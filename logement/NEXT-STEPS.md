@@ -21,9 +21,13 @@ Mis à jour à chaque fin de session de travail significative.
 3. ~~Définitions légales manquantes~~ — **fait** : D-12 habitat indigne
    (loi MOLLE 2009, art. 84) et D-13 passoire thermique (CCH L173-1-1,
    classes F-G) enregistrées depuis Légifrance (S-08), citations verbatim.
-4. **H-03 (coût) — première brique** : loyers (observatoires locaux /
-   carte des loyers MTE) et revenus (Filosofi) pour le taux d'effort
-   territorial (D-09).
+4. **H-03 (coût)** — exploration faite (notebook 04, S-09 loyers 2025 +
+   S-10 Filosofi 2021) : indice de coût par ZE anticorrélé à la vacance
+   (Spearman −0,42) — le coût marque la tension, il n'explique pas la
+   vacance ; exception corse (coût élevé ET vacance élevée, piste
+   résidences secondaires). RESTE À FAIRE : stabiliser R-04/I-04, puis un
+   vrai taux d'effort territorial (D-09 : surfaces et composition des
+   ménages) et l'axe résidences secondaires (AAV/littoral).
 5. Quand une nouvelle publication est prête : tag git + mise à jour du
    document de preuve (règle : l'article pointe une version précise).
 
