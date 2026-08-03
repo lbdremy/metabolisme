@@ -2,18 +2,24 @@
 # Toute valeur introduite dans un modèle est un paramètre nommé : valeur
 # centrale, plage plausible, unité, niveau de confiance, justification (ids
 # S-xx/I-xx...), résultats affectés (R-xx). Jamais de constante enfouie dans
-# une formule. Les hypothèses directrices H-01..H-05 de logement/INTRO.md §4
-# seront paramétrées ici lorsqu'elles deviendront calculables.
-# Schéma typé : src/logement/models.py (HypothesisRecord).
-#
-# Exemple :
-# - id: H-03
-#   name: frictional_vacancy_rate
-#   description: Part de la vacance correspondant à une rotation normale
-#   central_value: 0.10
-#   plausible_range: [0.07, 0.15]
-#   unit: ratio
-#   confidence: medium
-#   justification: [S-04]
-#   affects: [R-01]
-[]
+# une formule. Schéma typé : src/logement/models.py (HypothesisRecord).
+
+- id: H-01
+  name: structural_vacancy_threshold_years
+  description: >
+    Seuil de durée au-delà duquel une vacance est considérée comme
+    structurelle (et non frictionnelle). Valeur centrale : la convention
+    administrative LOVAC / plan national (plus de 2 ans), adoptée par le
+    choix C-01. La plage plausible encadre la sensibilité : à 1 an on
+    capture de la rotation lente de marché, à 3 ans on ne retient que les
+    sorties d'usage les plus installées. Les données LOVAC open data ne
+    publiant que le seuil à 2 ans, l'analyse de sensibilité complète
+    nécessitera les fichiers détaillés (ancienneté fine).
+  central_value: 2.0
+  plausible_range: [1.0, 3.0]
+  unit: years
+  confidence: medium
+  justification:
+    - S-05
+    - C-01
+  affects: []

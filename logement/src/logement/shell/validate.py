@@ -23,16 +23,14 @@ def _check_local_files(root: Path, sources: list[SourceRecord]) -> list[str]:
     """Verify that each frozen source file exists and matches its recorded sha256."""
     errors: list[str] = []
     for source in sources:
-        if source.local_file is None:
-            continue
-        path = root / source.local_file
-        if not path.is_file():
-            errors.append(f"{source.id}: local_file {source.local_file} not found")
-            continue
-        digest = hashlib.sha256(path.read_bytes()).hexdigest()
-        recorded = (source.checksum or "").removeprefix("sha256:")
-        if digest != recorded:
-            errors.append(f"{source.id}: checksum mismatch for {source.local_file}")
+        for frozen in source.frozen_files:
+            path = root / frozen.path
+            if not path.is_file():
+                errors.append(f"{source.id}: frozen file {frozen.path} not found")
+                continue
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            if digest != frozen.checksum.removeprefix("sha256:"):
+                errors.append(f"{source.id}: checksum mismatch for {frozen.path}")
     return errors
 
 

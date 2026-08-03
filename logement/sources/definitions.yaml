@@ -5,10 +5,9 @@
 # Schéma typé : src/logement/models.py (DefinitionRecord) ; contrôle :
 # `uv run logement validate`.
 #
-# Restent à sourcer (hors INSEE) : vacance frictionnelle / vacance durable
-# (seuils à définir par l'étude, cf. LOVAC), logement indigne (définition
-# légale, loi MOLLE 2009), passoire thermique (DPE classes F-G, loi Climat et
-# résilience). Ne pas les inventer ici sans source enregistrée.
+# Restent à sourcer (hors INSEE) : logement indigne (définition légale, loi
+# MOLLE 2009), passoire thermique (DPE classes F-G, loi Climat et résilience).
+# Ne pas les inventer ici sans source enregistrée.
 
 - id: D-01
   term: logement
@@ -152,3 +151,37 @@
       « brut » (sans déduction) ; toujours préciser laquelle est utilisée.
     - Revenus mesurés avant impôts ; ne couvre pas le coût du transport,
       que l'étude veut réintégrer dans un coût complet (INTRO §6.4).
+
+- id: D-10
+  term: vacance structurelle (parc privé, LOVAC)
+  source: S-05
+  url: https://doc-datafoncier.cerema.fr/doc/fiche_descriptive/lovac
+  definition: >
+    Logement privé vacant depuis plus de deux ans (variable
+    pp_vacant_plus_2ans des fichiers LOVAC : « Nombre de logements vacants du
+    parc privé depuis plus de deux ans » à la situation fiscale du 1er
+    janvier). La vacance de longue durée, dite structurelle, est la cible du
+    plan national de lutte contre les logements vacants.
+  caveats:
+    - Convention administrative (seuil de 2 ans) et non catégorie statistique
+      INSEE — le seuil est paramétré comme hypothèse H-01 (choix C-01).
+    - Parc privé uniquement, source fiscale — périmètre différent de la
+      vacance INSEE (D-03).
+    - Structurelle ne signifie pas mobilisable — l'état du bâti et les
+      blocages juridiques ne sont pas renseignés.
+
+- id: D-11
+  term: vacance frictionnelle (parc privé, LOVAC)
+  source: S-05
+  url: https://doc-datafoncier.cerema.fr/doc/fiche_descriptive/lovac
+  definition: >
+    Vacance de courte durée (deux ans ou moins dans les fichiers LOVAC,
+    différence pp_vacant − pp_vacant_plus_2ans), correspondant pour
+    l'essentiel à la rotation normale du marché entre deux occupations.
+  caveats:
+    - Une vacance courte n'est pas nécessairement frictionnelle au sens
+      économique (un logement neuf invendu ou un bien en travaux y figure) —
+      l'interprétation reste à qualifier territoire par territoire.
+    - Un niveau plancher de vacance frictionnelle est nécessaire au
+      fonctionnement du marché (INTRO §6.2) — l'objectif n'est jamais une
+      vacance nulle.

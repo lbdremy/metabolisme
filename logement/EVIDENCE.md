@@ -7,9 +7,9 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 4 sources INSEE (3 fichiers figés sha256 + la collection des définitions) |
-| D | Définitions | `sources/definitions.yaml` | 9 définitions INSEE citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | vide |
+| S | Sources | `sources/sources.yaml` | 5 sources (INSEE + LOVAC ; 7 fichiers figés sha256/LFS + la collection des définitions) |
+| D | Définitions | `sources/definitions.yaml` | 11 définitions citées verbatim, datées, avec limites |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-01 seuil de vacance structurelle (2 ans, plage 1-3) |
 | O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-03, T-01/T-02, R-01 (sortie `data/processed/parc-menages.json`) |
 | I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01, V-01, C-01/C-02, L-01..L-03 |
 | M/P | Mesures, propositions | — | à venir |
@@ -24,13 +24,21 @@ Sources enregistrées :
   millésimes 1962-2022).
 - **S-04** — INSEE, Définitions (métadonnées statistiques, collection en
   ligne — chaque définition citée verbatim et datée dans le registre).
+- **S-05** — Ministère de la Transition écologique (DGALN/Cerema), LOVAC open
+  data — logements vacants du parc privé par territoire et durée, millésimes
+  2020-2026 (4 fichiers figés ; ruptures méthodologiques 2023 et 2025
+  documentées ; parc privé uniquement, secrétisation < 11).
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
 concept remplacé le 31/08/2025) · D-06 ménage-logement · D-07 zone d'emploi ·
-D-08 bassin de vie · D-09 taux d'effort. Restent à sourcer : vacance
-frictionnelle/durable, logement indigne, passoire thermique (définitions
-légales, hors INSEE).
+D-08 bassin de vie · D-09 taux d'effort · D-10 vacance structurelle (LOVAC,
+> 2 ans) · D-11 vacance frictionnelle (LOVAC, ≤ 2 ans). Restent à sourcer :
+logement indigne, passoire thermique (définitions légales, hors INSEE).
+
+Hypothèses : **H-01** — seuil de vacance structurelle, valeur centrale 2 ans
+(convention C-01), plage plausible 1-3 ans (sensibilité complète possible
+seulement avec les fichiers LOVAC détaillés).
 
 Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 

@@ -87,3 +87,37 @@
     fige la version utilisée, la collection n'ayant pas de date de publication
     unique. Les concepts peuvent être remplacés (ex. « ménage (recensement) »
     remplacé le 31/08/2025 par « ménage au sens de ménage-logement »).
+
+- id: S-05
+  publisher: Ministère de la Transition écologique (DGALN / Cerema DataFoncier)
+  title: LOVAC open data — logements vacants du parc privé par commune, département, région, France, 2020-2026
+  dataset_id: logements-vacants-du-parc-prive-par-commune-departement-region-france-de-2020-a-2026
+  source_url: https://www.data.gouv.fr/datasets/logements-vacants-du-parc-prive-par-commune-departement-region-france-de-2020-a-2026
+  publication_date: 2026-06-25
+  retrieved_at: 2026-08-03
+  geographic_scope: France (communes, départements, régions ; COG au 1er janvier 2026)
+  temporal_scope: millésimes 2020-2026 (situations fiscales au 01/01 de l'année précédant le millésime)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  files:
+    - path: data/raw/lovac-opendata-communes26.csv
+      checksum: sha256:b856568d4b69784d32f9fafaf7e1376047e45eed245fb114dd737d2d43826245
+    - path: data/raw/lovac-opendata-departements26.csv
+      checksum: sha256:b6c3d2304dd4d35d07f6153720874650ea1f55583ffe58e459632b2f3e01a2ff
+    - path: data/raw/lovac-opendata-france26.csv
+      checksum: sha256:f1eaaa5d229729e1a07989edb2ccff591fece846bfde5ad205b94accbb21e5fa
+    - path: data/raw/lovac-opendata-metadonnees26.csv
+      checksum: sha256:d8698c32631201ab295268aa2e8679cd715abcc7c3550379c53c41076174bd81
+  notes: >
+    Données LOVAC agrégées et secrétisées (moins de 11 logements vacants dans
+    la commune → « s »). Source : DGFiP fichier 1767 bis Com croisé avec les
+    Fichiers fonciers du Cerema ; traitements équipe DataFoncier (Cerema) pour
+    la DGALN ; alimente Zéro Logement Vacant. Variables par millésime :
+    parc privé total (ff_pp_total), vacants du parc privé (pp_vacant),
+    vacants depuis plus de 2 ans (pp_vacant_plus_2ans). PARC PRIVÉ UNIQUEMENT
+    — non comparable directement à la vacance INSEE/EAPL (S-01/S-02, parc
+    entier, autre appareil). RUPTURES MÉTHODOLOGIQUES documentées : 2023
+    (disparition de la taxe d'habitation, passage à GMBI) et 2025 (données
+    sources avant chaîne de traitement fiscale) ; millésime 2026 sans
+    ff_pp_total au niveau France. Fichiers CSV en encodage Windows-1252,
+    séparateur point-virgule, milliers avec espaces insécables.
+    Documentation : https://doc-datafoncier.cerema.fr/doc/fiche_descriptive/lovac

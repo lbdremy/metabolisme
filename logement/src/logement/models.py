@@ -49,6 +49,13 @@ EvidenceId = Annotated[str, Field(pattern=r"^[SDOTMHRIVCPL]-\d{2,}$")]
 # --------------------------------------------------------------- sources.yaml (§7)
 
 
+class FrozenFile(StrictModel):
+    """One frozen file of a source: repo-relative path + sha256 of its bytes."""
+
+    path: str
+    checksum: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+
+
 class SourceRecord(StrictModel):
     """One retained source: identified, dated, scoped, checksummed (INTRO §7)."""
 
@@ -64,10 +71,12 @@ class SourceRecord(StrictModel):
     temporal_scope: str
     license: str
     dataset_id: str | None = None
-    # Path relative to the project root (e.g. data/raw/insee-logements-2023.csv).
+    # Single-file sources: path relative to the project root + checksum.
     # None while the source is registered but not yet frozen locally.
     local_file: str | None = None
     checksum: str | None = Field(default=None, pattern=r"^sha256:[0-9a-f]{64}$")
+    # Multi-file sources (e.g. a dataset shipping data + schema + summaries).
+    files: list[FrozenFile] = Field(default_factory=list)
     notes: str = ""
 
     @model_validator(mode="after")
@@ -76,7 +85,17 @@ class SourceRecord(StrictModel):
         if self.local_file is not None and self.checksum is None:
             msg = f"{self.id}: local_file is set but checksum is missing"
             raise ValueError(msg)
+        if self.local_file is not None and self.files:
+            msg = f"{self.id}: use either local_file or files, not both"
+            raise ValueError(msg)
         return self
+
+    @property
+    def frozen_files(self) -> list[FrozenFile]:
+        """All frozen files of this source, whatever the declaration style."""
+        if self.local_file is not None and self.checksum is not None:
+            return [FrozenFile(path=self.local_file, checksum=self.checksum)]
+        return self.files
 
 
 # ----------------------------------------------------------- definitions.yaml (§8)

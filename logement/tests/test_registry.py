@@ -67,6 +67,17 @@ def test_full_records_round_trip() -> None:
         ([{**SOURCE, "typo_key": 1}], "sources"),
         ([{**SOURCE, "id": "X-01"}], "sources"),
         ([{**SOURCE, "local_file": "data/raw/x.csv"}], "sources"),  # frozen but unchecksummed
+        (  # local_file and files are mutually exclusive declaration styles
+            [
+                {
+                    **SOURCE,
+                    "local_file": "data/raw/x.csv",
+                    "checksum": "sha256:" + "0" * 64,
+                    "files": [{"path": "data/raw/y.csv", "checksum": "sha256:" + "0" * 64}],
+                }
+            ],
+            "sources",
+        ),
         ([{**HYPOTHESIS, "central_value": 0.5}], "hypotheses"),  # outside plausible_range
         ([{**HYPOTHESIS, "plausible_range": [0.15, 0.07]}], "hypotheses"),  # unordered
         ([{**HYPOTHESIS, "confidence": "certain"}], "hypotheses"),  # not a valid level

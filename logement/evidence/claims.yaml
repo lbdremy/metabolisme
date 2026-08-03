@@ -16,10 +16,10 @@
 - id: C-01
   type: choice
   title: >
-    La distinction vacance frictionnelle / durable adoptera la convention
+    La distinction vacance frictionnelle / durable adopte la convention
     administrative « vacance structurelle = plus de 2 ans » (LOVAC / Zéro
-    Logement Vacant), le seuil étant paramétré en hypothèse (plage 1-3 ans).
-  depends_on: [D-03]
+    Logement Vacant), le seuil étant paramétré en hypothèse (H-01, 1-3 ans).
+  depends_on: [D-03, D-10, D-11]
 
 - id: C-02
   type: choice
