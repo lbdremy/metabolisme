@@ -38,3 +38,10 @@ def test_committed_cout_artifact_matches_rebuild() -> None:
     root = project_root()
     committed = json.loads((root / build.COUT_OUTPUT).read_text(encoding="utf-8"))
     assert build.build_cout_residentiel(root) == committed
+
+
+def test_committed_rs_artifact_matches_rebuild() -> None:
+    """data/processed/residences-secondaires-ze.json matches a rebuild."""
+    root = project_root()
+    committed = json.loads((root / build.RS_OUTPUT).read_text(encoding="utf-8"))
+    assert build.build_residences_secondaires(root) == committed

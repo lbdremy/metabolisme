@@ -12,14 +12,20 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
 | Élément | État en fin de session |
 |---|---|
 | Harnais | Projet uv autonome calqué sur le dépôt `learn` : core/shell, pydantic aux frontières, CLI clypi, `check.sh` (ruff · ty · skylos) + `test.sh` (pytest + hypothesis), CI GitHub (checkout LFS) |
-| Sources (S-01..S-10) | 8 fichiers INSEE/ANIL + 4 fichiers LOVAC figés (Git LFS, sha256) + collections définitions INSEE et Légifrance |
+| Sources (S-01..S-11) | 9 fichiers INSEE/ANIL + 4 fichiers LOVAC figés (Git LFS, sha256) + collections définitions INSEE et Légifrance |
 | Définitions (D-01..D-13) | citées verbatim, datées, avec limites — liste du cadrage complète |
 | Hypothèses | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
-| Graphe (`evidence/claims.yaml`) | 34 nœuds — O-01..O-08, T-01..T-05, R-01..R-04, I-01..I-04, V-01, C-01..C-03, L-01..L-09 |
-| Résultats reproductibles | R-01..R-04 (`data/processed/*.json`) — verrouillés par tests de régression ; document de preuve auto-vérifié couvrant les quatre |
-| Notebooks d'exploration | 01 parc/ménages, 02 vacance territoriale, 03 vacance × emploi, 04 coût résidentiel (py:percent, committés) |
+| Graphe (`evidence/claims.yaml`) | 39 nœuds — O-01..O-09, T-01..T-06, R-01..R-05, I-01..I-05, V-01, C-01..C-03, L-01..L-10 |
+| Résultats reproductibles | R-01..R-05 (`data/processed/*.json`) — verrouillés par tests de régression ; document de preuve auto-vérifié couvrant les cinq |
+| Notebooks d'exploration | 01 parc/ménages, 02 vacance territoriale, 03 vacance × emploi, 04 coût résidentiel, 05 résidences secondaires (py:percent, committés) |
 | Document de preuve | `evidence/efficacite-parc-immobilier.qmd` + HTML rendu (auto-vérifié : artefacts publiés == recalcul) |
 | Qualité | 30 tests verts ; CI verte après correction d'un vrai bug de reproductibilité (ordre des ex æquo dépendant de la plateforme, attrapé par le test de régression au premier run CI) |
+
+- **R-05/I-05** — Les résidences secondaires n'expliquent ni la vacance ni
+  le coût à l'échelle ZE (les ZE touristiques ont une vacance PLUS basse) ;
+  cumul RS+vacance dans un sous-groupe corse/rural-touristique. La
+  vérification a corrigé une erreur d'interprétation de R-04 (ZE
+  ultramarines, pas corses).
 
 ### Décisions arrêtées (voir aussi `CLAUDE.md` et le graphe)
 

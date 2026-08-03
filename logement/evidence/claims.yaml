@@ -348,3 +348,66 @@
     vacance structurelle PLUS BASSE que les autres.
   depends_on: [R-04, I-03]
   limitations: [L-09]
+
+# --------------------------------------- branche résidences secondaires (I-02/I-04)
+
+- id: L-10
+  type: limit
+  title: >
+    Limites du croisement résidences secondaires : parc entier côté
+    recensement vs parc privé côté LOVAC (L-06) ; géographie COG 2025
+    (S-11) vs COG 2026 (S-06) — jointure sans perte constatée mais à
+    revérifier à chaque millésime ; l'échelle ZE dilue les effets
+    communaux (stations, littoral) — les effets d'éviction infra-
+    territoriaux ne sont pas mesurés par ces indicateurs.
+  depends_on: [S-11, S-06, L-06]
+
+- id: O-09
+  type: observation
+  title: >
+    Comptages du recensement 2022 par commune : logements, résidences
+    principales, résidences secondaires et occasionnels, logements vacants
+    (millésimes 2011/2016/2022, géographie 2025).
+  depends_on: [S-11, D-01, D-02, D-03, D-04]
+
+- id: T-06
+  type: transformation
+  title: >
+    Part des résidences secondaires par zone d'emploi : agrégation des
+    comptages communaux du recensement (arrondissements PLM dédupliqués vers
+    la commune parente), parts de catégories, croisement avec le taux de
+    vacance structurelle LOVAC et l'indice de coût (corrélations de rangs,
+    groupe « touristique » à plus de 20 % de RS, cumuls RS + vacance > 5 %).
+  depends_on: [O-09, O-05, T-03, T-05]
+  produced_by: src/logement/core/rs.py
+
+- id: R-05
+  type: result
+  title: >
+    Résidences secondaires × coût × vacance par zone d'emploi (297 ZE,
+    recensement 2022) : part nationale 9,7 % (jusqu'à 65,5 % à Briançon) ;
+    corrélations faibles avec la vacance structurelle (+0,17) et nulles
+    avec l'indice de coût (−0,05) ; les 56 ZE à plus de 20 % de RS ont une
+    vacance structurelle PLUS BASSE (médiane 2,6 % contre 3,3 %) ; 12 ZE
+    cumulent RS > 20 % et vacance > 5 %, dont six corses (Corte 39 %/10,4 %)
+    et des ZE rurales touristiques (Sarlat, Millau, Saint-Flour).
+  depends_on: [T-06, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/residences-secondaires-ze.json
+  limitations: [L-05, L-06, L-09, L-10]
+
+- id: I-05
+  type: interpretation
+  title: >
+    À l'échelle des zones d'emploi, la part de résidences secondaires
+    n'explique ni la vacance ni le coût : les grands marchés touristiques
+    (stations alpines, littoral varois) gardent leur parc en usage — comme
+    résidence secondaire précisément — et la « capacité saisonnière
+    retirée » (INTRO §7) réside dans la catégorie RS elle-même et ses
+    effets d'éviction infra-territoriaux, pas dans la vacance. Le cumul
+    RS + vacance existe dans un sous-groupe corse et rural-touristique
+    (R-05) — cas d'étude communaux pour la suite. Cette exploration a aussi
+    permis de corriger l'identification des ZE à coût et vacance élevés de
+    R-04 : ultramarines (La Réunion, Martinique), non corses.
+  depends_on: [R-05, R-04, I-04]
+  limitations: [L-10]

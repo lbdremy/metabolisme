@@ -173,8 +173,11 @@ plt.show()
 #    65 % localement) et dans ses effets d'éviction infra-territoriaux —
 #    l'accès des résidents permanents (prix d'achat, offre locative à
 #    l'année) n'est pas mesuré par nos indicateurs actuels.
-#    **Porto-Vecchio** (56,8 % RS ET 7,1 % de vacance structurelle) est le
-#    seul vrai cumul RS+vacance — cas à instruire à l'échelle communale.
+#    Avec un critère explicite (RS > 20 % ET vacance > 5 %, stabilisé en
+#    R-05), **12 ZE cumulent RS et vacance** — dont six corses (Corte
+#    39 %/10,4 %, Ghisonaccia, Porto-Vecchio, Propriano, Ajaccio, Bastia)
+#    et des ZE rurales touristiques (Sarlat, Millau, Ussel, Saint-Flour) :
+#    le cumul existe, il est corse et rural-touristique, pas alpin.
 # 4. Limites : parc entier (recensement) vs parc privé (LOVAC) pour les
 #    taux (L-06) ; COG 2025 vs 2026 (0 commune perdue à la jointure) ;
 #    rappel V-01 — la RS est un usage réel, pas un gisement.

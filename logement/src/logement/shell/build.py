@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from logement.core import cout, lovac, parc, ze
+from logement.core import cout, lovac, parc, rs, ze
 
 S01_FILE = "insee-focus-359-parc-logements-2025.xlsx"
 S02_FILE = "insee-eapl-parc-residence-2025.xlsx"
@@ -33,6 +33,10 @@ LOYERS_FILE = "carte-loyers-2025-appartement.csv"
 FILOSOFI_ZIP = "insee-filosofi-2021-geo2025.zip"
 FILOSOFI_CSV = "DS_FILOSOFI_CC_data.csv"
 COUT_OUTPUT = Path("data") / "processed" / "cout-residentiel-ze.json"
+
+CENSUS_ZIP = "insee-rp-base-cc-logement-2022.zip"
+CENSUS_CSV = "base-cc-logement-2022.CSV"
+RS_OUTPUT = Path("data") / "processed" / "residences-secondaires-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -129,8 +133,8 @@ def _read_membership(root: Path) -> pd.DataFrame:
         return pd.read_excel(fh, sheet_name="COM", header=5, engine="calamine", dtype=str)
 
 
-def build_cout_residentiel(root: Path) -> dict[str, object]:
-    """Compute the R-04 summary payload (cost-pressure index × vacancy by ZE)."""
+def _cost_frame(root: Path) -> pd.DataFrame:
+    """Build the per-ZE cost frame shared by the R-04 and R-05 stages."""
     raw = root / "data" / "raw"
     loyers = cout.parse_loyers(
         pd.read_csv(raw / LOYERS_FILE, sep=";", encoding="cp1252", dtype=str)
@@ -140,17 +144,27 @@ def build_cout_residentiel(root: Path) -> dict[str, object]:
             fh, sep=";", dtype=str, usecols=["GEO", "GEO_OBJECT", "FILOSOFI_MEASURE", "OBS_VALUE"]
         )
     niveau_vie = cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="MED_SL")
-    commune_ze = ze.parse_commune_ze(_read_membership(root)).rename(columns={"ze": "ze"})
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
     communes = lovac.parse_territories(
         _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
     )
-    cost_ze = cout.cost_index_by_ze(loyers, communes, commune_ze, niveau_vie)
-    emploi = ze.parse_emploi_ze(
+    return cout.cost_index_by_ze(loyers, communes, commune_ze, niveau_vie)
+
+
+def _ze_names(root: Path) -> pd.Series:
+    return ze.parse_emploi_ze(
         pd.read_excel(
-            raw / EMPLOI_ZE_FILE, sheet_name="Emploi total - ZE", header=4, engine="calamine"
+            root / "data" / "raw" / EMPLOI_ZE_FILE,
+            sheet_name="Emploi total - ZE",
+            header=4,
+            engine="calamine",
         )
-    )
-    return cout.build_summary(cost_ze, emploi["ze_name"])
+    )["ze_name"]
+
+
+def build_cout_residentiel(root: Path) -> dict[str, object]:
+    """Compute the R-04 summary payload (cost-pressure index × vacancy by ZE)."""
+    return cout.build_summary(_cost_frame(root), _ze_names(root))
 
 
 def run_cout(root: Path) -> int:
@@ -160,5 +174,27 @@ def run_cout(root: Path) -> int:
     print(
         f"cout-residentiel: wrote {COUT_OUTPUT} — spearman "
         f"{payload['spearman_cost_vs_vacancy']}, medians {payload['median_vacancy_rate_pct']}"
+    )
+    return 0
+
+
+def build_residences_secondaires(root: Path) -> dict[str, object]:
+    """Compute the R-05 summary payload (secondary-residence share × cost/vacancy)."""
+    raw = root / "data" / "raw"
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+    census = rs.parse_census_housing(census_raw)
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    rs_ze = rs.rs_by_ze(census, commune_ze)
+    return rs.build_summary(rs_ze, _cost_frame(root), _ze_names(root))
+
+
+def run_rs(root: Path) -> int:
+    """Rebuild data/processed/residences-secondaires-ze.json; return an exit code."""
+    payload = build_residences_secondaires(root)
+    _write_json(root, RS_OUTPUT, payload)
+    print(
+        f"residences-secondaires: wrote {RS_OUTPUT} — spearman RS×vacance "
+        f"{payload['spearman_rs_vs_structural_vacancy']}, touristic {payload['touristic_ze']}"
     )
     return 0

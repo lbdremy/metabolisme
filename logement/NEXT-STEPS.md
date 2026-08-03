@@ -29,10 +29,11 @@ Mis à jour à chaque fin de session de travail significative.
    vérifiant les codes ZE). ~~Stabiliser R-04/I-04~~ — fait.
    Exploration 05 (recensement 2022, S-11) : l'axe « résidences
    secondaires » n'explique NI la vacance NI le coût à l'échelle ZE
-   (ZE > 20 % RS : vacance 2,6 % vs 3,3 % ailleurs) — reste à stabiliser
-   en R-05/I-05, et à descendre à l'échelle communale/AAV où l'effet peut
-   exister (Porto-Vecchio : 57 % RS, 7,1 % de vacance). PUIS : un vrai
-   taux d'effort territorial (D-09 : surfaces et composition des ménages).
+   (ZE > 20 % RS : vacance 2,6 % vs 3,3 % ailleurs). ~~Stabiliser
+   R-05/I-05~~ — fait (12 ZE cumulant RS > 20 % et vacance > 5 %, dont six
+   corses — cas d'étude communaux à instruire). PUIS : un vrai taux
+   d'effort territorial (D-09 : surfaces et composition des ménages), et
+   l'échelle communale/AAV pour les effets d'éviction saisonniers.
 5. Quand une nouvelle publication est prête : tag git + mise à jour du
    document de preuve (règle : l'article pointe une version précise).
 

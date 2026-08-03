@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 10 sources (INSEE, LOVAC, ANIL, Légifrance ; 12 fichiers figés sha256/LFS + 2 collections vivantes) |
+| S | Sources | `sources/sources.yaml` | 11 sources (INSEE, LOVAC, ANIL, Légifrance ; 13 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 13 définitions citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-08, T-01..T-05, R-01..R-04 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-04, V-01, C-01..C-03, L-01..L-09 |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-09, T-01..T-06, R-01..R-05 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-05, V-01, C-01..C-03, L-01..L-10 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -65,6 +65,14 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   la vacance ; le cumul coût élevé + vacance élevée est ultramarin
   (La Réunion, Martinique — revenus faibles), pas corse ni « résidences
   secondaires » (correction vérifiée, exploration 05). Limites L-09.
+
+- **R-05** — Résidences secondaires × coût × vacance par ZE (sortie
+  reproductible `data/processed/residences-secondaires-ze.json`) : part RS
+  sans lien avec la vacance (+0,17) ni le coût (−0,05) à l'échelle ZE ; les
+  ZE touristiques ont une vacance PLUS BASSE ; cumul RS+vacance dans un
+  sous-groupe corse et rural-touristique. Lecture : **I-05** — la capacité
+  saisonnière retirée est dans la catégorie RS et ses effets d'éviction
+  infra-territoriaux, pas dans la vacance. Limites L-10.
 
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,

@@ -189,13 +189,15 @@ r01 = build.build_parc_menages(ROOT)
 r02 = build.build_vacance_structurelle(ROOT)
 r03 = build.build_vacance_emploi(ROOT)
 r04 = build.build_cout_residentiel(ROOT)
+r05 = build.build_residences_secondaires(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
+    ("R-05", r05, build.RS_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-04 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-05 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -375,6 +377,33 @@ R-02 (interprétation I-04 ; une première identification « corse » de ces ZE
 a été corrigée en vérifiant les codes). L'indice n'est pas un taux d'effort
 (limite L-09).
 
+### R-05 — Résidences secondaires : la « capacité saisonnière » n'est pas de la vacance
+
+```{python}
+#| code-summary: "chiffres clés R-05"
+tz = r05["touristic_ze"]
+print(f"{r05['n_ze']} ZE ; part nationale de résidences secondaires : "
+      f"{r05['national_rs_share_pct']} % (max par ZE : "
+      f"{r05['top_rs_share'][0]['name']} {r05['top_rs_share'][0]['part_rs_pct']} %)")
+print(f"Spearman part RS × vacance structurelle : "
+      f"{r05['spearman_rs_vs_structural_vacancy']} ; part RS × indice de coût : "
+      f"{r05['spearman_rs_vs_cost_index']}")
+print(f"ZE à plus de {tz['threshold_rs_pct']:.0f} % de RS : {tz['n']} — vacance "
+      f"structurelle médiane {tz['median_structural_vacancy_pct']} % contre "
+      f"{tz['others_median_structural_vacancy_pct']} % ailleurs")
+print(f"Cumuls RS > 20 % et vacance > 5 % : {len(r05['rs_and_vacancy_outliers'])} ZE — "
+      + ", ".join(e['name'] for e in r05['rs_and_vacancy_outliers'][:6]) + "…")
+```
+
+À l'échelle des zones d'emploi, la part de résidences secondaires n'explique
+ni la vacance ni le coût : les grands marchés touristiques (Briançon 65,5 %
+de RS) gardent leur parc en usage — comme résidence secondaire précisément.
+La « capacité saisonnière retirée » (INTRO §7) réside dans la catégorie RS
+elle-même et ses effets d'éviction infra-territoriaux, non mesurés ici
+(limite L-10). Un sous-groupe corse et rural-touristique cumule cependant
+RS et vacance (Corte : 39 % de RS, 10,4 % de vacance) — cas d'étude
+communaux pour la suite (interprétation I-05).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -423,10 +452,13 @@ structurelle à ce millésime (L-04).
   vacance ; combiné à I-03, le blocage en zone dynamique paraît relever du
   niveau propriété/bâti ou infra-territorial plutôt que du prix
   territorial. Le cumul coût+vacance élevés est ultramarin (revenus
-  faibles) ; l'exploration des résidences secondaires (notebook 05) montre
-  qu'à l'échelle ZE les territoires touristiques ont une vacance
-  structurelle plus basse que les autres — l'effet saisonnier, s'il
-  existe, est infra-territorial.
+  faibles).
+- **I-05** — À l'échelle ZE, les résidences secondaires n'expliquent ni la
+  vacance ni le coût ; les marchés touristiques gardent leur parc en usage
+  et l'effet saisonnier, s'il existe, est infra-territorial. Un sous-groupe
+  corse et rural-touristique cumule RS et vacance — cas d'étude communaux.
+  Cette exploration a corrigé l'identification des ZE coût+vacance de
+  R-04 : ultramarines, non corses.
 
 Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
 bâti, des causes de la vacance (succession, travaux, rétention…), de la
