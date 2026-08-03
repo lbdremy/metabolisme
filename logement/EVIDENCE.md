@@ -10,8 +10,8 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 | S | Sources | `sources/sources.yaml` | 5 sources (INSEE + LOVAC ; 7 fichiers figés sha256/LFS + la collection des définitions) |
 | D | Définitions | `sources/definitions.yaml` | 11 définitions citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | H-01 seuil de vacance structurelle (2 ans, plage 1-3) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-03, T-01/T-02, R-01 (sortie `data/processed/parc-menages.json`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01, V-01, C-01/C-02, L-01..L-03 |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-04, T-01..T-03, R-01/R-02 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01/I-02, V-01, C-01..C-03, L-01..L-06 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -49,7 +49,16 @@ Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,
 seuil paramétré 1-3 ans), **C-02** (national d'abord, puis LOVAC).
 
-Premier résultat stabilisé (2026-08-03) :
+Résultats stabilisés (2026-08-03) :
+
+- **R-02** — Vacance structurelle du parc privé (sortie reproductible
+  `data/processed/vacance-structurelle.json`) : ~1,18 M de logements
+  (millésime 26), taux national 3,5 % (millésime 24, choix C-03), gradient
+  départemental d'un ordre de grandeur (DOM et diagonale des faibles
+  densités vs zones tendues). Lecture : **I-02** — deux régimes distincts,
+  intensité rurale/ultramarine vs volume urbain, premier indice cohérent
+  avec H-02. Limites L-04 (ruptures 2023/2025), L-05 (secrétisation),
+  L-06 (parc privé ≠ INSEE).
 
 - **R-01** — Comparaison parc / ménages / population 1982-2025 (sortie
   reproductible `data/processed/parc-menages.json`, rebâtie par

@@ -27,6 +27,14 @@
     Ordre d'acquisition : séries nationales d'abord (S-01..S-03), puis LOVAC
     pour l'analyse territoriale.
 
+- id: C-03
+  type: choice
+  title: >
+    Millésime de référence LOVAC pour les taux : 24 (situation au
+    01/01/2023), dernier millésime disposant du numérateur ET du dénominateur
+    avant la rupture 2025 (constante REFERENCE_MILLESIME de core/lovac.py).
+  depends_on: [S-05, L-04]
+
 # ------------------------------------------------------------------ limites
 
 - id: L-01
@@ -49,6 +57,34 @@
     observé ±0,3 % aux millésimes (voir R-01), et changement de concept au
     31/08/2025 (D-06) pour les millésimes futurs.
   depends_on: [D-02, D-05, D-06]
+
+- id: L-04
+  type: limit
+  title: >
+    Ruptures méthodologiques LOVAC : 2023 (disparition de la taxe
+    d'habitation, passage à GMBI) et 2025 (données sources avant chaîne de
+    traitement fiscale). Les niveaux de vacance totale ne sont pas
+    comparables entre millésimes séparés par une rupture ; seule la série
+    structurelle est raisonnablement robuste.
+  depends_on: [S-05]
+
+- id: L-05
+  type: limit
+  title: >
+    Secrétisation LOVAC : la vacance structurelle communale est masquée
+    (« s ») sous 11 logements vacants — 51 % des communes au millésime 26 ;
+    les communes visibles au millésime 24 (20 % du total) portent 72,6 % de
+    la vacance structurelle nationale. Échelle communale utilisable pour les
+    volumes, pas pour une couverture exhaustive.
+  depends_on: [S-05]
+
+- id: L-06
+  type: limit
+  title: >
+    LOVAC couvre le parc privé sur source fiscale — périmètre différent de la
+    vacance INSEE/EAPL (parc entier, autre appareil de mesure) : les niveaux
+    des deux chaînes ne se comparent pas directement.
+  depends_on: [S-05, D-03, D-10]
 
 # ------------------------------------------------------- observations (sources)
 
@@ -74,6 +110,14 @@
     des figures de l'Insee Focus n° 359).
   depends_on: [S-01]
 
+- id: O-04
+  type: observation
+  title: >
+    Vacance du parc privé par durée (totale / plus de 2 ans) et parc privé
+    total, aux échelles France, département et commune, millésimes LOVAC
+    2020-2026.
+  depends_on: [S-05, D-10, D-11]
+
 # ------------------------------------------------------------ transformations
 
 - id: T-01
@@ -94,6 +138,17 @@
   depends_on: [T-01]
   produced_by: src/logement/core/parc.py
 
+- id: T-03
+  type: transformation
+  title: >
+    Lecture des fichiers LOVAC (cp1252, « s » de secret → valeur manquante,
+    séparateurs de milliers insécables, millésimes normalisés à 4 chiffres),
+    agrégation des arrondissements PLM en communes (avec propagation du
+    secret), calcul des taux de vacance structurelle au millésime de
+    référence (C-03).
+  depends_on: [O-04, C-03]
+  produced_by: src/logement/core/lovac.py
+
 # ------------------------------------------------------------------- résultats
 
 - id: R-01
@@ -110,6 +165,21 @@
   output: data/processed/parc-menages.json
   limitations: [L-01, L-02, L-03]
 
+- id: R-02
+  type: result
+  title: >
+    Vacance structurelle du parc privé : 1,18 M de logements au millésime 26
+    (~1,1-1,2 M stables sur 2020-2026), taux national 3,5 % au millésime 24,
+    gradient départemental d'un ordre de grandeur (DOM 10-27 % et diagonale
+    des faibles densités 7-9,5 % contre 1,4-1,7 % en zones tendues), volumes
+    concentrés dans les grandes villes (Paris 32 091, Marseille 14 529, PLM
+    agrégées) à des taux proches de la moyenne, statistiques de
+    secrétisation communale.
+  depends_on: [T-03, H-01, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/vacance-structurelle.json
+  limitations: [L-04, L-05, L-06]
+
 # -------------------------------------------------------------- interprétations
 
 - id: I-01
@@ -123,3 +193,14 @@
     est de la vacance, pas des résidences secondaires.
   depends_on: [R-01]
   limitations: [L-01, L-02]
+
+- id: I-02
+  type: interpretation
+  title: >
+    « Où est la vacance » a deux réponses : en intensité, les taux élevés
+    sont ultramarins et ruraux (diagonale des faibles densités) — premier
+    indice cohérent avec H-02 (capacités mal localisées) ; en volume, les
+    grandes villes dominent à des taux proches de la moyenne. Tout mécanisme
+    de remise en usage devra traiter ces deux régimes distincts.
+  depends_on: [R-02]
+  limitations: [L-05, L-06]

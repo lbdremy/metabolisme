@@ -13,7 +13,10 @@ from pathlib import Path
 
 from logement.shell import build
 
-STAGES: tuple[tuple[str, Callable[[Path], int]], ...] = (("parc-menages", build.run),)
+STAGES: tuple[tuple[str, Callable[[Path], int]], ...] = (
+    ("parc-menages", build.run),
+    ("vacance-structurelle", build.run_vacance),
+)
 
 
 def run(root: Path) -> int:

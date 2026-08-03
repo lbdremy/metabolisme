@@ -1,0 +1,206 @@
+{
+  "break_millesimes": [
+    2023,
+    2025
+  ],
+  "communes": {
+    "n_masked_latest": 17767,
+    "n_total": 34912,
+    "top_by_volume_ref": [
+      {
+        "code": "75056",
+        "name": "Paris",
+        "rate_pct": 2.9,
+        "structural": 32091
+      },
+      {
+        "code": "13055",
+        "name": "Marseille",
+        "rate_pct": 3.6,
+        "structural": 14529
+      },
+      {
+        "code": "06088",
+        "name": "Nice",
+        "rate_pct": 2.8,
+        "structural": 6227
+      },
+      {
+        "code": "31555",
+        "name": "Toulouse",
+        "rate_pct": 2.2,
+        "structural": 6040
+      },
+      {
+        "code": "97209",
+        "name": "Fort-de-France",
+        "rate_pct": 12.9,
+        "structural": 5720
+      },
+      {
+        "code": "69123",
+        "name": "Lyon",
+        "rate_pct": 2.1,
+        "structural": 5590
+      },
+      {
+        "code": "97101",
+        "name": "Les Abymes",
+        "rate_pct": 16.4,
+        "structural": 4734
+      },
+      {
+        "code": "42218",
+        "name": "Saint-Étienne",
+        "rate_pct": 5.5,
+        "structural": 4649
+      },
+      {
+        "code": "59350",
+        "name": "Lille",
+        "rate_pct": 3.7,
+        "structural": 4338
+      },
+      {
+        "code": "66136",
+        "name": "Perpignan",
+        "rate_pct": 5.7,
+        "structural": 3739
+      }
+    ],
+    "visible_ref": {
+      "n": 6923,
+      "structural_share_pct": 72.6
+    }
+  },
+  "departements": {
+    "bottom": [
+      {
+        "dep": "92",
+        "name": "Hauts-de-Seine",
+        "rate_pct": 1.7,
+        "structural": 11130
+      },
+      {
+        "dep": "91",
+        "name": "Essonne",
+        "rate_pct": 1.7,
+        "structural": 8179
+      },
+      {
+        "dep": "78",
+        "name": "Yvelines",
+        "rate_pct": 1.5,
+        "structural": 8271
+      },
+      {
+        "dep": "44",
+        "name": "Loire-Atlantique",
+        "rate_pct": 1.5,
+        "structural": 10460
+      },
+      {
+        "dep": "85",
+        "name": "Vendée",
+        "rate_pct": 1.4,
+        "structural": 6261
+      }
+    ],
+    "top": [
+      {
+        "dep": "976",
+        "name": "Mayotte",
+        "rate_pct": 26.9,
+        "structural": 8152
+      },
+      {
+        "dep": "973",
+        "name": "Guyane",
+        "rate_pct": 11.5,
+        "structural": 8365
+      },
+      {
+        "dep": "971",
+        "name": "Guadeloupe",
+        "rate_pct": 10.7,
+        "structural": 22816
+      },
+      {
+        "dep": "972",
+        "name": "Martinique",
+        "rate_pct": 10.4,
+        "structural": 20663
+      },
+      {
+        "dep": "23",
+        "name": "Creuse",
+        "rate_pct": 9.5,
+        "structural": 8133
+      },
+      {
+        "dep": "58",
+        "name": "Nièvre",
+        "rate_pct": 7.9,
+        "structural": 10441
+      },
+      {
+        "dep": "03",
+        "name": "Allier",
+        "rate_pct": 7.6,
+        "structural": 15410
+      },
+      {
+        "dep": "55",
+        "name": "Meuse",
+        "rate_pct": 7.4,
+        "structural": 6792
+      },
+      {
+        "dep": "2B",
+        "name": "Haute-Corse",
+        "rate_pct": 7.3,
+        "structural": 9812
+      },
+      {
+        "dep": "52",
+        "name": "Haute-Marne",
+        "rate_pct": 7.3,
+        "structural": 6431
+      },
+      {
+        "dep": "36",
+        "name": "Indre",
+        "rate_pct": 7.1,
+        "structural": 8818
+      },
+      {
+        "dep": "10",
+        "name": "Aube",
+        "rate_pct": 6.7,
+        "structural": 9412
+      }
+    ]
+  },
+  "national": {
+    "structural_by_millesime": {
+      "2020": 1114443,
+      "2021": 1167654,
+      "2022": 1139834,
+      "2023": 1130129,
+      "2024": 1154436,
+      "2025": 1348470,
+      "2026": 1179845
+    },
+    "structural_rate_ref_pct": 3.5,
+    "total_by_millesime": {
+      "2020": 3639254,
+      "2021": 3654082,
+      "2022": 3559162,
+      "2023": 3741093,
+      "2024": 3687140,
+      "2025": 2380076,
+      "2026": 3160235
+    }
+  },
+  "reference_millesime": 2024
+}

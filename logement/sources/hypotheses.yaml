@@ -22,4 +22,5 @@
   justification:
     - S-05
     - C-01
-  affects: []
+  affects:
+    - R-02
