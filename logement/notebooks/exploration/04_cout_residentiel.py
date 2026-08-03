@@ -185,12 +185,14 @@ plt.show()
 #    D-09) mais pas l'usage du parc. Là où la vacance est forte
 #    (Bar-le-Duc 6,1 %, Cosne-Cours-sur-Loire 7,3 %), le coût est bas :
 #    le blocage n'y est pas économique côté demande solvable locale.
-# 3. **Exception remarquable : la Corse.** Les trois ZE corses (L'Ouest,
-#    Le Sud, L'Est) cumulent indice de coût parmi les plus élevés de France
-#    (1,01-1,16, revenus faibles × loyers élevés) ET vacance structurelle
-#    au-dessus de la moyenne (3,8-4,6 %) — configuration compatible avec un
-#    marché tiré par la résidence secondaire/saisonnière qui exclut la
-#    demande locale (INTRO §7, capacité saisonnière retirée).
+# 3. **Exception remarquable : les DOM** (CORRECTION — d'abord identifiés
+#    à tort comme ZE corses ; la vérification des codes montre que 0401
+#    L'Est, 0402 L'Ouest, 0404 Le Sud sont des ZE de La Réunion et 0205
+#    Le Sud de Martinique). Elles cumulent indice de coût parmi les plus
+#    élevés de France (1,01-1,16 — revenus faibles bien plus que loyers
+#    élevés) ET vacance structurelle au-dessus de la moyenne — prolongement
+#    du constat DOM de R-02, sans lien avec les résidences secondaires
+#    (voir exploration 05).
 # 4. Limites : loyers d'annonce 2025 (relocation) vs revenus 2021 ;
 #    l'indice n'est pas un taux d'effort (pas de surface ni de composition
 #    de ménage) ; 8 ZE absentes (Guadeloupe, Guyane hors Filosofi) ;

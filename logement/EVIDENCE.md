@@ -62,8 +62,9 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   reproductible `data/processed/cout-residentiel-ze.json`) : Spearman −0,42,
   vacance médiane 2,5 % dans les ZE chères contre 4,0 % dans les ZE bon
   marché. Lecture : **I-04** — le coût marque la tension, il n'explique pas
-  la vacance ; exception corse (coût élevé ET vacance élevée → piste
-  résidences secondaires). Limites L-09.
+  la vacance ; le cumul coût élevé + vacance élevée est ultramarin
+  (La Réunion, Martinique — revenus faibles), pas corse ni « résidences
+  secondaires » (correction vérifiée, exploration 05). Limites L-09.
 
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,

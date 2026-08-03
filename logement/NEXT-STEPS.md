@@ -24,12 +24,15 @@ Mis à jour à chaque fin de session de travail significative.
 4. **H-03 (coût)** — exploration faite (notebook 04, S-09 loyers 2025 +
    S-10 Filosofi 2021) : indice de coût par ZE anticorrélé à la vacance
    (Spearman −0,42) — le coût marque la tension, il n'explique pas la
-   vacance ; exception corse (coût élevé ET vacance élevée, piste
-   résidences secondaires). ~~Stabiliser R-04/I-04~~ — fait (graphe à 34
-   nœuds, document de preuve couvrant R-01..R-04). RESTE À FAIRE : un vrai
-   taux d'effort territorial (D-09 : surfaces et composition des ménages)
-   et l'axe résidences secondaires (AAV/littoral, S-01 fig. 6 + LOVAC +
-   part des résidences secondaires par territoire).
+   vacance ; le cumul coût+vacance est ultramarin (La Réunion/Martinique,
+   revenus faibles — d'abord mal identifié comme corse, corrigé en
+   vérifiant les codes ZE). ~~Stabiliser R-04/I-04~~ — fait.
+   Exploration 05 (recensement 2022, S-11) : l'axe « résidences
+   secondaires » n'explique NI la vacance NI le coût à l'échelle ZE
+   (ZE > 20 % RS : vacance 2,6 % vs 3,3 % ailleurs) — reste à stabiliser
+   en R-05/I-05, et à descendre à l'échelle communale/AAV où l'effet peut
+   exister (Porto-Vecchio : 57 % RS, 7,1 % de vacance). PUIS : un vrai
+   taux d'effort territorial (D-09 : surfaces et composition des ménages).
 5. Quand une nouvelle publication est prête : tag git + mise à jour du
    document de preuve (règle : l'article pointe une version précise).
 

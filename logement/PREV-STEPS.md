@@ -47,7 +47,10 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
   Les causes de blocage dominantes sont donc ailleurs → H-03/H-05.
 - **R-04/I-04** — Croisée avec le coût (loyers 2025 / Filosofi 2021) :
   anticorrélation nette (Spearman −0,42) — le coût marque la tension, il
-  n'explique pas la vacance ; l'exception corse (coût élevé ET vacance
-  élevée) ouvre l'axe résidences secondaires. La sensibilité H-06 est
-  bloquée au niveau source (fichiers détaillés réservés aux acteurs
-  publics) ; D-12/D-13 complètent le registre des définitions.
+  n'explique pas la vacance. Le cumul coût+vacance est ultramarin (La
+  Réunion/Martinique, revenus faibles) — d'abord mal identifié comme
+  corse, corrigé en vérifiant les codes ZE. L'exploration 05 (résidences
+  secondaires, recensement 2022) écarte l'explication « saisonnière » à
+  l'échelle ZE : les ZE à plus de 20 % de RS ont une vacance structurelle
+  plus basse (2,6 % vs 3,3 %). La sensibilité H-06 est bloquée au niveau
+  source ; D-12/D-13 complètent le registre des définitions.

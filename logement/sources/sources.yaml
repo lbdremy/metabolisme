@@ -227,3 +227,27 @@
     d'habitation) ; écart temporel à documenter avec les loyers 2025 (S-09).
     DOM partiellement couverts — les croisements avec LOVAC excluront
     Guadeloupe/Guyane.
+
+- id: S-11
+  publisher: INSEE
+  title: Recensement 2022 — chiffres clés logement, base communale (base-cc-logement-2022)
+  dataset_id: base-cc-logement-2022
+  source_url: https://www.insee.fr/fr/statistiques/8581474
+  publication_date: 2025-06-26
+  retrieved_at: 2026-08-03
+  geographic_scope: France hors Mayotte, communes et arrondissements municipaux (géographie au 1er janvier 2025)
+  temporal_scope: millésimes censitaires 2011, 2016, 2022
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-rp-base-cc-logement-2022.zip
+  checksum: sha256:03a25cf3a475f44c5ba83c472de3ca64b5145d5ab4e76f2511bac159cee9fad5
+  notes: >
+    Comptages par commune : logements (P22_LOG), résidences principales
+    (P22_RP), résidences secondaires et logements occasionnels
+    (P22_RSECOCC), logements vacants (P22_LOGVAC), maisons/appartements,
+    avec les millésimes 2011/2016 pour l'évolution. Parc ENTIER (recensement,
+    D-01/D-03/D-04) — la vacance RP n'est pas comparable à la vacance LOVAC
+    (parc privé, source fiscale, L-06). Géographie COG 2025 vs COG 2026 pour
+    la table d'appartenance et LOVAC — écarts marginaux de communes à
+    documenter dans les jointures. Inclut les arrondissements PLM (pas
+    d'agrégation nécessaire côté recensement, mais harmoniser avec la table
+    d'appartenance qui ne les contient pas).

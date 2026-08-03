@@ -367,10 +367,13 @@ Le coût résidentiel relatif (loyer d'annonce rapporté au niveau de vie
 médian) et la vacance structurelle **varient en sens inverse** : le coût est
 un marqueur de tension, pas la cause de la vacance. Là où le coût est élevé
 (Paris, indice 1,28), le parc est presque entièrement utilisé ; là où la
-vacance est forte, le logement est bon marché. **Exception notable : les
-trois ZE corses** cumulent coût parmi les plus élevés et vacance au-dessus de
-la moyenne — signature d'un marché de résidence secondaire (interprétation
-I-04). L'indice n'est pas un taux d'effort (limite L-09).
+vacance est forte, le logement est bon marché. **Exception notable : des ZE
+ultramarines** (La Réunion — L'Est, L'Ouest, Le Sud — et Martinique)
+cumulent coût relatif parmi les plus élevés, porté par la faiblesse des
+revenus, et vacance au-dessus de la moyenne — prolongement du constat DOM de
+R-02 (interprétation I-04 ; une première identification « corse » de ces ZE
+a été corrigée en vérifiant les codes). L'indice n'est pas un taux d'effort
+(limite L-09).
 
 ## 7. Sensibilité
 
@@ -419,8 +422,11 @@ structurelle à ce millésime (L-04).
 - **I-04** — Le coût est un marqueur de tension, pas la cause de la
   vacance ; combiné à I-03, le blocage en zone dynamique paraît relever du
   niveau propriété/bâti ou infra-territorial plutôt que du prix
-  territorial. L'exception corse pointe vers la capacité saisonnière
-  retirée (résidences secondaires) — axe suivant.
+  territorial. Le cumul coût+vacance élevés est ultramarin (revenus
+  faibles) ; l'exploration des résidences secondaires (notebook 05) montre
+  qu'à l'échelle ZE les territoires touristiques ont une vacance
+  structurelle plus basse que les autres — l'effet saisonnier, s'il
+  existe, est infra-territorial.
 
 Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
 bâti, des causes de la vacance (succession, travaux, rétention…), de la

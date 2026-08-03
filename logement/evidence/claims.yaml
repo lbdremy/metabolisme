@@ -321,8 +321,10 @@
     (297 ZE) : corrélation de Spearman −0,42 ; taux de vacance médian de
     2,5 % dans la moitié des ZE au coût relatif élevé contre 4,0 % dans la
     moitié bon marché ; loyers pondérés de 8,0 à 27,2 €/m² (Paris, indice
-    1,28) ; les trois ZE corses cumulent coût parmi les plus élevés
-    (1,01-1,16) et vacance au-dessus de la moyenne (3,8-4,6 %).
+    1,28) ; des ZE ultramarines (La Réunion — L'Est, L'Ouest, Le Sud — et
+    Martinique — Le Sud) cumulent coût relatif parmi les plus élevés
+    (1,01-1,16, porté par la faiblesse des revenus) et vacance au-dessus de
+    la moyenne (3,8-8,7 %).
   depends_on: [T-05, H-06, V-01]
   produced_by: src/logement/shell/build.py
   output: data/processed/cout-residentiel-ze.json
@@ -337,8 +339,12 @@
     avec un vrai taux d'effort), là où la vacance est forte le logement est
     bon marché. Combiné à I-03, le blocage de la capacité sortie d'usage en
     zone dynamique paraît relever du niveau propriété/bâti ou infra-
-    territorial plutôt que du prix territorial. L'exception corse (coût
-    élevé ET vacance élevée) pointe vers le marché de la résidence
-    secondaire (INTRO §7, capacité saisonnière retirée) — axe à instruire.
+    territorial plutôt que du prix territorial. Le cumul coût élevé ET
+    vacance élevée est ultramarin (La Réunion, Martinique — d'abord
+    identifié à tort comme corse, corrigé par vérification des codes ZE) :
+    il prolonge le constat DOM de R-02 et tient à la faiblesse des revenus,
+    pas aux résidences secondaires — l'exploration 05 montre qu'à l'échelle
+    ZE les territoires à forte part de résidences secondaires ont une
+    vacance structurelle PLUS BASSE que les autres.
   depends_on: [R-04, I-03]
   limitations: [L-09]
