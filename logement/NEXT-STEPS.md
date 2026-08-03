@@ -1,36 +1,7 @@
-# HANDOFF — reprendre l'étude logement
+# NEXT-STEPS — ce qui vient ensuite
 
-État au **2026-08-03** (session de fondation). Ce fichier dit où en est
-l'étude et quoi faire ensuite ; il se met à jour à chaque fin de session de
-travail significative.
-
-## Où on en est
-
-Une **première boucle complète** de la chaîne de preuves exécutable est
-faite : sources figées → définitions verbatim → hypothèse nommée →
-exploration → stabilisation testée → résultats reproductibles → document de
-preuve rendu.
-
-| Élément | État |
-|---|---|
-| Sources (S-01..S-05) | 3 fichiers INSEE + 4 fichiers LOVAC figés (Git LFS, sha256 vérifiés par `validate`) + collection définitions INSEE |
-| Définitions (D-01..D-11) | citées verbatim, datées ; manquent : logement indigne, passoire thermique (légales, hors INSEE) |
-| Hypothèses | H-01 seuil de vacance structurelle (2 ans, plage 1-3) |
-| Graphe (`evidence/claims.yaml`) | 21 nœuds — O-01..O-04, T-01..T-03, R-01/R-02, I-01/I-02, V-01, C-01..C-03, L-01..L-06 |
-| Résultats reproductibles | R-01 `data/processed/parc-menages.json`, R-02 `data/processed/vacance-structurelle.json` — verrouillés par tests de régression |
-| Notebooks d'exploration | 01 parc/ménages, 02 vacance territoriale (py:percent, committés) |
-| Document de preuve | `evidence/efficacite-parc-immobilier.qmd` + HTML rendu (auto-vérifié : artefacts publiés == recalcul) |
-| Qualité | `./check.sh` + `./test.sh` (30 tests) verts ; CI `.github/workflows/logement-ci.yml` (checkout LFS) |
-
-## Ce que disent les premiers résultats (résumé d'une phrase chacun)
-
-- **R-01/I-01** — Sur 40 ans le parc suit les ménages (décohabitation), pas
-  la population ; depuis ~2006 le parc croît plus vite et l'écart part en
-  vacance (7,7 % en 2025, ~3,0 M).
-- **R-02/I-02** — La vacance structurelle du parc privé est ~1,15 M de
-  logements (3,5 % du parc privé), robuste aux ruptures LOVAC, avec un
-  gradient territorial d'un ordre de grandeur : intensité rurale/DOM vs
-  volume urbain — premier indice pour H-02.
+Ce qui est déjà fait est consigné dans [`PREV-STEPS.md`](PREV-STEPS.md).
+Mis à jour à chaque fin de session de travail significative.
 
 ## Prochaines étapes (dans l'ordre)
 
@@ -38,7 +9,7 @@ preuve rendu.
    ZE 2020 (INSEE, table d'appartenance communes → ZE) + un jeu
    emploi/tension par ZE ; agréger la vacance structurelle LOVAC par ZE et
    la confronter à la dynamique d'emploi. C'est l'étape qui transforme
-   « premier indice » en résultat.
+   « premier indice » (I-02) en résultat.
    Attention : codes commune LOVAC au COG 2026, zonage ZE sur un COG
    antérieur — prévoir la table de passage (et documenter T-xx).
 2. **Fichiers LOVAC détaillés (sensibilité H-01).** L'open data ne publie
@@ -81,6 +52,9 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
 - **INSEE** : colonnes années suffixées « (p) » = provisoires ; libellés
   avec espaces insécables ; concept « ménage » remplacé au 31/08/2025
   (D-05 → D-06) — documenter toute jonction de séries.
+- **Classements publiés** : tri stable + clé de départage explicite (les
+  taux arrondis créent des ex æquo dont l'ordre varie selon la plateforme —
+  attrapé par la CI, corrigé dans `build_summary`).
 - **Méthode** : aucun chiffre publié sans S-xx enregistré ; les constats
   d'un notebook se vérifient depuis les sorties avant d'être écrits (une
   erreur de ce type a déjà été interceptée en session 1 — indice parc vs

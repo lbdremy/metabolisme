@@ -130,15 +130,11 @@ Correspondence with the method INTRO's canonical commands: `uv run validate` ≙
   file's sha256 — the same checksum recorded in `sources.yaml`.
 - **Notebooks: Jupytext py:percent** as the committed representation.
 
-## Next deliverables (INTRO §19, in order)
+## Roadmap files (keep them current)
 
-1. ~~Fill `sources/definitions.yaml`~~ — done (D-01..D-09, verbatim + dated).
-2. ~~First sources frozen~~ — done (S-01..S-04, LFS + sha256).
-3. ~~`notebooks/exploration/01_parc_population`~~ — done.
-4. ~~Stabilize the first transformations~~ — done: `core/parc.py` (tested,
-   invariants as property tests), stage `parc-menages` in `shell/build.py`,
-   R-01 output `data/processed/parc-menages.json` locked by the regression
-   test `tests/test_reproduce.py`, graph in `evidence/claims.yaml`.
-5. Acquire LOVAC (vacancy by territory/duration) — C-01/C-02: register D-10
-   (vacance structurelle > 2 ans) and the threshold hypothesis (H-01, 1-3 y).
-6. `evidence/efficacite-parc-immobilier.qmd`, reproducible from scratch.
+- **`NEXT-STEPS.md`** — the ordered upcoming work, the 5-minute pickup
+  procedure, and the known traps. Update it at the end of any significant
+  session.
+- **`PREV-STEPS.md`** — the session journal (most recent first): what was
+  done, decisions taken, what the results say. Append a session entry when
+  closing one; don't rewrite history.
