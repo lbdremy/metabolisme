@@ -70,3 +70,20 @@
     S-01/S-02 : ménage (RP) et résidence principale (EAPL) sont des concepts
     proches mais issus de sources et de définitions distinctes — l'écart
     résiduel doit être documenté, pas gommé. Série non annuelle.
+
+- id: S-04
+  publisher: INSEE
+  title: Définitions — métadonnées statistiques (collection en ligne)
+  source_url: https://www.insee.fr/fr/metadonnees/definitions
+  publication_date: null
+  retrieved_at: 2026-08-03
+  geographic_scope: France
+  temporal_scope: définitions en vigueur au 2026-08-03
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  notes: >
+    Collection vivante : chaque définition a sa propre page (URL et date de
+    « dernière mise à jour » reportées dans sources/definitions.yaml) et le
+    texte est cité verbatim dans le registre — c'est cette citation datée qui
+    fige la version utilisée, la collection n'ayant pas de date de publication
+    unique. Les concepts peuvent être remplacés (ex. « ménage (recensement) »
+    remplacé le 31/08/2025 par « ménage au sens de ménage-logement »).

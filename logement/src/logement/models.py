@@ -56,7 +56,9 @@ class SourceRecord(StrictModel):
     publisher: str
     title: str
     source_url: str
-    publication_date: dt.date
+    # None for living collections (e.g. a definitions registry) that have no
+    # single publication date — each derived record then carries its own date.
+    publication_date: dt.date | None
     retrieved_at: dt.date
     geographic_scope: str
     temporal_scope: str
@@ -87,6 +89,10 @@ class DefinitionRecord(StrictModel):
     term: str
     source: SourceId
     definition: str
+    # The definition's own page within the source (e.g. an INSEE metadata page)
+    # and its "dernière mise à jour" date as published there.
+    url: str | None = None
+    last_updated: dt.date | None = None
     caveats: list[str] = Field(default_factory=list)
 
 

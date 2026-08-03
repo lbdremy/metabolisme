@@ -7,8 +7,8 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 3 sources INSEE figées (fichiers dans `data/raw/`, sha256 vérifiés) |
-| D | Définitions | `sources/definitions.yaml` | vide |
+| S | Sources | `sources/sources.yaml` | 4 sources INSEE (3 fichiers figés sha256 + la collection des définitions) |
+| D | Définitions | `sources/definitions.yaml` | 9 définitions INSEE citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | vide |
 | O/T/M/R | Observations, transformations, mesures, résultats | `src/logement/` + `evidence/claims.yaml` | aucune chaîne stabilisée |
 | I/V/C/P/L | Interprétations, valeurs, choix, propositions, limites | documents de preuve (`evidence/*.qmd`) | à venir |
@@ -21,6 +21,15 @@ Sources enregistrées :
   type d'habitat (chiffres détaillés EAPL, 1982-2025).
 - **S-03** — INSEE, Ménages en séries longues (SL_MEN1, recensement,
   millésimes 1962-2022).
+- **S-04** — INSEE, Définitions (métadonnées statistiques, collection en
+  ligne — chaque définition citée verbatim et datée dans le registre).
+
+Définitions enregistrées : D-01 logement · D-02 résidence principale ·
+D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
+concept remplacé le 31/08/2025) · D-06 ménage-logement · D-07 zone d'emploi ·
+D-08 bassin de vie · D-09 taux d'effort. Restent à sourcer : vacance
+frictionnelle/durable, logement indigne, passoire thermique (définitions
+légales, hors INSEE).
 
 Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 

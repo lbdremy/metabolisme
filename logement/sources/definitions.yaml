@@ -1,19 +1,154 @@
 # Registre des définitions (D-xx) — méthode Métabolisme, INTRO §8.
-# Chaque définition statistique/juridique retenue est enregistrée ici, rattachée
-# à sa source (S-xx) avec ses limites connues. Ne PAS remplir de mémoire : une
-# définition sans source enregistrée n'existe pas (INTRO §21, règles 1-2).
-# Minimum attendu (logement/INTRO.md §19) : logement, résidence principale,
-# logement vacant, vacance frictionnelle/durable, ménage, zone d'emploi,
-# bassin de vie, taux d'effort, logement indigne, passoire thermique.
-# Schéma typé : src/logement/models.py (DefinitionRecord).
+# Chaque définition est citée VERBATIM depuis sa page source (S-04 : collection
+# des définitions INSEE), avec l'URL de la page, sa date de « dernière mise à
+# jour » et les limites connues. La citation datée fige la version utilisée.
+# Schéma typé : src/logement/models.py (DefinitionRecord) ; contrôle :
+# `uv run logement validate`.
 #
-# Exemple :
-# - id: D-01
-#   term: logement vacant
-#   source: S-01
-#   definition: >
-#     Logement inoccupé au sens de la définition statistique de la source.
-#   caveats:
-#     - Peut inclure une vacance temporaire.
-#     - Ne renseigne pas l'état du bâti.
-[]
+# Restent à sourcer (hors INSEE) : vacance frictionnelle / vacance durable
+# (seuils à définir par l'étude, cf. LOVAC), logement indigne (définition
+# légale, loi MOLLE 2009), passoire thermique (DPE classes F-G, loi Climat et
+# résilience). Ne pas les inventer ici sans source enregistrée.
+
+- id: D-01
+  term: logement
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c1702
+  last_updated: 2025-12-22
+  definition: >
+    Un logement, ou logement ordinaire, est un local utilisé pour
+    l'habitation : séparé, c'est-à-dire complètement fermé par des murs et
+    cloisons, sans communication avec un autre local sauf avec les parties
+    communes de l'immeuble (couloir, escalier, etc.) ; indépendant, c'est-à-dire
+    ayant une entrée avec accès direct sur l'extérieur ou sur les parties
+    communes de l'immeuble.
+  caveats:
+    - Les logements sont répartis en quatre catégories — résidences principales,
+      résidences secondaires, logements occasionnels, logements vacants
+      (« catégorie de logement », page c1437).
+    - Exclut les habitations mobiles et les chambres des communautés
+      (maisons de retraite, foyers), sauf exceptions occupées à l'année à titre
+      de résidence principale.
+
+- id: D-02
+  term: résidence principale
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c1928
+  last_updated: 2020-05-14
+  definition: >
+    Une résidence principale est un logement occupé de façon habituelle et à
+    titre principal par une ou plusieurs personnes qui constituent un ménage.
+  caveats:
+    - Depuis 2005, une résidence principale peut comporter plusieurs ménages
+      si ceux-ci ont des budgets séparés.
+    - Concept central pour l'axiome normatif de l'étude (INTRO §3) — une
+      résidence principale occupée n'est jamais comptée comme capacité
+      disponible.
+
+- id: D-03
+  term: logement vacant
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c1059
+  last_updated: 2021-01-25
+  definition: >
+    Un logement est vacant s'il est inoccupé et : proposé à la vente, à la
+    location, déjà attribué à un acheteur ou un locataire et en attente
+    d'occupation, en attente de règlement de succession, conservé par un
+    employeur pour un usage futur au profit d'un de ses employés, sans
+    affectation précise par le propriétaire (logement vétuste, etc.).
+  caveats:
+    - Agrège vacance frictionnelle (rotation normale du marché) et vacance
+      durable — la distinction, décisive pour l'étude, n'est pas dans la
+      définition et devra être construite (seuils de durée, cf. LOVAC).
+    - Ne renseigne ni l'état du bâti ni la disponibilité juridique réelle.
+    - Un logement vacant n'est pas un logement mobilisable.
+
+- id: D-04
+  term: résidence secondaire
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c1634
+  last_updated: 2021-01-14
+  definition: >
+    Un logement utilisé pour des séjours de courte durée (week-ends, loisirs,
+    ou vacances). Les logements meublés mis en location pour des séjours
+    touristiques sont également classés en résidences secondaires.
+  caveats:
+    - La distinction avec les logements occasionnels étant difficile, les deux
+      catégories sont souvent regroupées (c'est le cas dans S-01/S-02).
+    - Inclut les meublés touristiques — pertinent pour la « capacité
+      saisonnière retirée » (INTRO §7).
+
+- id: D-05
+  term: ménage (recensement de la population)
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c1881
+  last_updated: 2026-04-02
+  definition: >
+    Un ménage, au sens du recensement de la population, désigne l'ensemble des
+    personnes qui partagent la même résidence principale, sans que ces
+    personnes soient nécessairement unies par des liens de parenté.
+  caveats:
+    - Concept abandonné le 31/08/2025, remplacé par « ménage (au sens de
+      ménage-logement) » (D-06) — les séries longues de S-03 reposent sur ce
+      concept historique ; toute jonction de séries doit documenter la rupture.
+    - Il y a égalité entre nombre de ménages et nombre de résidences
+      principales — c'est ce qui permet la comparaison parc/ménages.
+
+- id: D-06
+  term: ménage (au sens de ménage-logement)
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c2355
+  last_updated: 2026-07-07
+  definition: >
+    Un ménage au sens de ménage-logement est constitué par l'ensemble des
+    personnes qui habitent dans un même logement qui constitue leur résidence
+    habituelle, quels que soient les liens familiaux entre ces personnes. Un
+    ménage peut être constitué d'une seule personne.
+  caveats:
+    - Remplace D-05 depuis le 31/08/2025 ; « résidence habituelle » se
+      substitue à « résidence principale » — l'effet de ce changement sur les
+      séries devra être vérifié lors des prochains millésimes.
+
+- id: D-07
+  term: zone d'emploi
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c1361
+  last_updated: 2025-05-27
+  definition: >
+    Une zone d'emploi est un espace géographique à l'intérieur duquel la
+    plupart des actifs résident et travaillent, et dans lequel les
+    établissements peuvent trouver l'essentiel de la main d'œuvre nécessaire
+    pour occuper les emplois offerts.
+  caveats:
+    - Découpage en vigueur (millésime 2020) fondé sur les flux
+      domicile-travail du recensement 2016 — vieillissant par rapport aux
+      données de parc 2025.
+
+- id: D-08
+  term: bassin de vie
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c2060
+  last_updated: 2016-10-12
+  definition: >
+    Le bassin de vie est le plus petit territoire sur lequel les habitants ont
+    accès aux équipements et services les plus courants.
+  caveats:
+    - Définition modifiée en 2012 — l'accès à l'emploi a été retiré du
+      critère ; le millésime actuel du zonage est 2022.
+    - Couvre six domaines de services (services aux particuliers, commerce,
+      enseignement, santé, sports-loisirs-culture, transports).
+
+- id: D-09
+  term: taux d'effort (occupation de la résidence principale)
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c1809
+  last_updated: 2026-07-31
+  definition: >
+    Le taux d'effort des ménages liés à l'occupation de leur résidence
+    principale est le rapport entre la somme des dépenses liées à l'habitation
+    principale et les revenus des ménages.
+  caveats:
+    - Deux variantes — « net » (aides au logement déduites de la dépense) et
+      « brut » (sans déduction) ; toujours préciser laquelle est utilisée.
+    - Revenus mesurés avant impôts ; ne couvre pas le coût du transport,
+      que l'étude veut réintégrer dans un coût complet (INTRO §6.4).
