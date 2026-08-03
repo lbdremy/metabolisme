@@ -276,3 +276,69 @@
     inadéquation infra-ZE : H-03, H-05).
   depends_on: [R-03]
   limitations: [L-07, L-08]
+
+# --------------------------------------------------------- branche coût (H-03)
+
+- id: L-09
+  type: limit
+  title: >
+    Limites du croisement coût : loyers d'annonce (relocation, pas le parc
+    en place) modélisés, millésime 2025, rapportés à des revenus Filosofi
+    2021 (dernier disponible) ; l'indice loyer/revenu n'est pas un taux
+    d'effort (D-09 — ni surface ni composition de ménage) ; 8 ZE absentes
+    (Guadeloupe, Guyane hors Filosofi) ; licence du millésime loyers 2025
+    non précisée sur data.gouv — à confirmer avant publication.
+  depends_on: [S-09, S-10, D-09]
+
+- id: O-07
+  type: observation
+  title: >
+    Loyers d'annonce prédits par commune (€/m², appartements, charges
+    comprises), millésime 2025.
+  depends_on: [S-09]
+
+- id: O-08
+  type: observation
+  title: >
+    Médiane du niveau de vie (MED_SL, €/UC/an) par zone d'emploi 2020,
+    Filosofi 2021.
+  depends_on: [S-10]
+
+- id: T-05
+  type: transformation
+  title: >
+    Indice de pression du coût par ZE : loyer moyen pondéré par le parc
+    privé LOVAC (arrondissements PLM ramenés à la commune parente), loyer
+    annuel d'un m² rapporté au niveau de vie médian, croisé avec le taux de
+    vacance structurelle (corrélation de rangs).
+  depends_on: [O-04, O-05, O-07, O-08, C-03]
+  produced_by: src/logement/core/cout.py
+
+- id: R-04
+  type: result
+  title: >
+    Pression du coût résidentiel × vacance structurelle par zone d'emploi
+    (297 ZE) : corrélation de Spearman −0,42 ; taux de vacance médian de
+    2,5 % dans la moitié des ZE au coût relatif élevé contre 4,0 % dans la
+    moitié bon marché ; loyers pondérés de 8,0 à 27,2 €/m² (Paris, indice
+    1,28) ; les trois ZE corses cumulent coût parmi les plus élevés
+    (1,01-1,16) et vacance au-dessus de la moyenne (3,8-4,6 %).
+  depends_on: [T-05, H-06, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/cout-residentiel-ze.json
+  limitations: [L-05, L-06, L-09]
+
+- id: I-04
+  type: interpretation
+  title: >
+    Le coût résidentiel est un marqueur de tension, pas la cause de la
+    vacance : là où le coût relatif est élevé le parc est presque
+    entièrement utilisé (le coût y limite l'accès des ménages — à instruire
+    avec un vrai taux d'effort), là où la vacance est forte le logement est
+    bon marché. Combiné à I-03, le blocage de la capacité sortie d'usage en
+    zone dynamique paraît relever du niveau propriété/bâti ou infra-
+    territorial plutôt que du prix territorial. L'exception corse (coût
+    élevé ET vacance élevée) pointe vers le marché de la résidence
+    secondaire (INTRO §7, capacité saisonnière retirée) — axe à instruire.
+  depends_on: [R-04, I-03]
+  limitations: [L-09]

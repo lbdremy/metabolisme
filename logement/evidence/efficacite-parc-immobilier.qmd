@@ -2,7 +2,7 @@
 title: "Efficacité du parc immobilier français — document de preuve"
 subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
-  parc privé (2020-2026)
+  parc privé (2020-2026), croisements emploi et coût par zone d'emploi
 date: 2026-08-03
 lang: fr
 format:
@@ -131,7 +131,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 30 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 42 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -143,6 +143,13 @@ propriétés) :
   avec **propagation du secret** (un arrondissement masqué masque la somme,
   plutôt qu'une sous-estimation silencieuse), taux structurels au millésime
   de référence (choix **C-03**).
+- **T-04** (`core/ze.py`) — agrégation de la vacance structurelle par zone
+  d'emploi 2020 (la feuille COM de la table d'appartenance ne contenant pas
+  les arrondissements PLM, ils sont ramenés à leur commune parente),
+  dynamique d'emploi 1998-2018 en taux annuel moyen, corrélation de rangs.
+- **T-05** (`core/cout.py`) — indice de pression du coût par ZE : loyer
+  d'annonce moyen pondéré par le parc privé, loyer annuel d'un m² rapporté
+  au niveau de vie médian Filosofi.
 
 ## 5. Hypothèses
 
@@ -180,11 +187,15 @@ exactement ce que la chaîne recalcule depuis les fichiers figés :
 #| code-fold: false
 r01 = build.build_parc_menages(ROOT)
 r02 = build.build_vacance_structurelle(ROOT)
-committed_r01 = json.loads((ROOT / build.OUTPUT).read_text(encoding="utf-8"))
-committed_r02 = json.loads((ROOT / build.LOVAC_OUTPUT).read_text(encoding="utf-8"))
-assert r01 == committed_r01, "R-01 diverge de l'artefact publié"
-assert r02 == committed_r02, "R-02 diverge de l'artefact publié"
-print("R-01 et R-02 : artefacts publiés == recalcul depuis les sources figées ✔")
+r03 = build.build_vacance_emploi(ROOT)
+r04 = build.build_cout_residentiel(ROOT)
+for name, computed, output in [
+    ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
+    ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
+]:
+    committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
+    assert computed == committed, f"{name} diverge de l'artefact publié"
+print("R-01..R-04 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -312,6 +323,55 @@ territorial d'un ordre de grandeur** : DOM (Mayotte 26,9 %, Guyane 11,5 %)
 et diagonale des faibles densités (Creuse 9,5 %, Nièvre 7,9 %) contre
 1,4-1,7 % en zones tendues et sur le littoral ouest.
 
+### R-03 — Vacance structurelle et dynamique de l'emploi (test de H-02)
+
+```{python}
+#| code-summary: "chiffres clés R-03"
+dec = r03["declining_ze"]
+print(f"{r03['n_ze']} zones d'emploi ; Spearman taux structurel × évolution "
+      f"emploi 1998-2018 : {r03['spearman_rate_vs_growth']}")
+print(f"ZE à emploi déclinant : {dec['n']} — {dec['structural_share_pct']} % de la "
+      f"vacance structurelle pour {dec['private_stock_share_pct']} % du parc privé ; "
+      f"taux médian {dec['median_rate_pct']} % contre "
+      f"{r03['growing_ze_median_rate_pct']} % ailleurs")
+print("Plus gros volumes en ZE dynamiques :",
+      ", ".join(f"{e['name']} {e['structural']:,}".replace(",", " ")
+                for e in r03["top_growing_by_volume"][:3]))
+```
+
+L'hypothèse directrice **H-02** (capacités mal localisées) est **confirmée en
+intensité** — la vacance structurelle est sur-représentée (×1,5) et deux fois
+plus fréquente dans les ZE à emploi déclinant — mais **réfutée comme
+explication dominante en volume** : ~85 % de la vacance structurelle se
+trouve dans des zones d'emploi où l'emploi croît, Paris en tête. La majorité
+de la capacité sortie d'usage coexiste avec la demande (interprétation
+I-03) ; la dynamique d'emploi s'arrête en 2018 (limite L-07).
+
+### R-04 — Pression du coût résidentiel et vacance (instruction de H-03)
+
+```{python}
+#| code-summary: "chiffres clés R-04"
+med = r04["median_vacancy_rate_pct"]
+print(f"{r04['n_ze']} ZE ; Spearman indice de coût × taux structurel : "
+      f"{r04['spearman_cost_vs_vacancy']}")
+print(f"Taux de vacance médian : {med['expensive_half']} % (moitié des ZE au coût "
+      f"relatif élevé) contre {med['cheap_half']} % (moitié bon marché)")
+rng = r04["loyer_m2_range"]
+print(f"Loyers pondérés : {rng['min']} / {rng['median']} / {rng['max']} €/m² "
+      f"(min/médiane/max)")
+print("Indices les plus élevés :",
+      ", ".join(f"{e['name']} {e['indice_cout_pct']}" for e in r04["top_cost_index"][:4]))
+```
+
+Le coût résidentiel relatif (loyer d'annonce rapporté au niveau de vie
+médian) et la vacance structurelle **varient en sens inverse** : le coût est
+un marqueur de tension, pas la cause de la vacance. Là où le coût est élevé
+(Paris, indice 1,28), le parc est presque entièrement utilisé ; là où la
+vacance est forte, le logement est bon marché. **Exception notable : les
+trois ZE corses** cumulent coût parmi les plus élevés et vacance au-dessus de
+la moyenne — signature d'un marché de résidence secondaire (interprétation
+I-04). L'indice n'est pas un taux d'effort (limite L-09).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -352,6 +412,15 @@ structurelle à ce millésime (L-04).
   villes dominent (Paris ~32 000, Marseille ~14 500) à des taux proches de
   la moyenne. Tout mécanisme de remise en usage devra traiter ces deux
   régimes distincts.
+- **I-03** — H-02 est confirmée en intensité mais réfutée en volume : la
+  majorité de la capacité sortie d'usage coexiste avec la demande — les
+  causes de blocage sont à chercher au niveau propriété/bâti, successions,
+  coût ou inadéquation infra-ZE (H-03, H-05).
+- **I-04** — Le coût est un marqueur de tension, pas la cause de la
+  vacance ; combiné à I-03, le blocage en zone dynamique paraît relever du
+  niveau propriété/bâti ou infra-territorial plutôt que du prix
+  territorial. L'exception corse pointe vers la capacité saisonnière
+  retirée (résidences secondaires) — axe suivant.
 
 Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
 bâti, des causes de la vacance (succession, travaux, rétention…), de la

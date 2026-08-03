@@ -31,3 +31,10 @@ def test_committed_ze_artifact_matches_rebuild() -> None:
     root = project_root()
     committed = json.loads((root / build.ZE_OUTPUT).read_text(encoding="utf-8"))
     assert build.build_vacance_emploi(root) == committed
+
+
+def test_committed_cout_artifact_matches_rebuild() -> None:
+    """data/processed/cout-residentiel-ze.json is exactly what the chain rebuilds."""
+    root = project_root()
+    committed = json.loads((root / build.COUT_OUTPUT).read_text(encoding="utf-8"))
+    assert build.build_cout_residentiel(root) == committed

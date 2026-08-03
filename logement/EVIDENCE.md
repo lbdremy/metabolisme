@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 8 sources (INSEE, LOVAC, Légifrance ; 9 fichiers figés sha256/LFS + 2 collections vivantes) |
+| S | Sources | `sources/sources.yaml` | 10 sources (INSEE, LOVAC, ANIL, Légifrance ; 12 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 13 définitions citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-06, T-01..T-04, R-01..R-03 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-03, V-01, C-01..C-03, L-01..L-08 |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-08, T-01..T-05, R-01..R-04 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-04, V-01, C-01..C-03, L-01..L-09 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -57,6 +57,13 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   H-02 confirmée en intensité, réfutée comme explication dominante en
   volume ; les causes de blocage sont ailleurs (H-03/H-05). Limites
   L-05..L-08.
+
+- **R-04** — Pression du coût résidentiel × vacance par ZE (sortie
+  reproductible `data/processed/cout-residentiel-ze.json`) : Spearman −0,42,
+  vacance médiane 2,5 % dans les ZE chères contre 4,0 % dans les ZE bon
+  marché. Lecture : **I-04** — le coût marque la tension, il n'explique pas
+  la vacance ; exception corse (coût élevé ET vacance élevée → piste
+  résidences secondaires). Limites L-09.
 
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,

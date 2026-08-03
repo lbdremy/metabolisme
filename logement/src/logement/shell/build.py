@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from logement.core import lovac, parc, ze
+from logement.core import cout, lovac, parc, ze
 
 S01_FILE = "insee-focus-359-parc-logements-2025.xlsx"
 S02_FILE = "insee-eapl-parc-residence-2025.xlsx"
@@ -28,6 +28,11 @@ APPARTENANCE_ZIP = "insee-table-appartenance-geo-communes-2026.zip"
 APPARTENANCE_XLSX = "table-appartenance-geo-communes-2026.xlsx"
 EMPLOI_ZE_FILE = "insee-emploi-zone-1998-2018.xlsx"
 ZE_OUTPUT = Path("data") / "processed" / "vacance-emploi-ze.json"
+
+LOYERS_FILE = "carte-loyers-2025-appartement.csv"
+FILOSOFI_ZIP = "insee-filosofi-2021-geo2025.zip"
+FILOSOFI_CSV = "DS_FILOSOFI_CC_data.csv"
+COUT_OUTPUT = Path("data") / "processed" / "cout-residentiel-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -114,5 +119,46 @@ def run_vacance_emploi(root: Path) -> int:
     print(
         f"vacance-emploi: wrote {ZE_OUTPUT} — spearman "
         f"{payload['spearman_rate_vs_growth']}, declining {payload['declining_ze']}"
+    )
+    return 0
+
+
+def _read_membership(root: Path) -> pd.DataFrame:
+    raw = root / "data" / "raw"
+    with zipfile.ZipFile(raw / APPARTENANCE_ZIP) as zf, zf.open(APPARTENANCE_XLSX) as fh:
+        return pd.read_excel(fh, sheet_name="COM", header=5, engine="calamine", dtype=str)
+
+
+def build_cout_residentiel(root: Path) -> dict[str, object]:
+    """Compute the R-04 summary payload (cost-pressure index × vacancy by ZE)."""
+    raw = root / "data" / "raw"
+    loyers = cout.parse_loyers(
+        pd.read_csv(raw / LOYERS_FILE, sep=";", encoding="cp1252", dtype=str)
+    )
+    with zipfile.ZipFile(raw / FILOSOFI_ZIP) as zf, zf.open(FILOSOFI_CSV) as fh:
+        filosofi = pd.read_csv(
+            fh, sep=";", dtype=str, usecols=["GEO", "GEO_OBJECT", "FILOSOFI_MEASURE", "OBS_VALUE"]
+        )
+    niveau_vie = cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="MED_SL")
+    commune_ze = ze.parse_commune_ze(_read_membership(root)).rename(columns={"ze": "ze"})
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    cost_ze = cout.cost_index_by_ze(loyers, communes, commune_ze, niveau_vie)
+    emploi = ze.parse_emploi_ze(
+        pd.read_excel(
+            raw / EMPLOI_ZE_FILE, sheet_name="Emploi total - ZE", header=4, engine="calamine"
+        )
+    )
+    return cout.build_summary(cost_ze, emploi["ze_name"])
+
+
+def run_cout(root: Path) -> int:
+    """Rebuild data/processed/cout-residentiel-ze.json; return a process exit code."""
+    payload = build_cout_residentiel(root)
+    _write_json(root, COUT_OUTPUT, payload)
+    print(
+        f"cout-residentiel: wrote {COUT_OUTPUT} — spearman "
+        f"{payload['spearman_cost_vs_vacancy']}, medians {payload['median_vacancy_rate_pct']}"
     )
     return 0

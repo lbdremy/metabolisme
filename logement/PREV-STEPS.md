@@ -12,12 +12,12 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
 | Élément | État en fin de session |
 |---|---|
 | Harnais | Projet uv autonome calqué sur le dépôt `learn` : core/shell, pydantic aux frontières, CLI clypi, `check.sh` (ruff · ty · skylos) + `test.sh` (pytest + hypothesis), CI GitHub (checkout LFS) |
-| Sources (S-01..S-07) | 5 fichiers INSEE + 4 fichiers LOVAC figés (Git LFS, sha256 vérifiés par `validate`) + collection définitions INSEE |
-| Définitions (D-01..D-11) | citées verbatim, datées, avec limites |
+| Sources (S-01..S-10) | 8 fichiers INSEE/ANIL + 4 fichiers LOVAC figés (Git LFS, sha256) + collections définitions INSEE et Légifrance |
+| Définitions (D-01..D-13) | citées verbatim, datées, avec limites — liste du cadrage complète |
 | Hypothèses | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
-| Graphe (`evidence/claims.yaml`) | 28 nœuds — O-01..O-06, T-01..T-04, R-01..R-03, I-01..I-03, V-01, C-01..C-03, L-01..L-08 |
-| Résultats reproductibles | R-01 parc-menages, R-02 vacance-structurelle, R-03 vacance-emploi-ze (`data/processed/*.json`) — verrouillés par tests de régression |
-| Notebooks d'exploration | 01 parc/ménages, 02 vacance territoriale, 03 vacance × emploi (py:percent, committés) |
+| Graphe (`evidence/claims.yaml`) | 34 nœuds — O-01..O-08, T-01..T-05, R-01..R-04, I-01..I-04, V-01, C-01..C-03, L-01..L-09 |
+| Résultats reproductibles | R-01..R-04 (`data/processed/*.json`) — verrouillés par tests de régression ; document de preuve auto-vérifié couvrant les quatre |
+| Notebooks d'exploration | 01 parc/ménages, 02 vacance territoriale, 03 vacance × emploi, 04 coût résidentiel (py:percent, committés) |
 | Document de preuve | `evidence/efficacite-parc-immobilier.qmd` + HTML rendu (auto-vérifié : artefacts publiés == recalcul) |
 | Qualité | 30 tests verts ; CI verte après correction d'un vrai bug de reproductibilité (ordre des ex æquo dépendant de la plateforme, attrapé par le test de régression au premier run CI) |
 
@@ -45,3 +45,9 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
   ZE déclinantes vs 2,9 %) mais réfutée en volume — ~85 % de la vacance
   structurelle est dans des ZE où l'emploi croît (Paris 69,8 k en tête).
   Les causes de blocage dominantes sont donc ailleurs → H-03/H-05.
+- **R-04/I-04** — Croisée avec le coût (loyers 2025 / Filosofi 2021) :
+  anticorrélation nette (Spearman −0,42) — le coût marque la tension, il
+  n'explique pas la vacance ; l'exception corse (coût élevé ET vacance
+  élevée) ouvre l'axe résidences secondaires. La sensibilité H-06 est
+  bloquée au niveau source (fichiers détaillés réservés aux acteurs
+  publics) ; D-12/D-13 complètent le registre des définitions.

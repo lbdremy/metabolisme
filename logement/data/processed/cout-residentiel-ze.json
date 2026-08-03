@@ -1,0 +1,114 @@
+{
+  "bottom_cost_index": [
+    {
+      "indice_cout_pct": 0.44,
+      "loyer_m2": 8.03,
+      "name": "Bar-le-Duc",
+      "niveau_vie_median": 22120,
+      "taux_structurelle_pct": 6.05,
+      "ze": "4401"
+    },
+    {
+      "indice_cout_pct": 0.45,
+      "loyer_m2": 8.24,
+      "name": "Mayenne",
+      "niveau_vie_median": 21860,
+      "taux_structurelle_pct": 2.58,
+      "ze": "5215"
+    },
+    {
+      "indice_cout_pct": 0.45,
+      "loyer_m2": 8.15,
+      "name": "Cosne-Cours-sur-Loire",
+      "niveau_vie_median": 21560,
+      "taux_structurelle_pct": 7.29,
+      "ze": "0056"
+    },
+    {
+      "indice_cout_pct": 0.45,
+      "loyer_m2": 8.15,
+      "name": "Charolais",
+      "niveau_vie_median": 21510,
+      "taux_structurelle_pct": 4.51,
+      "ze": "2708"
+    },
+    {
+      "indice_cout_pct": 0.46,
+      "loyer_m2": 8.44,
+      "name": "Les Sources de la Loire",
+      "niveau_vie_median": 22160,
+      "taux_structurelle_pct": 5.06,
+      "ze": "8420"
+    },
+    {
+      "indice_cout_pct": 0.46,
+      "loyer_m2": 8.33,
+      "name": "Chaumont",
+      "niveau_vie_median": 21850,
+      "taux_structurelle_pct": 4.25,
+      "ze": "4404"
+    }
+  ],
+  "loyer_m2_range": {
+    "max": 27.2,
+    "median": 11.2,
+    "min": 8.0
+  },
+  "median_vacancy_rate_pct": {
+    "cheap_half": 4.0,
+    "expensive_half": 2.5
+  },
+  "n_ze": 297,
+  "reference_millesime": 2024,
+  "spearman_cost_vs_vacancy": -0.42,
+  "top_cost_index": [
+    {
+      "indice_cout_pct": 1.28,
+      "loyer_m2": 27.23,
+      "name": "Paris",
+      "niveau_vie_median": 25510,
+      "taux_structurelle_pct": 2.53,
+      "ze": "1109"
+    },
+    {
+      "indice_cout_pct": 1.16,
+      "loyer_m2": 17.47,
+      "name": "L'Ouest",
+      "niveau_vie_median": 18090,
+      "taux_structurelle_pct": 3.78,
+      "ze": "0402"
+    },
+    {
+      "indice_cout_pct": 1.15,
+      "loyer_m2": 22.69,
+      "name": "Menton",
+      "niveau_vie_median": 23650,
+      "taux_structurelle_pct": 4.57,
+      "ze": "9314"
+    },
+    {
+      "indice_cout_pct": 1.07,
+      "loyer_m2": 18.52,
+      "name": "Roissy ",
+      "niveau_vie_median": 20830,
+      "taux_structurelle_pct": 2.38,
+      "ze": "1112"
+    },
+    {
+      "indice_cout_pct": 1.05,
+      "loyer_m2": 14.53,
+      "name": "Le Sud",
+      "niveau_vie_median": 16590,
+      "taux_structurelle_pct": 3.85,
+      "ze": "0404"
+    },
+    {
+      "indice_cout_pct": 1.01,
+      "loyer_m2": 12.66,
+      "name": "L'Est",
+      "niveau_vie_median": 14970,
+      "taux_structurelle_pct": 4.04,
+      "ze": "0401"
+    }
+  ]
+}

@@ -25,9 +25,11 @@ Mis à jour à chaque fin de session de travail significative.
    S-10 Filosofi 2021) : indice de coût par ZE anticorrélé à la vacance
    (Spearman −0,42) — le coût marque la tension, il n'explique pas la
    vacance ; exception corse (coût élevé ET vacance élevée, piste
-   résidences secondaires). RESTE À FAIRE : stabiliser R-04/I-04, puis un
-   vrai taux d'effort territorial (D-09 : surfaces et composition des
-   ménages) et l'axe résidences secondaires (AAV/littoral).
+   résidences secondaires). ~~Stabiliser R-04/I-04~~ — fait (graphe à 34
+   nœuds, document de preuve couvrant R-01..R-04). RESTE À FAIRE : un vrai
+   taux d'effort territorial (D-09 : surfaces et composition des ménages)
+   et l'axe résidences secondaires (AAV/littoral, S-01 fig. 6 + LOVAC +
+   part des résidences secondaires par territoire).
 5. Quand une nouvelle publication est prête : tag git + mise à jour du
    document de preuve (règle : l'article pointe une version précise).
 
