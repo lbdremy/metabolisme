@@ -121,3 +121,45 @@
     ff_pp_total au niveau France. Fichiers CSV en encodage Windows-1252,
     séparateur point-virgule, milliers avec espaces insécables.
     Documentation : https://doc-datafoncier.cerema.fr/doc/fiche_descriptive/lovac
+
+- id: S-06
+  publisher: INSEE
+  title: Table d'appartenance géographique des communes au 1er janvier 2026
+  dataset_id: table-appartenance-geo-communes-2026
+  source_url: https://www.insee.fr/fr/information/7671844
+  publication_date: 2026-03-19
+  retrieved_at: 2026-08-03
+  geographic_scope: France (COG au 1er janvier 2026)
+  temporal_scope: zonages en vigueur en 2026 (ZE 2020, UU 2020, AAV 2020, BV 2022)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-table-appartenance-geo-communes-2026.zip
+  checksum: sha256:9e26e89a580bf787c610913080aee50f28c678a82dfa36db864ddbad228a07b8
+  notes: >
+    Zip contenant table-appartenance-geo-communes-2026.xlsx : pour chaque
+    commune (CODGEO, COG 2026 — même millésime que les codes LOVAC de S-05),
+    les zonages supra-communaux d'appartenance (DEP, REG, EPCI, ZE2020,
+    UU2020, AAV2020, BV2022) + un onglet de libellés. C'est la table de
+    passage communes → zones d'emploi utilisée pour agréger la vacance.
+    Le fichier xlsx est illisible par openpyxl (feuille de style non
+    standard) — lire avec le moteur calamine.
+
+- id: S-07
+  publisher: INSEE
+  title: Estimation d'emploi par zone d'emploi et secteur d'activité de 1998 à 2018
+  dataset_id: emploi-zone-1998-2018
+  source_url: https://www.insee.fr/fr/statistiques/5365132
+  publication_date: 2021-05-11
+  retrieved_at: 2026-08-03
+  geographic_scope: France hors Mayotte — 305 zones d'emploi (zonage ZE 2020) + 28 parties régionales
+  temporal_scope: 1998-2018 (emploi estimé la dernière semaine de l'année)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-emploi-zone-1998-2018.xlsx
+  checksum: sha256:fe35e48be92e9c9c8861966c1195fd0bba16da898de9956450110a85aae6ea69
+  notes: >
+    Estimations annuelles d'emploi (salarié, non salarié, total) par zone
+    d'emploi (zonage 2020) et secteur A5, 1998-2018. Série la plus récente
+    publiée à la maille ZE : s'arrête en 2018 — la dynamique d'emploi
+    utilisée est donc structurelle (long terme), pas conjoncturelle ; les
+    publications « Emploi localisé » plus récentes ne descendent qu'au
+    département. Codes ZE à 4 chiffres au format « 0051 - Alençon » à
+    séparer en code + libellé.
