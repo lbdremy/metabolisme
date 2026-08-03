@@ -1,0 +1,50 @@
+name: logement • evidence chain CI
+
+# The CI half of the control loop (method INTRO §6.8): replay the study in a
+# fresh environment on every change. Lives at the repo root because GitHub only
+# runs workflows from .github/workflows/, but everything it touches is under
+# logement/ (a uv project, same layout as the `learn` repo's projects).
+on:
+  workflow_dispatch:
+  push:
+    paths: ["logement/**", ".github/workflows/logement-ci.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: logement-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    # 'shell: bash' (explicit) runs with -o pipefail — GitHub's implicit
+    # default shell has no pipefail, which can mask a failing step.
+    shell: bash
+    working-directory: logement
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: logement/uv.lock
+
+      # Deterministic feedback, no LLM: a red gate or test fails the build.
+      - name: Static gates (ruff format · ruff check · ty · skylos)
+        run: ./check.sh
+
+      - name: Behaviour tests (pure core)
+        run: ./test.sh
+
+      # The evidence chain itself: registries must validate, and every
+      # stabilized stage must rebuild from the committed raw data.
+      - name: Validate evidence registries
+        run: uv run logement validate
+
+      - name: Reproduce the evidence chain
+        run: uv run logement reproduce

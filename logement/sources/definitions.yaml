@@ -1,0 +1,19 @@
+# Registre des définitions (D-xx) — méthode Métabolisme, INTRO §8.
+# Chaque définition statistique/juridique retenue est enregistrée ici, rattachée
+# à sa source (S-xx) avec ses limites connues. Ne PAS remplir de mémoire : une
+# définition sans source enregistrée n'existe pas (INTRO §21, règles 1-2).
+# Minimum attendu (logement/INTRO.md §19) : logement, résidence principale,
+# logement vacant, vacance frictionnelle/durable, ménage, zone d'emploi,
+# bassin de vie, taux d'effort, logement indigne, passoire thermique.
+# Schéma typé : src/logement/models.py (DefinitionRecord).
+#
+# Exemple :
+# - id: D-01
+#   term: logement vacant
+#   source: S-01
+#   definition: >
+#     Logement inoccupé au sens de la définition statistique de la source.
+#   caveats:
+#     - Peut inclure une vacance temporaire.
+#     - Ne renseigne pas l'état du bâti.
+[]

@@ -1,0 +1,19 @@
+# Registre des hypothèses (H-xx) — méthode Métabolisme, INTRO §9.
+# Toute valeur introduite dans un modèle est un paramètre nommé : valeur
+# centrale, plage plausible, unité, niveau de confiance, justification (ids
+# S-xx/I-xx...), résultats affectés (R-xx). Jamais de constante enfouie dans
+# une formule. Les hypothèses directrices H-01..H-05 de logement/INTRO.md §4
+# seront paramétrées ici lorsqu'elles deviendront calculables.
+# Schéma typé : src/logement/models.py (HypothesisRecord).
+#
+# Exemple :
+# - id: H-03
+#   name: frictional_vacancy_rate
+#   description: Part de la vacance correspondant à une rotation normale
+#   central_value: 0.10
+#   plausible_range: [0.07, 0.15]
+#   unit: ratio
+#   confidence: medium
+#   justification: [S-04]
+#   affects: [R-01]
+[]

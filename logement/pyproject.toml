@@ -1,0 +1,94 @@
+[project]
+name = "logement"
+version = "0.1.0"
+description = "Efficacité du parc immobilier français — executable evidence chain (Métabolisme)."
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml>=6.0",   # sources/definitions/hypotheses registries
+    "pydantic>=2.7", # parse-at-the-boundary (models.py)
+    "clypi>=1.2.9",  # typed CLI (cli.py)
+]
+
+[project.scripts]
+logement = "logement.cli:main"
+
+[dependency-groups]
+# The feedback half of the control loop. Pinned so `uv sync` reproduces the exact
+# toolchain; run via `uv run <tool>` (never uvx). Static gates (`./check.sh`) +
+# behaviour tests over the pure core (`./test.sh`).
+dev = [
+    "ruff>=0.6",           # formatting + lint
+    "ty>=0.0.1a1",         # type checking (Astral, preview)
+    "skylos>=2.0",         # dead-code detection
+    "pytest>=9.1.1",       # behaviour tests
+    "hypothesis>=6.156.3", # property-based tests for the pure core
+    "pytest-cov>=7.1.0",   # coverage (uv run pytest --cov=logement)
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/logement"]
+
+# --------------------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "F",    # pyflakes
+    "E", "W", # pycodestyle
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "C4",   # flake8-comprehensions
+    "N",    # pep8-naming
+    "D",    # pydocstyle
+    "ANN",  # flake8-annotations
+    "PTH",  # flake8-use-pathlib
+    "RET",  # flake8-return
+    "ARG",  # flake8-unused-arguments
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "D203",   # one-blank-line-before-class — conflicts with D211 (house style: no blank)
+    "D213",   # multi-line-summary-second-line — conflicts with D212 (summary on line 1)
+    "D205",   # 1-blank-line-between-summary-and-description — house style: compact docstrings
+    "D100",   # undocumented public module — docstrings by choice, not forced
+    "D101",   # undocumented public class — dataclasses/models are self-describing
+    "D102",   # undocumented public method — trivial properties need no prose
+    "D104",   # undocumented public package — __init__.py needs no docstring
+    "D105",   # undocumented magic method — __repr__/__init__ are obvious
+    "D106",   # undocumented nested class — pydantic Config etc.
+    "D107",   # undocumented __init__ — the class docstring covers it
+    # NB: D103 (public FUNCTION docstring) stays ON — free functions must document.
+    "N818",   # exception-name-suffix — descriptive exception names on purpose
+    "RUF001", # ambiguous unicode in strings — en/em dashes are deliberate typography
+    "RUF002", # ambiguous unicode in docstrings — same deliberate typography
+    "RUF003", # ambiguous unicode in comments — same deliberate typography
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+# ----------------------------------------------------------------------------- ty
+[tool.ty.environment]
+python-version = "3.11"
+root = ["src"]
+
+# ------------------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+minversion = "9.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+# ------------------------------------------------------------------------- skylos
+[tool.skylos.whitelist.documented]
+# clypi reads the `subcommand:` class attribute via its metaclass to build the
+# command tree — it's the framework's dispatch point, reflected not called, so
+# skylos sees no reference. Not dead code.
+subcommand = "clypi metaclass reads this class attribute to build the subcommand tree"

@@ -1,0 +1,119 @@
+"""Parse-at-the-boundary types (pydantic v2).
+
+Two base classes encode the trust boundary:
+- `StrictModel` (`extra="forbid"`) for data WE own — the evidence registries
+  (`sources.yaml`, `definitions.yaml`, `hypotheses.yaml`), claims, artifacts we
+  parse back. A stray/typo'd key is an error, not a silent drop.
+- `SubsetModel` (`extra="ignore"`, `from_attributes`) for third-party payloads we
+  don't control (INSEE/SDES files, API responses) — read the fields we need.
+
+Never flow a raw dict downstream: `model_validate` it at the edge, then work with
+types. `Any` is banned in signatures (ANN401) — type a raw payload as `object` and
+parse it.
+
+The record schemas mirror the method INTRO (§7 sources, §8 definitions,
+§9 hypotheses); epistemic-status ids (`S-01`, `D-01`, `H-03`, …) are validated
+by pattern so a claim can never reference a malformed id.
+"""
+
+from __future__ import annotations
+
+import datetime as dt
+from typing import Annotated, Literal
+
+from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+
+class StrictModel(BaseModel):
+    """Base for data we own — unknown keys are a hard error."""
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class SubsetModel(BaseModel):
+    """Base for third-party payloads — read the fields we need, ignore the rest."""
+
+    model_config = ConfigDict(extra="ignore", from_attributes=True)
+
+
+# ------------------------------------------------------------------ epistemic ids
+# One pattern per status used in the registries; claims will reuse them later.
+
+SourceId = Annotated[str, Field(pattern=r"^S-\d{2,}$")]
+DefinitionId = Annotated[str, Field(pattern=r"^D-\d{2,}$")]
+HypothesisId = Annotated[str, Field(pattern=r"^H-\d{2,}$")]
+# Justifications / affected results may point at any status (S/D/O/T/M/H/R/I/V/C/P/L).
+EvidenceId = Annotated[str, Field(pattern=r"^[SDOTMHRIVCPL]-\d{2,}$")]
+
+
+# --------------------------------------------------------------- sources.yaml (§7)
+
+
+class SourceRecord(StrictModel):
+    """One retained source: identified, dated, scoped, checksummed (INTRO §7)."""
+
+    id: SourceId
+    publisher: str
+    title: str
+    source_url: str
+    publication_date: dt.date
+    retrieved_at: dt.date
+    geographic_scope: str
+    temporal_scope: str
+    license: str
+    dataset_id: str | None = None
+    # Path relative to the project root (e.g. data/raw/insee-logements-2023.csv).
+    # None while the source is registered but not yet frozen locally.
+    local_file: str | None = None
+    checksum: str | None = Field(default=None, pattern=r"^sha256:[0-9a-f]{64}$")
+    notes: str = ""
+
+    @model_validator(mode="after")
+    def _frozen_files_are_checksummed(self) -> SourceRecord:
+        """Reject a frozen local file without a checksum — it can't prove its version."""
+        if self.local_file is not None and self.checksum is None:
+            msg = f"{self.id}: local_file is set but checksum is missing"
+            raise ValueError(msg)
+        return self
+
+
+# ----------------------------------------------------------- definitions.yaml (§8)
+
+
+class DefinitionRecord(StrictModel):
+    """One statistical/legal/conceptual definition, tied to its source (INTRO §8)."""
+
+    id: DefinitionId
+    term: str
+    source: SourceId
+    definition: str
+    caveats: list[str] = Field(default_factory=list)
+
+
+# ------------------------------------------------------------ hypotheses.yaml (§9)
+
+
+class HypothesisRecord(StrictModel):
+    """One named model parameter: central value, plausible range, lineage (INTRO §9)."""
+
+    id: HypothesisId
+    name: str
+    description: str
+    central_value: float
+    plausible_range: tuple[float, float]
+    unit: str
+    confidence: Literal["low", "medium", "high"]
+    justification: list[EvidenceId] = Field(default_factory=list)
+    affects: list[EvidenceId] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _central_value_inside_range(self) -> HypothesisRecord:
+        """Require an ordered plausible range that contains the central value."""
+        low, high = self.plausible_range
+        if not low <= high:
+            msg = f"{self.id}: plausible_range is not ordered ({low} > {high})"
+            raise ValueError(msg)
+        if not low <= self.central_value <= high:
+            msg = f"{self.id}: central_value {self.central_value} outside [{low}, {high}]"
+            raise ValueError(msg)
+        return self

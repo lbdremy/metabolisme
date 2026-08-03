@@ -1,0 +1,21 @@
+# Python
+logement/.venv/         # uv-managed env for the logement study (deps pinned in logement/uv.lock)
+**/__pycache__/
+*.pyc
+
+# skylos dead-code cache (regenerated each ./check.sh run)
+.skylos/
+logement/.skylos/
+
+# pytest / hypothesis / coverage (regenerated each ./test.sh run)
+.coverage
+logement/.coverage
+.pytest_cache/
+.hypothesis/
+htmlcov/
+
+# ruff cache (regenerated each ./check.sh run)
+.ruff_cache/
+
+# OS
+.DS_Store

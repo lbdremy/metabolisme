@@ -1,0 +1,22 @@
+# Registre des sources (S-xx) — méthode Métabolisme, INTRO §7.
+# Chaque source retenue doit être enregistrée ici AVANT d'alimenter un calcul :
+# organisme, titre, URL, dates (publication + récupération), périmètres, licence,
+# fichier local figé dans data/raw/ et son empreinte sha256.
+# Schéma typé : src/logement/models.py (SourceRecord) ; contrôle : `uv run logement validate`.
+#
+# Exemple :
+# - id: S-01
+#   publisher: INSEE
+#   title: Parc de logements par catégorie
+#   source_url: https://...
+#   publication_date: 2025-06-12
+#   retrieved_at: 2026-08-03
+#   geographic_scope: France
+#   temporal_scope: "2023"
+#   license: Licence Ouverte 2.0
+#   local_file: data/raw/insee-logements-2023.csv
+#   checksum: sha256:...
+#   notes: >
+#     La catégorie « logement vacant » ne signifie pas que le logement est
+#     immédiatement mobilisable.
+[]
