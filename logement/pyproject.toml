@@ -7,6 +7,8 @@ dependencies = [
     "pyyaml>=6.0",   # sources/definitions/hypotheses registries
     "pydantic>=2.7", # parse-at-the-boundary (models.py)
     "clypi>=1.2.9",  # typed CLI (cli.py)
+    "pandas>=2.2",   # tabular reads/transforms of the frozen sources
+    "openpyxl>=3.1", # xlsx engine for the INSEE files in data/raw/
 ]
 
 [project.scripts]
@@ -23,6 +25,9 @@ dev = [
     "pytest>=9.1.1",       # behaviour tests
     "hypothesis>=6.156.3", # property-based tests for the pure core
     "pytest-cov>=7.1.0",   # coverage (uv run pytest --cov=logement)
+    "matplotlib>=3.8", # exploration/verification notebook figures
+    "jupytext>=1.16",  # py:percent pairing — the committed notebook representation
+    "jupyterlab>=4.0", # the exploration environment (method INTRO §6.3)
 ]
 
 [build-system]
