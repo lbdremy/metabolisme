@@ -93,18 +93,19 @@ def parse_territories(raw: pd.DataFrame, *, code_col: str, name_col: str) -> pd.
     return out
 
 
+def plm_parent(code: str) -> str:
+    """Map a PLM arrondissement code to its parent commune code, else identity."""
+    return next((city for p, (city, _, _) in PLM_CITIES.items() if code.startswith(p)), code)
+
+
 def aggregate_plm(territories: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     """Aggregate PLM arrondissements into their parent commune, summing `columns`.
 
     Secrecy propagates: a parent whose arrondissements include a masked value
     keeps NA (min_count) rather than a silently understated sum.
     """
-
-    def parent(code: str) -> str:
-        return next((city for p, (city, _, _) in PLM_CITIES.items() if code.startswith(p)), code)
-
     out = territories.copy()
-    out["code"] = out["code"].map(parent)
+    out["code"] = out["code"].map(plm_parent)
     renames = {city: name for _, (city, name, _) in PLM_CITIES.items()}
     grouped = out.groupby("code", as_index=False).agg(
         name=("name", "first"), **{c: (c, "sum") for c in columns}

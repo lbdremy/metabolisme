@@ -5,13 +5,11 @@ Mis à jour à chaque fin de session de travail significative.
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Croisement zones d'emploi (test de H-02).** Acquérir le zonage
-   ZE 2020 (INSEE, table d'appartenance communes → ZE) + un jeu
-   emploi/tension par ZE ; agréger la vacance structurelle LOVAC par ZE et
-   la confronter à la dynamique d'emploi. C'est l'étape qui transforme
-   « premier indice » (I-02) en résultat.
-   Attention : codes commune LOVAC au COG 2026, zonage ZE sur un COG
-   antérieur — prévoir la table de passage (et documenter T-xx).
+1. ~~Croisement zones d'emploi (test de H-02)~~ — **fait** (R-03/I-03,
+   session 1) : H-02 confirmée en intensité, réfutée en volume — ~85 % de la
+   vacance structurelle est dans des ZE où l'emploi croît. Suite logique :
+   descendre à l'infra-ZE (bassins de vie, D-08) et instruire H-03 (coût)
+   et H-05 (blocages institutionnels), devenues les pistes dominantes.
 2. **Fichiers LOVAC détaillés (sensibilité H-06).** L'open data ne publie
    que la coupure à 2 ans ; les fichiers détaillés (ancienneté fine, accès
    Cerema/datafoncier sur demande) permettent l'analyse 1-3 ans promise par
@@ -51,7 +49,10 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
   agréger (le secret se propage) via `lovac.aggregate_plm`.
 - **INSEE** : colonnes années suffixées « (p) » = provisoires ; libellés
   avec espaces insécables ; concept « ménage » remplacé au 31/08/2025
-  (D-05 → D-06) — documenter toute jonction de séries.
+  (D-05 → D-06) — documenter toute jonction de séries ; la table
+  d'appartenance (feuille COM) ne contient PAS les arrondissements PLM
+  (feuille ARM) — toujours ramener les codes LOVAC à la commune parente
+  avant jointure ; certains xlsx INSEE cassent openpyxl → moteur calamine.
 - **Classements publiés** : tri stable + clé de départage explicite (les
   taux arrondis créent des ex æquo dont l'ordre varie selon la plateforme —
   attrapé par la CI, corrigé dans `build_summary`).

@@ -16,6 +16,7 @@ from logement.shell import build
 STAGES: tuple[tuple[str, Callable[[Path], int]], ...] = (
     ("parc-menages", build.run),
     ("vacance-structurelle", build.run_vacance),
+    ("vacance-emploi", build.run_vacance_emploi),
 )
 
 

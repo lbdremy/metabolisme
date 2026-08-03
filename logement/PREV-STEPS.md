@@ -12,12 +12,12 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
 | Élément | État en fin de session |
 |---|---|
 | Harnais | Projet uv autonome calqué sur le dépôt `learn` : core/shell, pydantic aux frontières, CLI clypi, `check.sh` (ruff · ty · skylos) + `test.sh` (pytest + hypothesis), CI GitHub (checkout LFS) |
-| Sources (S-01..S-05) | 3 fichiers INSEE + 4 fichiers LOVAC figés (Git LFS, sha256 vérifiés par `validate`) + collection définitions INSEE |
+| Sources (S-01..S-07) | 5 fichiers INSEE + 4 fichiers LOVAC figés (Git LFS, sha256 vérifiés par `validate`) + collection définitions INSEE |
 | Définitions (D-01..D-11) | citées verbatim, datées, avec limites |
 | Hypothèses | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
-| Graphe (`evidence/claims.yaml`) | 21 nœuds — O-01..O-04, T-01..T-03, R-01/R-02, I-01/I-02, V-01, C-01..C-03, L-01..L-06 |
-| Résultats reproductibles | R-01 `data/processed/parc-menages.json`, R-02 `data/processed/vacance-structurelle.json` — verrouillés par tests de régression |
-| Notebooks d'exploration | 01 parc/ménages, 02 vacance territoriale (py:percent, committés) |
+| Graphe (`evidence/claims.yaml`) | 28 nœuds — O-01..O-06, T-01..T-04, R-01..R-03, I-01..I-03, V-01, C-01..C-03, L-01..L-08 |
+| Résultats reproductibles | R-01 parc-menages, R-02 vacance-structurelle, R-03 vacance-emploi-ze (`data/processed/*.json`) — verrouillés par tests de régression |
+| Notebooks d'exploration | 01 parc/ménages, 02 vacance territoriale, 03 vacance × emploi (py:percent, committés) |
 | Document de preuve | `evidence/efficacite-parc-immobilier.qmd` + HTML rendu (auto-vérifié : artefacts publiés == recalcul) |
 | Qualité | 30 tests verts ; CI verte après correction d'un vrai bug de reproductibilité (ordre des ex æquo dépendant de la plateforme, attrapé par le test de régression au premier run CI) |
 
@@ -40,3 +40,8 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
   logements (3,5 % du parc privé), robuste aux ruptures LOVAC, avec un
   gradient territorial d'un ordre de grandeur : intensité rurale/DOM vs
   volume urbain — premier indice pour H-02.
+- **R-03/I-03** — Croisée avec l'emploi par zone d'emploi (1998-2018) :
+  H-02 confirmée en intensité (Spearman −0,36 ; taux médian 4,5 % dans les
+  ZE déclinantes vs 2,9 %) mais réfutée en volume — ~85 % de la vacance
+  structurelle est dans des ZE où l'emploi croît (Paris 69,8 k en tête).
+  Les causes de blocage dominantes sont donc ailleurs → H-03/H-05.

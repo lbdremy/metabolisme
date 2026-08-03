@@ -90,6 +90,23 @@
     des deux chaînes ne se comparent pas directement.
   depends_on: [S-05, D-03, D-10]
 
+- id: L-07
+  type: limit
+  title: >
+    La série d'emploi par zone d'emploi s'arrête en 2018 (S-07, dernière
+    publication à cette maille) : la dynamique d'emploi utilisée est
+    structurelle (1998-2018), pas conjoncturelle. Les millésimes récents ne
+    descendent qu'au département.
+  depends_on: [S-07]
+
+- id: L-08
+  type: limit
+  title: >
+    Agrégats ZE de vacance minorés par la secrétisation communale (L-05) —
+    surtout dans les petites ZE rurales — et une commune LOVAC non appariée
+    à la table 2026 (97127) exclue de l'agrégation.
+  depends_on: [S-05, S-06, L-05]
+
 # ------------------------------------------------------- observations (sources)
 
 - id: O-01
@@ -122,6 +139,19 @@
     2020-2026.
   depends_on: [S-05, D-10, D-11]
 
+- id: O-05
+  type: observation
+  title: >
+    Appartenance de chaque commune (COG 2026) à sa zone d'emploi 2020
+    (table d'appartenance géographique, S-06).
+  depends_on: [S-06, D-07]
+
+- id: O-06
+  type: observation
+  title: >
+    Emploi total estimé par zone d'emploi (zonage 2020), 1998-2018.
+  depends_on: [S-07, D-07]
+
 # ------------------------------------------------------------ transformations
 
 - id: T-01
@@ -152,6 +182,16 @@
     référence (C-03).
   depends_on: [O-04, C-03]
   produced_by: src/logement/core/lovac.py
+
+- id: T-04
+  type: transformation
+  title: >
+    Croisement vacance × emploi par zone d'emploi : agrégation de la vacance
+    structurelle communale LOVAC par ZE 2020 (arrondissements PLM ramenés à
+    leur commune parente — la feuille COM de S-06 ne les contient pas),
+    dynamique d'emploi 1998-2018 en taux annuel moyen, corrélation de rangs.
+  depends_on: [O-04, O-05, O-06, T-03]
+  produced_by: src/logement/core/ze.py
 
 # ------------------------------------------------------------------- résultats
 
@@ -184,6 +224,20 @@
   output: data/processed/vacance-structurelle.json
   limitations: [L-04, L-05, L-06]
 
+- id: R-03
+  type: result
+  title: >
+    Vacance structurelle × dynamique d'emploi par zone d'emploi (millésime
+    LOVAC 24, emploi 1998-2018, 305 ZE) : corrélation de Spearman −0,36 ;
+    les 63 ZE à emploi déclinant portent 15,1 % de la vacance structurelle
+    pour 9,8 % du parc privé (taux médian 4,5 % contre 2,9 % ailleurs) ;
+    84,9 % de la vacance structurelle se situe dans des ZE où l'emploi
+    croît (Paris 69 803, Marseille 17 917, Lyon 12 099).
+  depends_on: [T-04, H-06, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/vacance-emploi-ze.json
+  limitations: [L-05, L-06, L-07, L-08]
+
 # -------------------------------------------------------------- interprétations
 
 - id: I-01
@@ -208,3 +262,17 @@
     de remise en usage devra traiter ces deux régimes distincts.
   depends_on: [R-02]
   limitations: [L-05, L-06]
+
+- id: I-03
+  type: interpretation
+  title: >
+    L'hypothèse directrice H-02 (capacités mal localisées) est confirmée en
+    intensité — la vacance structurelle est sur-représentée (×1,5) et deux
+    fois plus fréquente dans les ZE à emploi déclinant — mais réfutée comme
+    explication dominante en volume : ~85 % de la vacance structurelle se
+    trouve dans des zones d'emploi où l'emploi croît. La majorité de la
+    capacité sortie d'usage coexiste donc avec la demande — les causes de
+    blocage sont à chercher ailleurs (état du bâti, successions, coût,
+    inadéquation infra-ZE : H-03, H-05).
+  depends_on: [R-03]
+  limitations: [L-07, L-08]

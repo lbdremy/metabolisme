@@ -1,0 +1,132 @@
+{
+  "declining_ze": {
+    "emploi_share_pct": 8.9,
+    "median_rate_pct": 4.5,
+    "n": 63,
+    "private_stock_share_pct": 9.8,
+    "structural_share_pct": 15.1
+  },
+  "growing_ze_median_rate_pct": 2.9,
+  "n_ze": 305,
+  "reference_millesime": 2024,
+  "spearman_rate_vs_growth": -0.36,
+  "top_declining_by_volume": [
+    {
+      "emploi_pct_per_year": -0.6,
+      "name": "Thionville",
+      "rate_pct": 3.79,
+      "structural": 5136,
+      "ze": "4424"
+    },
+    {
+      "emploi_pct_per_year": -0.09,
+      "name": "Châteauroux",
+      "rate_pct": 4.83,
+      "structural": 4630,
+      "ze": "2405"
+    },
+    {
+      "emploi_pct_per_year": -0.42,
+      "name": "Nevers",
+      "rate_pct": 6.43,
+      "structural": 4445,
+      "ze": "0060"
+    },
+    {
+      "emploi_pct_per_year": -0.53,
+      "name": "Montluçon",
+      "rate_pct": 7.2,
+      "structural": 4385,
+      "ze": "8423"
+    },
+    {
+      "emploi_pct_per_year": -0.11,
+      "name": "Troyes",
+      "rate_pct": 4.87,
+      "structural": 4313,
+      "ze": "4425"
+    },
+    {
+      "emploi_pct_per_year": -0.12,
+      "name": "Roubaix-Tourcoing",
+      "rate_pct": 2.63,
+      "structural": 3673,
+      "ze": "3218"
+    },
+    {
+      "emploi_pct_per_year": -0.47,
+      "name": "Le Livradois",
+      "rate_pct": 8.46,
+      "structural": 3645,
+      "ze": "8417"
+    },
+    {
+      "emploi_pct_per_year": -0.16,
+      "name": "Bourges",
+      "rate_pct": 4.2,
+      "structural": 3541,
+      "ze": "2402"
+    }
+  ],
+  "top_growing_by_volume": [
+    {
+      "emploi_pct_per_year": 0.74,
+      "name": "Paris",
+      "rate_pct": 2.53,
+      "structural": 69803,
+      "ze": "1109"
+    },
+    {
+      "emploi_pct_per_year": 1.06,
+      "name": "Marseille",
+      "rate_pct": 3.13,
+      "structural": 17917,
+      "ze": "9312"
+    },
+    {
+      "emploi_pct_per_year": 0.6,
+      "name": "Région Pointoise",
+      "rate_pct": 11.3,
+      "structural": 12896,
+      "ze": "0104"
+    },
+    {
+      "emploi_pct_per_year": 1.29,
+      "name": "Lyon",
+      "rate_pct": 1.54,
+      "structural": 12099,
+      "ze": "8421"
+    },
+    {
+      "emploi_pct_per_year": 0.7,
+      "name": "Nice",
+      "rate_pct": 2.69,
+      "structural": 10630,
+      "ze": "9315"
+    },
+    {
+      "emploi_pct_per_year": 1.16,
+      "name": "Perpignan",
+      "rate_pct": 3.1,
+      "structural": 10526,
+      "ze": "7620"
+    },
+    {
+      "emploi_pct_per_year": 0.25,
+      "name": "Saint Etienne",
+      "rate_pct": 4.08,
+      "structural": 9685,
+      "ze": "8428"
+    },
+    {
+      "emploi_pct_per_year": 1.97,
+      "name": "Toulouse",
+      "rate_pct": 1.53,
+      "structural": 9278,
+      "ze": "7625"
+    }
+  ],
+  "unmatched_communes": [
+    "97127"
+  ]
+}

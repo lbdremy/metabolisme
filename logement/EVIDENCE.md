@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 5 sources (INSEE + LOVAC ; 7 fichiers figés sha256/LFS + la collection des définitions) |
+| S | Sources | `sources/sources.yaml` | 7 sources (INSEE + LOVAC ; 9 fichiers figés sha256/LFS + la collection des définitions) |
 | D | Définitions | `sources/definitions.yaml` | 11 définitions citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-04, T-01..T-03, R-01/R-02 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01/I-02, V-01, C-01..C-03, L-01..L-06 |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-06, T-01..T-04, R-01..R-03 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-03, V-01, C-01..C-03, L-01..L-08 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -24,6 +24,10 @@ Sources enregistrées :
   millésimes 1962-2022).
 - **S-04** — INSEE, Définitions (métadonnées statistiques, collection en
   ligne — chaque définition citée verbatim et datée dans le registre).
+- **S-06** — INSEE, table d'appartenance géographique des communes 2026
+  (communes → ZE 2020, même COG que LOVAC).
+- **S-07** — INSEE, emploi par zone d'emploi 1998-2018 (dernier millésime
+  publié à la maille ZE).
 - **S-05** — Ministère de la Transition écologique (DGALN/Cerema), LOVAC open
   data — logements vacants du parc privé par territoire et durée, millésimes
   2020-2026 (4 fichiers figés ; ruptures méthodologiques 2023 et 2025
@@ -44,6 +48,14 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 
 - **V-01** — Une résidence principale occupée est pleinement utilisée ; elle ne
   peut jamais être comptée comme capacité disponible ni comme inefficience.
+
+- **R-03** — Vacance structurelle × dynamique d'emploi par ZE (sortie
+  reproductible `data/processed/vacance-emploi-ze.json`) : Spearman −0,36,
+  taux médian 4,5 % dans les 63 ZE à emploi déclinant contre 2,9 % ailleurs,
+  mais ~85 % des volumes dans des ZE où l'emploi croît. Lecture : **I-03** —
+  H-02 confirmée en intensité, réfutée comme explication dominante en
+  volume ; les causes de blocage sont ailleurs (H-03/H-05). Limites
+  L-05..L-08.
 
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,

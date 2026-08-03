@@ -7,11 +7,12 @@ the committed artifact declared by the matching result in evidence/claims.yaml.
 from __future__ import annotations
 
 import json
+import zipfile
 from pathlib import Path
 
 import pandas as pd
 
-from logement.core import lovac, parc
+from logement.core import lovac, parc, ze
 
 S01_FILE = "insee-focus-359-parc-logements-2025.xlsx"
 S02_FILE = "insee-eapl-parc-residence-2025.xlsx"
@@ -22,6 +23,11 @@ LOVAC_FRANCE = "lovac-opendata-france26.csv"
 LOVAC_DEPARTEMENTS = "lovac-opendata-departements26.csv"
 LOVAC_COMMUNES = "lovac-opendata-communes26.csv"
 LOVAC_OUTPUT = Path("data") / "processed" / "vacance-structurelle.json"
+
+APPARTENANCE_ZIP = "insee-table-appartenance-geo-communes-2026.zip"
+APPARTENANCE_XLSX = "table-appartenance-geo-communes-2026.xlsx"
+EMPLOI_ZE_FILE = "insee-emploi-zone-1998-2018.xlsx"
+ZE_OUTPUT = Path("data") / "processed" / "vacance-emploi-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -79,4 +85,34 @@ def run_vacance(root: Path) -> int:
     _write_json(root, LOVAC_OUTPUT, payload)
     national = payload["national"]
     print(f"vacance-structurelle: wrote {LOVAC_OUTPUT} — national {national}")
+    return 0
+
+
+def build_vacance_emploi(root: Path) -> dict[str, object]:
+    """Compute the R-03 summary payload (vacancy × employment by ZE)."""
+    raw = root / "data" / "raw"
+    with zipfile.ZipFile(raw / APPARTENANCE_ZIP) as zf, zf.open(APPARTENANCE_XLSX) as fh:
+        # The INSEE stylesheet breaks openpyxl; calamine reads it (S-06 note).
+        membership = pd.read_excel(fh, sheet_name="COM", header=5, engine="calamine", dtype=str)
+    commune_ze = ze.parse_commune_ze(membership)
+    emploi = ze.parse_emploi_ze(
+        pd.read_excel(
+            raw / EMPLOI_ZE_FILE, sheet_name="Emploi total - ZE", header=4, engine="calamine"
+        )
+    )
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    vacancy_ze, unmatched = ze.aggregate_vacancy_by_ze(communes, commune_ze)
+    return ze.build_summary(vacancy_ze, emploi, unmatched)
+
+
+def run_vacance_emploi(root: Path) -> int:
+    """Rebuild data/processed/vacance-emploi-ze.json; return a process exit code."""
+    payload = build_vacance_emploi(root)
+    _write_json(root, ZE_OUTPUT, payload)
+    print(
+        f"vacance-emploi: wrote {ZE_OUTPUT} — spearman "
+        f"{payload['spearman_rate_vs_growth']}, declining {payload['declining_ze']}"
+    )
     return 0
