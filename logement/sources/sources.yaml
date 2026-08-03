@@ -179,3 +179,51 @@
     sources/definitions.yaml, avec l'URL de l'article et sa date d'entrée
     en vigueur. Utilisée pour les définitions à valeur juridique (habitat
     indigne, classes de performance énergétique).
+
+- id: S-09
+  publisher: ANIL / DHUP (Ministère de la Transition écologique)
+  title: Carte des loyers — indicateurs de loyers d'annonce par commune en 2025
+  dataset_id: carte-des-loyers-indicateurs-de-loyers-dannonce-par-commune-en-2025
+  source_url: https://www.data.gouv.fr/datasets/carte-des-loyers-indicateurs-de-loyers-dannonce-par-commune-en-2025
+  publication_date: 2025-12-11
+  retrieved_at: 2026-08-03
+  geographic_scope: France hors Mayotte (communes)
+  temporal_scope: annonces 2018-2025 (indicateur millésimé 2025)
+  license: non précisée sur data.gouv (millésimes antérieurs en Licence Ouverte 2.0) — à confirmer avant publication
+  files:
+    - path: data/raw/carte-loyers-2025-appartement.csv
+      checksum: sha256:eda84e03a269faff3335f7ab6061d1f1e9f45adc89c0a4c32632df20a5de4010
+    - path: data/raw/carte-loyers-2025-maison.csv
+      checksum: sha256:fd4f5e33ec1d7c8d97deeb024bab4b4a76466f2822f83a3739d1777c3b7bd72b
+  notes: >
+    Loyers d'annonce (leboncoin + SeLoger) modélisés par commune :
+    loypredm2 = loyer prédit €/m² charges comprises, avec intervalle de
+    prédiction (lwr/upr), type de maille de prédiction (TYPPRED
+    commune/maille), effectifs d'annonces et R² ajusté. LOYERS D'ANNONCE,
+    pas loyers du parc en place : biais vers les biens remis en location ;
+    modélisation (pas une observation directe) — la précision varie selon
+    nbobs (voir champs de qualité). Décimales à virgule française,
+    séparateur point-virgule.
+
+- id: S-10
+  publisher: INSEE
+  title: Filosofi 2021 — principaux indicateurs sur les revenus et la pauvreté (géographie 2025)
+  dataset_id: base-cc-filosofi-2021-geo2025
+  source_url: https://www.insee.fr/fr/statistiques/7756729
+  publication_date: 2024-01-29
+  retrieved_at: 2026-08-03
+  geographic_scope: France métropolitaine, Martinique, La Réunion (Guadeloupe, Guyane et Mayotte exclues)
+  temporal_scope: revenus 2021 (dernier millésime Filosofi disponible)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-filosofi-2021-geo2025.zip
+  checksum: sha256:24961b1217ce760c8159dc16cd57d4ef9bbc2939fae34005dad91e695e95aa95
+  notes: >
+    Dispositif Revenus localisés sociaux et fiscaux (Filosofi) : 20
+    indicateurs (dont MED_SL, médiane du niveau de vie en €/UC/an) déclinés
+    par commune, EPCI, département, région, UU2020, AAV2020, BV2022 et
+    ZE2020 (format long GEO_OBJECT × FILOSOFI_MEASURE, secret « C » dans
+    CONF_STATUS). LE MILLÉSIME 2021 EST LE DERNIER DISPONIBLE — le 2022 n'a
+    pas pu être produit (qualité des sources après suppression de la taxe
+    d'habitation) ; écart temporel à documenter avec les loyers 2025 (S-09).
+    DOM partiellement couverts — les croisements avec LOVAC excluront
+    Guadeloupe/Guyane.
