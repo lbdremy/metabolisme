@@ -1581,6 +1581,7 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "hypothesis" },
+    { name = "ipykernel" },
     { name = "jupyterlab" },
     { name = "jupytext" },
     { name = "matplotlib" },
@@ -1603,6 +1604,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "hypothesis", specifier = ">=6.156.3" },
+    { name = "ipykernel", specifier = ">=6.29" },
     { name = "jupyterlab", specifier = ">=4.0" },
     { name = "jupytext", specifier = ">=1.16" },
     { name = "matplotlib", specifier = ">=3.8" },

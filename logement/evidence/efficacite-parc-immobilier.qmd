@@ -1,0 +1,412 @@
+---
+title: "Efficacité du parc immobilier français — document de preuve"
+subtitle: >
+  Premiers constats : parc et ménages (1982-2025), vacance structurelle du
+  parc privé (2020-2026)
+date: 2026-08-03
+lang: fr
+format:
+  html:
+    toc: true
+    embed-resources: true
+    code-fold: true
+    code-summary: "voir le code"
+execute:
+  echo: true
+  warning: false
+---
+
+Ce document est le **document de preuve** des premiers résultats de la
+recherche « Efficacité du parc immobilier français » (projet Métabolisme).
+Il est **exécutable** : chaque chiffre affiché est recalculé à la volée par le
+code stabilisé du dépôt (`src/logement/`), à partir des fichiers sources
+figés (`data/raw/`, empreintes sha256 vérifiées), et confronté aux artefacts
+publiés (`data/processed/`). Les statuts épistémiques (S sources,
+D définitions, H hypothèses, O/T/R/I, V valeurs, C choix, L limites) sont
+ceux du graphe de preuves `evidence/claims.yaml`.
+
+```{python}
+#| code-summary: "initialisation : accès au dépôt et aux registres"
+import json
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+import pandas as pd
+import yaml
+
+from logement.config import project_root
+from logement.core import lovac, parc
+from logement.shell import build
+
+ROOT = project_root()
+C1, C2, C3, C4 = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
+
+def load_yaml(rel: str) -> list[dict]:
+    return yaml.safe_load((ROOT / rel).read_text(encoding="utf-8")) or []
+
+sources = load_yaml("sources/sources.yaml")
+definitions = load_yaml("sources/definitions.yaml")
+hypotheses = load_yaml("sources/hypotheses.yaml")
+```
+
+## 1. Question étudiée
+
+> Dans quelle mesure le parc immobilier français permet-il de loger
+> correctement la population, dans les territoires où elle souhaite ou a
+> besoin de vivre, à un coût soutenable et avec une mobilité suffisante, en
+> mobilisant mieux les capacités qui ne sont pas actuellement consacrées à
+> une résidence principale ?
+
+Ce premier document couvre deux sous-questions empiriques du cadrage
+(`INTRO.md` §15) :
+
+1. Le nombre de logements augmente-t-il au même rythme que les ménages ?
+   (**R-01**)
+2. Où se trouve la vacance durable, et quelle part semble structurelle ?
+   (**R-02**)
+
+**Axiome normatif (V-01)** : une résidence principale occupée est pleinement
+utilisée — elle n'est jamais comptée comme capacité disponible ni comme
+inefficience. Le champ d'analyse est la capacité *hors* résidence principale.
+
+## 2. Définitions
+
+Les définitions sont citées verbatim depuis leur source et versionnées dans
+`sources/definitions.yaml` ; les limites de chacune y sont documentées.
+
+```{python}
+#| code-summary: "tableau des définitions depuis le registre"
+defs = pd.DataFrame(
+    [
+        {
+            "id": d["id"],
+            "terme": d["term"],
+            "source": d["source"],
+            "mise à jour": d.get("last_updated", "—"),
+        }
+        for d in definitions
+    ]
+)
+defs.style.hide(axis="index")
+```
+
+Deux points structurants :
+
+- **D-03 (logement vacant, INSEE)** agrège vacance frictionnelle et durable ;
+  la distinction décisive pour l'étude vient de LOVAC : **D-10** (vacance
+  structurelle, plus de 2 ans) et **D-11** (frictionnelle).
+- **D-05 (ménage, recensement)** a été remplacé le 31/08/2025 par **D-06**
+  (ménage-logement) — les séries longues utilisées reposent sur l'ancien
+  concept.
+
+## 3. Sources
+
+Chaque source est enregistrée avec ses dates, périmètres, licence et
+l'empreinte sha256 de ses fichiers figés (`uv run logement validate` vérifie
+les empreintes à chaque exécution).
+
+```{python}
+#| code-summary: "tableau des sources depuis le registre"
+def n_files(s: dict) -> int:
+    if s.get("local_file"):
+        return 1
+    return len(s.get("files", []))
+
+srcs = pd.DataFrame(
+    [
+        {
+            "id": s["id"],
+            "éditeur": s["publisher"],
+            "titre": s["title"][:80],
+            "publication": s.get("publication_date") or "collection vivante",
+            "récupérée le": s["retrieved_at"],
+            "fichiers figés": n_files(s),
+        }
+        for s in sources
+    ]
+)
+srcs.style.hide(axis="index")
+```
+
+## 4. Transformations
+
+Toutes les transformations sont du code testé (`./test.sh`, 30 tests dont
+propriétés) :
+
+- **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
+  espaces insécables, années provisoires « (p) »), invariant de sommation
+  (les catégories somment à l'ensemble, tolérance 1 millier), indexation
+  base 100 et taux de croissance annuels moyens.
+- **T-03** (`core/lovac.py`) — lecture LOVAC (cp1252, secret « s » →
+  valeur manquante), agrégation des arrondissements de Paris/Lyon/Marseille
+  avec **propagation du secret** (un arrondissement masqué masque la somme,
+  plutôt qu'une sous-estimation silencieuse), taux structurels au millésime
+  de référence (choix **C-03**).
+
+## 5. Hypothèses
+
+```{python}
+#| code-summary: "registre des hypothèses"
+hyp = pd.DataFrame(
+    [
+        {
+            "id": h["id"],
+            "nom": h["name"],
+            "valeur centrale": h["central_value"],
+            "plage plausible": str(h["plausible_range"]),
+            "unité": h["unit"],
+            "confiance": h["confidence"],
+        }
+        for h in hypotheses
+    ]
+)
+hyp.style.hide(axis="index")
+```
+
+**H-01** — le seuil de 2 ans qui sépare vacance frictionnelle et structurelle
+est une convention administrative (choix **C-01**), pas un fait : il est
+paramétré, et sa plage plausible (1-3 ans) devra être explorée dès que les
+fichiers LOVAC détaillés (ancienneté fine) seront acquis.
+
+## 6. Résultats
+
+### Vérification de reproduction
+
+Avant d'afficher quoi que ce soit, on vérifie que les artefacts publiés sont
+exactement ce que la chaîne recalcule depuis les fichiers figés :
+
+```{python}
+#| code-fold: false
+r01 = build.build_parc_menages(ROOT)
+r02 = build.build_vacance_structurelle(ROOT)
+committed_r01 = json.loads((ROOT / build.OUTPUT).read_text(encoding="utf-8"))
+committed_r02 = json.loads((ROOT / build.LOVAC_OUTPUT).read_text(encoding="utf-8"))
+assert r01 == committed_r01, "R-01 diverge de l'artefact publié"
+assert r02 == committed_r02, "R-02 diverge de l'artefact publié"
+print("R-01 et R-02 : artefacts publiés == recalcul depuis les sources figées ✔")
+```
+
+### R-01 — Le parc suit les ménages, pas la population (1982-2025)
+
+```{python}
+#| code-summary: "séries indexées base 100 en 1982"
+#| fig-cap: "Logements, ménages, population — indice base 100 en 1982 (S-01, S-02, S-03 ; France hors Mayotte). Les millésimes ménages sont censitaires (points)."
+raw = ROOT / "data" / "raw"
+categories = parc.parse_eapl_categories(
+    pd.read_excel(raw / build.S02_FILE, sheet_name="Données", header=3)
+)
+menages = parc.parse_menages_totals(
+    pd.read_excel(raw / build.S03_FILE, sheet_name="France", header=None)
+)
+population_idx = parc.parse_population_index(
+    pd.read_excel(raw / build.S01_FILE, sheet_name="Figure 2", header=2)
+)
+counts = categories.counts
+dwellings_idx = parc.index_to_base(counts[parc.TOTAL], 1982)
+menages_idx = parc.index_to_base(menages[menages.index >= 1982], 1982)
+
+fig, ax = plt.subplots(figsize=(9, 4.8))
+ax.plot(dwellings_idx.index, dwellings_idx, color=C1, lw=2, label="Ensemble des logements")
+ax.plot(population_idx.index, population_idx, color=C3, lw=2, label="Population")
+ax.plot(menages_idx.index, menages_idx, color=C4, lw=0, marker="o", ms=6,
+        label="Ménages (millésimes censitaires)")
+ax.set_ylabel("indice (100 = 1982)")
+ax.grid(alpha=0.25)
+ax.legend(frameon=False)
+ax.spines[["top", "right"]].set_visible(False)
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| code-summary: "chiffres clés R-01"
+idx = r01["indices_at_last_common_vintage"]
+print(f"Indices {idx['year']} (base 100 en 1982) : logements {idx['dwellings']} · "
+      f"ménages {idx['menages']} · population {idx['population']}")
+vac = r01["vacancy"]
+print(f"Logements vacants : {vac['count_thousands']['1982']} milliers (1982) → "
+      f"{vac['count_thousands']['2025']} milliers (2025)")
+print(f"Part de vacance : {vac['share_pct']['1982']} % (1982) → minimum "
+      f"{vac['share_pct']['min']} % ({vac['share_pct']['min_year']}) → "
+      f"{vac['share_pct']['2025']} % (2025)")
+```
+
+Sur quarante ans, le parc croît au rythme des ménages (indices 2022 : 156,2
+contre 155,2) et bien plus vite que la population (121,9) : la croissance du
+parc a accompagné la **décohabitation** (2,72 personnes par ménage en 1982,
+2,15 en 2022). Le régime change vers 2005-2006 : avant, les ménages
+croissent plus vite que le parc et la vacance tombe à 6,2 % ; après, le parc
+croît plus vite et la vacance remonte à 7,7 % en 2025 (environ 3,0 millions
+de logements). La part des résidences secondaires est stable au niveau
+national (9,5 % → 9,8 %) : **la capacité hors résidence principale qui
+augmente depuis 2006 est de la vacance** (interprétation I-01).
+
+### R-02 — La vacance structurelle du parc privé et sa géographie
+
+```{python}
+#| code-summary: "série nationale LOVAC et ruptures"
+#| fig-cap: "Vacance du parc privé, France, millésimes LOVAC 2020-2026 (millésime N = situation fiscale au 01/01/N-1). Les niveaux de vacance totale ne sont pas comparables au travers des ruptures 2023 et 2025 (L-04)."
+france = lovac.parse_france(
+    pd.read_csv(raw / build.LOVAC_FRANCE, sep=";", encoding="cp1252", dtype=str)
+)
+fig, ax = plt.subplots(figsize=(9, 4.8))
+ax.plot(france.index, france["pp_vacant"] / 1e6, color=C1, lw=2, marker="o",
+        label="Vacants du parc privé")
+ax.plot(france.index, france["pp_vacant_plus_2ans"] / 1e6, color=C2, lw=2, marker="o",
+        label="Vacants depuis plus de 2 ans (structurelle, D-10)")
+for rupture in lovac.BREAK_MILLESIMES:
+    ax.axvline(rupture - 0.5, color="#999999", ls="--", lw=1)
+ax.set_ylabel("millions de logements")
+ax.set_xlabel("millésime LOVAC")
+ax.grid(alpha=0.25)
+ax.legend(frameon=False)
+ax.spines[["top", "right"]].set_visible(False)
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| code-summary: "gradient départemental (millésime de référence C-03)"
+#| fig-cap: "Taux de vacance structurelle du parc privé par département (> 2 ans, millésime 2024 — situation au 01/01/2023)."
+top = pd.DataFrame(r02["departements"]["top"]).iloc[::-1]
+bottom = pd.DataFrame(r02["departements"]["bottom"]).iloc[::-1]
+national = r02["national"]["structural_rate_ref_pct"]
+fig, ax = plt.subplots(figsize=(9, 5.6))
+ax.barh(top["name"], top["rate_pct"], color=C2, height=0.6, label="12 taux les plus élevés")
+ax.barh(bottom["name"], bottom["rate_pct"], color=C1, height=0.6, label="5 taux les plus bas")
+ax.axvline(national, color="#999999", ls="--", lw=1)
+ax.annotate(f"France : {national} %", (national + 0.1, 0.3), fontsize=8, color="#555555")
+ax.xaxis.set_major_formatter(mticker.FormatStrFormatter("%.0f %%"))
+ax.grid(alpha=0.25, axis="x")
+ax.legend(frameon=False, loc="lower right")
+ax.spines[["top", "right"]].set_visible(False)
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| code-summary: "chiffres clés R-02"
+nat = r02["national"]
+print(f"Vacance structurelle nationale (millésime 26, au 01/01/2025) : "
+      f"{nat['structural_by_millesime']['2026']:,} logements".replace(",", " "))
+print(f"Taux structurel national (millésime {r02['reference_millesime']}) : "
+      f"{nat['structural_rate_ref_pct']} % du parc privé")
+com = r02["communes"]
+print(f"Secrétisation communale : {com['n_masked_latest']:,}/{com['n_total']:,} communes "
+      f"masquées au dernier millésime".replace(",", " "))
+print(f"Communes visibles (mill. réf.) : {com['visible_ref']['n']:,} — "
+      f"{com['visible_ref']['structural_share_pct']} % de la vacance structurelle nationale"
+      .replace(",", " "))
+print("Top volumes (PLM agrégées) :",
+      ", ".join(f"{e['name']} {e['structural']:,}".replace(",", " ")
+                for e in com["top_by_volume_ref"][:4]))
+```
+
+La vacance structurelle du parc privé est de l'ordre de **1,1 à 1,2 million
+de logements** et à peu près stable sur 2020-2026 — tandis que la vacance
+totale saute de 3,69 M à 2,38 M puis 3,16 M au passage des ruptures
+méthodologiques : seule la série structurelle est raisonnablement robuste.
+Le taux structurel (3,5 % au millésime de référence) présente un **gradient
+territorial d'un ordre de grandeur** : DOM (Mayotte 26,9 %, Guyane 11,5 %)
+et diagonale des faibles densités (Creuse 9,5 %, Nièvre 7,9 %) contre
+1,4-1,7 % en zones tendues et sur le littoral ouest.
+
+## 7. Sensibilité
+
+L'analyse de sensibilité complète au seuil H-01 attend les fichiers LOVAC
+détaillés (l'open data ne publie que la coupure à 2 ans). En revanche, la
+sensibilité au **choix du millésime de référence (C-03)** peut être testée :
+
+```{python}
+#| code-summary: "taux structurel national selon le millésime"
+deps = lovac.parse_territories(
+    pd.read_csv(raw / build.LOVAC_DEPARTEMENTS, sep=";", encoding="cp1252", dtype=str),
+    code_col="DEP", name_col="LIB_DEP",
+)
+rows = []
+for m in range(2020, 2026):
+    try:
+        num = deps[f"pp_vacant_plus_2ans_{m}"].sum()
+        den = deps[f"ff_pp_total_{m}"].sum()
+        rows.append({"millésime": m, "taux structurel national (%)": round(num / den * 100, 2)})
+    except KeyError:
+        continue
+pd.DataFrame(rows).style.hide(axis="index")
+```
+
+Le taux national reste dans une bande étroite (~3,4-4,1 %) quel que soit le
+millésime : la conclusion d'ordre de grandeur (« environ 3,5 % du parc
+privé ») n'est pas sensible au choix C-03. Le millésime 2025 (post-rupture)
+est le plus haut — cohérent avec la hausse artificielle de la série
+structurelle à ce millésime (L-04).
+
+## 8. Interprétation
+
+- **I-01** — La croissance du parc accompagne la décohabitation, pas la
+  croissance démographique. Depuis 2006, le parc croît plus vite que les
+  ménages et l'écart se loge dans la vacance.
+- **I-02** — « Où est la vacance » a deux réponses : en **intensité**, les
+  taux élevés sont ultramarins et ruraux (premier indice cohérent avec
+  l'hypothèse H-02 : capacités mal localisées) ; en **volume**, les grandes
+  villes dominent (Paris ~32 000, Marseille ~14 500) à des taux proches de
+  la moyenne. Tout mécanisme de remise en usage devra traiter ces deux
+  régimes distincts.
+
+Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
+bâti, des causes de la vacance (succession, travaux, rétention…), de la
+mobilisabilité réelle des logements, ni de l'adéquation aux besoins locaux
+(emplois, services). Une vacance élevée n'implique pas une capacité
+mobilisable équivalente.
+
+## 9. Implications de conception (préliminaires)
+
+Prudentes à ce stade :
+
+1. Le « problème du logement » national n'est pas d'abord un déficit brut de
+   logements par rapport aux ménages : le stock a suivi. Les écarts sont
+   dans la **disponibilité réelle, la localisation et l'accès** — ce qui
+   oriente la suite de la recherche vers H-02/H-03/H-04.
+2. Un mécanisme de remise en usage calibré sur « la France vacante » se
+   trompe de cible s'il ignore le clivage intensité rurale / volume urbain
+   (I-02).
+
+## 10. Limites et objections
+
+```{python}
+#| code-summary: "limites depuis le graphe de preuves"
+claims = yaml.safe_load((ROOT / "evidence" / "claims.yaml").read_text(encoding="utf-8"))
+limits = pd.DataFrame(
+    [{"id": c["id"], "limite": " ".join(c["title"].split())} for c in claims if c["type"] == "limit"]
+)
+limits.style.hide(axis="index")
+```
+
+Objections examinées à ce stade : la comparaison parc/ménages repose sur
+deux appareils de mesure distincts (écart contrôlé : ±0,3 % aux millésimes,
+L-03) ; les niveaux LOVAC et INSEE ne se comparent pas (L-06) ; la lecture
+territoriale communale est bornée par la secrétisation (L-05).
+
+## 11. Reproduction
+
+```bash
+git clone <dépôt> && cd metabolisme/logement
+uv sync --locked            # environnement figé (uv.lock)
+uv run logement validate    # registres + empreintes sha256 + graphe
+./test.sh                   # 30 tests (unitaires, propriétés, régression)
+uv run logement reproduce   # reconstruit data/processed/*.json
+```
+
+```{python}
+#| code-summary: "version du dépôt au moment du rendu"
+import subprocess
+commit = subprocess.run(
+    ["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=ROOT
+).stdout.strip()
+print(f"Document rendu depuis l'arbre du commit {commit} (le commit publiant ce "
+      "document HTML est son descendant immédiat — voir l'historique git).")
+```
+
+Environnement : Python ≥ 3.11, dépendances verrouillées dans `uv.lock`,
+données figées dans `data/raw/` (Git LFS, empreintes dans
+`sources/sources.yaml`).

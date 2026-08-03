@@ -28,6 +28,7 @@ dev = [
     "matplotlib>=3.8", # exploration/verification notebook figures
     "jupytext>=1.16",  # py:percent pairing — the committed notebook representation
     "jupyterlab>=4.0", # the exploration environment (method INTRO §6.3)
+    "ipykernel>=6.29", # jupyter engine for the Quarto evidence documents
 ]
 
 [build-system]
