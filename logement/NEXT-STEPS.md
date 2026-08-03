@@ -31,9 +31,14 @@ Mis à jour à chaque fin de session de travail significative.
    secondaires » n'explique NI la vacance NI le coût à l'échelle ZE
    (ZE > 20 % RS : vacance 2,6 % vs 3,3 % ailleurs). ~~Stabiliser
    R-05/I-05~~ — fait (12 ZE cumulant RS > 20 % et vacance > 5 %, dont six
-   corses — cas d'étude communaux à instruire). PUIS : un vrai taux
-   d'effort territorial (D-09 : surfaces et composition des ménages), et
-   l'échelle communale/AAV pour les effets d'éviction saisonniers.
+   corses — cas d'étude communaux à instruire). ~~Échelle communale~~ —
+   explorée (notebook 06) : la vacance y est diffuse, les corrélations
+   intra-ZE faibles et instables, et la secrétisation (Corte : 3 communes
+   visibles) rend la question de l'éviction saisonnière NON TRANCHABLE
+   avec l'open data — frontière de données actée (il faudrait les données
+   non secrétisées, le registre des meublés de tourisme ou des
+   monographies). PUIS : un vrai taux d'effort territorial (D-09 :
+   surfaces et composition des ménages).
 5. Quand une nouvelle publication est prête : tag git + mise à jour du
    document de preuve (règle : l'article pointe une version précise).
 
