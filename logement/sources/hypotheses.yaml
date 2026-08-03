@@ -21,7 +21,10 @@
     capture de la rotation lente de marché, à 3 ans on ne retient que les
     sorties d'usage les plus installées. Les données LOVAC open data ne
     publiant que le seuil à 2 ans, l'analyse de sensibilité complète
-    nécessitera les fichiers détaillés (ancienneté fine).
+    nécessiterait les fichiers détaillés (ancienneté fine) — dont l'accès
+    est réservé aux collectivités, services de l'État et Anah (vérifié le
+    2026-08-03) : la plage plausible reste déclarée mais non testable en
+    l'état.
   central_value: 2.0
   plausible_range: [1.0, 3.0]
   unit: years

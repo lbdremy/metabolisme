@@ -10,13 +10,17 @@ Mis à jour à chaque fin de session de travail significative.
    vacance structurelle est dans des ZE où l'emploi croît. Suite logique :
    descendre à l'infra-ZE (bassins de vie, D-08) et instruire H-03 (coût)
    et H-05 (blocages institutionnels), devenues les pistes dominantes.
-2. **Fichiers LOVAC détaillés (sensibilité H-06).** L'open data ne publie
-   que la coupure à 2 ans ; les fichiers détaillés (ancienneté fine, accès
-   Cerema/datafoncier sur demande) permettent l'analyse 1-3 ans promise par
-   H-06. Vérifier les conditions d'accès/licence avant tout engagement.
-3. **Définitions légales manquantes** : logement indigne (loi MOLLE 2009,
-   art. 84) et passoire thermique (DPE F-G, loi Climat et résilience) —
-   sourcer Légifrance, enregistrer D-12/D-13.
+2. **Sensibilité H-06 : BLOQUÉE au niveau source (vérifié 2026-08-03).**
+   Les fichiers LOVAC détaillés (ancienneté fine) sont réservés aux
+   collectivités à fiscalité propre, services de l'État et Anah (secret
+   fiscal, Portail Données Foncières) — pas d'accès chercheur/particulier.
+   L'analyse 1-3 ans promise par H-06 reste donc hors de portée ; la
+   limite est actée dans la description de H-06. Alternatives possibles :
+   demande de convention via un partenaire habilité, ou bornes indirectes
+   depuis l'open data (vacance totale − structurelle).
+3. ~~Définitions légales manquantes~~ — **fait** : D-12 habitat indigne
+   (loi MOLLE 2009, art. 84) et D-13 passoire thermique (CCH L173-1-1,
+   classes F-G) enregistrées depuis Légifrance (S-08), citations verbatim.
 4. **H-03 (coût) — première brique** : loyers (observatoires locaux /
    carte des loyers MTE) et revenus (Filosofi) pour le taux d'effort
    territorial (D-09).

@@ -163,3 +163,19 @@
     publications « Emploi localisé » plus récentes ne descendent qu'au
     département. Codes ZE à 4 chiffres au format « 0051 - Alençon » à
     séparer en code + libellé.
+
+- id: S-08
+  publisher: Légifrance (DILA)
+  title: Textes législatifs et réglementaires consolidés (collection en ligne)
+  source_url: https://www.legifrance.gouv.fr
+  publication_date: null
+  retrieved_at: 2026-08-03
+  geographic_scope: France
+  temporal_scope: versions consolidées en vigueur au 2026-08-03
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  notes: >
+    Collection vivante (même statut que S-04) : chaque définition légale
+    citée est figée par sa citation verbatim datée dans
+    sources/definitions.yaml, avec l'URL de l'article et sa date d'entrée
+    en vigueur. Utilisée pour les définitions à valeur juridique (habitat
+    indigne, classes de performance énergétique).
