@@ -52,18 +52,23 @@ bad production).
 ```
 INTRO.md              # research framing (French)
 EVIDENCE.md           # human index of the evidence chain (French)
+NEXT-STEPS.md         # ordered upcoming work + pickup procedure + traps
+PREV-STEPS.md         # session journal (most recent first)
 sources/
   sources.yaml        # S-xx registry: every retained source, checksummed
   definitions.yaml    # D-xx registry: statistical/legal definitions, caveats
-  hypotheses.yaml     # H-xx registry: named parameters with plausible ranges
-data/raw/             # frozen source files (small ones committed as-is)
+  hypotheses.yaml     # H-xx registry: named parameters (H-06+; H-01..H-05
+                      #   reserved for the framing INTRO's hypotheses)
+data/
+  raw/                # frozen source files (Git LFS, sha256 in sources.yaml)
+  processed/          # committed R-xx outputs, rebuilt by `reproduce`
 src/logement/
   models.py           # StrictModel/SubsetModel bases + typed registry records
   config.py           # project-root resolution
   cli.py              # typed CLI (clypi): validate · reproduce
-  core/               # pure: registry parsing/cross-checks, later transforms
-  shell/              # effects: file I/O, checksums, later acquisition
-tests/                # pytest + hypothesis over the pure core
+  core/               # pure: registry.py · parc.py · lovac.py (no I/O)
+  shell/              # effects: validate.py · build.py (stages) · reproduce.py
+tests/                # pytest + hypothesis over the pure core + regression
 notebooks/
   exploration/        # free lab notebooks (never published from)
   verification/       # top-to-bottom reproducible, import from src/
@@ -81,8 +86,8 @@ fuller split (acquisition/ transformations/ indicators/ …) — minimal first
 uv sync                        # install into .venv/ (uv.lock is committed)
 uv run logement validate       # parse + cross-check the three registries,
                                #   verify local_file existence and sha256
-uv run logement reproduce      # re-run every pipeline stage (none defined yet:
-                               #   says so and exits 0 — never fakes work)
+uv run logement reproduce      # re-run every stabilized stage (parc-menages,
+                               #   vacance-structurelle) -> data/processed/
 ./check.sh                     # static gates   (--fix to auto-format first)
 ./test.sh                      # behaviour tests (--cov for coverage)
 ```
@@ -118,11 +123,16 @@ Correspondence with the method INTRO's canonical commands: `uv run validate` ≙
 
 ## Settled decisions (2026-08-03)
 
-- **Vacancy split (frictional vs durable):** adopt the administrative
-  convention — vacance structurelle = vacant > 2 years (LOVAC / Zéro Logement
-  Vacant) — as the central definition, to be sourced as D-10 when LOVAC is
-  acquired, AND parameterize the threshold as a named hypothesis (plausible
-  range 1–3 years) so every result shows its sensitivity to it.
+- **Vacancy vocabulary and split (C-01).** The framing INTRO §6.2 has THREE
+  levels: frictionnelle / durable (sortie de l'usage) / structurelle
+  (difficilement mobilisable sans action lourde). LOVAC's administrative
+  "vacance structurelle" (> 2 years, D-10) operationalizes the INTRO's
+  *durable* level — not its heavier "structurelle", which needs building-state
+  data we don't have. The 2-year threshold is the hypothesis **H-06**
+  (plausible range 1–3 years).
+- **H-xx id space:** H-01..H-05 are RESERVED for the framing INTRO §4's
+  hypothèses directrices (not registry parameters); model parameters in
+  `sources/hypotheses.yaml` start at H-06.
 - **Acquisition order:** national series first (S-01..S-03, first notebook on
   dwellings vs households), then LOVAC for the territorial dive.
 - **Raw data policy: Git LFS for everything** under `logement/data/raw/`

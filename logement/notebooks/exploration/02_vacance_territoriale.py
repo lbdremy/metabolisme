@@ -18,7 +18,7 @@
 # Cadre déjà arrêté :
 #
 # - **D-10** vacance structurelle = plus de 2 ans (`pp_vacant_plus_2ans`) ;
-#   **D-11** vacance frictionnelle = le reste ; seuil paramétré **H-01**
+#   **D-11** vacance frictionnelle = le reste ; seuil paramétré **H-06**
 #   (2 ans, plage 1-3) par le choix **C-01**.
 # - **Précautions S-05** : parc privé uniquement (≠ vacance INSEE/EAPL) ;
 #   secrétisation (« s » si < 11 logements vacants dans la commune) ;

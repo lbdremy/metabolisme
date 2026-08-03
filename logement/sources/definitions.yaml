@@ -164,7 +164,11 @@
     plan national de lutte contre les logements vacants.
   caveats:
     - Convention administrative (seuil de 2 ans) et non catégorie statistique
-      INSEE — le seuil est paramétré comme hypothèse H-01 (choix C-01).
+      INSEE — le seuil est paramétré comme hypothèse H-06 (choix C-01).
+    - Vocabulaire — correspond à la « vacance durable » du cadrage
+      (INTRO.md §6.2) ; la « vacance structurelle » du cadrage (difficilement
+      mobilisable sans action lourde) est une notion plus exigeante que ce
+      terme administratif ne recouvre pas.
     - Parc privé uniquement, source fiscale — périmètre différent de la
       vacance INSEE (D-03).
     - Structurelle ne signifie pas mobilisable — l'état du bâti et les

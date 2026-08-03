@@ -16,9 +16,13 @@
 - id: C-01
   type: choice
   title: >
-    La distinction vacance frictionnelle / durable adopte la convention
-    administrative « vacance structurelle = plus de 2 ans » (LOVAC / Zéro
-    Logement Vacant), le seuil étant paramétré en hypothèse (H-01, 1-3 ans).
+    La vacance durable au sens du cadrage (INTRO §6.2 : capacité
+    potentiellement sortie de l'usage) est opérationnalisée par la convention
+    administrative LOVAC « vacance structurelle = plus de 2 ans », le seuil
+    étant paramétré en hypothèse (H-06, 1-3 ans). Attention au vocabulaire :
+    la « vacance structurelle » du cadrage (difficilement mobilisable sans
+    action lourde) est une notion plus exigeante, non mesurable avec les
+    données actuelles (état du bâti absent).
   depends_on: [D-03, D-10, D-11]
 
 - id: C-02
@@ -175,7 +179,7 @@
     concentrés dans les grandes villes (Paris 32 091, Marseille 14 529, PLM
     agrégées) à des taux proches de la moyenne, statistiques de
     secrétisation communale.
-  depends_on: [T-03, H-01, V-01]
+  depends_on: [T-03, H-06, V-01]
   produced_by: src/logement/shell/build.py
   output: data/processed/vacance-structurelle.json
   limitations: [L-04, L-05, L-06]

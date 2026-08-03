@@ -12,10 +12,10 @@ Mis à jour à chaque fin de session de travail significative.
    « premier indice » (I-02) en résultat.
    Attention : codes commune LOVAC au COG 2026, zonage ZE sur un COG
    antérieur — prévoir la table de passage (et documenter T-xx).
-2. **Fichiers LOVAC détaillés (sensibilité H-01).** L'open data ne publie
+2. **Fichiers LOVAC détaillés (sensibilité H-06).** L'open data ne publie
    que la coupure à 2 ans ; les fichiers détaillés (ancienneté fine, accès
    Cerema/datafoncier sur demande) permettent l'analyse 1-3 ans promise par
-   H-01. Vérifier les conditions d'accès/licence avant tout engagement.
+   H-06. Vérifier les conditions d'accès/licence avant tout engagement.
 3. **Définitions légales manquantes** : logement indigne (loi MOLLE 2009,
    art. 84) et passoire thermique (DPE F-G, loi Climat et résilience) —
    sourcer Légifrance, enregistrer D-12/D-13.

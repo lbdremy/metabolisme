@@ -9,7 +9,7 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 |------|--------|------------------------|------|
 | S | Sources | `sources/sources.yaml` | 5 sources (INSEE + LOVAC ; 7 fichiers figés sha256/LFS + la collection des définitions) |
 | D | Définitions | `sources/definitions.yaml` | 11 définitions citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-01 seuil de vacance structurelle (2 ans, plage 1-3) |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
 | O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-04, T-01..T-03, R-01/R-02 (sorties dans `data/processed/`) |
 | I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01/I-02, V-01, C-01..C-03, L-01..L-06 |
 | M/P | Mesures, propositions | — | à venir |
@@ -36,7 +36,7 @@ D-08 bassin de vie · D-09 taux d'effort · D-10 vacance structurelle (LOVAC,
 > 2 ans) · D-11 vacance frictionnelle (LOVAC, ≤ 2 ans). Restent à sourcer :
 logement indigne, passoire thermique (définitions légales, hors INSEE).
 
-Hypothèses : **H-01** — seuil de vacance structurelle, valeur centrale 2 ans
+Hypothèses : **H-06** — seuil de vacance structurelle, valeur centrale 2 ans
 (convention C-01), plage plausible 1-3 ans (sensibilité complète possible
 seulement avec les fichiers LOVAC détaillés).
 

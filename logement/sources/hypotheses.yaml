@@ -3,8 +3,15 @@
 # centrale, plage plausible, unité, niveau de confiance, justification (ids
 # S-xx/I-xx...), résultats affectés (R-xx). Jamais de constante enfouie dans
 # une formule. Schéma typé : src/logement/models.py (HypothesisRecord).
+#
+# RÉSERVATION D'IDENTIFIANTS : H-01 à H-05 désignent les hypothèses
+# directrices du cadrage (INTRO.md §4 : parc sorti d'usage, capacités mal
+# localisées, coût, mobilités empêchées, inefficacités institutionnelles).
+# Elles ne sont pas des paramètres chiffrés et ne figurent donc pas dans ce
+# registre, mais leurs identifiants leur restent réservés. Les paramètres de
+# modèle commencent à H-06.
 
-- id: H-01
+- id: H-06
   name: structural_vacancy_threshold_years
   description: >
     Seuil de durée au-delà duquel une vacance est considérée comme

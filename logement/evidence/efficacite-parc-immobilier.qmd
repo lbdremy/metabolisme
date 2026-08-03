@@ -164,7 +164,7 @@ hyp = pd.DataFrame(
 hyp.style.hide(axis="index")
 ```
 
-**H-01** — le seuil de 2 ans qui sépare vacance frictionnelle et structurelle
+**H-06** — le seuil de 2 ans qui sépare vacance frictionnelle et structurelle
 est une convention administrative (choix **C-01**), pas un fait : il est
 paramétré, et sa plage plausible (1-3 ans) devra être explorée dès que les
 fichiers LOVAC détaillés (ancienneté fine) seront acquis.
@@ -314,7 +314,7 @@ et diagonale des faibles densités (Creuse 9,5 %, Nièvre 7,9 %) contre
 
 ## 7. Sensibilité
 
-L'analyse de sensibilité complète au seuil H-01 attend les fichiers LOVAC
+L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
 détaillés (l'open data ne publie que la coupure à 2 ans). En revanche, la
 sensibilité au **choix du millésime de référence (C-03)** peut être testée :
 
