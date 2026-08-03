@@ -7,11 +7,20 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | vide — aucune source enregistrée |
+| S | Sources | `sources/sources.yaml` | 3 sources INSEE figées (fichiers dans `data/raw/`, sha256 vérifiés) |
 | D | Définitions | `sources/definitions.yaml` | vide |
 | H | Hypothèses | `sources/hypotheses.yaml` | vide |
 | O/T/M/R | Observations, transformations, mesures, résultats | `src/logement/` + `evidence/claims.yaml` | aucune chaîne stabilisée |
 | I/V/C/P/L | Interprétations, valeurs, choix, propositions, limites | documents de preuve (`evidence/*.qmd`) | à venir |
+
+Sources enregistrées :
+
+- **S-01** — INSEE, Parc de logements au 1ᵉʳ janvier 2025 (Insee Focus n° 359,
+  données des figures — EAPL, séries nationales 1982-2025).
+- **S-02** — INSEE, Répartition du parc selon la catégorie de logement et le
+  type d'habitat (chiffres détaillés EAPL, 1982-2025).
+- **S-03** — INSEE, Ménages en séries longues (SL_MEN1, recensement,
+  millésimes 1962-2022).
 
 Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 

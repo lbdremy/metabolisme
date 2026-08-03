@@ -3,20 +3,70 @@
 # organisme, titre, URL, dates (publication + récupération), périmètres, licence,
 # fichier local figé dans data/raw/ et son empreinte sha256.
 # Schéma typé : src/logement/models.py (SourceRecord) ; contrôle : `uv run logement validate`.
-#
-# Exemple :
-# - id: S-01
-#   publisher: INSEE
-#   title: Parc de logements par catégorie
-#   source_url: https://...
-#   publication_date: 2025-06-12
-#   retrieved_at: 2026-08-03
-#   geographic_scope: France
-#   temporal_scope: "2023"
-#   license: Licence Ouverte 2.0
-#   local_file: data/raw/insee-logements-2023.csv
-#   checksum: sha256:...
-#   notes: >
-#     La catégorie « logement vacant » ne signifie pas que le logement est
-#     immédiatement mobilisable.
-[]
+
+- id: S-01
+  publisher: INSEE
+  title: Parc de logements au 1er janvier 2025 — données des figures (Insee Focus n° 359)
+  dataset_id: if359
+  source_url: https://www.insee.fr/fr/statistiques/8640662
+  publication_date: 2025-09-17
+  retrieved_at: 2026-08-03
+  geographic_scope: France hors Mayotte
+  temporal_scope: 1982-2025 (données 2023 à 2025 provisoires)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-focus-359-parc-logements-2025.xlsx
+  checksum: sha256:9c42e7ed589ecd15457a35537323406c2a51cf9d9ddd66c15c858c472986efc9
+  notes: >
+    Données des figures de la publication (fichier if359.xlsx, téléchargé depuis
+    https://www.insee.fr/fr/statistiques/fichier/8640662/if359.xlsx).
+    Source statistique sous-jacente : Estimations annuelles du parc de logements
+    (EAPL), synthèse Insee-SDES (taxe d'habitation, enquêtes annuelles de
+    recensement, RIL, enquêtes Logement). Séries nationales agrégées :
+    parc par catégorie (Figure 1-3), habitat individuel (Figure 4), statut
+    d'occupation des résidences principales (Figure 5), répartition par taille
+    d'unité urbaine (Figure 6, Tableau complémentaire). La catégorie
+    « logement vacant » ne signifie pas que le logement est mobilisable :
+    elle agrège vacance frictionnelle et vacance durable.
+
+- id: S-02
+  publisher: INSEE
+  title: Répartition du parc selon la catégorie de logement et le type d'habitat (chiffres détaillés EAPL)
+  dataset_id: cond-logt-parc-residence
+  source_url: https://www.insee.fr/fr/statistiques/2412780
+  publication_date: 2025-09-17
+  retrieved_at: 2026-08-03
+  geographic_scope: France hors Mayotte
+  temporal_scope: 1982-2025 (données au 1er janvier ; 2023 à 2025 provisoires)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-eapl-parc-residence-2025.xlsx
+  checksum: sha256:4f587626dface262df5ce93c29bbb2714674e24a992fed7d9e368345c519cefe
+  notes: >
+    Série annuelle détaillée 1982-2025 du parc par catégorie (résidences
+    principales, résidences secondaires et logements occasionnels, logements
+    vacants) croisée avec le type d'habitat (individuel/collectif). Fichier
+    cond-logt-parc-residence.xlsx téléchargé depuis
+    https://www.insee.fr/fr/statistiques/fichier/2412780/cond-logt-parc-residence.xlsx.
+    Même source EAPL que S-01 ; niveau national uniquement — les déclinaisons
+    territoriales devront venir d'autres jeux (recensement, Fidéli/LOVAC).
+
+- id: S-03
+  publisher: INSEE
+  title: Ménages et familles en 2022 et en séries longues — nombre de personnes par ménage (SL_MEN1)
+  dataset_id: SL_MEN1
+  source_url: https://www.insee.fr/fr/statistiques/8613706?sommaire=8613956
+  publication_date: 2025-09-03
+  retrieved_at: 2026-08-03
+  geographic_scope: France hors Mayotte (onglet France) et France métropolitaine
+  temporal_scope: 1962-2022 (millésimes censitaires, non annuels)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-rp-menages-series-longues-2022.xlsx
+  checksum: sha256:757fbd26c3e74c5d9d39d8127238b692decd351ba00418a17b04da0b24058b4d
+  notes: >
+    Nombre de ménages et taille moyenne par millésime de recensement
+    (1962/1968/1975/1982/1990/1999 puis recensement rénové jusqu'en 2022).
+    Fichier « SL_MEN1 2022 series longues.xlsx » téléchargé depuis
+    https://www.insee.fr/fr/statistiques/fichier/8613706/SL_MEN1%202022%20series%20longues.xlsx.
+    Source : recensement de la population. Attention à la comparaison avec
+    S-01/S-02 : ménage (RP) et résidence principale (EAPL) sont des concepts
+    proches mais issus de sources et de définitions distinctes — l'écart
+    résiduel doit être documenté, pas gommé. Série non annuelle.
