@@ -5,42 +5,38 @@ Mis à jour à chaque fin de session de travail significative.
 
 ## Prochaines étapes (dans l'ordre)
 
-1. ~~Croisement zones d'emploi (test de H-02)~~ — **fait** (R-03/I-03,
-   session 1) : H-02 confirmée en intensité, réfutée en volume — ~85 % de la
-   vacance structurelle est dans des ZE où l'emploi croît. Suite logique :
-   descendre à l'infra-ZE (bassins de vie, D-08) et instruire H-03 (coût)
-   et H-05 (blocages institutionnels), devenues les pistes dominantes.
-2. **Sensibilité H-06 : BLOQUÉE au niveau source (vérifié 2026-08-03).**
-   Les fichiers LOVAC détaillés (ancienneté fine) sont réservés aux
-   collectivités à fiscalité propre, services de l'État et Anah (secret
-   fiscal, Portail Données Foncières) — pas d'accès chercheur/particulier.
-   L'analyse 1-3 ans promise par H-06 reste donc hors de portée ; la
-   limite est actée dans la description de H-06. Alternatives possibles :
-   demande de convention via un partenaire habilité, ou bornes indirectes
-   depuis l'open data (vacance totale − structurelle).
-3. ~~Définitions légales manquantes~~ — **fait** : D-12 habitat indigne
-   (loi MOLLE 2009, art. 84) et D-13 passoire thermique (CCH L173-1-1,
-   classes F-G) enregistrées depuis Légifrance (S-08), citations verbatim.
-4. **H-03 (coût)** — exploration faite (notebook 04, S-09 loyers 2025 +
-   S-10 Filosofi 2021) : indice de coût par ZE anticorrélé à la vacance
-   (Spearman −0,42) — le coût marque la tension, il n'explique pas la
-   vacance ; le cumul coût+vacance est ultramarin (La Réunion/Martinique,
-   revenus faibles — d'abord mal identifié comme corse, corrigé en
-   vérifiant les codes ZE). ~~Stabiliser R-04/I-04~~ — fait.
-   Exploration 05 (recensement 2022, S-11) : l'axe « résidences
-   secondaires » n'explique NI la vacance NI le coût à l'échelle ZE
-   (ZE > 20 % RS : vacance 2,6 % vs 3,3 % ailleurs). ~~Stabiliser
-   R-05/I-05~~ — fait (12 ZE cumulant RS > 20 % et vacance > 5 %, dont six
-   corses — cas d'étude communaux à instruire). ~~Échelle communale~~ —
-   explorée (notebook 06) : la vacance y est diffuse, les corrélations
-   intra-ZE faibles et instables, et la secrétisation (Corte : 3 communes
-   visibles) rend la question de l'éviction saisonnière NON TRANCHABLE
-   avec l'open data — frontière de données actée (il faudrait les données
-   non secrétisées, le registre des meublés de tourisme ou des
-   monographies). PUIS : un vrai taux d'effort territorial (D-09 :
-   surfaces et composition des ménages).
-5. Quand une nouvelle publication est prête : tag git + mise à jour du
-   document de preuve (règle : l'article pointe une version précise).
+L'état à la fin de la session 1 est tagué **`efficacite-parc-v0.1`**
+(chaîne complète R-01..R-05, document de preuve auto-vérifié). Le détail de
+ce qui est fait est dans `PREV-STEPS.md` ; les items ci-dessous sont ce qui
+reste à ouvrir.
+
+1. **Taux d'effort territorial réel (D-09).** L'indice de coût de R-04
+   n'intègre ni surface ni composition des ménages. Il faut : une source
+   de surfaces habitables (enquête Logement, ou nombre de pièces des RP
+   dans S-11 comme proxy), une hypothèse de logement type paramétrée
+   (H-07, plage plausible), les loyers S-09 et revenus S-10 déjà figés →
+   R-06 (taux d'effort à la relocation par ZE), avec la variante
+   nette/brute de D-09 explicitée.
+2. **Instruire H-04 (mobilités empêchées).** Données candidates :
+   demandes de logement social et délais (SNE / data.gouv), taux de
+   rotation du parc, DVF pour les frais de transaction. C'est la dernière
+   hypothèse directrice non instruite (H-01 ✓ R-02, H-02 ✓ R-03, H-03 ✓
+   R-04, H-05 = piste dominante restante).
+3. **Instruire H-05 (blocages institutionnels) au niveau propriété.**
+   I-03/I-04 pointent vers l'état du bâti et les successions ; données
+   candidates : parc privé potentiellement indigne (PPPI, si accessible),
+   DPE par territoire (ADEME open data, D-13), indivisions/successions
+   (piste : stats notariales ou fichiers fonciers agrégés).
+4. **Frontières de données actées** (ne pas re-tenter sans nouveau
+   levier) : fichiers LOVAC détaillés = habilitation collectivités/État/
+   Anah (sensibilité H-06) ; éviction saisonnière infra-territoriale =
+   non tranchable en open data secrétisé (notebook 06) — leviers
+   possibles : convention avec un partenaire habilité, registre des
+   meublés de tourisme, monographies communales.
+5. **Chemin de publication** : revue contradictoire (méthode INTRO
+   étape 12 — chercher activement les objections), premier article dans
+   `articles/` pointant le tag, licence du millésime loyers 2025 à
+   confirmer avant publication (L-09), puis tag suivant.
 
 ## Comment reprendre (5 minutes)
 
@@ -48,7 +44,7 @@ Mis à jour à chaque fin de session de travail significative.
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 2 artefacts data/processed/
+uv run logement reproduce   # rebâtit les 5 artefacts data/processed/
 ./check.sh && ./test.sh     # portes qualité
 ```
 
@@ -75,6 +71,9 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
 - **Classements publiés** : tri stable + clé de départage explicite (les
   taux arrondis créent des ex æquo dont l'ordre varie selon la plateforme —
   attrapé par la CI, corrigé dans `build_summary`).
+- **pandas** : `groupby().sum()` transforme silencieusement les NaN
+  (secret) en 0 — toujours passer par `lovac.aggregate_plm` ou
+  `min_count` (attrapé au notebook 06).
 - **Méthode** : aucun chiffre publié sans S-xx enregistré ; les constats
   d'un notebook se vérifient depuis les sorties avant d'être écrits (une
   erreur de ce type a déjà été interceptée en session 1 — indice parc vs

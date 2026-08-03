@@ -3,7 +3,7 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
-## Session 1 — 2026-08-03 (fondation)
+## Session 1 — 2026-08-03 (fondation) — tag `efficacite-parc-v0.1`
 
 Une **première boucle complète** de la chaîne de preuves exécutable :
 sources figées → définitions verbatim → hypothèse nommée → exploration →
@@ -17,7 +17,7 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
 | Hypothèses | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
 | Graphe (`evidence/claims.yaml`) | 39 nœuds — O-01..O-09, T-01..T-06, R-01..R-05, I-01..I-05, V-01, C-01..C-03, L-01..L-10 |
 | Résultats reproductibles | R-01..R-05 (`data/processed/*.json`) — verrouillés par tests de régression ; document de preuve auto-vérifié couvrant les cinq |
-| Notebooks d'exploration | 01 parc/ménages, 02 vacance territoriale, 03 vacance × emploi, 04 coût résidentiel, 05 résidences secondaires (py:percent, committés) |
+| Notebooks d'exploration | 01 parc/ménages · 02 vacance territoriale · 03 vacance × emploi · 04 coût résidentiel · 05 résidences secondaires · 06 cumuls RS+vacance (frontière de données) |
 | Document de preuve | `evidence/efficacite-parc-immobilier.qmd` + HTML rendu (auto-vérifié : artefacts publiés == recalcul) |
 | Qualité | 30 tests verts ; CI verte après correction d'un vrai bug de reproductibilité (ordre des ex æquo dépendant de la plateforme, attrapé par le test de régression au premier run CI) |
 
@@ -26,6 +26,11 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
   cumul RS+vacance dans un sous-groupe corse/rural-touristique. La
   vérification a corrigé une erreur d'interprétation de R-04 (ZE
   ultramarines, pas corses).
+
+- **Notebook 06 (frontière de données)** — dans les 12 ZE à cumul, la
+  vacance est diffuse et la secrétisation rend la question de l'éviction
+  saisonnière non tranchable en open data ; consignée comme frontière,
+  sans R-xx (c'est la limite qui est le résultat).
 
 ### Décisions arrêtées (voir aussi `CLAUDE.md` et le graphe)
 
@@ -36,6 +41,15 @@ stabilisation testée → résultats reproductibles → document de preuve rendu
   complet avant la rupture 2025).
 - Git LFS pour tout `data/raw/` ; notebooks en Jupytext py:percent ;
   documents de preuve en Quarto.
+
+### Corrections attrapées par la vérification (à relire avant de conclure vite)
+
+1. Indice parc vs ménages (notebook 01) — première conclusion fausse,
+   corrigée depuis les sorties.
+2. Ordre des ex æquo dépendant de la plateforme (R-02) — attrapé par la CI.
+3. ZE « corses » de R-04 qui étaient réunionnaises/martiniquaises —
+   corrigé en vérifiant les codes, correction tracée dans le graphe.
+4. NaN → 0 silencieux de pandas dans les agrégats communaux (notebook 06).
 
 ### Ce que disent les premiers résultats
 
