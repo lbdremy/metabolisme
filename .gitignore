@@ -17,5 +17,9 @@ htmlcov/
 # ruff cache (regenerated each ./check.sh run)
 .ruff_cache/
 
+# notebooks: the Jupytext py:percent .py pairing is the committed
+# representation; .ipynb files are local working copies
+logement/notebooks/**/*.ipynb
+
 # OS
 .DS_Store

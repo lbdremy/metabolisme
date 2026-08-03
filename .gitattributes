@@ -1,0 +1,4 @@
+# Raw source data is committed via Git LFS whatever its size (settled 2026-08-03):
+# strongest reproducibility — the frozen bytes travel with the repo, keeping
+# `logement validate`'s sha256 checks meaningful even if INSEE moves a file.
+logement/data/raw/** filter=lfs diff=lfs merge=lfs -text

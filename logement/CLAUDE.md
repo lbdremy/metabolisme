@@ -108,11 +108,27 @@ Correspondence with the method INTRO's canonical commands: `uv run validate` ≙
   and unit-consistent (dwelling counts as `int`, rates as branded ratios).
 - **Notebooks**: `exploration/` is a lab (anything goes, never published);
   `verification/` must run top-to-bottom, import from `src/logement/`, and
-  display the intermediate values a reader needs. Pair both with Jupytext so
-  diffs are reviewable.
+  display the intermediate values a reader needs. **Jupytext py:percent `.py`
+  files are the primary, committed representation** (`# %%` cells — diffable,
+  ruff-lintable, runnable as scripts); `.ipynb` files stay local and
+  git-ignored.
 - **Evidence docs are Quarto** (`evidence/*.qmd`), rendered from the
   stabilized code — the article in `articles/` cites result ids and points to
   a tagged version, it never carries untraceable numbers.
+
+## Settled decisions (2026-08-03)
+
+- **Vacancy split (frictional vs durable):** adopt the administrative
+  convention — vacance structurelle = vacant > 2 years (LOVAC / Zéro Logement
+  Vacant) — as the central definition, to be sourced as D-10 when LOVAC is
+  acquired, AND parameterize the threshold as a named hypothesis (plausible
+  range 1–3 years) so every result shows its sensitivity to it.
+- **Acquisition order:** national series first (S-01..S-03, first notebook on
+  dwellings vs households), then LOVAC for the territorial dive.
+- **Raw data policy: Git LFS for everything** under `logement/data/raw/`
+  (root `.gitattributes`), whatever the size. The LFS object id is the
+  file's sha256 — the same checksum recorded in `sources.yaml`.
+- **Notebooks: Jupytext py:percent** as the committed representation.
 
 ## Next deliverables (INTRO §19, in order)
 

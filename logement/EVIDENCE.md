@@ -36,5 +36,15 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 - **V-01** — Une résidence principale occupée est pleinement utilisée ; elle ne
   peut jamais être comptée comme capacité disponible ni comme inefficience.
 
+Choix de conception arrêtés (2026-08-03) :
+
+- **C-01** — La distinction vacance frictionnelle / vacance durable adopte la
+  convention administrative « vacance structurelle = plus de 2 ans » (LOVAC /
+  Zéro Logement Vacant), à enregistrer comme D-10 lors de l'acquisition de
+  LOVAC ; le seuil sera paramétré comme hypothèse (plage plausible 1 à 3 ans)
+  pour rendre visible la sensibilité des résultats.
+- **C-02** — Ordre d'acquisition : séries nationales d'abord (S-01..S-03),
+  puis LOVAC pour l'analyse territoriale.
+
 Aucun résultat n'a encore été produit : ce fichier s'enrichit à mesure que des
 éléments passent du régime exploratoire au régime stabilisé.
