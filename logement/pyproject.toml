@@ -45,7 +45,11 @@ line-length = 100
 src = ["src"]
 
 [tool.ruff.lint]
-select = [
+# extend-select on top of ruff's curated defaults (413 rules since 0.16): the
+# gate is defaults ∪ these groups. Explicitly listing E/F keeps the 18
+# opinionated pycodestyle/pyflakes rules that 0.16 dropped from the defaults.
+# The effective set changes only when a ruff upgrade is committed via uv.lock.
+extend-select = [
     "F",    # pyflakes
     "E", "W", # pycodestyle
     "I",    # isort
