@@ -31,7 +31,7 @@ class Reproduce(Command):
     async def run(self) -> None:
         from logement.shell import reproduce
 
-        raise SystemExit(reproduce.run())
+        raise SystemExit(reproduce.run(project_root()))
 
 
 class Logement(Command):

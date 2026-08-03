@@ -28,6 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # data/raw/ lives in Git LFS; reproduce + the regression test read it.
+          lfs: true
 
       - uses: astral-sh/setup-uv@v5
         with:

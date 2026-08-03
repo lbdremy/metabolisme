@@ -42,6 +42,7 @@ def run(root: Path) -> int:
         "sources": root / "sources" / "sources.yaml",
         "definitions": root / "sources" / "definitions.yaml",
         "hypotheses": root / "sources" / "hypotheses.yaml",
+        "claims": root / "evidence" / "claims.yaml",
     }
     missing = [str(p) for p in paths.values() if not p.is_file()]
     if missing:
@@ -53,17 +54,24 @@ def run(root: Path) -> int:
         sources = registry.parse_sources(_load_yaml(paths["sources"]))
         definitions = registry.parse_definitions(_load_yaml(paths["definitions"]))
         hypotheses = registry.parse_hypotheses(_load_yaml(paths["hypotheses"]))
+        claims = registry.parse_claims(_load_yaml(paths["claims"]))
     except registry.RegistryError as exc:
         print(f"validate: {exc}")
         return 1
 
-    errors = registry.cross_check(sources, definitions, hypotheses)
+    errors = registry.cross_check(sources, definitions, hypotheses, claims)
     errors += _check_local_files(root, sources)
+    errors += [
+        f"{claim.id}: declared output {claim.output} not found"
+        for claim in claims
+        if claim.output is not None and not (root / claim.output).is_file()
+    ]
     for error in errors:
         print(f"validate: {error}")
 
     print(
         f"validate: {len(sources)} source(s), {len(definitions)} definition(s), "
-        f"{len(hypotheses)} hypothesis(es) — {'RED' if errors else 'green'}"
+        f"{len(hypotheses)} hypothesis(es), {len(claims)} claim(s) — "
+        f"{'RED' if errors else 'green'}"
     )
     return 1 if errors else 0

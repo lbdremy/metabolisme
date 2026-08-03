@@ -1,0 +1,125 @@
+# Graphe de preuves (méthode Métabolisme, INTRO §10) — les statuts hors
+# registres : O observations, T transformations, M mesures, R résultats,
+# I interprétations, V valeurs, C choix, P propositions, L limites.
+# Chaque nœud référence ses dépendances par identifiant ; contrôle par
+# `uv run logement validate` (références résolues, sorties présentes).
+
+# ------------------------------------------------------------- valeurs et choix
+
+- id: V-01
+  type: value
+  title: >
+    Une résidence principale occupée est pleinement utilisée ; elle ne peut
+    jamais être comptée comme capacité disponible ni comme inefficience
+    (axiome, INTRO.md §3).
+
+- id: C-01
+  type: choice
+  title: >
+    La distinction vacance frictionnelle / durable adoptera la convention
+    administrative « vacance structurelle = plus de 2 ans » (LOVAC / Zéro
+    Logement Vacant), le seuil étant paramétré en hypothèse (plage 1-3 ans).
+  depends_on: [D-03]
+
+- id: C-02
+  type: choice
+  title: >
+    Ordre d'acquisition : séries nationales d'abord (S-01..S-03), puis LOVAC
+    pour l'analyse territoriale.
+
+# ------------------------------------------------------------------ limites
+
+- id: L-01
+  type: limit
+  title: >
+    Séries nationales uniquement — aucune conclusion territoriale (« où »)
+    n'est possible à ce stade ; attend LOVAC (C-02).
+
+- id: L-02
+  type: limit
+  title: >
+    Les années 2023-2025 de l'EAPL sont provisoires ; les millésimes ménages
+    s'arrêtent en 2022, la dernière comparaison parc/ménages date donc de 2022.
+
+- id: L-03
+  type: limit
+  title: >
+    Ménage (recensement, D-05) et résidence principale (EAPL, D-02) sont des
+    concepts appariés mais mesurés par des appareils différents ; écart
+    observé ±0,3 % aux millésimes (voir R-01), et changement de concept au
+    31/08/2025 (D-06) pour les millésimes futurs.
+  depends_on: [D-02, D-05, D-06]
+
+# ------------------------------------------------------- observations (sources)
+
+- id: O-01
+  type: observation
+  title: >
+    Parc de logements par catégorie (résidences principales / secondaires et
+    occasionnels / vacants) et ensemble, France hors Mayotte, série annuelle
+    1982-2025 en milliers.
+  depends_on: [S-02, D-01, D-02, D-03, D-04]
+
+- id: O-02
+  type: observation
+  title: >
+    Nombre de ménages aux millésimes censitaires 1975-2022, France hors
+    Mayotte, en milliers.
+  depends_on: [S-03, D-05]
+
+- id: O-03
+  type: observation
+  title: >
+    Indice de population base 100 en 1982, série annuelle 1982-2025 (données
+    des figures de l'Insee Focus n° 359).
+  depends_on: [S-01]
+
+# ------------------------------------------------------------ transformations
+
+- id: T-01
+  type: transformation
+  title: >
+    Lecture et normalisation des fichiers figés : libellés (espaces
+    insécables), années provisoires « (p) », lignes de niveau catégorie,
+    invariant de sommation (catégories = ensemble, tolérance 1 millier).
+  depends_on: [O-01, O-02, O-03]
+  produced_by: src/logement/core/parc.py
+
+- id: T-02
+  type: transformation
+  title: >
+    Indexation base 100 (première année commune, 1982), taux de croissance
+    annuels moyens par période intercensitaire, parts de catégories dans
+    l'ensemble du parc.
+  depends_on: [T-01]
+  produced_by: src/logement/core/parc.py
+
+# ------------------------------------------------------------------- résultats
+
+- id: R-01
+  type: result
+  title: >
+    Comparaison parc / ménages / population 1982-2025 : indices au dernier
+    millésime commun (2022 : logements 156,2 · ménages 155,2 · population
+    121,9), trajectoire de la vacance (7,9 % en 1982, minimum 6,2 % en 2005,
+    7,7 % en 2025 ; 1 895 → 2 962 milliers), part des résidences secondaires
+    (9,5 % → 9,8 %), croissances annuelles par période, écart RP/ménages aux
+    millésimes (±0,3 %).
+  depends_on: [T-02, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/parc-menages.json
+  limitations: [L-01, L-02, L-03]
+
+# -------------------------------------------------------------- interprétations
+
+- id: I-01
+  type: interpretation
+  title: >
+    Sur 40 ans le parc suit les ménages (et non la population) : la croissance
+    du parc accompagne la décohabitation. Le régime change vers 2005-2006 :
+    avant, les ménages croissent plus vite que le parc et la vacance se
+    résorbe ; après, le parc croît plus vite et la vacance remonte — au niveau
+    national, la capacité hors résidence principale qui augmente depuis 2006
+    est de la vacance, pas des résidences secondaires.
+  depends_on: [R-01]
+  limitations: [L-01, L-02]

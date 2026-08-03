@@ -10,8 +10,9 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 | S | Sources | `sources/sources.yaml` | 4 sources INSEE (3 fichiers figés sha256 + la collection des définitions) |
 | D | Définitions | `sources/definitions.yaml` | 9 définitions INSEE citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | vide |
-| O/T/M/R | Observations, transformations, mesures, résultats | `src/logement/` + `evidence/claims.yaml` | aucune chaîne stabilisée |
-| I/V/C/P/L | Interprétations, valeurs, choix, propositions, limites | documents de preuve (`evidence/*.qmd`) | à venir |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-03, T-01/T-02, R-01 (sortie `data/processed/parc-menages.json`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01, V-01, C-01/C-02, L-01..L-03 |
+| M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
 
@@ -36,15 +37,16 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 - **V-01** — Une résidence principale occupée est pleinement utilisée ; elle ne
   peut jamais être comptée comme capacité disponible ni comme inefficience.
 
-Choix de conception arrêtés (2026-08-03) :
+Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
+(`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,
+seuil paramétré 1-3 ans), **C-02** (national d'abord, puis LOVAC).
 
-- **C-01** — La distinction vacance frictionnelle / vacance durable adopte la
-  convention administrative « vacance structurelle = plus de 2 ans » (LOVAC /
-  Zéro Logement Vacant), à enregistrer comme D-10 lors de l'acquisition de
-  LOVAC ; le seuil sera paramétré comme hypothèse (plage plausible 1 à 3 ans)
-  pour rendre visible la sensibilité des résultats.
-- **C-02** — Ordre d'acquisition : séries nationales d'abord (S-01..S-03),
-  puis LOVAC pour l'analyse territoriale.
+Premier résultat stabilisé (2026-08-03) :
 
-Aucun résultat n'a encore été produit : ce fichier s'enrichit à mesure que des
-éléments passent du régime exploratoire au régime stabilisé.
+- **R-01** — Comparaison parc / ménages / population 1982-2025 (sortie
+  reproductible `data/processed/parc-menages.json`, rebâtie par
+  `uv run logement reproduce`, verrouillée par le test de régression
+  `tests/test_reproduce.py`). Lecture : **I-01** — le parc suit les ménages
+  (décohabitation), régime inversé vers 2005-2006, la remontée de la capacité
+  hors résidence principale depuis 2006 est de la vacance. Limites L-01..L-03
+  (national seulement, 2023-2025 provisoires, écart conceptuel ménage/RP).

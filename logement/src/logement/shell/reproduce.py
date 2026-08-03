@@ -1,19 +1,28 @@
 """`logement reproduce` — replay every stabilized pipeline stage from raw data.
 
-No stage exists yet: the command says so honestly instead of faking work. As
-transformations are stabilized into `core/`, each becomes a stage listed and
-re-run here, so `uv run logement reproduce` always rebuilds every published
-result (method INTRO §6.8).
+Each stabilized stage is listed here and re-run in order, so
+`uv run logement reproduce` always rebuilds every published result from the
+frozen raw files (method INTRO §6.8). The regression test in
+tests/test_reproduce.py asserts the committed artifacts match a rebuild.
 """
 
 from __future__ import annotations
 
+from collections.abc import Callable
+from pathlib import Path
 
-def run() -> int:
-    """Re-run the (currently empty) evidence chain; return a process exit code.
+from logement.shell import build
 
-    Will grow a `root: Path` argument with the first real stage.
-    """
-    print("reproduce: the evidence chain has no stabilized stage yet — nothing to rebuild.")
-    print("reproduce: registries are gated separately by `logement validate`.")
+STAGES: tuple[tuple[str, Callable[[Path], int]], ...] = (("parc-menages", build.run),)
+
+
+def run(root: Path) -> int:
+    """Re-run every stage of the evidence chain; return a process exit code."""
+    for name, stage in STAGES:
+        print(f"reproduce: stage {name}")
+        code = stage(root)
+        if code != 0:
+            print(f"reproduce: stage {name} FAILED ({code})")
+            return code
+    print(f"reproduce: {len(STAGES)} stage(s) rebuilt.")
     return 0

@@ -132,10 +132,13 @@ Correspondence with the method INTRO's canonical commands: `uv run validate` ≙
 
 ## Next deliverables (INTRO §19, in order)
 
-1. Fill `sources/definitions.yaml` from real recorded sources (logement,
-   résidence principale, vacance, ménage, zone d'emploi, taux d'effort, …).
-2. Fill `sources/sources.yaml` (INSEE, SDES, ANAH, …) with checksummed files
-   in `data/raw/`.
-3. `notebooks/exploration/01_parc_population` — logements vs ménages.
-4. Stabilize the first transformations into `src/logement/core/`.
-5. `evidence/efficacite-parc-immobilier.qmd`, reproducible from scratch.
+1. ~~Fill `sources/definitions.yaml`~~ — done (D-01..D-09, verbatim + dated).
+2. ~~First sources frozen~~ — done (S-01..S-04, LFS + sha256).
+3. ~~`notebooks/exploration/01_parc_population`~~ — done.
+4. ~~Stabilize the first transformations~~ — done: `core/parc.py` (tested,
+   invariants as property tests), stage `parc-menages` in `shell/build.py`,
+   R-01 output `data/processed/parc-menages.json` locked by the regression
+   test `tests/test_reproduce.py`, graph in `evidence/claims.yaml`.
+5. Acquire LOVAC (vacancy by territory/duration) — C-01/C-02: register D-10
+   (vacance structurelle > 2 ans) and the threshold hypothesis (H-01, 1-3 y).
+6. `evidence/efficacite-parc-immobilier.qmd`, reproducible from scratch.

@@ -123,3 +123,57 @@ class HypothesisRecord(StrictModel):
             msg = f"{self.id}: central_value {self.central_value} outside [{low}, {high}]"
             raise ValueError(msg)
         return self
+
+
+# ------------------------------------------------------------- claims.yaml (§10)
+
+ClaimType = Literal[
+    "observation",
+    "transformation",
+    "measure",
+    "result",
+    "interpretation",
+    "value",
+    "choice",
+    "proposition",
+    "limit",
+]
+
+# Claims carry the non-registry statuses; S/D/H live in their own registries.
+CLAIM_PREFIXES: dict[str, ClaimType] = {
+    "O": "observation",
+    "T": "transformation",
+    "M": "measure",
+    "R": "result",
+    "I": "interpretation",
+    "V": "value",
+    "C": "choice",
+    "P": "proposition",
+    "L": "limit",
+}
+
+
+class ClaimRecord(StrictModel):
+    """One node of the evidence graph: what it is, what it depends on (INTRO §10)."""
+
+    id: EvidenceId
+    type: ClaimType
+    title: str
+    depends_on: list[EvidenceId] = Field(default_factory=list)
+    # For computed nodes: the code that produces it and the artifact written.
+    produced_by: str | None = None
+    output: str | None = None
+    limitations: list[EvidenceId] = Field(default_factory=list)
+    notes: str = ""
+
+    @model_validator(mode="after")
+    def _type_matches_id_prefix(self) -> ClaimRecord:
+        """Require the declared type to agree with the id's status prefix."""
+        expected = CLAIM_PREFIXES.get(self.id[0])
+        if expected is None:
+            msg = f"{self.id}: S/D/H ids belong to the sources/ registries, not claims"
+            raise ValueError(msg)
+        if self.type != expected:
+            msg = f"{self.id}: type '{self.type}' does not match prefix ('{expected}' expected)"
+            raise ValueError(msg)
+        return self

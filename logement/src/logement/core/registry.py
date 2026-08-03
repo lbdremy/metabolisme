@@ -11,9 +11,9 @@ from typing import TypeVar
 
 from pydantic import ValidationError
 
-from logement.models import DefinitionRecord, HypothesisRecord, SourceRecord
+from logement.models import ClaimRecord, DefinitionRecord, HypothesisRecord, SourceRecord
 
-T = TypeVar("T", SourceRecord, DefinitionRecord, HypothesisRecord)
+T = TypeVar("T", SourceRecord, DefinitionRecord, HypothesisRecord, ClaimRecord)
 
 
 class RegistryError(Exception):
@@ -51,31 +51,40 @@ def parse_hypotheses(raw: object) -> list[HypothesisRecord]:
     return _parse_entries(raw, HypothesisRecord, "hypotheses")
 
 
+def parse_claims(raw: object) -> list[ClaimRecord]:
+    """Parse the evidence/claims.yaml payload into typed claim records."""
+    return _parse_entries(raw, ClaimRecord, "claims")
+
+
 def cross_check(
     sources: list[SourceRecord],
     definitions: list[DefinitionRecord],
     hypotheses: list[HypothesisRecord],
+    claims: list[ClaimRecord] | None = None,
 ) -> list[str]:
-    """Referential checks across the three registries; returns human-readable errors.
+    """Referential checks across registries and claims; returns human-readable errors.
 
-    Checks: unique ids per registry, definitions pointing at registered sources,
-    hypothesis justifications whose `S-xx` references exist. References to other
-    statuses (O/T/M/R/I/…) will be checked once `evidence/claims.yaml` exists.
+    Checks: unique ids overall, definitions pointing at registered sources,
+    hypothesis justifications whose `S-xx` references exist, and every claim
+    dependency/limitation resolving to a known id (registry or claim).
     """
+    claims = claims or []
     errors: list[str] = []
 
+    seen: set[str] = set()
     for registry, ids in (
         ("sources", [s.id for s in sources]),
         ("definitions", [d.id for d in definitions]),
         ("hypotheses", [h.id for h in hypotheses]),
+        ("claims", [c.id for c in claims]),
     ):
-        seen: set[str] = set()
         for record_id in ids:
             if record_id in seen:
                 errors.append(f"{registry}: duplicate id {record_id}")
             seen.add(record_id)
 
     source_ids = {s.id for s in sources}
+    known_ids = seen
     for definition in definitions:
         if definition.source not in source_ids:
             errors.append(f"{definition.id}: unknown source {definition.source}")
@@ -83,5 +92,12 @@ def cross_check(
         for ref in hypothesis.justification:
             if ref.startswith("S-") and ref not in source_ids:
                 errors.append(f"{hypothesis.id}: unknown source {ref} in justification")
+    for claim in claims:
+        for ref in claim.depends_on:
+            if ref not in known_ids:
+                errors.append(f"{claim.id}: unknown dependency {ref}")
+        for ref in claim.limitations:
+            if ref not in known_ids:
+                errors.append(f"{claim.id}: unknown limitation {ref}")
 
     return errors
