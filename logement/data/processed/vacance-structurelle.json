@@ -76,28 +76,28 @@
   "departements": {
     "bottom": [
       {
-        "dep": "92",
-        "name": "Hauts-de-Seine",
-        "rate_pct": 1.7,
-        "structural": 11130
-      },
-      {
         "dep": "91",
         "name": "Essonne",
         "rate_pct": 1.7,
         "structural": 8179
       },
       {
-        "dep": "78",
-        "name": "Yvelines",
-        "rate_pct": 1.5,
-        "structural": 8271
+        "dep": "92",
+        "name": "Hauts-de-Seine",
+        "rate_pct": 1.7,
+        "structural": 11130
       },
       {
         "dep": "44",
         "name": "Loire-Atlantique",
         "rate_pct": 1.5,
         "structural": 10460
+      },
+      {
+        "dep": "78",
+        "name": "Yvelines",
+        "rate_pct": 1.5,
+        "structural": 8271
       },
       {
         "dep": "85",

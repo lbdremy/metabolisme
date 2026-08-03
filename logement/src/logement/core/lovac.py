@@ -132,7 +132,10 @@ def build_summary(
     ref = REFERENCE_MILLESIME
     dep = departements.copy()
     dep["rate_pct"] = structural_rate(dep, ref).round(1)
-    dep = dep.sort_values("rate_pct", ascending=False)
+    # Rounded rates tie (e.g. 7.3/7.3): a stable sort with an explicit code
+    # tie-break keeps the ranking identical across platforms — the regression
+    # test compares this list element by element.
+    dep = dep.sort_values(["rate_pct", "code"], ascending=[False, True], kind="stable")
     national_rate = dep[f"pp_vacant_plus_2ans_{ref}"].sum() / dep[f"ff_pp_total_{ref}"].sum() * 100
 
     def dep_entry(row: pd.Series) -> dict[str, object]:
@@ -147,7 +150,9 @@ def build_summary(
     com_cols = [f"pp_vacant_plus_2ans_{ref}", f"ff_pp_total_{ref}"]
     cities = aggregate_plm(communes, com_cols)
     visible = cities.dropna(subset=com_cols)
-    top_cities = visible.sort_values(f"pp_vacant_plus_2ans_{ref}", ascending=False).head(10)
+    top_cities = visible.sort_values(
+        [f"pp_vacant_plus_2ans_{ref}", "code"], ascending=[False, True], kind="stable"
+    ).head(10)
     masked_latest = communes[f"pp_vacant_plus_2ans_{latest}"].isna().sum()
 
     return {
