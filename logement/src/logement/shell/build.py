@@ -13,7 +13,7 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from logement.core import bati, cout, effort, lovac, parc, registry, rs, tension, ze
+from logement.core import bati, cout, effort, lovac, parc, registry, remob, rs, tension, ze
 from logement.models import HypothesisRecord
 
 S01_FILE = "insee-focus-359-parc-logements-2025.xlsx"
@@ -48,6 +48,9 @@ TENSION_OUTPUT = Path("data") / "processed" / "tension-manque-absolu-ze.json"
 
 DPE_FILE = "ademe-dpe-existants-communes-etiquettes.csv"
 BATI_OUTPUT = Path("data") / "processed" / "etat-bati-ze.json"
+
+IPEA_FILE = "insee-ipea-residentiel-011779962.xml"
+REMOB_OUTPUT = Path("data") / "processed" / "cout-remobilisation-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -305,6 +308,52 @@ def run_bati(root: Path) -> int:
     print(
         f"etat-bati: wrote {BATI_OUTPUT} — spearman age×vacance "
         f"{payload['spearman_age_vs_vacancy']}, F+G×vacance {payload['spearman_fg_vs_vacancy']}"
+    )
+    return 0
+
+
+def build_cout_remobilisation(root: Path) -> dict[str, object]:
+    """Compute the R-09 summary payload (remobilisation cost vs building new)."""
+    raw = root / "data" / "raw"
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+    census = rs.parse_census_housing(census_raw)
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        mix_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *effort.CENSUS_MIX_COLS])
+    census_mix = effort.parse_census_mix(mix_raw)
+    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    h08 = _load_hypothesis(root, "H-08")
+    frame = tension.tension_by_ze(census, tlv, communes, commune_ze, h08.central_value)
+    tense = frame[frame["tendue"]]
+    mix = (
+        census_mix.merge(commune_ze, on="code", how="left")
+        .dropna(subset=["ze"])
+        .groupby("ze")[["rp_maison", "rp_appart"]]
+        .sum()
+    )
+    part_maison = mix["rp_maison"] / (mix["rp_maison"] + mix["rp_appart"])
+    annual_means = remob.parse_ipea_annual_means((raw / IPEA_FILE).read_text(encoding="utf-8"))
+    return remob.build_summary(
+        tense,
+        part_maison,
+        _ze_names(root),
+        _load_hypothesis(root, "H-09"),
+        _load_hypothesis(root, "H-10"),
+        annual_means,
+    )
+
+
+def run_remob(root: Path) -> int:
+    """Rebuild data/processed/cout-remobilisation-ze.json; return an exit code."""
+    payload = build_cout_remobilisation(root)
+    _write_json(root, REMOB_OUTPUT, payload)
+    print(
+        f"cout-remobilisation: wrote {REMOB_OUTPUT} — couts {payload['couts']}, "
+        f"comparateur {payload['comparateur_neuf']}"
     )
     return 0
 

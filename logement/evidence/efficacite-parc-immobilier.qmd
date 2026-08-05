@@ -3,7 +3,7 @@ title: "Efficacité du parc immobilier français — document de preuve"
 subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
-  taux d'effort à la relocation, tension et manque absolu, état du bâti
+  taux d'effort, tension et manque absolu, état du bâti, coût de remobilisation
 date: 2026-08-05
 lang: fr
 format:
@@ -132,7 +132,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 68 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 73 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -167,6 +167,11 @@ propriétés) :
   question du recensement n'est pas posée en métropole), part F+G des
   logements diagnostiqués (extrait DPE S-16), corrélations de rangs avec
   séparation métropole / DOM.
+- **T-10** (`core/remob.py`) — coût de la détente par remobilisation :
+  coût unitaire par logement (choix **C-07** : €/m² S-17 mixés par la
+  part maison, surfaces S-12, TVA 5,5 %, actualisation IPEA S-19),
+  agrégats par variante (plages H-09/H-10) et comparaison au prix de
+  revient du logement social neuf (S-18).
 
 ## 5. Hypothèses
 
@@ -210,15 +215,17 @@ r05 = build.build_residences_secondaires(ROOT)
 r06 = build.build_taux_effort(ROOT)
 r07 = build.build_tension(ROOT)
 r08 = build.build_etat_bati(ROOT)
+r09 = build.build_cout_remobilisation(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
     ("R-05", r05, build.RS_OUTPUT), ("R-06", r06, build.EFFORT_OUTPUT),
     ("R-07", r07, build.TENSION_OUTPUT), ("R-08", r08, build.BATI_OUTPUT),
+    ("R-09", r09, build.REMOB_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-08 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-09 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -550,6 +557,41 @@ données actée, interprétation I-08 ; limites L-13, dont le biais
 d'échantillon DPE : les diagnostiqués ne sont pas le parc, et les vacants
 durables ne sont justement pas diagnostiqués).
 
+### R-09 — Ce que coûterait la remobilisation, comparé au neuf
+
+```{python}
+#| code-summary: "chiffres clés R-09"
+ip = r09["ipea"]
+print(f"{r09['n_ze_tendues']} ZE tendues ; actualisation IPEA "
+      f"{ip['moyenne_2016']} (2016) → {ip['moyenne_2023']} (2023), "
+      f"facteur {ip['facteur']}")
+for label in ("bas", "central", "haut"):
+    v = r09["couts"][label]
+    print(f"{label:8s}: {v['cout_unitaire_moyen_pondere_eur']:,} €/logement — "
+          f"détente {v['cout_detente_mdeur']} Md€, gisement entier "
+          f"{v['cout_gisement_mdeur']} Md€".replace(",", " "))
+cn = r09["comparateur_neuf"]
+print(f"Construire les {r09['besoin_total']:,} logements au prix de revient "
+      f"social 2023 : {cn['cout_neuf_mdeur']} Md€ — ratio neuf/remobilisation "
+      f"{cn['ratio_neuf_sur_remobilisation']['haut']} à "
+      f"{cn['ratio_neuf_sur_remobilisation']['bas']} "
+      f"({cn['ratio_neuf_sur_remobilisation']['central']} au central)".replace(",", " "))
+print("Plus gros coûts de détente (M€) :",
+      ", ".join(f"{e['name'].strip()} {e['cout_detente_meur']:.0f}"
+                for e in r09["top_cout_detente"][:4]))
+```
+
+Le chiffrage referme la boucle ouverte par R-07 : la détente des 142 ZE
+tendues par remobilisation (rénovation complète et performante du volume
+nécessaire, C-07) coûterait **~12,5 Md€ TTC 2023** (10,6-15,3 sur les
+plages), contre **~48,3 Md€** pour construire les mêmes logements au prix
+de revient du logement social — la remobilisation est **3,2 à 4,6 fois
+moins chère**, et remobiliser la totalité du gisement structurel des
+zones tendues resterait sous ~24 Md€. Le chiffre est un ordre de grandeur
+d'investissement total, pas un coût public, et l'argument économique ne
+lève pas à lui seul les verrous de propriété mis en évidence par R-08
+(interprétation I-09 ; limites L-14).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -654,6 +696,12 @@ couvertes) qui bouge avec le seuil.
   propriété, successions, indivisions — est précisément derrière la
   frontière de données (PPPI, fichiers fonciers) ; à instruire par
   convention d'accès, pas à affirmer.
+- **I-09** — Le coût de la détente par remobilisation (~12,5 Md€) est un
+  ordre de grandeur ~4 fois inférieur au coût de la même détente par
+  construction neuve : l'argument économique de la remobilisation est
+  solide, mais il ne lève pas à lui seul les verrous de propriété (I-08)
+  et ne couvre pas la tension touristique des 41 ZE sans gisement.
+  Première brique quantifiée de la future proposition institutionnelle.
 
 Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
 bâti, des causes de la vacance (succession, travaux, rétention…), de la
@@ -695,7 +743,7 @@ territoriale communale est bornée par la secrétisation (L-05).
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 68 tests (unitaires, propriétés, régression)
+./test.sh                   # 73 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 

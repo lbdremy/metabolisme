@@ -747,3 +747,108 @@
     (qui conditionne I-07) reste à faire.
   depends_on: [R-08, I-02, I-03, I-04, I-05, I-07]
   limitations: [L-13]
+
+# --------------------------- branche coût de remobilisation (H-05, chiffrage)
+
+- id: C-07
+  type: choice
+  title: >
+    Modèle du coût de remise en usage (décisions du 2026-08-05) : coût
+    unitaire par logement = coûts €/m² d'une rénovation complète et
+    performante (H-09 maison, H-10 collectif — S-17, euros 2016 HT),
+    mixés par la part maison des RP de chaque ZE (S-11), aux surfaces
+    moyennes S-12 (114,3 / 65,5 m²), convertis TTC (TVA 5,5 %, S-17) et
+    ACTUALISÉS 2016 → 2023 par l'indice IPEA résidentiel (S-19, facteur
+    recalculé depuis le fichier figé — jamais une constante) pour être
+    comparables au prix de revient 2023 du logement social neuf (S-18,
+    169 200 €/logement), retenu comme comparateur « construire à la
+    place » (conservateur : la promotion libre est plus chère).
+  depends_on: [S-17, S-18, S-19, S-11, S-12, C-05, C-06]
+
+- id: L-14
+  type: limit
+  title: >
+    Limites du chiffrage de remobilisation : la rénovation complète et
+    performante (~BBC) est un PROXY de la remise en usage — elle ne
+    couvre ni les reprises structurelles lourdes ni l'acquisition/le
+    foncier, mais dépasse le strict minimum de louabilité (sens du biais
+    indéterminé) ; coûts S-17 observés sur des opérations volontaires
+    (biais de sélection) et en euros 2016 actualisés par un indice de
+    prix moyen (pas un devis territorial) ; surfaces moyennes du parc
+    OCCUPÉ (S-12) appliquées au parc vacant ; ordre de grandeur
+    d'INVESTISSEMENT total, pas de coût public ; prix de revient du
+    logement social comme étalon du neuf (minore le neuf libre) ; et le
+    verrou n'est pas seulement financier (blocages de propriété, DOM —
+    R-08/L-13).
+  depends_on: [S-17, S-18, S-12, L-12, L-13]
+
+- id: O-19
+  type: observation
+  title: >
+    Coûts observés d'une rénovation complète et performante (~BBC,
+    S-17, euros 2016 HT/m² habitable) : logements collectifs 200-300
+    (moyenne 250), maison individuelle 406 en moyenne après optimisation
+    (496 à 70 m², 348 à 200 m²) ; TVA applicable 5,5 %.
+  depends_on: [S-17]
+
+- id: O-20
+  type: observation
+  title: >
+    Prix de revient moyen d'un logement social neuf : 169 200 € en 2023
+    (152 200 € en 2019) — S-18, 16 800 opérations financées.
+  depends_on: [S-18]
+
+- id: O-21
+  type: observation
+  title: >
+    Indice IPEA résidentiel (S-19, base 2021) : moyennes annuelles 91,6
+    en 2016 et 116,1 en 2023, soit un facteur d'actualisation ×1,267 des
+    coûts de travaux entre les deux millésimes.
+  depends_on: [S-19]
+
+- id: T-10
+  type: transformation
+  title: >
+    Coût de la détente par remobilisation : ZE tendues et besoins de
+    T-08, part maison des RP par ZE, coût unitaire C-07 par ZE en trois
+    variantes (plages H-09/H-10), agrégats nationaux (détente, gisement
+    entier) et comparaison au neuf (O-20), top des ZE par coût.
+  depends_on: [T-08, O-12, O-19, O-20, O-21, C-07]
+  produced_by: src/logement/core/remob.py
+
+- id: R-09
+  type: result
+  title: >
+    Coût de la remobilisation du gisement des zones tendues (142 ZE,
+    hypothèses C-07) : rendre disponibles les 285 665 logements de la
+    détente coûterait ~12,5 Md€ TTC 2023 (10,6-15,3 sur les plages
+    H-09/H-10), soit ~43 800 € par logement en moyenne pondérée ;
+    remobiliser la totalité du gisement structurel des ZE tendues
+    (472 022 logements) ~20,0 Md€ (16,9-24,3) ; construire les mêmes
+    285 665 logements au prix de revient du logement social 2023
+    coûterait ~48,3 Md€ — la remobilisation est 3,2 à 4,6 fois moins
+    chère (3,9 au central). Plus gros coûts de détente : Bordeaux
+    ~509 M€ (neuf : 2 011), Toulon ~462 (2 065), Nantes ~411 (1 594),
+    Marseille ~348 (1 805).
+  depends_on: [T-10, H-08, H-09, H-10, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/cout-remobilisation-ze.json
+  limitations: [L-12, L-14]
+
+- id: I-09
+  type: interpretation
+  title: >
+    Le chiffrage referme la boucle ouverte par I-07 : la suffisance du
+    gisement en volume (couverture 1,65) a un prix de l'ordre de 12,5
+    Md€ pour la détente — un ordre de grandeur nettement inférieur au
+    coût de la même détente par construction neuve (~48 Md€, ratio ~4),
+    et comparable aux ordres de grandeur des politiques publiques du
+    logement existantes. L'argument économique ne suffit pourtant pas :
+    R-08/I-08 montrent que le verrou est aussi dans la propriété
+    (successions, indivisions — DOM notamment) et L-14 rappelle que le
+    chiffre est un investissement total, pas un coût public, et que la
+    tension touristique des 41 ZE non couvertes reste hors de portée de
+    la remobilisation. C'est la première brique quantifiée pour la
+    future proposition institutionnelle (P-xx à venir).
+  depends_on: [R-09, I-07, I-08]
+  limitations: [L-14]

@@ -1,0 +1,139 @@
+{
+  "besoin_total": 285665,
+  "comparateur_neuf": {
+    "cout_neuf_mdeur": 48.3,
+    "ratio_neuf_sur_remobilisation": {
+      "bas": 4.6,
+      "central": 3.9,
+      "haut": 3.2
+    }
+  },
+  "couts": {
+    "bas": {
+      "cout_detente_mdeur": 10.6,
+      "cout_gisement_mdeur": 16.9,
+      "cout_unitaire_moyen_pondere_eur": 36978
+    },
+    "central": {
+      "cout_detente_mdeur": 12.5,
+      "cout_gisement_mdeur": 20.0,
+      "cout_unitaire_moyen_pondere_eur": 43802
+    },
+    "haut": {
+      "cout_detente_mdeur": 15.2,
+      "cout_gisement_mdeur": 24.3,
+      "cout_unitaire_moyen_pondere_eur": 53297
+    }
+  },
+  "gisement_total": 472022,
+  "hypotheses": {
+    "h09_maison_eur_ht_m2": {
+      "central": 406.0,
+      "plausible_range": [
+        348.0,
+        496.0
+      ]
+    },
+    "h10_collectif_eur_ht_m2": {
+      "central": 250.0,
+      "plausible_range": [
+        200.0,
+        300.0
+      ]
+    }
+  },
+  "ipea": {
+    "facteur": 1.267,
+    "moyenne_2016": 91.62,
+    "moyenne_2023": 116.05
+  },
+  "modele": {
+    "prix_revient_neuf_eur_2023": 169200.0,
+    "surface_appart_m2": 65.5,
+    "surface_maison_m2": 114.3,
+    "tva": 1.055
+  },
+  "n_ze_tendues": 142,
+  "top_cout_detente": [
+    {
+      "besoin_mobilisation": 11882,
+      "cout_detente_meur": 509.3,
+      "cout_neuf_meur": 2010.5,
+      "name": "Bordeaux",
+      "part_maison_pct": 52.3,
+      "ze": "7505"
+    },
+    {
+      "besoin_mobilisation": 12204,
+      "cout_detente_meur": 461.5,
+      "cout_neuf_meur": 2064.9,
+      "name": "Toulon",
+      "part_maison_pct": 39.7,
+      "ze": "9318"
+    },
+    {
+      "besoin_mobilisation": 9419,
+      "cout_detente_meur": 411.0,
+      "cout_neuf_meur": 1593.6,
+      "name": "Nantes",
+      "part_maison_pct": 54.2,
+      "ze": "5216"
+    },
+    {
+      "besoin_mobilisation": 10670,
+      "cout_detente_meur": 328.2,
+      "cout_neuf_meur": 1805.3,
+      "name": "Marseille",
+      "part_maison_pct": 22.1,
+      "ze": "9312"
+    },
+    {
+      "besoin_mobilisation": 7989,
+      "cout_detente_meur": 313.1,
+      "cout_neuf_meur": 1351.8,
+      "name": "Roissy ",
+      "part_maison_pct": 43.1,
+      "ze": "1112"
+    },
+    {
+      "besoin_mobilisation": 6953,
+      "cout_detente_meur": 302.9,
+      "cout_neuf_meur": 1176.5,
+      "name": "Lille",
+      "part_maison_pct": 54.0,
+      "ze": "3216"
+    },
+    {
+      "besoin_mobilisation": 7131,
+      "cout_detente_meur": 288.7,
+      "cout_neuf_meur": 1206.6,
+      "name": "Bayonne",
+      "part_maison_pct": 46.4,
+      "ze": "7503"
+    },
+    {
+      "besoin_mobilisation": 7042,
+      "cout_detente_meur": 278.5,
+      "cout_neuf_meur": 1191.5,
+      "name": "Montpellier",
+      "part_maison_pct": 44.0,
+      "ze": "7616"
+    },
+    {
+      "besoin_mobilisation": 6021,
+      "cout_detente_meur": 255.1,
+      "cout_neuf_meur": 1018.7,
+      "name": "La Tarentaise",
+      "part_maison_pct": 51.1,
+      "ze": "8413"
+    },
+    {
+      "besoin_mobilisation": 4454,
+      "cout_detente_meur": 248.0,
+      "cout_neuf_meur": 753.7,
+      "name": "Royan",
+      "part_maison_pct": 84.2,
+      "ze": "7526"
+    }
+  ]
+}

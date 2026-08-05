@@ -5,24 +5,20 @@ Mis à jour à chaque fin de session de travail significative.
 
 ## Prochaines étapes (dans l'ordre)
 
-L'état à la fin de la session 1 est tagué **`efficacite-parc-v0.1`**
-(chaîne complète R-01..R-05, document de preuve auto-vérifié). La session 2
-a ajouté **R-06** (taux d'effort brut à la relocation — S-12, H-07,
-C-04/C-05), **R-07** (tension et manque absolu — S-13..S-15, H-08, C-06,
-correction tracée du test de tension) et **R-08** (état du bâti × vacance,
-première instruction de H-05 — S-16, L-13). Le détail est dans
-`PREV-STEPS.md` ; les items ci-dessous sont ce qui reste à ouvrir.
+L'état à la fin de la session 1 est tagué **`efficacite-parc-v0.1`** ;
+le milieu de session 2 est tagué **`efficacite-parc-v0.2`** (R-01..R-08).
+La session 2 a ajouté **R-06** (taux d'effort — S-12, H-07, C-04/C-05),
+**R-07** (tension et manque absolu — S-13..S-15, H-08, C-06, correction
+tracée), **R-08** (état du bâti, première instruction de H-05 — S-16,
+L-13) et **R-09** (coût de remobilisation ~12,5 Md€ vs ~48,3 Md€ en neuf
+— S-17..S-19, H-09/H-10, C-07). Le détail est dans `PREV-STEPS.md` ; les
+items ci-dessous sont ce qui reste à ouvrir.
 
-1. **Chiffrer le coût de remise en usage du gisement** (suite de H-05,
-   conditionne I-07/I-08) : coûts de rénovation par étiquette DPE
-   (sources candidates : ADEME/ONRE coûts moyens de rénovation, barèmes
-   MaPrimeRénov'), croisés avec le gisement structurel des ZE tendues de
-   R-07 — un ordre de grandeur du « coût de la couverture 1,65 ».
-2. **Lever les frontières H-05 par convention** : PPPI (DREAL/DDT) et
+1. **Lever les frontières H-05 par convention** : PPPI (DREAL/DDT) et
    fichiers fonciers/successions (Cerema — statut « acteur public » à
    clarifier pour un chercheur indépendant) ; c'est la seule voie pour
    instruire la piste successions/indivisions des DOM (I-08).
-3. **Instruire H-04 (mobilités empêchées).** Données candidates :
+2. **Instruire H-04 (mobilités empêchées).** Données candidates :
    demandes de logement social et délais (SNE / data.gouv), taux de
    rotation du parc, DVF pour les frais de transaction. Le terme « coût de
    la mobilité résidentielle » est désormais disponible (R-06). Levier à
@@ -30,13 +26,13 @@ première instruction de H-05 — S-16, L-13). Le détail est dans
    (S-12 provisoire) donnerait des taux d'effort NETS observés à
    confronter à R-06. Les 41 ZE tendues non couvertes de R-07 (tension
    touristique) rejoignent la frontière infra-territoriale du notebook 06.
-4. **Frontières de données actées** (ne pas re-tenter sans nouveau
+3. **Frontières de données actées** (ne pas re-tenter sans nouveau
    levier) : fichiers LOVAC détaillés = habilitation collectivités/État/
    Anah (sensibilité H-06) ; éviction saisonnière infra-territoriale =
    non tranchable en open data secrétisé (notebook 06) — leviers
    possibles : convention avec un partenaire habilité, registre des
    meublés de tourisme, monographies communales.
-5. **Chemin de publication** : revue contradictoire (méthode INTRO
+4. **Chemin de publication** : revue contradictoire (méthode INTRO
    étape 12 — chercher activement les objections), premier article dans
    `articles/` pointant le tag, licence du millésime loyers 2025 à
    confirmer avant publication (L-09), puis tag suivant.
@@ -47,7 +43,7 @@ première instruction de H-05 — S-16, L-13). Le détail est dans
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 8 artefacts data/processed/
+uv run logement reproduce   # rebâtit les 9 artefacts data/processed/
 ./check.sh && ./test.sh     # portes qualité
 ```
 

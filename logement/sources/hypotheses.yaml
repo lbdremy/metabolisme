@@ -90,3 +90,47 @@
     - D-15
   affects:
     - R-07
+
+- id: H-09
+  name: renovation_cost_maison_eur_ht_per_m2_2016
+  description: >
+    Coût unitaire d'une rénovation complète et performante (niveau ~BBC)
+    en MAISON INDIVIDUELLE, en euros 2016 hors taxes par m² de surface
+    habitable. Valeur centrale : le coût moyen après optimisation observé
+    par S-17 (406 € HT/m²). Plage plausible : l'effet taille documenté
+    par la même source — 496 € HT/m² pour une maison de 70 m², 348 pour
+    200 m². Utilisé comme PROXY du coût de remise en usage d'un logement
+    structurellement vacant : la rénovation performante recouvre une
+    remise à niveau générale de l'enveloppe et des systèmes, mais ni les
+    reprises structurelles lourdes ni le simple rafraîchissement — le
+    sens du biais est indéterminé et documenté (L-14). À actualiser par
+    le facteur IPEA (S-19) et convertir TTC (TVA 5,5 %, S-17) avant tout
+    agrégat en euros courants.
+  central_value: 406.0
+  plausible_range: [348.0, 496.0]
+  unit: eur_ht_2016_per_m2
+  confidence: medium
+  justification:
+    - S-17
+    - C-07
+  affects:
+    - R-09
+
+- id: H-10
+  name: renovation_cost_collectif_eur_ht_per_m2_2016
+  description: >
+    Coût unitaire d'une rénovation complète et performante (niveau ~BBC)
+    en LOGEMENT COLLECTIF, en euros 2016 hors taxes par m² de surface
+    habitable. Valeur centrale : la valeur moyenne de S-17 (250 € HT/m² ;
+    257 hors opérations atypiques). Plage plausible : la fourchette
+    observée par la même source (200 à 300 € HT/m²). Mêmes usages,
+    limites, actualisation et TVA que H-09.
+  central_value: 250.0
+  plausible_range: [200.0, 300.0]
+  unit: eur_ht_2016_per_m2
+  confidence: medium
+  justification:
+    - S-17
+    - C-07
+  affects:
+    - R-09

@@ -3,12 +3,32 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
-## Session 2 — 2026-08-05 (taux d'effort · tension et manque absolu · état du bâti)
+## Session 2 — 2026-08-05 (taux d'effort · tension · état du bâti · coût de remobilisation)
 
-Trois livrables : **R-06/I-06** (premier item de NEXT-STEPS), **R-07/I-07**
+Quatre livrables : **R-06/I-06** (premier item de NEXT-STEPS), **R-07/I-07**
 (nouvelle question posée par Rémy en séance : zones tendues, volume
 additionnel nécessaire à la détente, suffisance du gisement vacant local —
-en nombres ABSOLUS), puis **R-08/I-08** (première instruction de H-05).
+en nombres ABSOLUS), **R-08/I-08** (première instruction de H-05), puis
+**R-09/I-09** (chiffrage du coût de remobilisation). Tag intermédiaire
+**`efficacite-parc-v0.2`** posé après R-08.
+
+### Livrable 4 — R-09 : le coût de la remobilisation vs construire
+
+| Élément | État |
+|---|---|
+| Sources | S-17 Enertech/ADEME 2016 (coûts rénovation performante €HT/m²) ; S-18 Banque des Territoires Éclairages n°33 (prix de revient logement social neuf 169 200 € en 2023) ; S-19 INSEE IPEA résidentiel (réponse SDMX figée, facteur 2016→2023 recalculé par la chaîne) |
+| Hypothèses | H-09 maison 406 €HT/m² (348-496) ; H-10 collectif 250 (200-300) — plages sourcées S-17 |
+| Choix | **C-07** — coût unitaire = €/m² mixés par la part maison de la ZE × surfaces S-12, TTC 5,5 %, actualisation IPEA ; comparateur = prix de revient social (conservateur) |
+| Notebook | 10 (exploration, constats vérifiés depuis les sorties) |
+| Stabilisation | `core/remob.py` + stage `cout-remobilisation` + 5 tests (73 au total) + R-09/I-09/C-07/L-14 + O-19..O-21/T-10 |
+
+Ce que dit R-09 : détendre les 142 ZE tendues par remobilisation coûterait
+**~12,5 Md€ TTC 2023** (10,6-15,3 ; ~43 800 €/logement en moyenne
+pondérée) contre **~48,3 Md€** en construction neuve — **ratio 3,2-4,6**
+(3,9 au central), robuste sur les plages. Tout le gisement des ZE
+tendues : ~20 Md€. Limites portées avec le chiffre (L-14) :
+investissement total ≠ coût public ; rénovation performante = proxy de la
+remise en usage ; le verrou n'est pas que financier (I-08).
 
 ### Livrable 3 — R-08 : état du bâti × vacance (H-05, 1re instruction)
 

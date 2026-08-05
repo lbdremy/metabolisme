@@ -379,3 +379,72 @@
     justement pas diagnostiqués tant qu'ils ne reviennent pas sur le
     marché. Base VIVANTE : une ré-extraction donne un fichier différent
     — la reproductibilité repose sur le fichier figé.
+
+- id: S-17
+  publisher: Enertech (pour le compte de l'ADEME)
+  title: Analyse des coûts de la rénovation énergétique des logements en France
+  dataset_id: enertech-ademe-2016-couts-renovation
+  source_url: https://www.enertech.fr/wp-content/uploads/modules/catalogue/pdf/73/170612%20Co%C3%BBts%20R%C3%A9novation%20thermique%20Vdef.pdf
+  publication_date: 2016-07-01
+  retrieved_at: 2026-08-05
+  geographic_scope: France (opérations de rénovation performante documentées)
+  temporal_scope: coûts observés jusqu'en 2016 (euros 2016)
+  license: non précisée (rapport d'étude ADEME, convention n°14 10 C 0001) — citer la source
+  local_file: data/raw/enertech-ademe-2016-couts-renovation.pdf
+  checksum: sha256:b65ac02919ba4c3d91fa52f1d9a2d3fcf659a7c0993f89b25a9320c6525b7af9
+  notes: >
+    Source des coûts unitaires de rénovation COMPLÈTE ET PERFORMANTE
+    (niveau ~BBC, ~50 kWhep/m².an de chauffage) utilisés par H-09/H-10.
+    Passages exacts : « [les coûts en] logements collectifs varient de
+    200 à 300 € HT/m² Shab, avec une valeur moyenne de 250 € HT/m²Shab »
+    (moyenne 257 hors opérations atypiques) ; « la TVA applicable sur ces
+    travaux est de 5,5% » ; « En maison individuelle, le coût moyen après
+    optimisation est de 406 € HT/m²Shab. Mais il y a un lien entre la
+    surface habitable et ce coût : celui-ci vaut 496 € HT/m²Shab pour une
+    maison de 70 m², et 348 €/m²Shab pour une maison de 200 m². »
+    EUROS 2016 — à actualiser (S-19) avant toute comparaison avec des
+    prix récents. Coûts de rénovation ÉNERGÉTIQUE performante : la remise
+    en usage d'un logement vacant de longue durée peut exiger des travaux
+    non énergétiques additionnels (non couverts ici).
+
+- id: S-18
+  publisher: Banque des Territoires (Caisse des Dépôts)
+  title: Éclairages n°33 — Le prix de revient des logements sociaux face à l'accumulation des chocs (décembre 2024)
+  dataset_id: banque-territoires-eclairages-33
+  source_url: https://www.banquedesterritoires.fr/sites/default/files/2025-01/Exe%20brochure%20Eclairages%2033%20A4%202024%20vdef.pdf
+  publication_date: 2024-12-01
+  retrieved_at: 2026-08-05
+  geographic_scope: France, opérations de construction de logements sociaux financées (16 800 opérations analysées)
+  temporal_scope: prix de revient 2019-2023
+  license: non précisée — citer la source
+  local_file: data/raw/banque-territoires-eclairages-33-prix-revient-2024.pdf
+  checksum: sha256:045d0e3136126eee12a7222ebb9aaac1e86caf3fe7f3add733ee4b3ca599535a
+  notes: >
+    Ancrage du « construire à la place » pour R-09. Passage exact : « Le
+    prix de revient moyen d'un logement social atteint 169 200 € en
+    2023 » (152 200 € en 2019). Prix de revient COMPLET (charge foncière
+    + bâti + honoraires) du logement social — pas la promotion libre
+    (dont le prix de sortie est supérieur) : le comparateur est donc
+    plutôt CONSERVATEUR (il minore le coût du neuf).
+
+- id: S-19
+  publisher: INSEE (BDM, série 011779962)
+  title: Indice des prix de l'entretien-amélioration des bâtiments — Résidentiel (IPEA, CPF 43 hors 43.1), base 2021
+  dataset_id: insee-bdm-011779962
+  source_url: https://bdm.insee.fr/series/sdmx/data/SERIES_BDM/011779962
+  publication_date: 2026-07-01
+  retrieved_at: 2026-08-05
+  geographic_scope: France
+  temporal_scope: série trimestrielle 1999-T1 à 2026-T1 (base 100 en 2021)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab — données INSEE)
+  local_file: data/raw/insee-ipea-residentiel-011779962.xml
+  checksum: sha256:f3b5c8fc2714ea0bb66e1ca4d09517f0427d4b60f90da2a2310f49737e2ea638
+  notes: >
+    Réponse SDMX brute de la BDM, figée pour calculer le FACTEUR
+    D'ACTUALISATION des coûts S-17 (euros 2016) vers l'année du
+    comparateur S-18 (2023) : moyennes annuelles 91,0 (2016) et 115,5
+    (2023), soit ×1,269. L'indice mesure les prix HT des travaux
+    d'entretien-amélioration des logements pratiqués par les entreprises
+    de construction — le déflateur pertinent pour des coûts de
+    rénovation. Le facteur est recalculé depuis ce fichier par la chaîne
+    (jamais une constante enfouie).

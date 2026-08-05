@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 16 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Légifrance ; 19 fichiers figés sha256/LFS + 2 collections vivantes) |
+| S | Sources | `sources/sources.yaml` | 19 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Enertech, Banque des Territoires, Légifrance ; 22 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 15 définitions citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) · H-07 surface de relocation (51,2 m²/pers, plage 35-71) · H-08 seuil de vacance de fluidité (6 %, plage 5-7) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-18, T-01..T-09, R-01..R-08 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-08, V-01, C-01..C-06, L-01..L-13 |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante maison/collectif (S-17, euros 2016) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-21, T-01..T-10, R-01..R-09 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-09, V-01, C-01..C-07, L-01..L-14 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -54,6 +54,14 @@ Sources enregistrées :
 - **S-16** — ADEME, DPE logements existants depuis 07/2021 — extrait
   agrégé commune × étiquette (14,8 M de DPE couverts, acquisition
   scriptée `logement acquire-dpe` ; biais d'échantillon documenté).
+- **S-17** — Enertech pour l'ADEME (2016), Analyse des coûts de la
+  rénovation énergétique — coûts €HT/m² d'une rénovation performante
+  (base de H-09/H-10).
+- **S-18** — Banque des Territoires (Éclairages n°33, 2024), prix de
+  revient des logements sociaux — 169 200 €/logement neuf en 2023
+  (comparateur de R-09).
+- **S-19** — INSEE (BDM 011779962), indice IPEA résidentiel — facteur
+  d'actualisation 2016→2023 des coûts de travaux (×1,267).
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -132,6 +140,16 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   remise en usage (métropole) ; aux DOM tout le mesurable est éliminé,
   reste la piste successions/indivisions derrière la frontière de
   données. Limites L-13.
+
+- **R-09** — Coût de la remobilisation (sortie reproductible
+  `data/processed/cout-remobilisation-ze.json`) : détendre les 142 ZE
+  tendues coûterait ~12,5 Md€ TTC 2023 (10,6-15,3 sur les plages
+  H-09/H-10 ; ~43 800 €/logement), contre ~48,3 Md€ en construction
+  neuve — ratio 3,2-4,6 (modèle C-07 : coûts S-17 actualisés IPEA,
+  surfaces S-12, mix maison/appart par ZE). Lecture : **I-09** —
+  l'argument économique de la remobilisation est solide mais ne lève ni
+  les verrous de propriété (I-08) ni la tension touristique sans
+  gisement ; première brique quantifiée de la proposition. Limites L-14.
 
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,
