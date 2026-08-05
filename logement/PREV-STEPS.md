@@ -12,6 +12,18 @@ en nombres ABSOLUS), **R-08/I-08** (première instruction de H-05), puis
 **R-09/I-09** (chiffrage du coût de remobilisation). Tag intermédiaire
 **`efficacite-parc-v0.2`** posé après R-08.
 
+**État en fin de session** : 19 sources figées (S-01..S-19), 15
+définitions, 5 hypothèses (H-06..H-10), graphe à 71 nœuds
+(O-01..O-21, T-01..T-10, R-01..R-09, I-01..I-09, C-01..C-07,
+L-01..L-14), 9 stages reproductibles, 73 tests verts, document de
+preuve auto-vérifié R-01..R-09, CI verte sur les 4 commits. **L'arc
+quantifié de la proposition est complet** : le gisement des zones
+tendues suffit en volume (R-07, couverture 1,65) → il est vieux et sa
+remobilisation a un coût (R-08) → mais ~4 fois moindre que construire
+(R-09, ~12,5 vs ~48,3 Md€). Toutes les hypothèses directrices
+mesurables en open data sont instruites ; H-04 reste à ouvrir, H-05 à
+approfondir par convention d'accès.
+
 ### Livrable 4 — R-09 : le coût de la remobilisation vs construire
 
 | Élément | État |

@@ -12,7 +12,11 @@ La session 2 a ajouté **R-06** (taux d'effort — S-12, H-07, C-04/C-05),
 tracée), **R-08** (état du bâti, première instruction de H-05 — S-16,
 L-13) et **R-09** (coût de remobilisation ~12,5 Md€ vs ~48,3 Md€ en neuf
 — S-17..S-19, H-09/H-10, C-07). Le détail est dans `PREV-STEPS.md` ; les
-items ci-dessous sont ce qui reste à ouvrir.
+items ci-dessous sont ce qui reste à ouvrir. NOTE DE REPRISE : l'arc
+quantifié de la proposition est complet (R-07 volume → R-08 état → R-09
+coût) — l'item 4 (chemin de publication) est devenu praticable sans
+attendre les items 1-3, si la prochaine session veut privilégier la
+revue contradictoire et le premier article.
 
 1. **Lever les frontières H-05 par convention** : PPPI (DREAL/DDT) et
    fichiers fonciers/successions (Cerema — statut « acteur public » à
