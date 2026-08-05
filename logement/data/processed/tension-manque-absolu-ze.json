@@ -1,0 +1,290 @@
+{
+  "artefacts_disponible_negatif": [
+    "9401",
+    "9402",
+    "9404",
+    "9405",
+    "9406"
+  ],
+  "croisement_admin_marche": {
+    "n_majoritaires_tlv": 84,
+    "n_majoritaires_tlv_tendues": 75,
+    "n_majoritaires_tlv_tendues_test_vacance_totale": 33,
+    "seuil_majorite_tlv_pct": 50.0
+  },
+  "hypothesis": {
+    "central_value_pct": 6.0,
+    "id": "H-08",
+    "name": "fluidity_vacancy_threshold_pct",
+    "plausible_range": [
+      5.0,
+      7.0
+    ]
+  },
+  "n_ze": 305,
+  "national": {
+    "besoin_logements": 285665,
+    "couverture": 1.65,
+    "gisement_structurel": 472022,
+    "n_ze_tendues": 142,
+    "parc_tendues": 23796730,
+    "seuil_pct": 6.0
+  },
+  "pires_couvertures": [
+    {
+      "besoin_mobilisation": 2114,
+      "couverture_gisement": 0.2,
+      "name": "Les Sables-d'Olonne",
+      "parc": 75280,
+      "part_tlv_pct": 85.7,
+      "structurelle": 429,
+      "taux_disponible_pct": 3.19,
+      "taux_vacance_pct": 3.76,
+      "ze": "5214"
+    },
+    {
+      "besoin_mobilisation": 1699,
+      "couverture_gisement": 0.27,
+      "name": "Pornic",
+      "parc": 60660,
+      "part_tlv_pct": 73.7,
+      "structurelle": 452,
+      "taux_disponible_pct": 3.2,
+      "taux_vacance_pct": 3.95,
+      "ze": "5217"
+    },
+    {
+      "besoin_mobilisation": 1559,
+      "couverture_gisement": 0.33,
+      "name": "Calvi",
+      "parc": 26852,
+      "part_tlv_pct": 100.0,
+      "structurelle": 518,
+      "taux_disponible_pct": 0.19,
+      "taux_vacance_pct": 2.12,
+      "ze": "9403"
+    },
+    {
+      "besoin_mobilisation": 3892,
+      "couverture_gisement": 0.39,
+      "name": "Challans",
+      "parc": 136796,
+      "part_tlv_pct": 67.7,
+      "structurelle": 1502,
+      "taux_disponible_pct": 3.15,
+      "taux_vacance_pct": 4.25,
+      "ze": "5203"
+    },
+    {
+      "besoin_mobilisation": 4138,
+      "couverture_gisement": 0.43,
+      "name": "Le Mont Blanc",
+      "parc": 76194,
+      "part_tlv_pct": 98.6,
+      "structurelle": 1760,
+      "taux_disponible_pct": 0.57,
+      "taux_vacance_pct": 2.88,
+      "ze": "8418"
+    },
+    {
+      "besoin_mobilisation": 1706,
+      "couverture_gisement": 0.43,
+      "name": "Briançon",
+      "parc": 53674,
+      "part_tlv_pct": 97.4,
+      "structurelle": 727,
+      "taux_disponible_pct": 2.82,
+      "taux_vacance_pct": 4.18,
+      "ze": "9302"
+    },
+    {
+      "besoin_mobilisation": 4454,
+      "couverture_gisement": 0.44,
+      "name": "Royan",
+      "parc": 130862,
+      "part_tlv_pct": 86.6,
+      "structurelle": 1955,
+      "taux_disponible_pct": 2.6,
+      "taux_vacance_pct": 4.09,
+      "ze": "7526"
+    },
+    {
+      "besoin_mobilisation": 3812,
+      "couverture_gisement": 0.45,
+      "name": "Fréjus",
+      "parc": 104198,
+      "part_tlv_pct": 100.0,
+      "structurelle": 1730,
+      "taux_disponible_pct": 2.34,
+      "taux_vacance_pct": 4.0,
+      "ze": "9309"
+    }
+  ],
+  "reference_millesime": 2024,
+  "sensibilite_seuil": [
+    {
+      "besoin_logements": 122350,
+      "couverture": 1.9,
+      "gisement_structurel": 232632,
+      "n_ze_tendues": 76,
+      "parc_tendues": 11584680,
+      "seuil_pct": 5.0
+    },
+    {
+      "besoin_logements": 285665,
+      "couverture": 1.65,
+      "gisement_structurel": 472022,
+      "n_ze_tendues": 142,
+      "parc_tendues": 23796730,
+      "seuil_pct": 6.0
+    },
+    {
+      "besoin_logements": 563739,
+      "couverture": 1.15,
+      "gisement_structurel": 647385,
+      "n_ze_tendues": 208,
+      "parc_tendues": 31013857,
+      "seuil_pct": 7.0
+    }
+  ],
+  "top_besoin": [
+    {
+      "besoin_mobilisation": 12204,
+      "couverture_gisement": 0.57,
+      "name": "Toulon",
+      "parc": 377078,
+      "part_tlv_pct": 97.8,
+      "structurelle": 6975,
+      "taux_disponible_pct": 2.76,
+      "taux_vacance_pct": 4.61,
+      "ze": "9318"
+    },
+    {
+      "besoin_mobilisation": 11882,
+      "couverture_gisement": 0.71,
+      "name": "Bordeaux",
+      "parc": 648489,
+      "part_tlv_pct": 89.4,
+      "structurelle": 8434,
+      "taux_disponible_pct": 4.17,
+      "taux_vacance_pct": 5.47,
+      "ze": "7505"
+    },
+    {
+      "besoin_mobilisation": 10670,
+      "couverture_gisement": 1.68,
+      "name": "Marseille",
+      "parc": 656279,
+      "part_tlv_pct": 98.3,
+      "structurelle": 17917,
+      "taux_disponible_pct": 4.37,
+      "taux_vacance_pct": 7.1,
+      "ze": "9312"
+    },
+    {
+      "besoin_mobilisation": 9419,
+      "couverture_gisement": 0.57,
+      "name": "Nantes",
+      "parc": 494483,
+      "part_tlv_pct": 73.4,
+      "structurelle": 5365,
+      "taux_disponible_pct": 4.1,
+      "taux_vacance_pct": 5.18,
+      "ze": "5216"
+    },
+    {
+      "besoin_mobilisation": 8649,
+      "couverture_gisement": 8.07,
+      "name": "Paris",
+      "parc": 3587720,
+      "part_tlv_pct": 100.0,
+      "structurelle": 69803,
+      "taux_disponible_pct": 5.76,
+      "taux_vacance_pct": 7.7,
+      "ze": "1109"
+    },
+    {
+      "besoin_mobilisation": 7989,
+      "couverture_gisement": 0.84,
+      "name": "Roissy ",
+      "parc": 383002,
+      "part_tlv_pct": 85.7,
+      "structurelle": 6730,
+      "taux_disponible_pct": 3.91,
+      "taux_vacance_pct": 5.67,
+      "ze": "1112"
+    },
+    {
+      "besoin_mobilisation": 7131,
+      "couverture_gisement": 0.52,
+      "name": "Bayonne",
+      "parc": 252449,
+      "part_tlv_pct": 89.3,
+      "structurelle": 3721,
+      "taux_disponible_pct": 3.18,
+      "taux_vacance_pct": 4.65,
+      "ze": "7503"
+    },
+    {
+      "besoin_mobilisation": 7042,
+      "couverture_gisement": 1.05,
+      "name": "Montpellier",
+      "parc": 468425,
+      "part_tlv_pct": 80.1,
+      "structurelle": 7407,
+      "taux_disponible_pct": 4.5,
+      "taux_vacance_pct": 6.08,
+      "ze": "7616"
+    },
+    {
+      "besoin_mobilisation": 6953,
+      "couverture_gisement": 1.13,
+      "name": "Lille",
+      "parc": 472081,
+      "part_tlv_pct": 72.3,
+      "structurelle": 7829,
+      "taux_disponible_pct": 4.53,
+      "taux_vacance_pct": 6.19,
+      "ze": "3216"
+    },
+    {
+      "besoin_mobilisation": 6021,
+      "couverture_gisement": 0.49,
+      "name": "La Tarentaise",
+      "parc": 145411,
+      "part_tlv_pct": 78.4,
+      "structurelle": 2924,
+      "taux_disponible_pct": 1.86,
+      "taux_vacance_pct": 3.87,
+      "ze": "8413"
+    },
+    {
+      "besoin_mobilisation": 5447,
+      "couverture_gisement": 0.55,
+      "name": "Ajaccio",
+      "parc": 78943,
+      "part_tlv_pct": 100.0,
+      "structurelle": 2975,
+      "taux_disponible_pct": -0.9,
+      "taux_vacance_pct": 2.87,
+      "ze": "9401"
+    },
+    {
+      "besoin_mobilisation": 5434,
+      "couverture_gisement": 0.71,
+      "name": "Cannes",
+      "parc": 322088,
+      "part_tlv_pct": 100.0,
+      "structurelle": 3851,
+      "taux_disponible_pct": 4.31,
+      "taux_vacance_pct": 5.51,
+      "ze": "9304"
+    }
+  ],
+  "ze_couvertes": {
+    "n": 101,
+    "parc_couvert": 17322117,
+    "parc_non_couvert": 6474613,
+    "sur": 142
+  }
+}

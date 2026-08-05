@@ -274,3 +274,76 @@
     l'encadré méthodologique (traitements approfondis et volet financier
     annoncés) ; champ métropole seulement (les DOM de R-06 ne sont pas
     couverts par cette moyenne) ; ménages étudiants exclus.
+
+- id: S-13
+  publisher: Ministère de la Transition écologique (Observatoire habitat)
+  title: Liste des communes selon le zonage TLV (taxe sur les logements vacants), version décret du 22/12/2025
+  dataset_id: liste-des-communes-selon-le-zonage-tlv-1
+  source_url: https://www.data.gouv.fr/datasets/liste-des-communes-selon-le-zonage-tlv-1
+  publication_date: 2025-12-30
+  retrieved_at: 2026-08-05
+  geographic_scope: France entière, toutes communes (COG 2025)
+  temporal_scope: zonages TLV 2013, 2023 et post-décret n° 2025-1267 du 22/12/2025
+  license: non précisée sur la page du jeu de données — à confirmer avant publication
+  files:
+    - path: data/raw/zonage-tlv-decret-2025-12-22.csv
+      checksum: sha256:503424cd140c1f6e3befcdfdcb0addffa3d471aa2abb5fc7fa6b9f6f27fe69b6
+    - path: data/raw/zonage-tlv-decret-2025-1267-jo.pdf
+      checksum: sha256:387dd25fe3b5c98ce83969f522963b17ebb061ac5afce39123b21f0b67d9be12
+  notes: >
+    34 875 communes avec trois millésimes du zonage : « Zonage TLV 2013 »
+    (binaire TLV/Non TLV, 1 138 communes TLV), « Zonage TLV 2023 » et
+    « Zonage TLV post décret 22/12/2025 » en trois catégories — « 1. Zone
+    tendue » (agglos > 50 000 hab., art. 232 I 1° CGI ; 1 430 communes
+    post-2025), « 2. Zone touristique et tendue » (extension 2023, art.
+    232 I 2° ; 2 259 communes), « 3. Non tendue ». Paris/Lyon/Marseille à
+    la commune parente (75056/69123/13055 — pas d'arrondissements). PIÈGE :
+    les colonnes « Code EPCI » et « Libellé EPCI » sont INVERSÉES par
+    rapport à leurs en-têtes (le libellé arrive avant le code). UTF-8,
+    CRLF, séparateur point-virgule. Le PDF joint est le décret n° 2025-1267
+    publié au JO du 23/12/2025.
+
+- id: S-14
+  publisher: DREAL Pays de la Loire (collection Analyses et connaissance)
+  title: Lutter contre la vacance des logements — capitalisation des Programmes Locaux de l'Habitat en Pays de la Loire
+  dataset_id: dreal-pdl-2020-lutte-vacance-logements
+  source_url: https://www.pays-de-la-loire.developpement-durable.gouv.fr/IMG/pdf/1921h20et_analyses_et_connaissance_lutte_contre_la_vacance_des_logements_v2.pdf
+  publication_date: 2020-07-01
+  retrieved_at: 2026-08-05
+  geographic_scope: région Pays de la Loire (le seuil de fluidité cité est général)
+  temporal_scope: étude 2020 (données INSEE 2017, FILOCOM 2017)
+  license: non précisée (publication d'un service déconcentré de l'État) — citer la source
+  local_file: data/raw/dreal-pdl-2020-lutte-vacance-logements.pdf
+  checksum: sha256:fc8bc4ab7ded1ac5f714ab0ac34ed7ec2d64588806bdfba9f3550a357ede76f8
+  notes: >
+    Utilisée pour le SEUIL DE VACANCE DE FLUIDITÉ (H-08). Passage exact
+    (p. 3) : « la vacance des logements est nécessaire pour assurer une
+    rotation fluide des ménages dans le parc de logements. On estime le
+    taux de vacance optimal autour de 6 % - 7 %. Au-dessus, on considère
+    qu'il y a une surabondance de logements, et en deçà, pas assez de
+    logements par rapport à la demande, soit une tension du marché
+    immobilier. » Estimation d'usage (« on estime ») sans référence
+    primaire citée — d'où la confiance limitée de H-08 et sa plage.
+
+- id: S-15
+  publisher: Observatoire de l'habitat de la Communauté Urbaine d'Alençon (réseau des observatoires locaux des loyers)
+  title: La vacance — données de cadrage et chiffres clés, 2025
+  dataset_id: oll-alencon-2025-vacance-cadrage
+  source_url: https://www.observatoires-des-loyers.org/fileadmin/www.observatoires-des-loyers.org/MEDIA/observatoires/B6100/publications/publi_OLL6100_etude_vacance_2024.pdf
+  publication_date: 2025-01-01
+  retrieved_at: 2026-08-05
+  geographic_scope: CUA d'Alençon / Orne (les définitions et seuils cités sont généraux)
+  temporal_scope: publication 2025 (données INSEE RP 2010-2021)
+  license: non précisée — citer la source
+  local_file: data/raw/oll-alencon-2025-vacance-cadrage.pdf
+  checksum: sha256:4459d633a10645dcb39fb92816be01bf12b9bea692b16f2b0fd566b4fd94acdc
+  notes: >
+    Utilisée pour la BORNE BASSE de la plage de H-08. Passage exact
+    (p. 1, section « Vacance conjoncturelle ou frictionnelle ») :
+    « En-deçà de 5% de taux de vacance, le marché cesse d'être fluide.
+    Les nouveaux arrivants notamment, trouvent difficilement à se loger,
+    le marché est pour ainsi dire bloqué. » Même page : la vacance
+    structurelle y est définie à « deux ans minimums d'inoccupation »,
+    cohérent avec D-10/H-06. Publication d'un observatoire local sans
+    référence primaire pour le seuil — confiance limitée, utilisée
+    seulement pour encadrer la plage.

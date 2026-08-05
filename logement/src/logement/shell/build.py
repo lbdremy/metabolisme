@@ -13,7 +13,7 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from logement.core import cout, effort, lovac, parc, registry, rs, ze
+from logement.core import cout, effort, lovac, parc, registry, rs, tension, ze
 from logement.models import HypothesisRecord
 
 S01_FILE = "insee-focus-359-parc-logements-2025.xlsx"
@@ -42,6 +42,9 @@ RS_OUTPUT = Path("data") / "processed" / "residences-secondaires-ze.json"
 
 LOYERS_MAISON_FILE = "carte-loyers-2025-maison.csv"
 EFFORT_OUTPUT = Path("data") / "processed" / "taux-effort-relocation-ze.json"
+
+TLV_FILE = "zonage-tlv-decret-2025-12-22.csv"
+TENSION_OUTPUT = Path("data") / "processed" / "tension-manque-absolu-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -194,13 +197,13 @@ def build_residences_secondaires(root: Path) -> dict[str, object]:
     return rs.build_summary(rs_ze, _cost_frame(root), _ze_names(root))
 
 
-def _load_h07(root: Path) -> HypothesisRecord:
-    """Load the H-07 surface hypothesis from the registry (single source of truth)."""
+def _load_hypothesis(root: Path, hypothesis_id: str) -> HypothesisRecord:
+    """Load one named hypothesis from the registry (single source of truth)."""
     payload = yaml.safe_load((root / "sources" / "hypotheses.yaml").read_text(encoding="utf-8"))
     for record in registry.parse_hypotheses(payload):
-        if record.id == "H-07":
+        if record.id == hypothesis_id:
             return record
-    raise effort.EffortError("hypothesis H-07 not found in sources/hypotheses.yaml")
+    raise effort.EffortError(f"hypothesis {hypothesis_id} not found in sources/hypotheses.yaml")
 
 
 def build_taux_effort(root: Path) -> dict[str, object]:
@@ -230,7 +233,7 @@ def build_taux_effort(root: Path) -> dict[str, object]:
     communes = lovac.parse_territories(
         _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
     )
-    h07 = _load_h07(root)
+    h07 = _load_hypothesis(root, "H-07")
     frame = effort.effort_by_ze(
         loyers_appart,
         loyers_maison,
@@ -241,6 +244,33 @@ def build_taux_effort(root: Path) -> dict[str, object]:
         h07.central_value,
     )
     return effort.build_summary(frame, _ze_names(root), h07)
+
+
+def build_tension(root: Path) -> dict[str, object]:
+    """Compute the R-07 summary payload (tension, absolute shortage, coverage)."""
+    raw = root / "data" / "raw"
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+    census = rs.parse_census_housing(census_raw)
+    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    h08 = _load_hypothesis(root, "H-08")
+    frame = tension.tension_by_ze(census, tlv, communes, commune_ze, h08.central_value)
+    return tension.build_summary(frame, _ze_names(root), h08)
+
+
+def run_tension(root: Path) -> int:
+    """Rebuild data/processed/tension-manque-absolu-ze.json; return an exit code."""
+    payload = build_tension(root)
+    _write_json(root, TENSION_OUTPUT, payload)
+    print(
+        f"tension: wrote {TENSION_OUTPUT} — national {payload['national']}, "
+        f"couvertes {payload['ze_couvertes']}"
+    )
+    return 0
 
 
 def run_effort(root: Path) -> int:

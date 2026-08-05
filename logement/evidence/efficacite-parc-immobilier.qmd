@@ -3,7 +3,7 @@ title: "Efficacité du parc immobilier français — document de preuve"
 subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
-  taux d'effort à la relocation
+  taux d'effort à la relocation, tension et manque absolu de logements
 date: 2026-08-05
 lang: fr
 format:
@@ -132,7 +132,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 55 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 62 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -157,6 +157,11 @@ propriétés) :
   mix des loyers appartement/maison pondéré par la composition des RP
   (choix **C-05**), surface par UC = H-07 × ratio personnes/UC observé
   Filosofi (choix **C-04**), sensibilités par homothétie sur la plage H-07.
+- **T-08** (`core/tension.py`) — tension et manque absolu par ZE : vacance
+  disponible = vacance totale du recensement − vacance structurelle LOVAC
+  (choix **C-06**), test de tension au seuil H-08, besoin absolu de
+  mobilisation, couverture par le gisement local, croisement avec le
+  zonage légal TLV (S-13, D-14).
 
 ## 5. Hypothèses
 
@@ -198,14 +203,16 @@ r03 = build.build_vacance_emploi(ROOT)
 r04 = build.build_cout_residentiel(ROOT)
 r05 = build.build_residences_secondaires(ROOT)
 r06 = build.build_taux_effort(ROOT)
+r07 = build.build_tension(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
     ("R-05", r05, build.RS_OUTPUT), ("R-06", r06, build.EFFORT_OUTPUT),
+    ("R-07", r07, build.TENSION_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-06 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-07 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -448,6 +455,52 @@ du ménage médian local**, tandis que l'anticorrélation avec la vacance
 persiste (interprétation I-06 ; limites L-09/L-11 — notamment : taux brut
 avant aides, et niveau calé sur la surface du parc moyen en place).
 
+### R-07 — Tension des usages : le manque absolu et le gisement local
+
+```{python}
+#| code-summary: "chiffres clés R-07"
+nat = r07["national"]
+print(f"{r07['n_ze']} ZE ; seuil de fluidité H-08 = "
+      f"{r07['hypothesis']['central_value_pct']:.0f} % "
+      f"(plage {r07['hypothesis']['plausible_range'][0]:.0f}-"
+      f"{r07['hypothesis']['plausible_range'][1]:.0f})")
+print(f"ZE tendues (vacance disponible < seuil) : {nat['n_ze_tendues']} — "
+      f"parc {nat['parc_tendues'] / 1e6:.1f} M logements")
+print(f"BESOIN ABSOLU de détente : {nat['besoin_logements']:,} logements à rendre "
+      f"disponibles".replace(",", " "))
+print(f"GISEMENT structurel dans ces mêmes ZE : {nat['gisement_structurel']:,} "
+      f"→ couverture {nat['couverture']}".replace(",", " "))
+cv = r07["ze_couvertes"]
+print(f"Couverture locale acquise : {cv['n']} ZE / {cv['sur']} "
+      f"(parc couvert {cv['parc_couvert'] / 1e6:.1f} M, non couvert "
+      f"{cv['parc_non_couvert'] / 1e6:.1f} M)")
+adm = r07["croisement_admin_marche"]
+print(f"ZE à parc majoritairement TLV : {adm['n_majoritaires_tlv']} — tendues au "
+      f"test vacance disponible : {adm['n_majoritaires_tlv_tendues']}, au test "
+      f"vacance totale : {adm['n_majoritaires_tlv_tendues_test_vacance_totale']}")
+print("Plus gros besoins :",
+      ", ".join(f"{e['name'].strip()} {e['besoin_mobilisation']:,}".replace(",", " ")
+                for e in r07["top_besoin"][:5]))
+print("Pires couvertures :",
+      ", ".join(f"{e['name'].strip()} {e['couverture_gisement']}"
+                for e in r07["pires_couvertures"][:5]))
+```
+
+La tension est testée sur la **vacance disponible** (vacance totale du
+recensement moins vacance structurelle LOVAC, hors marché par construction
+D-10) — le choix initial d'un test sur la vacance totale a été **corrigé**
+après un contrôle de cohérence (choix C-06, correction tracée) : la vacance
+totale du recensement est haute partout et aucune grande métropole TLV n'en
+sortait tendue. Le résultat central répond à la question « le gisement
+vacant des zones tendues suffirait-il ? » **en volume absolu** : il faudrait
+~286 000 logements rendus disponibles pour ramener les 142 ZE tendues au
+seuil de fluidité, et ces mêmes ZE contiennent ~472 000 logements
+structurellement vacants (couverture 1,65, robuste sur la plage H-08). La
+suffisance est nationale et acquise dans 101 ZE, mais **pas** dans 41 ZE —
+littorales et touristiques (Les Sables-d'Olonne, Pornic, Calvi, Briançon…),
+où le parc hors résidence principale est en résidences secondaires (R-05),
+pas en vacance (interprétation I-07 ; limites L-12).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -485,6 +538,19 @@ intervalle `effort_range_pct`. La variante appartement seul (numérateur de
 R-04) déplace la médiane de 40,1 % à 43,8 % et laisse les rangs presque
 inchangés (Spearman 0,959).
 
+La sensibilité de **R-07 au seuil H-08** est publiée dans l'artefact
+(`sensibilite_seuil`) :
+
+```{python}
+#| code-summary: "couverture nationale selon le seuil de fluidité"
+pd.DataFrame(r07["sensibilite_seuil"]).style.hide(axis="index")
+```
+
+La conclusion qualitative — le gisement structurel des ZE tendues excède le
+besoin absolu de détente — tient sur toute la plage plausible du seuil
+(couverture 1,90 à 1,15) ; c'est le partage territorial (quelles ZE sont
+couvertes) qui bouge avec le seuil.
+
 ## 8. Interprétation
 
 - **I-01** — La croissance du parc accompagne la décohabitation, pas la
@@ -519,6 +585,17 @@ inchangés (Spearman 0,959).
   change pas la lecture de I-04 (le coût marque la tension, pas la
   vacance) et fournit le terme « coût de la mobilité résidentielle » pour
   instruire H-04.
+- **I-07** — En volume absolu, le gisement structurel des zones tendues
+  excède le manque : ~286 000 logements à rendre disponibles pour ramener
+  les 142 ZE tendues au seuil de fluidité, ~472 000 structurellement
+  vacants dans ces mêmes ZE (couverture 1,65, robuste sur la plage H-08).
+  I-03 est ainsi quantifié : la capacité sortie d'usage coexiste avec la
+  demande, en volume suffisant. Mais la suffisance est conditionnelle —
+  remobiliser un parc sorti de l'usage suppose de lever des blocages non
+  encore instruits (H-05) ; et elle est fausse localement dans 41 ZE,
+  littorales et touristiques, où le parc hors RP est en résidences
+  secondaires : la tension touristique ne peut pas se résoudre par la
+  vacance.
 
 Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
 bâti, des causes de la vacance (succession, travaux, rétention…), de la
@@ -560,7 +637,7 @@ territoriale communale est bornée par la secrétisation (L-05).
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 55 tests (unitaires, propriétés, régression)
+./test.sh                   # 62 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 

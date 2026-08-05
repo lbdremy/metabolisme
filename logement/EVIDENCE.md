@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 12 sources (INSEE, LOVAC, ANIL, SDES, Légifrance ; 14 fichiers figés sha256/LFS + 2 collections vivantes) |
-| D | Définitions | `sources/definitions.yaml` | 13 définitions citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) · H-07 surface de relocation (51,2 m²/pers, plage 35-71) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-13, T-01..T-07, R-01..R-06 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-06, V-01, C-01..C-05, L-01..L-11 |
+| S | Sources | `sources/sources.yaml` | 15 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, Légifrance ; 18 fichiers figés sha256/LFS + 2 collections vivantes) |
+| D | Définitions | `sources/definitions.yaml` | 15 définitions citées verbatim, datées, avec limites |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) · H-07 surface de relocation (51,2 m²/pers, plage 35-71) · H-08 seuil de vacance de fluidité (6 %, plage 5-7) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-15, T-01..T-08, R-01..R-07 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-07, V-01, C-01..C-06, L-01..L-12 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -44,6 +44,13 @@ Sources enregistrées :
 - **S-12** — SDES, enquête nationale Logement 2020 (Datalab essentiel
   n° 296) — surfaces habitables moyennes, dont 51,2 m²/personne (source de
   H-07 ; premiers résultats provisoires, champ métropole).
+- **S-13** — MTE (Observatoire habitat), zonage TLV par commune (décret
+  n° 2025-1267 du 22/12/2025 + millésimes 2013/2023 ; base de D-14).
+- **S-14** — DREAL Pays de la Loire (2020), Lutter contre la vacance des
+  logements — bande de vacance optimale 6-7 % (source de H-08/D-15).
+- **S-15** — Observatoire de l'habitat CUA d'Alençon (2025), La vacance —
+  borne basse du seuil de fluidité (« en-deçà de 5 %, le marché cesse
+  d'être fluide »).
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -51,7 +58,9 @@ concept remplacé le 31/08/2025) · D-06 ménage-logement · D-07 zone d'emploi 
 D-08 bassin de vie · D-09 taux d'effort · D-10 vacance structurelle (LOVAC,
 > 2 ans) · D-11 vacance frictionnelle (LOVAC, ≤ 2 ans) · D-12 habitat
 indigne (loi MOLLE 2009, Légifrance) · D-13 passoire thermique (CCH
-L173-1-1, classes F-G). Le registre des définitions du cadrage est complet.
+L173-1-1, classes F-G) · D-14 zone tendue (art. 232 CGI, zonage TLV) ·
+D-15 vacance de fluidité. Le registre des définitions du cadrage est
+complet.
 
 Hypothèses : **H-06** — seuil de vacance structurelle, valeur centrale 2 ans
 (convention C-01), plage plausible 1-3 ans (sensibilité complète possible
@@ -59,6 +68,10 @@ seulement avec les fichiers LOVAC détaillés). **H-07** — surface habitable
 par personne à la relocation, valeur centrale 51,2 m²/personne (enquête
 Logement 2020, S-12), plage plausible 35-71 (bornes observées par âge) ;
 le taux d'effort R-06 est linéaire en H-07 (classement invariant).
+**H-08** — seuil de vacance de fluidité, valeur centrale 6 % (bande
+optimale 6-7 % de S-14), plage plausible 5-7 (borne basse S-15) ;
+confiance basse — ordre de grandeur professionnel, sensibilité publiée
+dans R-07.
 
 Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 
@@ -97,12 +110,24 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   les DOM couverts, la relocation est hors de portée du ménage médian
   local ; fournit le terme coût pour instruire H-04. Limites L-09/L-11.
 
+- **R-07** — Tension et manque absolu par ZE (sortie reproductible
+  `data/processed/tension-manque-absolu-ze.json`) : 142 ZE tendues en
+  vacance disponible (choix C-06 — correction tracée du test initial) ;
+  besoin national de détente 285 665 logements, gisement structurel local
+  472 022, couverture 1,65 (robuste sur la plage H-08) ; couverte dans
+  101 ZE, pas dans 41 (littorales/touristiques). Lecture : **I-07** — en
+  volume absolu le gisement suffit nationalement (I-03 quantifié), mais
+  la suffisance suppose de lever les blocages H-05 et la tension
+  touristique ne se résout pas par la vacance. Limites L-12.
+
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,
 seuil paramétré 1-3 ans), **C-02** (national d'abord, puis LOVAC). Ajoutés le
 2026-08-05 : **C-04** (taux d'effort sans ménage type — H-07 × ratio
 personnes/UC observé), **C-05** (loyer = mix appartement/maison pondéré par
-la composition des RP de la ZE).
+la composition des RP de la ZE), **C-06** (tension = vacance DISPONIBLE
+< H-08 — correction tracée du test « vacance totale », qui ne classait
+tendue aucune grande métropole TLV).
 
 Résultats stabilisés (2026-08-03) :
 

@@ -64,3 +64,29 @@
     - C-04
   affects:
     - R-06
+
+- id: H-08
+  name: fluidity_vacancy_threshold_pct
+  description: >
+    Taux de vacance totale (parc entier, recensement, D-03) en dessous
+    duquel un marché local du logement est considéré comme tendu : le
+    volant de logements vacants ne suffit plus à assurer la rotation
+    fluide des ménages (D-15). Valeur centrale : 6 %, le bas de la bande
+    « optimale » de 6-7 % citée par S-14 (« en deçà, pas assez de
+    logements par rapport à la demande, soit une tension du marché
+    immobilier »). Plage plausible : 5 % (seuil de blocage de S-15 —
+    « en-deçà de 5% de taux de vacance, le marché cesse d'être fluide »)
+    à 7 % (haut de la bande optimale, lecture exigeante). Confiance
+    basse : ordre de grandeur d'usage professionnel sans source primaire
+    académique — d'où l'importance de publier la sensibilité sur toute la
+    plage.
+  central_value: 6.0
+  plausible_range: [5.0, 7.0]
+  unit: pct_of_total_stock
+  confidence: low
+  justification:
+    - S-14
+    - S-15
+    - D-15
+  affects:
+    - R-07

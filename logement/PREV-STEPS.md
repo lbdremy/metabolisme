@@ -3,10 +3,36 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
-## Session 2 — 2026-08-05 (taux d'effort à la relocation)
+## Session 2 — 2026-08-05 (taux d'effort à la relocation · tension et manque absolu)
 
-Livrable : **R-06/I-06** — le premier item de NEXT-STEPS (taux d'effort
-territorial réel, D-09) est instruit de bout en bout.
+Deux livrables : **R-06/I-06** (premier item de NEXT-STEPS) puis
+**R-07/I-07** (nouvelle question posée par Rémy en séance : zones tendues,
+volume additionnel nécessaire à la détente, suffisance du gisement vacant
+local — en nombres ABSOLUS).
+
+### Livrable 2 — R-07 : tension des usages et manque absolu
+
+| Élément | État |
+|---|---|
+| Sources | S-13 zonage TLV figé (décret 2025-1267, 3 millésimes) ; S-14 DREAL PdL 2020 (bande optimale 6-7 %) ; S-15 observatoire CUA Alençon 2025 (borne 5 %) |
+| Définitions | D-14 zone tendue (art. 232 CGI, verbatim) ; D-15 vacance de fluidité |
+| Hypothèse | H-08 seuil de fluidité : 6 % (plage 5-7), confiance basse — sensibilité publiée |
+| Choix | **C-06** — tension = vacance DISPONIBLE (totale − structurelle) < H-08 ; CORRECTION TRACÉE : le test « vacance totale » décidé en début de session échouait au contrôle de cohérence (aucune métropole TLV tendue — médiane nationale 8,6 %), correction validée par AskUserQuestion |
+| Notebook | 08 (exploration, constats vérifiés depuis les sorties) |
+| Stabilisation | `core/tension.py` + stage `tension-manque-absolu` + 7 tests (62 au total) + R-07/I-07/L-12 + O-14/O-15/T-08 dans le graphe |
+
+Ce que dit R-07 : **142 ZE tendues** (23,8 M de logements) ; besoin absolu
+national **285 665 logements à rendre disponibles** ; gisement structurel
+dans ces mêmes ZE **472 022** → **couverture 1,65** (1,90 au seuil 5 %,
+1,15 à 7 %). Le gisement suffit dans 101 ZE sur 142 ; les 41 non
+couvertes sont littorales/touristiques (Sables-d'Olonne 0,20, Calvi
+0,33…) — là, le parc hors RP est en résidences secondaires (R-05), pas en
+vacance. Suffisance CONDITIONNELLE : mobiliser un parc sorti d'usage
+suppose H-05 (état du bâti, successions) non instruite ; vacance
+recensement surestime l'offre disponible dans les centres denses (besoin
+métropolitain sous-estimé, L-12).
+
+### Livrable 1 — R-06 : taux d'effort à la relocation (D-09)
 
 | Élément | État |
 |---|---|

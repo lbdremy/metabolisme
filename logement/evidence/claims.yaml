@@ -531,3 +531,121 @@
     résidentielle » pour l'instruction de H-04 (mobilités empêchées).
   depends_on: [R-06, I-04]
   limitations: [L-11]
+
+# ------------------------------- branche tension et manque absolu (H-02 volume)
+
+- id: C-06
+  type: choice
+  title: >
+    Le test de tension de marché retient la VACANCE DISPONIBLE (vacance
+    totale du recensement moins vacance structurelle LOVAC, hors marché
+    par construction D-10) comparée au seuil de fluidité H-08. CORRECTION
+    TRACÉE (2026-08-05) : le choix initial de la session (seuil sur la
+    vacance totale, périmètre de la littérature D-15) échouait au contrôle
+    de cohérence — la vacance totale du recensement est haute partout
+    (médiane ZE 8,6 %) et aucune grande métropole TLV n'en sortait
+    « tendue » (Paris 7,7 %, Lyon 7,2 %, Marseille 7,1 %) alors qu'elles
+    cumulent zonage légal, loyers extrêmes et taux d'effort R-06
+    maximaux ; en retranchant la structurelle, 7 de ces 8 métropoles
+    repassent sous le seuil. Le test « vacance totale » reste publié en
+    sensibilité dans R-07. Le besoin absolu de détente est chiffré en
+    logements à rendre disponibles (M = seuil × parc − disponibles :
+    mobiliser un logement structurellement vacant ajoute une unité
+    disponible sans accroître le parc) et la couverture par le gisement
+    est structurelle / besoin.
+  depends_on: [S-11, S-13, D-10, D-14, D-15, H-08]
+
+- id: L-12
+  type: limit
+  title: >
+    Limites du croisement tension/manque : la vacance disponible mélange
+    deux appareils de mesure (recensement parc entier vs LOVAC parc privé
+    fiscal, L-06) — la vacance recensement surestime l'offre réellement
+    disponible dans les centres denses (Paris commune : 9,8 % de vacance
+    totale) donc le besoin des métropoles est plutôt SOUS-estimé ; la
+    secrétisation LOVAC ampute le gisement communal agrégé (843 765
+    structurels visibles contre ~1,15 M au national, L-05) donc la
+    couverture est plutôt sous-estimée dans les petites ZE ; dans
+    quelques ZE la structurelle LOVAC excède les vacants recensés
+    (vacance disponible négative — Ajaccio, signalée dans l'artefact) ;
+    le seuil H-08 est un ordre de grandeur d'usage professionnel
+    (confiance basse) ; millésimes mélangés (recensement 2022, LOVAC 24,
+    zonage TLV décembre 2025) ; « couverture » signifie que le volume
+    existe, pas qu'il est mobilisable — la vacance structurelle est
+    difficile à remobiliser par définition (C-01), et son état/coût de
+    remise en usage n'est pas mesuré (H-05 non instruite).
+  depends_on: [L-05, L-06, S-13, H-08]
+
+- id: O-14
+  type: observation
+  title: >
+    Zonage TLV par commune (S-13, décret n° 2025-1267 du 22/12/2025) :
+    1 430 communes « 1. Zone tendue » (agglos > 50 000 hab.), 2 259
+    « 2. Zone touristique et tendue », le reste non tendu ; millésimes
+    2013 et 2023 joints.
+  depends_on: [S-13, D-14]
+
+- id: O-15
+  type: observation
+  title: >
+    Bande de vacance « de fluidité » citée par la littérature
+    professionnelle : optimal autour de 6-7 % (S-14, p. 3) ; « en-deçà de
+    5 % de taux de vacance, le marché cesse d'être fluide » (S-15, p. 1).
+  depends_on: [S-14, S-15, D-15]
+
+- id: T-08
+  type: transformation
+  title: >
+    Tension et manque absolu par ZE : vacance totale du recensement 2022
+    agrégée par ZE (arrondissements PLM dédupliqués), part du parc en
+    communes TLV (catégories 1 et 2), vacance structurelle LOVAC agrégée
+    (min_count — le secret reste manquant), vacance disponible = totale −
+    structurelle, test de tension C-06 au seuil H-08, besoin absolu de
+    mobilisation et couverture par le gisement local, sensibilité sur la
+    plage H-08, croisement avec la lecture légale TLV.
+  depends_on: [O-04, O-05, O-09, O-14, O-15, C-03, C-06]
+  produced_by: src/logement/core/tension.py
+
+- id: R-07
+  type: result
+  title: >
+    Tension des usages et manque absolu par zone d'emploi (305 ZE,
+    recensement 2022, LOVAC mill. 24, zonage TLV 2025, H-08 = 6 %) :
+    142 ZE tendues en vacance disponible (23,8 M de logements de parc,
+    dont les 8 grandes métropoles TLV — que le test « vacance totale »
+    manquait toutes sauf une) ; besoin absolu national de détente
+    285 665 logements à rendre disponibles, gisement structurel dans ces
+    mêmes ZE 472 022, couverture 1,65 (1,90 au seuil 5 %, 1,15 à 7 %) ;
+    couverture locale acquise dans 101 ZE sur 142 (17,3 M de parc),
+    manquante dans 41 (6,5 M) — les pires couvertures sont littorales et
+    touristiques (Les Sables-d'Olonne 0,20, Pornic 0,27, Calvi 0,33,
+    Le Mont Blanc, Briançon, Royan, Fréjus ≤ 0,45) ; plus gros besoins
+    absolus : Toulon 12 204, Bordeaux 11 882, Marseille 10 670, Nantes
+    9 419, Paris 8 649 (couverture 8,07).
+  depends_on: [T-08, H-08, H-06, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/tension-manque-absolu-ze.json
+  limitations: [L-05, L-06, L-12]
+
+- id: I-07
+  type: interpretation
+  title: >
+    À l'échelle nationale, le gisement structurel des zones tendues
+    excède le manque : rendre disponibles ~286 000 logements suffirait à
+    ramener toutes les ZE tendues au seuil de fluidité, et ces mêmes ZE
+    contiennent ~472 000 logements structurellement vacants — la réponse
+    en volume ABSOLU est donc oui (couverture 1,65, robuste sur la plage
+    H-08), ce qui prolonge I-03 (la capacité sortie d'usage coexiste avec
+    la demande) en le quantifiant. Mais cette suffisance est
+    conditionnelle : (1) elle suppose la remobilisation d'un parc sorti
+    de l'usage par définition — l'état du bâti et les blocages
+    (successions, indivisions) ne sont pas instruits (H-05) ; (2) elle
+    n'est PAS acquise localement dans 41 ZE sur 142, et le déficit se
+    concentre dans les zones littorales et touristiques où le parc hors
+    résidence principale est en résidences secondaires (R-05), pas en
+    vacance — la tension touristique (catégorie 2 TLV) ne peut pas se
+    résoudre par la vacance ; (3) la vacance recensement surestimant
+    l'offre disponible dans les centres denses, le besoin métropolitain
+    est plutôt sous-estimé (L-12).
+  depends_on: [R-07, I-03, I-05]
+  limitations: [L-12]

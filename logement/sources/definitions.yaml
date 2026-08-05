@@ -233,3 +233,53 @@
       F au 01/01/2028).
     - Le DPE a été réformé en 2021 — les comptages de passoires avant/après
       la réforme ne sont pas comparables.
+
+- id: D-14
+  term: zone tendue (champ de la taxe annuelle sur les logements vacants, art. 232 CGI)
+  source: S-08
+  url: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000046872468
+  last_updated: 2023-01-01
+  definition: >
+    La taxe annuelle sur les logements vacants s'applique : 1° « dans les
+    communes appartenant à une zone d'urbanisation continue de plus de
+    cinquante mille habitants où il existe un déséquilibre marqué entre
+    l'offre et la demande de logements » ; 2° « dans les communes ne
+    respectant pas les conditions prévues au 1° du présent I où il existe
+    un déséquilibre marqué entre l'offre et la demande de logements »
+    (version en vigueur du 01/01/2023 au 01/01/2027). Le déséquilibre est
+    caractérisé notamment par le niveau des loyers, les prix d'acquisition
+    ou la demande de logements ; la liste des communes est fixée par
+    décret (décret n° 2013-392 modifié, dernière révision n° 2025-1267 du
+    22/12/2025, S-13).
+  caveats:
+    - Catégorie FISCALE et réglementaire, pas statistique — la liste
+      résulte d'un décret (critères d'appréciation non publiés commune par
+      commune) ; elle emporte aussi d'autres effets juridiques (préavis
+      réduit, encadrement, majoration THRS).
+    - Deux sous-régimes hétérogènes — le 1° vise la tension classique
+      offre/demande des agglomérations, le 2° (ajouté en 2023) l'attrition
+      des résidences principales en zone touristique — à distinguer dans
+      toute analyse (catégories 1 et 2 du fichier S-13).
+    - Zonage distinct du zonage ABC (aides au logement) et des zonages
+      d'encadrement des loyers.
+
+- id: D-15
+  term: vacance de fluidité (taux de vacance nécessaire à la rotation du parc)
+  source: S-14
+  url: https://www.pays-de-la-loire.developpement-durable.gouv.fr/IMG/pdf/1921h20et_analyses_et_connaissance_lutte_contre_la_vacance_des_logements_v2.pdf
+  last_updated: 2020-07-01
+  definition: >
+    « La vacance des logements est nécessaire pour assurer une rotation
+    fluide des ménages dans le parc de logements. On estime le taux de
+    vacance optimal autour de 6 % - 7 %. Au-dessus, on considère qu'il y a
+    une surabondance de logements, et en deçà, pas assez de logements par
+    rapport à la demande, soit une tension du marché immobilier » (S-14,
+    p. 3). « En-deçà de 5% de taux de vacance, le marché cesse d'être
+    fluide » (S-15, p. 1).
+  caveats:
+    - Ordre de grandeur d'usage professionnel (« on estime ») sans source
+      primaire académique identifiée dans les documents figés — le seuil
+      est traité comme HYPOTHÈSE paramétrée (H-08), jamais comme un fait.
+    - Le seuil s'entend sur le taux de vacance TOTALE du parc entier au
+      sens du recensement (D-03) — pas sur la seule vacance du parc privé
+      LOVAC (L-06).

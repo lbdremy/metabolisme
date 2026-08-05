@@ -8,23 +8,25 @@ Mis à jour à chaque fin de session de travail significative.
 L'état à la fin de la session 1 est tagué **`efficacite-parc-v0.1`**
 (chaîne complète R-01..R-05, document de preuve auto-vérifié). La session 2
 a ajouté **R-06** (taux d'effort brut à la relocation par ZE — S-12, H-07,
-C-04/C-05). Le détail de ce qui est fait est dans `PREV-STEPS.md` ; les
-items ci-dessous sont ce qui reste à ouvrir.
+C-04/C-05) et **R-07** (tension des usages et manque absolu — S-13..S-15,
+H-08, C-06, avec correction tracée du test de tension). Le détail est dans
+`PREV-STEPS.md` ; les items ci-dessous sont ce qui reste à ouvrir.
 
-1. **Instruire H-04 (mobilités empêchées).** Données candidates :
-   demandes de logement social et délais (SNE / data.gouv), taux de
-   rotation du parc, DVF pour les frais de transaction. Le terme « coût de
-   la mobilité résidentielle » est désormais disponible (R-06). C'est la
-   dernière hypothèse directrice non instruite (H-01 ✓ R-02, H-02 ✓ R-03,
-   H-03 ✓ R-04+R-06, H-05 = piste dominante restante). Levier à surveiller :
-   le volet financier définitif de l'enquête Logement 2020 (S-12 est
-   provisoire) donnerait des taux d'effort NETS observés à confronter à
-   R-06.
-2. **Instruire H-05 (blocages institutionnels) au niveau propriété.**
-   I-03/I-04 pointent vers l'état du bâti et les successions ; données
+1. **Instruire H-05 (blocages institutionnels) au niveau propriété.**
+   R-07 a rendu cette instruction PRIORITAIRE : la suffisance du gisement
+   (couverture 1,65) est conditionnelle à la remobilisation d'un parc
+   sorti d'usage — état du bâti et successions sont le verrou. Données
    candidates : parc privé potentiellement indigne (PPPI, si accessible),
    DPE par territoire (ADEME open data, D-13), indivisions/successions
    (piste : stats notariales ou fichiers fonciers agrégés).
+2. **Instruire H-04 (mobilités empêchées).** Données candidates :
+   demandes de logement social et délais (SNE / data.gouv), taux de
+   rotation du parc, DVF pour les frais de transaction. Le terme « coût de
+   la mobilité résidentielle » est désormais disponible (R-06). Levier à
+   surveiller : le volet financier définitif de l'enquête Logement 2020
+   (S-12 provisoire) donnerait des taux d'effort NETS observés à
+   confronter à R-06. Les 41 ZE tendues non couvertes de R-07 (tension
+   touristique) rejoignent la frontière infra-territoriale du notebook 06.
 3. **Frontières de données actées** (ne pas re-tenter sans nouveau
    levier) : fichiers LOVAC détaillés = habilitation collectivités/État/
    Anah (sensibilité H-06) ; éviction saisonnière infra-territoriale =
@@ -42,7 +44,7 @@ items ci-dessous sont ce qui reste à ouvrir.
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 6 artefacts data/processed/
+uv run logement reproduce   # rebâtit les 7 artefacts data/processed/
 ./check.sh && ./test.sh     # portes qualité
 ```
 
@@ -76,3 +78,12 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
   d'un notebook se vérifient depuis les sorties avant d'être écrits (une
   erreur de ce type a déjà été interceptée en session 1 — indice parc vs
   ménages).
+- **Vacance recensement ≠ tension** : la vacance totale du recensement est
+  haute partout (médiane ZE 8,6 % en 2022) et surestime l'offre disponible
+  dans les centres denses (Paris commune 9,8 %) — tout test de tension
+  doit retrancher la structurelle (C-06) et documenter L-12 ; à Ajaccio la
+  structurelle LOVAC excède même les vacants recensés (artefact de
+  périmètres, signalé dans l'artefact R-07).
+- **Zonage TLV (S-13)** : colonnes « Code EPCI »/« Libellé EPCI »
+  INVERSÉES par rapport aux en-têtes ; UTF-8 (pas cp1252), codes déjà à
+  la commune parente pour PLM.
