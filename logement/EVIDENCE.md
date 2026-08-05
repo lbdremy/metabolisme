@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 11 sources (INSEE, LOVAC, ANIL, Légifrance ; 13 fichiers figés sha256/LFS + 2 collections vivantes) |
+| S | Sources | `sources/sources.yaml` | 12 sources (INSEE, LOVAC, ANIL, SDES, Légifrance ; 14 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 13 définitions citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-09, T-01..T-06, R-01..R-05 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-05, V-01, C-01..C-03, L-01..L-10 |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) · H-07 surface de relocation (51,2 m²/pers, plage 35-71) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-13, T-01..T-07, R-01..R-06 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-06, V-01, C-01..C-05, L-01..L-11 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -32,6 +32,18 @@ Sources enregistrées :
   data — logements vacants du parc privé par territoire et durée, millésimes
   2020-2026 (4 fichiers figés ; ruptures méthodologiques 2023 et 2025
   documentées ; parc privé uniquement, secrétisation < 11).
+- **S-08** — Légifrance (DILA), textes consolidés (collection en ligne —
+  définitions légales D-12/D-13).
+- **S-09** — ANIL/DHUP, carte des loyers 2025 — loyers d'annonce prédits
+  par commune, fichiers appartement ET maison (licence du millésime à
+  confirmer avant publication, L-09).
+- **S-10** — INSEE, Filosofi 2021 — niveau de vie médian (€/UC/an),
+  personnes et unités de consommation par territoire (dont ZE 2020).
+- **S-11** — INSEE, recensement 2022 — chiffres clés logement par commune
+  (catégories, maisons/appartements, millésimes 2011/2016/2022).
+- **S-12** — SDES, enquête nationale Logement 2020 (Datalab essentiel
+  n° 296) — surfaces habitables moyennes, dont 51,2 m²/personne (source de
+  H-07 ; premiers résultats provisoires, champ métropole).
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -43,7 +55,10 @@ L173-1-1, classes F-G). Le registre des définitions du cadrage est complet.
 
 Hypothèses : **H-06** — seuil de vacance structurelle, valeur centrale 2 ans
 (convention C-01), plage plausible 1-3 ans (sensibilité complète possible
-seulement avec les fichiers LOVAC détaillés).
+seulement avec les fichiers LOVAC détaillés). **H-07** — surface habitable
+par personne à la relocation, valeur centrale 51,2 m²/personne (enquête
+Logement 2020, S-12), plage plausible 35-71 (bornes observées par âge) ;
+le taux d'effort R-06 est linéaire en H-07 (classement invariant).
 
 Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 
@@ -74,9 +89,20 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   saisonnière retirée est dans la catégorie RS et ses effets d'éviction
   infra-territoriaux, pas dans la vacance. Limites L-10.
 
+- **R-06** — Taux d'effort brut à la relocation par ZE (sortie reproductible
+  `data/processed/taux-effort-relocation-ze.json`) : médiane 40,1 %
+  (27,4-55,6 selon H-07), Paris 93,5 % puis les ZE réunionnaises et
+  martiniquaises (~75-85 %) ; Spearman effort × vacance −0,40. Lecture :
+  **I-06** — la tension de I-04 en unité interprétable ; à Paris et dans
+  les DOM couverts, la relocation est hors de portée du ménage médian
+  local ; fournit le terme coût pour instruire H-04. Limites L-09/L-11.
+
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,
-seuil paramétré 1-3 ans), **C-02** (national d'abord, puis LOVAC).
+seuil paramétré 1-3 ans), **C-02** (national d'abord, puis LOVAC). Ajoutés le
+2026-08-05 : **C-04** (taux d'effort sans ménage type — H-07 × ratio
+personnes/UC observé), **C-05** (loyer = mix appartement/maison pondéré par
+la composition des RP de la ZE).
 
 Résultats stabilisés (2026-08-03) :
 

@@ -2,8 +2,9 @@
 title: "Efficacité du parc immobilier français — document de preuve"
 subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
-  parc privé (2020-2026), croisements emploi et coût par zone d'emploi
-date: 2026-08-03
+  parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
+  taux d'effort à la relocation
+date: 2026-08-05
 lang: fr
 format:
   html:
@@ -131,7 +132,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 42 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 55 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -150,6 +151,12 @@ propriétés) :
 - **T-05** (`core/cout.py`) — indice de pression du coût par ZE : loyer
   d'annonce moyen pondéré par le parc privé, loyer annuel d'un m² rapporté
   au niveau de vie médian Filosofi.
+- **T-06** (`core/rs.py`) — part des résidences secondaires par ZE
+  (recensement 2022), croisée avec vacance structurelle et indice de coût.
+- **T-07** (`core/effort.py`) — taux d'effort brut à la relocation par ZE :
+  mix des loyers appartement/maison pondéré par la composition des RP
+  (choix **C-05**), surface par UC = H-07 × ratio personnes/UC observé
+  Filosofi (choix **C-04**), sensibilités par homothétie sur la plage H-07.
 
 ## 5. Hypothèses
 
@@ -190,14 +197,15 @@ r02 = build.build_vacance_structurelle(ROOT)
 r03 = build.build_vacance_emploi(ROOT)
 r04 = build.build_cout_residentiel(ROOT)
 r05 = build.build_residences_secondaires(ROOT)
+r06 = build.build_taux_effort(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
-    ("R-05", r05, build.RS_OUTPUT),
+    ("R-05", r05, build.RS_OUTPUT), ("R-06", r06, build.EFFORT_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-05 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-06 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -404,6 +412,42 @@ elle-même et ses effets d'éviction infra-territoriaux, non mesurés ici
 RS et vacance (Corte : 39 % de RS, 10,4 % de vacance) — cas d'étude
 communaux pour la suite (interprétation I-05).
 
+### R-06 — Le taux d'effort brut à la relocation (D-09) donne une grandeur à la tension
+
+```{python}
+#| code-summary: "chiffres clés R-06"
+h = r06["hypothesis"]
+med6 = r06["median_effort_by_h07_pct"]
+print(f"{r06['n_ze']} ZE ; H-07 = {h['central_value_m2_per_person']} m²/personne "
+      f"(plage {h['plausible_range'][0]:.0f}-{h['plausible_range'][1]:.0f})")
+print(f"Taux d'effort brut médian à la relocation : {med6['central']} % "
+      f"({med6['low']}-{med6['high']} % selon H-07)")
+q6 = r06["effort_brut_pct_quantiles"]
+print(f"Distribution : min {q6['min']} % · p25 {q6['p25']} % · p75 {q6['p75']} % · "
+      f"max {q6['max']} %")
+print("Efforts les plus élevés :",
+      ", ".join(f"{e['name'].strip()} {e['effort_brut_pct']}" for e in r06["top_effort"][:5]))
+print(f"Spearman effort × vacance structurelle : {r06['spearman_effort_vs_vacancy']} "
+      f"(vacance médiane {r06['median_vacancy_rate_pct']['high_effort_half']} % dans la "
+      f"moitié à effort élevé contre {r06['median_vacancy_rate_pct']['low_effort_half']} %)")
+print(f"Variante appartement seul : médiane "
+      f"{r06['appart_only']['median_effort_pct']} %, Spearman "
+      f"{r06['appart_only']['spearman_vs_mix']} avec le mix")
+```
+
+L'indice abstrait de R-04 devient un **taux d'effort** (D-09, variante
+brute) : part du revenu qu'un ménage médian consacrerait à se reloger aux
+loyers d'annonce courants — le loyer est le mix appartement/maison de la ZE
+(choix C-05) et le ménage s'élimine du calcul via le ratio personnes/UC
+observé (choix C-04), si bien que seul le paramètre de surface H-07 porte
+l'incertitude, par simple homothétie (le classement des ZE est invariant).
+La géographie de I-04 se confirme dans une unité parlante : à Paris
+(93,5 %) et dans les ZE réunionnaises et martiniquaises (~75-85 %, revenus
+faibles bien plus que loyers extrêmes), la relocation est **hors de portée
+du ménage médian local**, tandis que l'anticorrélation avec la vacance
+persiste (interprétation I-06 ; limites L-09/L-11 — notamment : taux brut
+avant aides, et niveau calé sur la surface du parc moyen en place).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -433,6 +477,14 @@ privé ») n'est pas sensible au choix C-03. Le millésime 2025 (post-rupture)
 est le plus haut — cohérent avec la hausse artificielle de la série
 structurelle à ce millésime (L-04).
 
+La sensibilité de **R-06 à H-07** est exacte et déjà publiée dans
+l'artefact : le taux d'effort est linéaire en H-07, donc la plage
+35-71 m²/personne translate la médiane de 27,4 % à 55,6 % sans changer le
+classement des ZE — chaque entrée de `top_effort`/`bottom_effort` porte son
+intervalle `effort_range_pct`. La variante appartement seul (numérateur de
+R-04) déplace la médiane de 40,1 % à 43,8 % et laisse les rangs presque
+inchangés (Spearman 0,959).
+
 ## 8. Interprétation
 
 - **I-01** — La croissance du parc accompagne la décohabitation, pas la
@@ -459,6 +511,14 @@ structurelle à ce millésime (L-04).
   corse et rural-touristique cumule RS et vacance — cas d'étude communaux.
   Cette exploration a corrigé l'identification des ZE coût+vacance de
   R-04 : ultramarines, non corses.
+- **I-06** — Le taux d'effort donne à la tension une grandeur
+  interprétable : se reloger coûterait au ménage médian ~40 % de son revenu
+  dans la ZE médiane (~27 % à l'hypothèse de surface la plus favorable),
+  plus des trois quarts à Paris et dans les DOM couverts — la relocation y
+  est hors de portée du ménage médian local. La montée en réalisme ne
+  change pas la lecture de I-04 (le coût marque la tension, pas la
+  vacance) et fournit le terme « coût de la mobilité résidentielle » pour
+  instruire H-04.
 
 Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
 bâti, des causes de la vacance (succession, travaux, rétention…), de la
@@ -500,7 +560,7 @@ territoriale communale est bornée par la secrétisation (L-05).
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 30 tests (unitaires, propriétés, régression)
+./test.sh                   # 55 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 

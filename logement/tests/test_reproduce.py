@@ -45,3 +45,10 @@ def test_committed_rs_artifact_matches_rebuild() -> None:
     root = project_root()
     committed = json.loads((root / build.RS_OUTPUT).read_text(encoding="utf-8"))
     assert build.build_residences_secondaires(root) == committed
+
+
+def test_committed_effort_artifact_matches_rebuild() -> None:
+    """data/processed/taux-effort-relocation-ze.json matches a rebuild."""
+    root = project_root()
+    committed = json.loads((root / build.EFFORT_OUTPUT).read_text(encoding="utf-8"))
+    assert build.build_taux_effort(root) == committed

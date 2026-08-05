@@ -11,8 +11,10 @@ import zipfile
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
-from logement.core import cout, lovac, parc, rs, ze
+from logement.core import cout, effort, lovac, parc, registry, rs, ze
+from logement.models import HypothesisRecord
 
 S01_FILE = "insee-focus-359-parc-logements-2025.xlsx"
 S02_FILE = "insee-eapl-parc-residence-2025.xlsx"
@@ -37,6 +39,9 @@ COUT_OUTPUT = Path("data") / "processed" / "cout-residentiel-ze.json"
 CENSUS_ZIP = "insee-rp-base-cc-logement-2022.zip"
 CENSUS_CSV = "base-cc-logement-2022.CSV"
 RS_OUTPUT = Path("data") / "processed" / "residences-secondaires-ze.json"
+
+LOYERS_MAISON_FILE = "carte-loyers-2025-maison.csv"
+EFFORT_OUTPUT = Path("data") / "processed" / "taux-effort-relocation-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -187,6 +192,67 @@ def build_residences_secondaires(root: Path) -> dict[str, object]:
     commune_ze = ze.parse_commune_ze(_read_membership(root))
     rs_ze = rs.rs_by_ze(census, commune_ze)
     return rs.build_summary(rs_ze, _cost_frame(root), _ze_names(root))
+
+
+def _load_h07(root: Path) -> HypothesisRecord:
+    """Load the H-07 surface hypothesis from the registry (single source of truth)."""
+    payload = yaml.safe_load((root / "sources" / "hypotheses.yaml").read_text(encoding="utf-8"))
+    for record in registry.parse_hypotheses(payload):
+        if record.id == "H-07":
+            return record
+    raise effort.EffortError("hypothesis H-07 not found in sources/hypotheses.yaml")
+
+
+def build_taux_effort(root: Path) -> dict[str, object]:
+    """Compute the R-06 summary payload (gross relocation effort rate by ZE)."""
+    raw = root / "data" / "raw"
+    loyers_appart = cout.parse_loyers(
+        pd.read_csv(raw / LOYERS_FILE, sep=";", encoding="cp1252", dtype=str)
+    )
+    loyers_maison = cout.parse_loyers(
+        pd.read_csv(raw / LOYERS_MAISON_FILE, sep=";", encoding="cp1252", dtype=str)
+    )
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(
+            fh, sep=";", dtype=str, usecols=["CODGEO", *effort.CENSUS_MIX_COLS]
+        )
+    census_mix = effort.parse_census_mix(census_raw)
+    with zipfile.ZipFile(raw / FILOSOFI_ZIP) as zf, zf.open(FILOSOFI_CSV) as fh:
+        filosofi = pd.read_csv(
+            fh, sep=";", dtype=str, usecols=["GEO", "GEO_OBJECT", "FILOSOFI_MEASURE", "OBS_VALUE"]
+        )
+    households = effort.household_frame(
+        cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="MED_SL"),
+        cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="NUM_PER"),
+        cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="NUM_CU"),
+    )
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    h07 = _load_h07(root)
+    frame = effort.effort_by_ze(
+        loyers_appart,
+        loyers_maison,
+        census_mix,
+        communes,
+        commune_ze,
+        households,
+        h07.central_value,
+    )
+    return effort.build_summary(frame, _ze_names(root), h07)
+
+
+def run_effort(root: Path) -> int:
+    """Rebuild data/processed/taux-effort-relocation-ze.json; return an exit code."""
+    payload = build_taux_effort(root)
+    _write_json(root, EFFORT_OUTPUT, payload)
+    print(
+        f"taux-effort: wrote {EFFORT_OUTPUT} — median effort "
+        f"{payload['median_effort_by_h07_pct']}, spearman vs vacancy "
+        f"{payload['spearman_effort_vs_vacancy']}"
+    )
+    return 0
 
 
 def run_rs(root: Path) -> int:

@@ -3,6 +3,34 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
+## Session 2 — 2026-08-05 (taux d'effort à la relocation)
+
+Livrable : **R-06/I-06** — le premier item de NEXT-STEPS (taux d'effort
+territorial réel, D-09) est instruit de bout en bout.
+
+| Élément | État |
+|---|---|
+| Source | S-12 figée (SDES Datalab n° 296, enquête Logement 2020 — surfaces habitables ; chiffres provisoires, champ métropole) |
+| Hypothèse | H-07 `relocation_surface_per_person_m2` : 51,2 m²/personne (plage 35-71, bornes observées par âge dans S-12) |
+| Choix | **C-04** — pas de ménage type : surface = H-07 × personnes, revenu = MED_SL × UC, donc seul le ratio personnes/UC OBSERVÉ par ZE (Filosofi NUM_PER/NUM_CU) intervient ; **C-05** — loyer = mix appartement/maison pondéré par la composition des RP de la ZE (S-11), variante appartement en sensibilité |
+| Notebook | 07 (exploration, constats vérifiés depuis les sorties) |
+| Stabilisation | `core/effort.py` + stage `taux-effort-relocation` + 9 tests (55 au total) + R-06/I-06/L-11 + O-10..O-13/T-07 dans le graphe |
+| Document de preuve | Section R-06, sensibilité H-07, I-06 — re-rendu, auto-vérification R-01..R-06 verte |
+
+Ce que dit R-06 : taux d'effort **brut** médian à la relocation **40,1 %**
+du revenu du ménage médian (27,4-55,6 % selon H-07 — le niveau dépend de
+H-07, le classement non). En tête Paris 93,5 % puis les ZE réunionnaises
+et martiniquaises (75-85 %, revenus faibles) : la relocation y est hors de
+portée du ménage médian local. Anticorrélation effort × vacance −0,40 :
+la montée en réalisme (surface, composition, mix maison/appart — part
+maison médiane 74 % des RP par ZE) ne change pas la lecture de I-04. Le
+terme « coût de la mobilité résidentielle » pour H-04 est disponible.
+
+Décisions prises en début de session (AskUserQuestion) : H-07 en m² par
+UC → implémentée en m²/personne directement sourcée (S-12) × ratio
+personnes/UC observé — raffinement tracé dans C-04 ; mix loyers pondéré
+parc retenu contre appartement seul.
+
 ## Session 1 — 2026-08-03 (fondation) — tag `efficacite-parc-v0.1`
 
 Une **première boucle complète** de la chaîne de preuves exécutable :

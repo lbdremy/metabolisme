@@ -34,3 +34,33 @@
     - C-01
   affects:
     - R-02
+
+- id: H-07
+  name: relocation_surface_per_person_m2
+  description: >
+    Surface habitable par personne du logement dans lequel un ménage médian
+    se reloge, utilisée pour convertir le loyer d'annonce (€/m², S-09) en
+    dépense annuelle de relocation. Valeur centrale : la surface moyenne
+    par occupant observée en 2020 (51,2 m²/personne, enquête nationale
+    Logement, S-12). Plage plausible : bornes observées du graphique 2 de
+    S-12 selon l'âge de la personne de référence — 35 m²/personne pour les
+    30-39 ans (la tranche qui déménage le plus : à la relocation on
+    consomme plutôt moins que le parc moyen en place) à 71 m²/personne
+    pour les 75 ans et plus. La conversion en unités de consommation (le
+    revenu Filosofi MED_SL est en €/UC/an) passe par le ratio
+    personnes/UC OBSERVÉ de chaque zone d'emploi (NUM_PER / NUM_CU,
+    S-10), pas par un ménage type : le taux d'effort qui en résulte ne
+    dépend d'aucun choix de composition de ménage (décision C-04).
+    Limite : moyenne France métropolitaine (les ZE ultramarines de R-06
+    héritent d'une surface calibrée en métropole) ; premiers résultats
+    qualifiés de provisoires par S-12.
+  central_value: 51.2
+  plausible_range: [35.0, 71.0]
+  unit: m2_per_person
+  confidence: medium
+  justification:
+    - S-12
+    - S-10
+    - C-04
+  affects:
+    - R-06

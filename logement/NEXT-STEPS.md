@@ -6,34 +6,32 @@ Mis à jour à chaque fin de session de travail significative.
 ## Prochaines étapes (dans l'ordre)
 
 L'état à la fin de la session 1 est tagué **`efficacite-parc-v0.1`**
-(chaîne complète R-01..R-05, document de preuve auto-vérifié). Le détail de
-ce qui est fait est dans `PREV-STEPS.md` ; les items ci-dessous sont ce qui
-reste à ouvrir.
+(chaîne complète R-01..R-05, document de preuve auto-vérifié). La session 2
+a ajouté **R-06** (taux d'effort brut à la relocation par ZE — S-12, H-07,
+C-04/C-05). Le détail de ce qui est fait est dans `PREV-STEPS.md` ; les
+items ci-dessous sont ce qui reste à ouvrir.
 
-1. **Taux d'effort territorial réel (D-09).** L'indice de coût de R-04
-   n'intègre ni surface ni composition des ménages. Il faut : une source
-   de surfaces habitables (enquête Logement, ou nombre de pièces des RP
-   dans S-11 comme proxy), une hypothèse de logement type paramétrée
-   (H-07, plage plausible), les loyers S-09 et revenus S-10 déjà figés →
-   R-06 (taux d'effort à la relocation par ZE), avec la variante
-   nette/brute de D-09 explicitée.
-2. **Instruire H-04 (mobilités empêchées).** Données candidates :
+1. **Instruire H-04 (mobilités empêchées).** Données candidates :
    demandes de logement social et délais (SNE / data.gouv), taux de
-   rotation du parc, DVF pour les frais de transaction. C'est la dernière
-   hypothèse directrice non instruite (H-01 ✓ R-02, H-02 ✓ R-03, H-03 ✓
-   R-04, H-05 = piste dominante restante).
-3. **Instruire H-05 (blocages institutionnels) au niveau propriété.**
+   rotation du parc, DVF pour les frais de transaction. Le terme « coût de
+   la mobilité résidentielle » est désormais disponible (R-06). C'est la
+   dernière hypothèse directrice non instruite (H-01 ✓ R-02, H-02 ✓ R-03,
+   H-03 ✓ R-04+R-06, H-05 = piste dominante restante). Levier à surveiller :
+   le volet financier définitif de l'enquête Logement 2020 (S-12 est
+   provisoire) donnerait des taux d'effort NETS observés à confronter à
+   R-06.
+2. **Instruire H-05 (blocages institutionnels) au niveau propriété.**
    I-03/I-04 pointent vers l'état du bâti et les successions ; données
    candidates : parc privé potentiellement indigne (PPPI, si accessible),
    DPE par territoire (ADEME open data, D-13), indivisions/successions
    (piste : stats notariales ou fichiers fonciers agrégés).
-4. **Frontières de données actées** (ne pas re-tenter sans nouveau
+3. **Frontières de données actées** (ne pas re-tenter sans nouveau
    levier) : fichiers LOVAC détaillés = habilitation collectivités/État/
    Anah (sensibilité H-06) ; éviction saisonnière infra-territoriale =
    non tranchable en open data secrétisé (notebook 06) — leviers
    possibles : convention avec un partenaire habilité, registre des
    meublés de tourisme, monographies communales.
-5. **Chemin de publication** : revue contradictoire (méthode INTRO
+4. **Chemin de publication** : revue contradictoire (méthode INTRO
    étape 12 — chercher activement les objections), premier article dans
    `articles/` pointant le tag, licence du millésime loyers 2025 à
    confirmer avant publication (L-09), puis tag suivant.
@@ -44,7 +42,7 @@ reste à ouvrir.
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 5 artefacts data/processed/
+uv run logement reproduce   # rebâtit les 6 artefacts data/processed/
 ./check.sh && ./test.sh     # portes qualité
 ```
 

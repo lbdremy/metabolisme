@@ -411,3 +411,123 @@
     R-04 : ultramarines (La Réunion, Martinique), non corses.
   depends_on: [R-05, R-04, I-04]
   limitations: [L-10]
+
+# ----------------------------------- branche taux d'effort (D-09, suite de H-03)
+
+- id: C-04
+  type: choice
+  title: >
+    Le taux d'effort à la relocation est construit sans ménage type
+    (décision du 2026-08-05) : la surface du ménage est H-07 (m²/personne,
+    S-12) × personnes, le revenu est MED_SL (€/UC/an, S-10) × UC, et le
+    rapport ne fait donc intervenir que le ratio personnes/UC OBSERVÉ de
+    chaque zone d'emploi (NUM_PER/NUM_CU, Filosofi). Un seul paramètre
+    d'hypothèse (H-07), sensibilité par simple homothétie — le classement
+    des ZE est invariant au choix de H-07.
+  depends_on: [S-12, S-10, D-09]
+
+- id: C-05
+  type: choice
+  title: >
+    Le loyer de relocation d'une ZE est le mix appartement/maison des deux
+    fichiers de la carte des loyers (S-09), pondéré par la composition
+    maison/appartement des résidences principales de la ZE (S-11) — en ZE
+    rurale on se reloge en maison (part maison médiane 74 % des RP par
+    ZE). La variante appartement seul (numérateur de R-04) est publiée en
+    sensibilité (décision du 2026-08-05).
+  depends_on: [S-09, S-11]
+
+- id: L-11
+  type: limit
+  title: >
+    Limites du taux d'effort à la relocation : variante BRUTE de D-09
+    (aucune source territoriale d'aides au logement — le taux net serait
+    plus bas, surtout en bas de la distribution des revenus) ; le NIVEAU
+    dépend linéairement de H-07 (51,2 m²/personne = parc moyen en place ;
+    un ménage qui se reloge consomme plutôt la borne basse, 35 m²/personne
+    chez les 30-39 ans) — seul le classement des ZE est invariant ; H-07
+    est calibrée en France métropolitaine (S-12) et appliquée aux ZE de La
+    Réunion/Martinique, dont le niveau est donc conventionnel ; premiers
+    résultats S-12 qualifiés de provisoires ; hérite des limites loyers/
+    revenus de L-09.
+  depends_on: [S-12, D-09, H-07, L-09]
+
+- id: O-10
+  type: observation
+  title: >
+    Surface habitable moyenne par occupant des résidences principales,
+    France métropolitaine 2020 : 51,2 m²/personne (49,7 en 2013), de 35
+    m²/personne (personne de référence 30-39 ans) à 71 (75 ans et plus) ;
+    surface moyenne des RP 93,2 m² (maisons 114,3, appartements 65,5).
+  depends_on: [S-12]
+
+- id: O-11
+  type: observation
+  title: >
+    Loyers d'annonce prédits par commune pour les MAISONS (€/m², charges
+    comprises), millésime 2025 — second fichier de la carte des loyers.
+  depends_on: [S-09]
+
+- id: O-12
+  type: observation
+  title: >
+    Répartition maison/appartement des résidences principales par commune
+    (P22_RPMAISON, P22_RPAPPART), recensement 2022.
+  depends_on: [S-11, D-02]
+
+- id: O-13
+  type: observation
+  title: >
+    Nombre de personnes (NUM_PER) et d'unités de consommation (NUM_CU) par
+    zone d'emploi 2020, Filosofi 2021 — le ratio personnes/UC observé par
+    ZE (1,35-1,58, médiane 1,43).
+  depends_on: [S-10]
+
+- id: T-07
+  type: transformation
+  title: >
+    Taux d'effort brut à la relocation par ZE : loyers appartement et
+    maison moyennés par commune puis pondérés par le parc privé LOVAC,
+    mixés selon la part maison des RP de la ZE (C-05) ; surface par UC =
+    H-07 × ratio personnes/UC observé (C-04) ; effort = 12 × loyer_mix ×
+    surface par UC / niveau de vie médian ; sensibilités (plage H-07 par
+    homothétie, variante appartement seul) ; croisement avec le taux de
+    vacance structurelle (agrégé min_count : les groupes tout-secret
+    restent manquants, jamais zéro).
+  depends_on: [O-04, O-05, O-07, O-08, O-10, O-11, O-12, O-13, C-03, C-04, C-05]
+  produced_by: src/logement/core/effort.py
+
+- id: R-06
+  type: result
+  title: >
+    Taux d'effort brut à la relocation pour un ménage médian, par zone
+    d'emploi (297 ZE, loyers 2025, revenus 2021, H-07 = 51,2 m²/personne,
+    plage 35-71) : médiane 40,1 % (27,4-55,6 selon H-07), du minimum
+    29,0 % (Avallon, Mayenne, Loches) au maximum 93,5 % (Paris) ; suivent
+    L'Ouest-Réunion 85,1 %, Roissy 82,9 %, Menton 78,7 %, Le
+    Sud-Martinique 77,4 % et les trois autres ZE réunionnaises ~75 % ;
+    corrélation de Spearman effort × vacance structurelle −0,40 (vacance
+    médiane 2,6 % dans la moitié à effort élevé contre 3,9 %) ; variante
+    appartement seul : médiane 43,8 %, Spearman 0,959 avec le mix.
+  depends_on: [T-07, H-07, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/taux-effort-relocation-ze.json
+  limitations: [L-05, L-06, L-09, L-11]
+
+- id: I-06
+  type: interpretation
+  title: >
+    Le taux d'effort donne à la tension de I-04 une grandeur interprétable
+    et confirme sa géographie : se reloger aux loyers d'annonce courants
+    coûterait au ménage médian ~40 % de son revenu dans la ZE médiane
+    (~27 % à l'hypothèse de surface la plus favorable), plus des trois
+    quarts à Paris et dans les DOM couverts — où la relocation est de fait
+    hors de portée du ménage médian local (revenus faibles bien plus que
+    loyers extrêmes, prolongement de I-04). L'anticorrélation avec la
+    vacance persiste dans l'unité réaliste : la montée en réalisme
+    (surface, composition des ménages, mix maison/appartement) ne change
+    pas la lecture — le coût marque la tension, il n'explique pas la
+    vacance. Ce résultat fournit le terme « coût de la mobilité
+    résidentielle » pour l'instruction de H-04 (mobilités empêchées).
+  depends_on: [R-06, I-04]
+  limitations: [L-11]

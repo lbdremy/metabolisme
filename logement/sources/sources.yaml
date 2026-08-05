@@ -251,3 +251,26 @@
     documenter dans les jointures. Inclut les arrondissements PLM (pas
     d'agrégation nécessaire côté recensement, mais harmoniser avec la table
     d'appartenance qui ne les contient pas).
+
+- id: S-12
+  publisher: SDES (Ministère de la Transition écologique)
+  title: Les conditions de logement des ménages résidant en France en 2020 — Datalab essentiel n°296
+  dataset_id: datalab-essentiel-296-conditions-logement-2020
+  source_url: https://www.statistiques.developpement-durable.gouv.fr/sites/default/files/2022-12/datalab_essentiel_296_conditions_logements_decembre2022_0.pdf
+  publication_date: 2022-12-01
+  retrieved_at: 2026-08-05
+  geographic_scope: France métropolitaine (hors ménages dont la personne de référence est étudiante)
+  temporal_scope: enquête nationale Logement 2020 (collecte fin 2019 - mi 2021), comparaisons avec 2013
+  license: non précisée (publication du service statistique ministériel, ISSN 2557-8510) — citer la source
+  local_file: data/raw/sdes-datalab-296-conditions-logement-2020.pdf
+  checksum: sha256:1aee3085dc79564d1a6086a6c0a6270c26319e7964ae8cf4ce3fcf698e234a77
+  notes: >
+    Premiers résultats de l'enquête nationale Logement 2020 (37 143 ménages
+    de métropole en logement ordinaire). Chiffres utilisés : surface
+    habitable moyenne des RP 93,2 m² (maisons 114,3, appartements 65,5) ;
+    SURFACE MOYENNE PAR OCCUPANT 51,2 m²/personne (49,7 en 2013), variant
+    de 35 m² (personne de référence 30-39 ans) à 71 m² (75 ans et plus)
+    — graphique 2. ATTENTION : résultats qualifiés de provisoires par
+    l'encadré méthodologique (traitements approfondis et volet financier
+    annoncés) ; champ métropole seulement (les DOM de R-06 ne sont pas
+    couverts par cette moyenne) ; ménages étudiants exclus.
