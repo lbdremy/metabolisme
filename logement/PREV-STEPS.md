@@ -3,12 +3,33 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
-## Session 2 — 2026-08-05 (taux d'effort à la relocation · tension et manque absolu)
+## Session 2 — 2026-08-05 (taux d'effort · tension et manque absolu · état du bâti)
 
-Deux livrables : **R-06/I-06** (premier item de NEXT-STEPS) puis
-**R-07/I-07** (nouvelle question posée par Rémy en séance : zones tendues,
-volume additionnel nécessaire à la détente, suffisance du gisement vacant
-local — en nombres ABSOLUS).
+Trois livrables : **R-06/I-06** (premier item de NEXT-STEPS), **R-07/I-07**
+(nouvelle question posée par Rémy en séance : zones tendues, volume
+additionnel nécessaire à la détente, suffisance du gisement vacant local —
+en nombres ABSOLUS), puis **R-08/I-08** (première instruction de H-05).
+
+### Livrable 3 — R-08 : état du bâti × vacance (H-05, 1re instruction)
+
+| Élément | État |
+|---|---|
+| Source | S-16 extrait DPE ADEME figé (14,8 M de DPE, commune × étiquette) — acquisition SCRIPTÉE `logement acquire-dpe` (shell/acquire.py) : agrégation API sans perte, choisie après échec de la pagination brute (throttle HTTP 429 : ~3 h → ~10 min) |
+| Notebook | 09 (exploration, constats vérifiés depuis les sorties) |
+| Stabilisation | `core/bati.py` + stage `etat-bati` + 6 tests (68 au total) + R-08/I-08/L-13 + O-16..O-18/T-09 dans le graphe |
+| Frontières actées | PPPI (convention DREAL/DDT ; open 2015 obsolète), fichiers fonciers/successions (Cerema, acteurs publics), stats notariales (rien d'ouvert) |
+
+Ce que dit R-08 : en MÉTROPOLE l'ancienneté du bâti est le corrélat
+territorial le plus fort de toute la chaîne (Spearman 0,56 vs vacance
+structurelle ; F+G des diagnostiqués 0,40 ; F+G × âge 0,62) — la
+diagonale rurale de R-02/R-03 ; la remobilisation du gisement R-07 a un
+coût de remise en usage, à chiffrer. CONTRASTE DOM : vacance médiane 11 %
+sur bâti récent (1,9 % d'avant-1946) et pourvu du confort — par
+élimination (emploi, coût, RS, bâti), reste la piste successions/
+indivisions, derrière la frontière de données. Pièges vérifiés en
+séance : P22_RP_BDWC nul en métropole (question DOM seulement) ; DPE
+quasi absents des DOM (ZE 0303 Guyane : zéro) ; biais d'échantillon DPE
+(les vacants durables ne sont pas diagnostiqués).
 
 ### Livrable 2 — R-07 : tension des usages et manque absolu
 

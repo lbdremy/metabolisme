@@ -13,7 +13,7 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from logement.core import cout, effort, lovac, parc, registry, rs, tension, ze
+from logement.core import bati, cout, effort, lovac, parc, registry, rs, tension, ze
 from logement.models import HypothesisRecord
 
 S01_FILE = "insee-focus-359-parc-logements-2025.xlsx"
@@ -45,6 +45,9 @@ EFFORT_OUTPUT = Path("data") / "processed" / "taux-effort-relocation-ze.json"
 
 TLV_FILE = "zonage-tlv-decret-2025-12-22.csv"
 TENSION_OUTPUT = Path("data") / "processed" / "tension-manque-absolu-ze.json"
+
+DPE_FILE = "ademe-dpe-existants-communes-etiquettes.csv"
+BATI_OUTPUT = Path("data") / "processed" / "etat-bati-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -269,6 +272,39 @@ def run_tension(root: Path) -> int:
     print(
         f"tension: wrote {TENSION_OUTPUT} — national {payload['national']}, "
         f"couvertes {payload['ze_couvertes']}"
+    )
+    return 0
+
+
+def build_etat_bati(root: Path) -> dict[str, object]:
+    """Compute the R-08 summary payload (building condition × vacancy by ZE)."""
+    raw = root / "data" / "raw"
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *bati.CENSUS_BATI_COLS])
+    census = bati.parse_census_bati(census_raw)
+    dpe_raw = pd.read_csv(raw / DPE_FILE, sep=";", dtype=str)
+    dpe_counts = bati.parse_dpe_counts(dpe_raw)
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    vacancy_ze, _unmatched = ze.aggregate_vacancy_by_ze(communes, commune_ze)
+    return bati.build_summary(
+        bati.bati_by_ze(census, commune_ze),
+        bati.dpe_by_ze(dpe_counts, commune_ze),
+        vacancy_ze,
+        _ze_names(root),
+        dpe_dropped_rows=dpe_counts.attrs["dropped_rows"],
+    )
+
+
+def run_bati(root: Path) -> int:
+    """Rebuild data/processed/etat-bati-ze.json; return a process exit code."""
+    payload = build_etat_bati(root)
+    _write_json(root, BATI_OUTPUT, payload)
+    print(
+        f"etat-bati: wrote {BATI_OUTPUT} — spearman age×vacance "
+        f"{payload['spearman_age_vs_vacancy']}, F+G×vacance {payload['spearman_fg_vs_vacancy']}"
     )
     return 0
 

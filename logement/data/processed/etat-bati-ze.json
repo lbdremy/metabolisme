@@ -1,0 +1,225 @@
+{
+  "dom_contrast": {
+    "median_part_avant_1946_pct": 1.9,
+    "median_part_inconfort_pct": 1.9,
+    "median_vacancy_pct": 11.0,
+    "n": 17,
+    "spearman_inconfort_vs_vacancy": 0.27
+  },
+  "dpe_dropped_rows": 0,
+  "median_vacancy_rate_pct": {
+    "newest_half": 2.7,
+    "oldest_half": 3.8
+  },
+  "n_dpe_total": 14768765,
+  "n_ze": 304,
+  "n_ze_dom": 17,
+  "part_fg_diagnostiques_pct": 9.9,
+  "spearman_age_vs_vacancy": {
+    "all": 0.35,
+    "metropole": 0.56
+  },
+  "spearman_fg_vs_age": 0.62,
+  "spearman_fg_vs_vacancy": {
+    "all": 0.27,
+    "metropole": 0.4
+  },
+  "top_age": [
+    {
+      "n_dpe": 9346,
+      "name": "Avallon",
+      "part_avant_1946_pct": 52.4,
+      "part_fg_pct": 33.6,
+      "taux_structurelle_pct": 5.32,
+      "ze": "2703"
+    },
+    {
+      "n_dpe": 13109,
+      "name": "Cosne-Cours-sur-Loire",
+      "part_avant_1946_pct": 46.9,
+      "part_fg_pct": 23.3,
+      "taux_structurelle_pct": 7.29,
+      "ze": "0056"
+    },
+    {
+      "n_dpe": 6454,
+      "name": "Autun",
+      "part_avant_1946_pct": 44.4,
+      "part_fg_pct": 20.6,
+      "taux_structurelle_pct": 5.26,
+      "ze": "2701"
+    },
+    {
+      "n_dpe": 22661,
+      "name": "Guéret",
+      "part_avant_1946_pct": 44.3,
+      "part_fg_pct": 32.3,
+      "taux_structurelle_pct": 5.19,
+      "ze": "7511"
+    },
+    {
+      "n_dpe": 10207,
+      "name": "Loches",
+      "part_avant_1946_pct": 42.8,
+      "part_fg_pct": 19.1,
+      "taux_structurelle_pct": 3.61,
+      "ze": "2408"
+    },
+    {
+      "n_dpe": 11487,
+      "name": "Châtillon-Montbard",
+      "part_avant_1946_pct": 42.7,
+      "part_fg_pct": 20.1,
+      "taux_structurelle_pct": 4.47,
+      "ze": "2709"
+    },
+    {
+      "n_dpe": 9612,
+      "name": "Tarare",
+      "part_avant_1946_pct": 38.9,
+      "part_fg_pct": 15.7,
+      "taux_structurelle_pct": 5.7,
+      "ze": "8430"
+    },
+    {
+      "n_dpe": 5089,
+      "name": "Saint Flour",
+      "part_avant_1946_pct": 38.0,
+      "part_fg_pct": 36.2,
+      "taux_structurelle_pct": 5.18,
+      "ze": "8429"
+    }
+  ],
+  "top_fg": [
+    {
+      "n_dpe": 11662,
+      "name": "Ussel",
+      "part_avant_1946_pct": 36.5,
+      "part_fg_pct": 37.3,
+      "taux_structurelle_pct": 5.24,
+      "ze": "0063"
+    },
+    {
+      "n_dpe": 5089,
+      "name": "Saint Flour",
+      "part_avant_1946_pct": 38.0,
+      "part_fg_pct": 36.2,
+      "taux_structurelle_pct": 5.18,
+      "ze": "8429"
+    },
+    {
+      "n_dpe": 9346,
+      "name": "Avallon",
+      "part_avant_1946_pct": 52.4,
+      "part_fg_pct": 33.6,
+      "taux_structurelle_pct": 5.32,
+      "ze": "2703"
+    },
+    {
+      "n_dpe": 22661,
+      "name": "Guéret",
+      "part_avant_1946_pct": 44.3,
+      "part_fg_pct": 32.3,
+      "taux_structurelle_pct": 5.19,
+      "ze": "7511"
+    },
+    {
+      "n_dpe": 13,
+      "name": "Côte sous le vent",
+      "part_avant_1946_pct": 3.6,
+      "part_fg_pct": 30.8,
+      "taux_structurelle_pct": 13.27,
+      "ze": "0101"
+    },
+    {
+      "n_dpe": 14675,
+      "name": "Tulle",
+      "part_avant_1946_pct": 30.9,
+      "part_fg_pct": 27.8,
+      "taux_structurelle_pct": 6.63,
+      "ze": "7531"
+    },
+    {
+      "n_dpe": 9764,
+      "name": "Mende",
+      "part_avant_1946_pct": 23.9,
+      "part_fg_pct": 27.4,
+      "taux_structurelle_pct": 4.53,
+      "ze": "7613"
+    },
+    {
+      "n_dpe": 13612,
+      "name": "Le Livradois",
+      "part_avant_1946_pct": 36.5,
+      "part_fg_pct": 26.4,
+      "taux_structurelle_pct": 8.46,
+      "ze": "8417"
+    }
+  ],
+  "top_vacancy": [
+    {
+      "n_dpe": 3,
+      "name": "Marie-Galante",
+      "part_avant_1946_pct": 3.3,
+      "part_fg_pct": 0.0,
+      "taux_structurelle_pct": 17.92,
+      "ze": "0103"
+    },
+    {
+      "n_dpe": 5,
+      "name": "Le Nord-Atlantique",
+      "part_avant_1946_pct": 7.4,
+      "part_fg_pct": 20.0,
+      "taux_structurelle_pct": 14.15,
+      "ze": "0203"
+    },
+    {
+      "n_dpe": 13,
+      "name": "Côte sous le vent",
+      "part_avant_1946_pct": 3.6,
+      "part_fg_pct": 30.8,
+      "taux_structurelle_pct": 13.27,
+      "ze": "0101"
+    },
+    {
+      "n_dpe": 93,
+      "name": "Est-littoral",
+      "part_avant_1946_pct": 1.2,
+      "part_fg_pct": 10.8,
+      "taux_structurelle_pct": 12.39,
+      "ze": "0301"
+    },
+    {
+      "n_dpe": 34,
+      "name": "Est Grande Terre",
+      "part_avant_1946_pct": 1.1,
+      "part_fg_pct": 0.0,
+      "taux_structurelle_pct": 12.22,
+      "ze": "0102"
+    },
+    {
+      "n_dpe": 551,
+      "name": "Région Pointoise",
+      "part_avant_1946_pct": 1.5,
+      "part_fg_pct": 3.4,
+      "taux_structurelle_pct": 11.3,
+      "ze": "0104"
+    },
+    {
+      "n_dpe": 5910,
+      "name": "Le Centre-Atlantique",
+      "part_avant_1946_pct": 3.1,
+      "part_fg_pct": 1.9,
+      "taux_structurelle_pct": 11.25,
+      "ze": "0201"
+    },
+    {
+      "n_dpe": 645,
+      "name": "Le Centre agglomération",
+      "part_avant_1946_pct": 3.0,
+      "part_fg_pct": 3.3,
+      "taux_structurelle_pct": 11.17,
+      "ze": "0202"
+    }
+  ]
+}

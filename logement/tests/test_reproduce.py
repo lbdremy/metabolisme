@@ -59,3 +59,10 @@ def test_committed_tension_artifact_matches_rebuild() -> None:
     root = project_root()
     committed = json.loads((root / build.TENSION_OUTPUT).read_text(encoding="utf-8"))
     assert build.build_tension(root) == committed
+
+
+def test_committed_bati_artifact_matches_rebuild() -> None:
+    """data/processed/etat-bati-ze.json matches a rebuild."""
+    root = project_root()
+    committed = json.loads((root / build.BATI_OUTPUT).read_text(encoding="utf-8"))
+    assert build.build_etat_bati(root) == committed

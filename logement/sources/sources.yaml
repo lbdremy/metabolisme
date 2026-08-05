@@ -347,3 +347,35 @@
     cohérent avec D-10/H-06. Publication d'un observatoire local sans
     référence primaire pour le seuil — confiance limitée, utilisée
     seulement pour encadrer la plage.
+
+- id: S-16
+  publisher: ADEME (observatoire DPE)
+  title: DPE logements existants (depuis juillet 2021) — extrait agrégé commune × étiquette
+  dataset_id: dpe03existant
+  source_url: https://data.ademe.fr/datasets/dpe03existant
+  publication_date: 2026-07-29
+  retrieved_at: 2026-08-05
+  geographic_scope: France entière (communes BAN)
+  temporal_scope: DPE établis depuis juillet 2021 (DPE v2), base vivante au 29/07/2026
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/ademe-dpe-existants-communes-etiquettes.csv
+  checksum: sha256:c8598cdd808a308d6e65af375065900b385efb10b69411991cc51f68458fd23b
+  notes: >
+    Extrait produit par `uv run logement acquire-dpe`
+    (src/logement/shell/acquire.py) : comptages commune × étiquette
+    (A..G) obtenus par l'API d'agrégation data-fair, une requête par
+    département × étiquette (le plafond agg_size=1000 dépasse le nombre
+    de communes de tout département). AGRÉGATION SANS PERTE par rapport à
+    l'extrait ligne à ligne (mêmes comptages), choisie parce que l'API
+    limite le débit anonyme (HTTP 429). Le jeu « dpe03existant » est
+    virtuel et exclut les DPE désactivés (filtre dpe_desactive=0).
+    COUVERTURE : 14 780 828 DPE sur 15 292 277 dans la base au moment de
+    l'extraction — 511 449 (3,3 %) sans code département/commune BAN,
+    hors extrait. BIAIS D'ÉCHANTILLON MAJEUR à rappeler à chaque usage :
+    les DPE sont établis à la vente/location/rénovation — l'échantillon
+    n'est PAS le parc (l'ONRE estime 13,9 % de F+G dans le parc au
+    01/01/2024 après extrapolation, contre ~9,8 % des seuls
+    diagnostiqués), et les logements durablement vacants ne sont
+    justement pas diagnostiqués tant qu'ils ne reviennent pas sur le
+    marché. Base VIVANTE : une ré-extraction donne un fichier différent
+    — la reproductibilité repose sur le fichier figé.

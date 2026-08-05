@@ -3,7 +3,7 @@ title: "Efficacité du parc immobilier français — document de preuve"
 subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
-  taux d'effort à la relocation, tension et manque absolu de logements
+  taux d'effort à la relocation, tension et manque absolu, état du bâti
 date: 2026-08-05
 lang: fr
 format:
@@ -132,7 +132,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 62 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 68 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -162,6 +162,11 @@ propriétés) :
   (choix **C-06**), test de tension au seuil H-08, besoin absolu de
   mobilisation, couverture par le gisement local, croisement avec le
   zonage légal TLV (S-13, D-14).
+- **T-09** (`core/bati.py`) — état du bâti × vacance par ZE : ancienneté
+  (part des RP d'avant 1946) et inconfort sanitaire (DOM seulement — la
+  question du recensement n'est pas posée en métropole), part F+G des
+  logements diagnostiqués (extrait DPE S-16), corrélations de rangs avec
+  séparation métropole / DOM.
 
 ## 5. Hypothèses
 
@@ -204,15 +209,16 @@ r04 = build.build_cout_residentiel(ROOT)
 r05 = build.build_residences_secondaires(ROOT)
 r06 = build.build_taux_effort(ROOT)
 r07 = build.build_tension(ROOT)
+r08 = build.build_etat_bati(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
     ("R-05", r05, build.RS_OUTPUT), ("R-06", r06, build.EFFORT_OUTPUT),
-    ("R-07", r07, build.TENSION_OUTPUT),
+    ("R-07", r07, build.TENSION_OUTPUT), ("R-08", r08, build.BATI_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-07 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-08 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -501,6 +507,49 @@ littorales et touristiques (Les Sables-d'Olonne, Pornic, Calvi, Briançon…),
 où le parc hors résidence principale est en résidences secondaires (R-05),
 pas en vacance (interprétation I-07 ; limites L-12).
 
+### R-08 — L'état du bâti, premier faisceau sur les blocages (H-05)
+
+```{python}
+#| code-summary: "chiffres clés R-08"
+print(f"{r08['n_ze']} ZE (dont {r08['n_ze_dom']} DOM) ; "
+      f"{r08['n_dpe_total']:,} DPE couverts, {r08['part_fg_diagnostiques_pct']} % "
+      f"de F+G parmi les diagnostiqués".replace(",", " "))
+sa = r08["spearman_age_vs_vacancy"]
+sf = r08["spearman_fg_vs_vacancy"]
+print(f"Spearman ancienneté (avant 1946) × vacance structurelle : "
+      f"{sa['metropole']} en métropole ({sa['all']} avec DOM)")
+print(f"Spearman part F+G × vacance : {sf['metropole']} en métropole "
+      f"({sf['all']} avec DOM) ; part F+G × ancienneté : {r08['spearman_fg_vs_age']}")
+med8 = r08["median_vacancy_rate_pct"]
+print(f"Taux structurel médian : {med8['oldest_half']} % (moitié des ZE au bâti "
+      f"le plus ancien) contre {med8['newest_half']} %")
+dc = r08["dom_contrast"]
+print(f"Contraste DOM ({dc['n']} ZE) : vacance médiane {dc['median_vacancy_pct']} % "
+      f"sur un bâti à {dc['median_part_avant_1946_pct']} % d'avant-1946 et "
+      f"{dc['median_part_inconfort_pct']} % d'inconfort sanitaire médian")
+print("Bâti le plus ancien :",
+      ", ".join(f"{e['name'].strip()} {e['part_avant_1946_pct']}" for e in r08["top_age"][:4]))
+print("Part F+G la plus forte :",
+      ", ".join(f"{e['name'].strip()} {e['part_fg_pct']}" for e in r08["top_fg"][:4]))
+```
+
+Première instruction de **H-05** (blocages au niveau propriété), imposée
+par R-07 : la couverture du manque par le gisement suppose que le parc
+structurellement vacant soit remobilisable. En **métropole**, l'ancienneté
+du bâti est le corrélat territorial le plus fort de la vacance
+structurelle de toute la chaîne (Spearman 0,56 — contre −0,42 pour le
+coût et −0,36 pour l'emploi), et le proxy énergie converge (F+G × vacance
+0,40 ; F+G × ancienneté 0,62) : les deux mesures pointent la diagonale
+rurale de R-02/R-03 — la remobilisation passe par le coût de remise en
+usage. Aux **DOM**, l'élimination progresse : ni l'emploi, ni le coût
+seul, ni les résidences secondaires, ni l'état du bâti n'expliquent la
+vacance record — reste la piste des blocages de propriété (successions,
+indivisions), NON MESURABLE en open data : PPPI sous convention
+DREAL/DDT, fichiers fonciers réservés aux acteurs publics (frontière de
+données actée, interprétation I-08 ; limites L-13, dont le biais
+d'échantillon DPE : les diagnostiqués ne sont pas le parc, et les vacants
+durables ne sont justement pas diagnostiqués).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -596,6 +645,15 @@ couvertes) qui bouge avec le seuil.
   littorales et touristiques, où le parc hors RP est en résidences
   secondaires : la tension touristique ne peut pas se résoudre par la
   vacance.
+- **I-08** — Première instruction de H-05 : en métropole la vacance
+  structurelle est un phénomène du bâti ancien rural (ancienneté et
+  étiquettes F+G convergent) — remobiliser le gisement de R-07 a donc un
+  coût de remise en usage, encore non chiffré, qui conditionne I-07. Aux
+  DOM, tout ce qui est mesurable en open data est éliminé (emploi, coût,
+  résidences secondaires, état du bâti) : la piste restante — blocages de
+  propriété, successions, indivisions — est précisément derrière la
+  frontière de données (PPPI, fichiers fonciers) ; à instruire par
+  convention d'accès, pas à affirmer.
 
 Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
 bâti, des causes de la vacance (succession, travaux, rétention…), de la
@@ -637,7 +695,7 @@ territoriale communale est bornée par la secrétisation (L-05).
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 62 tests (unitaires, propriétés, régression)
+./test.sh                   # 68 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 

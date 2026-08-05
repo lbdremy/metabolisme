@@ -34,10 +34,20 @@ class Reproduce(Command):
         raise SystemExit(reproduce.run(project_root()))
 
 
+class AcquireDpe(Command):
+    """Freeze the ADEME DPE commune/label extract (one-off acquisition, S-16)."""
+
+    @override
+    async def run(self) -> None:
+        from logement.shell import acquire
+
+        raise SystemExit(acquire.run(project_root()))
+
+
 class Logement(Command):
     """Executable evidence chain: efficacité du parc immobilier français."""
 
-    subcommand: Validate | Reproduce
+    subcommand: Validate | Reproduce | AcquireDpe
 
 
 def main() -> None:

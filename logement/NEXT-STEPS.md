@@ -7,19 +7,22 @@ Mis à jour à chaque fin de session de travail significative.
 
 L'état à la fin de la session 1 est tagué **`efficacite-parc-v0.1`**
 (chaîne complète R-01..R-05, document de preuve auto-vérifié). La session 2
-a ajouté **R-06** (taux d'effort brut à la relocation par ZE — S-12, H-07,
-C-04/C-05) et **R-07** (tension des usages et manque absolu — S-13..S-15,
-H-08, C-06, avec correction tracée du test de tension). Le détail est dans
+a ajouté **R-06** (taux d'effort brut à la relocation — S-12, H-07,
+C-04/C-05), **R-07** (tension et manque absolu — S-13..S-15, H-08, C-06,
+correction tracée du test de tension) et **R-08** (état du bâti × vacance,
+première instruction de H-05 — S-16, L-13). Le détail est dans
 `PREV-STEPS.md` ; les items ci-dessous sont ce qui reste à ouvrir.
 
-1. **Instruire H-05 (blocages institutionnels) au niveau propriété.**
-   R-07 a rendu cette instruction PRIORITAIRE : la suffisance du gisement
-   (couverture 1,65) est conditionnelle à la remobilisation d'un parc
-   sorti d'usage — état du bâti et successions sont le verrou. Données
-   candidates : parc privé potentiellement indigne (PPPI, si accessible),
-   DPE par territoire (ADEME open data, D-13), indivisions/successions
-   (piste : stats notariales ou fichiers fonciers agrégés).
-2. **Instruire H-04 (mobilités empêchées).** Données candidates :
+1. **Chiffrer le coût de remise en usage du gisement** (suite de H-05,
+   conditionne I-07/I-08) : coûts de rénovation par étiquette DPE
+   (sources candidates : ADEME/ONRE coûts moyens de rénovation, barèmes
+   MaPrimeRénov'), croisés avec le gisement structurel des ZE tendues de
+   R-07 — un ordre de grandeur du « coût de la couverture 1,65 ».
+2. **Lever les frontières H-05 par convention** : PPPI (DREAL/DDT) et
+   fichiers fonciers/successions (Cerema — statut « acteur public » à
+   clarifier pour un chercheur indépendant) ; c'est la seule voie pour
+   instruire la piste successions/indivisions des DOM (I-08).
+3. **Instruire H-04 (mobilités empêchées).** Données candidates :
    demandes de logement social et délais (SNE / data.gouv), taux de
    rotation du parc, DVF pour les frais de transaction. Le terme « coût de
    la mobilité résidentielle » est désormais disponible (R-06). Levier à
@@ -27,13 +30,13 @@ H-08, C-06, avec correction tracée du test de tension). Le détail est dans
    (S-12 provisoire) donnerait des taux d'effort NETS observés à
    confronter à R-06. Les 41 ZE tendues non couvertes de R-07 (tension
    touristique) rejoignent la frontière infra-territoriale du notebook 06.
-3. **Frontières de données actées** (ne pas re-tenter sans nouveau
+4. **Frontières de données actées** (ne pas re-tenter sans nouveau
    levier) : fichiers LOVAC détaillés = habilitation collectivités/État/
    Anah (sensibilité H-06) ; éviction saisonnière infra-territoriale =
    non tranchable en open data secrétisé (notebook 06) — leviers
    possibles : convention avec un partenaire habilité, registre des
    meublés de tourisme, monographies communales.
-4. **Chemin de publication** : revue contradictoire (méthode INTRO
+5. **Chemin de publication** : revue contradictoire (méthode INTRO
    étape 12 — chercher activement les objections), premier article dans
    `articles/` pointant le tag, licence du millésime loyers 2025 à
    confirmer avant publication (L-09), puis tag suivant.
@@ -44,7 +47,7 @@ H-08, C-06, avec correction tracée du test de tension). Le détail est dans
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 7 artefacts data/processed/
+uv run logement reproduce   # rebâtit les 8 artefacts data/processed/
 ./check.sh && ./test.sh     # portes qualité
 ```
 
@@ -87,3 +90,9 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
 - **Zonage TLV (S-13)** : colonnes « Code EPCI »/« Libellé EPCI »
   INVERSÉES par rapport aux en-têtes ; UTF-8 (pas cp1252), codes déjà à
   la commune parente pour PLM.
+- **Recensement** : P22_RP_BDWC (confort sanitaire) n'est renseignée que
+  dans les DOM — somme NULLE sur toute la métropole (vérifié session 2).
+- **API ADEME data-fair** : débit anonyme étranglé (HTTP 429) — ne jamais
+  paginer les lignes ; passer par values_agg par département × étiquette
+  (agg_size max 1000, script `logement acquire-dpe`) ; DPE quasi absents
+  des DOM ; jeu virtuel filtrant dpe_desactive=0.

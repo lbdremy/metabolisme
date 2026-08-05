@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 15 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, Légifrance ; 18 fichiers figés sha256/LFS + 2 collections vivantes) |
+| S | Sources | `sources/sources.yaml` | 16 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Légifrance ; 19 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 15 définitions citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle (2 ans, plage 1-3) · H-07 surface de relocation (51,2 m²/pers, plage 35-71) · H-08 seuil de vacance de fluidité (6 %, plage 5-7) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-15, T-01..T-08, R-01..R-07 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-07, V-01, C-01..C-06, L-01..L-12 |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-18, T-01..T-09, R-01..R-08 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-08, V-01, C-01..C-06, L-01..L-13 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -51,6 +51,9 @@ Sources enregistrées :
 - **S-15** — Observatoire de l'habitat CUA d'Alençon (2025), La vacance —
   borne basse du seuil de fluidité (« en-deçà de 5 %, le marché cesse
   d'être fluide »).
+- **S-16** — ADEME, DPE logements existants depuis 07/2021 — extrait
+  agrégé commune × étiquette (14,8 M de DPE couverts, acquisition
+  scriptée `logement acquire-dpe` ; biais d'échantillon documenté).
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -119,6 +122,16 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   volume absolu le gisement suffit nationalement (I-03 quantifié), mais
   la suffisance suppose de lever les blocages H-05 et la tension
   touristique ne se résout pas par la vacance. Limites L-12.
+
+- **R-08** — État du bâti × vacance par ZE (sortie reproductible
+  `data/processed/etat-bati-ze.json`) : en métropole, l'ancienneté du
+  bâti est le corrélat le plus fort de la chaîne (Spearman 0,56 ; F+G
+  0,40 ; F+G × âge 0,62 — la diagonale rurale) ; contraste DOM : vacance
+  médiane 11 % sur bâti récent et pourvu du confort. Lecture : **I-08** —
+  première instruction de H-05 : remobiliser le gisement a un coût de
+  remise en usage (métropole) ; aux DOM tout le mesurable est éliminé,
+  reste la piste successions/indivisions derrière la frontière de
+  données. Limites L-13.
 
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,

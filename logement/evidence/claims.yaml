@@ -649,3 +649,101 @@
     est plutôt sous-estimé (L-12).
   depends_on: [R-07, I-03, I-05]
   limitations: [L-12]
+
+# ------------------------------------ branche état du bâti (H-05, 1re instruction)
+
+- id: L-13
+  type: limit
+  title: >
+    Limites de l'instruction « état du bâti » : les DPE sont établis à la
+    vente/location/rénovation — l'échantillon n'est PAS le parc (l'ONRE
+    estime 13,9 % de F+G dans le parc au 01/01/2024 après extrapolation
+    contre ~9,9 % des seuls diagnostiqués), et les logements durablement
+    vacants ne sont justement pas diagnostiqués ; l'étiquette dépend
+    aussi du climat et de l'altitude (Gap : 25,9 % de F+G, vacance
+    2,2 %) ; les DOM sont quasi absents de la base (obligation récente
+    outre-mer — Guyane 104 diagnostics, ZE 0303 sans aucun DPE, seule ZE
+    exclue) ; la question du confort sanitaire du recensement (bain/
+    douche/WC, P22_RP_BDWC) n'est posée QUE dans les DOM (somme nulle sur
+    31,9 M de RP métropolitaines — vérifié) ; corrélations TERRITORIALES,
+    pas causes logement par logement ; 511 449 DPE (3,3 %) sans code
+    commune BAN hors extrait S-16 ; frontières d'accès actées : PPPI
+    (convention DREAL/DDT, open data 2015 obsolète), fichiers fonciers et
+    successions/indivisions (Cerema, acteurs publics — rien d'ouvert).
+  depends_on: [S-16, S-11, L-05, L-06]
+
+- id: O-16
+  type: observation
+  title: >
+    Ancienneté du bâti par commune (recensement 2022) : résidences
+    principales par période d'achèvement — la part d'avant 1946 par ZE va
+    de 1,1 % à 52,4 % (médiane 22,0 %).
+  depends_on: [S-11, D-02]
+
+- id: O-17
+  type: observation
+  title: >
+    Confort sanitaire des RP (recensement 2022, DOM UNIQUEMENT — la
+    question n'est pas posée en métropole) : part des RP sans baignoire/
+    douche/WC intérieurs de 0,9 % à 44,7 % selon la ZE des DOM.
+  depends_on: [S-11, D-02]
+
+- id: O-18
+  type: observation
+  title: >
+    Étiquettes DPE (A..G) des logements existants diagnostiqués depuis
+    juillet 2021, comptages par commune (extrait agrégé S-16 :
+    14 780 828 DPE couverts, 9,9 % de F+G parmi les diagnostiqués).
+  depends_on: [S-16, D-13]
+
+- id: T-09
+  type: transformation
+  title: >
+    État du bâti × vacance par ZE : parts d'ancienneté (avant 1946) et
+    d'inconfort sanitaire (DOM) agrégées depuis les comptages communaux
+    du recensement, part F+G des diagnostiqués agrégée depuis l'extrait
+    DPE (arrondissements PLM vers la commune parente), croisées avec le
+    taux de vacance structurelle LOVAC par ZE (corrélations de rangs,
+    séparation métropole / DOM).
+  depends_on: [O-04, O-05, O-16, O-17, O-18, C-03]
+  produced_by: src/logement/core/bati.py
+
+- id: R-08
+  type: result
+  title: >
+    État du bâti × vacance structurelle par zone d'emploi (304 ZE dont
+    17 DOM, recensement 2022, DPE depuis 07/2021, LOVAC mill. 24) : en
+    MÉTROPOLE, l'ancienneté du bâti est le corrélat territorial le plus
+    fort de la vacance structurelle de toute la chaîne — Spearman 0,56
+    (0,35 avec DOM), taux médian 3,8 % dans la moitié des ZE au bâti le
+    plus ancien contre 2,7 % ; le proxy énergie converge — part F+G des
+    diagnostiqués médiane 10,9 %, Spearman 0,40 avec la vacance
+    (métropole) et 0,62 avec l'ancienneté ; les têtes des deux
+    classements sont la diagonale rurale (Avallon 52,4 % d'avant-1946 ;
+    Ussel 37,3 % de F+G). CONTRASTE DOM : vacance médiane 11,0 % sur un
+    bâti récent (avant-1946 médian 1,9 %) et pourvu du confort sanitaire
+    (inconfort médian 1,9 %, Spearman inconfort × vacance 0,27 sur 17
+    ZE) — l'état du bâti n'explique pas la vacance ultramarine.
+  depends_on: [T-09, H-06, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/etat-bati-ze.json
+  limitations: [L-05, L-06, L-13]
+
+- id: I-08
+  type: interpretation
+  title: >
+    Première instruction de H-05 : en métropole, la vacance structurelle
+    est un phénomène du BÂTI ANCIEN RURAL — les deux proxys d'état
+    (ancienneté, étiquettes F+G) convergent vers les mêmes territoires
+    que R-02/R-03, et la remobilisation du gisement de R-07 y passe donc
+    par le coût de remise en usage (rénovation, mise aux normes), pas
+    seulement par l'incitation. Aux DOM, l'élimination progresse :
+    ni l'emploi (I-03), ni le coût seul (I-04), ni les résidences
+    secondaires (I-05), ni l'état du bâti (R-08) n'expliquent la vacance
+    record — reste la piste des blocages de propriété (successions,
+    indivisions), non mesurable en open data (frontière L-13) : à
+    instruire par convention d'accès, pas à affirmer. Corrélations
+    territoriales, pas causales — le chiffrage du coût de remobilisation
+    (qui conditionne I-07) reste à faire.
+  depends_on: [R-08, I-02, I-03, I-04, I-05, I-07]
+  limitations: [L-13]
