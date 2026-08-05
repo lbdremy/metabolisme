@@ -10,11 +10,14 @@ le milieu de session 2 est tagué **`efficacite-parc-v0.2`** (R-01..R-08).
 La session 2 a ajouté **R-06** (taux d'effort — S-12, H-07, C-04/C-05),
 **R-07** (tension et manque absolu — S-13..S-15, H-08, C-06, correction
 tracée), **R-08** (état du bâti, première instruction de H-05 — S-16,
-L-13) et **R-09** (coût de remobilisation ~12,5 Md€ vs ~48,3 Md€ en neuf
-— S-17..S-19, H-09/H-10, C-07). Le détail est dans `PREV-STEPS.md` ; les
-items ci-dessous sont ce qui reste à ouvrir. NOTE DE REPRISE : l'arc
-quantifié de la proposition est complet (R-07 volume → R-08 état → R-09
-coût) — l'item 4 (chemin de publication) est devenu praticable sans
+L-13), **R-09** (coût de remobilisation ~12,5 Md€ vs ~48,3 Md€ en neuf
+— S-17..S-19, H-09/H-10, C-07) et **R-10** (foncier en friche des zones
+tendues = 5,5-17,6 × le besoin à densité haussmannienne — S-20/S-21,
+H-11, C-08 : la contrainte de la détente est institutionnelle, pas
+physique). Le détail est dans `PREV-STEPS.md` ; les items ci-dessous
+sont ce qui reste à ouvrir. NOTE DE REPRISE : l'arc quantifié de la
+proposition est complet (R-07 volume → R-08 état → R-09 coût → R-10
+foncier) — l'item 4 (chemin de publication) est devenu praticable sans
 attendre les items 1-3, si la prochaine session veut privilégier la
 revue contradictoire et le premier article.
 
@@ -47,7 +50,7 @@ revue contradictoire et le premier article.
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 9 artefacts data/processed/
+uv run logement reproduce   # rebâtit les 10 artefacts data/processed/
 ./check.sh && ./test.sh     # portes qualité
 ```
 
@@ -96,3 +99,10 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
   paginer les lignes ; passer par values_agg par département × étiquette
   (agg_size max 1000, script `logement acquire-dpe`) ; DPE quasi absents
   des DOM ; jeu virtuel filtrant dpe_desactive=0.
+- **Cartofriches (S-20)** : inventaire PARTIEL bottom-up — totaux =
+  planchers, jamais de comparaison fine entre territoires ; bati_surface
+  vide (foncier seulement) ; queue de distribution violente (max
+  134 km²) → plafonner par site (C-08) ; « NA » littéraux dans le CSV.
+- **H-11 auto-contrôlée** : `core/foncier.py` recalcule la densité
+  haussmannienne depuis S-11 × S-21 et lève une erreur si le registre
+  dérive — mettre à jour hypotheses.yaml si les sources changent.

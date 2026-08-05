@@ -448,3 +448,49 @@
     de construction — le déflateur pertinent pour des coûts de
     rénovation. Le facteur est recalculé depuis ce fichier par la chaîne
     (jamais une constante enfouie).
+
+- id: S-20
+  publisher: Cerema (Cartofriches, pour le Ministère de la Transition écologique)
+  title: Sites référencés dans Cartofriches — inventaire national des friches, export du 15/06/2026
+  dataset_id: sites-references-dans-cartofriches
+  source_url: https://www.data.gouv.fr/datasets/sites-references-dans-cartofriches
+  publication_date: 2026-06-15
+  retrieved_at: 2026-08-05
+  geographic_scope: France entière (couverture HÉTÉROGÈNE — inventaire partiel, remonté des collectivités et pré-repérage national)
+  temporal_scope: état de l'inventaire au 15/06/2026 (mise à jour trimestrielle)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/cerema-cartofriches-2026-06-15.csv
+  checksum: sha256:8070174522e81284728eaaa72eecff4c3eae392efcefa56a34d6ff27e3f6156c
+  notes: >
+    36 241 sites sur 10 268 communes. Champs utilisés : comm_insee,
+    site_statut (« friche potentielle » 14 020 / « friche sans projet »
+    13 401 / « friche avec projet » 7 086 / « friche reconvertie »
+    1 734), unite_fonciere_surface (renseignée à 98 % — SURFACE DE
+    L'UNITÉ FONCIÈRE, pas du plancher bâti : bati_surface est vide),
+    bati_type (« résidentiel » quand connu, ~85 % inconnu/vide),
+    bati_vacance (lacunaire). PIÈGES : queue de distribution violente
+    (médiane ~0,6 ha, maximum 134 km² — carrières, camps militaires) ;
+    l'ABSENCE d'un site ne signifie PAS l'absence de friche (inventaire
+    bottom-up, effort de recensement variable selon les territoires) —
+    les totaux sont des PLANCHERS et les comparaisons fines entre
+    territoires ne sont pas fiables. Les bureaux vacants « en marché »
+    (immobilier d'entreprise) ne sont PAS couverts.
+
+- id: S-21
+  publisher: INSEE
+  title: Base du comparateur de territoires (dont superficie des communes et arrondissements municipaux)
+  dataset_id: base-comparateur-territoires
+  source_url: https://www.insee.fr/fr/statistiques/2521169
+  publication_date: 2026-07-22
+  retrieved_at: 2026-08-05
+  geographic_scope: France, communes et arrondissements municipaux (géographies 2025/2026)
+  temporal_scope: indicateurs multi-millésimes (superficie au millésime 2023)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-comparateur-territoires-2026.zip
+  checksum: sha256:17aded1066809bcb6a9ee044c89aa1e2093d59df21fad3c59dc043bcf0eda161
+  notes: >
+    Format long (GEO_OBJECT × TAB_MEASURE). Utilisée pour la mesure
+    « SUP » (superficie en km²) des ARRONDISSEMENTS municipaux parisiens
+    (GEO_OBJECT=ARM), dénominateur de la densité de référence
+    haussmannienne H-11 (numérateur : logements par arrondissement du
+    recensement S-11).

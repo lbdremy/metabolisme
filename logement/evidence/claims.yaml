@@ -852,3 +852,111 @@
     future proposition institutionnelle (P-xx à venir).
   depends_on: [R-09, I-07, I-08]
   limitations: [L-14]
+
+# ---------------------------- branche foncier immobilisé (question du 2026-08-05)
+
+- id: C-08
+  type: choice
+  title: >
+    Modèle du foncier immobilisé (décisions de Rémy, 2026-08-05) :
+    gisement central = friches « sans projet » de Cartofriches (S-20)
+    hors bâti résidentiel connu, variante haute avec les « potentielles »
+    (« avec projet » exclues : déjà fléchées) ; surface par site
+    PLAFONNÉE à 50 ha (au-delà, un site n'est pas un projet résidentiel
+    unique — totaux bruts publiés à côté) ; conversion en capacité de
+    logements à la DENSITÉ DE RÉFÉRENCE HAUSSMANNIENNE H-11, choisie
+    comme étalon d'un tissu résidentiel+commerces équilibré et marchable
+    où l'autonomie sans voiture est possible, et DÉRIVÉE des données
+    figées (logements par arrondissement S-11 / superficies S-21, sur
+    les arrondissements à ≥ 60 % de RP d'avant 1919) — la chaîne
+    recalcule H-11 et refuse toute dérive du registre.
+  depends_on: [S-20, S-11, S-21, H-11, C-06]
+
+- id: L-15
+  type: limit
+  title: >
+    Limites du chiffrage foncier : l'inventaire Cartofriches est PARTIEL
+    et hétérogène (remontées locales + pré-repérage national) —
+    l'absence d'un site ne signifie pas l'absence de friche, les totaux
+    sont des PLANCHERS et les comparaisons fines entre territoires ne
+    sont pas fiables ; surface d'unité foncière ≠ surface constructible
+    (pollution BASIAS/BASOL, zonage, rétention foncière) et bati_surface
+    est vide (pas de m² de plancher) ; la capacité à densité
+    haussmannienne est un POTENTIEL d'urbanisme, pas un programme (ni
+    dépollution/démolition ni délais chiffrés — le coût R-09 ne couvre
+    pas ce segment) ; le plafond de 50 ha par site écrête 72 % des
+    surfaces brutes (convention C-08) ; les bureaux vacants « en
+    marché » (immobilier d'entreprise, ORIE/données privées) restent une
+    frontière non couverte.
+  depends_on: [S-20, C-08]
+
+- id: O-22
+  type: observation
+  title: >
+    Friches inventoriées par Cartofriches (S-20, 15/06/2026) : 36 241
+    sites sur 10 268 communes — 14 020 « potentielles », 13 401 « sans
+    projet », 7 086 « avec projet », 1 734 « reconverties » ; surface
+    d'unité foncière renseignée à 98 % (médiane ~0,6 ha, maximum
+    134 km²).
+  depends_on: [S-20]
+
+- id: O-23
+  type: observation
+  title: >
+    Densités brutes des arrondissements parisiens au bâti ≥ 60 %
+    d'avant 1919 (1ᵉʳ, 2ᵉ, 3ᵉ, 4ᵉ, 6ᵉ, 8ᵉ, 9ᵉ — recensement S-11 /
+    superficies S-21) : de 70,6 (8ᵉ) à 225,7 logements/ha (3ᵉ), médiane
+    147,2.
+  depends_on: [S-11, S-21]
+
+- id: T-11
+  type: transformation
+  title: >
+    Foncier immobilisé par ZE tendue : parse Cartofriches
+    (PLM → commune parente, exclusion du bâti résidentiel connu,
+    plafond 50 ha), jointure communes → ZE, restriction aux ZE tendues
+    de T-08, dérivation et CONTRÔLE de H-11 depuis S-11 × S-21 (erreur
+    dure si le registre dérive des données), capacités aux trois
+    densités (min/médiane/max haussmanniennes), couverture du besoin
+    par ZE.
+  depends_on: [T-08, O-22, O-23, C-08]
+  produced_by: src/logement/core/foncier.py
+
+- id: R-10
+  type: result
+  title: >
+    Foncier immobilisé par des bâtiments non résidentiels dans les
+    zones tendues (Cartofriches 15/06/2026, 142 ZE tendues de R-07) :
+    gisement central (friches « sans projet ») de 4 052 sites et
+    22 328 ha plafonnés (80 196 ha bruts, 162 sites plafonnés) dans 134
+    ZE ; à densité haussmannienne (H-11 : 147,2 logements/ha, plage
+    70,6-225,7), capacité de ~3,29 M de logements = 11,5 × le besoin de
+    détente (5,5 × à la densité basse ; variante avec « potentielles » :
+    46 375 ha, jusqu'à 36 ×) ; 115 des 134 ZE pourvues couvriraient
+    leur besoin par leurs seules friches sans projet — dont Paris
+    (578 ha → ~85 000 logements vs besoin 8 649), Marseille et
+    Bordeaux ; plus gros gisements : Lens 1 726 ha, Tarbes-Lourdes,
+    Caen, Rouen, Thionville.
+  depends_on: [T-11, H-08, H-11, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/foncier-friches-ze.json
+  limitations: [L-12, L-15]
+
+- id: I-10
+  type: interpretation
+  title: >
+    Le foncier immobilisé n'est PAS la contrainte de la détente : même
+    au périmètre le plus strict (friches sans projet, hors résidentiel,
+    plafonnées) et à la borne basse de la densité de référence, la
+    capacité du foncier en friche des zones tendues dépasse largement
+    le besoin (5,5 à 17,6 ×) — et l'inventaire étant un plancher, le
+    gisement réel est supérieur. Combiné à R-07/R-08/R-09 : le volume
+    vacant suffit, le foncier suffit, le coût de remobilisation est
+    ~4 fois inférieur au neuf — la contrainte de la détente est
+    INSTITUTIONNELLE (blocages de propriété, remobilisation,
+    dépollution/portage du foncier), pas physique ni principalement
+    économique. La géographie du foncier (bassins industriels : Lens,
+    Thionville…) diffère de celle du besoin, mais les grandes
+    métropoles tendues sont elles-mêmes largement pourvues.
+  depends_on: [R-10, I-07, I-08, I-09]
+  limitations: [L-15]

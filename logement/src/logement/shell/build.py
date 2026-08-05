@@ -13,7 +13,19 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from logement.core import bati, cout, effort, lovac, parc, registry, remob, rs, tension, ze
+from logement.core import (
+    bati,
+    cout,
+    effort,
+    foncier,
+    lovac,
+    parc,
+    registry,
+    remob,
+    rs,
+    tension,
+    ze,
+)
 from logement.models import HypothesisRecord
 
 S01_FILE = "insee-focus-359-parc-logements-2025.xlsx"
@@ -51,6 +63,11 @@ BATI_OUTPUT = Path("data") / "processed" / "etat-bati-ze.json"
 
 IPEA_FILE = "insee-ipea-residentiel-011779962.xml"
 REMOB_OUTPUT = Path("data") / "processed" / "cout-remobilisation-ze.json"
+
+FRICHES_FILE = "cerema-cartofriches-2026-06-15.csv"
+COMPARATEUR_ZIP = "insee-comparateur-territoires-2026.zip"
+COMPARATEUR_CSV = "comparateur.csv"
+FONCIER_OUTPUT = Path("data") / "processed" / "foncier-friches-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -354,6 +371,69 @@ def run_remob(root: Path) -> int:
     print(
         f"cout-remobilisation: wrote {REMOB_OUTPUT} — couts {payload['couts']}, "
         f"comparateur {payload['comparateur_neuf']}"
+    )
+    return 0
+
+
+def build_foncier(root: Path) -> dict[str, object]:
+    """Compute the R-10 summary payload (immobilised land in tense zones)."""
+    raw = root / "data" / "raw"
+    friches = foncier.parse_friches(
+        pd.read_csv(raw / FRICHES_FILE, sep=";", dtype=str, na_values=["NA"])
+    )
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+    census = rs.parse_census_housing(census_raw)
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        paris_census = pd.read_csv(
+            fh,
+            sep=";",
+            dtype=str,
+            usecols=["CODGEO", "P22_LOG", "P22_RP_ACHTOT", "P22_RP_ACH1919"],
+        )
+    paris_census = paris_census[paris_census["CODGEO"].str.match(r"^751\d\d$")]
+    with zipfile.ZipFile(raw / COMPARATEUR_ZIP) as zf, zf.open(COMPARATEUR_CSV) as fh:
+        comp = pd.read_csv(
+            fh,
+            sep=";",
+            dtype=str,
+            usecols=["GEO_OBJECT", "GEO", "TIME_PERIOD", "TAB_MEASURE", "OBS_VALUE"],
+        )
+    sup = comp[
+        (comp["GEO_OBJECT"] == "ARM")
+        & (comp["TAB_MEASURE"] == "SUP")
+        & comp["GEO"].str.match(r"^751\d\d$")
+    ].copy()
+    sup["km2"] = pd.to_numeric(sup["OBS_VALUE"], errors="coerce")
+    superficies = sup.sort_values("TIME_PERIOD").groupby("GEO")["km2"].last()
+
+    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    h08 = _load_hypothesis(root, "H-08")
+    frame = tension.tension_by_ze(census, tlv, communes, commune_ze, h08.central_value)
+    tense_besoin = frame.loc[frame["tendue"], "besoin_mobilisation"]
+
+    density_frame = foncier.haussmann_density(paris_census, superficies)
+    return foncier.foncier_summary(
+        friches,
+        commune_ze,
+        tense_besoin,
+        density_frame,
+        _ze_names(root),
+        _load_hypothesis(root, "H-11"),
+    )
+
+
+def run_foncier(root: Path) -> int:
+    """Rebuild data/processed/foncier-friches-ze.json; return an exit code."""
+    payload = build_foncier(root)
+    _write_json(root, FONCIER_OUTPUT, payload)
+    print(
+        f"foncier-friches: wrote {FONCIER_OUTPUT} — gisement {payload['gisement_central']}, "
+        f"capacite {payload['capacite_centrale']}"
     )
     return 0
 

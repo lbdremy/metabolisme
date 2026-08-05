@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 19 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Enertech, Banque des Territoires, Légifrance ; 22 fichiers figés sha256/LFS + 2 collections vivantes) |
+| S | Sources | `sources/sources.yaml` | 21 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance ; 24 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 15 définitions citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante maison/collectif (S-17, euros 2016) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-21, T-01..T-10, R-01..R-09 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-09, V-01, C-01..C-07, L-01..L-14 |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-23, T-01..T-11, R-01..R-10 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-10, V-01, C-01..C-08, L-01..L-15 |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -62,6 +62,10 @@ Sources enregistrées :
   (comparateur de R-09).
 - **S-19** — INSEE (BDM 011779962), indice IPEA résidentiel — facteur
   d'actualisation 2016→2023 des coûts de travaux (×1,267).
+- **S-20** — Cerema, Cartofriches (export 15/06/2026) — 36 241 friches
+  inventoriées (inventaire PARTIEL : les totaux sont des planchers).
+- **S-21** — INSEE, base du comparateur de territoires — superficies des
+  arrondissements municipaux (dénominateur de H-11).
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -150,6 +154,16 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   l'argument économique de la remobilisation est solide mais ne lève ni
   les verrous de propriété (I-08) ni la tension touristique sans
   gisement ; première brique quantifiée de la proposition. Limites L-14.
+
+- **R-10** — Foncier immobilisé par le non-résidentiel vacant (sortie
+  reproductible `data/processed/foncier-friches-ze.json`) : 4 052
+  friches « sans projet » dans les ZE tendues, 22 328 ha plafonnés →
+  ~3,3 M de logements de capacité à densité haussmannienne (H-11
+  dérivée et contrôlée) = 11,5 × le besoin (5,5-17,6 sur la plage) ;
+  115 des 134 ZE pourvues couvrent leur besoin. Lecture : **I-10** —
+  le foncier n'est pas la contrainte ; volume vacant + foncier + coût
+  favorables, la contrainte de la détente est institutionnelle.
+  Limites L-15 (inventaire plancher, bureaux en marché hors champ).
 
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,

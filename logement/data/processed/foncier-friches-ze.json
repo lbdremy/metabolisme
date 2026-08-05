@@ -1,0 +1,144 @@
+{
+  "besoin_total": 285665,
+  "capacite_centrale": {
+    "bas": {
+      "logements": 1576357,
+      "ratio_besoin": 5.5
+    },
+    "central": {
+      "logements": 3286682,
+      "ratio_besoin": 11.5
+    },
+    "haut": {
+      "logements": 5039430,
+      "ratio_besoin": 17.6
+    }
+  },
+  "capacite_haute": {
+    "bas": {
+      "logements": 3274075,
+      "ratio_besoin": 11.5
+    },
+    "central": {
+      "logements": 6826400,
+      "ratio_besoin": 23.9
+    },
+    "haut": {
+      "logements": 10466838,
+      "ratio_besoin": 36.6
+    }
+  },
+  "couverture": {
+    "n_ze_avec_friche": 134,
+    "n_ze_capacite_couvre_besoin": 115
+  },
+  "criteres": {
+    "cap_surface_m2": 500000.0,
+    "part_avant_1919_min_pct": 60.0,
+    "statut_central": "friche sans projet",
+    "statut_variante": "friche potentielle"
+  },
+  "gisement_central": {
+    "ha_bruts": 80196,
+    "ha_plafonnes": 22328,
+    "n_sites": 4052,
+    "n_sites_plafonnes": 162,
+    "n_ze": 134
+  },
+  "gisement_haute": {
+    "ha_bruts": 154674,
+    "ha_plafonnes": 46375,
+    "n_sites": 10681,
+    "n_sites_plafonnes": 304,
+    "n_ze": 137
+  },
+  "h11_recalculee": {
+    "central": 147.2,
+    "max": 225.7,
+    "min": 70.6,
+    "n_arrondissements": 7.0
+  },
+  "n_ze_tendues": 142,
+  "top_gisements": [
+    {
+      "besoin_mobilisation": 1563,
+      "capacite_centrale": 254093,
+      "ha_plafonnes": 1726,
+      "n_sites": 403,
+      "name": "Lens",
+      "ze": "3215"
+    },
+    {
+      "besoin_mobilisation": 478,
+      "capacite_centrale": 184769,
+      "ha_plafonnes": 1255,
+      "n_sites": 100,
+      "name": "Tarbes - Lourdes",
+      "ze": "7624"
+    },
+    {
+      "besoin_mobilisation": 3382,
+      "capacite_centrale": 161506,
+      "ha_plafonnes": 1097,
+      "n_sites": 280,
+      "name": "Caen",
+      "ze": "2804"
+    },
+    {
+      "besoin_mobilisation": 2515,
+      "capacite_centrale": 159367,
+      "ha_plafonnes": 1083,
+      "n_sites": 245,
+      "name": "Rouen",
+      "ze": "2815"
+    },
+    {
+      "besoin_mobilisation": 1128,
+      "capacite_centrale": 135764,
+      "ha_plafonnes": 922,
+      "n_sites": 74,
+      "name": "Thionville",
+      "ze": "4424"
+    },
+    {
+      "besoin_mobilisation": 10670,
+      "capacite_centrale": 86056,
+      "ha_plafonnes": 585,
+      "n_sites": 88,
+      "name": "Marseille",
+      "ze": "9312"
+    },
+    {
+      "besoin_mobilisation": 8649,
+      "capacite_centrale": 85023,
+      "ha_plafonnes": 578,
+      "n_sites": 63,
+      "name": "Paris",
+      "ze": "1109"
+    },
+    {
+      "besoin_mobilisation": 11882,
+      "capacite_centrale": 83232,
+      "ha_plafonnes": 565,
+      "n_sites": 43,
+      "name": "Bordeaux",
+      "ze": "7505"
+    },
+    {
+      "besoin_mobilisation": 486,
+      "capacite_centrale": 74279,
+      "ha_plafonnes": 505,
+      "n_sites": 30,
+      "name": "Limoges",
+      "ze": "7517"
+    },
+    {
+      "besoin_mobilisation": 1,
+      "capacite_centrale": 71266,
+      "ha_plafonnes": 484,
+      "n_sites": 99,
+      "name": "Vernon – Gisors",
+      "ze": "2817"
+    }
+  ]
+}

@@ -134,3 +134,31 @@
     - C-07
   affects:
     - R-09
+
+- id: H-11
+  name: haussmann_reference_density_dwellings_per_ha
+  description: >
+    Densité résidentielle de référence pour convertir un foncier
+    reconverti en capacité de logements : la densité BRUTE (voirie et
+    équipements compris) observée dans les arrondissements parisiens au
+    bâti majoritairement haussmannien — choisie (décision de Rémy,
+    C-08) comme étalon d'un tissu résidentiel+commerces équilibré,
+    marchable, où l'autonomie sans voiture est possible. DÉRIVÉE des
+    données figées, jamais d'un chiffre de littérature : logements par
+    arrondissement (recensement S-11) / superficie (S-21), sur les 7
+    arrondissements dont ≥ 60 % des RP datent d'avant 1919 (1ᵉʳ, 2ᵉ,
+    3ᵉ, 4ᵉ, 6ᵉ, 8ᵉ, 9ᵉ). Centre : la médiane (147,2 logements/ha) ;
+    plage : le min-max observé (70,6 — le 8ᵉ, quartier de bureaux — à
+    225,7 — le 3ᵉ). La chaîne recalcule ces valeurs depuis les fichiers
+    figés (T-11) ; c'est une densité de POTENTIEL urbain, très
+    au-dessus des densités moyennes des opérations périurbaines.
+  central_value: 147.2
+  plausible_range: [70.6, 225.7]
+  unit: dwellings_per_ha
+  confidence: medium
+  justification:
+    - S-11
+    - S-21
+    - C-08
+  affects:
+    - R-10

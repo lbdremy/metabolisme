@@ -3,26 +3,45 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
-## Session 2 — 2026-08-05 (taux d'effort · tension · état du bâti · coût de remobilisation)
+## Session 2 — 2026-08-05 (taux d'effort · tension · bâti · coût · foncier)
 
-Quatre livrables : **R-06/I-06** (premier item de NEXT-STEPS), **R-07/I-07**
+Cinq livrables : **R-06/I-06** (premier item de NEXT-STEPS), **R-07/I-07**
 (nouvelle question posée par Rémy en séance : zones tendues, volume
 additionnel nécessaire à la détente, suffisance du gisement vacant local —
-en nombres ABSOLUS), **R-08/I-08** (première instruction de H-05), puis
-**R-09/I-09** (chiffrage du coût de remobilisation). Tag intermédiaire
-**`efficacite-parc-v0.2`** posé après R-08.
+en nombres ABSOLUS), **R-08/I-08** (première instruction de H-05),
+**R-09/I-09** (chiffrage du coût de remobilisation), puis **R-10/I-10**
+(seconde question de Rémy : le foncier immobilisé par le non-résidentiel
+vacant). Tag intermédiaire **`efficacite-parc-v0.2`** posé après R-08.
 
-**État en fin de session** : 19 sources figées (S-01..S-19), 15
-définitions, 5 hypothèses (H-06..H-10), graphe à 71 nœuds
-(O-01..O-21, T-01..T-10, R-01..R-09, I-01..I-09, C-01..C-07,
-L-01..L-14), 9 stages reproductibles, 73 tests verts, document de
-preuve auto-vérifié R-01..R-09, CI verte sur les 4 commits. **L'arc
+**État en fin de session** : 21 sources figées (S-01..S-21), 15
+définitions, 6 hypothèses (H-06..H-11), graphe à 78 nœuds
+(O-01..O-23, T-01..T-11, R-01..R-10, I-01..I-10, C-01..C-08,
+L-01..L-15), 10 stages reproductibles, 78 tests verts, document de
+preuve auto-vérifié R-01..R-10, CI verte sur tous les commits. **L'arc
 quantifié de la proposition est complet** : le gisement des zones
 tendues suffit en volume (R-07, couverture 1,65) → il est vieux et sa
-remobilisation a un coût (R-08) → mais ~4 fois moindre que construire
-(R-09, ~12,5 vs ~48,3 Md€). Toutes les hypothèses directrices
+remobilisation a un coût (R-08) → ~4 fois moindre que construire
+(R-09, ~12,5 vs ~48,3 Md€) → et le foncier en friche est surabondant
+(R-10, 5,5-17,6 × le besoin) : la contrainte de la détente est
+institutionnelle, pas physique. Toutes les hypothèses directrices
 mesurables en open data sont instruites ; H-04 reste à ouvrir, H-05 à
 approfondir par convention d'accès.
+
+### Livrable 5 — R-10 : le foncier immobilisé par le non-résidentiel vacant
+
+Sources S-20 (Cartofriches, 36 241 friches) et S-21 (superficies INSEE) ;
+hypothèse **H-11** = densité de référence haussmannienne (147,2
+logements/ha, plage 70,6-225,7) choisie par Rémy comme étalon d'un tissu
+équilibré marchable et DÉRIVÉE des données figées (arrondissements
+parisiens à ≥ 60 % de bâti d'avant 1919, S-11 × S-21) — la chaîne la
+recalcule et refuse toute dérive du registre (garde-fou dans
+`core/foncier.py`). Choix **C-08** (périmètre « sans projet », plafond
+50 ha/site, exclusion du résidentiel connu). Notebook 11 ;
+`core/foncier.py` + stage `foncier-friches` + 5 tests. Résultat :
+22 328 ha plafonnés dans 134 ZE tendues → ~3,3 M de logements de
+capacité = **11,5 × le besoin** ; 115 ZE couvrent leur besoin par leurs
+seules friches. Frontière actée : bureaux vacants « en marché »
+(ORIE/privé). Limites L-15 (inventaire plancher, potentiel ≠ programme).
 
 ### Livrable 4 — R-09 : le coût de la remobilisation vs construire
 

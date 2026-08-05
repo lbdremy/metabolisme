@@ -3,7 +3,7 @@ title: "Efficacité du parc immobilier français — document de preuve"
 subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
-  taux d'effort, tension et manque absolu, état du bâti, coût de remobilisation
+  taux d'effort, tension, état du bâti, coût de remobilisation, foncier immobilisé
 date: 2026-08-05
 lang: fr
 format:
@@ -132,7 +132,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 73 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 78 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -172,6 +172,12 @@ propriétés) :
   part maison, surfaces S-12, TVA 5,5 %, actualisation IPEA S-19),
   agrégats par variante (plages H-09/H-10) et comparaison au prix de
   revient du logement social neuf (S-18).
+- **T-11** (`core/foncier.py`) — foncier immobilisé par ZE tendue :
+  friches Cartofriches (choix **C-08** : « sans projet » central, plafond
+  50 ha/site, hors résidentiel connu), densité de référence
+  haussmannienne H-11 dérivée de S-11 × S-21 et CONTRÔLÉE contre le
+  registre (erreur dure en cas de dérive), capacités et couverture du
+  besoin par ZE.
 
 ## 5. Hypothèses
 
@@ -216,16 +222,17 @@ r06 = build.build_taux_effort(ROOT)
 r07 = build.build_tension(ROOT)
 r08 = build.build_etat_bati(ROOT)
 r09 = build.build_cout_remobilisation(ROOT)
+r10 = build.build_foncier(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
     ("R-05", r05, build.RS_OUTPUT), ("R-06", r06, build.EFFORT_OUTPUT),
     ("R-07", r07, build.TENSION_OUTPUT), ("R-08", r08, build.BATI_OUTPUT),
-    ("R-09", r09, build.REMOB_OUTPUT),
+    ("R-09", r09, build.REMOB_OUTPUT), ("R-10", r10, build.FONCIER_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-09 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-10 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -592,6 +599,45 @@ d'investissement total, pas un coût public, et l'argument économique ne
 lève pas à lui seul les verrous de propriété mis en évidence par R-08
 (interprétation I-09 ; limites L-14).
 
+### R-10 — Le foncier immobilisé par le non-résidentiel vacant
+
+```{python}
+#| code-summary: "chiffres clés R-10"
+h11c = r10["h11_recalculee"]
+print(f"H-11 recalculée depuis S-11 × S-21 : {h11c['central']} logements/ha "
+      f"(plage {h11c['min']}-{h11c['max']}, {h11c['n_arrondissements']:.0f} "
+      f"arrondissements haussmanniens)")
+g = r10["gisement_central"]
+print(f"Gisement central (friches sans projet, hors résidentiel) : "
+      f"{g['n_sites']:,} sites, {g['ha_plafonnes']:,} ha plafonnés "
+      f"({g['ha_bruts']:,} ha bruts, {g['n_sites_plafonnes']} sites plafonnés) "
+      f"dans {g['n_ze']} des {r10['n_ze_tendues']} ZE tendues".replace(",", " "))
+for label in ("bas", "central", "haut"):
+    c = r10["capacite_centrale"][label]
+    print(f"capacité × densité {label} : {c['logements']:,} logements "
+          f"({c['ratio_besoin']} × le besoin)".replace(",", " "))
+cv = r10["couverture"]
+print(f"ZE couvrant leur besoin par leurs seules friches sans projet : "
+      f"{cv['n_ze_capacite_couvre_besoin']} / {cv['n_ze_avec_friche']} pourvues")
+print("Plus gros gisements :",
+      ", ".join(f"{e['name'].strip()} {e['ha_plafonnes']:,} ha".replace(",", " ")
+                for e in r10["top_gisements"][:5]))
+```
+
+Réponse à la question du foncier immobilisé par des bâtiments vacants non
+résidentiels (ateliers, stockage, industrie…) : même au périmètre le plus
+strict — friches « sans projet », hors résidentiel connu, surfaces
+plafonnées à 50 ha par site — les zones tendues contiennent **~22 300 ha**
+de foncier en friche, soit, à la densité de référence haussmannienne
+(H-11, dérivée des données figées et re-contrôlée par la chaîne à chaque
+exécution), une capacité de **~3,3 millions de logements : 11,5 fois le
+besoin de détente** (5,5 × à la densité basse). **Le foncier n'est pas la
+contrainte** — et l'inventaire Cartofriches étant partiel, ces totaux
+sont des planchers. La géographie du gisement est industrielle (Lens,
+Thionville, Rouen…), mais Paris, Marseille et Bordeaux couvriraient
+elles-mêmes leur besoin (interprétation I-10 ; limites L-15, dont la
+frontière des bureaux vacants « en marché », hors donnée ouverte).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -702,6 +748,12 @@ couvertes) qui bouge avec le seuil.
   solide, mais il ne lève pas à lui seul les verrous de propriété (I-08)
   et ne couvre pas la tension touristique des 41 ZE sans gisement.
   Première brique quantifiée de la future proposition institutionnelle.
+- **I-10** — Le foncier immobilisé n'est pas la contrainte : les friches
+  sans projet des zones tendues porteraient 5,5 à 17,6 fois le besoin à
+  densité haussmannienne, inventaire pourtant partiel. Volume vacant
+  suffisant, foncier surabondant, coût favorable — la contrainte de la
+  détente est institutionnelle (propriété, remobilisation, portage du
+  foncier), pas physique.
 
 Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
 bâti, des causes de la vacance (succession, travaux, rétention…), de la
@@ -743,7 +795,7 @@ territoriale communale est bornée par la secrétisation (L-05).
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 73 tests (unitaires, propriétés, régression)
+./test.sh                   # 78 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 
