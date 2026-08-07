@@ -494,3 +494,126 @@
     (GEO_OBJECT=ARM), dénominateur de la densité de référence
     haussmannienne H-11 (numérateur : logements par arrondissement du
     recensement S-11).
+
+- id: S-22
+  publisher: Cour des comptes
+  title: La lutte contre les logements vacants dans le parc privé — observations définitives (S2025-0608)
+  dataset_id: ccomptes-s2025-0608-logements-vacants
+  source_url: https://www.ccomptes.fr/sites/default/files/2025-05/20250522-S2025-0608-Lutte-contre-logements-vacants-dans-le-parc-prive.pdf
+  publication_date: 2025-05-22
+  retrieved_at: 2026-08-07
+  geographic_scope: France (parc privé ; focus zones tendues et dispositifs nationaux)
+  temporal_scope: données 2014-2024 (LOVAC 2022-2023, ZLV 2020-2024, GMBI 2023)
+  license: Rapport public de la Cour des comptes — réutilisation libre avec mention de la source
+  local_file: data/raw/cour-des-comptes-logements-vacants-2025.pdf
+  checksum: sha256:b466ca4de1364f62aa7961ba71dc5d3b54542627257a399c818ca2e76d33129e
+  notes: >
+    Source primaire de la revue contradictoire (2026-08-07). Points
+    mobilisés : p. 16 — dans les communes TLV, 118 330 logements vacants
+    depuis plus de 2 ans en 2022 (1,5 % du parc), et « les logements
+    vacants ne sauraient constituer la principale ressource » des grandes
+    métropoles (étude Apur S-24) ; p. 21 — LOVAC surestime la vacance de
+    +14 % vs INSEE à périmètre comparable (Cerema : +10 à +20 %), et les
+    remontées de terrain estiment qu'environ 25 % des logements réputés
+    vacants ne le sont pas ou plus (Saint-Brieuc Armor : 74 réellement
+    vacants sur 270 contactés) — base de H-12 ; p. 29 — DHUP : 74 % du
+    parc privé durablement vacant est en marchés détendus ; pp. 13, 21-22
+    — campagne GMBI 2023 chaotique (82 % de déclarants, hausse 2022→2023
+    « bien plus marquée », risque de dégradation de la fiabilité LOVAC)
+    — complète L-04 ; pp. 24, 32, 36-37 — bilan des instruments : ZLV
+    6 700 sorties de vacance en 4 ans (3 % de sorties en zone tendue),
+    effet incitatif TLV/THLV « non démontré » (missions IGF/IGEDD 2016 et
+    2023), biais déclaratif fiscal possible en zone tendue (TLV/THRS).
+
+- id: S-23
+  publisher: SDES (Ministère de la Transition écologique — Boutchenik B., Mathieu B.)
+  title: Les déterminants de la vacance longue durée des logements détenus par les personnes physiques (Datalab)
+  dataset_id: sdes-datalab-determinants-vacance-longue-duree
+  source_url: https://www.statistiques.developpement-durable.gouv.fr/les-determinants-de-la-vacance-longue-duree-des-logements-detenus-par-les-personnes-physiques
+  publication_date: 2023-12-01
+  retrieved_at: 2026-08-07
+  geographic_scope: France (logements des personnes physiques, appariement Fidéli/LOVAC)
+  temporal_scope: millésimes 2019-2022
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/sdes-datalab-determinants-vacance-longue-duree-2023.pdf
+  checksum: sha256:32cf62dde44453d4b4e5d38991f851768faa23779690155ac17d39ebe997a1e7
+  notes: >
+    PDF téléchargé depuis /media/6939/download (annexe de données :
+    /media/6940, xlsx, non figée). L'écologie de la vacance longue durée
+    manquante au registre : un logement a ×2,8 plus de chances d'être
+    durablement vacant s'il fait moins de 35 m², ×3,3 s'il est construit
+    avant 1900, ×2 si l'indivision compte 3 usufruitiers ou plus ; ~45 %
+    de la vacance durable relève d'une forme d'obsolescence, ~20 % de
+    situations successorales. Fonde la limite « équivalence-unité non
+    établie » de R-07/R-09 (le gisement est biaisé vers les petits
+    logements anciens) et confirme la lecture I-08 (état du bâti,
+    successions) par des données logement par logement.
+
+- id: S-24
+  publisher: Apur (Atelier parisien d'urbanisme)
+  title: Les logements inoccupés à Paris — état des lieux, mise en perspective historique et leviers pour l'action publique
+  dataset_id: apur-logements-inoccupes-paris
+  source_url: https://www.apur.org/sites/default/files/logements_inoccupes_paris.pdf
+  publication_date: 2023-12-05
+  retrieved_at: 2026-08-07
+  geographic_scope: Paris (commune)
+  temporal_scope: recensement et fichiers fiscaux jusqu'en 2023 (série historique)
+  license: © Apur — publication publique librement téléchargeable, citation avec mention de la source
+  local_file: data/raw/apur-logements-inoccupes-paris-2023.pdf
+  checksum: sha256:c90fef65a2aeaa4078f203885d6d39fc263f98f76856146937515808cf11ad35
+  notes: >
+    Étude citée par la Cour des comptes (S-22, p. 28) : ~262 000
+    logements inoccupés ou peu utilisés à Paris (19 % du parc), dont
+    128 000 vacants au sens large mais seulement ~18 600 vacants depuis
+    plus de 2 ans dans le parc privé (1,3 %) — à confronter au chiffre
+    LOVAC millésime 26 de la chaîne (32 091, post-rupture GMBI) :
+    contrôle externe du volume parisien de R-02/R-07.
+
+- id: S-25
+  publisher: Cerema (Juliette Maître — présentation au Réseau national des aménageurs)
+  title: Coût des friches — analyse des lauréats du Fonds Friches (23/11/2023)
+  dataset_id: cerema-rna-cout-des-friches
+  source_url: https://web.archive.org/web/20240518025712/https://www.reseaunationalamenageurs.logement.gouv.fr/IMG/pdf/3-231123_rna_prez_jm.pdf
+  publication_date: 2023-11-23
+  retrieved_at: 2026-08-07
+  geographic_scope: France (échantillon de 1 029 lauréats 2021-2022 relus, 783 projets consolidés)
+  temporal_scope: éditions 1-3 du fonds friches (2021-2022)
+  license: © Cerema — support public de présentation (RNA) ; URL d'origine morte, figé via archive.org (snapshot du 18/05/2024)
+  local_file: data/raw/cerema-rna-bilan-fonds-friches-2023.pdf
+  checksum: sha256:aca40f5a346de507e9b335d1f34b277ac1f21d7934a4c170de7074e4c363c84b
+  notes: >
+    Coûts CONSTATÉS du recyclage de friches (échantillon uniquement
+    déficitaire, ordres de grandeur) : remise en état moyenne 780 k€
+    HT/ha traité (médiane ~400 k€, jusqu'à 1,8-2,5 M€/ha) ; recyclage
+    12-19 k€ HT/logement produit (médiane ~10 k€), foncier recyclé
+    ~25-31 k€/logement ; remise en état des projets résidentiels 2,5 ×
+    plus chère que non résidentielle ; 80 % des friches lauréates
+    polluées ; lauréats majoritairement en zone DÉTENDUE (zone C
+    dominante) ; production totale de l'échantillon : 20 247 689 m² de
+    plancher sur 2 313 ha recyclés (~8 750 m²SP/ha, tous usages).
+    Fonde la borne « densité d'opération constatée » de la sensibilité
+    R-10 et le coût d'usage du foncier en friche (L-15).
+
+- id: S-26
+  publisher: Cerema
+  title: Recyclage des friches — quels enseignements des centaines de projets soutenus par le fonds friches ? (article de bilan)
+  dataset_id: cerema-article-bilan-fonds-friches
+  source_url: https://www.cerema.fr/fr/actualites/recyclage-friches-quels-enseignements-centaines-projets
+  publication_date: 2023-12-04
+  retrieved_at: 2026-08-07
+  geographic_scope: France (1 382 projets soutenus, 3 éditions du fonds friches)
+  temporal_scope: éditions 1-3 (2021-2022), bilan publié fin 2023
+  license: © Cerema — page publique, citation avec mention de la source
+  local_file: data/raw/cerema-article-enseignements-fonds-friches-2023.html
+  checksum: sha256:50f0c625df5b61c2408942c26d8f49964d0c7b2fe7e06be4929657c179ad796c
+  notes: >
+    Page HTML figée (les chiffres de production n'apparaissent pas dans
+    la présentation S-25) : 2 999 candidats, 1 382 projets soutenus pour
+    750 M€, recyclage de 3 375 ha et production attendue de ~6,7 M m² de
+    surfaces de logements (plus d'un tiers de logements sociaux), >5 M m²
+    économiques, >4 M m² d'équipements ; 4,6 ha recyclés par M€ de
+    subvention. Dénominateur de la densité de logements CONSTATÉE des
+    opérations de recyclage : ~1 985 m²SP de logement par ha recyclé
+    (6,7 M m² / 3 375 ha, foncier partagé avec les autres usages), à
+    convertir en logements/ha dans la sensibilité de R-10 (convention
+    explicitée dans le code).
