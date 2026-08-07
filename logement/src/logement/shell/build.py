@@ -281,8 +281,17 @@ def build_tension(root: Path) -> dict[str, object]:
         _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
     )
     h08 = _load_hypothesis(root, "H-08")
-    frame = tension.tension_by_ze(census, tlv, communes, commune_ze, h08.central_value)
-    return tension.build_summary(frame, _ze_names(root), h08)
+    h12 = _load_hypothesis(root, "H-12")
+    rates = {
+        "bas": h12.plausible_range[0],
+        "central": h12.central_value,
+        "haut": h12.plausible_range[1],
+    }
+    frames = {
+        label: tension.tension_by_ze(census, tlv, communes, commune_ze, h08.central_value, rate)
+        for label, rate in rates.items()
+    }
+    return tension.build_summary(frames, _ze_names(root), h08, h12)
 
 
 def run_tension(root: Path) -> int:
@@ -344,8 +353,15 @@ def build_cout_remobilisation(root: Path) -> dict[str, object]:
         _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
     )
     h08 = _load_hypothesis(root, "H-08")
-    frame = tension.tension_by_ze(census, tlv, communes, commune_ze, h08.central_value)
-    tense = frame[frame["tendue"]]
+    h12 = _load_hypothesis(root, "H-12")
+    tense_by_seuil: dict[str, pd.DataFrame] = {}
+    for label, seuil in (
+        ("bas", h08.plausible_range[0]),
+        ("central", h08.central_value),
+        ("haut", h08.plausible_range[1]),
+    ):
+        frame = tension.tension_by_ze(census, tlv, communes, commune_ze, seuil, h12.central_value)
+        tense_by_seuil[label] = frame[frame["tendue"]]
     mix = (
         census_mix.merge(commune_ze, on="code", how="left")
         .dropna(subset=["ze"])
@@ -355,11 +371,13 @@ def build_cout_remobilisation(root: Path) -> dict[str, object]:
     part_maison = mix["rp_maison"] / (mix["rp_maison"] + mix["rp_appart"])
     annual_means = remob.parse_ipea_annual_means((raw / IPEA_FILE).read_text(encoding="utf-8"))
     return remob.build_summary(
-        tense,
+        tense_by_seuil,
         part_maison,
         _ze_names(root),
+        h08,
         _load_hypothesis(root, "H-09"),
         _load_hypothesis(root, "H-10"),
+        h12,
         annual_means,
     )
 
@@ -413,14 +431,27 @@ def build_foncier(root: Path) -> dict[str, object]:
         _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
     )
     h08 = _load_hypothesis(root, "H-08")
-    frame = tension.tension_by_ze(census, tlv, communes, commune_ze, h08.central_value)
-    tense_besoin = frame.loc[frame["tendue"], "besoin_mobilisation"]
+    h12 = _load_hypothesis(root, "H-12")
+    besoin_par_seuil: dict[str, dict[str, float]] = {}
+    tense_besoin = None
+    for label, seuil in (
+        ("bas", h08.plausible_range[0]),
+        ("central", h08.central_value),
+        ("haut", h08.plausible_range[1]),
+    ):
+        frame = tension.tension_by_ze(census, tlv, communes, commune_ze, seuil, h12.central_value)
+        besoin = frame.loc[frame["tendue"], "besoin_mobilisation"]
+        besoin_par_seuil[label] = {"seuil_pct": seuil, "besoin": float(besoin.sum())}
+        if label == "central":
+            tense_besoin = besoin
+    assert tense_besoin is not None
 
     density_frame = foncier.haussmann_density(paris_census, superficies)
     return foncier.foncier_summary(
         friches,
         commune_ze,
         tense_besoin,
+        besoin_par_seuil,
         density_frame,
         _ze_names(root),
         _load_hypothesis(root, "H-11"),

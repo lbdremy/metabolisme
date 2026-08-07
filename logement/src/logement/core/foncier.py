@@ -18,12 +18,19 @@ from __future__ import annotations
 import pandas as pd
 
 from logement.core.lovac import plm_parent
+from logement.core.remob import SURFACE_APPART_M2
 from logement.models import HypothesisRecord
 
 HAUSSMANN_PRE1919_MIN_PCT = 60.0  # C-08 selection criterion
 CAP_SURFACE_M2 = 500_000.0  # C-08: beyond 50 ha a site is not one housing project
 STATUT_CENTRAL = "friche sans projet"
 STATUT_VARIANTE = "friche potentielle"
+# Observed output of the fonds-friches recycling operations (S-26, review
+# 2026-08-07): ~6.7 M m² of housing floor area programmed on 3 375 ha of
+# recycled land (land shared with economic/equipment uses — an OPERATIONAL
+# density, not an urban-fabric potential like H-11).
+FONDS_FRICHES_M2_LOGEMENTS = 6_700_000.0  # S-26
+FONDS_FRICHES_HA_RECYCLES = 3_375.0  # S-26
 
 
 class FoncierError(Exception):
@@ -88,19 +95,45 @@ def check_h11_against_data(frame: pd.DataFrame, h11: HypothesisRecord) -> dict[s
     return computed
 
 
+def observed_recycling_density() -> dict[str, float]:
+    """Dwellings/ha observed in the fonds-friches operations (S-25/S-26).
+
+    Convention (declared, not hidden): housing floor area per recycled
+    hectare from S-26, converted to dwellings with the S-12 average
+    apartment surface (floor area ≈ habitable — approximation). The land
+    is shared with economic and equipment uses, so this is a conservative
+    OPERATIONAL floor to put against the H-11 urban-fabric potential.
+    """
+    m2_per_ha = FONDS_FRICHES_M2_LOGEMENTS / FONDS_FRICHES_HA_RECYCLES
+    return {
+        "m2_logements_par_ha": round(m2_per_ha),
+        "surface_logement_m2": SURFACE_APPART_M2,
+        "logements_par_ha": round(m2_per_ha / SURFACE_APPART_M2, 1),
+    }
+
+
 def foncier_summary(
     friches: pd.DataFrame,
     commune_ze: pd.DataFrame,
     tense_besoin: pd.Series,
+    besoin_par_seuil: dict[str, dict[str, float]],
     density_frame: pd.DataFrame,
     ze_names: pd.Series,
     h11: HypothesisRecord,
 ) -> dict[str, object]:
-    """Assemble the R-10 payload: land reservoir, capacity, coverage."""
+    """Assemble the R-10 payload: land reservoir, capacity, coverage.
+
+    `besoin_par_seuil` maps the H-08 labels (bas/central/haut) to
+    {"seuil_pct", "besoin"} — the review showed the published density
+    range hid the need's own factor-4.6 swing across the H-08 range.
+    """
     computed_h11 = check_h11_against_data(density_frame, h11)
     besoin_total = float(tense_besoin.sum())
     if besoin_total <= 0:
         raise FoncierError("empty or non-positive detente need")
+    for label in ("bas", "central", "haut"):
+        if label not in besoin_par_seuil:
+            raise FoncierError(f"missing H-08 need variant {label}")
 
     non_res = friches[~friches["residentiel"]].copy()
     non_res["surface_capee_m2"] = non_res["surface_m2"].clip(upper=CAP_SURFACE_M2)
@@ -159,6 +192,8 @@ def foncier_summary(
         }
 
     ranked = per_ze.sort_values(["ha", "ze_name"], ascending=[False, True], kind="stable")
+    observed = observed_recycling_density()
+    capacite_constatee = float(central_ha) * float(observed["logements_par_ha"])
     return {
         "h11_recalculee": computed_h11,
         "criteres": {
@@ -173,6 +208,24 @@ def foncier_summary(
         "gisement_haute": haute_stats,
         "capacite_centrale": capacities(float(central_ha)),
         "capacite_haute": capacities(float(haute_ha)),
+        "densite_constatee_fonds_friches": {
+            **observed,
+            "capacite_gisement_central": round(capacite_constatee),
+            "ratio_besoin": round(capacite_constatee / besoin_total, 1),
+        },
+        "sensibilite_seuil_h08": [
+            {
+                "seuil_pct": besoin_par_seuil[label]["seuil_pct"],
+                "besoin": round(besoin_par_seuil[label]["besoin"]),
+                "ratio_capacite_centrale": round(
+                    float(central_ha) * h11.central_value / besoin_par_seuil[label]["besoin"],
+                    1,
+                )
+                if besoin_par_seuil[label]["besoin"] > 0
+                else None,
+            }
+            for label in ("bas", "central", "haut")
+        ],
         "couverture": {
             "n_ze_avec_friche": len(per_ze),
             "n_ze_capacite_couvre_besoin": int(covered.sum()),

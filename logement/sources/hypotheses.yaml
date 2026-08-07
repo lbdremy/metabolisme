@@ -40,24 +40,34 @@
   description: >
     Surface habitable par personne du logement dans lequel un ménage médian
     se reloge, utilisée pour convertir le loyer d'annonce (€/m², S-09) en
-    dépense annuelle de relocation. Valeur centrale : la surface moyenne
-    par occupant observée en 2020 (51,2 m²/personne, enquête nationale
-    Logement, S-12). Plage plausible : bornes observées du graphique 2 de
-    S-12 selon l'âge de la personne de référence — 35 m²/personne pour les
-    30-39 ans (la tranche qui déménage le plus : à la relocation on
-    consomme plutôt moins que le parc moyen en place) à 71 m²/personne
-    pour les 75 ans et plus. La conversion en unités de consommation (le
-    revenu Filosofi MED_SL est en €/UC/an) passe par le ratio
-    personnes/UC OBSERVÉ de chaque zone d'emploi (NUM_PER / NUM_CU,
-    S-10), pas par un ménage type : le taux d'effort qui en résulte ne
-    dépend d'aucun choix de composition de ménage (décision C-04).
-    Limite : moyenne France métropolitaine (les ZE ultramarines de R-06
-    héritent d'une surface calibrée en métropole) ; premiers résultats
-    qualifiés de provisoires par S-12.
-  central_value: 51.2
-  plausible_range: [35.0, 71.0]
+    dépense annuelle de relocation. RECENTRÉE le 2026-08-07 (revue
+    contradictoire, décision de Rémy) : l'ancienne valeur centrale
+    (51,2 m²/personne, surface moyenne du parc OCCUPÉ EN PLACE, S-12)
+    décrivait le stock — gonflé par les 75 ans et plus (71 m²/personne)
+    qui ne déménagent pas — et non un ménage qui se reloge. Nouvelle
+    valeur centrale : 35 m²/personne, la surface observée par S-12
+    (graphique 2, cité verbatim) pour les 30-39 ans, la tranche d'âge la
+    plus mobile. Plage plausible : de 35 (borne basse identique au
+    centre : aucune valeur observée plus basse dans S-12) à 51,2
+    m²/personne (scénario « relocation au standard du parc en place »,
+    l'ancien centre — la sensibilité publiée est donc orientée à la
+    hausse). L'ancienne borne 71 (75 ans et plus) est abandonnée comme
+    scénario de relocation : cette tranche déménage peu et plutôt vers
+    plus petit. La conversion en unités de consommation (le revenu
+    Filosofi MED_SL est en €/UC/an) passe par le ratio personnes/UC
+    OBSERVÉ de chaque zone d'emploi (NUM_PER / NUM_CU, S-10), pas par un
+    ménage type (décision C-04). Limites : moyenne France métropolitaine
+    (les ZE ultramarines de R-06 héritent d'une surface calibrée en
+    métropole) ; premiers résultats qualifiés de provisoires par S-12 ;
+    la surface effectivement consommée à la relocation n'est observée
+    directement par aucune source ouverte (ni S-12 ni l'INSEE Première
+    n° 2090 du 21/01/2026 ne la stratifient par ancienneté
+    d'emménagement, vérifié 2026-08-07) — l'appariement « tranche la
+    plus mobile » reste une approximation déclarée.
+  central_value: 35.0
+  plausible_range: [35.0, 51.2]
   unit: m2_per_person
-  confidence: medium
+  confidence: low
   justification:
     - S-12
     - S-10
@@ -90,6 +100,8 @@
     - D-15
   affects:
     - R-07
+    - R-09
+    - R-10
 
 - id: H-09
   name: renovation_cost_maison_eur_ht_per_m2_2016
@@ -162,3 +174,43 @@
     - C-08
   affects:
     - R-10
+
+- id: H-12
+  name: lovac_structural_existence_rate
+  description: >
+    Fraction du gisement structurel LOVAC (vacance > 2 ans du parc privé,
+    D-10) correspondant à des logements RÉELLEMENT vacants au moment où
+    la base est exploitée. Introduite le 2026-08-07 par la revue
+    contradictoire : la Cour des comptes (S-22, p. 21) établit que LOVAC
+    surestime la vacance (+14 % vs INSEE 2020 à périmètre comparable ;
+    Cerema : +10 à +20 %) et que « les remontées de terrain permettent
+    d'estimer qu'environ 25 % des logements réputés vacants dans la base
+    ne le sont pas (ou plus) en réalité » (reloués, revendus, démolis,
+    identifiés à tort — cas extrême documenté : Saint-Brieuc Armor, 74
+    réellement vacants sur 270 contactés). Valeur centrale : 0,75 (le
+    complément des ~25 % de la Cour). Plage plausible : 0,60 (remontées
+    de terrain plus défavorables — le cas Saint-Brieuc, à 0,27, est
+    traité comme aberrant : campagne unique, biais de ciblage) à 0,90
+    (borne basse de la surestimation Cerema, ~1/1,10). PROPAGATION
+    COHÉRENTE dans C-06 : le taux s'applique à la fois au gisement
+    (gisement effectif = H-12 × structurelle) ET à la soustraction qui
+    définit la vacance disponible (disponible = vacants recensés −
+    H-12 × structurelle) — les faux vacants LOVAC ne sont pas non plus
+    une offre disponible. L'effet net sur la couverture n'est donc pas
+    le simple abattement du numérateur : le besoin baisse aussi ; la
+    chaîne publie le calcul complet, jamais une intuition. Ne couvre PAS
+    la mobilisabilité comportementale des vrais vacants (successions,
+    rétention volontaire, refus de louer) : celle-ci reste une limite
+    qualitative documentée (Cour : 6 700 sorties de vacance ZLV en 4
+    ans, ~3 % de taux de sortie en zone tendue), non paramétrée faute de
+    source donnant une fraction.
+  central_value: 0.75
+  plausible_range: [0.6, 0.9]
+  unit: fraction
+  confidence: low
+  justification:
+    - S-22
+    - S-05
+  affects:
+    - R-07
+    - R-09

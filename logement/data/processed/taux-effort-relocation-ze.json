@@ -1,14 +1,14 @@
 {
   "appart_only": {
-    "median_effort_pct": 43.8,
+    "median_effort_pct": 29.9,
     "spearman_vs_mix": 0.959
   },
   "bottom_effort": [
     {
-      "effort_brut_pct": 29.0,
+      "effort_brut_pct": 19.8,
       "effort_range_pct": [
         19.8,
-        40.2
+        29.0
       ],
       "loyer_mix_m2": 7.39,
       "name": "Avallon",
@@ -19,10 +19,10 @@
       "ze": "2703"
     },
     {
-      "effort_brut_pct": 29.1,
+      "effort_brut_pct": 19.9,
       "effort_range_pct": [
         19.9,
-        40.4
+        29.1
       ],
       "loyer_mix_m2": 7.21,
       "name": "Mayenne",
@@ -33,10 +33,10 @@
       "ze": "5215"
     },
     {
-      "effort_brut_pct": 29.3,
+      "effort_brut_pct": 20.1,
       "effort_range_pct": [
         20.1,
-        40.7
+        29.3
       ],
       "loyer_mix_m2": 7.41,
       "name": "Loches",
@@ -47,10 +47,10 @@
       "ze": "2408"
     },
     {
-      "effort_brut_pct": 29.6,
+      "effort_brut_pct": 20.2,
       "effort_range_pct": [
         20.2,
-        41.0
+        29.6
       ],
       "loyer_mix_m2": 7.53,
       "name": "Chaumont",
@@ -61,10 +61,10 @@
       "ze": "4404"
     },
     {
-      "effort_brut_pct": 29.6,
+      "effort_brut_pct": 20.3,
       "effort_range_pct": [
         20.3,
-        41.1
+        29.6
       ],
       "loyer_mix_m2": 7.39,
       "name": "Ussel",
@@ -76,26 +76,26 @@
     }
   ],
   "effort_brut_pct_quantiles": {
-    "max": 93.5,
-    "median": 40.1,
-    "min": 29.0,
-    "p10": 31.9,
-    "p25": 35.3,
-    "p75": 46.5,
-    "p90": 56.5
+    "max": 63.9,
+    "median": 27.4,
+    "min": 19.8,
+    "p10": 21.8,
+    "p25": 24.2,
+    "p75": 31.8,
+    "p90": 38.6
   },
   "hypothesis": {
-    "central_value_m2_per_person": 51.2,
+    "central_value_m2_per_person": 35.0,
     "id": "H-07",
     "name": "relocation_surface_per_person_m2",
     "plausible_range": [
       35.0,
-      71.0
+      51.2
     ]
   },
   "median_effort_by_h07_pct": {
-    "central": 40.1,
-    "high": 55.6,
+    "central": 27.4,
+    "high": 40.1,
     "low": 27.4
   },
   "median_vacancy_rate_pct": {
@@ -115,12 +115,30 @@
   },
   "reference_millesime": 2024,
   "spearman_effort_vs_vacancy": -0.4,
+  "spearman_perimetres": {
+    "france_entiere": {
+      "ci95": [
+        -0.49,
+        -0.3
+      ],
+      "n": 297,
+      "rho": -0.4
+    },
+    "metropole": {
+      "ci95": [
+        -0.59,
+        -0.41
+      ],
+      "n": 287,
+      "rho": -0.51
+    }
+  },
   "top_effort": [
     {
-      "effort_brut_pct": 93.5,
+      "effort_brut_pct": 63.9,
       "effort_range_pct": [
         63.9,
-        129.7
+        93.5
       ],
       "loyer_mix_m2": 26.79,
       "name": "Paris",
@@ -131,10 +149,10 @@
       "ze": "1109"
     },
     {
-      "effort_brut_pct": 85.1,
+      "effort_brut_pct": 58.1,
       "effort_range_pct": [
         58.1,
-        118.0
+        85.1
       ],
       "loyer_mix_m2": 16.15,
       "name": "L'Ouest",
@@ -145,10 +163,10 @@
       "ze": "0402"
     },
     {
-      "effort_brut_pct": 82.9,
+      "effort_brut_pct": 56.7,
       "effort_range_pct": [
         56.7,
-        114.9
+        82.9
       ],
       "loyer_mix_m2": 17.91,
       "name": "Roissy ",
@@ -159,10 +177,10 @@
       "ze": "1112"
     },
     {
-      "effort_brut_pct": 78.7,
+      "effort_brut_pct": 53.8,
       "effort_range_pct": [
         53.8,
-        109.2
+        78.7
       ],
       "loyer_mix_m2": 21.79,
       "name": "Menton",
@@ -173,10 +191,10 @@
       "ze": "9314"
     },
     {
-      "effort_brut_pct": 77.4,
+      "effort_brut_pct": 52.9,
       "effort_range_pct": [
         52.9,
-        107.3
+        77.4
       ],
       "loyer_mix_m2": 16.57,
       "name": "Le Sud",
@@ -187,10 +205,10 @@
       "ze": "0205"
     },
     {
-      "effort_brut_pct": 75.8,
+      "effort_brut_pct": 51.8,
       "effort_range_pct": [
         51.8,
-        105.1
+        75.8
       ],
       "loyer_mix_m2": 11.67,
       "name": "L'Est",
@@ -201,10 +219,10 @@
       "ze": "0401"
     },
     {
-      "effort_brut_pct": 75.5,
+      "effort_brut_pct": 51.6,
       "effort_range_pct": [
         51.6,
-        104.6
+        75.5
       ],
       "loyer_mix_m2": 13.24,
       "name": "Le Sud",
@@ -215,10 +233,10 @@
       "ze": "0404"
     },
     {
-      "effort_brut_pct": 75.4,
+      "effort_brut_pct": 51.5,
       "effort_range_pct": [
         51.5,
-        104.5
+        75.4
       ],
       "loyer_mix_m2": 14.79,
       "name": "Le Nord",

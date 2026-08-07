@@ -9,6 +9,32 @@
   "growing_ze_median_rate_pct": 2.9,
   "n_ze": 305,
   "reference_millesime": 2024,
+  "secretisation": {
+    "declining_share_borne_pct": [
+      12.2,
+      21.7
+    ],
+    "max_structurels_par_commune_masquee": 10,
+    "n_communes_masquees": 26927
+  },
+  "spearman_perimetres": {
+    "france_entiere": {
+      "ci95": [
+        -0.45,
+        -0.26
+      ],
+      "n": 305,
+      "rho": -0.36
+    },
+    "metropole": {
+      "ci95": [
+        -0.55,
+        -0.37
+      ],
+      "n": 287,
+      "rho": -0.47
+    }
+  },
   "spearman_rate_vs_growth": -0.36,
   "top_declining_by_volume": [
     {

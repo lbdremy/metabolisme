@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import pandas as pd
 
+from logement.core import stats
 from logement.core.lovac import REFERENCE_MILLESIME, plm_parent
 from logement.models import HypothesisRecord
 
@@ -164,7 +165,7 @@ def build_summary(
     central = h07.central_value
     low, high = h07.plausible_range
     effort = frame["effort_brut_pct"]
-    spearman = float(effort.rank().corr(frame["taux_structurelle_pct"].rank()))
+    perimetres = stats.spearman_by_perimeter(frame, "effort_brut_pct", "taux_structurelle_pct")
     high_effort = effort > effort.median()
 
     def entry(row: pd.Series) -> dict[str, object]:
@@ -210,7 +211,8 @@ def build_summary(
                 float(effort.rank().corr(frame["effort_appart_pct"].rank())), 3
             ),
         },
-        "spearman_effort_vs_vacancy": round(spearman, 2),
+        "spearman_effort_vs_vacancy": perimetres["france_entiere"]["rho"],
+        "spearman_perimetres": perimetres,
         "median_vacancy_rate_pct": {
             "high_effort_half": round(
                 float(frame.loc[high_effort, "taux_structurelle_pct"].median()), 1

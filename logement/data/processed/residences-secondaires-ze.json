@@ -7,35 +7,21 @@
       "indice_cout_pct": 0.48,
       "name": "Ussel",
       "part_rs_pct": 26.1,
-      "taux_structurelle_pct": 5.24,
+      "taux_structurelle_pct": 5.21,
       "ze": "0063"
-    },
-    {
-      "indice_cout_pct": 0.48,
-      "name": "Avallon",
-      "part_rs_pct": 27.2,
-      "taux_structurelle_pct": 5.32,
-      "ze": "2703"
-    },
-    {
-      "indice_cout_pct": 0.56,
-      "name": "Sarlat-La-Canéda",
-      "part_rs_pct": 27.3,
-      "taux_structurelle_pct": 5.57,
-      "ze": "7529"
     },
     {
       "indice_cout_pct": 0.53,
       "name": "Millau",
       "part_rs_pct": 24.7,
-      "taux_structurelle_pct": 5.7,
+      "taux_structurelle_pct": 5.38,
       "ze": "7614"
     },
     {
       "indice_cout_pct": 0.46,
       "name": "Les Sources de la Loire",
       "part_rs_pct": 20.2,
-      "taux_structurelle_pct": 5.06,
+      "taux_structurelle_pct": 5.03,
       "ze": "8420"
     },
     {
@@ -46,56 +32,56 @@
       "ze": "8429"
     },
     {
-      "indice_cout_pct": 0.77,
-      "name": "Ajaccio",
-      "part_rs_pct": 29.0,
-      "taux_structurelle_pct": 5.4,
-      "ze": "9401"
-    },
-    {
-      "indice_cout_pct": 0.76,
-      "name": "Bastia",
-      "part_rs_pct": 25.6,
-      "taux_structurelle_pct": 5.92,
-      "ze": "9402"
-    },
-    {
       "indice_cout_pct": 0.76,
       "name": "Corte",
       "part_rs_pct": 39.1,
-      "taux_structurelle_pct": 10.41,
+      "taux_structurelle_pct": 6.92,
       "ze": "9404"
     },
     {
       "indice_cout_pct": 0.73,
       "name": "Ghisonaccia",
       "part_rs_pct": 43.7,
-      "taux_structurelle_pct": 7.26,
+      "taux_structurelle_pct": 6.77,
       "ze": "9405"
     },
     {
       "indice_cout_pct": 0.82,
       "name": "Porto-Vecchio",
       "part_rs_pct": 56.8,
-      "taux_structurelle_pct": 7.14,
+      "taux_structurelle_pct": 6.52,
       "ze": "9406"
     },
     {
       "indice_cout_pct": 0.83,
       "name": "Propriano",
       "part_rs_pct": 47.9,
-      "taux_structurelle_pct": 6.14,
+      "taux_structurelle_pct": 5.57,
       "ze": "9407"
     }
   ],
-  "spearman_rs_vs_cost_index": -0.05,
-  "spearman_rs_vs_structural_vacancy": 0.17,
+  "spearman_rs_vs_cost_index": {
+    "ci95": [
+      -0.16,
+      0.06
+    ],
+    "n": 297,
+    "rho": -0.05
+  },
+  "spearman_rs_vs_structural_vacancy": {
+    "ci95": [
+      0.04,
+      0.26
+    ],
+    "n": 297,
+    "rho": 0.15
+  },
   "top_rs_share": [
     {
       "indice_cout_pct": 0.71,
       "name": "Briançon",
       "part_rs_pct": 65.5,
-      "taux_structurelle_pct": 1.55,
+      "taux_structurelle_pct": 1.48,
       "ze": "9302"
     },
     {
@@ -109,7 +95,7 @@
       "indice_cout_pct": 0.63,
       "name": "La Maurienne",
       "part_rs_pct": 58.4,
-      "taux_structurelle_pct": 2.43,
+      "taux_structurelle_pct": 2.35,
       "ze": "8411"
     },
     {
@@ -130,14 +116,14 @@
       "indice_cout_pct": 0.82,
       "name": "Porto-Vecchio",
       "part_rs_pct": 56.8,
-      "taux_structurelle_pct": 7.14,
+      "taux_structurelle_pct": 6.52,
       "ze": "9406"
     },
     {
       "indice_cout_pct": 0.83,
       "name": "Calvi",
       "part_rs_pct": 56.7,
-      "taux_structurelle_pct": 3.31,
+      "taux_structurelle_pct": 2.47,
       "ze": "9403"
     },
     {
@@ -150,10 +136,10 @@
   ],
   "touristic_ze": {
     "median_cost_index_pct": 0.67,
-    "median_structural_vacancy_pct": 2.6,
+    "median_structural_vacancy_pct": 2.5,
     "n": 56,
     "others_median_cost_index_pct": 0.59,
-    "others_median_structural_vacancy_pct": 3.3,
+    "others_median_structural_vacancy_pct": 3.2,
     "threshold_rs_pct": 20.0
   }
 }

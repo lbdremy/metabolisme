@@ -77,10 +77,16 @@ def test_foncier_summary_caps_and_counts() -> None:
     )
     commune_ze = pd.DataFrame({"code": ["00001", "00002"], "ze": ["0001", "0001"]})
     tense_besoin = pd.Series({"0001": 1000.0})
+    besoin_par_seuil = {
+        "bas": {"seuil_pct": 5.0, "besoin": 500.0},
+        "central": {"seuil_pct": 6.0, "besoin": 1000.0},
+        "haut": {"seuil_pct": 7.0, "besoin": 2000.0},
+    }
     summary = foncier.foncier_summary(
         friches,
         commune_ze,
         tense_besoin,
+        besoin_par_seuil,
         _density_frame(),
         pd.Series({"0001": "Alpha"}),
         _h11(),
@@ -93,3 +99,14 @@ def test_foncier_summary_caps_and_counts() -> None:
     assert summary["capacite_centrale"]["central"]["logements"] == 50 * 150
     assert summary["gisement_haute"]["n_sites"] == 2
     assert summary["top_gisements"][0]["name"] == "Alpha"
+    # H-08 propagation: a doubled need halves the density-central ratio
+    seuils = {s["seuil_pct"]: s for s in summary["sensibilite_seuil_h08"]}
+    assert seuils[7.0]["ratio_capacite_centrale"] == pytest.approx(
+        seuils[6.0]["ratio_capacite_centrale"] / 2, abs=0.1
+    )
+    # observed fonds-friches density is far below the Haussmannian etalon
+    constatee = summary["densite_constatee_fonds_friches"]
+    assert constatee["logements_par_ha"] < 150
+    assert constatee["capacite_gisement_central"] == pytest.approx(
+        50 * constatee["logements_par_ha"], abs=1
+    )

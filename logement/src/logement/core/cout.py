@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import pandas as pd
 
+from logement.core import stats
 from logement.core.lovac import REFERENCE_MILLESIME, plm_parent
 
 
@@ -72,8 +73,12 @@ def cost_index_by_ze(
             raise CoutError(f"missing LOVAC column {col}")
     lovac = lovac_communes.copy()
     lovac["code"] = lovac["code"].map(plm_parent)
+    # min_count keeps masked (secret) communes missing, never a silent zero
+    # (review harmonisation: T-03/T-04 now carry the same NA contract as
+    # T-07/T-08).
     parc = lovac.groupby("code", as_index=False).agg(
-        parc_prive=(stock_col, "sum"), structurelle=(vac_col, "sum")
+        parc_prive=(stock_col, lambda s: s.sum(min_count=1)),
+        structurelle=(vac_col, lambda s: s.sum(min_count=1)),
     )
     com = (
         loyers_commune.merge(parc, on="code", how="inner")
@@ -87,8 +92,8 @@ def cost_index_by_ze(
                 .mul(g["parc_prive"])
                 .sum()
                 / g["parc_prive"].sum(),
-                "parc_prive": g["parc_prive"].sum(),
-                "structurelle": g["structurelle"].sum(),
+                "parc_prive": g["parc_prive"].sum(min_count=1),
+                "structurelle": g["structurelle"].sum(min_count=1),
             }
         ),
         include_groups=False,
@@ -104,7 +109,7 @@ def cost_index_by_ze(
 def build_summary(cost_ze: pd.DataFrame, ze_names: pd.Series) -> dict[str, object]:
     """Assemble the R-04 payload: correlation, halves, extreme ZE lists."""
     frame = cost_ze.join(ze_names.rename("ze_name"), how="left")
-    spearman = float(frame["indice_cout_pct"].rank().corr(frame["taux_structurelle_pct"].rank()))
+    perimetres = stats.spearman_by_perimeter(frame, "indice_cout_pct", "taux_structurelle_pct")
     expensive = frame["indice_cout_pct"] > frame["indice_cout_pct"].median()
 
     def entry(row: pd.Series) -> dict[str, object]:
@@ -126,7 +131,8 @@ def build_summary(cost_ze: pd.DataFrame, ze_names: pd.Series) -> dict[str, objec
     return {
         "reference_millesime": REFERENCE_MILLESIME,
         "n_ze": len(frame),
-        "spearman_cost_vs_vacancy": round(spearman, 2),
+        "spearman_cost_vs_vacancy": perimetres["france_entiere"]["rho"],
+        "spearman_perimetres": perimetres,
         "median_vacancy_rate_pct": {
             "expensive_half": round(
                 float(frame.loc[expensive, "taux_structurelle_pct"].median()), 1

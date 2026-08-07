@@ -1,36 +1,36 @@
 {
-  "besoin_total": 285665,
+  "besoin_total": 194488,
   "capacite_centrale": {
     "bas": {
-      "logements": 1576357,
-      "ratio_besoin": 5.5
+      "logements": 1015440,
+      "ratio_besoin": 5.2
     },
     "central": {
-      "logements": 3286682,
-      "ratio_besoin": 11.5
+      "logements": 2117178,
+      "ratio_besoin": 10.9
     },
     "haut": {
-      "logements": 5039430,
-      "ratio_besoin": 17.6
+      "logements": 3246243,
+      "ratio_besoin": 16.7
     }
   },
   "capacite_haute": {
     "bas": {
-      "logements": 3274075,
-      "ratio_besoin": 11.5
+      "logements": 2118212,
+      "ratio_besoin": 10.9
     },
     "central": {
-      "logements": 6826400,
-      "ratio_besoin": 23.9
+      "logements": 4416442,
+      "ratio_besoin": 22.7
     },
     "haut": {
-      "logements": 10466838,
-      "ratio_besoin": 36.6
+      "logements": 6771677,
+      "ratio_besoin": 34.8
     }
   },
   "couverture": {
-    "n_ze_avec_friche": 134,
-    "n_ze_capacite_couvre_besoin": 115
+    "n_ze_avec_friche": 93,
+    "n_ze_capacite_couvre_besoin": 80
   },
   "criteres": {
     "cap_surface_m2": 500000.0,
@@ -38,19 +38,26 @@
     "statut_central": "friche sans projet",
     "statut_variante": "friche potentielle"
   },
+  "densite_constatee_fonds_friches": {
+    "capacite_gisement_central": 435805,
+    "logements_par_ha": 30.3,
+    "m2_logements_par_ha": 1985,
+    "ratio_besoin": 2.2,
+    "surface_logement_m2": 65.5
+  },
   "gisement_central": {
-    "ha_bruts": 80196,
-    "ha_plafonnes": 22328,
-    "n_sites": 4052,
-    "n_sites_plafonnes": 162,
-    "n_ze": 134
+    "ha_bruts": 61981,
+    "ha_plafonnes": 14383,
+    "n_sites": 2736,
+    "n_sites_plafonnes": 104,
+    "n_ze": 93
   },
   "gisement_haute": {
-    "ha_bruts": 154674,
-    "ha_plafonnes": 46375,
-    "n_sites": 10681,
-    "n_sites_plafonnes": 304,
-    "n_ze": 137
+    "ha_bruts": 89947,
+    "ha_plafonnes": 30003,
+    "n_sites": 7289,
+    "n_sites_plafonnes": 193,
+    "n_ze": 94
   },
   "h11_recalculee": {
     "central": 147.2,
@@ -58,10 +65,27 @@
     "min": 70.6,
     "n_arrondissements": 7.0
   },
-  "n_ze_tendues": 142,
+  "n_ze_tendues": 97,
+  "sensibilite_seuil_h08": [
+    {
+      "besoin": 74083,
+      "ratio_capacite_centrale": 28.6,
+      "seuil_pct": 5.0
+    },
+    {
+      "besoin": 194488,
+      "ratio_capacite_centrale": 10.9,
+      "seuil_pct": 6.0
+    },
+    {
+      "besoin": 414944,
+      "ratio_capacite_centrale": 5.1,
+      "seuil_pct": 7.0
+    }
+  ],
   "top_gisements": [
     {
-      "besoin_mobilisation": 1563,
+      "besoin_mobilisation": 727,
       "capacite_centrale": 254093,
       "ha_plafonnes": 1726,
       "n_sites": 403,
@@ -69,15 +93,7 @@
       "ze": "3215"
     },
     {
-      "besoin_mobilisation": 478,
-      "capacite_centrale": 184769,
-      "ha_plafonnes": 1255,
-      "n_sites": 100,
-      "name": "Tarbes - Lourdes",
-      "ze": "7624"
-    },
-    {
-      "besoin_mobilisation": 3382,
+      "besoin_mobilisation": 2538,
       "capacite_centrale": 161506,
       "ha_plafonnes": 1097,
       "n_sites": 280,
@@ -85,7 +101,7 @@
       "ze": "2804"
     },
     {
-      "besoin_mobilisation": 2515,
+      "besoin_mobilisation": 778,
       "capacite_centrale": 159367,
       "ha_plafonnes": 1083,
       "n_sites": 245,
@@ -93,15 +109,7 @@
       "ze": "2815"
     },
     {
-      "besoin_mobilisation": 1128,
-      "capacite_centrale": 135764,
-      "ha_plafonnes": 922,
-      "n_sites": 74,
-      "name": "Thionville",
-      "ze": "4424"
-    },
-    {
-      "besoin_mobilisation": 10670,
+      "besoin_mobilisation": 6191,
       "capacite_centrale": 86056,
       "ha_plafonnes": 585,
       "n_sites": 88,
@@ -109,15 +117,7 @@
       "ze": "9312"
     },
     {
-      "besoin_mobilisation": 8649,
-      "capacite_centrale": 85023,
-      "ha_plafonnes": 578,
-      "n_sites": 63,
-      "name": "Paris",
-      "ze": "1109"
-    },
-    {
-      "besoin_mobilisation": 11882,
+      "besoin_mobilisation": 9774,
       "capacite_centrale": 83232,
       "ha_plafonnes": 565,
       "n_sites": 43,
@@ -125,20 +125,44 @@
       "ze": "7505"
     },
     {
-      "besoin_mobilisation": 486,
-      "capacite_centrale": 74279,
-      "ha_plafonnes": 505,
-      "n_sites": 30,
-      "name": "Limoges",
-      "ze": "7517"
+      "besoin_mobilisation": 3137,
+      "capacite_centrale": 69435,
+      "ha_plafonnes": 472,
+      "n_sites": 29,
+      "name": "La Teste-de-Buch",
+      "ze": "7513"
     },
     {
-      "besoin_mobilisation": 1,
-      "capacite_centrale": 71266,
-      "ha_plafonnes": 484,
-      "n_sites": 99,
-      "name": "Vernon – Gisors",
-      "ze": "2817"
+      "besoin_mobilisation": 2331,
+      "capacite_centrale": 55402,
+      "ha_plafonnes": 376,
+      "n_sites": 56,
+      "name": "Perpignan",
+      "ze": "7620"
+    },
+    {
+      "besoin_mobilisation": 442,
+      "capacite_centrale": 47651,
+      "ha_plafonnes": 324,
+      "n_sites": 35,
+      "name": "Dijon",
+      "ze": "2711"
+    },
+    {
+      "besoin_mobilisation": 4703,
+      "capacite_centrale": 47377,
+      "ha_plafonnes": 322,
+      "n_sites": 26,
+      "name": "Ajaccio",
+      "ze": "9401"
+    },
+    {
+      "besoin_mobilisation": 4996,
+      "capacite_centrale": 47077,
+      "ha_plafonnes": 320,
+      "n_sites": 43,
+      "name": "Lille",
+      "ze": "3216"
     }
   ]
 }

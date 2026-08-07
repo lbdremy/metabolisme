@@ -15,9 +15,10 @@ from __future__ import annotations
 
 import pandas as pd
 
+from logement.core import stats
 from logement.core.lovac import plm_parent
 
-DOM_ZE_PREFIXES = ("01", "02", "03", "04")
+DOM_ZE_PREFIXES = stats.DOM_ZE_PREFIXES
 CENSUS_BATI_COLS = ("P22_RP", "P22_RP_ACHTOT", "P22_RP_ACH1919", "P22_RP_ACH1945", "P22_RP_BDWC")
 DPE_LABELS = ("A", "B", "C", "D", "E", "F", "G")
 
@@ -147,12 +148,30 @@ def build_summary(
         "spearman_age_vs_vacancy": {
             "all": round(_spearman(frame, "part_avant_1946_pct", "structural_rate_pct"), 2),
             "metropole": round(_spearman(metro, "part_avant_1946_pct", "structural_rate_pct"), 2),
+            "metropole_ci95": stats.spearman_summary(
+                metro, "part_avant_1946_pct", "structural_rate_pct"
+            )["ci95"],
         },
         "spearman_fg_vs_vacancy": {
             "all": round(_spearman(frame, "part_fg_pct", "structural_rate_pct"), 2),
             "metropole": round(_spearman(metro, "part_fg_pct", "structural_rate_pct"), 2),
+            "metropole_ci95": stats.spearman_summary(metro, "part_fg_pct", "structural_rate_pct")[
+                "ci95"
+            ],
         },
         "spearman_fg_vs_age": round(_spearman(frame, "part_fg_pct", "part_avant_1946_pct"), 2),
+        # Review addition (L-13 direction): where vacancy is high the stock
+        # is LESS diagnosed — the F+G share of the diagnosed is plausibly a
+        # floor there, and the published levels only describe the
+        # in-transaction stock.
+        "spearman_couverture_dpe_vs_vacancy_metropole": round(
+            _spearman(
+                metro.assign(couverture_dpe_pct=metro["n_dpe"] / metro["private_stock"] * 100),
+                "couverture_dpe_pct",
+                "structural_rate_pct",
+            ),
+            2,
+        ),
         "median_vacancy_rate_pct": {
             "oldest_half": round(float(frame.loc[old_half, "structural_rate_pct"].median()), 1),
             "newest_half": round(float(frame.loc[~old_half, "structural_rate_pct"].median()), 1),

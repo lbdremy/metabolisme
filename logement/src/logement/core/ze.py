@@ -10,7 +10,9 @@ from __future__ import annotations
 
 import pandas as pd
 
+from logement.core import stats
 from logement.core.lovac import REFERENCE_MILLESIME, plm_parent
+from logement.core.tension import SECRET_MAX_PER_COMMUNE
 
 
 class ZeError(Exception):
@@ -72,10 +74,17 @@ def aggregate_vacancy_by_ze(
     frame["code"] = frame["code"].map(plm_parent)
     merged = frame.merge(commune_ze, on="code", how="left")
     unmatched = sorted(merged.loc[merged["ze"].isna(), "code"].unique())
+    # min_count keeps all-secret groups missing, never zero, and the masked
+    # commune count per ZE bounds the hidden mass (≤ 10 structural each,
+    # L-05 — review correction of the R-03 share).
     per_ze = (
         merged.dropna(subset=["ze"])
         .groupby("ze")
-        .agg(structural=(cols[0], "sum"), private_stock=(cols[1], "sum"))
+        .agg(
+            structural=(cols[0], lambda s: s.sum(min_count=1)),
+            private_stock=(cols[1], lambda s: s.sum(min_count=1)),
+            n_communes_masquees=(cols[0], lambda s: int(s.isna().sum())),
+        )
     )
     per_ze["structural_rate_pct"] = per_ze["structural"] / per_ze["private_stock"] * 100
     return per_ze, [str(c) for c in unmatched]
@@ -88,9 +97,18 @@ def build_summary(
     cross = vacancy_ze.join(emploi_ze, how="inner")
     if cross.empty:
         raise ZeError("no ZE joined between vacancy and employment")
-    # Spearman as Pearson-on-ranks (no scipy dependency).
-    spearman = float(cross["structural_rate_pct"].rank().corr(cross["growth_pct_per_year"].rank()))
+    perimetres = stats.spearman_by_perimeter(cross, "structural_rate_pct", "growth_pct_per_year")
     declining = cross["growth_pct_per_year"] < 0
+    # Review correction: the declining-ZE share was computed on the VISIBLE
+    # structural mass only; masked communes (≤ 10 each) bound the share.
+    hidden = cross["n_communes_masquees"] * SECRET_MAX_PER_COMMUNE
+    visible_declining = float(cross.loc[declining, "structural"].sum())
+    visible_total = float(cross["structural"].sum())
+    hidden_declining = float(hidden[declining].sum())
+    hidden_total = float(hidden.sum())
+    share_visible = visible_declining / visible_total * 100
+    share_max = (visible_declining + hidden_declining) / (visible_total + hidden_declining) * 100
+    share_min = visible_declining / (visible_total + hidden_total - hidden_declining) * 100
 
     def ze_entry(row: pd.Series) -> dict[str, object]:
         return {
@@ -111,12 +129,16 @@ def build_summary(
         "reference_millesime": REFERENCE_MILLESIME,
         "n_ze": len(cross),
         "unmatched_communes": unmatched,
-        "spearman_rate_vs_growth": round(spearman, 2),
+        "spearman_rate_vs_growth": perimetres["france_entiere"]["rho"],
+        "spearman_perimetres": perimetres,
+        "secretisation": {
+            "n_communes_masquees": round(float(cross["n_communes_masquees"].sum())),
+            "max_structurels_par_commune_masquee": SECRET_MAX_PER_COMMUNE,
+            "declining_share_borne_pct": [round(share_min, 1), round(share_max, 1)],
+        },
         "declining_ze": {
             "n": int(declining.sum()),
-            "structural_share_pct": round(
-                float(cross.loc[declining, "structural"].sum() / cross["structural"].sum() * 100), 1
-            ),
+            "structural_share_pct": round(share_visible, 1),
             "private_stock_share_pct": round(
                 float(
                     cross.loc[declining, "private_stock"].sum() / cross["private_stock"].sum() * 100

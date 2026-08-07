@@ -5,7 +5,7 @@
       "loyer_m2": 8.03,
       "name": "Bar-le-Duc",
       "niveau_vie_median": 22120,
-      "taux_structurelle_pct": 6.05,
+      "taux_structurelle_pct": 5.92,
       "ze": "4401"
     },
     {
@@ -13,7 +13,7 @@
       "loyer_m2": 8.24,
       "name": "Mayenne",
       "niveau_vie_median": 21860,
-      "taux_structurelle_pct": 2.58,
+      "taux_structurelle_pct": 2.51,
       "ze": "5215"
     },
     {
@@ -21,7 +21,7 @@
       "loyer_m2": 8.15,
       "name": "Cosne-Cours-sur-Loire",
       "niveau_vie_median": 21560,
-      "taux_structurelle_pct": 7.29,
+      "taux_structurelle_pct": 6.93,
       "ze": "0056"
     },
     {
@@ -29,7 +29,7 @@
       "loyer_m2": 8.15,
       "name": "Charolais",
       "niveau_vie_median": 21510,
-      "taux_structurelle_pct": 4.51,
+      "taux_structurelle_pct": 4.35,
       "ze": "2708"
     },
     {
@@ -37,7 +37,7 @@
       "loyer_m2": 8.44,
       "name": "Les Sources de la Loire",
       "niveau_vie_median": 22160,
-      "taux_structurelle_pct": 5.06,
+      "taux_structurelle_pct": 5.03,
       "ze": "8420"
     },
     {
@@ -45,7 +45,7 @@
       "loyer_m2": 8.33,
       "name": "Chaumont",
       "niveau_vie_median": 21850,
-      "taux_structurelle_pct": 4.25,
+      "taux_structurelle_pct": 4.15,
       "ze": "4404"
     }
   ],
@@ -55,12 +55,30 @@
     "min": 8.0
   },
   "median_vacancy_rate_pct": {
-    "cheap_half": 4.0,
+    "cheap_half": 3.9,
     "expensive_half": 2.5
   },
   "n_ze": 297,
   "reference_millesime": 2024,
-  "spearman_cost_vs_vacancy": -0.42,
+  "spearman_cost_vs_vacancy": -0.43,
+  "spearman_perimetres": {
+    "france_entiere": {
+      "ci95": [
+        -0.52,
+        -0.33
+      ],
+      "n": 297,
+      "rho": -0.43
+    },
+    "metropole": {
+      "ci95": [
+        -0.62,
+        -0.45
+      ],
+      "n": 287,
+      "rho": -0.54
+    }
+  },
   "top_cost_index": [
     {
       "indice_cout_pct": 1.28,
@@ -91,7 +109,7 @@
       "loyer_m2": 18.52,
       "name": "Roissy ",
       "niveau_vie_median": 20830,
-      "taux_structurelle_pct": 2.38,
+      "taux_structurelle_pct": 2.37,
       "ze": "1112"
     },
     {

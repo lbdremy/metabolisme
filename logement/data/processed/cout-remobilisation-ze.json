@@ -1,31 +1,45 @@
 {
-  "besoin_total": 285665,
+  "besoin_total": 194488,
   "comparateur_neuf": {
-    "cout_neuf_mdeur": 48.3,
-    "ratio_neuf_sur_remobilisation": {
-      "bas": 4.6,
-      "central": 3.9,
+    "cout_neuf_mdeur": 32.9,
+    "ratio_neuf_sur_detente_mixte": {
+      "bas": 2.2,
+      "central": 2.1,
+      "haut": 1.9
+    },
+    "ratio_neuf_sur_renovation_seule": {
+      "bas": 4.5,
+      "central": 3.8,
       "haut": 3.2
     }
   },
   "couts": {
     "bas": {
-      "cout_detente_mdeur": 10.6,
-      "cout_gisement_mdeur": 16.9,
-      "cout_unitaire_moyen_pondere_eur": 36978
+      "cout_detente_mixte_mdeur": 14.9,
+      "cout_detente_renovation_seule_mdeur": 7.2,
+      "cout_gisement_mdeur": 7.8,
+      "cout_unitaire_renovation_moyen_eur": 36977,
+      "dont_deficit_neuf_mdeur": 9.8,
+      "dont_renovation_mdeur": 5.0
     },
     "central": {
-      "cout_detente_mdeur": 12.5,
-      "cout_gisement_mdeur": 20.0,
-      "cout_unitaire_moyen_pondere_eur": 43802
+      "cout_detente_mixte_mdeur": 15.8,
+      "cout_detente_renovation_seule_mdeur": 8.6,
+      "cout_gisement_mdeur": 9.2,
+      "cout_unitaire_renovation_moyen_eur": 43801,
+      "dont_deficit_neuf_mdeur": 9.8,
+      "dont_renovation_mdeur": 6.0
     },
     "haut": {
-      "cout_detente_mdeur": 15.2,
-      "cout_gisement_mdeur": 24.3,
-      "cout_unitaire_moyen_pondere_eur": 53297
+      "cout_detente_mixte_mdeur": 17.1,
+      "cout_detente_renovation_seule_mdeur": 10.4,
+      "cout_gisement_mdeur": 11.2,
+      "cout_unitaire_renovation_moyen_eur": 53296,
+      "dont_deficit_neuf_mdeur": 9.8,
+      "dont_renovation_mdeur": 7.3
     }
   },
-  "gisement_total": 472022,
+  "gisement_total": 206664,
   "hypotheses": {
     "h09_maison_eur_ht_m2": {
       "central": 406.0,
@@ -40,6 +54,13 @@
         200.0,
         300.0
       ]
+    },
+    "h12_existence_rate": {
+      "central": 0.75,
+      "plausible_range": [
+        0.6,
+        0.9
+      ]
     }
   },
   "ipea": {
@@ -47,93 +68,147 @@
     "moyenne_2016": 91.62,
     "moyenne_2023": 116.05
   },
+  "logements": {
+    "deficit_neuf": 57945,
+    "n_ze_structurelle_inconnue": 0,
+    "renovables": 136544
+  },
   "modele": {
     "prix_revient_neuf_eur_2023": 169200.0,
+    "regle_mixte": "renovation = min(besoin, gisement local) ; deficit au prix neuf",
     "surface_appart_m2": 65.5,
     "surface_maison_m2": 114.3,
     "tva": 1.055
   },
-  "n_ze_tendues": 142,
-  "top_cout_detente": [
+  "n_ze_tendues": 97,
+  "sensibilite_seuil_h08": [
     {
-      "besoin_mobilisation": 11882,
-      "cout_detente_meur": 509.3,
-      "cout_neuf_meur": 2010.5,
-      "name": "Bordeaux",
-      "part_maison_pct": 52.3,
-      "ze": "7505"
+      "besoin_total": 74083,
+      "cout_detente_mixte_mdeur": 5.5,
+      "n_ze_tendues": 54,
+      "ratio_neuf_sur_detente": 2.3,
+      "seuil_pct": 5.0
     },
     {
-      "besoin_mobilisation": 12204,
-      "cout_detente_meur": 461.5,
-      "cout_neuf_meur": 2064.9,
+      "besoin_total": 194488,
+      "cout_detente_mixte_mdeur": 15.8,
+      "n_ze_tendues": 97,
+      "ratio_neuf_sur_detente": 2.1,
+      "seuil_pct": 6.0
+    },
+    {
+      "besoin_total": 414944,
+      "cout_detente_mixte_mdeur": 37.5,
+      "n_ze_tendues": 170,
+      "ratio_neuf_sur_detente": 1.9,
+      "seuil_pct": 7.0
+    }
+  ],
+  "top_cout_detente": [
+    {
+      "besoin_mobilisation": 10460,
+      "cout_detente_meur": 1082.5,
+      "cout_neuf_meur": 1769.8,
+      "deficit_neuf": 5229,
       "name": "Toulon",
       "part_maison_pct": 39.7,
+      "renovables": 5231,
       "ze": "9318"
     },
     {
-      "besoin_mobilisation": 9419,
-      "cout_detente_meur": 411.0,
-      "cout_neuf_meur": 1593.6,
+      "besoin_mobilisation": 8077,
+      "cout_detente_meur": 861.5,
+      "cout_neuf_meur": 1366.7,
+      "deficit_neuf": 4054,
       "name": "Nantes",
       "part_maison_pct": 54.2,
+      "renovables": 4024,
       "ze": "5216"
     },
     {
-      "besoin_mobilisation": 10670,
-      "cout_detente_meur": 328.2,
-      "cout_neuf_meur": 1805.3,
-      "name": "Marseille",
-      "part_maison_pct": 22.1,
-      "ze": "9312"
+      "besoin_mobilisation": 9774,
+      "cout_detente_meur": 854.6,
+      "cout_neuf_meur": 1653.7,
+      "deficit_neuf": 3448,
+      "name": "Bordeaux",
+      "part_maison_pct": 52.3,
+      "renovables": 6326,
+      "ze": "7505"
     },
     {
-      "besoin_mobilisation": 7989,
-      "cout_detente_meur": 313.1,
-      "cout_neuf_meur": 1351.8,
-      "name": "Roissy ",
-      "part_maison_pct": 43.1,
-      "ze": "1112"
-    },
-    {
-      "besoin_mobilisation": 6953,
-      "cout_detente_meur": 302.9,
-      "cout_neuf_meur": 1176.5,
-      "name": "Lille",
-      "part_maison_pct": 54.0,
-      "ze": "3216"
-    },
-    {
-      "besoin_mobilisation": 7131,
-      "cout_detente_meur": 288.7,
-      "cout_neuf_meur": 1206.6,
+      "besoin_mobilisation": 6201,
+      "cout_detente_meur": 690.0,
+      "cout_neuf_meur": 1049.2,
+      "deficit_neuf": 3410,
       "name": "Bayonne",
       "part_maison_pct": 46.4,
+      "renovables": 2791,
       "ze": "7503"
     },
     {
-      "besoin_mobilisation": 7042,
-      "cout_detente_meur": 278.5,
-      "cout_neuf_meur": 1191.5,
-      "name": "Montpellier",
-      "part_maison_pct": 44.0,
-      "ze": "7616"
-    },
-    {
-      "besoin_mobilisation": 6021,
-      "cout_detente_meur": 255.1,
-      "cout_neuf_meur": 1018.7,
+      "besoin_mobilisation": 5290,
+      "cout_detente_meur": 616.9,
+      "cout_neuf_meur": 895.0,
+      "deficit_neuf": 3097,
       "name": "La Tarentaise",
       "part_maison_pct": 51.1,
+      "renovables": 2193,
       "ze": "8413"
     },
     {
-      "besoin_mobilisation": 4454,
-      "cout_detente_meur": 248.0,
-      "cout_neuf_meur": 753.7,
+      "besoin_mobilisation": 3966,
+      "cout_detente_meur": 504.5,
+      "cout_neuf_meur": 671.0,
+      "deficit_neuf": 2499,
       "name": "Royan",
       "part_maison_pct": 84.2,
+      "renovables": 1466,
       "ze": "7526"
+    },
+    {
+      "besoin_mobilisation": 4703,
+      "cout_detente_meur": 501.3,
+      "cout_neuf_meur": 795.8,
+      "deficit_neuf": 2472,
+      "name": "Ajaccio",
+      "part_maison_pct": 38.2,
+      "renovables": 2231,
+      "ze": "9401"
+    },
+    {
+      "besoin_mobilisation": 3516,
+      "cout_detente_meur": 470.0,
+      "cout_neuf_meur": 595.0,
+      "deficit_neuf": 2390,
+      "name": "Challans",
+      "part_maison_pct": 90.7,
+      "renovables": 1126,
+      "ze": "5203"
+    },
+    {
+      "besoin_mobilisation": 3698,
+      "cout_detente_meur": 453.7,
+      "cout_neuf_meur": 625.6,
+      "deficit_neuf": 2378,
+      "name": "Le Mont Blanc",
+      "part_maison_pct": 42.6,
+      "renovables": 1320,
+      "ze": "8418"
+    },
+    {
+      "besoin_mobilisation": 4479,
+      "cout_detente_meur": 431.3,
+      "cout_neuf_meur": 757.8,
+      "deficit_neuf": 1974,
+      "name": "Bastia",
+      "part_maison_pct": 42.3,
+      "renovables": 2505,
+      "ze": "9402"
     }
-  ]
+  ],
+  "variante_rehabilitation_lourde": {
+    "cout_detente_mixte_mdeur": 21.8,
+    "facteur_renovation": 2.0,
+    "ratio_neuf_sur_detente": 1.5
+  }
 }

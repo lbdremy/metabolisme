@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import pandas as pd
 
+from logement.core import stats
 from logement.core.lovac import plm_parent
 
 CENSUS_COLS = ("P22_LOG", "P22_RP", "P22_RSECOCC", "P22_LOGVAC")
@@ -73,11 +74,11 @@ def build_summary(
             float(frame["P22_RSECOCC"].sum() / frame["P22_LOG"].sum() * 100), 1
         ),
         "median_ze_rs_share_pct": round(float(frame["part_rs_pct"].median()), 1),
-        "spearman_rs_vs_structural_vacancy": round(
-            float(frame["part_rs_pct"].rank().corr(frame["taux_structurelle_pct"].rank())), 2
+        "spearman_rs_vs_structural_vacancy": stats.spearman_summary(
+            frame, "part_rs_pct", "taux_structurelle_pct"
         ),
-        "spearman_rs_vs_cost_index": round(
-            float(frame["part_rs_pct"].rank().corr(frame["indice_cout_pct"].rank())), 2
+        "spearman_rs_vs_cost_index": stats.spearman_summary(
+            frame, "part_rs_pct", "indice_cout_pct"
         ),
         "touristic_ze": {
             "threshold_rs_pct": TOURISTIC_RS_THRESHOLD_PCT,

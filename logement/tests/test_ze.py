@@ -57,7 +57,11 @@ def test_aggregate_vacancy_by_ze_maps_plm_and_reports_unmatched() -> None:
 def test_build_summary_shape_and_shares() -> None:
     """The R-03 payload carries coherent shares between declining and growing ZE."""
     vacancy = pd.DataFrame(
-        {"structural": [100.0, 300.0], "private_stock": [1000.0, 10000.0]},
+        {
+            "structural": [100.0, 300.0],
+            "private_stock": [1000.0, 10000.0],
+            "n_communes_masquees": [2, 0],
+        },
         index=pd.Index(["0001", "0002"], name="ze"),
     )
     vacancy["structural_rate_pct"] = vacancy["structural"] / vacancy["private_stock"] * 100

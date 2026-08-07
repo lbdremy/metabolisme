@@ -96,7 +96,7 @@ def _summary_fixture() -> dict[str, object]:
         index=pd.Index(["0101", "7507"], name="ze"),
     )
     vacancy_ze = pd.DataFrame(
-        {"structural_rate_pct": [12.0, 4.0]},
+        {"structural_rate_pct": [12.0, 4.0], "private_stock": [10_000.0, 20_000.0]},
         index=pd.Index(["0101", "7507"], name="ze"),
     )
     names = pd.Series({"0101": "Dom", "7507": "Metro"})
