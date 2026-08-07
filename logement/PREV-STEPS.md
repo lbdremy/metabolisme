@@ -3,6 +3,67 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
+## Session 3 — 2026-08-07 (revue contradictoire et intégration) — tag `efficacite-parc-v0.3`
+
+La session prévue « revue d'abord, H-04 si elle tient » : la revue n'a pas
+tenu, la session entière est passée à l'intégration (décision de Rémy :
+intégration complète, H-04 reporté — l'éclairage données H-04 a néanmoins
+été fait en parallèle et vit dans NEXT-STEPS).
+
+**Méthode** : 4 relecteurs indépendants (sources alternatives · hypothèses/
+définitions · scénarios d'échec · statistique), 45 objections, triées puis
+intégrées — compte rendu complet et dispositions dans
+`evidence/revue-contradictoire-2026-08-07.md` (+ les 5 rapports bruts en
+annexe). L'arithmétique d'avant revue était exacte partout ; les objections
+portaient sur les modèles et la mise en récit.
+
+**Corrections structurantes** (toutes tracées) :
+
+- **H-12 créée** (taux d'existence du gisement LOVAC, 0,75 [0,6-0,9],
+  Cour des comptes S-22 : ~25 % de faux vacants) — propagée des DEUX côtés
+  de C-06 ; **H-07 recentrée** sur les emménagés récents (35 m²/personne,
+  plage [35 ; 51,2] — l'ancien centre devient la borne haute).
+- **R-07** : écrêtage des disponibles négatifs (Corse), variante « gisement
+  des seules communes TLV » (couverture 0,69 !), grille jointe H-08 × H-12
+  (traverse 1 : 0,82-1,85), variante d'assiette de C-06, borne de
+  secrétisation (le sens de L-12 était INVERSÉ au national), bande grise,
+  besoin couvert/non couvert. Central : 97 ZE tendues, besoin 194 488,
+  couverture 1,06.
+- **R-09** : la seule vraie incohérence interne (confirmée dans le code) —
+  le besoin entier était facturé en rénovation là où R-07 établit qu'il
+  n'y a pas de gisement local. Règle MIXTE : min(besoin, gisement) en
+  rénovation + déficit (57 945) au prix du neuf → 15,8 Md€, ratio 2,1
+  (l'ancien 3,9 gardé en trace comme « rénovation seule ») ; H-08 propagée
+  (5,5-37,5 Md€) ; stress réhabilitation lourde ×2 (21,8 Md€, ratio 1,5).
+- **R-10** : H-08 propagée (5,1-28,6 ×) ; densité opérationnelle constatée
+  du fonds friches (30,3 log/ha, S-25/S-26) en plancher : ratio 2,2 — le
+  maillon le plus robuste de l'arc.
+- **Transverse** : `core/stats.py` (IC de Fisher + split France/métropole
+  publiés avec chaque rho — le superlatif de R-08 n'a pas survécu à
+  l'harmonisation : âge +0,56 ≈ coût −0,54 ≈ effort −0,51 en métropole) ;
+  `min_count=1` unifié (le rho R-05 bouge de +0,17 à +0,15) ; R-03 borné
+  contre la secrétisation ([12,2 ; 21,7] % en ZE déclinantes) ; R-06
+  médiane centrale 27,4 % (borne haute 40,1).
+- **Registres/graphe** : S-22..S-26 figées (dont S-25 récupérée via
+  archive.org — URL d'origine morte) ; L-16..L-21 nouvelles ; L-04/L-07/
+  L-09/L-11/L-12/L-13/L-14/L-15 corrigées ; I-02..I-10 reformulées ;
+  85 nœuds ; qmd re-rendu avec section « revue contradictoire » et tableau
+  avant/après ; 82 tests verts.
+
+**Ce que dit l'état v0.3** : la conclusion s'est déplacée, pas effondrée.
+Le foncier reste surabondant (jusqu'au plancher constaté), la direction
+économique tient (remobiliser ≤ 2 × moins cher, ≥ 1,5 sous stress), mais la
+suffisance du gisement vacant est MARGINALE et conditionnelle (couverture
+~1, sous 1 au périmètre légal et dans une partie des plages) : la
+contrainte institutionnelle est la CONDITION de la suffisance, pas sa
+conséquence. Les I-07/I-09/I-10 portent désormais leurs conditions dans
+leur énoncé.
+
+**Décisions prises en séance (AskUserQuestion)** : intégration complète
+(H-04 reporté) ; H-12 en une hypothèse (mobilisabilité comportementale en
+limite qualitative L-17) ; H-07 recentrée ; C-06 conservé avec sensibilité
+d'assiette (pas de recalibrage du test central).
+
 ## Session 2 — 2026-08-05 (taux d'effort · tension · bâti · coût · foncier)
 
 Cinq livrables : **R-06/I-06** (premier item de NEXT-STEPS), **R-07/I-07**

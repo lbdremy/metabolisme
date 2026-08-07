@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 21 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance ; 24 fichiers figés sha256/LFS + 2 collections vivantes) |
+| S | Sources | `sources/sources.yaml` | 26 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 29 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 15 définitions citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-23, T-01..T-11, R-01..R-10 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-10, V-01, C-01..C-08, L-01..L-15 |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-24, T-01..T-11, R-01..R-10 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-10, V-01, C-01..C-08, L-01..L-21 (L-16..L-21 et corrections L-04/L-07/L-09/L-11/L-12/L-13/L-14/L-15 : revue contradictoire du 2026-08-07, compte rendu `evidence/revue-contradictoire-2026-08-07.md`) |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -66,6 +66,27 @@ Sources enregistrées :
   inventoriées (inventaire PARTIEL : les totaux sont des planchers).
 - **S-21** — INSEE, base du comparateur de territoires — superficies des
   arrondissements municipaux (dénominateur de H-11).
+- **S-22** — Cour des comptes (mai 2025), La lutte contre les logements
+  vacants dans le parc privé — source pivot de la revue contradictoire :
+  ~25 % de faux vacants LOVAC (base de H-12), 118 330 vacants > 2 ans en
+  communes TLV (2022), DHUP 74 % du durable en marchés détendus,
+  campagne GMBI 2023 chaotique (L-04), bilan des instruments incitatifs
+  « non démontré » (ZLV ~3 % de sorties en zone tendue en 4 ans).
+- **S-23** — SDES Datalab (déc. 2023), déterminants de la vacance longue
+  durée — écologie de la vacance logement par logement : ×2,8 si < 35 m²,
+  ×3,3 si avant 1900, ~45 % obsolescence, ~20 % successions (fonde L-18,
+  conforte I-08).
+- **S-24** — Apur (déc. 2023), logements inoccupés à Paris — contrôle
+  externe du volume parisien : ~18 600 vacants > 2 ans du parc privé
+  (1,3 %) contre 32 091 au millésime LOVAC 26 (écart à instruire, L-04).
+- **S-25** — Cerema (23/11/2023), coût des friches (lauréats du fonds
+  friches, échantillon déficitaire) — remise en état moyenne 780 k€
+  HT/ha, projets résidentiels 2,5 × plus chers, 80 % pollués, lauréats
+  majoritairement en zone détendue (L-14/L-15).
+- **S-26** — Cerema (déc. 2023), article de bilan du fonds friches —
+  1 382 projets, 3 375 ha recyclés, ~6,7 M m² de logements attendus :
+  dénominateur de la densité constatée ~1 985 m² SP/ha (O-24, plancher
+  opérationnel de R-10).
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -80,13 +101,20 @@ complet.
 Hypothèses : **H-06** — seuil de vacance structurelle, valeur centrale 2 ans
 (convention C-01), plage plausible 1-3 ans (sensibilité complète possible
 seulement avec les fichiers LOVAC détaillés). **H-07** — surface habitable
-par personne à la relocation, valeur centrale 51,2 m²/personne (enquête
-Logement 2020, S-12), plage plausible 35-71 (bornes observées par âge) ;
-le taux d'effort R-06 est linéaire en H-07 (classement invariant).
+par personne à la relocation, RECENTRÉE le 2026-08-07 (revue
+contradictoire) : valeur centrale 35 m²/personne (emménagés récents,
+tranche 30-39 ans de S-12), plage plausible 35-51,2 — la borne haute est
+l'ancien centre (parc en place) ; le taux d'effort R-06 est linéaire en
+H-07 (classement invariant, sensibilité orientée à la hausse).
 **H-08** — seuil de vacance de fluidité, valeur centrale 6 % (bande
 optimale 6-7 % de S-14), plage plausible 5-7 (borne basse S-15) ;
-confiance basse — ordre de grandeur professionnel, sensibilité publiée
-dans R-07.
+confiance basse — ordre de grandeur professionnel, sensibilité désormais
+propagée dans R-07, R-09 ET R-10. **H-12** — taux d'existence du gisement
+structurel LOVAC, créée le 2026-08-07 (revue contradictoire) : valeur
+centrale 0,75 (~25 % de faux vacants, Cour des comptes S-22), plage
+plausible 0,6-0,9, propagée des deux côtés du test de tension C-06
+(gisement effectif ET vacance disponible) ; ne couvre PAS la
+mobilisabilité comportementale (limite qualitative L-17).
 
 Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 
@@ -94,76 +122,116 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   peut jamais être comptée comme capacité disponible ni comme inefficience.
 
 - **R-03** — Vacance structurelle × dynamique d'emploi par ZE (sortie
-  reproductible `data/processed/vacance-emploi-ze.json`) : Spearman −0,36,
-  taux médian 4,5 % dans les 63 ZE à emploi déclinant contre 2,9 % ailleurs,
-  mais ~85 % des volumes dans des ZE où l'emploi croît. Lecture : **I-03** —
-  H-02 confirmée en intensité, réfutée comme explication dominante en
-  volume ; les causes de blocage sont ailleurs (H-03/H-05). Limites
-  L-05..L-08.
+  reproductible `data/processed/vacance-emploi-ze.json`) : Spearman −0,36
+  [−0,45 ; −0,26] (métropole −0,47 [−0,55 ; −0,37]), taux médian 4,5 %
+  dans les 63 ZE à emploi déclinant contre 2,9 % ailleurs, mais 78-88 %
+  des volumes dans des ZE où l'emploi croît (84,9 % au visible, borne de
+  secrétisation publiée). Lecture : **I-03** — H-02 confirmée en
+  intensité, réfutée comme explication dominante en volume sur toute la
+  borne ; les causes de blocage sont ailleurs (H-03/H-05). Limites
+  L-05..L-08 (L-07 corrigée : l'emploi ZE récent existe, variante
+  planifiée).
 
 - **R-04** — Pression du coût résidentiel × vacance par ZE (sortie
-  reproductible `data/processed/cout-residentiel-ze.json`) : Spearman −0,42,
-  vacance médiane 2,5 % dans les ZE chères contre 4,0 % dans les ZE bon
-  marché. Lecture : **I-04** — le coût marque la tension, il n'explique pas
+  reproductible `data/processed/cout-residentiel-ze.json`) : Spearman
+  −0,43 [−0,52 ; −0,33] (métropole −0,54 [−0,62 ; −0,45]), vacance
+  médiane 2,5 % dans les ZE chères contre 3,9 % dans les ZE bon marché.
+  Lecture : **I-04** — le coût marque la tension, il n'explique pas
   la vacance ; le cumul coût élevé + vacance élevée est ultramarin
   (La Réunion, Martinique — revenus faibles), pas corse ni « résidences
-  secondaires » (correction vérifiée, exploration 05). Limites L-09.
+  secondaires » (correction vérifiée, exploration 05). Limites L-09
+  (complétée : niveaux surestimés — loyers 2025/revenus 2021, charges
+  comprises —, classements insensibles).
 
 - **R-05** — Résidences secondaires × coût × vacance par ZE (sortie
-  reproductible `data/processed/residences-secondaires-ze.json`) : part RS
-  sans lien avec la vacance (+0,17) ni le coût (−0,05) à l'échelle ZE ; les
-  ZE touristiques ont une vacance PLUS BASSE ; cumul RS+vacance dans un
-  sous-groupe corse et rural-touristique. Lecture : **I-05** — la capacité
+  reproductible `data/processed/residences-secondaires-ze.json`) :
+  corrélation RS × vacance faible mais SIGNIFICATIVE (+0,15
+  [0,04 ; 0,26]) et de signe opposé au contraste touristique (les ZE
+  touristiques ont une vacance PLUS BASSE — non-monotonie, effet de
+  structure) ; RS × coût compatible avec zéro (−0,05 [−0,16 ; 0,06]) ;
+  cumul RS+vacance dans un sous-groupe corse et rural-touristique (8 ZE).
+  Lecture : **I-05** (inchangée, énoncée honnêtement) — la capacité
   saisonnière retirée est dans la catégorie RS et ses effets d'éviction
   infra-territoriaux, pas dans la vacance. Limites L-10.
 
 - **R-06** — Taux d'effort brut à la relocation par ZE (sortie reproductible
-  `data/processed/taux-effort-relocation-ze.json`) : médiane 40,1 %
-  (27,4-55,6 selon H-07), Paris 93,5 % puis les ZE réunionnaises et
-  martiniquaises (~75-85 %) ; Spearman effort × vacance −0,40. Lecture :
-  **I-06** — la tension de I-04 en unité interprétable ; à Paris et dans
-  les DOM couverts, la relocation est hors de portée du ménage médian
-  local ; fournit le terme coût pour instruire H-04. Limites L-09/L-11.
+  `data/processed/taux-effort-relocation-ze.json`, H-07 recentrée le
+  2026-08-07) : médiane CENTRALE 27,4 % (27,4-40,1 selon H-07 — borne
+  haute = relocation au standard du parc en place, l'ancien titre),
+  Paris 63,9 % (63,9-93,5) puis les ZE réunionnaises et martiniquaises
+  (~50-58 %) ; Spearman effort × vacance −0,40 [−0,49 ; −0,30]
+  (métropole −0,51 [−0,59 ; −0,41]). Lecture : **I-06** — la tension de
+  I-04 en unité interprétable : ~27 % au central (proche du standard
+  30 %) mais jusqu'à 40 % en borne haute ; à Paris et dans les DOM
+  couverts, la relocation est hors de portée du ménage médian local à
+  toutes les valeurs de H-07 (classement invariant) ; fournit le terme
+  coût pour instruire H-04. Limites L-09/L-11 (directions des biais
+  écrites).
 
 - **R-07** — Tension et manque absolu par ZE (sortie reproductible
-  `data/processed/tension-manque-absolu-ze.json`) : 142 ZE tendues en
-  vacance disponible (choix C-06 — correction tracée du test initial) ;
-  besoin national de détente 285 665 logements, gisement structurel local
-  472 022, couverture 1,65 (robuste sur la plage H-08) ; couverte dans
-  101 ZE, pas dans 41 (littorales/touristiques). Lecture : **I-07** — en
-  volume absolu le gisement suffit nationalement (I-03 quantifié), mais
-  la suffisance suppose de lever les blocages H-05 et la tension
-  touristique ne se résout pas par la vacance. Limites L-12.
+  `data/processed/tension-manque-absolu-ze.json` — recalculé le
+  2026-08-07 : H-12 propagée des deux côtés, écrêtage, variantes) :
+  97 ZE tendues en vacance disponible (15,26 M de parc) ; besoin
+  national de détente 194 488 logements (écrêté), gisement structurel
+  EFFECTIF local 206 664 (LOVAC × 0,75), couverture 1,06 — 0,69 au
+  périmètre des seules communes TLV ; la grille H-08 × H-12 traverse 1
+  (0,82-1,85) ; couverte dans 56 ZE, pas dans 41 — 68 % du besoin en ZE
+  non couvertes, déficit incompressible 57 945 ; variante d'assiette
+  (seuil recalibré 4,31 %) : 28 ZE, couverture 1,19 ; 31 ZE « tendues
+  par structurelle record » (37 % du gisement). Lecture : **I-07**
+  (reformulée) — la suffisance en volume est MARGINALE et
+  conditionnelle ; le gisement n'est pas là où est le besoin (inter-ZE
+  ni infra-ZE) : la détente par la seule remobilisation n'est PAS
+  démontrée — contribution substantielle (~137 000 rénovables) dont le
+  verrou est institutionnel (H-05). Limites L-12 (corrigée),
+  L-16..L-19, L-21.
 
 - **R-08** — État du bâti × vacance par ZE (sortie reproductible
   `data/processed/etat-bati-ze.json`) : en métropole, l'ancienneté du
-  bâti est le corrélat le plus fort de la chaîne (Spearman 0,56 ; F+G
-  0,40 ; F+G × âge 0,62 — la diagonale rurale) ; contraste DOM : vacance
-  médiane 11 % sur bâti récent et pourvu du confort. Lecture : **I-08** —
-  première instruction de H-05 : remobiliser le gisement a un coût de
-  remise en usage (métropole) ; aux DOM tout le mesurable est éliminé,
-  reste la piste successions/indivisions derrière la frontière de
-  données. Limites L-13.
+  bâti est fortement corrélée à la vacance (Spearman +0,56
+  [0,47 ; 0,63]) — du MÊME ORDRE que le coût (−0,54) et l'effort
+  (−0,51) à périmètre égal (superlatif abandonné), au-dessus de F+G
+  (+0,40 [0,30 ; 0,49]) ; couverture DPE × vacance −0,14 (le 0,40 est
+  plutôt une borne basse) ; F+G × âge 0,62 — la diagonale rurale ;
+  contraste DOM : vacance médiane 11 % sur bâti récent et pourvu du
+  confort. Lecture : **I-08** (au conditionnel) — première instruction
+  de H-05 : SI l'état des vacants suit celui du parc observable (L-13 —
+  hypothèse, pas mesure), remobiliser a un coût de remise en usage ; le
+  Datalab S-23 conforte la piste obsolescence/successions logement par
+  logement ; aux DOM tout le mesurable est éliminé, reste la piste
+  successions/indivisions derrière la frontière de données. Limites
+  L-13 (complétée).
 
-- **R-09** — Coût de la remobilisation (sortie reproductible
-  `data/processed/cout-remobilisation-ze.json`) : détendre les 142 ZE
-  tendues coûterait ~12,5 Md€ TTC 2023 (10,6-15,3 sur les plages
-  H-09/H-10 ; ~43 800 €/logement), contre ~48,3 Md€ en construction
-  neuve — ratio 3,2-4,6 (modèle C-07 : coûts S-17 actualisés IPEA,
-  surfaces S-12, mix maison/appart par ZE). Lecture : **I-09** —
-  l'argument économique de la remobilisation est solide mais ne lève ni
-  les verrous de propriété (I-08) ni la tension touristique sans
-  gisement ; première brique quantifiée de la proposition. Limites L-14.
+- **R-09** — Coût de la remobilisation, règle MIXTE (sortie reproductible
+  `data/processed/cout-remobilisation-ze.json` — C-07 corrigé le
+  2026-08-07) : détendre les 97 ZE tendues coûterait ~15,8 Md€ TTC 2023
+  (14,9-17,1 ; 136 544 rénovables à ~43 800 €/logement + 57 945 en
+  déficit facturés au neuf, 9,8 Md€), contre ~32,9 Md€ en construction
+  neuve — ratio 2,1 (1,9-2,2) ; rénovation seule (trace) : 8,6 Md€,
+  ratio 3,8 ; propagation H-08 : 5,5-37,5 Md€, ratios 2,3-1,9 ; stress
+  réhabilitation lourde ×2 : 21,8 Md€, ratio 1,5. Lecture : **I-09**
+  (reformulée) — ~2 × moins cher au central, ≥ 1,5 sous stress : solide
+  en DIRECTION, plus étroit en AMPLEUR (le « ~4 × » ne valait que pour
+  la part rénovable) ; investissement total ≠ coût public, canal
+  incitatif historiquement faible (S-22). Limites L-14 (corrigée),
+  L-17/L-18/L-20.
 
 - **R-10** — Foncier immobilisé par le non-résidentiel vacant (sortie
-  reproductible `data/processed/foncier-friches-ze.json`) : 4 052
-  friches « sans projet » dans les ZE tendues, 22 328 ha plafonnés →
-  ~3,3 M de logements de capacité à densité haussmannienne (H-11
-  dérivée et contrôlée) = 11,5 × le besoin (5,5-17,6 sur la plage) ;
-  115 des 134 ZE pourvues couvrent leur besoin. Lecture : **I-10** —
-  le foncier n'est pas la contrainte ; volume vacant + foncier + coût
-  favorables, la contrainte de la détente est institutionnelle.
-  Limites L-15 (inventaire plancher, bureaux en marché hors champ).
+  reproductible `data/processed/foncier-friches-ze.json`) : 2 736
+  friches « sans projet » dans 93 des 97 ZE tendues, 14 383 ha
+  plafonnés → ~2,12 M de logements de capacité à densité haussmannienne
+  (H-11 dérivée et contrôlée) = 10,9 × le besoin (5,2-16,7 sur H-11 ;
+  5,1-28,6 sur H-08) ; à la densité CONSTATÉE des opérations du fonds
+  friches (30,3 logements/ha, S-25/S-26) : 2,2 × — plancher
+  opérationnel ; 80 des 93 ZE pourvues couvrent leur besoin. Lecture :
+  **I-10** (reformulée — conclusion de l'arc) — le foncier n'est pas la
+  contrainte et le coût est favorable là où il y a gisement, mais le
+  volume vacant ne suffit qu'à l'échelle agrégée et au taux d'existence
+  central : la contrainte institutionnelle n'est plus la conséquence de
+  la suffisance, elle en est la CONDITION — lever les verrous de
+  propriété (H-05), construire sur friches là où le gisement manque,
+  maintenir le flux de construction (L-19). Limites L-15 (complétée),
+  L-19/L-20.
 
 Choix de conception arrêtés (2026-08-03) — désormais dans le graphe
 (`evidence/claims.yaml`) : **C-01** (convention de vacance structurelle > 2 ans,
@@ -172,18 +240,26 @@ seuil paramétré 1-3 ans), **C-02** (national d'abord, puis LOVAC). Ajoutés le
 personnes/UC observé), **C-05** (loyer = mix appartement/maison pondéré par
 la composition des RP de la ZE), **C-06** (tension = vacance DISPONIBLE
 < H-08 — correction tracée du test « vacance totale », qui ne classait
-tendue aucune grande métropole TLV).
+tendue aucune grande métropole TLV), **C-07** (modèle du coût de remise en
+usage), **C-08** (modèle du foncier immobilisé, densité H-11). Complétés le
+2026-08-07 (revue contradictoire) : C-06 intègre H-12 des deux côtés et
+publie la sensibilité d'assiette (seuil recalibré, ZE tendues-par-
+structurelle marquées) ; C-07 porte la CORRECTION TRACÉE de la règle mixte
+(rénovation = min(besoin, gisement effectif local), déficit au prix du
+neuf).
 
 Résultats stabilisés (2026-08-03) :
 
 - **R-02** — Vacance structurelle du parc privé (sortie reproductible
-  `data/processed/vacance-structurelle.json`) : ~1,18 M de logements
-  (millésime 26), taux national 3,5 % (millésime 24, choix C-03), gradient
-  départemental d'un ordre de grandeur (DOM et diagonale des faibles
-  densités vs zones tendues). Lecture : **I-02** — deux régimes distincts,
-  intensité rurale/ultramarine vs volume urbain, premier indice cohérent
-  avec H-02. Limites L-04 (ruptures 2023/2025), L-05 (secrétisation),
-  L-06 (parc privé ≠ INSEE).
+  `data/processed/vacance-structurelle.json`) : ~1,15 M de logements au
+  dernier millésime pré-rupture (24, aligné C-03 — le millésime 26,
+  1,18 M, est post-GMBI, source dégradée ; contrôle externe Apur S-24 à
+  Paris : ~18 600 vs 32 091, écart à instruire), taux national 3,5 %
+  (millésime 24), gradient départemental d'un ordre de grandeur (DOM et
+  diagonale des faibles densités vs zones tendues). Lecture : **I-02** —
+  deux régimes distincts, intensité rurale/ultramarine vs volume urbain,
+  premier indice cohérent avec H-02. Limites L-04 (ruptures 2023/2025 +
+  GMBI, complétée), L-05 (secrétisation), L-06 (parc privé ≠ INSEE).
 
 - **R-01** — Comparaison parc / ménages / population 1982-2025 (sortie
   reproductible `data/processed/parc-menages.json`, rebâtie par

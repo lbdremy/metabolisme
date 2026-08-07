@@ -3,8 +3,9 @@ title: "Efficacité du parc immobilier français — document de preuve"
 subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
-  taux d'effort, tension, état du bâti, coût de remobilisation, foncier immobilisé
-date: 2026-08-05
+  taux d'effort, tension, état du bâti, coût de remobilisation, foncier
+  immobilisé — chiffres révisés par la revue contradictoire du 2026-08-07
+date: 2026-08-07
 lang: fr
 format:
   html:
@@ -132,7 +133,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 78 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 82 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -157,11 +158,15 @@ propriétés) :
   mix des loyers appartement/maison pondéré par la composition des RP
   (choix **C-05**), surface par UC = H-07 × ratio personnes/UC observé
   Filosofi (choix **C-04**), sensibilités par homothétie sur la plage H-07.
-- **T-08** (`core/tension.py`) — tension et manque absolu par ZE : vacance
-  disponible = vacance totale du recensement − vacance structurelle LOVAC
-  (choix **C-06**), test de tension au seuil H-08, besoin absolu de
-  mobilisation, couverture par le gisement local, croisement avec le
-  zonage légal TLV (S-13, D-14).
+- **T-08** (`core/tension.py`) — tension et manque absolu par ZE :
+  gisement effectif = H-12 × vacance structurelle LOVAC, vacance
+  disponible = vacance totale du recensement − gisement effectif (choix
+  **C-06**, H-12 propagée des deux côtés), test de tension au seuil H-08,
+  besoin absolu de mobilisation (écrêté à zéro par ZE, écrêtage publié),
+  couverture par le gisement local, sensibilités (grille H-08 × H-12,
+  périmètre des seules communes TLV, variante d'assiette au seuil
+  recalibré, borne de secrétisation, bande grise ± 1 pt), croisement avec
+  le zonage légal TLV (S-13, D-14 — les deux sens publiés).
 - **T-09** (`core/bati.py`) — état du bâti × vacance par ZE : ancienneté
   (part des RP d'avant 1946) et inconfort sanitaire (DOM seulement — la
   question du recensement n'est pas posée en métropole), part F+G des
@@ -169,15 +174,19 @@ propriétés) :
   séparation métropole / DOM.
 - **T-10** (`core/remob.py`) — coût de la détente par remobilisation :
   coût unitaire par logement (choix **C-07** : €/m² S-17 mixés par la
-  part maison, surfaces S-12, TVA 5,5 %, actualisation IPEA S-19),
-  agrégats par variante (plages H-09/H-10) et comparaison au prix de
-  revient du logement social neuf (S-18).
+  part maison, surfaces S-12, TVA 5,5 %, actualisation IPEA S-19), règle
+  MIXTE (C-07 corrigé le 2026-08-07 : rénovation = min(besoin, gisement
+  effectif local), déficit au prix du neuf), agrégats par variante
+  (plages H-09/H-10), propagation de H-08, stress « réhabilitation
+  lourde » et comparaison au prix de revient du logement social neuf
+  (S-18).
 - **T-11** (`core/foncier.py`) — foncier immobilisé par ZE tendue :
   friches Cartofriches (choix **C-08** : « sans projet » central, plafond
   50 ha/site, hors résidentiel connu), densité de référence
   haussmannienne H-11 dérivée de S-11 × S-21 et CONTRÔLÉE contre le
   registre (erreur dure en cas de dérive), capacités et couverture du
-  besoin par ZE.
+  besoin par ZE, densité constatée des opérations du fonds friches
+  (S-25/S-26) en plancher opérationnel, propagation de H-08.
 
 ## 5. Hypothèses
 
@@ -203,6 +212,16 @@ hyp.style.hide(axis="index")
 est une convention administrative (choix **C-01**), pas un fait : il est
 paramétré, et sa plage plausible (1-3 ans) devra être explorée dès que les
 fichiers LOVAC détaillés (ancienneté fine) seront acquis.
+
+Deux changements tracés par la revue contradictoire (2026-08-07) :
+**H-07** (surface de relocation) a été **recentrée** sur les emménagés
+récents — 35 m²/personne (tranche 30-39 ans, S-12), l'ancien centre 51,2
+(parc en place) devenant la borne haute « relocation au standard du
+parc » ; et **H-12** (taux d'existence du gisement LOVAC, 0,75, plage
+0,6-0,9) a été **créée** : la Cour des comptes (S-22) établit qu'environ
+25 % des logements réputés vacants dans LOVAC ne le sont pas ou plus —
+H-12 est propagée des DEUX côtés du test de tension (gisement effectif ET
+vacance disponible, choix C-06).
 
 ## 6. Résultats
 
@@ -336,7 +355,10 @@ plt.show()
 ```{python}
 #| code-summary: "chiffres clés R-02"
 nat = r02["national"]
-print(f"Vacance structurelle nationale (millésime 26, au 01/01/2025) : "
+print(f"Vacance structurelle nationale (millésime de référence 24, dernier "
+      f"pré-rupture, au 01/01/2023) : "
+      f"{nat['structural_by_millesime']['2024']:,} logements".replace(",", " "))
+print(f"Millésime 26 (au 01/01/2025, post-GMBI, source dégradée L-04) : "
       f"{nat['structural_by_millesime']['2026']:,} logements".replace(",", " "))
 print(f"Taux structurel national (millésime {r02['reference_millesime']}) : "
       f"{nat['structural_rate_ref_pct']} % du parc privé")
@@ -355,6 +377,12 @@ La vacance structurelle du parc privé est de l'ordre de **1,1 à 1,2 million
 de logements** et à peu près stable sur 2020-2026 — tandis que la vacance
 totale saute de 3,69 M à 2,38 M puis 3,16 M au passage des ruptures
 méthodologiques : seule la série structurelle est raisonnablement robuste.
+Le volume-titre se lit sur le **dernier millésime pré-rupture** (~1,15 M au
+millésime 24, aligné sur le millésime de référence C-03) : le millésime 26
+est le régime post-GMBI, dont la campagne 2023 a été chaotique (82 % de
+déclarants — S-22, limite L-04 complétée par la revue contradictoire) ; à
+Paris, le contrôle externe Apur (S-24) compte ~18 600 vacants > 2 ans du
+parc privé en 2022 contre 32 091 au millésime 26 LOVAC — écart à instruire.
 Le taux structurel (3,5 % au millésime de référence) présente un **gradient
 territorial d'un ordre de grandeur** : DOM (Mayotte 26,9 %, Guyane 11,5 %)
 et diagonale des faibles densités (Creuse 9,5 %, Nièvre 7,9 %) contre
@@ -365,12 +393,21 @@ et diagonale des faibles densités (Creuse 9,5 %, Nièvre 7,9 %) contre
 ```{python}
 #| code-summary: "chiffres clés R-03"
 dec = r03["declining_ze"]
+sp3 = r03["spearman_perimetres"]
 print(f"{r03['n_ze']} zones d'emploi ; Spearman taux structurel × évolution "
-      f"emploi 1998-2018 : {r03['spearman_rate_vs_growth']}")
+      f"emploi 1998-2018 : {sp3['france_entiere']['rho']} "
+      f"(IC 95 % {sp3['france_entiere']['ci95']}) ; métropole "
+      f"{sp3['metropole']['rho']} (IC {sp3['metropole']['ci95']})")
 print(f"ZE à emploi déclinant : {dec['n']} — {dec['structural_share_pct']} % de la "
-      f"vacance structurelle pour {dec['private_stock_share_pct']} % du parc privé ; "
-      f"taux médian {dec['median_rate_pct']} % contre "
+      f"vacance structurelle VISIBLE pour {dec['private_stock_share_pct']} % du parc "
+      f"privé ; taux médian {dec['median_rate_pct']} % contre "
       f"{r03['growing_ze_median_rate_pct']} % ailleurs")
+sec3 = r03["secretisation"]
+lo3, hi3 = sec3["declining_share_borne_pct"]
+print(f"Borne de secrétisation : {sec3['n_communes_masquees']:,} communes masquées "
+      f"(≤ {sec3['max_structurels_par_commune_masquee']} chacune) — part déclinante "
+      f"entre {lo3} et {hi3} %, donc 'ZE croissantes' entre {round(100 - hi3, 1)} "
+      f"et {round(100 - lo3, 1)} %".replace(",", " "))
 print("Plus gros volumes en ZE dynamiques :",
       ", ".join(f"{e['name']} {e['structural']:,}".replace(",", " ")
                 for e in r03["top_growing_by_volume"][:3]))
@@ -379,18 +416,23 @@ print("Plus gros volumes en ZE dynamiques :",
 L'hypothèse directrice **H-02** (capacités mal localisées) est **confirmée en
 intensité** — la vacance structurelle est sur-représentée (×1,5) et deux fois
 plus fréquente dans les ZE à emploi déclinant — mais **réfutée comme
-explication dominante en volume** : ~85 % de la vacance structurelle se
-trouve dans des zones d'emploi où l'emploi croît, Paris en tête. La majorité
-de la capacité sortie d'usage coexiste avec la demande (interprétation
-I-03) ; la dynamique d'emploi s'arrête en 2018 (limite L-07).
+explication dominante en volume** : **78 à 88 %** de la vacance structurelle
+(bornes de secrétisation incluses ; 84,9 % au visible) se trouve dans des
+zones d'emploi où l'emploi croît, Paris en tête — la lecture survit sur
+toute la borne (interprétation I-03). La majorité de la capacité sortie
+d'usage coexiste avec la demande ; la dynamique d'emploi utilisée s'arrête
+en 2018 (limite L-07, corrigée le 2026-08-07 : les millésimes ZE récents
+existent, la variante est planifiée).
 
 ### R-04 — Pression du coût résidentiel et vacance (instruction de H-03)
 
 ```{python}
 #| code-summary: "chiffres clés R-04"
 med = r04["median_vacancy_rate_pct"]
+sp4 = r04["spearman_perimetres"]
 print(f"{r04['n_ze']} ZE ; Spearman indice de coût × taux structurel : "
-      f"{r04['spearman_cost_vs_vacancy']}")
+      f"{sp4['france_entiere']['rho']} (IC 95 % {sp4['france_entiere']['ci95']}) ; "
+      f"métropole {sp4['metropole']['rho']} (IC {sp4['metropole']['ci95']})")
 print(f"Taux de vacance médian : {med['expensive_half']} % (moitié des ZE au coût "
       f"relatif élevé) contre {med['cheap_half']} % (moitié bon marché)")
 rng = r04["loyer_m2_range"]
@@ -417,12 +459,14 @@ a été corrigée en vérifiant les codes). L'indice n'est pas un taux d'effort
 ```{python}
 #| code-summary: "chiffres clés R-05"
 tz = r05["touristic_ze"]
+rsv = r05["spearman_rs_vs_structural_vacancy"]
+rsc = r05["spearman_rs_vs_cost_index"]
 print(f"{r05['n_ze']} ZE ; part nationale de résidences secondaires : "
       f"{r05['national_rs_share_pct']} % (max par ZE : "
       f"{r05['top_rs_share'][0]['name']} {r05['top_rs_share'][0]['part_rs_pct']} %)")
-print(f"Spearman part RS × vacance structurelle : "
-      f"{r05['spearman_rs_vs_structural_vacancy']} ; part RS × indice de coût : "
-      f"{r05['spearman_rs_vs_cost_index']}")
+print(f"Spearman part RS × vacance structurelle : {rsv['rho']} "
+      f"(IC 95 % {rsv['ci95']} — faible mais significative) ; part RS × indice "
+      f"de coût : {rsc['rho']} (IC {rsc['ci95']} — compatible avec zéro)")
 print(f"ZE à plus de {tz['threshold_rs_pct']:.0f} % de RS : {tz['n']} — vacance "
       f"structurelle médiane {tz['median_structural_vacancy_pct']} % contre "
       f"{tz['others_median_structural_vacancy_pct']} % ailleurs")
@@ -433,11 +477,17 @@ print(f"Cumuls RS > 20 % et vacance > 5 % : {len(r05['rs_and_vacancy_outliers'])
 À l'échelle des zones d'emploi, la part de résidences secondaires n'explique
 ni la vacance ni le coût : les grands marchés touristiques (Briançon 65,5 %
 de RS) gardent leur parc en usage — comme résidence secondaire précisément.
-La « capacité saisonnière retirée » (INTRO §7) réside dans la catégorie RS
-elle-même et ses effets d'éviction infra-territoriaux, non mesurés ici
-(limite L-10). Un sous-groupe corse et rural-touristique cumule cependant
-RS et vacance (Corte : 39 % de RS, 10,4 % de vacance) — cas d'étude
-communaux pour la suite (interprétation I-05).
+Énoncé honnêtement depuis la revue contradictoire (le « sans lien » initial
+était faux) : la corrélation RS × vacance est **faible mais significative**
+(+0,15, IC excluant zéro) et de signe **opposé** au contraste de groupe
+(les ZE les plus touristiques ont une vacance PLUS BASSE) — une relation
+non monotone, effet de structure territorial, pas un mécanisme ; RS × coût
+est compatible avec zéro. La « capacité saisonnière retirée » (INTRO §7)
+réside dans la catégorie RS elle-même et ses effets d'éviction
+infra-territoriaux, non mesurés ici (limite L-10). Un sous-groupe corse et
+rural-touristique cumule cependant RS et vacance (Corte : 39,1 % de RS,
+6,9 % de vacance) — cas d'étude communaux pour la suite (interprétation
+I-05).
 
 ### R-06 — Le taux d'effort brut à la relocation (D-09) donne une grandeur à la tension
 
@@ -445,18 +495,23 @@ communaux pour la suite (interprétation I-05).
 #| code-summary: "chiffres clés R-06"
 h = r06["hypothesis"]
 med6 = r06["median_effort_by_h07_pct"]
-print(f"{r06['n_ze']} ZE ; H-07 = {h['central_value_m2_per_person']} m²/personne "
-      f"(plage {h['plausible_range'][0]:.0f}-{h['plausible_range'][1]:.0f})")
+print(f"{r06['n_ze']} ZE ; H-07 = {h['central_value_m2_per_person']:.0f} m²/personne "
+      f"(recentrée sur les emménagés récents ; plage "
+      f"{h['plausible_range'][0]:.0f}-{h['plausible_range'][1]:.1f})")
 print(f"Taux d'effort brut médian à la relocation : {med6['central']} % "
-      f"({med6['low']}-{med6['high']} % selon H-07)")
+      f"({med6['low']}-{med6['high']} % selon H-07 — sensibilité orientée à la "
+      f"hausse, borne haute = relocation au standard du parc en place)")
 q6 = r06["effort_brut_pct_quantiles"]
 print(f"Distribution : min {q6['min']} % · p25 {q6['p25']} % · p75 {q6['p75']} % · "
       f"max {q6['max']} %")
 print("Efforts les plus élevés :",
       ", ".join(f"{e['name'].strip()} {e['effort_brut_pct']}" for e in r06["top_effort"][:5]))
-print(f"Spearman effort × vacance structurelle : {r06['spearman_effort_vs_vacancy']} "
-      f"(vacance médiane {r06['median_vacancy_rate_pct']['high_effort_half']} % dans la "
-      f"moitié à effort élevé contre {r06['median_vacancy_rate_pct']['low_effort_half']} %)")
+sp6 = r06["spearman_perimetres"]
+print(f"Spearman effort × vacance structurelle : {sp6['france_entiere']['rho']} "
+      f"(IC 95 % {sp6['france_entiere']['ci95']}) ; métropole "
+      f"{sp6['metropole']['rho']} (IC {sp6['metropole']['ci95']}) — vacance médiane "
+      f"{r06['median_vacancy_rate_pct']['high_effort_half']} % dans la moitié à "
+      f"effort élevé contre {r06['median_vacancy_rate_pct']['low_effort_half']} %")
 print(f"Variante appartement seul : médiane "
       f"{r06['appart_only']['median_effort_pct']} %, Spearman "
       f"{r06['appart_only']['spearman_vs_mix']} avec le mix")
@@ -468,12 +523,18 @@ loyers d'annonce courants — le loyer est le mix appartement/maison de la ZE
 (choix C-05) et le ménage s'élimine du calcul via le ratio personnes/UC
 observé (choix C-04), si bien que seul le paramètre de surface H-07 porte
 l'incertitude, par simple homothétie (le classement des ZE est invariant).
-La géographie de I-04 se confirme dans une unité parlante : à Paris
-(93,5 %) et dans les ZE réunionnaises et martiniquaises (~75-85 %, revenus
-faibles bien plus que loyers extrêmes), la relocation est **hors de portée
-du ménage médian local**, tandis que l'anticorrélation avec la vacance
-persiste (interprétation I-06 ; limites L-09/L-11 — notamment : taux brut
-avant aides, et niveau calé sur la surface du parc moyen en place).
+Au central recentré (H-07 = 35 m²/personne, revue contradictoire du
+2026-08-07 — l'ancien titre 40,1 % correspondait au parc en place et
+devient la borne haute), la médiane est **27,4 %** — proche du standard
+des 30 % — mais monte à **40,1 %** si la relocation se fait au standard du
+parc en place. La géographie de I-04 se confirme dans une unité parlante :
+à Paris (63,9 %, jusqu'à 93,5 % à la borne haute) et dans les ZE
+réunionnaises et martiniquaises (~50-58 %, revenus faibles bien plus que
+loyers extrêmes), la relocation est **hors de portée du ménage médian
+local** à toutes les valeurs de H-07, tandis que l'anticorrélation avec la
+vacance persiste (interprétation I-06 ; limites L-09/L-11 — notamment :
+taux brut avant aides, loyers 2025 sur revenus 2021 et charges comprises,
+donc niveaux plutôt surestimés, classements insensibles).
 
 ### R-07 — Tension des usages : le manque absolu et le gisement local
 
@@ -483,21 +544,56 @@ nat = r07["national"]
 print(f"{r07['n_ze']} ZE ; seuil de fluidité H-08 = "
       f"{r07['hypothesis']['central_value_pct']:.0f} % "
       f"(plage {r07['hypothesis']['plausible_range'][0]:.0f}-"
-      f"{r07['hypothesis']['plausible_range'][1]:.0f})")
+      f"{r07['hypothesis']['plausible_range'][1]:.0f}) ; taux d'existence "
+      f"H-12 = {r07['hypothesis_existence']['central_value']} "
+      f"(plage {r07['hypothesis_existence']['plausible_range'][0]}-"
+      f"{r07['hypothesis_existence']['plausible_range'][1]})")
 print(f"ZE tendues (vacance disponible < seuil) : {nat['n_ze_tendues']} — "
       f"parc {nat['parc_tendues'] / 1e6:.1f} M logements")
 print(f"BESOIN ABSOLU de détente : {nat['besoin_logements']:,} logements à rendre "
-      f"disponibles".replace(",", " "))
-print(f"GISEMENT structurel dans ces mêmes ZE : {nat['gisement_structurel']:,} "
-      f"→ couverture {nat['couverture']}".replace(",", " "))
+      f"disponibles (écrêté ; {nat['besoin_sans_ecretage']:,} sans écrêtage des "
+      f"{len(r07['artefacts_disponible_negatif'])} ZE à disponible négative)"
+      .replace(",", " "))
+print(f"GISEMENT structurel EFFECTIF (LOVAC × H-12) dans ces mêmes ZE : "
+      f"{nat['gisement_structurel']:,} → couverture {nat['couverture']}"
+      .replace(",", " "))
+print(f"Périmètre des seules communes TLV : gisement "
+      f"{nat['gisement_structurel_communes_tlv']:,} → couverture "
+      f"{nat['couverture_communes_tlv']}".replace(",", " "))
+grille = {(e["seuil_pct"], e["existence_rate"]): e["couverture"]
+          for e in r07["sensibilite_seuil_x_existence"]}
+print(f"Grille H-08 × H-12 : min {min(grille.values())} "
+      f"(7 % × 0,6), central {grille[(6.0, 0.75)]}, max {max(grille.values())} "
+      f"(5 % × 0,9) — la couverture TRAVERSE 1 à l'intérieur des plages")
 cv = r07["ze_couvertes"]
-print(f"Couverture locale acquise : {cv['n']} ZE / {cv['sur']} "
-      f"(parc couvert {cv['parc_couvert'] / 1e6:.1f} M, non couvert "
-      f"{cv['parc_non_couvert'] / 1e6:.1f} M)")
+print(f"Couverture locale acquise : {cv['n']} ZE / {cv['sur']} — besoin couvert "
+      f"{cv['besoin_couvert']:,}, non couvert {cv['besoin_non_couvert']:,} "
+      f"({cv['besoin_non_couvert'] / nat['besoin_logements']:.0%} du besoin), "
+      f"déficit incompressible {cv['deficit_incompressible']:,}".replace(",", " "))
+va = r07["variante_assiette"]
+print(f"Variante d'assiette (seuil recalibré {va['seuil_recalibre_pct']} % sur la "
+      f"disponible) : {va['national_au_seuil_recalibre']['n_ze_tendues']} ZE "
+      f"tendues, besoin {va['national_au_seuil_recalibre']['besoin_logements']:,}, "
+      f"couverture {va['national_au_seuil_recalibre']['couverture']} (communes TLV "
+      f"{va['national_au_seuil_recalibre']['couverture_communes_tlv']})"
+      .replace(",", " "))
+print(f"ZE tendues par structurelle record : "
+      f"{va['tendues_par_structurelle_record']['n']} — gisement "
+      f"{va['tendues_par_structurelle_record']['gisement_structurel']:,} "
+      f"({va['tendues_par_structurelle_record']['gisement_structurel'] / nat['gisement_structurel']:.0%} du total)"
+      .replace(",", " "))
+bs = r07["borne_secretisation"]
+bg = r07["bande_grise"]
+print(f"Borne de secrétisation : {bs['n_communes_masquees_tendues']:,} communes "
+      f"masquées, masse max {bs['masse_masquee_max']:,} → couverture bornée "
+      f"{nat['couverture']} → {bs['couverture_borne_masquee']} ; bande grise "
+      f"± {bg['largeur_pct']:.0f} pt : {bg['n_ze']} ZE dont {bg['dont_tendues']} "
+      f"tendues".replace(",", " "))
 adm = r07["croisement_admin_marche"]
-print(f"ZE à parc majoritairement TLV : {adm['n_majoritaires_tlv']} — tendues au "
-      f"test vacance disponible : {adm['n_majoritaires_tlv_tendues']}, au test "
-      f"vacance totale : {adm['n_majoritaires_tlv_tendues_test_vacance_totale']}")
+print(f"Croisement légal : {adm['n_majoritaires_tlv']} ZE majoritairement TLV, "
+      f"dont {adm['n_majoritaires_tlv_tendues']} tendues au test ; "
+      f"{adm['n_tendues_non_majoritaires_tlv']} ZE tendues NON majoritairement "
+      f"TLV, dont {adm['n_tendues_part_tlv_sous_1pct']} quasi sans commune TLV")
 print("Plus gros besoins :",
       ", ".join(f"{e['name'].strip()} {e['besoin_mobilisation']:,}".replace(",", " ")
                 for e in r07["top_besoin"][:5]))
@@ -507,19 +603,26 @@ print("Pires couvertures :",
 ```
 
 La tension est testée sur la **vacance disponible** (vacance totale du
-recensement moins vacance structurelle LOVAC, hors marché par construction
-D-10) — le choix initial d'un test sur la vacance totale a été **corrigé**
-après un contrôle de cohérence (choix C-06, correction tracée) : la vacance
-totale du recensement est haute partout et aucune grande métropole TLV n'en
-sortait tendue. Le résultat central répond à la question « le gisement
-vacant des zones tendues suffirait-il ? » **en volume absolu** : il faudrait
-~286 000 logements rendus disponibles pour ramener les 142 ZE tendues au
-seuil de fluidité, et ces mêmes ZE contiennent ~472 000 logements
-structurellement vacants (couverture 1,65, robuste sur la plage H-08). La
-suffisance est nationale et acquise dans 101 ZE, mais **pas** dans 41 ZE —
-littorales et touristiques (Les Sables-d'Olonne, Pornic, Calvi, Briançon…),
-où le parc hors résidence principale est en résidences secondaires (R-05),
-pas en vacance (interprétation I-07 ; limites L-12).
+recensement moins gisement effectif LOVAC × H-12, hors marché par
+construction D-10) — le choix initial d'un test sur la vacance totale a
+été **corrigé** après un contrôle de cohérence (choix C-06, correction
+tracée), et la revue contradictoire du 2026-08-07 a introduit le taux
+d'existence H-12 (~25 % de faux vacants dans LOVAC, S-22), propagé des
+deux côtés du test. Le résultat central répond à la question « le gisement
+vacant des zones tendues suffirait-il ? » : il faudrait ~194 000 logements
+rendus disponibles pour ramener les 97 ZE tendues au seuil de fluidité, et
+ces mêmes ZE contiennent ~207 000 logements structurellement vacants
+*existants* — couverture **1,06**, c'est-à-dire **marginale** : la grille
+H-08 × H-12 traverse 1 à l'intérieur des plages plausibles (0,82-1,85), et
+au périmètre des seules **communes TLV** — le périmètre légal de la
+tension — la couverture tombe à **0,69** (contrôles externes convergents :
+Cour des comptes et DHUP, S-22, limite L-16). La couverture locale n'est
+acquise que dans 56 ZE sur 97 : **68 % du besoin** est dans des ZE non
+couvertes, avec un déficit incompressible de ~58 000 logements même à
+remobilisation totale — littorales et touristiques (Les Sables-d'Olonne,
+Pornic, Calvi…), où le parc hors résidence principale est en résidences
+secondaires (R-05), pas en vacance (interprétation I-07 ; limites L-12,
+L-16..L-19, L-21).
 
 ### R-08 — L'état du bâti, premier faisceau sur les blocages (H-05)
 
@@ -531,9 +634,14 @@ print(f"{r08['n_ze']} ZE (dont {r08['n_ze_dom']} DOM) ; "
 sa = r08["spearman_age_vs_vacancy"]
 sf = r08["spearman_fg_vs_vacancy"]
 print(f"Spearman ancienneté (avant 1946) × vacance structurelle : "
-      f"{sa['metropole']} en métropole ({sa['all']} avec DOM)")
+      f"{sa['metropole']} en métropole (IC 95 % {sa['metropole_ci95']} ; "
+      f"{sa['all']} avec DOM)")
 print(f"Spearman part F+G × vacance : {sf['metropole']} en métropole "
-      f"({sf['all']} avec DOM) ; part F+G × ancienneté : {r08['spearman_fg_vs_age']}")
+      f"(IC {sf['metropole_ci95']} ; {sf['all']} avec DOM) ; part F+G × "
+      f"ancienneté : {r08['spearman_fg_vs_age']}")
+print(f"Couverture de diagnostic DPE × vacance (métropole) : "
+      f"{r08['spearman_couverture_dpe_vs_vacancy_metropole']} — le parc des ZE à "
+      f"forte vacance est MOINS diagnostiqué (le 0,40 est plutôt une borne basse)")
 med8 = r08["median_vacancy_rate_pct"]
 print(f"Taux structurel médian : {med8['oldest_half']} % (moitié des ZE au bâti "
       f"le plus ancien) contre {med8['newest_half']} %")
@@ -550,54 +658,84 @@ print("Part F+G la plus forte :",
 Première instruction de **H-05** (blocages au niveau propriété), imposée
 par R-07 : la couverture du manque par le gisement suppose que le parc
 structurellement vacant soit remobilisable. En **métropole**, l'ancienneté
-du bâti est le corrélat territorial le plus fort de la vacance
-structurelle de toute la chaîne (Spearman 0,56 — contre −0,42 pour le
-coût et −0,36 pour l'emploi), et le proxy énergie converge (F+G × vacance
-0,40 ; F+G × ancienneté 0,62) : les deux mesures pointent la diagonale
-rurale de R-02/R-03 — la remobilisation passe par le coût de remise en
-usage. Aux **DOM**, l'élimination progresse : ni l'emploi, ni le coût
-seul, ni les résidences secondaires, ni l'état du bâti n'expliquent la
-vacance record — reste la piste des blocages de propriété (successions,
-indivisions), NON MESURABLE en open data : PPPI sous convention
-DREAL/DDT, fichiers fonciers réservés aux acteurs publics (frontière de
-données actée, interprétation I-08 ; limites L-13, dont le biais
-d'échantillon DPE : les diagnostiqués ne sont pas le parc, et les vacants
-durables ne sont justement pas diagnostiqués).
+du bâti est fortement corrélée à la vacance structurelle (Spearman +0,56)
+— **à périmètre égal** (métropole), c'est du même ordre que le coût
+(−0,54), l'effort (−0,51) et l'emploi (−0,47), IC chevauchants : le
+superlatif « corrélat le plus fort de la chaîne » de la première version
+a été abandonné à la revue contradictoire ; l'ancienneté n'est
+significativement au-dessus que de F+G (+0,40). Le proxy énergie converge
+(F+G × ancienneté 0,62) et tous pointent la diagonale rurale de
+R-02/R-03 — SI l'état du parc vacant suit celui du parc observable
+(hypothèse déclarée, pas mesure : les proxys décrivent le parc occupé ou
+en transaction, jamais les vacants, L-13), la remobilisation passe par le
+coût de remise en usage ; le Datalab SDES (S-23) conforte cette piste
+logement par logement (×3,3 avant 1900, ~45 % d'obsolescence, ~20 % de
+successions). Aux **DOM**, l'élimination progresse : ni l'emploi, ni le
+coût seul, ni les résidences secondaires, ni l'état du bâti n'expliquent
+la vacance record — reste la piste des blocages de propriété
+(successions, indivisions), NON MESURABLE en open data : PPPI sous
+convention DREAL/DDT, fichiers fonciers réservés aux acteurs publics
+(frontière de données actée, interprétation I-08 ; limites L-13, dont le
+biais d'échantillon DPE : les diagnostiqués ne sont pas le parc, et les
+vacants durables sont justement MOINS diagnostiqués — couverture ×
+vacance −0,14).
 
 ### R-09 — Ce que coûterait la remobilisation, comparé au neuf
 
 ```{python}
 #| code-summary: "chiffres clés R-09"
 ip = r09["ipea"]
+lg = r09["logements"]
 print(f"{r09['n_ze_tendues']} ZE tendues ; actualisation IPEA "
       f"{ip['moyenne_2016']} (2016) → {ip['moyenne_2023']} (2023), "
       f"facteur {ip['facteur']}")
+print(f"Règle mixte : {lg['renovables']:,} logements rénovables "
+      f"(min(besoin, gisement effectif local)) + {lg['deficit_neuf']:,} en "
+      f"déficit, facturés au prix du neuf".replace(",", " "))
 for label in ("bas", "central", "haut"):
     v = r09["couts"][label]
-    print(f"{label:8s}: {v['cout_unitaire_moyen_pondere_eur']:,} €/logement — "
-          f"détente {v['cout_detente_mdeur']} Md€, gisement entier "
-          f"{v['cout_gisement_mdeur']} Md€".replace(",", " "))
+    print(f"{label:8s}: rénovation {v['cout_unitaire_renovation_moyen_eur']:,} "
+          f"€/logement — détente MIXTE {v['cout_detente_mixte_mdeur']} Md€ "
+          f"(dont neuf {v['dont_deficit_neuf_mdeur']}), rénovation seule "
+          f"{v['cout_detente_renovation_seule_mdeur']} Md€".replace(",", " "))
 cn = r09["comparateur_neuf"]
 print(f"Construire les {r09['besoin_total']:,} logements au prix de revient "
-      f"social 2023 : {cn['cout_neuf_mdeur']} Md€ — ratio neuf/remobilisation "
-      f"{cn['ratio_neuf_sur_remobilisation']['haut']} à "
-      f"{cn['ratio_neuf_sur_remobilisation']['bas']} "
-      f"({cn['ratio_neuf_sur_remobilisation']['central']} au central)".replace(",", " "))
+      f"social 2023 : {cn['cout_neuf_mdeur']} Md€ — ratio neuf/détente mixte "
+      f"{cn['ratio_neuf_sur_detente_mixte']['haut']} à "
+      f"{cn['ratio_neuf_sur_detente_mixte']['bas']} "
+      f"({cn['ratio_neuf_sur_detente_mixte']['central']} au central) ; "
+      f"ratio neuf/rénovation seule "
+      f"{cn['ratio_neuf_sur_renovation_seule']['central']} au central"
+      .replace(",", " "))
+print("Propagation H-08 :",
+      " ; ".join(f"seuil {e['seuil_pct']:.0f} % → {e['cout_detente_mixte_mdeur']} "
+                 f"Md€ (ratio {e['ratio_neuf_sur_detente']})"
+                 for e in r09["sensibilite_seuil_h08"]))
+vr = r09["variante_rehabilitation_lourde"]
+print(f"Stress réhabilitation lourde (rénovation × {vr['facteur_renovation']:.0f}) : "
+      f"{vr['cout_detente_mixte_mdeur']} Md€, ratio {vr['ratio_neuf_sur_detente']}")
 print("Plus gros coûts de détente (M€) :",
       ", ".join(f"{e['name'].strip()} {e['cout_detente_meur']:.0f}"
                 for e in r09["top_cout_detente"][:4]))
 ```
 
-Le chiffrage referme la boucle ouverte par R-07 : la détente des 142 ZE
-tendues par remobilisation (rénovation complète et performante du volume
-nécessaire, C-07) coûterait **~12,5 Md€ TTC 2023** (10,6-15,3 sur les
-plages), contre **~48,3 Md€** pour construire les mêmes logements au prix
-de revient du logement social — la remobilisation est **3,2 à 4,6 fois
-moins chère**, et remobiliser la totalité du gisement structurel des
-zones tendues resterait sous ~24 Md€. Le chiffre est un ordre de grandeur
-d'investissement total, pas un coût public, et l'argument économique ne
-lève pas à lui seul les verrous de propriété mis en évidence par R-08
-(interprétation I-09 ; limites L-14).
+Le chiffrage referme la boucle ouverte par R-07, avec la règle MIXTE
+introduite par la revue contradictoire (C-07 corrigé : on ne peut rénover
+que là où le gisement existe — ~137 000 logements ; les ~58 000 du
+déficit sont facturés au prix du neuf) : la détente des 97 ZE tendues
+coûterait **~15,8 Md€ TTC 2023** (14,9-17,1 sur les plages, dont
+9,8 Md€ de neuf), contre **~32,9 Md€** pour tout construire au prix de
+revient du logement social — la remobilisation est **~2 fois moins
+chère** (1,9-2,2), et encore 1,5 fois sous le stress « réhabilitation
+lourde » (coûts de rénovation doublés : 21,8 Md€). L'ancien « ~4 fois
+moins cher » ne valait que pour la part rénovable (ratio rénovation seule
+3,8, publié pour trace). Les VOLUMES dépendent entièrement du seuil H-08
+(5,5-37,5 Md€ sur la plage), le RATIO est robuste (2,3-1,9). Le chiffre
+est un ordre de grandeur d'investissement total, pas un coût public ; il
+exclut l'acquisition des biens alors que le comparateur inclut la charge
+foncière (asymétrie documentée L-14), et l'argument économique ne lève
+pas à lui seul les verrous de propriété mis en évidence par R-08
+(interprétation I-09 ; limites L-14, L-17, L-18).
 
 ### R-10 — Le foncier immobilisé par le non-résidentiel vacant
 
@@ -616,6 +754,16 @@ for label in ("bas", "central", "haut"):
     c = r10["capacite_centrale"][label]
     print(f"capacité × densité {label} : {c['logements']:,} logements "
           f"({c['ratio_besoin']} × le besoin)".replace(",", " "))
+dc10 = r10["densite_constatee_fonds_friches"]
+print(f"Densité CONSTATÉE des opérations du fonds friches (S-25/S-26) : "
+      f"{dc10['logements_par_ha']} logements/ha ({dc10['m2_logements_par_ha']} "
+      f"m² SP/ha ÷ {dc10['surface_logement_m2']} m²) → capacité "
+      f"{dc10['capacite_gisement_central']:,} = {dc10['ratio_besoin']} × le "
+      f"besoin (plancher opérationnel)".replace(",", " "))
+print("Propagation H-08 :",
+      " ; ".join(f"seuil {e['seuil_pct']:.0f} % → ratio "
+                 f"{e['ratio_capacite_centrale']}"
+                 for e in r10["sensibilite_seuil_h08"]))
 cv = r10["couverture"]
 print(f"ZE couvrant leur besoin par leurs seules friches sans projet : "
       f"{cv['n_ze_capacite_couvre_besoin']} / {cv['n_ze_avec_friche']} pourvues")
@@ -627,16 +775,20 @@ print("Plus gros gisements :",
 Réponse à la question du foncier immobilisé par des bâtiments vacants non
 résidentiels (ateliers, stockage, industrie…) : même au périmètre le plus
 strict — friches « sans projet », hors résidentiel connu, surfaces
-plafonnées à 50 ha par site — les zones tendues contiennent **~22 300 ha**
+plafonnées à 50 ha par site — les 97 ZE tendues contiennent **~14 400 ha**
 de foncier en friche, soit, à la densité de référence haussmannienne
 (H-11, dérivée des données figées et re-contrôlée par la chaîne à chaque
-exécution), une capacité de **~3,3 millions de logements : 11,5 fois le
-besoin de détente** (5,5 × à la densité basse). **Le foncier n'est pas la
-contrainte** — et l'inventaire Cartofriches étant partiel, ces totaux
+exécution), une capacité de **~2,1 millions de logements : 10,9 fois le
+besoin de détente** (5,2 × à la densité basse, 5,1-28,6 × sur la plage
+H-08) — et même à la densité **constatée** des opérations de recyclage du
+fonds friches (30,3 logements/ha, foncier partagé tous usages, S-25/S-26),
+la capacité couvre encore **2,2 fois** le besoin. **Le foncier n'est pas
+la contrainte** — et l'inventaire Cartofriches étant partiel, ces totaux
 sont des planchers. La géographie du gisement est industrielle (Lens,
-Thionville, Rouen…), mais Paris, Marseille et Bordeaux couvriraient
-elles-mêmes leur besoin (interprétation I-10 ; limites L-15, dont la
-frontière des bureaux vacants « en marché », hors donnée ouverte).
+Caen, Rouen…) et les lauréats du fonds friches sont majoritairement en
+zone détendue, mais 80 des 93 ZE pourvues couvriraient leur propre besoin
+(interprétation I-10 ; limites L-15, dont la frontière des bureaux
+vacants « en marché », hors donnée ouverte).
 
 ## 7. Sensibilité
 
@@ -669,24 +821,39 @@ structurelle à ce millésime (L-04).
 
 La sensibilité de **R-06 à H-07** est exacte et déjà publiée dans
 l'artefact : le taux d'effort est linéaire en H-07, donc la plage
-35-71 m²/personne translate la médiane de 27,4 % à 55,6 % sans changer le
-classement des ZE — chaque entrée de `top_effort`/`bottom_effort` porte son
-intervalle `effort_range_pct`. La variante appartement seul (numérateur de
-R-04) déplace la médiane de 40,1 % à 43,8 % et laisse les rangs presque
-inchangés (Spearman 0,959).
+35-51,2 m²/personne (recentrée le 2026-08-07 — la borne haute est l'ancien
+centre « parc en place ») translate la médiane de 27,4 % à 40,1 % sans
+changer le classement des ZE — chaque entrée de `top_effort`/
+`bottom_effort` porte son intervalle `effort_range_pct`. La variante
+appartement seul (numérateur de R-04) déplace la médiane de 27,4 % à
+29,9 % et laisse les rangs presque inchangés (Spearman 0,959).
 
-La sensibilité de **R-07 au seuil H-08** est publiée dans l'artefact
-(`sensibilite_seuil`) :
+La sensibilité de **R-07 au seuil H-08** (au taux d'existence central
+H-12 = 0,75) est publiée dans l'artefact (`sensibilite_seuil`) :
 
 ```{python}
 #| code-summary: "couverture nationale selon le seuil de fluidité"
 pd.DataFrame(r07["sensibilite_seuil"]).style.hide(axis="index")
 ```
 
-La conclusion qualitative — le gisement structurel des ZE tendues excède le
-besoin absolu de détente — tient sur toute la plage plausible du seuil
-(couverture 1,90 à 1,15) ; c'est le partage territorial (quelles ZE sont
-couvertes) qui bouge avec le seuil.
+Et la grille jointe **H-08 × H-12** (`sensibilite_seuil_x_existence`) :
+
+```{python}
+#| code-summary: "couverture nationale : seuil de fluidité × taux d'existence"
+grille_df = pd.DataFrame(r07["sensibilite_seuil_x_existence"]).pivot(
+    index="existence_rate", columns="seuil_pct", values="couverture"
+)
+grille_df.index.name = "H-12 (existence)"
+grille_df.columns.name = "H-08 (seuil %)"
+grille_df
+```
+
+Contrairement à la première version du document (couverture 1,65,
+« robuste sur la plage H-08 »), la couverture nationale **traverse 1 à
+l'intérieur des plages plausibles** : de 0,82 (seuil 7 %, existence 0,6) à
+1,85 (seuil 5 %, existence 0,9), avec 1,06 au central — la suffisance en
+volume est marginale et conditionnelle, pas robuste. Le partage
+territorial (quelles ZE sont couvertes) bouge lui aussi avec le seuil.
 
 ## 8. Interprétation
 
@@ -699,8 +866,10 @@ couvertes) qui bouge avec le seuil.
   villes dominent (Paris ~32 000, Marseille ~14 500) à des taux proches de
   la moyenne. Tout mécanisme de remise en usage devra traiter ces deux
   régimes distincts.
-- **I-03** — H-02 est confirmée en intensité mais réfutée en volume : la
-  majorité de la capacité sortie d'usage coexiste avec la demande — les
+- **I-03** — H-02 est confirmée en intensité mais réfutée en volume : 78 à
+  88 % de la vacance structurelle (bornes de secrétisation incluses) est
+  en ZE où l'emploi croît — la majorité de la capacité sortie d'usage
+  coexiste avec la demande, et la lecture survit sur toute la borne. Les
   causes de blocage sont à chercher au niveau propriété/bâti, successions,
   coût ou inadéquation infra-ZE (H-03, H-05).
 - **I-04** — Le coût est un marqueur de tension, pas la cause de la
@@ -709,57 +878,76 @@ couvertes) qui bouge avec le seuil.
   territorial. Le cumul coût+vacance élevés est ultramarin (revenus
   faibles).
 - **I-05** — À l'échelle ZE, les résidences secondaires n'expliquent ni la
-  vacance ni le coût ; les marchés touristiques gardent leur parc en usage
-  et l'effet saisonnier, s'il existe, est infra-territorial. Un sous-groupe
-  corse et rural-touristique cumule RS et vacance — cas d'étude communaux.
-  Cette exploration a corrigé l'identification des ZE coût+vacance de
-  R-04 : ultramarines, non corses.
+  vacance ni le coût — énoncé honnêtement : la corrélation RS × vacance
+  est faible mais significative (+0,15) et de signe opposé au contraste
+  touristique (non-monotonie, effet de structure) ; RS × coût est
+  compatible avec zéro. Les marchés touristiques gardent leur parc en
+  usage et l'effet saisonnier, s'il existe, est infra-territorial. Un
+  sous-groupe corse et rural-touristique cumule RS et vacance — cas
+  d'étude communaux. Cette exploration a corrigé l'identification des ZE
+  coût+vacance de R-04 : ultramarines, non corses.
 - **I-06** — Le taux d'effort donne à la tension une grandeur
-  interprétable : se reloger coûterait au ménage médian ~40 % de son revenu
-  dans la ZE médiane (~27 % à l'hypothèse de surface la plus favorable),
-  plus des trois quarts à Paris et dans les DOM couverts — la relocation y
-  est hors de portée du ménage médian local. La montée en réalisme ne
-  change pas la lecture de I-04 (le coût marque la tension, pas la
-  vacance) et fournit le terme « coût de la mobilité résidentielle » pour
-  instruire H-04.
-- **I-07** — En volume absolu, le gisement structurel des zones tendues
-  excède le manque : ~286 000 logements à rendre disponibles pour ramener
-  les 142 ZE tendues au seuil de fluidité, ~472 000 structurellement
-  vacants dans ces mêmes ZE (couverture 1,65, robuste sur la plage H-08).
-  I-03 est ainsi quantifié : la capacité sortie d'usage coexiste avec la
-  demande, en volume suffisant. Mais la suffisance est conditionnelle —
-  remobiliser un parc sorti de l'usage suppose de lever des blocages non
-  encore instruits (H-05) ; et elle est fausse localement dans 41 ZE,
-  littorales et touristiques, où le parc hors RP est en résidences
-  secondaires : la tension touristique ne peut pas se résoudre par la
-  vacance.
+  interprétable : se reloger coûterait au ménage médian ~27 % de son
+  revenu dans la ZE médiane au central (surface des emménagés récents,
+  H-07 recentrée), jusqu'à ~40 % au standard du parc en place ; à Paris
+  (64-94 %) et dans les DOM couverts (~50-58 %), la relocation est hors
+  de portée du ménage médian local à toutes les valeurs de H-07. La
+  montée en réalisme ne change pas la lecture de I-04 (le coût marque la
+  tension, pas la vacance) et fournit le terme « coût de la mobilité
+  résidentielle » pour instruire H-04.
+- **I-07** (reformulé, revue contradictoire) — La suffisance en volume est
+  MARGINALE et conditionnelle : couverture ~1 au central (1,06), sous 1
+  dans une partie des plages (grille H-08 × H-12 : 0,82-1,85), sous 1 au
+  périmètre légal de la tension (0,69 aux seules communes TLV) ; 68 % du
+  besoin est dans des ZE non couvertes (déficit incompressible ~58 000).
+  Le gisement n'est pas là où est le besoin, ni à l'échelle inter-ZE ni à
+  l'échelle infra-ZE — la détente par la seule remobilisation n'est PAS
+  démontrée ; elle reste une contribution substantielle (jusqu'à
+  ~137 000 logements rénovables) dont le verrou est institutionnel
+  (H-05), et un gain de stock UNIQUE qui ne dispense pas du flux de
+  construction (L-19).
 - **I-08** — Première instruction de H-05 : en métropole la vacance
-  structurelle est un phénomène du bâti ancien rural (ancienneté et
-  étiquettes F+G convergent) — remobiliser le gisement de R-07 a donc un
-  coût de remise en usage, encore non chiffré, qui conditionne I-07. Aux
-  DOM, tout ce qui est mesurable en open data est éliminé (emploi, coût,
-  résidences secondaires, état du bâti) : la piste restante — blocages de
-  propriété, successions, indivisions — est précisément derrière la
-  frontière de données (PPPI, fichiers fonciers) ; à instruire par
-  convention d'accès, pas à affirmer.
-- **I-09** — Le coût de la détente par remobilisation (~12,5 Md€) est un
-  ordre de grandeur ~4 fois inférieur au coût de la même détente par
-  construction neuve : l'argument économique de la remobilisation est
-  solide, mais il ne lève pas à lui seul les verrous de propriété (I-08)
-  et ne couvre pas la tension touristique des 41 ZE sans gisement.
-  Première brique quantifiée de la future proposition institutionnelle.
-- **I-10** — Le foncier immobilisé n'est pas la contrainte : les friches
-  sans projet des zones tendues porteraient 5,5 à 17,6 fois le besoin à
-  densité haussmannienne, inventaire pourtant partiel. Volume vacant
-  suffisant, foncier surabondant, coût favorable — la contrainte de la
-  détente est institutionnelle (propriété, remobilisation, portage du
-  foncier), pas physique.
+  structurelle est territorialement un phénomène du bâti ancien rural
+  (ancienneté et étiquettes F+G convergent, du même ordre que coût et
+  emploi à périmètre égal — superlatif abandonné) — SI l'état des vacants
+  suit celui du parc observable (hypothèse déclarée, L-13), remobiliser
+  le gisement de R-07 a un coût de remise en usage ; le Datalab SDES
+  (S-23) conforte la piste obsolescence/successions logement par
+  logement. Aux DOM, tout ce qui est mesurable en open data est éliminé
+  (emploi, coût, résidences secondaires, état du bâti) : la piste
+  restante — blocages de propriété, successions, indivisions — est
+  précisément derrière la frontière de données (PPPI, fichiers
+  fonciers) ; à instruire par convention d'accès, pas à affirmer.
+- **I-09** (reformulé) — La détente au coût mixte (~15,8 Md€, dont 9,8 de
+  neuf là où le gisement manque) reste ~2 fois moins chère que le
+  tout-neuf (32,9 Md€) et ≥ 1,5 fois sous stress — mais l'ancien « ~4 × »
+  ne valait que pour la part rénovable : l'argument économique est solide
+  en DIRECTION, plus étroit en AMPLEUR ; c'est un investissement total,
+  pas un coût public, et le canal incitatif qui devrait le déclencher a
+  un bilan documenté faible (S-22). Première brique quantifiée de la
+  future proposition institutionnelle.
+- **I-10** (reformulé — conclusion de l'arc) — Le foncier n'est pas la
+  contrainte (5,2-16,7 × le besoin sur H-11, 2,2 × même au plancher
+  opérationnel constaté) ; le coût est favorable à la remobilisation là
+  où il y a gisement ; mais le VOLUME vacant ne suffit qu'à l'échelle
+  agrégée et au taux d'existence central — la contrainte institutionnelle
+  n'est plus la conséquence de la suffisance : elle en est la CONDITION.
+  Détendre suppose de lever les verrous de propriété (H-05), de
+  construire sur friches là où le gisement manque (les 41 ZE non
+  couvertes, littorales et touristiques), et de maintenir le flux de
+  construction (L-19).
 
-Ce que ces résultats **ne montrent pas** : ils ne disent rien de l'état du
-bâti, des causes de la vacance (succession, travaux, rétention…), de la
-mobilisabilité réelle des logements, ni de l'adéquation aux besoins locaux
-(emplois, services). Une vacance élevée n'implique pas une capacité
-mobilisable équivalente.
+Ce que ces résultats **ne montrent pas** : la mobilisabilité
+COMPORTEMENTALE des vrais vacants n'est pas paramétrée (successions,
+rétention — L-17 : la détente au central exigerait de remobiliser 94 % du
+gisement effectif, quand le constat ZLV est ~3 % de sorties en 4 ans) ;
+un vacant durable n'est pas un logement du besoin (petits logements
+anciens, obsolescence — L-18) ; le besoin est un besoin de STOCK de
+fluidité, pas le flux de construction ni la file d'attente sociale
+(L-19/L-21) ; et les effets de la détente elle-même (effet-prix et ses
+perdants, incitations des propriétaires, territoires détendus laissés
+entiers, attribution des logements) restent à instruire dans la
+proposition (L-20).
 
 ## 9. Implications de conception (préliminaires)
 
@@ -787,15 +975,66 @@ limits.style.hide(axis="index")
 Objections examinées à ce stade : la comparaison parc/ménages repose sur
 deux appareils de mesure distincts (écart contrôlé : ±0,3 % aux millésimes,
 L-03) ; les niveaux LOVAC et INSEE ne se comparent pas (L-06) ; la lecture
-territoriale communale est bornée par la secrétisation (L-05).
+territoriale communale est bornée par la secrétisation (L-05) ; et
+l'ensemble des objections de la revue contradictoire du 2026-08-07 est
+traité à la section suivante.
 
-## 11. Reproduction
+## 11. Revue contradictoire (2026-08-07)
+
+L'arc R-01..R-10 a subi la revue contradictoire exigée par la méthode
+(INTRO étape 12) : quatre relecteurs indépendants (sources alternatives ·
+hypothèses/définitions · scénarios d'échec · statistique), 45 objections,
+dont le compte rendu complet — méthode, dispositions objection par
+objection, restes ouverts — est
+[`evidence/revue-contradictoire-2026-08-07.md`](revue-contradictoire-2026-08-07.md).
+L'arithmétique publiée était exacte partout ; les objections sérieuses
+portaient sur les modèles et la mise en récit, et ont conduit aux
+corrections suivantes (toutes tracées dans les registres et le graphe,
+jamais silencieuses) :
+
+- **H-12 créée** (taux d'existence du gisement LOVAC, 0,75 [0,6 ; 0,9] —
+  ~25 % de faux vacants, Cour des comptes S-22), propagée des deux côtés
+  du test de tension C-06 ;
+- **H-07 recentrée** sur les emménagés récents (35 m²/personne, l'ancien
+  centre 51,2 devient la borne haute) ;
+- **règle mixte dans R-09** (C-07 corrigé : rénovation seulement là où le
+  gisement existe, déficit au prix du neuf — correction d'une incohérence
+  interne avec R-07) ;
+- **écrêtage des disponibles négatives**, variantes communes TLV /
+  assiette recalibrée / borne de secrétisation / bande grise dans R-07 ;
+- **IC de Fisher et périmètres harmonisés** sur toutes les corrélations,
+  agrégation `min_count` unifiée ;
+- **limites corrigées** (L-04, L-07, L-09, L-11, L-12 — dont un sens de
+  biais énoncé à FAUX —, L-13, L-14, L-15) et **six limites nouvelles**
+  (L-16 échelle infra-ZE, L-17 existence ≠ mobilisabilité, L-18
+  équivalence-unité, L-19 stock vs flux, L-20 effets de la détente non
+  chiffrés, L-21 portée du mot « besoin »).
+
+Chiffres-titres avant/après :
+
+| Grandeur | Avant (2026-08-05) | Après (2026-08-07) |
+|---|---|---|
+| ZE tendues | 142 | 97 |
+| Besoin de détente | 285 665 | 194 488 |
+| Gisement des ZE tendues | 472 022 (brut) | 206 664 (effectif) |
+| Couverture nationale | 1,65 « robuste » | 1,06 (grille 0,82-1,85 ; communes TLV 0,69) |
+| Coût de la détente | 12,5 Md€ (rénovation) | 15,8 Md€ (mixte, dont 9,8 de neuf) |
+| Ratio neuf/détente | 3,9 | 2,1 (stress 1,5 ; rénovation seule 3,8) |
+| Effort médian (R-06) | 40,1 % | 27,4 % (27,4-40,1) |
+| Ratio foncier (R-10) | 11,5 × | 10,9 × (plancher constaté 2,2 ×) |
+| Vacance en ZE croissantes (R-03) | ~85 % | 78-88 % |
+
+La conclusion de l'arc s'en trouve reformulée (I-07/I-10) : la contrainte
+institutionnelle n'est plus la *conséquence* de la suffisance du gisement,
+elle en est la **condition**.
+
+## 12. Reproduction
 
 ```bash
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 78 tests (unitaires, propriétés, régression)
+./test.sh                   # 82 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 
