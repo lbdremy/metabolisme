@@ -74,6 +74,31 @@ elle en est la **condition** (I-07/I-10 reformulées). Tag :
    institutionnelle = condition), pas sur les chiffres d'avant revue ;
    licence du millésime loyers 2025 à confirmer avant publication (L-09).
 
+## Outillage (sans urgence — ne mord qu'avec la croissance de l'étude)
+
+Deux écarts identifiés le 2026-08-07 en confrontant le process aux leçons
+d'architecture des systèmes de données (graphes explicites, détection de
+changement) ; à traiter quand l'occasion s'y prête, pas avant :
+
+- **DAG de stages explicite.** La dépendance R-07 → R-09/R-10 est enfouie
+  dans le shell : `build_remob` et `build_foncier` RECALCULENT la frame de
+  tension (`tension.tension_by_ze`) au lieu de consommer l'artefact de
+  R-07, et `reproduce` est une liste ordonnée, pas un graphe. Déclarer les
+  dépendances entre stages (et faire consommer les artefacts amont) rendra
+  la propagation visible et permettra la recomputation sélective le jour
+  où le full refresh (~1 min aujourd'hui) coûtera. Le graphe épistémique
+  (`claims.yaml` depends_on, `hypotheses.yaml` affects) est déjà la source
+  de vérité — l'exécution doit finir par le refléter.
+- **Veille de fraîcheur des sources.** Les S-xx figées garantissent la
+  reproductibilité mais RIEN ne signale qu'un millésime plus récent
+  existe : L-07 (emploi arrêté à 2018 alors que 2023 était publié) n'a été
+  détectée que par la revue contradictoire, l'annulation de Filosofi 2022
+  par recherche active, et l'URL de S-25 était morte avant même le
+  figement. Un contrôle léger (commande `logement freshness` : re-vérifier
+  périodiquement URL vivantes + dernier millésime annoncé par source, en
+  simple rapport, jamais en refigement automatique) fermerait la boucle de
+  détection de changement côté monde extérieur.
+
 ## Comment reprendre (5 minutes)
 
 ```bash
