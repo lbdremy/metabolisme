@@ -680,3 +680,37 @@
     est un RATIO PUBLIÉ par commune : l'agrégation par ZE doit le
     pondérer par le parc proposé à la location (convention à déclarer),
     faute des numérateurs (emménagements) dans le fichier.
+
+- id: S-29
+  publisher: INSEE
+  title: Recensement de la population — fichier détail MIGCOM, migrations résidentielles (commune de résidence × commune de résidence antérieure) en 2022
+  dataset_id: RP2022_migcom
+  source_url: https://www.insee.fr/fr/statistiques/8589767
+  publication_date: 2026-08-08
+  retrieved_at: 2026-08-08
+  geographic_scope: France hors Mayotte (individus en logement ordinaire ou non, ≥ 1 an ; COMMUNE en commune parente PLM, DCRAN en arrondissements PLM)
+  temporal_scope: millésime RP 2022 (résidence antérieure au 1er janvier de l'année précédant l'enquête, question annuelle depuis 2011)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  files:
+    - path: data/raw/insee-rp2022-migcom.parquet
+      checksum: sha256:4c1f5814231c7f670bf190e3cb6711b9b2c48e1637da5a1d59ee90e810384732
+    - path: data/raw/insee-rp2022-migcom-varmod.csv
+      checksum: sha256:e820d7187f9b0310173e53aa0c9a4483ce7fed79738c3187433ade393d83e16e
+  notes: >
+    Fichier détail anonymisé (Parquet 183 472 132 octets, 17 357 182
+    observations pondérées IPONDI — poids total 67,06 M de personnes —,
+    33 variables ; dictionnaire varmod figé en second fichier,
+    70 284 modalités). Publié le 08/08/2026 (téléchargé le jour même).
+    Variables clés : IRAN (indicateur de résidence antérieure au
+    1er janvier de l'année précédente, D-18 — 1 = même logement,
+    2 = autre logement même commune, 3-7 = autre commune France,
+    8-9 = étranger, 0 = commune de rattachement), DCRAN (commune de
+    résidence antérieure, arrondissements PLM — mapper via plm_parent),
+    COMMUNE (résidence actuelle, DÉJÀ en commune parente PLM — 75056
+    présent, pas 75101), STOCD (statut d'occupation : propriétaire /
+    locatif privé / HLM — pont avec R-12), ANEMC (ancienneté
+    d'emménagement condensée). Précautions de la documentation INSEE
+    (information/2383290) : toujours pondérer par IPONDI en conservant
+    les décimales ; effectifs < 200 à manier avec prudence
+    (imprécision d'échantillonnage) ; les caractéristiques sont celles
+    à la date de l'enquête, pas à la date du déménagement.

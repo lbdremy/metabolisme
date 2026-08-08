@@ -1604,3 +1604,122 @@
     parc au 01/01/2025 — décalage d'un an avec l'étiquette. Porte sur
     R-12/I-12.
   depends_on: [S-28, D-17, C-09]
+
+- id: O-31
+  type: observation
+  title: >
+    Fichier détail MIGCOM RP2022 (S-29) : 17 357 182 individus pondérés
+    (67,06 M de personnes ≥ 1 an, France hors Mayotte), résidence
+    actuelle (commune, PLM déjà en commune parente) × résidence au
+    1er janvier de l'année précédente (commune, PLM en arrondissements),
+    indicateur IRAN (D-18), statut d'occupation STOCD à la date
+    d'enquête, poids IPONDI.
+  depends_on: [S-29, D-18]
+
+- id: O-32
+  type: observation
+  title: >
+    Au national (hors 196 347 personnes en commune de rattachement,
+    IRAN = 0) : 9,87 % des personnes résident dans un logement différent
+    de celui d'il y a un an — 3,18 % dans la même commune, 6,25 % depuis
+    une autre commune de France, 0,44 % depuis l'étranger. Part de
+    mobiles parmi les occupants actuels par statut (= entrées de l'année
+    dans le segment) : locataire meublé/hôtel 32,98 %, LOCATIF PRIVÉ
+    vide 19,51 %, logé gratuitement 13,38 %, HLM 8,34 %, propriétaire
+    5,73 % — le segment privé tourne 2,3 × plus vite que le parc social
+    et 3,4 × plus vite que la propriété occupante. Le 8,34 % HLM recoupe
+    les taux RPLS des millésimes couverts par les enquêtes 2020-2024
+    (8,5 % en 2022, 8,0 % en 2023, O-29).
+  depends_on: [O-31]
+
+- id: O-33
+  type: observation
+  title: >
+    Par ZE : taux de mobilité annuel des personnes médian 9,42 %
+    (min 3,51 Nord-Atlantique, max 12,82 Rennes ; ZE étudiantes en
+    tête : Toulouse 12,80, Montpellier 12,66) ; 2,09 M de personnes
+    changent de ZE dans l'année ; soldes internes les plus négatifs (en
+    % de population) : Savanes −2,49, PARIS −1,40 (133 371 entrants,
+    225 906 sortants), Roissy −1,11, Evry −0,96 ; les plus positifs :
+    littoral et ouest (Les Sables-d'Olonne +1,91, Brignoles +1,81,
+    La Rochelle +1,43, Dinan +1,41). Couverture publiée : 67 communes
+    de résidence sans ZE (poids 79 331, écarts de COG), 11 406 mobiles
+    sans ZE d'origine, Mayotte présente en seule origine (5 347
+    sortants, aucun résident dans le champ).
+  depends_on: [O-31]
+
+- id: T-14
+  type: transformation
+  title: >
+    Migrations des personnes par ZE : validation du fichier MIGCOM
+    (modalités IRAN connues, poids IPONDI positifs — erreur dure sinon),
+    champ mobile/sédentaire hors rattachement (IRAN = 0 exclu des deux
+    termes, poids publié), taux de mobilité annuel par ZE de résidence,
+    part de mobiles par statut d'occupation STOCD, flux
+    origine→destination entre ZE (DCRAN → commune parente PLM → ZE ;
+    index sur l'union résidence ∪ origine pour que les soldes re-somment
+    à zéro — une ZE d'origine sans résident garde ses sortants, taux
+    manquants jamais zéro), croisements avec la tension (T-08), le coût
+    (T-05) et la rotation des logements (T-12).
+  depends_on: [O-31, T-05, T-08, T-12, H-08, H-12]
+  produced_by: src/logement/core/migrations.py
+
+- id: R-13
+  type: result
+  title: >
+    Migrations résidentielles des personnes par ZE (S-29, RP2022) :
+    9,87 % de mobiles annuels au national, médiane ZE 9,42 %. La
+    mobilité est PORTÉE par le locatif privé (19,51 % d'entrées de
+    l'année contre 8,34 % en HLM et 5,73 % en propriété — O-32), et la
+    géographie des personnes VALIDE celle des logements : mobilité ×
+    rotation RP (R-11) rho métropole +0,80 (IC95 [+0,76 ; +0,84],
+    n = 287) entre deux sources indépendantes. Les flux internes vident
+    les cœurs chers : solde inter-ZE × coût rho France entière −0,15
+    (IC95 [−0,26 ; −0,04] ; métropole −0,11 [−0,22 ; +0,01]), Paris
+    −1,40 %/an de sa population en migrations internes. En NIVEAU, la
+    mobilité annuelle ne montre pas de gel spécifique aux zones tendues
+    (médianes 9,5 vs 9,4 ; entrée × coût compatible avec zéro) : sur un
+    an, les flux étudiants/jeunes actifs dominent — le blocage se lit
+    dans QUI bouge (statuts) et dans les SOLDES, pas dans le volume.
+  depends_on: [T-14, O-32, O-33, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/migrations-residentielles-ze.json
+  limitations: [L-24]
+
+- id: I-13
+  type: interpretation
+  title: >
+    Troisième instruction de H-04 — la mesure des PERSONNES complète
+    les deux mesures de LOGEMENTS : (1) la validation croisée +0,80
+    (R-11 × R-13, sources indépendantes) établit que la géographie de
+    la rotation est un fait robuste, pas un artefact de source ;
+    (2) la mobilité annuelle repose massivement sur le locatif privé —
+    2,3 × le parc social, 3,4 × la propriété : tout ce qui rétrécit ou
+    renchérit ce segment (R-04/R-06) comprime le canal principal des
+    mobilités, et le recoupement RPLS (8,34 % ≈ O-29) relie les deux
+    chaînes de mesure ; (3) les soldes internes négatifs des cœurs
+    chers (Paris −1,40 %/an) montrent des mobilités qui se font CONTRE
+    la géographie de l'emploi — partir n'est pas toujours choisi, et le
+    solde parisien n'est soutenable que par l'international et la
+    démographie. Reste descriptif : une fenêtre d'un an ne sépare pas
+    les mobilités choisies des empêchées ; l'étape suivante (DVF, coût
+    de transaction) chiffre la BARRIÈRE à la mobilité de statut.
+  depends_on: [R-13, I-11, I-12]
+
+- id: L-24
+  type: limit
+  title: >
+    Limites de la mesure MIGCOM : (1) statut d'occupation à la date
+    d'ENQUÊTE — le taux par statut est un taux d'entrées dans le
+    segment d'arrivée, pas une propension à partir du segment d'origine
+    (les 19,51 % du locatif privé comptent aussi ceux qui le
+    traversent) ; (2) millésime 2022 = enquêtes 2020-2024 moyennées,
+    dont années COVID ; (3) les soldes ne couvrent que les migrations
+    INTERNES (l'étranger est dans le taux mais pas dans les flux O-D) ;
+    (4) effectifs pondérés < 200 imprécis (doc INSEE) — pas de flux
+    fins entre petites ZE publiés ; (5) 67 communes de résidence sans
+    ZE (COG 2022 vs 2026) et 11 406 mobiles sans origine, exclus et
+    publiés ; (6) fenêtre d'UN an : ne se compare pas au « moins de
+    2 ans » de D-16 (R-11) ni au taux RPLS (D-17) autrement qu'en ordre
+    de grandeur et en géographie. Porte sur R-13/I-13.
+  depends_on: [S-29, D-18]

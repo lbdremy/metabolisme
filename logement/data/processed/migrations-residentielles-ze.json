@@ -1,0 +1,345 @@
+{
+  "couverture": {
+    "communes_sans_ze": 67,
+    "flux_inter_ze": 2088333,
+    "poids_mobiles_sans_ze_origine": 11406,
+    "poids_sans_ze": 79331
+  },
+  "distribution_taux_mobilite_pct": {
+    "max": 12.82,
+    "mediane": 9.42,
+    "min": 3.51,
+    "q25": 8.83,
+    "q75": 10.08
+  },
+  "mediane_par_tension": {
+    "autres": {
+      "solde_pct_pop": 0.24,
+      "taux_mobilite_pct": 9.4
+    },
+    "n_tendues": 97,
+    "tendues": {
+      "solde_pct_pop": 0.33,
+      "taux_mobilite_pct": 9.5
+    }
+  },
+  "mobilite_la_plus_faible": [
+    {
+      "name": "Le Nord-Atlantique",
+      "solde_pct_pop": -0.51,
+      "taux_mobilite_pct": 3.51,
+      "ze": "0203"
+    },
+    {
+      "name": "Marie-Galante",
+      "solde_pct_pop": 1.54,
+      "taux_mobilite_pct": 4.16,
+      "ze": "0103"
+    },
+    {
+      "name": "Le Sud",
+      "solde_pct_pop": -0.62,
+      "taux_mobilite_pct": 4.86,
+      "ze": "0205"
+    },
+    {
+      "name": "Ouest-Guyanais",
+      "solde_pct_pop": -0.23,
+      "taux_mobilite_pct": 4.86,
+      "ze": "0302"
+    },
+    {
+      "name": "Côte sous le vent",
+      "solde_pct_pop": -0.4,
+      "taux_mobilite_pct": 5.31,
+      "ze": "0101"
+    },
+    {
+      "name": "Le Nord-Caraibe",
+      "solde_pct_pop": 0.03,
+      "taux_mobilite_pct": 5.34,
+      "ze": "0204"
+    },
+    {
+      "name": "Le Centre-Atlantique",
+      "solde_pct_pop": -0.28,
+      "taux_mobilite_pct": 5.47,
+      "ze": "0201"
+    },
+    {
+      "name": "Sud Basse-Terre ",
+      "solde_pct_pop": -0.15,
+      "taux_mobilite_pct": 6.07,
+      "ze": "0105"
+    }
+  ],
+  "mobilite_la_plus_forte": [
+    {
+      "name": "Rennes",
+      "solde_pct_pop": 0.7,
+      "taux_mobilite_pct": 12.82,
+      "ze": "5315"
+    },
+    {
+      "name": "Toulouse",
+      "solde_pct_pop": 0.39,
+      "taux_mobilite_pct": 12.8,
+      "ze": "7625"
+    },
+    {
+      "name": "Montpellier",
+      "solde_pct_pop": 0.58,
+      "taux_mobilite_pct": 12.66,
+      "ze": "7616"
+    },
+    {
+      "name": "La Rochelle",
+      "solde_pct_pop": 1.43,
+      "taux_mobilite_pct": 12.3,
+      "ze": "7512"
+    },
+    {
+      "name": "Dijon",
+      "solde_pct_pop": 0.53,
+      "taux_mobilite_pct": 12.02,
+      "ze": "2711"
+    },
+    {
+      "name": "Le Genevois Français",
+      "solde_pct_pop": 0.88,
+      "taux_mobilite_pct": 12.0,
+      "ze": "8416"
+    },
+    {
+      "name": "Chambéry",
+      "solde_pct_pop": 0.71,
+      "taux_mobilite_pct": 11.95,
+      "ze": "8407"
+    },
+    {
+      "name": "Est-littoral",
+      "solde_pct_pop": -0.51,
+      "taux_mobilite_pct": 11.89,
+      "ze": "0301"
+    }
+  ],
+  "n_ze": 306,
+  "national": {
+    "dont_autre_commune_france_pct": 6.25,
+    "dont_etranger_pct": 0.44,
+    "dont_meme_commune_pct": 3.18,
+    "part_mobiles_par_statut": {
+      "locataire_hlm": {
+        "part_mobiles_pct": 8.34,
+        "personnes": 10243139
+      },
+      "locataire_meuble": {
+        "part_mobiles_pct": 32.98,
+        "personnes": 1841074
+      },
+      "locataire_prive": {
+        "part_mobiles_pct": 19.51,
+        "personnes": 12512870
+      },
+      "loge_gratuitement": {
+        "part_mobiles_pct": 13.38,
+        "personnes": 1298817
+      },
+      "proprietaire": {
+        "part_mobiles_pct": 5.73,
+        "personnes": 39740297
+      }
+    },
+    "poids_rattachement_exclu": 196347,
+    "population": 66859433,
+    "taux_mobilite_pct": 9.87
+  },
+  "soldes_les_plus_negatifs": [
+    {
+      "entrants": 988,
+      "name": "Savanes ",
+      "solde_pct_pop": -2.49,
+      "sortants": 1693,
+      "ze": "0303"
+    },
+    {
+      "entrants": 133371,
+      "name": "Paris",
+      "solde_pct_pop": -1.4,
+      "sortants": 225906,
+      "ze": "1109"
+    },
+    {
+      "entrants": 23561,
+      "name": "Roissy ",
+      "solde_pct_pop": -1.11,
+      "sortants": 33990,
+      "ze": "1112"
+    },
+    {
+      "entrants": 3015,
+      "name": "La Tarentaise",
+      "solde_pct_pop": -1.05,
+      "sortants": 4192,
+      "ze": "8413"
+    },
+    {
+      "entrants": 19771,
+      "name": "Evry",
+      "solde_pct_pop": -0.96,
+      "sortants": 25620,
+      "ze": "1104"
+    },
+    {
+      "entrants": 1487,
+      "name": "Vierzon",
+      "solde_pct_pop": -0.79,
+      "sortants": 1857,
+      "ze": "2415"
+    },
+    {
+      "entrants": 2813,
+      "name": "Saint-Avold",
+      "solde_pct_pop": -0.77,
+      "sortants": 3749,
+      "ze": "4416"
+    },
+    {
+      "entrants": 3244,
+      "name": "Châlons-en-Champagne",
+      "solde_pct_pop": -0.68,
+      "sortants": 3965,
+      "ze": "4402"
+    }
+  ],
+  "soldes_les_plus_positifs": [
+    {
+      "entrants": 4443,
+      "name": "Les Sables-d'Olonne",
+      "solde_pct_pop": 1.91,
+      "sortants": 2718,
+      "ze": "5214"
+    },
+    {
+      "entrants": 7692,
+      "name": "Brignoles",
+      "solde_pct_pop": 1.81,
+      "sortants": 5205,
+      "ze": "9303"
+    },
+    {
+      "entrants": 250,
+      "name": "Marie-Galante",
+      "solde_pct_pop": 1.54,
+      "sortants": 91,
+      "ze": "0103"
+    },
+    {
+      "entrants": 3690,
+      "name": "Carhaix-Plouguer",
+      "solde_pct_pop": 1.53,
+      "sortants": 2484,
+      "ze": "5303"
+    },
+    {
+      "entrants": 721,
+      "name": "Ghisonaccia",
+      "solde_pct_pop": 1.48,
+      "sortants": 433,
+      "ze": "9405"
+    },
+    {
+      "entrants": 6043,
+      "name": "Draguignan",
+      "solde_pct_pop": 1.45,
+      "sortants": 4279,
+      "ze": "9308"
+    },
+    {
+      "entrants": 12069,
+      "name": "La Rochelle",
+      "solde_pct_pop": 1.43,
+      "sortants": 8325,
+      "ze": "7512"
+    },
+    {
+      "entrants": 4410,
+      "name": "Dinan",
+      "solde_pct_pop": 1.41,
+      "sortants": 2983,
+      "ze": "5304"
+    }
+  ],
+  "spearman_entree_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        -0.17,
+        0.06
+      ],
+      "n": 297,
+      "rho": -0.05
+    },
+    "metropole": {
+      "ci95": [
+        -0.11,
+        0.13
+      ],
+      "n": 287,
+      "rho": 0.01
+    }
+  },
+  "spearman_mobilite_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        -0.03,
+        0.2
+      ],
+      "n": 297,
+      "rho": 0.09
+    },
+    "metropole": {
+      "ci95": [
+        0.08,
+        0.3
+      ],
+      "n": 287,
+      "rho": 0.19
+    }
+  },
+  "spearman_mobilite_vs_rotation_rp": {
+    "france_entiere": {
+      "ci95": [
+        0.74,
+        0.83
+      ],
+      "n": 305,
+      "rho": 0.79
+    },
+    "metropole": {
+      "ci95": [
+        0.76,
+        0.84
+      ],
+      "n": 287,
+      "rho": 0.8
+    }
+  },
+  "spearman_solde_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        -0.26,
+        -0.04
+      ],
+      "n": 297,
+      "rho": -0.15
+    },
+    "metropole": {
+      "ci95": [
+        -0.22,
+        0.01
+      ],
+      "n": 287,
+      "rho": -0.11
+    }
+  }
+}

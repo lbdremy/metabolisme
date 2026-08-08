@@ -20,6 +20,7 @@ from logement.core import (
     effort,
     foncier,
     lovac,
+    migrations,
     mobilite,
     parc,
     registry,
@@ -78,6 +79,9 @@ MOBILITE_OUTPUT = Path("data") / "processed" / "mobilite-residentielle-ze.json"
 RPLS_ZIP = "sdes-rpls-2025-resultats-territoires.zip"
 RPLS_XLSX = "statistiques_sdes_resultats_rpls_2025_secret_donnees.xlsx"
 SOCIAL_OUTPUT = Path("data") / "processed" / "mobilite-parc-social-ze.json"
+
+MIGCOM_FILE = "insee-rp2022-migcom.parquet"
+MIGRATIONS_OUTPUT = Path("data") / "processed" / "migrations-residentielles-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -585,6 +589,53 @@ def run_social(root: Path) -> int:
         f"mobilite-social: wrote {SOCIAL_OUTPUT} — "
         f"{payload['n_ze_en_baisse_2019_2025']}/{payload['n_ze']} ZE en baisse, "
         f"distribution {payload['distribution_tx_mob_2025_pct']}, "
+        f"par tension {payload['mediane_par_tension']}"
+    )
+    return 0
+
+
+def build_migrations(root: Path) -> dict[str, object]:
+    """Compute the R-13 summary payload (person-level migrations by ZE, S-29)."""
+    raw = root / "data" / "raw"
+    cut = pq.read_table(
+        raw / MIGCOM_FILE, columns=["COMMUNE", "DCRAN", "IRAN", "IPONDI", "STOCD"]
+    ).to_pandas()
+    frame = migrations.parse_migcom(cut)
+    national = migrations.national_summary(frame)
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    ze_frame, coverage = migrations.migrations_by_ze(frame, commune_ze)
+
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+    census = rs.parse_census_housing(census_raw)
+    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    h08 = _load_hypothesis(root, "H-08")
+    h12 = _load_hypothesis(root, "H-12")
+    tension_frame = tension.tension_by_ze(
+        census, tlv, communes, commune_ze, h08.central_value, h12.central_value
+    )
+    rotation = mobilite.rotation_by_ze(_lstay_parts(root))
+    return migrations.build_summary(
+        ze_frame,
+        national,
+        coverage,
+        tension_frame["tendue"],
+        _cost_frame(root)["indice_cout_pct"],
+        rotation,
+        _ze_names(root),
+    )
+
+
+def run_migrations(root: Path) -> int:
+    """Rebuild data/processed/migrations-residentielles-ze.json; return an exit code."""
+    payload = build_migrations(root)
+    _write_json(root, MIGRATIONS_OUTPUT, payload)
+    print(
+        f"migrations: wrote {MIGRATIONS_OUTPUT} — "
+        f"distribution {payload['distribution_taux_mobilite_pct']}, "
         f"par tension {payload['mediane_par_tension']}"
     )
     return 0

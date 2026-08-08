@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 28 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 31 fichiers figés sha256/LFS + 2 collections vivantes) |
-| D | Définitions | `sources/definitions.yaml` | 17 définitions citées verbatim, datées, avec limites |
+| S | Sources | `sources/sources.yaml` | 29 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 33 fichiers figés sha256/LFS + 2 collections vivantes) |
+| D | Définitions | `sources/definitions.yaml` | 18 définitions citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-30, T-01..T-13, R-01..R-12 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-12, V-01, C-01..C-09, L-01..L-23 (L-16..L-21 et corrections L-04/L-07/L-09/L-11/L-12/L-13/L-14/L-15 : revue contradictoire du 2026-08-07, compte rendu `evidence/revue-contradictoire-2026-08-07.md`) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-33, T-01..T-14, R-01..R-13 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-13, V-01, C-01..C-09, L-01..L-24 (L-16..L-21 et corrections L-04/L-07/L-09/L-11/L-12/L-13/L-14/L-15 : revue contradictoire du 2026-08-07, compte rendu `evidence/revue-contradictoire-2026-08-07.md`) |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -96,6 +96,9 @@ Sources enregistrées :
   (16 863), séries annuelles 2013-2025 du taux de mobilité (D-17), de
   la vacance et des loyers ; parc 5,4 M de logements ; licence à
   confirmer avant citation dans l'article (comme L-09) — base de R-12.
+- **S-29** — INSEE, fichier détail MIGCOM RP2022 (Parquet 17,36 M obs.
+  + dictionnaire varmod figés) — résidence actuelle × résidence un an
+  auparavant, statut d'occupation, pondération IPONDI — base de R-13.
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -107,7 +110,9 @@ L173-1-1, classes F-G) · D-14 zone tendue (art. 232 CGI, zonage TLV) ·
 D-15 vacance de fluidité · D-16 ancienneté d'emménagement (RP —
 rotation du parc, pas mobilité des personnes) · D-17 taux de mobilité
 du parc locatif social (RPLS — hors mises en service et mutations
-internes). Le registre des définitions du cadrage est complet.
+internes) · D-18 migration résidentielle annuelle (MIGCOM — personnes,
+résidence un an auparavant). Le registre des définitions du cadrage est
+complet.
 
 Hypothèses : **H-06** — seuil de vacance structurelle, valeur centrale 2 ans
 (convention C-01), plage plausible 1-3 ans (sensibilité complète possible
@@ -258,6 +263,20 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   inabordable, personne ne quitte le parc social ; la file d'attente
   s'allonge partout. Convention C-09 (agrégation pondérée contrôlée au
   national, ≤ 0,014 pt). Limites L-23.
+
+- **R-13** — Migrations résidentielles des personnes par ZE (sortie
+  reproductible `data/processed/migrations-residentielles-ze.json`,
+  ajoutée le 2026-08-08 — troisième instruction de H-04) : 9,87 % de
+  mobiles annuels, portés par le LOCATIF PRIVÉ (19,51 % d'entrées de
+  l'année contre 8,34 % en HLM — recoupe RPLS — et 5,73 % en
+  propriété) ; validation croisée logements/personnes rho +0,80 (R-11 ×
+  R-13, sources indépendantes) ; les flux internes vident les cœurs
+  chers (Paris −1,40 %/an, solde × coût −0,15 France entière) ; en
+  niveau, pas de gel spécifique aux zones tendues sur un an (flux
+  étudiants dominants). Lecture : **I-13** — le locatif privé est le
+  canal principal des mobilités (le renchérir comprime la mobilité de
+  tous) ; les soldes se font contre la géographie de l'emploi. Limites
+  L-24.
 
 - **R-10** — Foncier immobilisé par le non-résidentiel vacant (sortie
   reproductible `data/processed/foncier-friches-ze.json`) : 2 736

@@ -338,3 +338,31 @@
     - Le fichier S-28 publie le ratio par territoire, pas ses deux
       termes - toute agrégation supra-communale est une moyenne
       pondérée approchée (convention à déclarer), pas un recalcul.
+
+- id: D-18
+  term: migration résidentielle annuelle (recensement, fichier MIGCOM)
+  source: S-29
+  url: https://www.insee.fr/fr/information/2383290
+  last_updated: 2026-08-08
+  definition: >
+    Une personne est dite mobile si elle réside dans un logement
+    différent de celui où elle résidait au 1er janvier de l'année
+    précédant l'enquête (indicateur IRAN du fichier détail - modalités
+    2 à 9). « La question sur le lieu de résidence antérieure porte,
+    depuis les enquêtes 2011, sur la résidence un an auparavant »
+    (elle portait sur 5 ans dans les enquêtes 2004-2010 - les taux ne
+    se comparent pas entre les deux régimes). La mesure porte sur les
+    PERSONNES (pondération IPONDI), contrairement à l'ancienneté
+    d'emménagement (D-16) qui décrit les LOGEMENTS.
+  caveats:
+    - Le millésime RP2022 agrège cinq enquêtes annuelles (2020-2024) -
+      le « taux annuel » est une moyenne de fenêtres annuelles
+      successives, dont les années COVID.
+    - Les caractéristiques (statut d'occupation, âge...) sont celles à
+      la date de l'enquête, pas à la date du déménagement - le statut
+      STOCD d'un mobile est son statut d'ARRIVÉE.
+    - Effectifs pondérés < 200 imprécis (documentation INSEE) - pas de
+      flux fins entre petites ZE.
+    - IRAN = 0 (commune de rattachement, personnes sans domicile fixe)
+      est hors du champ mobile/non-mobile - exclu du numérateur ET du
+      dénominateur, poids publié.

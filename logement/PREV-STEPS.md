@@ -3,11 +3,12 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
-## Session 4 — 2026-08-08 (H-04 : rotation résidentielle et parc social)
+## Session 4 — 2026-08-08 (H-04 : rotation, parc social, migrations)
 
-Deux livrables : **R-11** (rotation du parc, ancienneté d'emménagement)
-puis **R-12** (mobilité du parc social, RPLS), selon le plan d'éclairage
-données de la session 3 (options n° 1 et 2, rapport effort/valeur).
+Trois livrables : **R-11** (rotation du parc, ancienneté d'emménagement),
+**R-12** (mobilité du parc social, RPLS) et **R-13** (migrations des
+personnes, MIGCOM), selon le plan d'éclairage données de la session 3
+(rapport effort/valeur).
 
 - **S-27 figée** : RP « Logement en 2023 » (jeu Melodi
   DS_RP_LOGEMENT_PRINC, Parquet 98 Mo, 11,9 M obs.) — la base publiée le
@@ -55,6 +56,22 @@ données de la session 3 (options n° 1 et 2, rapport effort/valeur).
   C-09, O-28..O-30, T-13, R-12, I-12, L-23 (100 nœuds) ; 9 tests
   nouveaux (103) ; masque DOM de `core/stats` étendu à Mayotte
   (ZE 0601 — S-28 est la première source France entière avec Mayotte).
+- **S-29 figée** (MIGCOM RP2022, Parquet 17,36 M obs. + varmod, publié
+  le 08/08/2026 — téléchargé le jour même ; la bonne variante est
+  8589767 commune × commune, pas la 8589858 de l'éclairage initial).
+  **R-13** : 9,87 % de personnes mobiles dans l'année (D-18 créée) ;
+  la mobilité est PORTÉE par le locatif privé (19,51 % d'entrées de
+  l'année contre 8,34 % HLM — recoupe RPLS, validation externe de
+  R-12 — et 5,73 % propriété) ; validation croisée logements/personnes
+  rho +0,80 (R-11 × R-13, sources indépendantes) ; les flux internes
+  vident les cœurs chers (Paris −1,40 %/an : 225 906 sortants pour
+  133 371 entrants ; solde × coût −0,15) ; en niveau, pas de gel
+  spécifique aux zones tendues sur un an (flux étudiants). I-13 : le
+  locatif privé est le canal principal des mobilités. Claims O-31..
+  O-33, T-14, R-13, I-13, L-24 (107 nœuds) ; 9 tests nouveaux (112) —
+  dont un test de propriété qui a attrapé un vrai défaut (les soldes ne
+  bouclaient pas quand une ZE n'existe qu'en origine : Mayotte) ;
+  qmd re-rendu (R-11/R-12/R-13 postérieurs à la revue).
 
 ## Session 3 — 2026-08-07 (revue contradictoire et intégration) — tag `efficacite-parc-v0.3`
 

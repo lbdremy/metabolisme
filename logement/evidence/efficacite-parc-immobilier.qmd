@@ -4,8 +4,8 @@ subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
   taux d'effort, tension, état du bâti, coût de remobilisation, foncier
-  immobilisé, rotation résidentielle, mobilité du parc social — chiffres
-  révisés par la revue contradictoire du 2026-08-07
+  immobilisé, rotation résidentielle, mobilité du parc social et des
+  personnes — chiffres révisés par la revue contradictoire du 2026-08-07
 date: 2026-08-08
 lang: fr
 format:
@@ -134,7 +134,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 103 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 112 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -204,6 +204,13 @@ propriétés) :
   parc ≥ 500 logements, deltas 2019→2025 et 2013→2025, croisements
   tension/vacance privée/coût/rotation totale (T-12) ; masque DOM
   étendu à Mayotte (première source France entière avec Mayotte).
+- **T-14** (`core/migrations.py`) — migrations des personnes par ZE :
+  validation du fichier MIGCOM (modalités IRAN connues, poids IPONDI
+  positifs), champ hors rattachement (IRAN = 0 exclu des deux termes,
+  poids publié), taux annuel par ZE, part de mobiles par statut
+  d'occupation, flux origine→destination entre ZE (index sur l'union
+  résidence ∪ origine — les soldes re-somment à zéro), croisements
+  tension/coût/rotation (T-12).
 
 ## 5. Hypothèses
 
@@ -261,6 +268,7 @@ r09 = build.build_cout_remobilisation(ROOT)
 r10 = build.build_foncier(ROOT)
 r11 = build.build_mobilite(ROOT)
 r12 = build.build_social(ROOT)
+r13 = build.build_migrations(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
@@ -268,10 +276,11 @@ for name, computed, output in [
     ("R-07", r07, build.TENSION_OUTPUT), ("R-08", r08, build.BATI_OUTPUT),
     ("R-09", r09, build.REMOB_OUTPUT), ("R-10", r10, build.FONCIER_OUTPUT),
     ("R-11", r11, build.MOBILITE_OUTPUT), ("R-12", r12, build.SOCIAL_OUTPUT),
+    ("R-13", r13, build.MIGRATIONS_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-12 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-13 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -917,6 +926,57 @@ contre le national publié à ≤ 0,014 pt près) ; limites L-23 (blocage
 des sorties et stabilité choisie non séparables, petits parcs volatils,
 Mayotte incluse contrairement à S-27).
 
+### R-13 — Les personnes bougent par le locatif privé ; les flux vident les cœurs chers
+
+```{python}
+#| code-summary: "chiffres clés R-13"
+natm = r13["national"]
+print(f"population ≥ 1 an (hors rattachement) : {natm['population']:,} ; "
+      f"taux de mobilité annuel {natm['taux_mobilite_pct']} % "
+      f"(même commune {natm['dont_meme_commune_pct']}, autre commune "
+      f"{natm['dont_autre_commune_france_pct']}, étranger "
+      f"{natm['dont_etranger_pct']})".replace(",", " "))
+print("part de mobiles par statut d'occupation (entrées de l'année) :")
+for label, bloc in sorted(natm["part_mobiles_par_statut"].items(),
+                          key=lambda kv: -(kv[1]["part_mobiles_pct"] or 0)):
+    print(f"  {label} : {bloc['part_mobiles_pct']} % "
+          f"({bloc['personnes']:,} personnes)".replace(",", " "))
+d = r13["distribution_taux_mobilite_pct"]
+print(f"par ZE : min {d['min']} %, médiane {d['mediane']} %, max {d['max']} % ; "
+      f"flux inter-ZE {r13['couverture']['flux_inter_ze']:,} personnes/an".replace(",", " "))
+print("soldes internes les plus négatifs :",
+      "  ".join(f"{e['name'].strip()} {e['solde_pct_pop']} %"
+                for e in r13["soldes_les_plus_negatifs"][:4] if e["name"]))
+for label, key in [
+    ("mobilité personnes × rotation logements (R-11)", "spearman_mobilite_vs_rotation_rp"),
+    ("mobilité personnes × coût", "spearman_mobilite_vs_cout"),
+    ("solde inter-ZE × coût (France entière)", "spearman_solde_vs_cout"),
+]:
+    perim = "france_entiere" if "France entière" in label else "metropole"
+    m = r13[key][perim]
+    print(f"Spearman {label} : {m['rho']} [{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']})")
+```
+
+Troisième instruction de **H-04** : le fichier détail MIGCOM (S-29)
+mesure les PERSONNES — 9,87 % changent de logement dans l'année (D-18).
+Trois enseignements. D'abord une **validation croisée** : la mobilité
+des personnes et la rotation des logements (R-11, source indépendante)
+se classent presque identiquement (rho +0,80) — la géographie de la
+rotation est un fait, pas un artefact de source. Ensuite, **la mobilité
+repose sur le locatif privé** : 19,51 % de ses occupants sont entrés
+dans l'année, contre 8,34 % en HLM (qui recoupe le taux RPLS de R-12 —
+les deux chaînes de mesure se rejoignent) et 5,73 % en propriété : tout
+ce qui rétrécit ou renchérit le parc locatif privé comprime le canal
+principal des mobilités. Enfin, **les flux internes vident les cœurs
+chers** : Paris perd 1,40 % de sa population chaque année en migrations
+internes (225 906 sortants pour 133 371 entrants), et le solde est
+corrélé négativement au coût (−0,15 France entière) — des mobilités qui
+se font CONTRE la géographie de l'emploi. En niveau, le taux annuel ne
+montre pas de gel spécifique aux zones tendues (flux étudiants
+dominants) : le blocage se lit dans QUI bouge et dans les soldes, pas
+dans le volume brut (interprétation I-13 ; limites L-24 — statut mesuré
+à l'arrivée, fenêtre d'un an, migrations internes seulement).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -1114,9 +1174,9 @@ hypothèses/définitions · scénarios d'échec · statistique), 45 objections,
 dont le compte rendu complet — méthode, dispositions objection par
 objection, restes ouverts — est
 [`evidence/revue-contradictoire-2026-08-07.md`](revue-contradictoire-2026-08-07.md).
-R-11 et R-12 (rotation résidentielle et mobilité du parc social,
-ajoutés le 2026-08-08) sont POSTÉRIEURS à cette revue et devront entrer
-dans la prochaine passe contradictoire.
+R-11, R-12 et R-13 (rotation résidentielle, mobilité du parc social,
+migrations des personnes — ajoutés le 2026-08-08) sont POSTÉRIEURS à
+cette revue et devront entrer dans la prochaine passe contradictoire.
 L'arithmétique publiée était exacte partout ; les objections sérieuses
 portaient sur les modèles et la mise en récit, et ont conduit aux
 corrections suivantes (toutes tracées dans les registres et le graphe,

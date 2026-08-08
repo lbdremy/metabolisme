@@ -26,6 +26,7 @@ STAGES: tuple[tuple[str, Callable[[Path], int]], ...] = (
     ("foncier-friches", build.run_foncier),
     ("mobilite-residentielle", build.run_mobilite),
     ("mobilite-parc-social", build.run_social),
+    ("migrations-residentielles", build.run_migrations),
 )
 
 
