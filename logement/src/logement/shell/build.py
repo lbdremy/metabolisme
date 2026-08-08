@@ -28,6 +28,7 @@ from logement.core import (
     rs,
     social,
     tension,
+    transaction,
     ze,
 )
 from logement.models import HypothesisRecord
@@ -82,6 +83,9 @@ SOCIAL_OUTPUT = Path("data") / "processed" / "mobilite-parc-social-ze.json"
 
 MIGCOM_FILE = "insee-rp2022-migcom.parquet"
 MIGRATIONS_OUTPUT = Path("data") / "processed" / "migrations-residentielles-ze.json"
+
+DVF_FILE = "dvf-geolocalisees-2025.csv.gz"
+TRANSACTION_OUTPUT = Path("data") / "processed" / "cout-transaction-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -627,6 +631,83 @@ def build_migrations(root: Path) -> dict[str, object]:
         rotation,
         _ze_names(root),
     )
+
+
+def build_transaction(root: Path) -> dict[str, object]:
+    """Compute the R-14 summary payload (transaction toll by ZE, S-30/S-31/S-32)."""
+    raw = root / "data" / "raw"
+    dvf = pd.read_csv(
+        raw / DVF_FILE, usecols=list(transaction.DVF_COLUMNS), dtype={"code_commune": str}
+    )
+    sales = transaction.parse_dvf_sales(dvf)
+    national = {
+        "n_ventes_retenues": len(sales),
+        "prix_median_eur": round(float(sales["valeur"].median())),
+        "prix_median_maison_eur": round(
+            float(sales.loc[sales["type_local"] == "Maison", "valeur"].median())
+        ),
+        "prix_median_appartement_eur": round(
+            float(sales.loc[sales["type_local"] == "Appartement", "valeur"].median())
+        ),
+        "prix_m2_median_eur": round(float(sales["prix_m2"].median())),
+    }
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    prix = transaction.prices_by_ze(sales, commune_ze)
+
+    with zipfile.ZipFile(raw / FILOSOFI_ZIP) as zf, zf.open(FILOSOFI_CSV) as fh:
+        filosofi = pd.read_csv(
+            fh, sep=";", dtype=str, usecols=["GEO", "GEO_OBJECT", "FILOSOFI_MEASURE", "OBS_VALUE"]
+        )
+    niveau_vie = cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="MED_SL")
+    h13 = _load_hypothesis(root, "H-13")
+    frame = transaction.transaction_frame(
+        prix,
+        niveau_vie,
+        {
+            "bas": h13.plausible_range[0],
+            "central": h13.central_value,
+            "haut": h13.plausible_range[1],
+        },
+    )
+
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+    census = rs.parse_census_housing(census_raw)
+    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    h08 = _load_hypothesis(root, "H-08")
+    h12 = _load_hypothesis(root, "H-12")
+    tension_frame = tension.tension_by_ze(
+        census, tlv, communes, commune_ze, h08.central_value, h12.central_value
+    )
+    return transaction.build_summary(
+        frame,
+        national,
+        tension_frame["tendue"],
+        _cost_frame(root)["indice_cout_pct"],
+        _ze_names(root),
+        {
+            "id": h13.id,
+            "name": h13.name,
+            "central_value_pct": h13.central_value,
+            "plausible_range": list(h13.plausible_range),
+        },
+    )
+
+
+def run_transaction(root: Path) -> int:
+    """Rebuild data/processed/cout-transaction-ze.json; return an exit code."""
+    payload = build_transaction(root)
+    _write_json(root, TRANSACTION_OUTPUT, payload)
+    print(
+        f"cout-transaction: wrote {TRANSACTION_OUTPUT} — "
+        f"cout {payload['cout_pct_prix']} % du prix, "
+        f"mois {payload['distribution_mois_niveau_vie']}, "
+        f"par tension {payload['mediane_par_tension']}"
+    )
+    return 0
 
 
 def run_migrations(root: Path) -> int:

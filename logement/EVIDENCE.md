@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 29 sources (INSEE, LOVAC, ANIL, SDES, MTE, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 33 fichiers figés sha256/LFS + 2 collections vivantes) |
+| S | Sources | `sources/sources.yaml` | 32 sources (INSEE, LOVAC, ANIL, SDES, MTE, DGFiP, DILA, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 36 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 18 définitions citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-33, T-01..T-14, R-01..R-13 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-13, V-01, C-01..C-09, L-01..L-24 (L-16..L-21 et corrections L-04/L-07/L-09/L-11/L-12/L-13/L-14/L-15 : revue contradictoire du 2026-08-07, compte rendu `evidence/revue-contradictoire-2026-08-07.md`) |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) · H-13 taux de droits de mutation (créée 2026-08-08, S-31) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-35, T-01..T-15, R-01..R-14 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-14, V-01, C-01..C-10, L-01..L-25 (L-16..L-21 et corrections L-04/L-07/L-09/L-11/L-12/L-13/L-14/L-15 : revue contradictoire du 2026-08-07, compte rendu `evidence/revue-contradictoire-2026-08-07.md`) |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -99,6 +99,14 @@ Sources enregistrées :
 - **S-29** — INSEE, fichier détail MIGCOM RP2022 (Parquet 17,36 M obs.
   + dictionnaire varmod figés) — résidence actuelle × résidence un an
   auparavant, statut d'occupation, pondération IPONDI — base de R-13.
+- **S-30** — DGFiP/Etalab, DVF géolocalisées 2025 (année complète,
+  3,7 M de lignes) — prix de vente des logements ; hors Alsace-Moselle
+  et Mayotte — base de R-14 (assiette C-10).
+- **S-31** — DGFiP (impots.gouv, espace notaires), taux des droits
+  d'enregistrement par département au 01/02/2026 — base de H-13.
+- **S-32** — Service-Public/DILA, fiche F17701 — barème des émoluments
+  proportionnels du notaire (contrôlé par test sur l'exemple chiffré de
+  la fiche).
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -277,6 +285,20 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
   canal principal des mobilités (le renchérir comprime la mobilité de
   tous) ; les soldes se font contre la géographie de l'emploi. Limites
   L-24.
+
+- **R-14** — Coût de transaction à l'achat par ZE (sortie reproductible
+  `data/processed/cout-transaction-ze.json`, ajoutée le 2026-08-08 —
+  quatrième instruction de H-04) : péage quasi uniforme en taux
+  (7,4-8,0 % du prix : droits H-13 6,32 % central + émoluments exacts
+  S-32) mais très inégal en poids — médiane 6,1 MOIS de niveau de vie
+  médian par UC, 7,8 mois en ZE tendues vs 5,5 ailleurs, jusqu'à
+  ~11-13 mois (Paris, Bayonne, littoraux, DOM chers) ; rho +0,81 avec
+  l'indice de coût locatif. Lecture : **I-14** — le ménage des zones
+  tendues est pris en tenaille (relocation locative jusqu'à ~64 % du
+  revenu à Paris, R-06 ; péage d'achat record) ; ~83 % du péage est
+  fiscal : paramètre institutionnel direct pour la proposition P-xx.
+  Convention C-10 (assiette des ventes), limites L-25 (plancher — ni
+  agence ni débours ; taux majoritaire appliqué partout).
 
 - **R-10** — Foncier immobilisé par le non-résidentiel vacant (sortie
   reproductible `data/processed/foncier-friches-ze.json`) : 2 736

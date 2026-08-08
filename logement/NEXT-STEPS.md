@@ -5,8 +5,8 @@ Mis à jour à chaque fin de session de travail significative.
 
 ## État au sortir de la session 4 (2026-08-08)
 
-**H-04 est ouverte, trois résultats posés** (112 tests, 107 nœuds,
-13 stages) : **R-11** (rotation résidentielle, S-27 — RP2023 Melodi,
+**H-04 est INSTRUITE — quatre résultats posés** (122 tests, 114 nœuds,
+14 stages) : **R-11** (rotation résidentielle, S-27 — RP2023 Melodi,
 maille ZE native, millésimes 2012/2017/2023) : rotation en baisse dans
 293 ZE sur 305, chute CONCENTRÉE dans les marchés chers et sans vacance
 (tendues −1,54 pt vs −1,27) alors que le niveau suit la fonction du
@@ -21,33 +21,32 @@ personnes, S-29 — MIGCOM RP2022, 17,4 M obs.) : 9,87 % de mobiles
 annuels PORTÉS par le locatif privé (19,5 % d'entrées contre 8,3 % HLM
 — recoupe RPLS — et 5,7 % propriété), validation croisée
 logements/personnes +0,80 (R-11 × R-13), les flux internes vident les
-cœurs chers (Paris −1,40 %/an). R-11, R-12 et R-13 sont POSTÉRIEURS à
-la revue du 2026-08-07 — à couvrir par la prochaine passe
-contradictoire. L'état v0.3 (couverture 1,06, besoin 194 488, détente
+cœurs chers (Paris −1,40 %/an). **R-14** (coût de transaction, S-30 DVF
+2025 + S-31 DGFiP + S-32 barème, H-13 créée) : péage d'achat quasi
+uniforme en taux (7,4-8,0 % du prix) mais 6,1 mois de niveau de vie
+médian par UC en médiane — 7,8 mois en ZE tendues vs 5,5, jusqu'à
+11-13 mois (Paris, Bayonne, DOM chers) ; ~83 % du péage est FISCAL
+(paramètre institutionnel direct pour la future proposition P-xx,
+I-14). R-11 à R-14 sont POSTÉRIEURS à la revue du 2026-08-07 — à
+couvrir par la prochaine passe contradictoire. L'état v0.3 (couverture 1,06, besoin 194 488, détente
 15,8 Md€ ratio 2,1, foncier 10,9 ×) est inchangé.
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Poursuivre H-04 (mobilités empêchées)** — R-11 (rotation RP),
-   R-12 (parc social) et R-13 (migrations des personnes, MIGCOM
-   8589767 — la variante « pays antérieur » 8589858 de l'éclairage
-   initial était la mauvaise) sont FAITS (session 4) ; suite :
-   1. **DVF géolocalisées** (https://files.data.gouv.fr/geo-dvf/latest/csv/,
-      par département) : prix → coût de transaction via une H-xx à déclarer
-      (DMTO ~5,8 %, notaire, agence) ; pas d'Alsace-Moselle ni Mayotte.
-   2. SNE : ressource data.gouv MORTE (404) ; portail vivant
+1. **Compléments H-04 possibles** (l'essentiel est fait — R-11..R-14) :
+   1. SNE : ressource data.gouv MORTE (404) ; portail vivant
       https://www.data.logement.gouv.fr/statistiques/ = exports par
       territoire sans bulk (effort élevé) ; raccourci possible par les
       indicateurs SNE de l'Observatoire des Territoires (maille à vérifier
       à la main). EnL 2020 : microdonnées sous habilitation — calibration
       nationale seulement.
    Le terme « coût de la mobilité résidentielle » (R-06) est disponible ;
-   la prochaine passe contradictoire devra couvrir R-11, R-12 ET R-13
+   la prochaine passe contradictoire devra couvrir R-11 à R-14
    (postérieurs à la revue du 2026-08-07). Licence S-28 (RPLS) à
-   confirmer avant citation dans l'article, comme S-09 (L-09). Piste
-   ouverte par R-13 : STOCD × IRAN permettrait un taux de mobilité par
-   statut PAR ZE (privé vs HLM territorialisé) si un résultat le
-   demande.
+   confirmer avant citation dans l'article, comme S-09 (L-09). Pistes
+   ouvertes si un résultat les demande : STOCD × IRAN (mobilité par
+   statut PAR ZE) ; territorialiser H-13 par département depuis S-31 ;
+   frais d'agence (aucune source ouverte identifiée, L-25).
 2. **Restes ouverts de la revue** (voir la section dédiée du compte rendu) :
    - figer l'emploi localisé INSEE récent à la maille ZE (2012-2023) et
      re-exécuter R-03 en variante (L-07 corrigée le promet) ;
@@ -104,8 +103,8 @@ changement) ; à traiter quand l'occasion s'y prête, pas avant :
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 13 artefacts data/processed/
-./check.sh && ./test.sh     # portes qualité (112 tests)
+uv run logement reproduce   # rebâtit les 14 artefacts data/processed/
+./check.sh && ./test.sh     # portes qualité (122 tests)
 ```
 
 Lire dans l'ordre : `CLAUDE.md` (doctrine + décisions arrêtées),
@@ -168,6 +167,12 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
   session 4) ; agrégation supra-communale UNIQUEMENT par la convention
   C-09 (pondération par le parc du millésime + contrôle national) ; le
   millésime « 2025 » décrit les emménagements 2024.
+- **DVF (S-30)** : une mutation = plusieurs lignes partageant la même
+  valeur_fonciere — TOUJOURS passer par l'assiette C-10 (un seul
+  logement par mutation, bornes de plausibilité) avant un prix ;
+  code_commune SANS zéro initial (zfill) ; PLM par arrondissement ;
+  hors Alsace-Moselle (livre foncier) et Mayotte ; ventes à l'euro
+  symbolique présentes.
 - **MIGCOM (S-29)** : COMMUNE est DÉJÀ en commune parente PLM mais
   DCRAN est en arrondissements (plm_parent sur l'origine seulement) ;
   IRAN = 0 (rattachement) hors champ ; le statut STOCD est celui de la

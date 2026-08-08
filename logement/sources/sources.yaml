@@ -714,3 +714,70 @@
     les décimales ; effectifs < 200 à manier avec prudence
     (imprécision d'échantillonnage) ; les caractéristiques sont celles
     à la date de l'enquête, pas à la date du déménagement.
+
+- id: S-30
+  publisher: DGFiP / Etalab (data.gouv.fr)
+  title: Demandes de valeurs foncières géolocalisées (DVF) — mutations 2025, France entière
+  dataset_id: geo-dvf-2025
+  source_url: https://files.data.gouv.fr/geo-dvf/latest/csv/2025/
+  publication_date: 2026-05-18
+  retrieved_at: 2026-08-08
+  geographic_scope: France hors Alsace-Moselle (livre foncier) et hors Mayotte
+  temporal_scope: mutations du 01/01/2025 au 31/12/2025 (année complète, publication data.gouv du 18/05/2026)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/dvf-geolocalisees-2025.csv.gz
+  checksum: sha256:bf80533b27c44471287026e9ce679fa803ecdd9efd8267cf5710d40fd7a22980
+  notes: >
+    Fichier annuel complet (full.csv.gz, 98 313 852 octets — taille
+    conforme au listing du serveur —, 3 714 829 lignes, tous les mois
+    peuplés). Une mutation peut compter plusieurs lignes (locaux, lots,
+    parcelles) partageant la même valeur_fonciere : les filtres de la
+    convention C-10 (ventes, un seul local d'habitation par mutation,
+    bornes de plausibilité) sont indispensables avant tout prix médian.
+    3 514 036 lignes « Vente » ; code_commune SANS zéro initial pour
+    les départements 01-09 (re-normaliser sur 5 caractères).
+
+- id: S-31
+  publisher: DGFiP (impots.gouv.fr, espace notaires)
+  title: Droits d'enregistrement et taxe de publicité foncière — taux, abattements et réductions applicables au 1er février 2026
+  dataset_id: dgfip-dmto-2026-02
+  source_url: https://www.impots.gouv.fr/sites/default/files/media/1_metier/3_partenaire/notaires/dmto/dmto_2026-02.pdf
+  publication_date: 2026-02-01
+  retrieved_at: 2026-08-08
+  geographic_scope: France entière (taux votés par département)
+  temporal_scope: taux applicables au 01/02/2026
+  license: document public DGFiP (citation avec mention de la source)
+  local_file: data/raw/dgfip-dmto-taux-2026-02.pdf
+  checksum: sha256:68b0f0d649b7a19e94af99808a37aba31ff3e81a105aacd2dbdd36eaa488957d
+  notes: >
+    Table officielle par département : taux départemental de droit
+    commun 4,50 % (art. 1594 D CGI), porté à 5,00 % par la grande
+    majorité des départements en vertu du II de l'article 116 de la loi
+    de finances 2025 (faculté temporaire, actes du 01/04/2025 au
+    31/03/2028, hors primo-accédants) ; restent à 4,50 % une dizaine de
+    départements (05, 06, 07, 16, 26, 27, 48, 60, 71, 971) ; Indre (36)
+    et Mayotte (976) à 3,80 %. Avec la taxe communale de 1,20 %
+    (art. 1584 CGI) et les frais d'assiette de 2,37 % du droit
+    départemental (art. 1647 V CGI), le total est de 6,32 % (taux 5,00),
+    5,81 % (4,50) ou 5,09 % (3,80) du prix — la base de H-13.
+
+- id: S-32
+  publisher: Service-Public / DILA (Premier ministre)
+  title: Frais de notaire — qu'est-ce que c'est ? (fiche F17701, barème des émoluments proportionnels d'achat immobilier)
+  dataset_id: service-public-f17701
+  source_url: https://www.service-public.gouv.fr/particuliers/vosdroits/F17701
+  publication_date: 2026-08-05
+  retrieved_at: 2026-08-08
+  geographic_scope: France (barème métropole depuis le 01/01/2021)
+  temporal_scope: fiche vérifiée le 05/08/2026
+  license: Licence Ouverte / Open Licence 2.0 (contenus service-public.fr)
+  local_file: data/raw/service-public-f17701-emoluments-notaire-2026.html
+  checksum: sha256:07f9dbaae26d35fd9b608af918c488ed4a4921f4455facfe2f3f828a2f6c5879
+  notes: >
+    Composition des frais (« les émoluments, les honoraires, les
+    débours, les droits et taxes ») et barème des émoluments
+    proportionnels de l'achat immobilier (depuis le 01/01/2021) :
+    3,870 % de 0 à 6 500 €, 1,596 % de 6 500 à 17 000 €, 1,064 % de
+    17 000 à 60 000 €, 0,799 % au-delà — hors TVA à 20 %. La fiche ne
+    chiffre ni les débours ni la contribution de sécurité immobilière :
+    le coût de transaction R-14 est donc un PLANCHER (limite dédiée).

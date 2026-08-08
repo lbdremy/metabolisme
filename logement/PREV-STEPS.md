@@ -3,12 +3,13 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
-## Session 4 — 2026-08-08 (H-04 : rotation, parc social, migrations)
+## Session 4 — 2026-08-08 (H-04 instruite : rotation, parc social, migrations, transaction)
 
-Trois livrables : **R-11** (rotation du parc, ancienneté d'emménagement),
-**R-12** (mobilité du parc social, RPLS) et **R-13** (migrations des
-personnes, MIGCOM), selon le plan d'éclairage données de la session 3
-(rapport effort/valeur).
+Quatre livrables : **R-11** (rotation du parc), **R-12** (mobilité du
+parc social), **R-13** (migrations des personnes) et **R-14** (coût de
+transaction), selon le plan d'éclairage données de la session 3 (rapport
+effort/valeur). Tag intermédiaire **`efficacite-parc-v0.4`** posé après
+R-13.
 
 - **S-27 figée** : RP « Logement en 2023 » (jeu Melodi
   DS_RP_LOGEMENT_PRINC, Parquet 98 Mo, 11,9 M obs.) — la base publiée le
@@ -72,6 +73,28 @@ personnes, MIGCOM), selon le plan d'éclairage données de la session 3
   dont un test de propriété qui a attrapé un vrai défaut (les soldes ne
   bouclaient pas quand une ZE n'existe qu'en origine : Mayotte) ;
   qmd re-rendu (R-11/R-12/R-13 postérieurs à la revue).
+- **S-30/S-31/S-32 figées + H-13 créée** : DVF 2025 année complète
+  (98 Mo LFS), table DGFiP des taux DMTO au 01/02/2026 (majorité de
+  départements à 6,32 % total depuis la LF2025, plage [5,09 ; 6,32]),
+  fiche F17701 (barème des émoluments, TESTÉ sur l'exemple chiffré de
+  la fiche : 1 995,25 € HT à 200 000 €). **R-14** : assiette C-10
+  (727 209 ventes à un seul logement, prix médian France 182 000 €) ;
+  péage 7,4-8,0 % du prix mais 6,1 MOIS de niveau de vie médian par UC
+  en médiane, 7,8 mois en ZE tendues vs 5,5, jusqu'à 13 mois (L'Ouest
+  réunionnais, Porto-Vecchio) et 11 (Paris, Bayonne) ; rho +0,81 avec
+  le coût locatif. I-14 : le ménage des zones tendues est pris en
+  tenaille (relocation ~64 % du revenu à Paris, péage d'achat record) ;
+  ~83 % du péage est fiscal — paramètre institutionnel direct pour la
+  proposition. Claims C-10, O-34/O-35, T-15, R-14, I-14, L-25
+  (114 nœuds) ; 10 tests nouveaux (122).
+
+**Bilan H-04** : l'hypothèse « mobilités empêchées » est instruite par
+quatre mesures indépendantes qui se recoupent (validation croisée
+personnes × logements +0,80 ; MIGCOM-HLM ≈ RPLS) : le gel est réel,
+s'accélère, se concentre là où le marché est verrouillé ; le canal
+principal des mobilités (locatif privé) y est le plus cher, le parc
+social y est gelé, et la sortie par l'achat y paie un péage record
+majoritairement fiscal.
 
 ## Session 3 — 2026-08-07 (revue contradictoire et intégration) — tag `efficacite-parc-v0.3`
 

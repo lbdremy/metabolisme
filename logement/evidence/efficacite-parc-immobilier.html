@@ -2247,6 +2247,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
   <li><a href="#r-11-la-rotation-du-parc-ralentit-surtout-dans-les-marchés-verrouillés" id="toc-r-11-la-rotation-du-parc-ralentit-surtout-dans-les-marchés-verrouillés" class="nav-link" data-scroll-target="#r-11-la-rotation-du-parc-ralentit-surtout-dans-les-marchés-verrouillés">R-11 — La rotation du parc ralentit, surtout dans les marchés verrouillés</a></li>
   <li><a href="#r-12-le-parc-social-ne-tourne-plus-surtout-là-où-le-marché-est-cher" id="toc-r-12-le-parc-social-ne-tourne-plus-surtout-là-où-le-marché-est-cher" class="nav-link" data-scroll-target="#r-12-le-parc-social-ne-tourne-plus-surtout-là-où-le-marché-est-cher">R-12 — Le parc social ne tourne plus, surtout là où le marché est cher</a></li>
   <li><a href="#r-13-les-personnes-bougent-par-le-locatif-privé-les-flux-vident-les-cœurs-chers" id="toc-r-13-les-personnes-bougent-par-le-locatif-privé-les-flux-vident-les-cœurs-chers" class="nav-link" data-scroll-target="#r-13-les-personnes-bougent-par-le-locatif-privé-les-flux-vident-les-cœurs-chers">R-13 — Les personnes bougent par le locatif privé ; les flux vident les cœurs chers</a></li>
+  <li><a href="#r-14-le-péage-de-transaction-uniforme-en-taux-écrasant-là-où-tout-se-cumule" id="toc-r-14-le-péage-de-transaction-uniforme-en-taux-écrasant-là-où-tout-se-cumule" class="nav-link" data-scroll-target="#r-14-le-péage-de-transaction-uniforme-en-taux-écrasant-là-où-tout-se-cumule">R-14 — Le péage de transaction : uniforme en taux, écrasant là où tout se cumule</a></li>
   </ul></li>
   <li><a href="#sensibilité" id="toc-sensibilité" class="nav-link" data-scroll-target="#sensibilité">7. Sensibilité</a></li>
   <li><a href="#interprétation" id="toc-interprétation" class="nav-link" data-scroll-target="#interprétation">8. Interprétation</a></li>
@@ -2262,7 +2263,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Efficacité du parc immobilier français — document de preuve</h1>
-<p class="subtitle lead">Premiers constats : parc et ménages (1982-2025), vacance structurelle du parc privé (2020-2026), croisements emploi et coût par zone d’emploi, taux d’effort, tension, état du bâti, coût de remobilisation, foncier immobilisé, rotation résidentielle, mobilité du parc social et des personnes — chiffres révisés par la revue contradictoire du 2026-08-07</p>
+<p class="subtitle lead">Premiers constats : parc et ménages (1982-2025), vacance structurelle du parc privé (2020-2026), croisements emploi et coût par zone d’emploi, taux d’effort, tension, état du bâti, coût de remobilisation, foncier immobilisé, rotation résidentielle, mobilité du parc social et des personnes, coût de transaction — chiffres révisés par la revue contradictoire du 2026-08-07</p>
 </div>
 
 
@@ -2286,7 +2287,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 
 
 <p>Ce document est le <strong>document de preuve</strong> des premiers résultats de la recherche « Efficacité du parc immobilier français » (projet Métabolisme). Il est <strong>exécutable</strong> : chaque chiffre affiché est recalculé à la volée par le code stabilisé du dépôt (<code>src/logement/</code>), à partir des fichiers sources figés (<code>data/raw/</code>, empreintes sha256 vérifiées), et confronté aux artefacts publiés (<code>data/processed/</code>). Les statuts épistémiques (S sources, D définitions, H hypothèses, O/T/R/I, V valeurs, C choix, L limites) sont ceux du graphe de preuves <code>evidence/claims.yaml</code>.</p>
-<div id="a6fad17f" class="cell" data-execution_count="1">
+<div id="1be12e76" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>initialisation : accès au dépôt et aux registres</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
@@ -2327,7 +2328,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="définitions" class="level2">
 <h2 class="anchored" data-anchor-id="définitions">2. Définitions</h2>
 <p>Les définitions sont citées verbatim depuis leur source et versionnées dans <code>sources/definitions.yaml</code> ; les limites de chacune y sont documentées.</p>
-<div id="824da4fe" class="cell" data-execution_count="2">
+<div id="2cfbf83b" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>tableau des définitions depuis le registre</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>defs <span class="op">=</span> pd.DataFrame(</span>
@@ -2347,123 +2348,123 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <style type="text/css">
 </style>
 
-<table id="T_29515" class="caption-top table table-sm table-striped small">
+<table id="T_2d185" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_29515_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">id</th>
-<th id="T_29515_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">terme</th>
-<th id="T_29515_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">source</th>
-<th id="T_29515_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">mise à jour</th>
+<th id="T_2d185_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">id</th>
+<th id="T_2d185_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">terme</th>
+<th id="T_2d185_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">source</th>
+<th id="T_2d185_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">mise à jour</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_29515_row0_col0" class="data row0 col0">D-01</td>
-<td id="T_29515_row0_col1" class="data row0 col1">logement</td>
-<td id="T_29515_row0_col2" class="data row0 col2">S-04</td>
-<td id="T_29515_row0_col3" class="data row0 col3">2025-12-22</td>
+<td id="T_2d185_row0_col0" class="data row0 col0">D-01</td>
+<td id="T_2d185_row0_col1" class="data row0 col1">logement</td>
+<td id="T_2d185_row0_col2" class="data row0 col2">S-04</td>
+<td id="T_2d185_row0_col3" class="data row0 col3">2025-12-22</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row1_col0" class="data row1 col0">D-02</td>
-<td id="T_29515_row1_col1" class="data row1 col1">résidence principale</td>
-<td id="T_29515_row1_col2" class="data row1 col2">S-04</td>
-<td id="T_29515_row1_col3" class="data row1 col3">2020-05-14</td>
+<td id="T_2d185_row1_col0" class="data row1 col0">D-02</td>
+<td id="T_2d185_row1_col1" class="data row1 col1">résidence principale</td>
+<td id="T_2d185_row1_col2" class="data row1 col2">S-04</td>
+<td id="T_2d185_row1_col3" class="data row1 col3">2020-05-14</td>
 </tr>
 <tr class="odd">
-<td id="T_29515_row2_col0" class="data row2 col0">D-03</td>
-<td id="T_29515_row2_col1" class="data row2 col1">logement vacant</td>
-<td id="T_29515_row2_col2" class="data row2 col2">S-04</td>
-<td id="T_29515_row2_col3" class="data row2 col3">2021-01-25</td>
+<td id="T_2d185_row2_col0" class="data row2 col0">D-03</td>
+<td id="T_2d185_row2_col1" class="data row2 col1">logement vacant</td>
+<td id="T_2d185_row2_col2" class="data row2 col2">S-04</td>
+<td id="T_2d185_row2_col3" class="data row2 col3">2021-01-25</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row3_col0" class="data row3 col0">D-04</td>
-<td id="T_29515_row3_col1" class="data row3 col1">résidence secondaire</td>
-<td id="T_29515_row3_col2" class="data row3 col2">S-04</td>
-<td id="T_29515_row3_col3" class="data row3 col3">2021-01-14</td>
+<td id="T_2d185_row3_col0" class="data row3 col0">D-04</td>
+<td id="T_2d185_row3_col1" class="data row3 col1">résidence secondaire</td>
+<td id="T_2d185_row3_col2" class="data row3 col2">S-04</td>
+<td id="T_2d185_row3_col3" class="data row3 col3">2021-01-14</td>
 </tr>
 <tr class="odd">
-<td id="T_29515_row4_col0" class="data row4 col0">D-05</td>
-<td id="T_29515_row4_col1" class="data row4 col1">ménage (recensement de la population)</td>
-<td id="T_29515_row4_col2" class="data row4 col2">S-04</td>
-<td id="T_29515_row4_col3" class="data row4 col3">2026-04-02</td>
+<td id="T_2d185_row4_col0" class="data row4 col0">D-05</td>
+<td id="T_2d185_row4_col1" class="data row4 col1">ménage (recensement de la population)</td>
+<td id="T_2d185_row4_col2" class="data row4 col2">S-04</td>
+<td id="T_2d185_row4_col3" class="data row4 col3">2026-04-02</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row5_col0" class="data row5 col0">D-06</td>
-<td id="T_29515_row5_col1" class="data row5 col1">ménage (au sens de ménage-logement)</td>
-<td id="T_29515_row5_col2" class="data row5 col2">S-04</td>
-<td id="T_29515_row5_col3" class="data row5 col3">2026-07-07</td>
+<td id="T_2d185_row5_col0" class="data row5 col0">D-06</td>
+<td id="T_2d185_row5_col1" class="data row5 col1">ménage (au sens de ménage-logement)</td>
+<td id="T_2d185_row5_col2" class="data row5 col2">S-04</td>
+<td id="T_2d185_row5_col3" class="data row5 col3">2026-07-07</td>
 </tr>
 <tr class="odd">
-<td id="T_29515_row6_col0" class="data row6 col0">D-07</td>
-<td id="T_29515_row6_col1" class="data row6 col1">zone d&#39;emploi</td>
-<td id="T_29515_row6_col2" class="data row6 col2">S-04</td>
-<td id="T_29515_row6_col3" class="data row6 col3">2025-05-27</td>
+<td id="T_2d185_row6_col0" class="data row6 col0">D-07</td>
+<td id="T_2d185_row6_col1" class="data row6 col1">zone d&#39;emploi</td>
+<td id="T_2d185_row6_col2" class="data row6 col2">S-04</td>
+<td id="T_2d185_row6_col3" class="data row6 col3">2025-05-27</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row7_col0" class="data row7 col0">D-08</td>
-<td id="T_29515_row7_col1" class="data row7 col1">bassin de vie</td>
-<td id="T_29515_row7_col2" class="data row7 col2">S-04</td>
-<td id="T_29515_row7_col3" class="data row7 col3">2016-10-12</td>
+<td id="T_2d185_row7_col0" class="data row7 col0">D-08</td>
+<td id="T_2d185_row7_col1" class="data row7 col1">bassin de vie</td>
+<td id="T_2d185_row7_col2" class="data row7 col2">S-04</td>
+<td id="T_2d185_row7_col3" class="data row7 col3">2016-10-12</td>
 </tr>
 <tr class="odd">
-<td id="T_29515_row8_col0" class="data row8 col0">D-09</td>
-<td id="T_29515_row8_col1" class="data row8 col1">taux d&#39;effort (occupation de la résidence principale)</td>
-<td id="T_29515_row8_col2" class="data row8 col2">S-04</td>
-<td id="T_29515_row8_col3" class="data row8 col3">2026-07-31</td>
+<td id="T_2d185_row8_col0" class="data row8 col0">D-09</td>
+<td id="T_2d185_row8_col1" class="data row8 col1">taux d&#39;effort (occupation de la résidence principale)</td>
+<td id="T_2d185_row8_col2" class="data row8 col2">S-04</td>
+<td id="T_2d185_row8_col3" class="data row8 col3">2026-07-31</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row9_col0" class="data row9 col0">D-10</td>
-<td id="T_29515_row9_col1" class="data row9 col1">vacance structurelle (parc privé, LOVAC)</td>
-<td id="T_29515_row9_col2" class="data row9 col2">S-05</td>
-<td id="T_29515_row9_col3" class="data row9 col3">—</td>
+<td id="T_2d185_row9_col0" class="data row9 col0">D-10</td>
+<td id="T_2d185_row9_col1" class="data row9 col1">vacance structurelle (parc privé, LOVAC)</td>
+<td id="T_2d185_row9_col2" class="data row9 col2">S-05</td>
+<td id="T_2d185_row9_col3" class="data row9 col3">—</td>
 </tr>
 <tr class="odd">
-<td id="T_29515_row10_col0" class="data row10 col0">D-11</td>
-<td id="T_29515_row10_col1" class="data row10 col1">vacance frictionnelle (parc privé, LOVAC)</td>
-<td id="T_29515_row10_col2" class="data row10 col2">S-05</td>
-<td id="T_29515_row10_col3" class="data row10 col3">—</td>
+<td id="T_2d185_row10_col0" class="data row10 col0">D-11</td>
+<td id="T_2d185_row10_col1" class="data row10 col1">vacance frictionnelle (parc privé, LOVAC)</td>
+<td id="T_2d185_row10_col2" class="data row10 col2">S-05</td>
+<td id="T_2d185_row10_col3" class="data row10 col3">—</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row11_col0" class="data row11 col0">D-12</td>
-<td id="T_29515_row11_col1" class="data row11 col1">habitat indigne</td>
-<td id="T_29515_row11_col2" class="data row11 col2">S-08</td>
-<td id="T_29515_row11_col3" class="data row11 col3">2009-03-25</td>
+<td id="T_2d185_row11_col0" class="data row11 col0">D-12</td>
+<td id="T_2d185_row11_col1" class="data row11 col1">habitat indigne</td>
+<td id="T_2d185_row11_col2" class="data row11 col2">S-08</td>
+<td id="T_2d185_row11_col3" class="data row11 col3">2009-03-25</td>
 </tr>
 <tr class="odd">
-<td id="T_29515_row12_col0" class="data row12 col0">D-13</td>
-<td id="T_29515_row12_col1" class="data row12 col1">passoire thermique (logements classés F et G)</td>
-<td id="T_29515_row12_col2" class="data row12 col2">S-08</td>
-<td id="T_29515_row12_col3" class="data row12 col3">2021-08-25</td>
+<td id="T_2d185_row12_col0" class="data row12 col0">D-13</td>
+<td id="T_2d185_row12_col1" class="data row12 col1">passoire thermique (logements classés F et G)</td>
+<td id="T_2d185_row12_col2" class="data row12 col2">S-08</td>
+<td id="T_2d185_row12_col3" class="data row12 col3">2021-08-25</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row13_col0" class="data row13 col0">D-14</td>
-<td id="T_29515_row13_col1" class="data row13 col1">zone tendue (champ de la taxe annuelle sur les logements vacants, art. 232 CGI)</td>
-<td id="T_29515_row13_col2" class="data row13 col2">S-08</td>
-<td id="T_29515_row13_col3" class="data row13 col3">2023-01-01</td>
+<td id="T_2d185_row13_col0" class="data row13 col0">D-14</td>
+<td id="T_2d185_row13_col1" class="data row13 col1">zone tendue (champ de la taxe annuelle sur les logements vacants, art. 232 CGI)</td>
+<td id="T_2d185_row13_col2" class="data row13 col2">S-08</td>
+<td id="T_2d185_row13_col3" class="data row13 col3">2023-01-01</td>
 </tr>
 <tr class="odd">
-<td id="T_29515_row14_col0" class="data row14 col0">D-15</td>
-<td id="T_29515_row14_col1" class="data row14 col1">vacance de fluidité (taux de vacance nécessaire à la rotation du parc)</td>
-<td id="T_29515_row14_col2" class="data row14 col2">S-14</td>
-<td id="T_29515_row14_col3" class="data row14 col3">2020-07-01</td>
+<td id="T_2d185_row14_col0" class="data row14 col0">D-15</td>
+<td id="T_2d185_row14_col1" class="data row14 col1">vacance de fluidité (taux de vacance nécessaire à la rotation du parc)</td>
+<td id="T_2d185_row14_col2" class="data row14 col2">S-14</td>
+<td id="T_2d185_row14_col3" class="data row14 col3">2020-07-01</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row15_col0" class="data row15 col0">D-16</td>
-<td id="T_29515_row15_col1" class="data row15 col1">ancienneté d&#39;emménagement dans le logement (recensement de la population)</td>
-<td id="T_29515_row15_col2" class="data row15 col2">S-04</td>
-<td id="T_29515_row15_col3" class="data row15 col3">2026-08-06</td>
+<td id="T_2d185_row15_col0" class="data row15 col0">D-16</td>
+<td id="T_2d185_row15_col1" class="data row15 col1">ancienneté d&#39;emménagement dans le logement (recensement de la population)</td>
+<td id="T_2d185_row15_col2" class="data row15 col2">S-04</td>
+<td id="T_2d185_row15_col3" class="data row15 col3">2026-08-06</td>
 </tr>
 <tr class="odd">
-<td id="T_29515_row16_col0" class="data row16 col0">D-17</td>
-<td id="T_29515_row16_col1" class="data row16 col1">taux de mobilité du parc locatif social (RPLS)</td>
-<td id="T_29515_row16_col2" class="data row16 col2">S-28</td>
-<td id="T_29515_row16_col3" class="data row16 col3">2022-01-01</td>
+<td id="T_2d185_row16_col0" class="data row16 col0">D-17</td>
+<td id="T_2d185_row16_col1" class="data row16 col1">taux de mobilité du parc locatif social (RPLS)</td>
+<td id="T_2d185_row16_col2" class="data row16 col2">S-28</td>
+<td id="T_2d185_row16_col3" class="data row16 col3">2022-01-01</td>
 </tr>
 <tr class="even">
-<td id="T_29515_row17_col0" class="data row17 col0">D-18</td>
-<td id="T_29515_row17_col1" class="data row17 col1">migration résidentielle annuelle (recensement, fichier MIGCOM)</td>
-<td id="T_29515_row17_col2" class="data row17 col2">S-29</td>
-<td id="T_29515_row17_col3" class="data row17 col3">2026-08-08</td>
+<td id="T_2d185_row17_col0" class="data row17 col0">D-18</td>
+<td id="T_2d185_row17_col1" class="data row17 col1">migration résidentielle annuelle (recensement, fichier MIGCOM)</td>
+<td id="T_2d185_row17_col2" class="data row17 col2">S-29</td>
+<td id="T_2d185_row17_col3" class="data row17 col3">2026-08-08</td>
 </tr>
 </tbody>
 </table>
@@ -2478,7 +2479,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="sources" class="level2">
 <h2 class="anchored" data-anchor-id="sources">3. Sources</h2>
 <p>Chaque source est enregistrée avec ses dates, périmètres, licence et l’empreinte sha256 de ses fichiers figés (<code>uv run logement validate</code> vérifie les empreintes à chaque exécution).</p>
-<div id="0644fd95" class="cell" data-execution_count="3">
+<div id="4874e35c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>tableau des sources depuis le registre</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_files(s: <span class="bu">dict</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
@@ -2505,249 +2506,273 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <style type="text/css">
 </style>
 
-<table id="T_16897" class="caption-top table table-sm table-striped small">
+<table id="T_cd6a8" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_16897_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">id</th>
-<th id="T_16897_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">éditeur</th>
-<th id="T_16897_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">titre</th>
-<th id="T_16897_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">publication</th>
-<th id="T_16897_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">récupérée le</th>
-<th id="T_16897_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">fichiers figés</th>
+<th id="T_cd6a8_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">id</th>
+<th id="T_cd6a8_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">éditeur</th>
+<th id="T_cd6a8_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">titre</th>
+<th id="T_cd6a8_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">publication</th>
+<th id="T_cd6a8_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">récupérée le</th>
+<th id="T_cd6a8_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">fichiers figés</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_16897_row0_col0" class="data row0 col0">S-01</td>
-<td id="T_16897_row0_col1" class="data row0 col1">INSEE</td>
-<td id="T_16897_row0_col2" class="data row0 col2">Parc de logements au 1er janvier 2025 — données des figures (Insee Focus n° 359)</td>
-<td id="T_16897_row0_col3" class="data row0 col3">2025-09-17</td>
-<td id="T_16897_row0_col4" class="data row0 col4">2026-08-03</td>
-<td id="T_16897_row0_col5" class="data row0 col5">1</td>
+<td id="T_cd6a8_row0_col0" class="data row0 col0">S-01</td>
+<td id="T_cd6a8_row0_col1" class="data row0 col1">INSEE</td>
+<td id="T_cd6a8_row0_col2" class="data row0 col2">Parc de logements au 1er janvier 2025 — données des figures (Insee Focus n° 359)</td>
+<td id="T_cd6a8_row0_col3" class="data row0 col3">2025-09-17</td>
+<td id="T_cd6a8_row0_col4" class="data row0 col4">2026-08-03</td>
+<td id="T_cd6a8_row0_col5" class="data row0 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row1_col0" class="data row1 col0">S-02</td>
-<td id="T_16897_row1_col1" class="data row1 col1">INSEE</td>
-<td id="T_16897_row1_col2" class="data row1 col2">Répartition du parc selon la catégorie de logement et le type d&#39;habitat (chiffre</td>
-<td id="T_16897_row1_col3" class="data row1 col3">2025-09-17</td>
-<td id="T_16897_row1_col4" class="data row1 col4">2026-08-03</td>
-<td id="T_16897_row1_col5" class="data row1 col5">1</td>
+<td id="T_cd6a8_row1_col0" class="data row1 col0">S-02</td>
+<td id="T_cd6a8_row1_col1" class="data row1 col1">INSEE</td>
+<td id="T_cd6a8_row1_col2" class="data row1 col2">Répartition du parc selon la catégorie de logement et le type d&#39;habitat (chiffre</td>
+<td id="T_cd6a8_row1_col3" class="data row1 col3">2025-09-17</td>
+<td id="T_cd6a8_row1_col4" class="data row1 col4">2026-08-03</td>
+<td id="T_cd6a8_row1_col5" class="data row1 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row2_col0" class="data row2 col0">S-03</td>
-<td id="T_16897_row2_col1" class="data row2 col1">INSEE</td>
-<td id="T_16897_row2_col2" class="data row2 col2">Ménages et familles en 2022 et en séries longues — nombre de personnes par ménag</td>
-<td id="T_16897_row2_col3" class="data row2 col3">2025-09-03</td>
-<td id="T_16897_row2_col4" class="data row2 col4">2026-08-03</td>
-<td id="T_16897_row2_col5" class="data row2 col5">1</td>
+<td id="T_cd6a8_row2_col0" class="data row2 col0">S-03</td>
+<td id="T_cd6a8_row2_col1" class="data row2 col1">INSEE</td>
+<td id="T_cd6a8_row2_col2" class="data row2 col2">Ménages et familles en 2022 et en séries longues — nombre de personnes par ménag</td>
+<td id="T_cd6a8_row2_col3" class="data row2 col3">2025-09-03</td>
+<td id="T_cd6a8_row2_col4" class="data row2 col4">2026-08-03</td>
+<td id="T_cd6a8_row2_col5" class="data row2 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row3_col0" class="data row3 col0">S-04</td>
-<td id="T_16897_row3_col1" class="data row3 col1">INSEE</td>
-<td id="T_16897_row3_col2" class="data row3 col2">Définitions — métadonnées statistiques (collection en ligne)</td>
-<td id="T_16897_row3_col3" class="data row3 col3">collection vivante</td>
-<td id="T_16897_row3_col4" class="data row3 col4">2026-08-03</td>
-<td id="T_16897_row3_col5" class="data row3 col5">0</td>
+<td id="T_cd6a8_row3_col0" class="data row3 col0">S-04</td>
+<td id="T_cd6a8_row3_col1" class="data row3 col1">INSEE</td>
+<td id="T_cd6a8_row3_col2" class="data row3 col2">Définitions — métadonnées statistiques (collection en ligne)</td>
+<td id="T_cd6a8_row3_col3" class="data row3 col3">collection vivante</td>
+<td id="T_cd6a8_row3_col4" class="data row3 col4">2026-08-03</td>
+<td id="T_cd6a8_row3_col5" class="data row3 col5">0</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row4_col0" class="data row4 col0">S-05</td>
-<td id="T_16897_row4_col1" class="data row4 col1">Ministère de la Transition écologique (DGALN / Cerema DataFoncier)</td>
-<td id="T_16897_row4_col2" class="data row4 col2">LOVAC open data — logements vacants du parc privé par commune, département, régi</td>
-<td id="T_16897_row4_col3" class="data row4 col3">2026-06-25</td>
-<td id="T_16897_row4_col4" class="data row4 col4">2026-08-03</td>
-<td id="T_16897_row4_col5" class="data row4 col5">4</td>
+<td id="T_cd6a8_row4_col0" class="data row4 col0">S-05</td>
+<td id="T_cd6a8_row4_col1" class="data row4 col1">Ministère de la Transition écologique (DGALN / Cerema DataFoncier)</td>
+<td id="T_cd6a8_row4_col2" class="data row4 col2">LOVAC open data — logements vacants du parc privé par commune, département, régi</td>
+<td id="T_cd6a8_row4_col3" class="data row4 col3">2026-06-25</td>
+<td id="T_cd6a8_row4_col4" class="data row4 col4">2026-08-03</td>
+<td id="T_cd6a8_row4_col5" class="data row4 col5">4</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row5_col0" class="data row5 col0">S-06</td>
-<td id="T_16897_row5_col1" class="data row5 col1">INSEE</td>
-<td id="T_16897_row5_col2" class="data row5 col2">Table d&#39;appartenance géographique des communes au 1er janvier 2026</td>
-<td id="T_16897_row5_col3" class="data row5 col3">2026-03-19</td>
-<td id="T_16897_row5_col4" class="data row5 col4">2026-08-03</td>
-<td id="T_16897_row5_col5" class="data row5 col5">1</td>
+<td id="T_cd6a8_row5_col0" class="data row5 col0">S-06</td>
+<td id="T_cd6a8_row5_col1" class="data row5 col1">INSEE</td>
+<td id="T_cd6a8_row5_col2" class="data row5 col2">Table d&#39;appartenance géographique des communes au 1er janvier 2026</td>
+<td id="T_cd6a8_row5_col3" class="data row5 col3">2026-03-19</td>
+<td id="T_cd6a8_row5_col4" class="data row5 col4">2026-08-03</td>
+<td id="T_cd6a8_row5_col5" class="data row5 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row6_col0" class="data row6 col0">S-07</td>
-<td id="T_16897_row6_col1" class="data row6 col1">INSEE</td>
-<td id="T_16897_row6_col2" class="data row6 col2">Estimation d&#39;emploi par zone d&#39;emploi et secteur d&#39;activité de 1998 à 2018</td>
-<td id="T_16897_row6_col3" class="data row6 col3">2021-05-11</td>
-<td id="T_16897_row6_col4" class="data row6 col4">2026-08-03</td>
-<td id="T_16897_row6_col5" class="data row6 col5">1</td>
+<td id="T_cd6a8_row6_col0" class="data row6 col0">S-07</td>
+<td id="T_cd6a8_row6_col1" class="data row6 col1">INSEE</td>
+<td id="T_cd6a8_row6_col2" class="data row6 col2">Estimation d&#39;emploi par zone d&#39;emploi et secteur d&#39;activité de 1998 à 2018</td>
+<td id="T_cd6a8_row6_col3" class="data row6 col3">2021-05-11</td>
+<td id="T_cd6a8_row6_col4" class="data row6 col4">2026-08-03</td>
+<td id="T_cd6a8_row6_col5" class="data row6 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row7_col0" class="data row7 col0">S-08</td>
-<td id="T_16897_row7_col1" class="data row7 col1">Légifrance (DILA)</td>
-<td id="T_16897_row7_col2" class="data row7 col2">Textes législatifs et réglementaires consolidés (collection en ligne)</td>
-<td id="T_16897_row7_col3" class="data row7 col3">collection vivante</td>
-<td id="T_16897_row7_col4" class="data row7 col4">2026-08-03</td>
-<td id="T_16897_row7_col5" class="data row7 col5">0</td>
+<td id="T_cd6a8_row7_col0" class="data row7 col0">S-08</td>
+<td id="T_cd6a8_row7_col1" class="data row7 col1">Légifrance (DILA)</td>
+<td id="T_cd6a8_row7_col2" class="data row7 col2">Textes législatifs et réglementaires consolidés (collection en ligne)</td>
+<td id="T_cd6a8_row7_col3" class="data row7 col3">collection vivante</td>
+<td id="T_cd6a8_row7_col4" class="data row7 col4">2026-08-03</td>
+<td id="T_cd6a8_row7_col5" class="data row7 col5">0</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row8_col0" class="data row8 col0">S-09</td>
-<td id="T_16897_row8_col1" class="data row8 col1">ANIL / DHUP (Ministère de la Transition écologique)</td>
-<td id="T_16897_row8_col2" class="data row8 col2">Carte des loyers — indicateurs de loyers d&#39;annonce par commune en 2025</td>
-<td id="T_16897_row8_col3" class="data row8 col3">2025-12-11</td>
-<td id="T_16897_row8_col4" class="data row8 col4">2026-08-03</td>
-<td id="T_16897_row8_col5" class="data row8 col5">2</td>
+<td id="T_cd6a8_row8_col0" class="data row8 col0">S-09</td>
+<td id="T_cd6a8_row8_col1" class="data row8 col1">ANIL / DHUP (Ministère de la Transition écologique)</td>
+<td id="T_cd6a8_row8_col2" class="data row8 col2">Carte des loyers — indicateurs de loyers d&#39;annonce par commune en 2025</td>
+<td id="T_cd6a8_row8_col3" class="data row8 col3">2025-12-11</td>
+<td id="T_cd6a8_row8_col4" class="data row8 col4">2026-08-03</td>
+<td id="T_cd6a8_row8_col5" class="data row8 col5">2</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row9_col0" class="data row9 col0">S-10</td>
-<td id="T_16897_row9_col1" class="data row9 col1">INSEE</td>
-<td id="T_16897_row9_col2" class="data row9 col2">Filosofi 2021 — principaux indicateurs sur les revenus et la pauvreté (géographi</td>
-<td id="T_16897_row9_col3" class="data row9 col3">2024-01-29</td>
-<td id="T_16897_row9_col4" class="data row9 col4">2026-08-03</td>
-<td id="T_16897_row9_col5" class="data row9 col5">1</td>
+<td id="T_cd6a8_row9_col0" class="data row9 col0">S-10</td>
+<td id="T_cd6a8_row9_col1" class="data row9 col1">INSEE</td>
+<td id="T_cd6a8_row9_col2" class="data row9 col2">Filosofi 2021 — principaux indicateurs sur les revenus et la pauvreté (géographi</td>
+<td id="T_cd6a8_row9_col3" class="data row9 col3">2024-01-29</td>
+<td id="T_cd6a8_row9_col4" class="data row9 col4">2026-08-03</td>
+<td id="T_cd6a8_row9_col5" class="data row9 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row10_col0" class="data row10 col0">S-11</td>
-<td id="T_16897_row10_col1" class="data row10 col1">INSEE</td>
-<td id="T_16897_row10_col2" class="data row10 col2">Recensement 2022 — chiffres clés logement, base communale (base-cc-logement-2022</td>
-<td id="T_16897_row10_col3" class="data row10 col3">2025-06-26</td>
-<td id="T_16897_row10_col4" class="data row10 col4">2026-08-03</td>
-<td id="T_16897_row10_col5" class="data row10 col5">1</td>
+<td id="T_cd6a8_row10_col0" class="data row10 col0">S-11</td>
+<td id="T_cd6a8_row10_col1" class="data row10 col1">INSEE</td>
+<td id="T_cd6a8_row10_col2" class="data row10 col2">Recensement 2022 — chiffres clés logement, base communale (base-cc-logement-2022</td>
+<td id="T_cd6a8_row10_col3" class="data row10 col3">2025-06-26</td>
+<td id="T_cd6a8_row10_col4" class="data row10 col4">2026-08-03</td>
+<td id="T_cd6a8_row10_col5" class="data row10 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row11_col0" class="data row11 col0">S-12</td>
-<td id="T_16897_row11_col1" class="data row11 col1">SDES (Ministère de la Transition écologique)</td>
-<td id="T_16897_row11_col2" class="data row11 col2">Les conditions de logement des ménages résidant en France en 2020 — Datalab esse</td>
-<td id="T_16897_row11_col3" class="data row11 col3">2022-12-01</td>
-<td id="T_16897_row11_col4" class="data row11 col4">2026-08-05</td>
-<td id="T_16897_row11_col5" class="data row11 col5">1</td>
+<td id="T_cd6a8_row11_col0" class="data row11 col0">S-12</td>
+<td id="T_cd6a8_row11_col1" class="data row11 col1">SDES (Ministère de la Transition écologique)</td>
+<td id="T_cd6a8_row11_col2" class="data row11 col2">Les conditions de logement des ménages résidant en France en 2020 — Datalab esse</td>
+<td id="T_cd6a8_row11_col3" class="data row11 col3">2022-12-01</td>
+<td id="T_cd6a8_row11_col4" class="data row11 col4">2026-08-05</td>
+<td id="T_cd6a8_row11_col5" class="data row11 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row12_col0" class="data row12 col0">S-13</td>
-<td id="T_16897_row12_col1" class="data row12 col1">Ministère de la Transition écologique (Observatoire habitat)</td>
-<td id="T_16897_row12_col2" class="data row12 col2">Liste des communes selon le zonage TLV (taxe sur les logements vacants), version</td>
-<td id="T_16897_row12_col3" class="data row12 col3">2025-12-30</td>
-<td id="T_16897_row12_col4" class="data row12 col4">2026-08-05</td>
-<td id="T_16897_row12_col5" class="data row12 col5">2</td>
+<td id="T_cd6a8_row12_col0" class="data row12 col0">S-13</td>
+<td id="T_cd6a8_row12_col1" class="data row12 col1">Ministère de la Transition écologique (Observatoire habitat)</td>
+<td id="T_cd6a8_row12_col2" class="data row12 col2">Liste des communes selon le zonage TLV (taxe sur les logements vacants), version</td>
+<td id="T_cd6a8_row12_col3" class="data row12 col3">2025-12-30</td>
+<td id="T_cd6a8_row12_col4" class="data row12 col4">2026-08-05</td>
+<td id="T_cd6a8_row12_col5" class="data row12 col5">2</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row13_col0" class="data row13 col0">S-14</td>
-<td id="T_16897_row13_col1" class="data row13 col1">DREAL Pays de la Loire (collection Analyses et connaissance)</td>
-<td id="T_16897_row13_col2" class="data row13 col2">Lutter contre la vacance des logements — capitalisation des Programmes Locaux de</td>
-<td id="T_16897_row13_col3" class="data row13 col3">2020-07-01</td>
-<td id="T_16897_row13_col4" class="data row13 col4">2026-08-05</td>
-<td id="T_16897_row13_col5" class="data row13 col5">1</td>
+<td id="T_cd6a8_row13_col0" class="data row13 col0">S-14</td>
+<td id="T_cd6a8_row13_col1" class="data row13 col1">DREAL Pays de la Loire (collection Analyses et connaissance)</td>
+<td id="T_cd6a8_row13_col2" class="data row13 col2">Lutter contre la vacance des logements — capitalisation des Programmes Locaux de</td>
+<td id="T_cd6a8_row13_col3" class="data row13 col3">2020-07-01</td>
+<td id="T_cd6a8_row13_col4" class="data row13 col4">2026-08-05</td>
+<td id="T_cd6a8_row13_col5" class="data row13 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row14_col0" class="data row14 col0">S-15</td>
-<td id="T_16897_row14_col1" class="data row14 col1">Observatoire de l&#39;habitat de la Communauté Urbaine d&#39;Alençon (réseau des observatoires locaux des loyers)</td>
-<td id="T_16897_row14_col2" class="data row14 col2">La vacance — données de cadrage et chiffres clés, 2025</td>
-<td id="T_16897_row14_col3" class="data row14 col3">2025-01-01</td>
-<td id="T_16897_row14_col4" class="data row14 col4">2026-08-05</td>
-<td id="T_16897_row14_col5" class="data row14 col5">1</td>
+<td id="T_cd6a8_row14_col0" class="data row14 col0">S-15</td>
+<td id="T_cd6a8_row14_col1" class="data row14 col1">Observatoire de l&#39;habitat de la Communauté Urbaine d&#39;Alençon (réseau des observatoires locaux des loyers)</td>
+<td id="T_cd6a8_row14_col2" class="data row14 col2">La vacance — données de cadrage et chiffres clés, 2025</td>
+<td id="T_cd6a8_row14_col3" class="data row14 col3">2025-01-01</td>
+<td id="T_cd6a8_row14_col4" class="data row14 col4">2026-08-05</td>
+<td id="T_cd6a8_row14_col5" class="data row14 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row15_col0" class="data row15 col0">S-16</td>
-<td id="T_16897_row15_col1" class="data row15 col1">ADEME (observatoire DPE)</td>
-<td id="T_16897_row15_col2" class="data row15 col2">DPE logements existants (depuis juillet 2021) — extrait agrégé commune × étiquet</td>
-<td id="T_16897_row15_col3" class="data row15 col3">2026-07-29</td>
-<td id="T_16897_row15_col4" class="data row15 col4">2026-08-05</td>
-<td id="T_16897_row15_col5" class="data row15 col5">1</td>
+<td id="T_cd6a8_row15_col0" class="data row15 col0">S-16</td>
+<td id="T_cd6a8_row15_col1" class="data row15 col1">ADEME (observatoire DPE)</td>
+<td id="T_cd6a8_row15_col2" class="data row15 col2">DPE logements existants (depuis juillet 2021) — extrait agrégé commune × étiquet</td>
+<td id="T_cd6a8_row15_col3" class="data row15 col3">2026-07-29</td>
+<td id="T_cd6a8_row15_col4" class="data row15 col4">2026-08-05</td>
+<td id="T_cd6a8_row15_col5" class="data row15 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row16_col0" class="data row16 col0">S-17</td>
-<td id="T_16897_row16_col1" class="data row16 col1">Enertech (pour le compte de l&#39;ADEME)</td>
-<td id="T_16897_row16_col2" class="data row16 col2">Analyse des coûts de la rénovation énergétique des logements en France</td>
-<td id="T_16897_row16_col3" class="data row16 col3">2016-07-01</td>
-<td id="T_16897_row16_col4" class="data row16 col4">2026-08-05</td>
-<td id="T_16897_row16_col5" class="data row16 col5">1</td>
+<td id="T_cd6a8_row16_col0" class="data row16 col0">S-17</td>
+<td id="T_cd6a8_row16_col1" class="data row16 col1">Enertech (pour le compte de l&#39;ADEME)</td>
+<td id="T_cd6a8_row16_col2" class="data row16 col2">Analyse des coûts de la rénovation énergétique des logements en France</td>
+<td id="T_cd6a8_row16_col3" class="data row16 col3">2016-07-01</td>
+<td id="T_cd6a8_row16_col4" class="data row16 col4">2026-08-05</td>
+<td id="T_cd6a8_row16_col5" class="data row16 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row17_col0" class="data row17 col0">S-18</td>
-<td id="T_16897_row17_col1" class="data row17 col1">Banque des Territoires (Caisse des Dépôts)</td>
-<td id="T_16897_row17_col2" class="data row17 col2">Éclairages n°33 — Le prix de revient des logements sociaux face à l&#39;accumulation</td>
-<td id="T_16897_row17_col3" class="data row17 col3">2024-12-01</td>
-<td id="T_16897_row17_col4" class="data row17 col4">2026-08-05</td>
-<td id="T_16897_row17_col5" class="data row17 col5">1</td>
+<td id="T_cd6a8_row17_col0" class="data row17 col0">S-18</td>
+<td id="T_cd6a8_row17_col1" class="data row17 col1">Banque des Territoires (Caisse des Dépôts)</td>
+<td id="T_cd6a8_row17_col2" class="data row17 col2">Éclairages n°33 — Le prix de revient des logements sociaux face à l&#39;accumulation</td>
+<td id="T_cd6a8_row17_col3" class="data row17 col3">2024-12-01</td>
+<td id="T_cd6a8_row17_col4" class="data row17 col4">2026-08-05</td>
+<td id="T_cd6a8_row17_col5" class="data row17 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row18_col0" class="data row18 col0">S-19</td>
-<td id="T_16897_row18_col1" class="data row18 col1">INSEE (BDM, série 011779962)</td>
-<td id="T_16897_row18_col2" class="data row18 col2">Indice des prix de l&#39;entretien-amélioration des bâtiments — Résidentiel (IPEA, C</td>
-<td id="T_16897_row18_col3" class="data row18 col3">2026-07-01</td>
-<td id="T_16897_row18_col4" class="data row18 col4">2026-08-05</td>
-<td id="T_16897_row18_col5" class="data row18 col5">1</td>
+<td id="T_cd6a8_row18_col0" class="data row18 col0">S-19</td>
+<td id="T_cd6a8_row18_col1" class="data row18 col1">INSEE (BDM, série 011779962)</td>
+<td id="T_cd6a8_row18_col2" class="data row18 col2">Indice des prix de l&#39;entretien-amélioration des bâtiments — Résidentiel (IPEA, C</td>
+<td id="T_cd6a8_row18_col3" class="data row18 col3">2026-07-01</td>
+<td id="T_cd6a8_row18_col4" class="data row18 col4">2026-08-05</td>
+<td id="T_cd6a8_row18_col5" class="data row18 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row19_col0" class="data row19 col0">S-20</td>
-<td id="T_16897_row19_col1" class="data row19 col1">Cerema (Cartofriches, pour le Ministère de la Transition écologique)</td>
-<td id="T_16897_row19_col2" class="data row19 col2">Sites référencés dans Cartofriches — inventaire national des friches, export du</td>
-<td id="T_16897_row19_col3" class="data row19 col3">2026-06-15</td>
-<td id="T_16897_row19_col4" class="data row19 col4">2026-08-05</td>
-<td id="T_16897_row19_col5" class="data row19 col5">1</td>
+<td id="T_cd6a8_row19_col0" class="data row19 col0">S-20</td>
+<td id="T_cd6a8_row19_col1" class="data row19 col1">Cerema (Cartofriches, pour le Ministère de la Transition écologique)</td>
+<td id="T_cd6a8_row19_col2" class="data row19 col2">Sites référencés dans Cartofriches — inventaire national des friches, export du</td>
+<td id="T_cd6a8_row19_col3" class="data row19 col3">2026-06-15</td>
+<td id="T_cd6a8_row19_col4" class="data row19 col4">2026-08-05</td>
+<td id="T_cd6a8_row19_col5" class="data row19 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row20_col0" class="data row20 col0">S-21</td>
-<td id="T_16897_row20_col1" class="data row20 col1">INSEE</td>
-<td id="T_16897_row20_col2" class="data row20 col2">Base du comparateur de territoires (dont superficie des communes et arrondisseme</td>
-<td id="T_16897_row20_col3" class="data row20 col3">2026-07-22</td>
-<td id="T_16897_row20_col4" class="data row20 col4">2026-08-05</td>
-<td id="T_16897_row20_col5" class="data row20 col5">1</td>
+<td id="T_cd6a8_row20_col0" class="data row20 col0">S-21</td>
+<td id="T_cd6a8_row20_col1" class="data row20 col1">INSEE</td>
+<td id="T_cd6a8_row20_col2" class="data row20 col2">Base du comparateur de territoires (dont superficie des communes et arrondisseme</td>
+<td id="T_cd6a8_row20_col3" class="data row20 col3">2026-07-22</td>
+<td id="T_cd6a8_row20_col4" class="data row20 col4">2026-08-05</td>
+<td id="T_cd6a8_row20_col5" class="data row20 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row21_col0" class="data row21 col0">S-22</td>
-<td id="T_16897_row21_col1" class="data row21 col1">Cour des comptes</td>
-<td id="T_16897_row21_col2" class="data row21 col2">La lutte contre les logements vacants dans le parc privé — observations définiti</td>
-<td id="T_16897_row21_col3" class="data row21 col3">2025-05-22</td>
-<td id="T_16897_row21_col4" class="data row21 col4">2026-08-07</td>
-<td id="T_16897_row21_col5" class="data row21 col5">1</td>
+<td id="T_cd6a8_row21_col0" class="data row21 col0">S-22</td>
+<td id="T_cd6a8_row21_col1" class="data row21 col1">Cour des comptes</td>
+<td id="T_cd6a8_row21_col2" class="data row21 col2">La lutte contre les logements vacants dans le parc privé — observations définiti</td>
+<td id="T_cd6a8_row21_col3" class="data row21 col3">2025-05-22</td>
+<td id="T_cd6a8_row21_col4" class="data row21 col4">2026-08-07</td>
+<td id="T_cd6a8_row21_col5" class="data row21 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row22_col0" class="data row22 col0">S-23</td>
-<td id="T_16897_row22_col1" class="data row22 col1">SDES (Ministère de la Transition écologique — Boutchenik B., Mathieu B.)</td>
-<td id="T_16897_row22_col2" class="data row22 col2">Les déterminants de la vacance longue durée des logements détenus par les person</td>
-<td id="T_16897_row22_col3" class="data row22 col3">2023-12-01</td>
-<td id="T_16897_row22_col4" class="data row22 col4">2026-08-07</td>
-<td id="T_16897_row22_col5" class="data row22 col5">1</td>
+<td id="T_cd6a8_row22_col0" class="data row22 col0">S-23</td>
+<td id="T_cd6a8_row22_col1" class="data row22 col1">SDES (Ministère de la Transition écologique — Boutchenik B., Mathieu B.)</td>
+<td id="T_cd6a8_row22_col2" class="data row22 col2">Les déterminants de la vacance longue durée des logements détenus par les person</td>
+<td id="T_cd6a8_row22_col3" class="data row22 col3">2023-12-01</td>
+<td id="T_cd6a8_row22_col4" class="data row22 col4">2026-08-07</td>
+<td id="T_cd6a8_row22_col5" class="data row22 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row23_col0" class="data row23 col0">S-24</td>
-<td id="T_16897_row23_col1" class="data row23 col1">Apur (Atelier parisien d&#39;urbanisme)</td>
-<td id="T_16897_row23_col2" class="data row23 col2">Les logements inoccupés à Paris — état des lieux, mise en perspective historique</td>
-<td id="T_16897_row23_col3" class="data row23 col3">2023-12-05</td>
-<td id="T_16897_row23_col4" class="data row23 col4">2026-08-07</td>
-<td id="T_16897_row23_col5" class="data row23 col5">1</td>
+<td id="T_cd6a8_row23_col0" class="data row23 col0">S-24</td>
+<td id="T_cd6a8_row23_col1" class="data row23 col1">Apur (Atelier parisien d&#39;urbanisme)</td>
+<td id="T_cd6a8_row23_col2" class="data row23 col2">Les logements inoccupés à Paris — état des lieux, mise en perspective historique</td>
+<td id="T_cd6a8_row23_col3" class="data row23 col3">2023-12-05</td>
+<td id="T_cd6a8_row23_col4" class="data row23 col4">2026-08-07</td>
+<td id="T_cd6a8_row23_col5" class="data row23 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row24_col0" class="data row24 col0">S-25</td>
-<td id="T_16897_row24_col1" class="data row24 col1">Cerema (Juliette Maître — présentation au Réseau national des aménageurs)</td>
-<td id="T_16897_row24_col2" class="data row24 col2">Coût des friches — analyse des lauréats du Fonds Friches (23/11/2023)</td>
-<td id="T_16897_row24_col3" class="data row24 col3">2023-11-23</td>
-<td id="T_16897_row24_col4" class="data row24 col4">2026-08-07</td>
-<td id="T_16897_row24_col5" class="data row24 col5">1</td>
+<td id="T_cd6a8_row24_col0" class="data row24 col0">S-25</td>
+<td id="T_cd6a8_row24_col1" class="data row24 col1">Cerema (Juliette Maître — présentation au Réseau national des aménageurs)</td>
+<td id="T_cd6a8_row24_col2" class="data row24 col2">Coût des friches — analyse des lauréats du Fonds Friches (23/11/2023)</td>
+<td id="T_cd6a8_row24_col3" class="data row24 col3">2023-11-23</td>
+<td id="T_cd6a8_row24_col4" class="data row24 col4">2026-08-07</td>
+<td id="T_cd6a8_row24_col5" class="data row24 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row25_col0" class="data row25 col0">S-26</td>
-<td id="T_16897_row25_col1" class="data row25 col1">Cerema</td>
-<td id="T_16897_row25_col2" class="data row25 col2">Recyclage des friches — quels enseignements des centaines de projets soutenus pa</td>
-<td id="T_16897_row25_col3" class="data row25 col3">2023-12-04</td>
-<td id="T_16897_row25_col4" class="data row25 col4">2026-08-07</td>
-<td id="T_16897_row25_col5" class="data row25 col5">1</td>
+<td id="T_cd6a8_row25_col0" class="data row25 col0">S-26</td>
+<td id="T_cd6a8_row25_col1" class="data row25 col1">Cerema</td>
+<td id="T_cd6a8_row25_col2" class="data row25 col2">Recyclage des friches — quels enseignements des centaines de projets soutenus pa</td>
+<td id="T_cd6a8_row25_col3" class="data row25 col3">2023-12-04</td>
+<td id="T_cd6a8_row25_col4" class="data row25 col4">2026-08-07</td>
+<td id="T_cd6a8_row25_col5" class="data row25 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row26_col0" class="data row26 col0">S-27</td>
-<td id="T_16897_row26_col1" class="data row26 col1">INSEE</td>
-<td id="T_16897_row26_col2" class="data row26 col2">Recensement de la population — Logements et résidences principales en 2023 (expl</td>
-<td id="T_16897_row26_col3" class="data row26 col3">2026-08-08</td>
-<td id="T_16897_row26_col4" class="data row26 col4">2026-08-08</td>
-<td id="T_16897_row26_col5" class="data row26 col5">1</td>
+<td id="T_cd6a8_row26_col0" class="data row26 col0">S-27</td>
+<td id="T_cd6a8_row26_col1" class="data row26 col1">INSEE</td>
+<td id="T_cd6a8_row26_col2" class="data row26 col2">Recensement de la population — Logements et résidences principales en 2023 (expl</td>
+<td id="T_cd6a8_row26_col3" class="data row26 col3">2026-08-08</td>
+<td id="T_cd6a8_row26_col4" class="data row26 col4">2026-08-08</td>
+<td id="T_cd6a8_row26_col5" class="data row26 col5">1</td>
 </tr>
 <tr class="even">
-<td id="T_16897_row27_col0" class="data row27 col0">S-28</td>
-<td id="T_16897_row27_col1" class="data row27 col1">SDES (Commissariat général au développement durable)</td>
-<td id="T_16897_row27_col2" class="data row27 col2">Répertoire du parc locatif social (RPLS) au 1er janvier 2025 — résultats par rég</td>
-<td id="T_16897_row27_col3" class="data row27 col3">2026-01-20</td>
-<td id="T_16897_row27_col4" class="data row27 col4">2026-08-08</td>
-<td id="T_16897_row27_col5" class="data row27 col5">1</td>
+<td id="T_cd6a8_row27_col0" class="data row27 col0">S-28</td>
+<td id="T_cd6a8_row27_col1" class="data row27 col1">SDES (Commissariat général au développement durable)</td>
+<td id="T_cd6a8_row27_col2" class="data row27 col2">Répertoire du parc locatif social (RPLS) au 1er janvier 2025 — résultats par rég</td>
+<td id="T_cd6a8_row27_col3" class="data row27 col3">2026-01-20</td>
+<td id="T_cd6a8_row27_col4" class="data row27 col4">2026-08-08</td>
+<td id="T_cd6a8_row27_col5" class="data row27 col5">1</td>
 </tr>
 <tr class="odd">
-<td id="T_16897_row28_col0" class="data row28 col0">S-29</td>
-<td id="T_16897_row28_col1" class="data row28 col1">INSEE</td>
-<td id="T_16897_row28_col2" class="data row28 col2">Recensement de la population — fichier détail MIGCOM, migrations résidentielles</td>
-<td id="T_16897_row28_col3" class="data row28 col3">2026-08-08</td>
-<td id="T_16897_row28_col4" class="data row28 col4">2026-08-08</td>
-<td id="T_16897_row28_col5" class="data row28 col5">2</td>
+<td id="T_cd6a8_row28_col0" class="data row28 col0">S-29</td>
+<td id="T_cd6a8_row28_col1" class="data row28 col1">INSEE</td>
+<td id="T_cd6a8_row28_col2" class="data row28 col2">Recensement de la population — fichier détail MIGCOM, migrations résidentielles</td>
+<td id="T_cd6a8_row28_col3" class="data row28 col3">2026-08-08</td>
+<td id="T_cd6a8_row28_col4" class="data row28 col4">2026-08-08</td>
+<td id="T_cd6a8_row28_col5" class="data row28 col5">2</td>
+</tr>
+<tr class="even">
+<td id="T_cd6a8_row29_col0" class="data row29 col0">S-30</td>
+<td id="T_cd6a8_row29_col1" class="data row29 col1">DGFiP / Etalab (data.gouv.fr)</td>
+<td id="T_cd6a8_row29_col2" class="data row29 col2">Demandes de valeurs foncières géolocalisées (DVF) — mutations 2025, France entiè</td>
+<td id="T_cd6a8_row29_col3" class="data row29 col3">2026-05-18</td>
+<td id="T_cd6a8_row29_col4" class="data row29 col4">2026-08-08</td>
+<td id="T_cd6a8_row29_col5" class="data row29 col5">1</td>
+</tr>
+<tr class="odd">
+<td id="T_cd6a8_row30_col0" class="data row30 col0">S-31</td>
+<td id="T_cd6a8_row30_col1" class="data row30 col1">DGFiP (impots.gouv.fr, espace notaires)</td>
+<td id="T_cd6a8_row30_col2" class="data row30 col2">Droits d&#39;enregistrement et taxe de publicité foncière — taux, abattements et réd</td>
+<td id="T_cd6a8_row30_col3" class="data row30 col3">2026-02-01</td>
+<td id="T_cd6a8_row30_col4" class="data row30 col4">2026-08-08</td>
+<td id="T_cd6a8_row30_col5" class="data row30 col5">1</td>
+</tr>
+<tr class="even">
+<td id="T_cd6a8_row31_col0" class="data row31 col0">S-32</td>
+<td id="T_cd6a8_row31_col1" class="data row31 col1">Service-Public / DILA (Premier ministre)</td>
+<td id="T_cd6a8_row31_col2" class="data row31 col2">Frais de notaire — qu&#39;est-ce que c&#39;est ? (fiche F17701, barème des émoluments pr</td>
+<td id="T_cd6a8_row31_col3" class="data row31 col3">2026-08-05</td>
+<td id="T_cd6a8_row31_col4" class="data row31 col4">2026-08-08</td>
+<td id="T_cd6a8_row31_col5" class="data row31 col5">1</td>
 </tr>
 </tbody>
 </table>
@@ -2756,7 +2781,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </section>
 <section id="transformations" class="level2">
 <h2 class="anchored" data-anchor-id="transformations">4. Transformations</h2>
-<p>Toutes les transformations sont du code testé (<code>./test.sh</code>, 112 tests dont propriétés) :</p>
+<p>Toutes les transformations sont du code testé (<code>./test.sh</code>, 122 tests dont propriétés) :</p>
 <ul>
 <li><strong>T-01/T-02</strong> (<code>core/parc.py</code>) — lecture des fichiers INSEE (libellés à espaces insécables, années provisoires « (p) »), invariant de sommation (les catégories somment à l’ensemble, tolérance 1 millier), indexation base 100 et taux de croissance annuels moyens.</li>
 <li><strong>T-03</strong> (<code>core/lovac.py</code>) — lecture LOVAC (cp1252, secret « s » → valeur manquante), agrégation des arrondissements de Paris/Lyon/Marseille avec <strong>propagation du secret</strong> (un arrondissement masqué masque la somme, plutôt qu’une sous-estimation silencieuse), taux structurels au millésime de référence (choix <strong>C-03</strong>).</li>
@@ -2771,11 +2796,12 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <li><strong>T-12</strong> (<code>core/mobilite.py</code>) — rotation résidentielle par ZE : filtrage du Parquet Melodi S-27 à la lecture (résidences principales, toutes dimensions hors L_STAY au total), pivot avec contrôle d’intégrité (les 6 classes re-somment au total diffusé, erreur dure sinon), parts d’emménagés récents (&lt; 2 ans, &lt; 5 ans) aux périmètres jamais mélangés (national F, ZE), delta 2012→2023, croisements avec la tension (T-08), la vacance structurelle (T-04) et l’indice de coût (T-05) — corrélations de rangs avec IC de Fisher.</li>
 <li><strong>T-13</strong> (<code>core/social.py</code>) — mobilité du parc social par ZE : lecture des feuilles COMMUNE/REGION du RPLS (S-28, PLM → commune parente, secret en valeurs manquantes conservées), agrégation par moyenne pondérée du parc du millésime (choix <strong>C-09</strong>, CONTRÔLE dur contre le national publié — écarts observés ≤ 0,014 pt), seuil de parc ≥ 500 logements, deltas 2019→2025 et 2013→2025, croisements tension/vacance privée/coût/rotation totale (T-12) ; masque DOM étendu à Mayotte (première source France entière avec Mayotte).</li>
 <li><strong>T-14</strong> (<code>core/migrations.py</code>) — migrations des personnes par ZE : validation du fichier MIGCOM (modalités IRAN connues, poids IPONDI positifs), champ hors rattachement (IRAN = 0 exclu des deux termes, poids publié), taux annuel par ZE, part de mobiles par statut d’occupation, flux origine→destination entre ZE (index sur l’union résidence ∪ origine — les soldes re-somment à zéro), croisements tension/coût/rotation (T-12).</li>
+<li><strong>T-15</strong> (<code>core/transaction.py</code>) — coût de transaction par ZE : assiette C-10 des ventes DVF (un seul logement par mutation, bornes de plausibilité), prix médians par ZE, émoluments proportionnels exacts (barème S-32, contrôle unitaire sur l’exemple de la fiche), droits H-13 aux trois scénarios, poids en mois de niveau de vie médian par UC (C-04), croisements tension et coût locatif.</li>
 </ul>
 </section>
 <section id="hypothèses" class="level2">
 <h2 class="anchored" data-anchor-id="hypothèses">5. Hypothèses</h2>
-<div id="ed825aad" class="cell" data-execution_count="4">
+<div id="c409b24b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>registre des hypothèses</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>hyp <span class="op">=</span> pd.DataFrame(</span>
@@ -2797,73 +2823,81 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <style type="text/css">
 </style>
 
-<table id="T_5b48c" class="caption-top table table-sm table-striped small">
+<table id="T_d7a31" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_5b48c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">id</th>
-<th id="T_5b48c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">nom</th>
-<th id="T_5b48c_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">valeur centrale</th>
-<th id="T_5b48c_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">plage plausible</th>
-<th id="T_5b48c_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">unité</th>
-<th id="T_5b48c_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">confiance</th>
+<th id="T_d7a31_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">id</th>
+<th id="T_d7a31_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">nom</th>
+<th id="T_d7a31_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">valeur centrale</th>
+<th id="T_d7a31_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">plage plausible</th>
+<th id="T_d7a31_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">unité</th>
+<th id="T_d7a31_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">confiance</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_5b48c_row0_col0" class="data row0 col0">H-06</td>
-<td id="T_5b48c_row0_col1" class="data row0 col1">structural_vacancy_threshold_years</td>
-<td id="T_5b48c_row0_col2" class="data row0 col2">2.000000</td>
-<td id="T_5b48c_row0_col3" class="data row0 col3">[1.0, 3.0]</td>
-<td id="T_5b48c_row0_col4" class="data row0 col4">years</td>
-<td id="T_5b48c_row0_col5" class="data row0 col5">medium</td>
+<td id="T_d7a31_row0_col0" class="data row0 col0">H-06</td>
+<td id="T_d7a31_row0_col1" class="data row0 col1">structural_vacancy_threshold_years</td>
+<td id="T_d7a31_row0_col2" class="data row0 col2">2.000000</td>
+<td id="T_d7a31_row0_col3" class="data row0 col3">[1.0, 3.0]</td>
+<td id="T_d7a31_row0_col4" class="data row0 col4">years</td>
+<td id="T_d7a31_row0_col5" class="data row0 col5">medium</td>
 </tr>
 <tr class="even">
-<td id="T_5b48c_row1_col0" class="data row1 col0">H-07</td>
-<td id="T_5b48c_row1_col1" class="data row1 col1">relocation_surface_per_person_m2</td>
-<td id="T_5b48c_row1_col2" class="data row1 col2">35.000000</td>
-<td id="T_5b48c_row1_col3" class="data row1 col3">[35.0, 51.2]</td>
-<td id="T_5b48c_row1_col4" class="data row1 col4">m2_per_person</td>
-<td id="T_5b48c_row1_col5" class="data row1 col5">low</td>
+<td id="T_d7a31_row1_col0" class="data row1 col0">H-07</td>
+<td id="T_d7a31_row1_col1" class="data row1 col1">relocation_surface_per_person_m2</td>
+<td id="T_d7a31_row1_col2" class="data row1 col2">35.000000</td>
+<td id="T_d7a31_row1_col3" class="data row1 col3">[35.0, 51.2]</td>
+<td id="T_d7a31_row1_col4" class="data row1 col4">m2_per_person</td>
+<td id="T_d7a31_row1_col5" class="data row1 col5">low</td>
 </tr>
 <tr class="odd">
-<td id="T_5b48c_row2_col0" class="data row2 col0">H-08</td>
-<td id="T_5b48c_row2_col1" class="data row2 col1">fluidity_vacancy_threshold_pct</td>
-<td id="T_5b48c_row2_col2" class="data row2 col2">6.000000</td>
-<td id="T_5b48c_row2_col3" class="data row2 col3">[5.0, 7.0]</td>
-<td id="T_5b48c_row2_col4" class="data row2 col4">pct_of_total_stock</td>
-<td id="T_5b48c_row2_col5" class="data row2 col5">low</td>
+<td id="T_d7a31_row2_col0" class="data row2 col0">H-08</td>
+<td id="T_d7a31_row2_col1" class="data row2 col1">fluidity_vacancy_threshold_pct</td>
+<td id="T_d7a31_row2_col2" class="data row2 col2">6.000000</td>
+<td id="T_d7a31_row2_col3" class="data row2 col3">[5.0, 7.0]</td>
+<td id="T_d7a31_row2_col4" class="data row2 col4">pct_of_total_stock</td>
+<td id="T_d7a31_row2_col5" class="data row2 col5">low</td>
 </tr>
 <tr class="even">
-<td id="T_5b48c_row3_col0" class="data row3 col0">H-09</td>
-<td id="T_5b48c_row3_col1" class="data row3 col1">renovation_cost_maison_eur_ht_per_m2_2016</td>
-<td id="T_5b48c_row3_col2" class="data row3 col2">406.000000</td>
-<td id="T_5b48c_row3_col3" class="data row3 col3">[348.0, 496.0]</td>
-<td id="T_5b48c_row3_col4" class="data row3 col4">eur_ht_2016_per_m2</td>
-<td id="T_5b48c_row3_col5" class="data row3 col5">medium</td>
+<td id="T_d7a31_row3_col0" class="data row3 col0">H-09</td>
+<td id="T_d7a31_row3_col1" class="data row3 col1">renovation_cost_maison_eur_ht_per_m2_2016</td>
+<td id="T_d7a31_row3_col2" class="data row3 col2">406.000000</td>
+<td id="T_d7a31_row3_col3" class="data row3 col3">[348.0, 496.0]</td>
+<td id="T_d7a31_row3_col4" class="data row3 col4">eur_ht_2016_per_m2</td>
+<td id="T_d7a31_row3_col5" class="data row3 col5">medium</td>
 </tr>
 <tr class="odd">
-<td id="T_5b48c_row4_col0" class="data row4 col0">H-10</td>
-<td id="T_5b48c_row4_col1" class="data row4 col1">renovation_cost_collectif_eur_ht_per_m2_2016</td>
-<td id="T_5b48c_row4_col2" class="data row4 col2">250.000000</td>
-<td id="T_5b48c_row4_col3" class="data row4 col3">[200.0, 300.0]</td>
-<td id="T_5b48c_row4_col4" class="data row4 col4">eur_ht_2016_per_m2</td>
-<td id="T_5b48c_row4_col5" class="data row4 col5">medium</td>
+<td id="T_d7a31_row4_col0" class="data row4 col0">H-10</td>
+<td id="T_d7a31_row4_col1" class="data row4 col1">renovation_cost_collectif_eur_ht_per_m2_2016</td>
+<td id="T_d7a31_row4_col2" class="data row4 col2">250.000000</td>
+<td id="T_d7a31_row4_col3" class="data row4 col3">[200.0, 300.0]</td>
+<td id="T_d7a31_row4_col4" class="data row4 col4">eur_ht_2016_per_m2</td>
+<td id="T_d7a31_row4_col5" class="data row4 col5">medium</td>
 </tr>
 <tr class="even">
-<td id="T_5b48c_row5_col0" class="data row5 col0">H-11</td>
-<td id="T_5b48c_row5_col1" class="data row5 col1">haussmann_reference_density_dwellings_per_ha</td>
-<td id="T_5b48c_row5_col2" class="data row5 col2">147.200000</td>
-<td id="T_5b48c_row5_col3" class="data row5 col3">[70.6, 225.7]</td>
-<td id="T_5b48c_row5_col4" class="data row5 col4">dwellings_per_ha</td>
-<td id="T_5b48c_row5_col5" class="data row5 col5">medium</td>
+<td id="T_d7a31_row5_col0" class="data row5 col0">H-11</td>
+<td id="T_d7a31_row5_col1" class="data row5 col1">haussmann_reference_density_dwellings_per_ha</td>
+<td id="T_d7a31_row5_col2" class="data row5 col2">147.200000</td>
+<td id="T_d7a31_row5_col3" class="data row5 col3">[70.6, 225.7]</td>
+<td id="T_d7a31_row5_col4" class="data row5 col4">dwellings_per_ha</td>
+<td id="T_d7a31_row5_col5" class="data row5 col5">medium</td>
 </tr>
 <tr class="odd">
-<td id="T_5b48c_row6_col0" class="data row6 col0">H-12</td>
-<td id="T_5b48c_row6_col1" class="data row6 col1">lovac_structural_existence_rate</td>
-<td id="T_5b48c_row6_col2" class="data row6 col2">0.750000</td>
-<td id="T_5b48c_row6_col3" class="data row6 col3">[0.6, 0.9]</td>
-<td id="T_5b48c_row6_col4" class="data row6 col4">fraction</td>
-<td id="T_5b48c_row6_col5" class="data row6 col5">low</td>
+<td id="T_d7a31_row6_col0" class="data row6 col0">H-12</td>
+<td id="T_d7a31_row6_col1" class="data row6 col1">lovac_structural_existence_rate</td>
+<td id="T_d7a31_row6_col2" class="data row6 col2">0.750000</td>
+<td id="T_d7a31_row6_col3" class="data row6 col3">[0.6, 0.9]</td>
+<td id="T_d7a31_row6_col4" class="data row6 col4">fraction</td>
+<td id="T_d7a31_row6_col5" class="data row6 col5">low</td>
+</tr>
+<tr class="even">
+<td id="T_d7a31_row7_col0" class="data row7 col0">H-13</td>
+<td id="T_d7a31_row7_col1" class="data row7 col1">transfer_tax_rate_pct</td>
+<td id="T_d7a31_row7_col2" class="data row7 col2">6.320000</td>
+<td id="T_d7a31_row7_col3" class="data row7 col3">[5.09, 6.32]</td>
+<td id="T_d7a31_row7_col4" class="data row7 col4">pct_of_price</td>
+<td id="T_d7a31_row7_col5" class="data row7 col5">medium</td>
 </tr>
 </tbody>
 </table>
@@ -2877,7 +2911,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="vérification-de-reproduction" class="level3">
 <h3 class="anchored" data-anchor-id="vérification-de-reproduction">Vérification de reproduction</h3>
 <p>Avant d’afficher quoi que ce soit, on vérifie que les artefacts publiés sont exactement ce que la chaîne recalcule depuis les fichiers figés :</p>
-<div id="eff542a6" class="cell" data-execution_count="5">
+<div id="7f2a2aa1" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>r01 <span class="op">=</span> build.build_parc_menages(ROOT)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>r02 <span class="op">=</span> build.build_vacance_structurelle(ROOT)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>r03 <span class="op">=</span> build.build_vacance_emploi(ROOT)</span>
@@ -2891,26 +2925,27 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>r11 <span class="op">=</span> build.build_mobilite(ROOT)</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>r12 <span class="op">=</span> build.build_social(ROOT)</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>r13 <span class="op">=</span> build.build_migrations(ROOT)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, computed, output <span class="kw">in</span> [</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-01&quot;</span>, r01, build.OUTPUT), (<span class="st">&quot;R-02&quot;</span>, r02, build.LOVAC_OUTPUT),</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-03&quot;</span>, r03, build.ZE_OUTPUT), (<span class="st">&quot;R-04&quot;</span>, r04, build.COUT_OUTPUT),</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-05&quot;</span>, r05, build.RS_OUTPUT), (<span class="st">&quot;R-06&quot;</span>, r06, build.EFFORT_OUTPUT),</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-07&quot;</span>, r07, build.TENSION_OUTPUT), (<span class="st">&quot;R-08&quot;</span>, r08, build.BATI_OUTPUT),</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-09&quot;</span>, r09, build.REMOB_OUTPUT), (<span class="st">&quot;R-10&quot;</span>, r10, build.FONCIER_OUTPUT),</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-11&quot;</span>, r11, build.MOBILITE_OUTPUT), (<span class="st">&quot;R-12&quot;</span>, r12, build.SOCIAL_OUTPUT),</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-13&quot;</span>, r13, build.MIGRATIONS_OUTPUT),</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>]:</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    committed <span class="op">=</span> json.loads((ROOT <span class="op">/</span> output).read_text(encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>))</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> computed <span class="op">==</span> committed, <span class="ss">f&quot;</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> diverge de l&#39;artefact publié&quot;</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;R-01..R-13 : artefacts publiés == recalcul depuis les sources figées ✔&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>r14 <span class="op">=</span> build.build_transaction(ROOT)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, computed, output <span class="kw">in</span> [</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-01&quot;</span>, r01, build.OUTPUT), (<span class="st">&quot;R-02&quot;</span>, r02, build.LOVAC_OUTPUT),</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-03&quot;</span>, r03, build.ZE_OUTPUT), (<span class="st">&quot;R-04&quot;</span>, r04, build.COUT_OUTPUT),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-05&quot;</span>, r05, build.RS_OUTPUT), (<span class="st">&quot;R-06&quot;</span>, r06, build.EFFORT_OUTPUT),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-07&quot;</span>, r07, build.TENSION_OUTPUT), (<span class="st">&quot;R-08&quot;</span>, r08, build.BATI_OUTPUT),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-09&quot;</span>, r09, build.REMOB_OUTPUT), (<span class="st">&quot;R-10&quot;</span>, r10, build.FONCIER_OUTPUT),</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-11&quot;</span>, r11, build.MOBILITE_OUTPUT), (<span class="st">&quot;R-12&quot;</span>, r12, build.SOCIAL_OUTPUT),</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;R-13&quot;</span>, r13, build.MIGRATIONS_OUTPUT), (<span class="st">&quot;R-14&quot;</span>, r14, build.TRANSACTION_OUTPUT),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>]:</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    committed <span class="op">=</span> json.loads((ROOT <span class="op">/</span> output).read_text(encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>))</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> computed <span class="op">==</span> committed, <span class="ss">f&quot;</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> diverge de l&#39;artefact publié&quot;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;R-01..R-14 : artefacts publiés == recalcul depuis les sources figées ✔&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R-01..R-13 : artefacts publiés == recalcul depuis les sources figées ✔</code></pre>
+<pre><code>R-01..R-14 : artefacts publiés == recalcul depuis les sources figées ✔</code></pre>
 </div>
 </div>
 </section>
 <section id="r-01-le-parc-suit-les-ménages-pas-la-population-1982-2025" class="level3">
 <h3 class="anchored" data-anchor-id="r-01-le-parc-suit-les-ménages-pas-la-population-1982-2025">R-01 — Le parc suit les ménages, pas la population (1982-2025)</h3>
-<div id="20acef73" class="cell" data-execution_count="6">
+<div id="057ee39f" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>séries indexées base 100 en 1982</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>raw <span class="op">=</span> ROOT <span class="op">/</span> <span class="st">&quot;data&quot;</span> <span class="op">/</span> <span class="st">&quot;raw&quot;</span></span>
@@ -2948,7 +2983,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </div>
 </div>
 </div>
-<div id="24f5e77a" class="cell" data-execution_count="7">
+<div id="8053df67" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>chiffres clés R-01</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> r01[<span class="st">&quot;indices_at_last_common_vintage&quot;</span>]</span>
@@ -2971,7 +3006,7 @@ Part de vacance : 7.9 % (1982) → minimum 6.2 % (2005) → 7.7 % (2025)</code><
 </section>
 <section id="r-02-la-vacance-structurelle-du-parc-privé-et-sa-géographie" class="level3">
 <h3 class="anchored" data-anchor-id="r-02-la-vacance-structurelle-du-parc-privé-et-sa-géographie">R-02 — La vacance structurelle du parc privé et sa géographie</h3>
-<div id="10d6d76e" class="cell" data-execution_count="8">
+<div id="8f2e4ea7" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>série nationale LOVAC et ruptures</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>france <span class="op">=</span> lovac.parse_france(</span>
@@ -3001,7 +3036,7 @@ Part de vacance : 7.9 % (1982) → minimum 6.2 % (2005) → 7.7 % (2025)</code><
 </div>
 </div>
 </div>
-<div id="e1927553" class="cell" data-execution_count="9">
+<div id="5b9ec4f5" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>gradient départemental (millésime de référence C-03)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>top <span class="op">=</span> pd.DataFrame(r02[<span class="st">&quot;departements&quot;</span>][<span class="st">&quot;top&quot;</span>]).iloc[::<span class="op">-</span><span class="dv">1</span>]</span>
@@ -3028,7 +3063,7 @@ Part de vacance : 7.9 % (1982) → minimum 6.2 % (2005) → 7.7 % (2025)</code><
 </div>
 </div>
 </div>
-<div id="455653ff" class="cell" data-execution_count="10">
+<div id="61d64d4b" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>chiffres clés R-02</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>nat <span class="op">=</span> r02[<span class="st">&quot;national&quot;</span>]</span>
@@ -3062,7 +3097,7 @@ Top volumes (PLM agrégées) : Paris 32 091, Marseille 14 529, Nice 6 227, Toulo
 </section>
 <section id="r-03-vacance-structurelle-et-dynamique-de-lemploi-test-de-h-02" class="level3">
 <h3 class="anchored" data-anchor-id="r-03-vacance-structurelle-et-dynamique-de-lemploi-test-de-h-02">R-03 — Vacance structurelle et dynamique de l’emploi (test de H-02)</h3>
-<div id="4ae88ca7" class="cell" data-execution_count="11">
+<div id="c40f982d" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>chiffres clés R-03</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dec <span class="op">=</span> r03[<span class="st">&quot;declining_ze&quot;</span>]</span>
@@ -3096,7 +3131,7 @@ Plus gros volumes en ZE dynamiques : Paris 69 803, Marseille 17 917, Région Poi
 </section>
 <section id="r-04-pression-du-coût-résidentiel-et-vacance-instruction-de-h-03" class="level3">
 <h3 class="anchored" data-anchor-id="r-04-pression-du-coût-résidentiel-et-vacance-instruction-de-h-03">R-04 — Pression du coût résidentiel et vacance (instruction de H-03)</h3>
-<div id="4e71e581" class="cell" data-execution_count="12">
+<div id="bd5633fe" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>chiffres clés R-04</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>med <span class="op">=</span> r04[<span class="st">&quot;median_vacancy_rate_pct&quot;</span>]</span>
@@ -3123,7 +3158,7 @@ Indices les plus élevés : Paris 1.28, L&#39;Ouest 1.16, Menton 1.15, Roissy  1
 </section>
 <section id="r-05-résidences-secondaires-la-capacité-saisonnière-nest-pas-de-la-vacance" class="level3">
 <h3 class="anchored" data-anchor-id="r-05-résidences-secondaires-la-capacité-saisonnière-nest-pas-de-la-vacance">R-05 — Résidences secondaires : la « capacité saisonnière » n’est pas de la vacance</h3>
-<div id="46f17d3c" class="cell" data-execution_count="13">
+<div id="71708db4" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>chiffres clés R-05</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tz <span class="op">=</span> r05[<span class="st">&quot;touristic_ze&quot;</span>]</span>
@@ -3152,7 +3187,7 @@ Cumuls RS &gt; 20 % et vacance &gt; 5 % : 8 ZE — Ussel, Millau, Les Sources de
 </section>
 <section id="r-06-le-taux-deffort-brut-à-la-relocation-d-09-donne-une-grandeur-à-la-tension" class="level3">
 <h3 class="anchored" data-anchor-id="r-06-le-taux-deffort-brut-à-la-relocation-d-09-donne-une-grandeur-à-la-tension">R-06 — Le taux d’effort brut à la relocation (D-09) donne une grandeur à la tension</h3>
-<div id="a71e0c65" class="cell" data-execution_count="14">
+<div id="47471e45" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>chiffres clés R-06</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> r06[<span class="st">&quot;hypothesis&quot;</span>]</span>
@@ -3191,7 +3226,7 @@ Variante appartement seul : médiane 29.9 %, Spearman 0.959 avec le mix</code></
 </section>
 <section id="r-07-tension-des-usages-le-manque-absolu-et-le-gisement-local" class="level3">
 <h3 class="anchored" data-anchor-id="r-07-tension-des-usages-le-manque-absolu-et-le-gisement-local">R-07 — Tension des usages : le manque absolu et le gisement local</h3>
-<div id="9852953a" class="cell" data-execution_count="15">
+<div id="c5987fba" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>chiffres clés R-07</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>nat <span class="op">=</span> r07[<span class="st">&quot;national&quot;</span>]</span>
@@ -3275,7 +3310,7 @@ Pires couvertures : Les Sables-d&#39;Olonne 0.16, Pornic 0.21, Calvi 0.27, Chall
 </section>
 <section id="r-08-létat-du-bâti-premier-faisceau-sur-les-blocages-h-05" class="level3">
 <h3 class="anchored" data-anchor-id="r-08-létat-du-bâti-premier-faisceau-sur-les-blocages-h-05">R-08 — L’état du bâti, premier faisceau sur les blocages (H-05)</h3>
-<div id="7b62b677" class="cell" data-execution_count="16">
+<div id="65271edf" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>chiffres clés R-08</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>r08[<span class="st">&#39;n_ze&#39;</span>]<span class="sc">}</span><span class="ss"> ZE (dont </span><span class="sc">{</span>r08[<span class="st">&#39;n_ze_dom&#39;</span>]<span class="sc">}</span><span class="ss"> DOM) ; &quot;</span></span>
@@ -3319,7 +3354,7 @@ Part F+G la plus forte : Ussel 37.3, Saint Flour 36.2, Avallon 33.6, Guéret 32.
 </section>
 <section id="r-09-ce-que-coûterait-la-remobilisation-comparé-au-neuf" class="level3">
 <h3 class="anchored" data-anchor-id="r-09-ce-que-coûterait-la-remobilisation-comparé-au-neuf">R-09 — Ce que coûterait la remobilisation, comparé au neuf</h3>
-<div id="85ffde0b" class="cell" data-execution_count="17">
+<div id="068631b0" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>chiffres clés R-09</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ip <span class="op">=</span> r09[<span class="st">&quot;ipea&quot;</span>]</span>
@@ -3372,7 +3407,7 @@ Plus gros coûts de détente (M€) : Toulon 1082, Nantes 862, Bordeaux 855, Bay
 </section>
 <section id="r-10-le-foncier-immobilisé-par-le-non-résidentiel-vacant" class="level3">
 <h3 class="anchored" data-anchor-id="r-10-le-foncier-immobilisé-par-le-non-résidentiel-vacant">R-10 — Le foncier immobilisé par le non-résidentiel vacant</h3>
-<div id="53f618d7" class="cell" data-execution_count="18">
+<div id="8c69c2ce" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>chiffres clés R-10</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>h11c <span class="op">=</span> r10[<span class="st">&quot;h11_recalculee&quot;</span>]</span>
@@ -3421,7 +3456,7 @@ Plus gros gisements : Lens 1 726 ha, Caen 1 097 ha, Rouen 1 083 ha, Marseille 58
 </section>
 <section id="r-11-la-rotation-du-parc-ralentit-surtout-dans-les-marchés-verrouillés" class="level3">
 <h3 class="anchored" data-anchor-id="r-11-la-rotation-du-parc-ralentit-surtout-dans-les-marchés-verrouillés">R-11 — La rotation du parc ralentit, surtout dans les marchés verrouillés</h3>
-<div id="329c429b" class="cell" data-execution_count="19">
+<div id="b81518ce" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>chiffres clés R-11</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>nat <span class="op">=</span> r11[<span class="st">&quot;national&quot;</span>]</span>
@@ -3467,7 +3502,7 @@ Spearman chute 2012→2023 × vacance (métropole) : 0.25 [0.14 ; 0.36] (n = 287
 </section>
 <section id="r-12-le-parc-social-ne-tourne-plus-surtout-là-où-le-marché-est-cher" class="level3">
 <h3 class="anchored" data-anchor-id="r-12-le-parc-social-ne-tourne-plus-surtout-là-où-le-marché-est-cher">R-12 — Le parc social ne tourne plus, surtout là où le marché est cher</h3>
-<div id="6d90fbb7" class="cell" data-execution_count="20">
+<div id="7b9d5e9b" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>chiffres clés R-12</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>nats <span class="op">=</span> r12[<span class="st">&quot;national&quot;</span>]</span>
@@ -3517,7 +3552,7 @@ Spearman chute sociale × chute rotation RP (métropole) : 0.19 [0.07 ; 0.3] (n 
 </section>
 <section id="r-13-les-personnes-bougent-par-le-locatif-privé-les-flux-vident-les-cœurs-chers" class="level3">
 <h3 class="anchored" data-anchor-id="r-13-les-personnes-bougent-par-le-locatif-privé-les-flux-vident-les-cœurs-chers">R-13 — Les personnes bougent par le locatif privé ; les flux vident les cœurs chers</h3>
-<div id="63ffba88" class="cell" data-execution_count="21">
+<div id="176bc206" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>chiffres clés R-13</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>natm <span class="op">=</span> r13[<span class="st">&quot;national&quot;</span>]</span>
@@ -3563,62 +3598,100 @@ Spearman solde inter-ZE × coût (France entière) : -0.15 [-0.26 ; -0.04] (n = 
 </div>
 <p>Troisième instruction de <strong>H-04</strong> : le fichier détail MIGCOM (S-29) mesure les PERSONNES — 9,87 % changent de logement dans l’année (D-18). Trois enseignements. D’abord une <strong>validation croisée</strong> : la mobilité des personnes et la rotation des logements (R-11, source indépendante) se classent presque identiquement (rho +0,80) — la géographie de la rotation est un fait, pas un artefact de source. Ensuite, <strong>la mobilité repose sur le locatif privé</strong> : 19,51 % de ses occupants sont entrés dans l’année, contre 8,34 % en HLM (qui recoupe le taux RPLS de R-12 — les deux chaînes de mesure se rejoignent) et 5,73 % en propriété : tout ce qui rétrécit ou renchérit le parc locatif privé comprime le canal principal des mobilités. Enfin, <strong>les flux internes vident les cœurs chers</strong> : Paris perd 1,40 % de sa population chaque année en migrations internes (225 906 sortants pour 133 371 entrants), et le solde est corrélé négativement au coût (−0,15 France entière) — des mobilités qui se font CONTRE la géographie de l’emploi. En niveau, le taux annuel ne montre pas de gel spécifique aux zones tendues (flux étudiants dominants) : le blocage se lit dans QUI bouge et dans les soldes, pas dans le volume brut (interprétation I-13 ; limites L-24 — statut mesuré à l’arrivée, fenêtre d’un an, migrations internes seulement).</p>
 </section>
+<section id="r-14-le-péage-de-transaction-uniforme-en-taux-écrasant-là-où-tout-se-cumule" class="level3">
+<h3 class="anchored" data-anchor-id="r-14-le-péage-de-transaction-uniforme-en-taux-écrasant-là-où-tout-se-cumule">R-14 — Le péage de transaction : uniforme en taux, écrasant là où tout se cumule</h3>
+<div id="ade4869b" class="cell" data-execution_count="22">
+<details class="code-fold">
+<summary>chiffres clés R-14</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>natt <span class="op">=</span> r14[<span class="st">&quot;national&quot;</span>]</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;assiette C-10 : </span><span class="sc">{</span>natt[<span class="st">&#39;n_ventes_retenues&#39;</span>]<span class="sc">:,}</span><span class="ss"> ventes retenues — prix médian &quot;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f&quot;</span><span class="sc">{</span>natt[<span class="st">&#39;prix_median_eur&#39;</span>]<span class="sc">:,}</span><span class="ss"> € (maison </span><span class="sc">{</span>natt[<span class="st">&#39;prix_median_maison_eur&#39;</span>]<span class="sc">:,}</span><span class="ss">, &quot;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f&quot;appartement </span><span class="sc">{</span>natt[<span class="st">&#39;prix_median_appartement_eur&#39;</span>]<span class="sc">:,}</span><span class="ss">), &quot;</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f&quot;</span><span class="sc">{</span>natt[<span class="st">&#39;prix_m2_median_eur&#39;</span>]<span class="sc">:,}</span><span class="ss"> €/m²&quot;</span>.replace(<span class="st">&quot;,&quot;</span>, <span class="st">&quot; &quot;</span>))</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>cp <span class="op">=</span> r14[<span class="st">&quot;cout_pct_prix&quot;</span>]</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;péage (droits H-13 </span><span class="sc">{</span>r14[<span class="st">&#39;hypothesis&#39;</span>][<span class="st">&#39;central_value_pct&#39;</span>]<span class="sc">}</span><span class="ss"> % + émoluments S-32) : &quot;</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f&quot;</span><span class="sc">{</span>cp[<span class="st">&#39;min&#39;</span>]<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>cp[<span class="st">&#39;max&#39;</span>]<span class="sc">}</span><span class="ss"> % du prix (médiane </span><span class="sc">{</span>cp[<span class="st">&#39;mediane&#39;</span>]<span class="sc">}</span><span class="ss">)&quot;</span>)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> r14[<span class="st">&quot;distribution_mois_niveau_vie&quot;</span>]</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;en mois de niveau de vie médian par UC (</span><span class="sc">{</span>r14[<span class="st">&#39;n_ze_avec_niveau_vie&#39;</span>]<span class="sc">}</span><span class="ss"> ZE) : &quot;</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f&quot;min </span><span class="sc">{</span>d[<span class="st">&#39;min&#39;</span>]<span class="sc">}</span><span class="ss">, médiane </span><span class="sc">{</span>d[<span class="st">&#39;mediane&#39;</span>]<span class="sc">}</span><span class="ss">, max </span><span class="sc">{</span>d[<span class="st">&#39;max&#39;</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>mt <span class="op">=</span> r14[<span class="st">&quot;mediane_par_tension&quot;</span>]</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;ZE tendues : </span><span class="sc">{</span>mt[<span class="st">&#39;tendues_mois&#39;</span>]<span class="sc">}</span><span class="ss"> mois (prix médian &quot;</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f&quot;</span><span class="sc">{</span>mt[<span class="st">&#39;tendues_prix_median_eur&#39;</span>]<span class="sc">:,}</span><span class="ss"> €) — autres : </span><span class="sc">{</span>mt[<span class="st">&#39;autres_mois&#39;</span>]<span class="sc">}</span><span class="ss"> mois &quot;</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f&quot;(</span><span class="sc">{</span>mt[<span class="st">&#39;autres_prix_median_eur&#39;</span>]<span class="sc">:,}</span><span class="ss"> €)&quot;</span>.replace(<span class="st">&quot;,&quot;</span>, <span class="st">&quot; &quot;</span>))</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;péages les plus lourds :&quot;</span>,</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot; ; &quot;</span>.join(<span class="ss">f&quot;</span><span class="sc">{</span>e[<span class="st">&#39;name&#39;</span>]<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>e[<span class="st">&#39;cout_en_mois_niveau_vie&#39;</span>]<span class="sc">}</span><span class="ss"> mois&quot;</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>                 <span class="cf">for</span> e <span class="kw">in</span> r14[<span class="st">&quot;peage_le_plus_lourd&quot;</span>][:<span class="dv">5</span>] <span class="cf">if</span> e[<span class="st">&quot;name&quot;</span>]))</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> r14[<span class="st">&quot;spearman_mois_vs_cout_locatif&quot;</span>][<span class="st">&quot;metropole&quot;</span>]</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Spearman péage (mois) × indice de coût locatif (métropole) : </span><span class="sc">{</span>m[<span class="st">&#39;rho&#39;</span>]<span class="sc">}</span><span class="ss"> &quot;</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f&quot;[</span><span class="sc">{</span>m[<span class="st">&#39;ci95&#39;</span>][<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> ; </span><span class="sc">{</span>m[<span class="st">&#39;ci95&#39;</span>][<span class="dv">1</span>]<span class="sc">}</span><span class="ss">] (n = </span><span class="sc">{</span>m[<span class="st">&#39;n&#39;</span>]<span class="sc">}</span><span class="ss">)&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>assiette C-10 : 727 209 ventes retenues — prix médian 182 000 € (maison 200 000  appartement 166 000)  2 658 €/m²
+péage (droits H-13 6.32 % + émoluments S-32) : 7.43-8.02 % du prix (médiane 7.6)
+en mois de niveau de vie médian par UC (288 ZE) : min 2.76, médiane 6.14, max 13.24
+ZE tendues : 7.76 mois (prix médian 198 990 €) — autres : 5.53 mois (133 629 €)
+péages les plus lourds : L&#39;Ouest 13.2 mois ; Porto-Vecchio 13.1 mois ; Paris 11.2 mois ; Bayonne 11.0 mois ; La Teste-de-Buch 10.8 mois
+Spearman péage (mois) × indice de coût locatif (métropole) : 0.81 [0.77 ; 0.85] (n = 278)</code></pre>
+</div>
+</div>
+<p>Quatrième instruction de <strong>H-04</strong> : chaque achat paie un péage non récupérable — droits de mutation (H-13 : 6,32 % du prix dans la grande majorité des départements depuis la loi de finances 2025, S-31) plus les émoluments du notaire (barème S-32, calculé exactement). Le taux est quasi uniforme (<strong>7,4-8,0 % du prix</strong>) mais son poids en pouvoir d’achat local ne l’est pas : <strong>6,1 mois de niveau de vie médian par UC en médiane, 7,8 mois dans les ZE tendues contre 5,5 ailleurs</strong>, et jusqu’à 11-13 mois à Paris, Bayonne, sur les littoraux touristiques et dans les DOM chers (rho +0,81 avec l’indice de coût locatif). Le péage est un PLANCHER (ni débours, ni agence, L-25) et il pèse exactement là où R-11/R-12 localisent le gel de la rotation et où R-13 montre que la propriété est le statut le moins mobile : le ménage des zones tendues est pris en tenaille — relocation locative jusqu’à ~64 % du revenu (R-06), péage d’achat record. ~83 % de ce péage est fiscal : c’est un paramètre institutionnel direct pour la proposition à venir (interprétation I-14).</p>
+</section>
 </section>
 <section id="sensibilité" class="level2">
 <h2 class="anchored" data-anchor-id="sensibilité">7. Sensibilité</h2>
 <p>L’analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC détaillés (l’open data ne publie que la coupure à 2 ans). En revanche, la sensibilité au <strong>choix du millésime de référence (C-03)</strong> peut être testée :</p>
-<div id="cec807c6" class="cell" data-execution_count="22">
+<div id="706fa5ea" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>taux structurel national selon le millésime</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>deps <span class="op">=</span> lovac.parse_territories(</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    pd.read_csv(raw <span class="op">/</span> build.LOVAC_DEPARTEMENTS, sep<span class="op">=</span><span class="st">&quot;;&quot;</span>, encoding<span class="op">=</span><span class="st">&quot;cp1252&quot;</span>, dtype<span class="op">=</span><span class="bu">str</span>),</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    code_col<span class="op">=</span><span class="st">&quot;DEP&quot;</span>, name_col<span class="op">=</span><span class="st">&quot;LIB_DEP&quot;</span>,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2020</span>, <span class="dv">2026</span>):</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>        num <span class="op">=</span> deps[<span class="ss">f&quot;pp_vacant_plus_2ans_</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">&quot;</span>].<span class="bu">sum</span>()</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>        den <span class="op">=</span> deps[<span class="ss">f&quot;ff_pp_total_</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">&quot;</span>].<span class="bu">sum</span>()</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>        rows.append({<span class="st">&quot;millésime&quot;</span>: m, <span class="st">&quot;taux structurel national (%)&quot;</span>: <span class="bu">round</span>(num <span class="op">/</span> den <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>)})</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows).style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>deps <span class="op">=</span> lovac.parse_territories(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    pd.read_csv(raw <span class="op">/</span> build.LOVAC_DEPARTEMENTS, sep<span class="op">=</span><span class="st">&quot;;&quot;</span>, encoding<span class="op">=</span><span class="st">&quot;cp1252&quot;</span>, dtype<span class="op">=</span><span class="bu">str</span>),</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    code_col<span class="op">=</span><span class="st">&quot;DEP&quot;</span>, name_col<span class="op">=</span><span class="st">&quot;LIB_DEP&quot;</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2020</span>, <span class="dv">2026</span>):</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>        num <span class="op">=</span> deps[<span class="ss">f&quot;pp_vacant_plus_2ans_</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">&quot;</span>].<span class="bu">sum</span>()</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>        den <span class="op">=</span> deps[<span class="ss">f&quot;ff_pp_total_</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">&quot;</span>].<span class="bu">sum</span>()</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>        rows.append({<span class="st">&quot;millésime&quot;</span>: m, <span class="st">&quot;taux structurel national (%)&quot;</span>: <span class="bu">round</span>(num <span class="op">/</span> den <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>)})</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows).style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="23">
 <style type="text/css">
 </style>
 
-<table id="T_5112e" class="caption-top table table-sm table-striped small">
+<table id="T_6a89d" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_5112e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">millésime</th>
-<th id="T_5112e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">taux structurel national (%)</th>
+<th id="T_6a89d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">millésime</th>
+<th id="T_6a89d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">taux structurel national (%)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_5112e_row0_col0" class="data row0 col0">2020</td>
-<td id="T_5112e_row0_col1" class="data row0 col1">3.480000</td>
+<td id="T_6a89d_row0_col0" class="data row0 col0">2020</td>
+<td id="T_6a89d_row0_col1" class="data row0 col1">3.480000</td>
 </tr>
 <tr class="even">
-<td id="T_5112e_row1_col0" class="data row1 col0">2021</td>
-<td id="T_5112e_row1_col1" class="data row1 col1">3.620000</td>
+<td id="T_6a89d_row1_col0" class="data row1 col0">2021</td>
+<td id="T_6a89d_row1_col1" class="data row1 col1">3.620000</td>
 </tr>
 <tr class="odd">
-<td id="T_5112e_row2_col0" class="data row2 col0">2022</td>
-<td id="T_5112e_row2_col1" class="data row2 col1">3.500000</td>
+<td id="T_6a89d_row2_col0" class="data row2 col0">2022</td>
+<td id="T_6a89d_row2_col1" class="data row2 col1">3.500000</td>
 </tr>
 <tr class="even">
-<td id="T_5112e_row3_col0" class="data row3 col0">2023</td>
-<td id="T_5112e_row3_col1" class="data row3 col1">3.450000</td>
+<td id="T_6a89d_row3_col0" class="data row3 col0">2023</td>
+<td id="T_6a89d_row3_col1" class="data row3 col1">3.450000</td>
 </tr>
 <tr class="odd">
-<td id="T_5112e_row4_col0" class="data row4 col0">2024</td>
-<td id="T_5112e_row4_col1" class="data row4 col1">3.500000</td>
+<td id="T_6a89d_row4_col0" class="data row4 col0">2024</td>
+<td id="T_6a89d_row4_col1" class="data row4 col1">3.500000</td>
 </tr>
 <tr class="even">
-<td id="T_5112e_row5_col0" class="data row5 col0">2025</td>
-<td id="T_5112e_row5_col1" class="data row5 col1">4.060000</td>
+<td id="T_6a89d_row5_col0" class="data row5 col0">2025</td>
+<td id="T_6a89d_row5_col1" class="data row5 col1">4.060000</td>
 </tr>
 </tbody>
 </table>
@@ -3627,79 +3700,79 @@ Spearman solde inter-ZE × coût (France entière) : -0.15 [-0.26 ; -0.04] (n = 
 <p>Le taux national reste dans une bande étroite (~3,4-4,1 %) quel que soit le millésime : la conclusion d’ordre de grandeur (« environ 3,5 % du parc privé ») n’est pas sensible au choix C-03. Le millésime 2025 (post-rupture) est le plus haut — cohérent avec la hausse artificielle de la série structurelle à ce millésime (L-04).</p>
 <p>La sensibilité de <strong>R-06 à H-07</strong> est exacte et déjà publiée dans l’artefact : le taux d’effort est linéaire en H-07, donc la plage 35-51,2 m²/personne (recentrée le 2026-08-07 — la borne haute est l’ancien centre « parc en place ») translate la médiane de 27,4 % à 40,1 % sans changer le classement des ZE — chaque entrée de <code>top_effort</code>/ <code>bottom_effort</code> porte son intervalle <code>effort_range_pct</code>. La variante appartement seul (numérateur de R-04) déplace la médiane de 27,4 % à 29,9 % et laisse les rangs presque inchangés (Spearman 0,959).</p>
 <p>La sensibilité de <strong>R-07 au seuil H-08</strong> (au taux d’existence central H-12 = 0,75) est publiée dans l’artefact (<code>sensibilite_seuil</code>) :</p>
-<div id="a7b0ec93" class="cell" data-execution_count="23">
+<div id="c3abaa1c" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>couverture nationale selon le seuil de fluidité</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(r07[<span class="st">&quot;sensibilite_seuil&quot;</span>]).style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(r07[<span class="st">&quot;sensibilite_seuil&quot;</span>]).style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <style type="text/css">
 </style>
 
-<table id="T_b8e5a" class="caption-top table table-sm table-striped small">
+<table id="T_fc661" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_b8e5a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">seuil_pct</th>
-<th id="T_b8e5a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">n_ze_tendues</th>
-<th id="T_b8e5a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">parc_tendues</th>
-<th id="T_b8e5a_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">besoin_logements</th>
-<th id="T_b8e5a_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">besoin_sans_ecretage</th>
-<th id="T_b8e5a_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">gisement_structurel</th>
-<th id="T_b8e5a_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">gisement_structurel_communes_tlv</th>
-<th id="T_b8e5a_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">couverture</th>
-<th id="T_b8e5a_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">couverture_communes_tlv</th>
+<th id="T_fc661_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">seuil_pct</th>
+<th id="T_fc661_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">n_ze_tendues</th>
+<th id="T_fc661_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">parc_tendues</th>
+<th id="T_fc661_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">besoin_logements</th>
+<th id="T_fc661_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">besoin_sans_ecretage</th>
+<th id="T_fc661_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">gisement_structurel</th>
+<th id="T_fc661_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">gisement_structurel_communes_tlv</th>
+<th id="T_fc661_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">couverture</th>
+<th id="T_fc661_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">couverture_communes_tlv</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_b8e5a_row0_col0" class="data row0 col0">5.000000</td>
-<td id="T_b8e5a_row0_col1" class="data row0 col1">54</td>
-<td id="T_b8e5a_row0_col2" class="data row0 col2">8002618</td>
-<td id="T_b8e5a_row0_col3" class="data row0 col3">74083</td>
-<td id="T_b8e5a_row0_col4" class="data row0 col4">74495</td>
-<td id="T_b8e5a_row0_col5" class="data row0 col5">107065</td>
-<td id="T_b8e5a_row0_col6" class="data row0 col6">76210</td>
-<td id="T_b8e5a_row0_col7" class="data row0 col7">1.450000</td>
-<td id="T_b8e5a_row0_col8" class="data row0 col8">1.030000</td>
+<td id="T_fc661_row0_col0" class="data row0 col0">5.000000</td>
+<td id="T_fc661_row0_col1" class="data row0 col1">54</td>
+<td id="T_fc661_row0_col2" class="data row0 col2">8002618</td>
+<td id="T_fc661_row0_col3" class="data row0 col3">74083</td>
+<td id="T_fc661_row0_col4" class="data row0 col4">74495</td>
+<td id="T_fc661_row0_col5" class="data row0 col5">107065</td>
+<td id="T_fc661_row0_col6" class="data row0 col6">76210</td>
+<td id="T_fc661_row0_col7" class="data row0 col7">1.450000</td>
+<td id="T_fc661_row0_col8" class="data row0 col8">1.030000</td>
 </tr>
 <tr class="even">
-<td id="T_b8e5a_row1_col0" class="data row1 col0">6.000000</td>
-<td id="T_b8e5a_row1_col1" class="data row1 col1">97</td>
-<td id="T_b8e5a_row1_col2" class="data row1 col2">15256479</td>
-<td id="T_b8e5a_row1_col3" class="data row1 col3">194488</td>
-<td id="T_b8e5a_row1_col4" class="data row1 col4">194901</td>
-<td id="T_b8e5a_row1_col5" class="data row1 col5">206664</td>
-<td id="T_b8e5a_row1_col6" class="data row1 col6">134223</td>
-<td id="T_b8e5a_row1_col7" class="data row1 col7">1.060000</td>
-<td id="T_b8e5a_row1_col8" class="data row1 col8">0.690000</td>
+<td id="T_fc661_row1_col0" class="data row1 col0">6.000000</td>
+<td id="T_fc661_row1_col1" class="data row1 col1">97</td>
+<td id="T_fc661_row1_col2" class="data row1 col2">15256479</td>
+<td id="T_fc661_row1_col3" class="data row1 col3">194488</td>
+<td id="T_fc661_row1_col4" class="data row1 col4">194901</td>
+<td id="T_fc661_row1_col5" class="data row1 col5">206664</td>
+<td id="T_fc661_row1_col6" class="data row1 col6">134223</td>
+<td id="T_fc661_row1_col7" class="data row1 col7">1.060000</td>
+<td id="T_fc661_row1_col8" class="data row1 col8">0.690000</td>
 </tr>
 <tr class="odd">
-<td id="T_b8e5a_row2_col0" class="data row2 col0">7.000000</td>
-<td id="T_b8e5a_row2_col1" class="data row2 col1">170</td>
-<td id="T_b8e5a_row2_col2" class="data row2 col2">27238527</td>
-<td id="T_b8e5a_row2_col3" class="data row2 col3">414944</td>
-<td id="T_b8e5a_row2_col4" class="data row2 col4">415356</td>
-<td id="T_b8e5a_row2_col5" class="data row2 col5">400578</td>
-<td id="T_b8e5a_row2_col6" class="data row2 col6">227296</td>
-<td id="T_b8e5a_row2_col7" class="data row2 col7">0.970000</td>
-<td id="T_b8e5a_row2_col8" class="data row2 col8">0.550000</td>
+<td id="T_fc661_row2_col0" class="data row2 col0">7.000000</td>
+<td id="T_fc661_row2_col1" class="data row2 col1">170</td>
+<td id="T_fc661_row2_col2" class="data row2 col2">27238527</td>
+<td id="T_fc661_row2_col3" class="data row2 col3">414944</td>
+<td id="T_fc661_row2_col4" class="data row2 col4">415356</td>
+<td id="T_fc661_row2_col5" class="data row2 col5">400578</td>
+<td id="T_fc661_row2_col6" class="data row2 col6">227296</td>
+<td id="T_fc661_row2_col7" class="data row2 col7">0.970000</td>
+<td id="T_fc661_row2_col8" class="data row2 col8">0.550000</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <p>Et la grille jointe <strong>H-08 × H-12</strong> (<code>sensibilite_seuil_x_existence</code>) :</p>
-<div id="498f7b36" class="cell" data-execution_count="24">
+<div id="6c5c0fa9" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>couverture nationale : seuil de fluidité × taux d’existence</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>grille_df <span class="op">=</span> pd.DataFrame(r07[<span class="st">&quot;sensibilite_seuil_x_existence&quot;</span>]).pivot(</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">&quot;existence_rate&quot;</span>, columns<span class="op">=</span><span class="st">&quot;seuil_pct&quot;</span>, values<span class="op">=</span><span class="st">&quot;couverture&quot;</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>grille_df.index.name <span class="op">=</span> <span class="st">&quot;H-12 (existence)&quot;</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>grille_df.columns.name <span class="op">=</span> <span class="st">&quot;H-08 (seuil %)&quot;</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>grille_df</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>grille_df <span class="op">=</span> pd.DataFrame(r07[<span class="st">&quot;sensibilite_seuil_x_existence&quot;</span>]).pivot(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">&quot;existence_rate&quot;</span>, columns<span class="op">=</span><span class="st">&quot;seuil_pct&quot;</span>, values<span class="op">=</span><span class="st">&quot;couverture&quot;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>grille_df.index.name <span class="op">=</span> <span class="st">&quot;H-12 (existence)&quot;</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>grille_df.columns.name <span class="op">=</span> <span class="st">&quot;H-08 (seuil %)&quot;</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>grille_df</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
 
@@ -3771,122 +3844,126 @@ Spearman solde inter-ZE × coût (France entière) : -0.15 [-0.26 ; -0.04] (n = 
 </section>
 <section id="limites-et-objections" class="level2">
 <h2 class="anchored" data-anchor-id="limites-et-objections">10. Limites et objections</h2>
-<div id="6e2a69c3" class="cell" data-execution_count="25">
+<div id="69c0bc78" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>limites depuis le graphe de preuves</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>claims <span class="op">=</span> yaml.safe_load((ROOT <span class="op">/</span> <span class="st">&quot;evidence&quot;</span> <span class="op">/</span> <span class="st">&quot;claims.yaml&quot;</span>).read_text(encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>))</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>limits <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    [{<span class="st">&quot;id&quot;</span>: c[<span class="st">&quot;id&quot;</span>], <span class="st">&quot;limite&quot;</span>: <span class="st">&quot; &quot;</span>.join(c[<span class="st">&quot;title&quot;</span>].split())} <span class="cf">for</span> c <span class="kw">in</span> claims <span class="cf">if</span> c[<span class="st">&quot;type&quot;</span>] <span class="op">==</span> <span class="st">&quot;limit&quot;</span>]</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>limits.style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>claims <span class="op">=</span> yaml.safe_load((ROOT <span class="op">/</span> <span class="st">&quot;evidence&quot;</span> <span class="op">/</span> <span class="st">&quot;claims.yaml&quot;</span>).read_text(encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>limits <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    [{<span class="st">&quot;id&quot;</span>: c[<span class="st">&quot;id&quot;</span>], <span class="st">&quot;limite&quot;</span>: <span class="st">&quot; &quot;</span>.join(c[<span class="st">&quot;title&quot;</span>].split())} <span class="cf">for</span> c <span class="kw">in</span> claims <span class="cf">if</span> c[<span class="st">&quot;type&quot;</span>] <span class="op">==</span> <span class="st">&quot;limit&quot;</span>]</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>limits.style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <style type="text/css">
 </style>
 
-<table id="T_9327c" class="caption-top table table-sm table-striped small">
+<table id="T_3c9c7" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_9327c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">id</th>
-<th id="T_9327c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">limite</th>
+<th id="T_3c9c7_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">id</th>
+<th id="T_3c9c7_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">limite</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_9327c_row0_col0" class="data row0 col0">L-01</td>
-<td id="T_9327c_row0_col1" class="data row0 col1">Séries nationales uniquement — aucune conclusion territoriale (« où ») n&#39;est possible à ce stade ; attend LOVAC (C-02).</td>
+<td id="T_3c9c7_row0_col0" class="data row0 col0">L-01</td>
+<td id="T_3c9c7_row0_col1" class="data row0 col1">Séries nationales uniquement — aucune conclusion territoriale (« où ») n&#39;est possible à ce stade ; attend LOVAC (C-02).</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row1_col0" class="data row1 col0">L-02</td>
-<td id="T_9327c_row1_col1" class="data row1 col1">Les années 2023-2025 de l&#39;EAPL sont provisoires ; les millésimes ménages s&#39;arrêtent en 2022, la dernière comparaison parc/ménages date donc de 2022.</td>
+<td id="T_3c9c7_row1_col0" class="data row1 col0">L-02</td>
+<td id="T_3c9c7_row1_col1" class="data row1 col1">Les années 2023-2025 de l&#39;EAPL sont provisoires ; les millésimes ménages s&#39;arrêtent en 2022, la dernière comparaison parc/ménages date donc de 2022.</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row2_col0" class="data row2 col0">L-03</td>
-<td id="T_9327c_row2_col1" class="data row2 col1">Ménage (recensement, D-05) et résidence principale (EAPL, D-02) sont des concepts appariés mais mesurés par des appareils différents ; écart observé ±0,3 % aux millésimes (voir R-01), et changement de concept au 31/08/2025 (D-06) pour les millésimes futurs.</td>
+<td id="T_3c9c7_row2_col0" class="data row2 col0">L-03</td>
+<td id="T_3c9c7_row2_col1" class="data row2 col1">Ménage (recensement, D-05) et résidence principale (EAPL, D-02) sont des concepts appariés mais mesurés par des appareils différents ; écart observé ±0,3 % aux millésimes (voir R-01), et changement de concept au 31/08/2025 (D-06) pour les millésimes futurs.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row3_col0" class="data row3 col0">L-04</td>
-<td id="T_9327c_row3_col1" class="data row3 col1">Ruptures méthodologiques LOVAC : 2023 (disparition de la taxe d&#39;habitation, passage à GMBI) et 2025 (données sources avant chaîne de traitement fiscale). Les niveaux de vacance totale ne sont pas comparables entre millésimes séparés par une rupture ; seule la série structurelle est raisonnablement robuste. COMPLÉTÉ le 2026-08-07 (revue contradictoire) : le millésime de référence 24 (situation au 01/01/2023) est le PREMIER post-GMBI — la campagne déclarative 2023 a été « chaotique » (82 % de déclarants seulement, hausse 2022→2023 « bien plus marquée », risque de dégradation de la fiabilité LOVAC : S-22, pp. 13 et 21-22) ; l&#39;ancienneté &gt; 2 ans protège PARTIELLEMENT la série structurelle (les entrées en vacance ≤ 01/2021 sont pré-GMBI) ; le volume-titre de R-02 doit se lire sur le dernier millésime pré-rupture (~1,15 M au mill. 24), le mill. 26 (1,18 M) étant de source dégradée. Contrôle externe parisien : 32 091 structurels LOVAC mill. 26 contre ~18 600 vacants &gt; 2 ans du parc privé selon l&#39;Apur (2022, S-24) — écart à instruire, prudence sur les volumes post-2023.</td>
+<td id="T_3c9c7_row3_col0" class="data row3 col0">L-04</td>
+<td id="T_3c9c7_row3_col1" class="data row3 col1">Ruptures méthodologiques LOVAC : 2023 (disparition de la taxe d&#39;habitation, passage à GMBI) et 2025 (données sources avant chaîne de traitement fiscale). Les niveaux de vacance totale ne sont pas comparables entre millésimes séparés par une rupture ; seule la série structurelle est raisonnablement robuste. COMPLÉTÉ le 2026-08-07 (revue contradictoire) : le millésime de référence 24 (situation au 01/01/2023) est le PREMIER post-GMBI — la campagne déclarative 2023 a été « chaotique » (82 % de déclarants seulement, hausse 2022→2023 « bien plus marquée », risque de dégradation de la fiabilité LOVAC : S-22, pp. 13 et 21-22) ; l&#39;ancienneté &gt; 2 ans protège PARTIELLEMENT la série structurelle (les entrées en vacance ≤ 01/2021 sont pré-GMBI) ; le volume-titre de R-02 doit se lire sur le dernier millésime pré-rupture (~1,15 M au mill. 24), le mill. 26 (1,18 M) étant de source dégradée. Contrôle externe parisien : 32 091 structurels LOVAC mill. 26 contre ~18 600 vacants &gt; 2 ans du parc privé selon l&#39;Apur (2022, S-24) — écart à instruire, prudence sur les volumes post-2023.</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row4_col0" class="data row4 col0">L-05</td>
-<td id="T_9327c_row4_col1" class="data row4 col1">Secrétisation LOVAC : la vacance structurelle communale est masquée (« s ») sous 11 logements vacants — 51 % des communes au millésime 26 ; les communes visibles au millésime 24 (20 % du total) portent 72,6 % de la vacance structurelle nationale. Échelle communale utilisable pour les volumes, pas pour une couverture exhaustive.</td>
+<td id="T_3c9c7_row4_col0" class="data row4 col0">L-05</td>
+<td id="T_3c9c7_row4_col1" class="data row4 col1">Secrétisation LOVAC : la vacance structurelle communale est masquée (« s ») sous 11 logements vacants — 51 % des communes au millésime 26 ; les communes visibles au millésime 24 (20 % du total) portent 72,6 % de la vacance structurelle nationale. Échelle communale utilisable pour les volumes, pas pour une couverture exhaustive.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row5_col0" class="data row5 col0">L-06</td>
-<td id="T_9327c_row5_col1" class="data row5 col1">LOVAC couvre le parc privé sur source fiscale — périmètre différent de la vacance INSEE/EAPL (parc entier, autre appareil de mesure) : les niveaux des deux chaînes ne se comparent pas directement.</td>
+<td id="T_3c9c7_row5_col0" class="data row5 col0">L-06</td>
+<td id="T_3c9c7_row5_col1" class="data row5 col1">LOVAC couvre le parc privé sur source fiscale — périmètre différent de la vacance INSEE/EAPL (parc entier, autre appareil de mesure) : les niveaux des deux chaînes ne se comparent pas directement.</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row6_col0" class="data row6 col0">L-07</td>
-<td id="T_9327c_row6_col1" class="data row6 col1">La dynamique d&#39;emploi utilisée est structurelle (1998-2018, S-07), pas conjoncturelle. CORRIGÉ le 2026-08-07 (revue contradictoire) : l&#39;énoncé initial (« dernière publication à cette maille », millésimes récents au département seulement) est PÉRIMÉ — les estimations annuelles d&#39;emploi localisées de l&#39;INSEE existent à la maille zone d&#39;emploi jusqu&#39;en 2023 (définitif) / 2024 (provisoire). R-03 reste calculé sur 1998-2018 ; la re-exécution en variante récente est planifiée (NEXT-STEPS, source à figer en S-xx à la prochaine session) — jusque-là, la lecture « dynamique d&#39;emploi » de R-03/I-03 s&#39;entend comme structurelle, aveugle aux retournements post-2018.</td>
+<td id="T_3c9c7_row6_col0" class="data row6 col0">L-07</td>
+<td id="T_3c9c7_row6_col1" class="data row6 col1">La dynamique d&#39;emploi utilisée est structurelle (1998-2018, S-07), pas conjoncturelle. CORRIGÉ le 2026-08-07 (revue contradictoire) : l&#39;énoncé initial (« dernière publication à cette maille », millésimes récents au département seulement) est PÉRIMÉ — les estimations annuelles d&#39;emploi localisées de l&#39;INSEE existent à la maille zone d&#39;emploi jusqu&#39;en 2023 (définitif) / 2024 (provisoire). R-03 reste calculé sur 1998-2018 ; la re-exécution en variante récente est planifiée (NEXT-STEPS, source à figer en S-xx à la prochaine session) — jusque-là, la lecture « dynamique d&#39;emploi » de R-03/I-03 s&#39;entend comme structurelle, aveugle aux retournements post-2018.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row7_col0" class="data row7 col0">L-08</td>
-<td id="T_9327c_row7_col1" class="data row7 col1">Agrégats ZE de vacance minorés par la secrétisation communale (L-05) — surtout dans les petites ZE rurales — et une commune LOVAC non appariée à la table 2026 (97127) exclue de l&#39;agrégation.</td>
+<td id="T_3c9c7_row7_col0" class="data row7 col0">L-08</td>
+<td id="T_3c9c7_row7_col1" class="data row7 col1">Agrégats ZE de vacance minorés par la secrétisation communale (L-05) — surtout dans les petites ZE rurales — et une commune LOVAC non appariée à la table 2026 (97127) exclue de l&#39;agrégation.</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row8_col0" class="data row8 col0">L-09</td>
-<td id="T_9327c_row8_col1" class="data row8 col1">Limites du croisement coût : loyers d&#39;annonce (relocation, pas le parc en place) modélisés, millésime 2025, rapportés à des revenus Filosofi 2021 (dernier disponible) ; l&#39;indice loyer/revenu n&#39;est pas un taux d&#39;effort (D-09 — ni surface ni composition de ménage) ; 8 ZE absentes (Guadeloupe, Guyane hors Filosofi) ; licence du millésime loyers 2025 non précisée sur data.gouv — à confirmer avant publication. COMPLÉTÉ le 2026-08-07 (revue contradictoire) — DIRECTION des biais, jusqu&#39;ici tue : loyers 2025 rapportés à des revenus 2021, soit ~4 ans de croissance nominale des revenus non corrigée → les NIVEAUX (indice de coût R-04, taux d&#39;effort R-06) sont SURESTIMÉS ; les loyers de la carte sont charges comprises → même sens. Les biais étant communs à toutes les ZE, les CLASSEMENTS et corrélations de rangs y sont insensibles ; Filosofi 2022 a été annulé par l&#39;INSEE (2021 = dernier millésime, vérifié) — pas de variante indexée possible avec les données figées.</td>
+<td id="T_3c9c7_row8_col0" class="data row8 col0">L-09</td>
+<td id="T_3c9c7_row8_col1" class="data row8 col1">Limites du croisement coût : loyers d&#39;annonce (relocation, pas le parc en place) modélisés, millésime 2025, rapportés à des revenus Filosofi 2021 (dernier disponible) ; l&#39;indice loyer/revenu n&#39;est pas un taux d&#39;effort (D-09 — ni surface ni composition de ménage) ; 8 ZE absentes (Guadeloupe, Guyane hors Filosofi) ; licence du millésime loyers 2025 non précisée sur data.gouv — à confirmer avant publication. COMPLÉTÉ le 2026-08-07 (revue contradictoire) — DIRECTION des biais, jusqu&#39;ici tue : loyers 2025 rapportés à des revenus 2021, soit ~4 ans de croissance nominale des revenus non corrigée → les NIVEAUX (indice de coût R-04, taux d&#39;effort R-06) sont SURESTIMÉS ; les loyers de la carte sont charges comprises → même sens. Les biais étant communs à toutes les ZE, les CLASSEMENTS et corrélations de rangs y sont insensibles ; Filosofi 2022 a été annulé par l&#39;INSEE (2021 = dernier millésime, vérifié) — pas de variante indexée possible avec les données figées.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row9_col0" class="data row9 col0">L-10</td>
-<td id="T_9327c_row9_col1" class="data row9 col1">Limites du croisement résidences secondaires : parc entier côté recensement vs parc privé côté LOVAC (L-06) ; géographie COG 2025 (S-11) vs COG 2026 (S-06) — jointure sans perte constatée mais à revérifier à chaque millésime ; l&#39;échelle ZE dilue les effets communaux (stations, littoral) — les effets d&#39;éviction infra- territoriaux ne sont pas mesurés par ces indicateurs.</td>
+<td id="T_3c9c7_row9_col0" class="data row9 col0">L-10</td>
+<td id="T_3c9c7_row9_col1" class="data row9 col1">Limites du croisement résidences secondaires : parc entier côté recensement vs parc privé côté LOVAC (L-06) ; géographie COG 2025 (S-11) vs COG 2026 (S-06) — jointure sans perte constatée mais à revérifier à chaque millésime ; l&#39;échelle ZE dilue les effets communaux (stations, littoral) — les effets d&#39;éviction infra- territoriaux ne sont pas mesurés par ces indicateurs.</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row10_col0" class="data row10 col0">L-11</td>
-<td id="T_9327c_row10_col1" class="data row10 col1">Limites du taux d&#39;effort à la relocation : variante BRUTE de D-09 (aucune source territoriale d&#39;aides au logement — le taux net serait plus bas, surtout en bas de la distribution des revenus) ; le NIVEAU dépend linéairement de H-07 — seul le classement des ZE est invariant. CORRIGÉ le 2026-08-07 (revue contradictoire) : H-07 a été RECENTRÉE sur les emménagés récents (35 m²/personne, la tranche 30-39 ans de S-12 ; l&#39;ancien centre 51,2 = parc moyen EN PLACE, gonflé par les 75 ans et plus, devient la borne haute « relocation au standard du parc ») — la sensibilité publiée est donc désormais orientée à la HAUSSE (médiane 27,4 % → 40,1 % à la borne haute) ; les niveaux restent par ailleurs SURESTIMÉS par les biais loyers 2025 / revenus 2021 et charges comprises (direction documentée en L-09), les deux effets jouant en sens inverse du recentrage sans se compenser exactement ; H-07 est calibrée en France métropolitaine (S-12) et appliquée aux ZE de La Réunion/Martinique, dont le niveau est donc conventionnel ; premiers résultats S-12 qualifiés de provisoires ; hérite des limites loyers/revenus de L-09.</td>
+<td id="T_3c9c7_row10_col0" class="data row10 col0">L-11</td>
+<td id="T_3c9c7_row10_col1" class="data row10 col1">Limites du taux d&#39;effort à la relocation : variante BRUTE de D-09 (aucune source territoriale d&#39;aides au logement — le taux net serait plus bas, surtout en bas de la distribution des revenus) ; le NIVEAU dépend linéairement de H-07 — seul le classement des ZE est invariant. CORRIGÉ le 2026-08-07 (revue contradictoire) : H-07 a été RECENTRÉE sur les emménagés récents (35 m²/personne, la tranche 30-39 ans de S-12 ; l&#39;ancien centre 51,2 = parc moyen EN PLACE, gonflé par les 75 ans et plus, devient la borne haute « relocation au standard du parc ») — la sensibilité publiée est donc désormais orientée à la HAUSSE (médiane 27,4 % → 40,1 % à la borne haute) ; les niveaux restent par ailleurs SURESTIMÉS par les biais loyers 2025 / revenus 2021 et charges comprises (direction documentée en L-09), les deux effets jouant en sens inverse du recentrage sans se compenser exactement ; H-07 est calibrée en France métropolitaine (S-12) et appliquée aux ZE de La Réunion/Martinique, dont le niveau est donc conventionnel ; premiers résultats S-12 qualifiés de provisoires ; hérite des limites loyers/revenus de L-09.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row11_col0" class="data row11 col0">L-12</td>
-<td id="T_9327c_row11_col1" class="data row11 col1">Limites du croisement tension/manque — CORRECTION MAJEURE le 2026-08-07 (revue contradictoire, deux erreurs de l&#39;énoncé initial corrigées). La vacance disponible mélange deux appareils de mesure (recensement parc entier vs LOVAC parc privé fiscal, L-06) — la vacance recensement surestime l&#39;offre réellement disponible dans les centres denses (Paris commune : 9,8 % de vacance totale) donc le besoin des métropoles est plutôt SOUS-estimé. (1) Secrétisation : l&#39;énoncé initial (« la couverture est plutôt sous-estimée ») était FAUX au niveau national — quand le gisement excède le besoin, réintégrer la masse masquée (5 003 communes masquées dans les ZE tendues, ≤ 10 structurels chacune, masse maximale 37 522) augmente le gisement ET réduit le besoin : la couverture nationale DESCEND vers 1 (borne publiée : 1,06 → 1,05) ; le sens « sous-estimation » n&#39;est vrai que dans les ZE où le besoin excède le gisement. (2) Vacance disponible négative : les artefacts sont 3 ZE corses (Corte, Ghisonaccia, Porto-Vecchio — l&#39;énoncé initial ne citait qu&#39;Ajaccio), désormais ÉCRÊTÉS à zéro dans le besoin publié (écrêtage 412 logements, besoin sans écrêtage publié à côté). (3) Bande grise : 116 ZE (dont 43 tendues) sont à ± 1 point du seuil — la partition tendue/non-tendue est sensible à l&#39;erreur de construit de la vacance disponible. (4) Divergence étude/zonage légal, publiée dans les DEUX sens : 63 des 84 ZE à parc majoritairement TLV sont tendues au test, mais 34 ZE tendues ne sont PAS majoritairement TLV, dont 14 quasi sans commune TLV (&lt; 1 % du parc). Restent : le seuil H-08 est un ordre de grandeur d&#39;usage professionnel (confiance basse) ; millésimes mélangés (recensement 2022, LOVAC 24, zonage TLV décembre 2025) ; « couverture » signifie que le volume existe, pas qu&#39;il est mobilisable — la vacance structurelle est difficile à remobiliser par définition (C-01), et son état/coût de remise en usage n&#39;est mesuré qu&#39;indirectement (L-13, L-17).</td>
+<td id="T_3c9c7_row11_col0" class="data row11 col0">L-12</td>
+<td id="T_3c9c7_row11_col1" class="data row11 col1">Limites du croisement tension/manque — CORRECTION MAJEURE le 2026-08-07 (revue contradictoire, deux erreurs de l&#39;énoncé initial corrigées). La vacance disponible mélange deux appareils de mesure (recensement parc entier vs LOVAC parc privé fiscal, L-06) — la vacance recensement surestime l&#39;offre réellement disponible dans les centres denses (Paris commune : 9,8 % de vacance totale) donc le besoin des métropoles est plutôt SOUS-estimé. (1) Secrétisation : l&#39;énoncé initial (« la couverture est plutôt sous-estimée ») était FAUX au niveau national — quand le gisement excède le besoin, réintégrer la masse masquée (5 003 communes masquées dans les ZE tendues, ≤ 10 structurels chacune, masse maximale 37 522) augmente le gisement ET réduit le besoin : la couverture nationale DESCEND vers 1 (borne publiée : 1,06 → 1,05) ; le sens « sous-estimation » n&#39;est vrai que dans les ZE où le besoin excède le gisement. (2) Vacance disponible négative : les artefacts sont 3 ZE corses (Corte, Ghisonaccia, Porto-Vecchio — l&#39;énoncé initial ne citait qu&#39;Ajaccio), désormais ÉCRÊTÉS à zéro dans le besoin publié (écrêtage 412 logements, besoin sans écrêtage publié à côté). (3) Bande grise : 116 ZE (dont 43 tendues) sont à ± 1 point du seuil — la partition tendue/non-tendue est sensible à l&#39;erreur de construit de la vacance disponible. (4) Divergence étude/zonage légal, publiée dans les DEUX sens : 63 des 84 ZE à parc majoritairement TLV sont tendues au test, mais 34 ZE tendues ne sont PAS majoritairement TLV, dont 14 quasi sans commune TLV (&lt; 1 % du parc). Restent : le seuil H-08 est un ordre de grandeur d&#39;usage professionnel (confiance basse) ; millésimes mélangés (recensement 2022, LOVAC 24, zonage TLV décembre 2025) ; « couverture » signifie que le volume existe, pas qu&#39;il est mobilisable — la vacance structurelle est difficile à remobiliser par définition (C-01), et son état/coût de remise en usage n&#39;est mesuré qu&#39;indirectement (L-13, L-17).</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row12_col0" class="data row12 col0">L-13</td>
-<td id="T_9327c_row12_col1" class="data row12 col1">Limites de l&#39;instruction « état du bâti » : les DPE sont établis à la vente/location/rénovation — l&#39;échantillon n&#39;est PAS le parc (l&#39;ONRE estime 13,9 % de F+G dans le parc au 01/01/2024 après extrapolation contre ~9,9 % des seuls diagnostiqués), et les logements durablement vacants ne sont justement pas diagnostiqués ; l&#39;étiquette dépend aussi du climat et de l&#39;altitude (Gap : 25,9 % de F+G, vacance 2,2 %) ; les DOM sont quasi absents de la base (obligation récente outre-mer — Guyane 104 diagnostics, ZE 0303 sans aucun DPE, seule ZE exclue) ; la question du confort sanitaire du recensement (bain/ douche/WC, P22_RP_BDWC) n&#39;est posée QUE dans les DOM (somme nulle sur 31,9 M de RP métropolitaines — vérifié) ; corrélations TERRITORIALES, pas causes logement par logement ; 511 449 DPE (3,3 %) sans code commune BAN hors extrait S-16 ; frontières d&#39;accès actées : PPPI (convention DREAL/DDT, open data 2015 obsolète), fichiers fonciers et successions/indivisions (Cerema, acteurs publics — rien d&#39;ouvert). COMPLÉTÉ le 2026-08-07 (revue contradictoire) : (1) les deux proxys d&#39;état décrivent le parc OCCUPÉ (ancienneté = résidences principales du recensement) ou EN TRANSACTION (F+G = logements diagnostiqués), jamais les logements VACANTS eux-mêmes — l&#39;attribution de cet état au gisement de R-07 est une hypothèse nommée, non mesurée (le Datalab S-23 la conforte par des données logement par logement : ×3,3 avant 1900, ~45 % d&#39;obsolescence) ; (2) direction du biais DPE, jusqu&#39;ici tue : la couverture de diagnostic est ANTI-corrélée à la vacance (Spearman couverture × vacance −0,14 en métropole) — là où la vacance est forte, le parc est MOINS diagnostiqué, donc le 0,40 de R-08 est plutôt une borne BASSE ; les NIVEAUX de F+G, eux, ne décrivent que le parc en transaction et ne se généralisent pas.</td>
+<td id="T_3c9c7_row12_col0" class="data row12 col0">L-13</td>
+<td id="T_3c9c7_row12_col1" class="data row12 col1">Limites de l&#39;instruction « état du bâti » : les DPE sont établis à la vente/location/rénovation — l&#39;échantillon n&#39;est PAS le parc (l&#39;ONRE estime 13,9 % de F+G dans le parc au 01/01/2024 après extrapolation contre ~9,9 % des seuls diagnostiqués), et les logements durablement vacants ne sont justement pas diagnostiqués ; l&#39;étiquette dépend aussi du climat et de l&#39;altitude (Gap : 25,9 % de F+G, vacance 2,2 %) ; les DOM sont quasi absents de la base (obligation récente outre-mer — Guyane 104 diagnostics, ZE 0303 sans aucun DPE, seule ZE exclue) ; la question du confort sanitaire du recensement (bain/ douche/WC, P22_RP_BDWC) n&#39;est posée QUE dans les DOM (somme nulle sur 31,9 M de RP métropolitaines — vérifié) ; corrélations TERRITORIALES, pas causes logement par logement ; 511 449 DPE (3,3 %) sans code commune BAN hors extrait S-16 ; frontières d&#39;accès actées : PPPI (convention DREAL/DDT, open data 2015 obsolète), fichiers fonciers et successions/indivisions (Cerema, acteurs publics — rien d&#39;ouvert). COMPLÉTÉ le 2026-08-07 (revue contradictoire) : (1) les deux proxys d&#39;état décrivent le parc OCCUPÉ (ancienneté = résidences principales du recensement) ou EN TRANSACTION (F+G = logements diagnostiqués), jamais les logements VACANTS eux-mêmes — l&#39;attribution de cet état au gisement de R-07 est une hypothèse nommée, non mesurée (le Datalab S-23 la conforte par des données logement par logement : ×3,3 avant 1900, ~45 % d&#39;obsolescence) ; (2) direction du biais DPE, jusqu&#39;ici tue : la couverture de diagnostic est ANTI-corrélée à la vacance (Spearman couverture × vacance −0,14 en métropole) — là où la vacance est forte, le parc est MOINS diagnostiqué, donc le 0,40 de R-08 est plutôt une borne BASSE ; les NIVEAUX de F+G, eux, ne décrivent que le parc en transaction et ne se généralisent pas.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row13_col0" class="data row13 col0">L-14</td>
-<td id="T_9327c_row13_col1" class="data row13 col1">Limites du chiffrage de remobilisation — CORRIGÉ le 2026-08-07 (revue contradictoire). La rénovation complète et performante (~BBC) est un PROXY de la remise en usage — elle ne couvre ni les reprises structurelles lourdes ni l&#39;acquisition/le foncier, mais dépasse le strict minimum de louabilité. (1) Le sens du biais n&#39;est plus « indéterminé » comme l&#39;énonçait la limite initiale : R-08 (le gisement est dans le bâti le plus vieux) et S-25 (remise en état des projets résidentiels 2,5 × plus chère que non résidentielle ; 80 % des friches lauréates polluées) le tirent vers le HAUT — d&#39;où le stress « réhabilitation lourde » publié dans R-09 (coût de rénovation ×2 : détente mixte 21,8 Md€, ratio neuf/détente 1,5 — la direction survit). (2) Asymétrie du comparateur : le prix de revient S-18 INCLUT la charge foncière, la remobilisation EXCLUT l&#39;acquisition du bien — le ratio publié vaut pour un canal incitatif pur (travaux seuls chez le propriétaire), dont le bilan documenté est faible (S-22 : effet TLV « non démontré », ZLV ~3 % de sorties en zone tendue en 4 ans) ; en acquisition-amélioration le ratio tendrait vers ~1. (3) TVA : 5,5 % appliqué uniformément alors qu&#39;il ne vaut que pour la rénovation énergétique (10 % sur le reste) — même sens, vers le haut. Restent : coûts S-17 observés sur des opérations volontaires (biais de sélection) et en euros 2016 actualisés par un indice de prix moyen (pas un devis territorial) ; surfaces moyennes du parc OCCUPÉ (S-12) appliquées au parc vacant (le gisement réel est biaisé vers les petits logements, L-18) ; ordre de grandeur d&#39;INVESTISSEMENT total, pas de coût public ; prix de revient du logement social comme étalon du neuf (minore le neuf libre) ; et le verrou n&#39;est pas seulement financier (blocages de propriété, DOM — R-08/L-13).</td>
+<td id="T_3c9c7_row13_col0" class="data row13 col0">L-14</td>
+<td id="T_3c9c7_row13_col1" class="data row13 col1">Limites du chiffrage de remobilisation — CORRIGÉ le 2026-08-07 (revue contradictoire). La rénovation complète et performante (~BBC) est un PROXY de la remise en usage — elle ne couvre ni les reprises structurelles lourdes ni l&#39;acquisition/le foncier, mais dépasse le strict minimum de louabilité. (1) Le sens du biais n&#39;est plus « indéterminé » comme l&#39;énonçait la limite initiale : R-08 (le gisement est dans le bâti le plus vieux) et S-25 (remise en état des projets résidentiels 2,5 × plus chère que non résidentielle ; 80 % des friches lauréates polluées) le tirent vers le HAUT — d&#39;où le stress « réhabilitation lourde » publié dans R-09 (coût de rénovation ×2 : détente mixte 21,8 Md€, ratio neuf/détente 1,5 — la direction survit). (2) Asymétrie du comparateur : le prix de revient S-18 INCLUT la charge foncière, la remobilisation EXCLUT l&#39;acquisition du bien — le ratio publié vaut pour un canal incitatif pur (travaux seuls chez le propriétaire), dont le bilan documenté est faible (S-22 : effet TLV « non démontré », ZLV ~3 % de sorties en zone tendue en 4 ans) ; en acquisition-amélioration le ratio tendrait vers ~1. (3) TVA : 5,5 % appliqué uniformément alors qu&#39;il ne vaut que pour la rénovation énergétique (10 % sur le reste) — même sens, vers le haut. Restent : coûts S-17 observés sur des opérations volontaires (biais de sélection) et en euros 2016 actualisés par un indice de prix moyen (pas un devis territorial) ; surfaces moyennes du parc OCCUPÉ (S-12) appliquées au parc vacant (le gisement réel est biaisé vers les petits logements, L-18) ; ordre de grandeur d&#39;INVESTISSEMENT total, pas de coût public ; prix de revient du logement social comme étalon du neuf (minore le neuf libre) ; et le verrou n&#39;est pas seulement financier (blocages de propriété, DOM — R-08/L-13).</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row14_col0" class="data row14 col0">L-15</td>
-<td id="T_9327c_row14_col1" class="data row14 col1">Limites du chiffrage foncier : l&#39;inventaire Cartofriches est PARTIEL et hétérogène (remontées locales + pré-repérage national) — l&#39;absence d&#39;un site ne signifie pas l&#39;absence de friche, les totaux sont des PLANCHERS et les comparaisons fines entre territoires ne sont pas fiables ; surface d&#39;unité foncière ≠ surface constructible (pollution BASIAS/BASOL, zonage, rétention foncière) et bati_surface est vide (pas de m² de plancher) ; la capacité à densité haussmannienne est un POTENTIEL d&#39;urbanisme, pas un programme (ni dépollution/démolition ni délais chiffrés — le coût R-09 ne couvre pas ce segment) ; le plafond de 50 ha par site écrête ~77 % des surfaces brutes (convention C-08) ; les bureaux vacants « en marché » (immobilier d&#39;entreprise, ORIE/données privées) restent une frontière non couverte. COMPLÉTÉ le 2026-08-07 (revue contradictoire) : la densité CONSTATÉE des opérations de recyclage du fonds friches (S-25/S-26 : ~1 985 m² de surface de plancher de logement par ha recyclé, foncier PARTAGÉ avec les autres usages, soit ~30,3 logements/ha à 65,5 m²) est publiée dans R-10 comme PLANCHER opérationnel à côté du potentiel H-11 — même à ce plancher, la capacité couvre 2,2 × le besoin ; et les lauréats du fonds friches sont majoritairement en zone DÉTENDUE (S-25) — la géographie du gisement de friches reproduit partiellement le désajustement infra-territorial du gisement vacant (L-16).</td>
+<td id="T_3c9c7_row14_col0" class="data row14 col0">L-15</td>
+<td id="T_3c9c7_row14_col1" class="data row14 col1">Limites du chiffrage foncier : l&#39;inventaire Cartofriches est PARTIEL et hétérogène (remontées locales + pré-repérage national) — l&#39;absence d&#39;un site ne signifie pas l&#39;absence de friche, les totaux sont des PLANCHERS et les comparaisons fines entre territoires ne sont pas fiables ; surface d&#39;unité foncière ≠ surface constructible (pollution BASIAS/BASOL, zonage, rétention foncière) et bati_surface est vide (pas de m² de plancher) ; la capacité à densité haussmannienne est un POTENTIEL d&#39;urbanisme, pas un programme (ni dépollution/démolition ni délais chiffrés — le coût R-09 ne couvre pas ce segment) ; le plafond de 50 ha par site écrête ~77 % des surfaces brutes (convention C-08) ; les bureaux vacants « en marché » (immobilier d&#39;entreprise, ORIE/données privées) restent une frontière non couverte. COMPLÉTÉ le 2026-08-07 (revue contradictoire) : la densité CONSTATÉE des opérations de recyclage du fonds friches (S-25/S-26 : ~1 985 m² de surface de plancher de logement par ha recyclé, foncier PARTAGÉ avec les autres usages, soit ~30,3 logements/ha à 65,5 m²) est publiée dans R-10 comme PLANCHER opérationnel à côté du potentiel H-11 — même à ce plancher, la capacité couvre 2,2 × le besoin ; et les lauréats du fonds friches sont majoritairement en zone DÉTENDUE (S-25) — la géographie du gisement de friches reproduit partiellement le désajustement infra-territorial du gisement vacant (L-16).</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row15_col0" class="data row15 col0">L-16</td>
-<td id="T_9327c_row15_col1" class="data row15 col1">Échelle infra-ZE : la couverture de R-07 est calculée à la maille zone d&#39;emploi — elle suppose que le gisement se déplace librement à l&#39;INTÉRIEUR de la ZE, alors que le marché du logement est communal. Au périmètre des seules communes TLV (le périmètre légal de la tension, D-14), la couverture nationale tombe de 1,06 à 0,69 : le gisement durable des ZE tendues est majoritairement HORS des communes tendues. Contrôles externes convergents (S-22) : la Cour des comptes compte 118 330 vacants &gt; 2 ans dans les communes TLV en 2022 (1,5 % de leur parc — zonage 2013, périmètre non identique à celui de la chaîne) et la DHUP estime que 74 % du parc privé durablement vacant est en marchés DÉTENDUS. Porte sur R-07/I-07 ; la géographie des friches reproduit partiellement le même désajustement (L-15).</td>
+<td id="T_3c9c7_row15_col0" class="data row15 col0">L-16</td>
+<td id="T_3c9c7_row15_col1" class="data row15 col1">Échelle infra-ZE : la couverture de R-07 est calculée à la maille zone d&#39;emploi — elle suppose que le gisement se déplace librement à l&#39;INTÉRIEUR de la ZE, alors que le marché du logement est communal. Au périmètre des seules communes TLV (le périmètre légal de la tension, D-14), la couverture nationale tombe de 1,06 à 0,69 : le gisement durable des ZE tendues est majoritairement HORS des communes tendues. Contrôles externes convergents (S-22) : la Cour des comptes compte 118 330 vacants &gt; 2 ans dans les communes TLV en 2022 (1,5 % de leur parc — zonage 2013, périmètre non identique à celui de la chaîne) et la DHUP estime que 74 % du parc privé durablement vacant est en marchés DÉTENDUS. Porte sur R-07/I-07 ; la géographie des friches reproduit partiellement le même désajustement (L-15).</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row16_col0" class="data row16 col0">L-17</td>
-<td id="T_9327c_row16_col1" class="data row16 col1">Existence ≠ mobilisabilité : H-12 ne corrige que l&#39;EXISTENCE des vacants enregistrés (faux vacants LOVAC — reloués, revendus, démolis, S-22) ; la mobilisabilité COMPORTEMENTALE des vrais vacants (successions en cours — ~20 % de la vacance durable selon S-23 —, rétention volontaire, refus de louer) n&#39;est PAS paramétrée, faute de source donnant une fraction. Le constat d&#39;exécution disponible est défavorable : ~6 700 sorties de vacance via ZLV en 4 ans, soit ~3 % de taux de sortie en zone tendue (S-22). Or la détente au central exigerait de remobiliser 194 488 des 206 664 logements du gisement effectif, soit 94 % — un taux de mobilisation sans précédent documenté. Porte sur R-07 (couverture = existence du volume, pas remobilisation acquise) et R-09 (le coût suppose des propriétaires qui engagent les travaux).</td>
+<td id="T_3c9c7_row16_col0" class="data row16 col0">L-17</td>
+<td id="T_3c9c7_row16_col1" class="data row16 col1">Existence ≠ mobilisabilité : H-12 ne corrige que l&#39;EXISTENCE des vacants enregistrés (faux vacants LOVAC — reloués, revendus, démolis, S-22) ; la mobilisabilité COMPORTEMENTALE des vrais vacants (successions en cours — ~20 % de la vacance durable selon S-23 —, rétention volontaire, refus de louer) n&#39;est PAS paramétrée, faute de source donnant une fraction. Le constat d&#39;exécution disponible est défavorable : ~6 700 sorties de vacance via ZLV en 4 ans, soit ~3 % de taux de sortie en zone tendue (S-22). Or la détente au central exigerait de remobiliser 194 488 des 206 664 logements du gisement effectif, soit 94 % — un taux de mobilisation sans précédent documenté. Porte sur R-07 (couverture = existence du volume, pas remobilisation acquise) et R-09 (le coût suppose des propriétaires qui engagent les travaux).</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row17_col0" class="data row17 col0">L-18</td>
-<td id="T_9327c_row17_col1" class="data row17 col1">Équivalence-unité non établie : un logement durablement vacant n&#39;est pas un logement du besoin. La vacance durable est biaisée vers les petits logements anciens (S-23 : ×2,8 si &lt; 35 m², ×3,3 si construit avant 1900, ~45 % d&#39;obsolescence ; recoupé par S-22 p. 18) : compter « un vacant remobilisé = une unité de détente » (C-06) assimile des studios anciens, souvent obsolètes, aux logements que demandent les ménages en tension ; R-09 applique en outre les surfaces moyennes du parc OCCUPÉ (S-12) à un gisement plus petit que ce parc. Frontière de données : la distribution taille × époque des vacants exige les fichiers LOVAC détaillés (accès restreint, cf. H-06). Porte sur R-07 (couverture en unités hétérogènes) et R-09 (coût par logement moyen).</td>
+<td id="T_3c9c7_row17_col0" class="data row17 col0">L-18</td>
+<td id="T_3c9c7_row17_col1" class="data row17 col1">Équivalence-unité non établie : un logement durablement vacant n&#39;est pas un logement du besoin. La vacance durable est biaisée vers les petits logements anciens (S-23 : ×2,8 si &lt; 35 m², ×3,3 si construit avant 1900, ~45 % d&#39;obsolescence ; recoupé par S-22 p. 18) : compter « un vacant remobilisé = une unité de détente » (C-06) assimile des studios anciens, souvent obsolètes, aux logements que demandent les ménages en tension ; R-09 applique en outre les surfaces moyennes du parc OCCUPÉ (S-12) à un gisement plus petit que ce parc. Frontière de données : la distribution taille × époque des vacants exige les fichiers LOVAC détaillés (accès restreint, cf. H-06). Porte sur R-07 (couverture en unités hétérogènes) et R-09 (coût par logement moyen).</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row18_col0" class="data row18 col0">L-19</td>
-<td id="T_9327c_row18_col1" class="data row18 col1">Stock vs flux : le besoin de détente de R-07 est un besoin de STOCK à date (ramener la vacance disponible au seuil H-08, une fois). La formation de ménages se poursuit (~0,92 %/an sur 2016-2022, R-01) : appliquée au parc des ZE tendues (~15,3 M de logements), elle représente ~140 000 ménages supplémentaires par an, alors que l&#39;excédent du gisement effectif sur le besoin est d&#39;environ 12 000 logements au central — moins d&#39;un an de flux. La remobilisation est donc un gain UNIQUE qui ne dispense pas du flux de construction ; le flux nécessaire n&#39;est pas instruit à la maille ZE par la chaîne. Porte sur R-07/I-07 et sur la conclusion I-10.</td>
+<td id="T_3c9c7_row18_col0" class="data row18 col0">L-19</td>
+<td id="T_3c9c7_row18_col1" class="data row18 col1">Stock vs flux : le besoin de détente de R-07 est un besoin de STOCK à date (ramener la vacance disponible au seuil H-08, une fois). La formation de ménages se poursuit (~0,92 %/an sur 2016-2022, R-01) : appliquée au parc des ZE tendues (~15,3 M de logements), elle représente ~140 000 ménages supplémentaires par an, alors que l&#39;excédent du gisement effectif sur le besoin est d&#39;environ 12 000 logements au central — moins d&#39;un an de flux. La remobilisation est donc un gain UNIQUE qui ne dispense pas du flux de construction ; le flux nécessaire n&#39;est pas instruit à la maille ZE par la chaîne. Porte sur R-07/I-07 et sur la conclusion I-10.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row19_col0" class="data row19 col0">L-20</td>
-<td id="T_9327c_row19_col1" class="data row19 col1">Effets de la détente non chiffrés : (1) l&#39;effet-prix recherché (détendre, c&#39;est faire baisser les loyers relatifs) a des perdants patrimoniaux — propriétaires occupants comme bailleurs — dont la résistance est un paramètre institutionnel, pas un résidu ; (2) la structure d&#39;incitation des propriétaires n&#39;est pas modélisée : l&#39;investissement de R-09 est privé, il faut donc subvention ou contrainte, et le bilan documenté des instruments incitatifs existants est faible (TLV/THLV « non démontré », missions IGF/IGEDD 2016 et 2023 via S-22) ; (3) les territoires détendus — le régime « intensité » de I-02, où est la majorité du gisement national — sont laissés entiers par une politique de détente des seules zones tendues ; (4) l&#39;attribution des logements remis en marché (qui s&#39;y loge, à quel loyer) n&#39;est pas traitée. À instruire dans la future proposition institutionnelle (P-xx). Porte sur I-09/I-10.</td>
+<td id="T_3c9c7_row19_col0" class="data row19 col0">L-20</td>
+<td id="T_3c9c7_row19_col1" class="data row19 col1">Effets de la détente non chiffrés : (1) l&#39;effet-prix recherché (détendre, c&#39;est faire baisser les loyers relatifs) a des perdants patrimoniaux — propriétaires occupants comme bailleurs — dont la résistance est un paramètre institutionnel, pas un résidu ; (2) la structure d&#39;incitation des propriétaires n&#39;est pas modélisée : l&#39;investissement de R-09 est privé, il faut donc subvention ou contrainte, et le bilan documenté des instruments incitatifs existants est faible (TLV/THLV « non démontré », missions IGF/IGEDD 2016 et 2023 via S-22) ; (3) les territoires détendus — le régime « intensité » de I-02, où est la majorité du gisement national — sont laissés entiers par une politique de détente des seules zones tendues ; (4) l&#39;attribution des logements remis en marché (qui s&#39;y loge, à quel loyer) n&#39;est pas traitée. À instruire dans la future proposition institutionnelle (P-xx). Porte sur I-09/I-10.</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row20_col0" class="data row20 col0">L-21</td>
-<td id="T_9327c_row20_col1" class="data row20 col1">Portée du mot « besoin » : les 194 488 logements de R-07 sont un besoin de FLUIDITÉ au sens D-15/H-08 (le volant de vacance disponible manquant pour que les marchés tendus tournent), PAS le « besoin de logements » du débat public — ni le besoin en FLUX de construction (les estimations publiques courantes vont d&#39;environ 210 000 à 518 000 logements/an selon le périmètre et la méthode), ni la file d&#39;attente du logement social (~2,7 millions de demandes actives). Ces ordres de grandeur de contexte n&#39;ont pas de source figée S-xx dans le registre et n&#39;entrent dans AUCUN calcul de la chaîne ; ils bornent seulement ce que « le gisement couvre le besoin » veut dire — et ne pas dire. Porte sur R-07/I-07/I-10.</td>
+<td id="T_3c9c7_row20_col0" class="data row20 col0">L-21</td>
+<td id="T_3c9c7_row20_col1" class="data row20 col1">Portée du mot « besoin » : les 194 488 logements de R-07 sont un besoin de FLUIDITÉ au sens D-15/H-08 (le volant de vacance disponible manquant pour que les marchés tendus tournent), PAS le « besoin de logements » du débat public — ni le besoin en FLUX de construction (les estimations publiques courantes vont d&#39;environ 210 000 à 518 000 logements/an selon le périmètre et la méthode), ni la file d&#39;attente du logement social (~2,7 millions de demandes actives). Ces ordres de grandeur de contexte n&#39;ont pas de source figée S-xx dans le registre et n&#39;entrent dans AUCUN calcul de la chaîne ; ils bornent seulement ce que « le gisement couvre le besoin » veut dire — et ne pas dire. Porte sur R-07/I-07/I-10.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row21_col0" class="data row21 col0">L-22</td>
-<td id="T_9327c_row21_col1" class="data row21 col1">Limites de la rotation comme mesure des mobilités empêchées : (1) aucun contrôle de composition — le vieillissement élève mécaniquement l&#39;ancienneté d&#39;emménagement et une partie de la chute nationale est démographique ; le gradient TERRITORIAL de la chute (R-11) est le signal le moins exposé (le vieillissement est national) mais les structures d&#39;âge diffèrent aussi entre ZE ; (2) rotation du parc ≠ mobilité des personnes (D-16) : un marché étudiant gonfle sa rotation par les premières installations sans que les ménages en place puissent bouger, et une mobilité sortante vers une autre ZE ne laisse aucune trace si le logement quitte l&#39;usage de résidence principale ; (3) la classe « moins de 2 ans » du millésime 2023 recouvre des emménagements ~2021-2023 (collecte EAR), période post-COVID atypique ; (4) les corrélations coût portent sur n = 297 ZE (loyers d&#39;annonce absents de certaines ZE), la vacance sur n = 305. Porte sur R-11/I-11.</td>
+<td id="T_3c9c7_row21_col0" class="data row21 col0">L-22</td>
+<td id="T_3c9c7_row21_col1" class="data row21 col1">Limites de la rotation comme mesure des mobilités empêchées : (1) aucun contrôle de composition — le vieillissement élève mécaniquement l&#39;ancienneté d&#39;emménagement et une partie de la chute nationale est démographique ; le gradient TERRITORIAL de la chute (R-11) est le signal le moins exposé (le vieillissement est national) mais les structures d&#39;âge diffèrent aussi entre ZE ; (2) rotation du parc ≠ mobilité des personnes (D-16) : un marché étudiant gonfle sa rotation par les premières installations sans que les ménages en place puissent bouger, et une mobilité sortante vers une autre ZE ne laisse aucune trace si le logement quitte l&#39;usage de résidence principale ; (3) la classe « moins de 2 ans » du millésime 2023 recouvre des emménagements ~2021-2023 (collecte EAR), période post-COVID atypique ; (4) les corrélations coût portent sur n = 297 ZE (loyers d&#39;annonce absents de certaines ZE), la vacance sur n = 305. Porte sur R-11/I-11.</td>
 </tr>
 <tr class="odd">
-<td id="T_9327c_row22_col0" class="data row22 col0">L-23</td>
-<td id="T_9327c_row22_col1" class="data row22 col1">Limites de la mobilité RPLS comme mesure des mobilités empêchées : (1) agrégation par ratio publié (C-09) — approchée par construction, contrôlée au national (écarts ≤ 0,014 pt) mais non contrôlable ZE par ZE ; (2) un taux bas ne sépare pas blocage des sorties et stabilité choisie ; mutations internes et premières mises en location hors numérateur (D-17) ; (3) petits parcs volatils — les plus fortes « chutes » (Issoire −13,2 pt) sont des petits parcs ruraux ; le seuil de 500 logements écarte les cas extrêmes, les médianes restent l&#39;indicateur robuste ; (4) périmètre France entière AVEC Mayotte (ZE 0601, absente de S-27 et sans nom dans S-07) — masque DOM de core/stats étendu en conséquence ; (5) millésime « 2025 » = emménagements de l&#39;année 2024 rapportés au parc au 01/01/2025 — décalage d&#39;un an avec l&#39;étiquette. Porte sur R-12/I-12.</td>
+<td id="T_3c9c7_row22_col0" class="data row22 col0">L-23</td>
+<td id="T_3c9c7_row22_col1" class="data row22 col1">Limites de la mobilité RPLS comme mesure des mobilités empêchées : (1) agrégation par ratio publié (C-09) — approchée par construction, contrôlée au national (écarts ≤ 0,014 pt) mais non contrôlable ZE par ZE ; (2) un taux bas ne sépare pas blocage des sorties et stabilité choisie ; mutations internes et premières mises en location hors numérateur (D-17) ; (3) petits parcs volatils — les plus fortes « chutes » (Issoire −13,2 pt) sont des petits parcs ruraux ; le seuil de 500 logements écarte les cas extrêmes, les médianes restent l&#39;indicateur robuste ; (4) périmètre France entière AVEC Mayotte (ZE 0601, absente de S-27 et sans nom dans S-07) — masque DOM de core/stats étendu en conséquence ; (5) millésime « 2025 » = emménagements de l&#39;année 2024 rapportés au parc au 01/01/2025 — décalage d&#39;un an avec l&#39;étiquette. Porte sur R-12/I-12.</td>
 </tr>
 <tr class="even">
-<td id="T_9327c_row23_col0" class="data row23 col0">L-24</td>
-<td id="T_9327c_row23_col1" class="data row23 col1">Limites de la mesure MIGCOM : (1) statut d&#39;occupation à la date d&#39;ENQUÊTE — le taux par statut est un taux d&#39;entrées dans le segment d&#39;arrivée, pas une propension à partir du segment d&#39;origine (les 19,51 % du locatif privé comptent aussi ceux qui le traversent) ; (2) millésime 2022 = enquêtes 2020-2024 moyennées, dont années COVID ; (3) les soldes ne couvrent que les migrations INTERNES (l&#39;étranger est dans le taux mais pas dans les flux O-D) ; (4) effectifs pondérés &lt; 200 imprécis (doc INSEE) — pas de flux fins entre petites ZE publiés ; (5) 67 communes de résidence sans ZE (COG 2022 vs 2026) et 11 406 mobiles sans origine, exclus et publiés ; (6) fenêtre d&#39;UN an : ne se compare pas au « moins de 2 ans » de D-16 (R-11) ni au taux RPLS (D-17) autrement qu&#39;en ordre de grandeur et en géographie. Porte sur R-13/I-13.</td>
+<td id="T_3c9c7_row23_col0" class="data row23 col0">L-24</td>
+<td id="T_3c9c7_row23_col1" class="data row23 col1">Limites de la mesure MIGCOM : (1) statut d&#39;occupation à la date d&#39;ENQUÊTE — le taux par statut est un taux d&#39;entrées dans le segment d&#39;arrivée, pas une propension à partir du segment d&#39;origine (les 19,51 % du locatif privé comptent aussi ceux qui le traversent) ; (2) millésime 2022 = enquêtes 2020-2024 moyennées, dont années COVID ; (3) les soldes ne couvrent que les migrations INTERNES (l&#39;étranger est dans le taux mais pas dans les flux O-D) ; (4) effectifs pondérés &lt; 200 imprécis (doc INSEE) — pas de flux fins entre petites ZE publiés ; (5) 67 communes de résidence sans ZE (COG 2022 vs 2026) et 11 406 mobiles sans origine, exclus et publiés ; (6) fenêtre d&#39;UN an : ne se compare pas au « moins de 2 ans » de D-16 (R-11) ni au taux RPLS (D-17) autrement qu&#39;en ordre de grandeur et en géographie. Porte sur R-13/I-13.</td>
+</tr>
+<tr class="odd">
+<td id="T_3c9c7_row24_col0" class="data row24 col0">L-25</td>
+<td id="T_3c9c7_row24_col1" class="data row24 col1">Limites du coût de transaction R-14 : (1) PLANCHER — ni débours, ni contribution de sécurité immobilière, ni frais d&#39;agence (S-32 ne les chiffre pas ; l&#39;agence peut ajouter plusieurs points) ; hors primo-accédants (maintenus à 4,50 % départemental, S-31) ; (2) H-13 central applique le taux majoritaire 6,32 % partout — une dizaine de départements sont à 5,81 % et l&#39;Indre à 5,09 % (la table S-31 permettrait de territorialiser si un résultat en dépend) ; (3) prix médian des VENTES 2025 ≠ prix du logement médian du parc (échantillon non aléatoire) ; petites ZE fragiles (min 22 ventes) ; (4) Alsace-Moselle (livre foncier) et Mayotte hors champ DVF — 296 ZE sur 305 ; 8 ZE sans niveau de vie Filosofi (n = 288 pour les mois) ; (5) le poids en mois est par UC (C-04) — un ménage de 1,5 UC divise par 1,5. Porte sur R-14/I-14.</td>
 </tr>
 </tbody>
 </table>
@@ -3896,7 +3973,7 @@ Spearman solde inter-ZE × coût (France entière) : -0.15 [-0.26 ; -0.04] (n = 
 </section>
 <section id="revue-contradictoire-2026-08-07" class="level2">
 <h2 class="anchored" data-anchor-id="revue-contradictoire-2026-08-07">11. Revue contradictoire (2026-08-07)</h2>
-<p>L’arc R-01..R-10 a subi la revue contradictoire exigée par la méthode (INTRO étape 12) : quatre relecteurs indépendants (sources alternatives · hypothèses/définitions · scénarios d’échec · statistique), 45 objections, dont le compte rendu complet — méthode, dispositions objection par objection, restes ouverts — est <a href="revue-contradictoire-2026-08-07.md"><code>evidence/revue-contradictoire-2026-08-07.md</code></a>. R-11, R-12 et R-13 (rotation résidentielle, mobilité du parc social, migrations des personnes — ajoutés le 2026-08-08) sont POSTÉRIEURS à cette revue et devront entrer dans la prochaine passe contradictoire. L’arithmétique publiée était exacte partout ; les objections sérieuses portaient sur les modèles et la mise en récit, et ont conduit aux corrections suivantes (toutes tracées dans les registres et le graphe, jamais silencieuses) :</p>
+<p>L’arc R-01..R-10 a subi la revue contradictoire exigée par la méthode (INTRO étape 12) : quatre relecteurs indépendants (sources alternatives · hypothèses/définitions · scénarios d’échec · statistique), 45 objections, dont le compte rendu complet — méthode, dispositions objection par objection, restes ouverts — est <a href="revue-contradictoire-2026-08-07.md"><code>evidence/revue-contradictoire-2026-08-07.md</code></a>. R-11 à R-14 (rotation résidentielle, mobilité du parc social, migrations des personnes, coût de transaction — ajoutés le 2026-08-08) sont POSTÉRIEURS à cette revue et devront entrer dans la prochaine passe contradictoire. L’arithmétique publiée était exacte partout ; les objections sérieuses portaient sur les modèles et la mise en récit, et ont conduit aux corrections suivantes (toutes tracées dans les registres et le graphe, jamais silencieuses) :</p>
 <ul>
 <li><strong>H-12 créée</strong> (taux d’existence du gisement LOVAC, 0,75 [0,6 ; 0,9] — ~25 % de faux vacants, Cour des comptes S-22), propagée des deux côtés du test de tension C-06 ;</li>
 <li><strong>H-07 recentrée</strong> sur les emménagés récents (35 m²/personne, l’ancien centre 51,2 devient la borne haute) ;</li>
@@ -3971,23 +4048,23 @@ Spearman solde inter-ZE × coût (France entière) : -0.15 [-0.26 ; -0.04] (n = 
 </section>
 <section id="reproduction" class="level2">
 <h2 class="anchored" data-anchor-id="reproduction">12. Reproduction</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>dépôt<span class="op">&gt;</span> <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> metabolisme/logement</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--locked</span>            <span class="co"># environnement figé (uv.lock)</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run logement validate    <span class="co"># registres + empreintes sha256 + graphe</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./test.sh</span>                   <span class="co"># 82 tests (unitaires, propriétés, régression)</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run logement reproduce   <span class="co"># reconstruit data/processed/*.json</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="6719b165" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>dépôt<span class="op">&gt;</span> <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> metabolisme/logement</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--locked</span>            <span class="co"># environnement figé (uv.lock)</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run logement validate    <span class="co"># registres + empreintes sha256 + graphe</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./test.sh</span>                   <span class="co"># 82 tests (unitaires, propriétés, régression)</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run logement reproduce   <span class="co"># reconstruit data/processed/*.json</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ba0c72cc" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>version du dépôt au moment du rendu</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>commit <span class="op">=</span> subprocess.run(</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&quot;git&quot;</span>, <span class="st">&quot;rev-parse&quot;</span>, <span class="st">&quot;--short&quot;</span>, <span class="st">&quot;HEAD&quot;</span>], capture_output<span class="op">=</span><span class="va">True</span>, text<span class="op">=</span><span class="va">True</span>, cwd<span class="op">=</span>ROOT</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>).stdout.strip()</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Document rendu depuis l&#39;arbre du commit </span><span class="sc">{</span>commit<span class="sc">}</span><span class="ss"> (le commit publiant ce &quot;</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;document HTML est son descendant immédiat — voir l&#39;historique git).&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>commit <span class="op">=</span> subprocess.run(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&quot;git&quot;</span>, <span class="st">&quot;rev-parse&quot;</span>, <span class="st">&quot;--short&quot;</span>, <span class="st">&quot;HEAD&quot;</span>], capture_output<span class="op">=</span><span class="va">True</span>, text<span class="op">=</span><span class="va">True</span>, cwd<span class="op">=</span>ROOT</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>).stdout.strip()</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Document rendu depuis l&#39;arbre du commit </span><span class="sc">{</span>commit<span class="sc">}</span><span class="ss"> (le commit publiant ce &quot;</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;document HTML est son descendant immédiat — voir l&#39;historique git).&quot;</span>)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Document rendu depuis l&#39;arbre du commit d6df38e (le commit publiant ce document HTML est son descendant immédiat — voir l&#39;historique git).</code></pre>
+<pre><code>Document rendu depuis l&#39;arbre du commit 1f3b45f (le commit publiant ce document HTML est son descendant immédiat — voir l&#39;historique git).</code></pre>
 </div>
 </div>
 <p>Environnement : Python ≥ 3.11, dépendances verrouillées dans <code>uv.lock</code>, données figées dans <code>data/raw/</code> (Git LFS, empreintes dans <code>sources/sources.yaml</code>).</p>

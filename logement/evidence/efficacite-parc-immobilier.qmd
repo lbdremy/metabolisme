@@ -5,7 +5,8 @@ subtitle: >
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
   taux d'effort, tension, état du bâti, coût de remobilisation, foncier
   immobilisé, rotation résidentielle, mobilité du parc social et des
-  personnes — chiffres révisés par la revue contradictoire du 2026-08-07
+  personnes, coût de transaction — chiffres révisés par la revue
+  contradictoire du 2026-08-07
 date: 2026-08-08
 lang: fr
 format:
@@ -134,7 +135,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 112 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 122 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -211,6 +212,12 @@ propriétés) :
   d'occupation, flux origine→destination entre ZE (index sur l'union
   résidence ∪ origine — les soldes re-somment à zéro), croisements
   tension/coût/rotation (T-12).
+- **T-15** (`core/transaction.py`) — coût de transaction par ZE :
+  assiette C-10 des ventes DVF (un seul logement par mutation, bornes
+  de plausibilité), prix médians par ZE, émoluments proportionnels
+  exacts (barème S-32, contrôle unitaire sur l'exemple de la fiche),
+  droits H-13 aux trois scénarios, poids en mois de niveau de vie
+  médian par UC (C-04), croisements tension et coût locatif.
 
 ## 5. Hypothèses
 
@@ -269,6 +276,7 @@ r10 = build.build_foncier(ROOT)
 r11 = build.build_mobilite(ROOT)
 r12 = build.build_social(ROOT)
 r13 = build.build_migrations(ROOT)
+r14 = build.build_transaction(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
@@ -276,11 +284,11 @@ for name, computed, output in [
     ("R-07", r07, build.TENSION_OUTPUT), ("R-08", r08, build.BATI_OUTPUT),
     ("R-09", r09, build.REMOB_OUTPUT), ("R-10", r10, build.FONCIER_OUTPUT),
     ("R-11", r11, build.MOBILITE_OUTPUT), ("R-12", r12, build.SOCIAL_OUTPUT),
-    ("R-13", r13, build.MIGRATIONS_OUTPUT),
+    ("R-13", r13, build.MIGRATIONS_OUTPUT), ("R-14", r14, build.TRANSACTION_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-13 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-14 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -977,6 +985,50 @@ dominants) : le blocage se lit dans QUI bouge et dans les soldes, pas
 dans le volume brut (interprétation I-13 ; limites L-24 — statut mesuré
 à l'arrivée, fenêtre d'un an, migrations internes seulement).
 
+### R-14 — Le péage de transaction : uniforme en taux, écrasant là où tout se cumule
+
+```{python}
+#| code-summary: "chiffres clés R-14"
+natt = r14["national"]
+print(f"assiette C-10 : {natt['n_ventes_retenues']:,} ventes retenues — prix médian "
+      f"{natt['prix_median_eur']:,} € (maison {natt['prix_median_maison_eur']:,}, "
+      f"appartement {natt['prix_median_appartement_eur']:,}), "
+      f"{natt['prix_m2_median_eur']:,} €/m²".replace(",", " "))
+cp = r14["cout_pct_prix"]
+print(f"péage (droits H-13 {r14['hypothesis']['central_value_pct']} % + émoluments S-32) : "
+      f"{cp['min']}-{cp['max']} % du prix (médiane {cp['mediane']})")
+d = r14["distribution_mois_niveau_vie"]
+print(f"en mois de niveau de vie médian par UC ({r14['n_ze_avec_niveau_vie']} ZE) : "
+      f"min {d['min']}, médiane {d['mediane']}, max {d['max']}")
+mt = r14["mediane_par_tension"]
+print(f"ZE tendues : {mt['tendues_mois']} mois (prix médian "
+      f"{mt['tendues_prix_median_eur']:,} €) — autres : {mt['autres_mois']} mois "
+      f"({mt['autres_prix_median_eur']:,} €)".replace(",", " "))
+print("péages les plus lourds :",
+      " ; ".join(f"{e['name'].strip()} {e['cout_en_mois_niveau_vie']} mois"
+                 for e in r14["peage_le_plus_lourd"][:5] if e["name"]))
+m = r14["spearman_mois_vs_cout_locatif"]["metropole"]
+print(f"Spearman péage (mois) × indice de coût locatif (métropole) : {m['rho']} "
+      f"[{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']})")
+```
+
+Quatrième instruction de **H-04** : chaque achat paie un péage non
+récupérable — droits de mutation (H-13 : 6,32 % du prix dans la grande
+majorité des départements depuis la loi de finances 2025, S-31) plus les
+émoluments du notaire (barème S-32, calculé exactement). Le taux est
+quasi uniforme (**7,4-8,0 % du prix**) mais son poids en pouvoir d'achat
+local ne l'est pas : **6,1 mois de niveau de vie médian par UC en
+médiane, 7,8 mois dans les ZE tendues contre 5,5 ailleurs**, et jusqu'à
+11-13 mois à Paris, Bayonne, sur les littoraux touristiques et dans les
+DOM chers (rho +0,81 avec l'indice de coût locatif). Le péage est un
+PLANCHER (ni débours, ni agence, L-25) et il pèse exactement là où
+R-11/R-12 localisent le gel de la rotation et où R-13 montre que la
+propriété est le statut le moins mobile : le ménage des zones tendues
+est pris en tenaille — relocation locative jusqu'à ~64 % du revenu
+(R-06), péage d'achat record. ~83 % de ce péage est fiscal : c'est un
+paramètre institutionnel direct pour la proposition à venir
+(interprétation I-14).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -1174,9 +1226,10 @@ hypothèses/définitions · scénarios d'échec · statistique), 45 objections,
 dont le compte rendu complet — méthode, dispositions objection par
 objection, restes ouverts — est
 [`evidence/revue-contradictoire-2026-08-07.md`](revue-contradictoire-2026-08-07.md).
-R-11, R-12 et R-13 (rotation résidentielle, mobilité du parc social,
-migrations des personnes — ajoutés le 2026-08-08) sont POSTÉRIEURS à
-cette revue et devront entrer dans la prochaine passe contradictoire.
+R-11 à R-14 (rotation résidentielle, mobilité du parc social,
+migrations des personnes, coût de transaction — ajoutés le 2026-08-08)
+sont POSTÉRIEURS à cette revue et devront entrer dans la prochaine
+passe contradictoire.
 L'arithmétique publiée était exacte partout ; les objections sérieuses
 portaient sur les modèles et la mise en récit, et ont conduit aux
 corrections suivantes (toutes tracées dans les registres et le graphe,

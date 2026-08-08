@@ -1,0 +1,207 @@
+{
+  "cout_pct_prix": {
+    "max": 8.02,
+    "mediane": 7.6,
+    "min": 7.43
+  },
+  "distribution_mois_niveau_vie": {
+    "max": 13.24,
+    "mediane": 6.14,
+    "min": 2.76,
+    "q25": 4.99,
+    "q75": 7.38
+  },
+  "hypothesis": {
+    "central_value_pct": 6.32,
+    "id": "H-13",
+    "name": "transfer_tax_rate_pct",
+    "plausible_range": [
+      5.09,
+      6.32
+    ]
+  },
+  "mediane_par_tension": {
+    "autres_mois": 5.53,
+    "autres_prix_median_eur": 133629,
+    "n_tendues": 96,
+    "tendues_mois": 7.76,
+    "tendues_prix_median_eur": 198990
+  },
+  "n_ze": 296,
+  "n_ze_avec_niveau_vie": 288,
+  "national": {
+    "n_ventes_retenues": 727209,
+    "prix_m2_median_eur": 2658,
+    "prix_median_appartement_eur": 166000,
+    "prix_median_eur": 182000,
+    "prix_median_maison_eur": 200000
+  },
+  "peage_le_plus_leger": [
+    {
+      "cout_en_mois_niveau_vie": 2.8,
+      "cout_transaction_eur": 5208,
+      "n_ventes": 59,
+      "name": "Sarrebourg",
+      "prix_median_eur": 65000,
+      "ze": "4419"
+    },
+    {
+      "cout_en_mois_niveau_vie": 2.9,
+      "cout_transaction_eur": 5172,
+      "n_ventes": 1282,
+      "name": "Montluçon",
+      "prix_median_eur": 64500,
+      "ze": "8423"
+    },
+    {
+      "cout_en_mois_niveau_vie": 3.2,
+      "cout_transaction_eur": 5572,
+      "n_ventes": 1487,
+      "name": "Guéret",
+      "prix_median_eur": 70000,
+      "ze": "7511"
+    },
+    {
+      "cout_en_mois_niveau_vie": 3.3,
+      "cout_transaction_eur": 5717,
+      "n_ventes": 526,
+      "name": "Vierzon",
+      "prix_median_eur": 72000,
+      "ze": "2415"
+    },
+    {
+      "cout_en_mois_niveau_vie": 3.3,
+      "cout_transaction_eur": 6009,
+      "n_ventes": 871,
+      "name": "Cosne-Cours-sur-Loire",
+      "prix_median_eur": 76000,
+      "ze": "0056"
+    },
+    {
+      "cout_en_mois_niveau_vie": 3.4,
+      "cout_transaction_eur": 6009,
+      "n_ventes": 1858,
+      "name": "Nevers",
+      "prix_median_eur": 76000,
+      "ze": "0060"
+    },
+    {
+      "cout_en_mois_niveau_vie": 3.5,
+      "cout_transaction_eur": 6227,
+      "n_ventes": 688,
+      "name": "Avallon",
+      "prix_median_eur": 79000,
+      "ze": "2703"
+    },
+    {
+      "cout_en_mois_niveau_vie": 3.6,
+      "cout_transaction_eur": 6300,
+      "n_ventes": 846,
+      "name": "Le Livradois",
+      "prix_median_eur": 80000,
+      "ze": "8417"
+    }
+  ],
+  "peage_le_plus_lourd": [
+    {
+      "cout_en_mois_niveau_vie": 13.2,
+      "cout_transaction_eur": 19966,
+      "n_ventes": 1022,
+      "name": "L'Ouest",
+      "prix_median_eur": 267750,
+      "ze": "0402"
+    },
+    {
+      "cout_en_mois_niveau_vie": 13.1,
+      "cout_transaction_eur": 24042,
+      "n_ventes": 371,
+      "name": "Porto-Vecchio",
+      "prix_median_eur": 323750,
+      "ze": "9406"
+    },
+    {
+      "cout_en_mois_niveau_vie": 11.2,
+      "cout_transaction_eur": 23914,
+      "n_ventes": 71752,
+      "name": "Paris",
+      "prix_median_eur": 322000,
+      "ze": "1109"
+    },
+    {
+      "cout_en_mois_niveau_vie": 11.0,
+      "cout_transaction_eur": 21841,
+      "n_ventes": 5486,
+      "name": "Bayonne",
+      "prix_median_eur": 293513,
+      "ze": "7503"
+    },
+    {
+      "cout_en_mois_niveau_vie": 10.8,
+      "cout_transaction_eur": 21935,
+      "n_ventes": 2702,
+      "name": "La Teste-de-Buch",
+      "prix_median_eur": 294805,
+      "ze": "7513"
+    },
+    {
+      "cout_en_mois_niveau_vie": 10.6,
+      "cout_transaction_eur": 14670,
+      "n_ventes": 1596,
+      "name": "Le Sud",
+      "prix_median_eur": 195000,
+      "ze": "0404"
+    },
+    {
+      "cout_en_mois_niveau_vie": 10.5,
+      "cout_transaction_eur": 20493,
+      "n_ventes": 1764,
+      "name": "Sainte-Maxime",
+      "prix_median_eur": 275000,
+      "ze": "9317"
+    },
+    {
+      "cout_en_mois_niveau_vie": 10.5,
+      "cout_transaction_eur": 20693,
+      "n_ventes": 1396,
+      "name": "Auray",
+      "prix_median_eur": 277740,
+      "ze": "5301"
+    }
+  ],
+  "spearman_mois_vs_cout_locatif": {
+    "france_entiere": {
+      "ci95": [
+        0.77,
+        0.85
+      ],
+      "n": 288,
+      "rho": 0.82
+    },
+    "metropole": {
+      "ci95": [
+        0.77,
+        0.85
+      ],
+      "n": 278,
+      "rho": 0.81
+    }
+  },
+  "spearman_prix_vs_cout_locatif": {
+    "france_entiere": {
+      "ci95": [
+        0.71,
+        0.81
+      ],
+      "n": 288,
+      "rho": 0.76
+    },
+    "metropole": {
+      "ci95": [
+        0.74,
+        0.83
+      ],
+      "n": 278,
+      "rho": 0.79
+    }
+  }
+}

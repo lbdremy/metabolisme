@@ -1723,3 +1723,115 @@
     2 ans » de D-16 (R-11) ni au taux RPLS (D-17) autrement qu'en ordre
     de grandeur et en géographie. Porte sur R-13/I-13.
   depends_on: [S-29, D-18]
+
+- id: C-10
+  type: choice
+  title: >
+    Assiette des prix de transaction DVF (S-30) : ventes
+    (nature_mutation « Vente ») portant EXACTEMENT UN local
+    d'habitation (une Maison ou un Appartement) et aucun local
+    industriel/commercial dans la mutation (dépendances admises — une
+    mutation DVF partage sa valeur_fonciere entre toutes ses lignes,
+    les mutations multi-logements rendraient le prix du logement
+    indéterminé) ; bornes de plausibilité : valeur ≥ 5 000 €, surface
+    ≥ 10 m², prix/m² entre 200 et 30 000 € (ventes à l'euro symbolique
+    et coquilles de saisie) ; médianes par ZE (robustes aux queues).
+    Codes commune re-normalisés (zéro initial), PLM par arrondissement
+    → commune parente.
+  depends_on: [S-30]
+
+- id: O-34
+  type: observation
+  title: >
+    Mutations DVF 2025 (année complète, S-30) : 3 514 036 lignes de
+    vente ; 733 529 mutations à un seul logement (C-10), 727 209 après
+    bornes de plausibilité. Prix médians France (hors Alsace-Moselle et
+    Mayotte) : 182 000 € l'ensemble, 200 000 € une maison, 166 000 € un
+    appartement, 2 658 €/m² ; 296 ZE couvertes (médiane 1 380 ventes
+    par ZE, min 22).
+  depends_on: [S-30, C-10]
+
+- id: O-35
+  type: observation
+  title: >
+    Le péage de transaction (droits H-13 centraux 6,32 % + émoluments
+    exacts du barème S-32, TVA comprise) vaut 7,43 à 8,02 % du prix
+    selon la ZE (médiane 7,60 % — la part émoluments décroît avec le
+    prix). Rapporté au niveau de vie médian local (MED_SL/12, unité
+    C-04) : médiane 6,14 mois, de 2,76 mois (Sarrebourg ; Montluçon
+    2,9, Guéret 3,2) à 13,24 mois (L'Ouest réunionnais ; Porto-Vecchio
+    13,0 ; Paris, Bayonne, La Teste-de-Buch et Le Sud réunionnais
+    ~11) ; médiane 7,76 mois dans les ZE tendues (prix médian
+    198 990 €) contre 5,53 ailleurs (133 629 €).
+  depends_on: [O-34, H-13]
+
+- id: T-15
+  type: transformation
+  title: >
+    Coût de transaction par ZE : filtrage C-10 des ventes DVF, prix et
+    prix/m² médians et comptages par ZE, émoluments proportionnels
+    calculés exactement depuis le barème S-32 (contrôle unitaire sur
+    l'exemple chiffré de la fiche : 1 995,25 € HT à 200 000 €), droits
+    de mutation aux trois scénarios H-13 (5,09/6,32/6,32), poids en
+    mois de niveau de vie médian par UC (S-10, unité C-04), croisements
+    tension (T-08) et indice de coût locatif (T-05).
+  depends_on: [O-34, C-10, T-05, T-08, H-13]
+  produced_by: src/logement/core/transaction.py
+
+- id: R-14
+  type: result
+  title: >
+    Coût de transaction à l'achat du logement médian par ZE (S-30 DVF
+    2025, H-13, barème S-32) : un TAUX quasi uniforme (7,4-8,0 % du
+    prix) mais un POIDS très inégal — médiane 6,1 mois de niveau de vie
+    médian par UC, de 2,8 mois (Sarrebourg) à 13,2 (L'Ouest
+    réunionnais), 11 mois à Paris et Bayonne ; 7,8 mois en ZE tendues
+    contre 5,5 ailleurs, corrélation avec l'indice de coût locatif rho
+    métropole +0,81 (IC95 [+0,77 ; +0,85], n = 278). Le péage est un
+    PLANCHER (ni débours, ni CSI, ni agence — L-25) et il est le plus
+    lourd exactement là où R-11/R-12 localisent le gel de la rotation
+    et où R-13 montre que la propriété est le statut le moins mobile.
+  depends_on: [T-15, O-35, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/cout-transaction-ze.json
+  limitations: [L-25]
+
+- id: I-14
+  type: interpretation
+  title: >
+    Quatrième instruction de H-04 — le mécanisme de blocage a un prix
+    explicite : changer de logement en achetant coûte plus d'une
+    demi-année de niveau de vie médian en pur péage non récupérable
+    dans les zones tendues (jusqu'à un an à Paris, Bayonne, dans les
+    DOM chers et sur les littoraux touristiques). La géographie du
+    péage (rho +0,81 avec le coût locatif) superpose la barrière à la
+    mobilité de statut au verrouillage locatif : le ménage des zones
+    tendues est pris en tenaille — la relocation locative y absorbe de
+    ~27 % (médiane nationale) à ~64 % (Paris) du revenu (R-06) et
+    l'accès à la propriété y exige
+    d'abord un péage record. Cohérence d'ensemble de H-04 : la mobilité
+    repose sur le segment le plus cher (R-13), le parc social est gelé
+    (R-12), la rotation chute là où tout cela se cumule (R-11). La
+    part de causalité du péage dans le gel n'est PAS identifiée
+    (descriptif) ; l'essentiel du péage étant fiscal (droits ~83 % du
+    total), c'est un paramètre INSTITUTIONNEL — matière directe pour
+    la proposition (P-xx) à venir.
+  depends_on: [R-14, I-11, I-12, I-13]
+
+- id: L-25
+  type: limit
+  title: >
+    Limites du coût de transaction R-14 : (1) PLANCHER — ni débours, ni
+    contribution de sécurité immobilière, ni frais d'agence (S-32 ne
+    les chiffre pas ; l'agence peut ajouter plusieurs points) ; hors
+    primo-accédants (maintenus à 4,50 % départemental, S-31) ;
+    (2) H-13 central applique le taux majoritaire 6,32 % partout — une
+    dizaine de départements sont à 5,81 % et l'Indre à 5,09 % (la table
+    S-31 permettrait de territorialiser si un résultat en dépend) ;
+    (3) prix médian des VENTES 2025 ≠ prix du logement médian du parc
+    (échantillon non aléatoire) ; petites ZE fragiles (min 22 ventes) ;
+    (4) Alsace-Moselle (livre foncier) et Mayotte hors champ DVF —
+    296 ZE sur 305 ; 8 ZE sans niveau de vie Filosofi (n = 288 pour les
+    mois) ; (5) le poids en mois est par UC (C-04) — un ménage de
+    1,5 UC divise par 1,5. Porte sur R-14/I-14.
+  depends_on: [S-30, S-31, S-32, C-10, H-13]
