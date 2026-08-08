@@ -11,6 +11,7 @@ import zipfile
 from pathlib import Path
 
 import pandas as pd
+import pyarrow.parquet as pq
 import yaml
 
 from logement.core import (
@@ -19,6 +20,7 @@ from logement.core import (
     effort,
     foncier,
     lovac,
+    mobilite,
     parc,
     registry,
     remob,
@@ -68,6 +70,9 @@ FRICHES_FILE = "cerema-cartofriches-2026-06-15.csv"
 COMPARATEUR_ZIP = "insee-comparateur-territoires-2026.zip"
 COMPARATEUR_CSV = "comparateur.csv"
 FONCIER_OUTPUT = Path("data") / "processed" / "foncier-friches-ze.json"
+
+MOBILITE_FILE = "insee-rp-logement-princ-2023.parquet"
+MOBILITE_OUTPUT = Path("data") / "processed" / "mobilite-residentielle-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -465,6 +470,70 @@ def run_foncier(root: Path) -> int:
     print(
         f"foncier-friches: wrote {FONCIER_OUTPUT} — gisement {payload['gisement_central']}, "
         f"capacite {payload['capacite_centrale']}"
+    )
+    return 0
+
+
+def build_mobilite(root: Path) -> dict[str, object]:
+    """Compute the R-11 summary payload (residential rotation by ZE, S-27)."""
+    raw = root / "data" / "raw"
+    # The S-27 parquet crosses every dimension; the useful cut is the
+    # DWELLINGS measure of primary residences with all non-L_STAY axes at
+    # their total — filtered at read time, the 11.9M-row file yields
+    # ~1 000 rows.
+    cut = pq.read_table(
+        raw / MOBILITE_FILE,
+        columns=["GEO_OBJECT", "GEO", "TIME_PERIOD", "L_STAY", "OBS_VALUE"],
+        filters=[
+            ("GEO_OBJECT", "in", {"ZE2020", "FRANCE"}),
+            ("RP_MEASURE", "=", "DWELLINGS"),
+            ("OCS", "=", "DW_MAIN"),
+            ("TDW", "=", "_T"),
+            ("NRG_SRC", "=", "_T"),
+            ("CARPARK", "=", "_T"),
+            ("NOR", "=", "_T"),
+            ("TSH", "=", "_T"),
+            ("CARS", "=", "_T"),
+            ("BUILD_END", "=", "_T"),
+        ],
+    ).to_pandas()
+    parts = mobilite.rotation_parts(mobilite.parse_lstay(cut))
+    national = mobilite.national_rotation(parts)
+    ze_frame = mobilite.rotation_by_ze(parts)
+
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+    census = rs.parse_census_housing(census_raw)
+    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    h08 = _load_hypothesis(root, "H-08")
+    h12 = _load_hypothesis(root, "H-12")
+    tension_frame = tension.tension_by_ze(
+        census, tlv, communes, commune_ze, h08.central_value, h12.central_value
+    )
+    vacancy_ze, _unmatched = ze.aggregate_vacancy_by_ze(communes, commune_ze)
+    return mobilite.build_summary(
+        ze_frame,
+        national,
+        tension_frame["tendue"],
+        vacancy_ze["structural_rate_pct"],
+        _cost_frame(root)["indice_cout_pct"],
+        _ze_names(root),
+    )
+
+
+def run_mobilite(root: Path) -> int:
+    """Rebuild data/processed/mobilite-residentielle-ze.json; return an exit code."""
+    payload = build_mobilite(root)
+    _write_json(root, MOBILITE_OUTPUT, payload)
+    print(
+        f"mobilite: wrote {MOBILITE_OUTPUT} — "
+        f"{payload['n_ze_en_baisse']}/{payload['n_ze']} ZE en baisse, "
+        f"distribution {payload['distribution_part_recents_pct']}, "
+        f"delta par tension {payload['mediane_delta_par_tension']}"
     )
     return 0
 

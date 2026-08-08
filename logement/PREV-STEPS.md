@@ -3,6 +3,42 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
+## Session 4 — 2026-08-08 (rotation résidentielle : première instruction de H-04)
+
+Livrable unique : **R-11** — la rotation du parc par l'ancienneté
+d'emménagement, selon le plan d'éclairage données de la session 3 (option
+n° 1, rapport effort/valeur).
+
+- **S-27 figée** : RP « Logement en 2023 » (jeu Melodi
+  DS_RP_LOGEMENT_PRINC, Parquet 98 Mo, 11,9 M obs.) — la base publiée le
+  08/08/2026 diffuse l'ancienneté d'emménagement (dimension européenne
+  L_STAY, 6 classes) NATIVEMENT à la maille ZE2020, avec TROIS millésimes
+  comparables par construction (2012/2017/2023, concepts 2023, COG 2026).
+  Mieux qu'espéré : pas besoin du repli IRIS RP2022. **D-16** créée
+  (ancienneté d'emménagement — rotation du parc ≠ mobilité des personnes).
+- **Notebook 12** (exploration) puis stabilisation : `core/mobilite.py`
+  (contrôle d'intégrité classes vs total, périmètre national F jamais
+  mélangé à FM), stage `mobilite-residentielle` (filtrage Parquet à la
+  lecture), 12 tests nouveaux (94 au total), claims O-25..O-27, T-12,
+  R-11, I-11, L-22 (92 nœuds), EVIDENCE.md, qmd re-rendu (R-11 marqué
+  POSTÉRIEUR à la revue du 2026-08-07).
+- **Ce que dit R-11** : la part des RP occupées depuis moins de 2 ans
+  passe de 13,14 % (2012) à 11,97 % (2023) et la baisse S'ACCÉLÈRE
+  (−0,92 pt sur 2017-2023) ; 293 ZE sur 305 en baisse. Le NIVEAU de
+  rotation suit la fonction du territoire (+0,40 avec le coût — villes
+  étudiantes ; −0,22 avec la vacance, métropole) mais la CHUTE suit le
+  gradient INVERSE (−0,29 avec le coût, +0,25 avec la vacance ; tendues
+  −1,54 pt vs autres −1,27) : le gel se concentre dans les marchés
+  verrouillés — signature attendue d'une mobilité EMPÊCHÉE (I-11), le
+  sens opposé niveau/chute écartant l'explication structurelle. Reste
+  descriptif : pas de contrôle de composition (vieillissement), fenêtre
+  2021-2023 post-COVID (L-22).
+- **Pièges appris** : le téléchargement Melodi décroche en HTTP/2 sur les
+  gros fichiers (reprendre en HTTP/1.1 avec `-C -` et détection de
+  décrochage) ; la taille au octet près est publiée dans le catalogue
+  (`tailleFichierParquetEnOctets`) — contrôle d'intégrité gratuit ; le
+  niveau FRANCE du fichier contient F ET FM.
+
 ## Session 3 — 2026-08-07 (revue contradictoire et intégration) — tag `efficacite-parc-v0.3`
 
 La session prévue « revue d'abord, H-04 si elle tient » : la revue n'a pas

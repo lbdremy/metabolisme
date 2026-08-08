@@ -3,52 +3,44 @@
 Ce qui est déjà fait est consigné dans [`PREV-STEPS.md`](PREV-STEPS.md).
 Mis à jour à chaque fin de session de travail significative.
 
-## État au sortir de la session 3 (2026-08-07)
+## État au sortir de la session 4 (2026-08-08)
 
-La **revue contradictoire** (méthode INTRO étape 12) est faite et INTÉGRÉE :
-compte rendu dans `evidence/revue-contradictoire-2026-08-07.md` (+ annexes),
-26 sources (S-22..S-26 : Cour des comptes mai 2025, SDES Datalab
-déterminants, Apur, Cerema fonds friches), 7 hypothèses (H-07 RECENTRÉE sur
-les emménagés récents — changement tracé ; H-12 taux d'existence du
-gisement LOVAC), graphe à 85 nœuds (L-16..L-21, O-24), 82 tests verts,
-document de preuve re-rendu et auto-vérifié. Les chiffres-titres ont
-changé : couverture 1,65 → **1,06** (0,69 aux seules communes TLV), besoin
-285 665 → **194 488**, coût de détente 12,5 → **15,8 Md€** (règle mixte,
-ratio 3,9 → **2,1**), effort médian 40,1 → **27,4 %**, foncier 11,5 →
-**10,9 ×** (plancher opérationnel 2,2 ×). La conclusion s'est DÉPLACÉE :
-la contrainte institutionnelle n'est plus la conséquence de la suffisance,
-elle en est la **condition** (I-07/I-10 reformulées). Tag :
-**`efficacite-parc-v0.3`**.
+**H-04 est ouverte** : R-11 (rotation résidentielle par l'ancienneté
+d'emménagement, S-27 — RP2023 Melodi, maille ZE native, millésimes
+2012/2017/2023 comparables) est stabilisé, testé (94 tests), inscrit au
+graphe (92 nœuds : O-25..O-27, T-12, R-11, I-11, L-22) et au document de
+preuve (marqué POSTÉRIEUR à la revue du 2026-08-07 — à couvrir par la
+prochaine passe contradictoire). Le constat : rotation en baisse dans
+293 ZE sur 305, chute concentrée dans les marchés chers et sans vacance
+(tendues −1,54 pt vs −1,27) alors que le NIVEAU de rotation suit la
+fonction du territoire — signature d'une mobilité empêchée, encore
+descriptive (pas de contrôle de composition, L-22). L'état v0.3 (revue
+contradictoire intégrée : couverture 1,06, besoin 194 488, détente
+15,8 Md€ ratio 2,1, foncier 10,9 ×) est inchangé.
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Instruire H-04 (mobilités empêchées)** — l'éclairage données est FAIT
-   (session 3, agent éclaireur) ; par rapport effort/valeur :
-   1. RP INSEE **ancienneté d'emménagement** : base « Logement en 2023 »
-      (RP2023, publiée 08/2026, https://www.insee.fr/fr/statistiques/8997194,
-      CSV/Parquet, diffusée NATIVEMENT à la maille ZE, DOM hors Mayotte ;
-      vérifier que ANEM y figure à cette maille ; caveat concepts européens
-      2023, tables de passage fournies). Sinon base IRIS RP2022
-      (P22_MEN_ANEM0002/0204/0509/10P,
-      https://www.insee.fr/fr/statistiques/8647012). La mesure la plus
-      directe de la rotation effective.
-   2. **RPLS SDES 2025** (zip communes/EPCI 20 Mo,
+1. **Poursuivre H-04 (mobilités empêchées)** — R-11 (rotation RP) est
+   FAIT (session 4) ; suite par rapport effort/valeur :
+   1. **RPLS SDES 2025** (zip communes/EPCI 20 Mo,
       https://www.statistiques.developpement-durable.gouv.fr/media/8938/download?inline=) :
       taux de mobilité du parc social 7,1 % (2025) vs 9,3 % (2019) — la
       chute EST le phénomène ; + vacance sociale 2,1 %.
-   3. Fichier détail **migrations résidentielles RP2022**
+   2. Fichier détail **migrations résidentielles RP2022**
       (https://www.insee.fr/fr/statistiques/8589858, Parquet 17,2 M obs.) :
       taux de mobilité annuel par ZE + flux entre ZE.
-   4. **DVF géolocalisées** (https://files.data.gouv.fr/geo-dvf/latest/csv/,
+   3. **DVF géolocalisées** (https://files.data.gouv.fr/geo-dvf/latest/csv/,
       par département) : prix → coût de transaction via une H-xx à déclarer
       (DMTO ~5,8 %, notaire, agence) ; pas d'Alsace-Moselle ni Mayotte.
-   5. SNE : ressource data.gouv MORTE (404) ; portail vivant
+   4. SNE : ressource data.gouv MORTE (404) ; portail vivant
       https://www.data.logement.gouv.fr/statistiques/ = exports par
       territoire sans bulk (effort élevé) ; raccourci possible par les
       indicateurs SNE de l'Observatoire des Territoires (maille à vérifier
       à la main). EnL 2020 : microdonnées sous habilitation — calibration
       nationale seulement.
-   Le terme « coût de la mobilité résidentielle » (R-06) est disponible.
+   Le terme « coût de la mobilité résidentielle » (R-06) est disponible ;
+   la prochaine passe contradictoire devra couvrir R-11 (postérieur à la
+   revue du 2026-08-07).
 2. **Restes ouverts de la revue** (voir la section dédiée du compte rendu) :
    - figer l'emploi localisé INSEE récent à la maille ZE (2012-2023) et
      re-exécuter R-03 en variante (L-07 corrigée le promet) ;
@@ -105,8 +97,8 @@ changement) ; à traiter quand l'occasion s'y prête, pas avant :
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 10 artefacts data/processed/
-./check.sh && ./test.sh     # portes qualité (82 tests)
+uv run logement reproduce   # rebâtit les 11 artefacts data/processed/
+./check.sh && ./test.sh     # portes qualité (94 tests)
 ```
 
 Lire dans l'ordre : `CLAUDE.md` (doctrine + décisions arrêtées),
@@ -162,3 +154,11 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
 - **Wayback** : l'URL S-25 (présentation RNA) est morte à l'origine — figée
   via archive.org ; vérifier les URL gouvernementales anciennes avant de
   les citer.
+- **Melodi (api.insee.fr)** : les gros téléchargements décrochent en
+  HTTP/2 — reprendre en HTTP/1.1 avec `curl -C -` et une détection de
+  décrochage (`--speed-limit`) ; la taille exacte du Parquet est publiée
+  dans le catalogue (`tailleFichierParquetEnOctets`) — contrôle
+  d'intégrité gratuit ; le niveau FRANCE contient DEUX séries (F = hors
+  Mayotte, FM = métropole — ne jamais mélanger, cf. T-12) ; les classes
+  L_STAY 2023 ne se raccordent PAS à l'ANEM des diffusions antérieures
+  (D-16).

@@ -1,0 +1,339 @@
+{
+  "distribution_part_recents_pct": {
+    "max": 23.45,
+    "mediane": 10.58,
+    "min": 5.97,
+    "q25": 9.82,
+    "q75": 11.69
+  },
+  "mediane_delta_par_tension": {
+    "autres_pts": -1.27,
+    "n_tendues": 97,
+    "tendues_pts": -1.54
+  },
+  "millesimes": [
+    2012,
+    2017,
+    2023
+  ],
+  "n_ze": 305,
+  "n_ze_en_baisse": 293,
+  "national": {
+    "delta_moins_2_ans_pts": -1.17,
+    "delta_moins_5_ans_pts": -0.43,
+    "emmenagements_recents_manquants": 364418,
+    "parts_par_millesime": {
+      "2012": {
+        "moins_2_ans_pct": 13.14,
+        "moins_5_ans_pct": 33.26,
+        "rp_total": 28268898
+      },
+      "2017": {
+        "moins_2_ans_pct": 12.89,
+        "moins_5_ans_pct": 33.02,
+        "rp_total": 29479746
+      },
+      "2023": {
+        "moins_2_ans_pct": 11.97,
+        "moins_5_ans_pct": 32.83,
+        "rp_total": 31220147
+      }
+    }
+  },
+  "plus_fortes_baisses": [
+    {
+      "delta_pts": -4.89,
+      "name": "Le Nord-Caraibe",
+      "part_recents_pct": 6.7,
+      "ze": "0204"
+    },
+    {
+      "delta_pts": -4.29,
+      "name": "Le Sud-Caraibe",
+      "part_recents_pct": 9.59,
+      "ze": "0206"
+    },
+    {
+      "delta_pts": -4.12,
+      "name": "Le Nord",
+      "part_recents_pct": 13.78,
+      "ze": "0403"
+    },
+    {
+      "delta_pts": -3.31,
+      "name": "Est Grande Terre",
+      "part_recents_pct": 8.61,
+      "ze": "0102"
+    },
+    {
+      "delta_pts": -3.3,
+      "name": "L'Est",
+      "part_recents_pct": 9.86,
+      "ze": "0401"
+    },
+    {
+      "delta_pts": -3.18,
+      "name": "Le Sud",
+      "part_recents_pct": 11.78,
+      "ze": "0404"
+    },
+    {
+      "delta_pts": -3.13,
+      "name": "Bastia",
+      "part_recents_pct": 11.3,
+      "ze": "9402"
+    },
+    {
+      "delta_pts": -3.03,
+      "name": "Calais",
+      "part_recents_pct": 10.33,
+      "ze": "3207"
+    }
+  ],
+  "rotation_la_plus_faible": [
+    {
+      "delta_pts": -2.22,
+      "name": "Le Nord-Atlantique",
+      "part_recents_pct": 5.97,
+      "ze": "0203"
+    },
+    {
+      "delta_pts": -4.89,
+      "name": "Le Nord-Caraibe",
+      "part_recents_pct": 6.7,
+      "ze": "0204"
+    },
+    {
+      "delta_pts": -1.92,
+      "name": "Côte sous le vent",
+      "part_recents_pct": 6.71,
+      "ze": "0101"
+    },
+    {
+      "delta_pts": -2.67,
+      "name": "Le Centre-Atlantique",
+      "part_recents_pct": 7.0,
+      "ze": "0201"
+    },
+    {
+      "delta_pts": -0.03,
+      "name": "Marie-Galante",
+      "part_recents_pct": 7.63,
+      "ze": "0103"
+    },
+    {
+      "delta_pts": -1.77,
+      "name": "Le Sud",
+      "part_recents_pct": 7.79,
+      "ze": "0205"
+    },
+    {
+      "delta_pts": -0.96,
+      "name": "Sarreguemines",
+      "part_recents_pct": 7.87,
+      "ze": "4420"
+    },
+    {
+      "delta_pts": -1.74,
+      "name": "La Vallée de la Bresle - Vimeu",
+      "part_recents_pct": 7.97,
+      "ze": "0058"
+    }
+  ],
+  "rotation_la_plus_forte": [
+    {
+      "delta_pts": 2.24,
+      "name": "Corte",
+      "part_recents_pct": 23.45,
+      "ze": "9404"
+    },
+    {
+      "delta_pts": 1.67,
+      "name": "Est-littoral",
+      "part_recents_pct": 19.22,
+      "ze": "0301"
+    },
+    {
+      "delta_pts": -1.43,
+      "name": "Toulouse",
+      "part_recents_pct": 16.89,
+      "ze": "7625"
+    },
+    {
+      "delta_pts": -2.04,
+      "name": "Montpellier",
+      "part_recents_pct": 16.06,
+      "ze": "7616"
+    },
+    {
+      "delta_pts": -2.99,
+      "name": "Rennes",
+      "part_recents_pct": 15.52,
+      "ze": "5315"
+    },
+    {
+      "delta_pts": 2.19,
+      "name": "Ouest-Guyanais",
+      "part_recents_pct": 15.14,
+      "ze": "0302"
+    },
+    {
+      "delta_pts": -0.56,
+      "name": "Lille",
+      "part_recents_pct": 15.0,
+      "ze": "3216"
+    },
+    {
+      "delta_pts": -1.27,
+      "name": "Reims",
+      "part_recents_pct": 14.92,
+      "ze": "4413"
+    }
+  ],
+  "spearman_delta_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        -0.44,
+        -0.24
+      ],
+      "n": 297,
+      "rho": -0.35
+    },
+    "metropole": {
+      "ci95": [
+        -0.39,
+        -0.18
+      ],
+      "n": 287,
+      "rho": -0.29
+    }
+  },
+  "spearman_delta_vs_vacance": {
+    "france_entiere": {
+      "ci95": [
+        0.05,
+        0.27
+      ],
+      "n": 305,
+      "rho": 0.17
+    },
+    "metropole": {
+      "ci95": [
+        0.14,
+        0.36
+      ],
+      "n": 287,
+      "rho": 0.25
+    }
+  },
+  "spearman_niveau_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        0.23,
+        0.43
+      ],
+      "n": 297,
+      "rho": 0.33
+    },
+    "metropole": {
+      "ci95": [
+        0.3,
+        0.49
+      ],
+      "n": 287,
+      "rho": 0.4
+    }
+  },
+  "spearman_niveau_vs_vacance": {
+    "france_entiere": {
+      "ci95": [
+        -0.35,
+        -0.14
+      ],
+      "n": 305,
+      "rho": -0.25
+    },
+    "metropole": {
+      "ci95": [
+        -0.33,
+        -0.11
+      ],
+      "n": 287,
+      "rho": -0.22
+    }
+  },
+  "ze_en_hausse": [
+    {
+      "delta_pts": 2.24,
+      "name": "Corte",
+      "part_recents_pct": 23.45,
+      "ze": "9404"
+    },
+    {
+      "delta_pts": 2.19,
+      "name": "Ouest-Guyanais",
+      "part_recents_pct": 15.14,
+      "ze": "0302"
+    },
+    {
+      "delta_pts": 1.67,
+      "name": "Est-littoral",
+      "part_recents_pct": 19.22,
+      "ze": "0301"
+    },
+    {
+      "delta_pts": 0.52,
+      "name": "Saclay",
+      "part_recents_pct": 11.56,
+      "ze": "1113"
+    },
+    {
+      "delta_pts": 0.31,
+      "name": "Roanne",
+      "part_recents_pct": 11.61,
+      "ze": "8426"
+    },
+    {
+      "delta_pts": 0.26,
+      "name": "Thouars",
+      "part_recents_pct": 10.15,
+      "ze": "7530"
+    },
+    {
+      "delta_pts": 0.18,
+      "name": "Versailles-Saint-Quentin",
+      "part_recents_pct": 11.14,
+      "ze": "1115"
+    },
+    {
+      "delta_pts": 0.11,
+      "name": "Châteaudun",
+      "part_recents_pct": 9.78,
+      "ze": "2404"
+    },
+    {
+      "delta_pts": 0.07,
+      "name": "Carhaix-Plouguer",
+      "part_recents_pct": 10.19,
+      "ze": "5303"
+    },
+    {
+      "delta_pts": 0.04,
+      "name": "Saint Etienne",
+      "part_recents_pct": 12.67,
+      "ze": "8428"
+    },
+    {
+      "delta_pts": 0.02,
+      "name": "Autun",
+      "part_recents_pct": 9.73,
+      "ze": "2701"
+    },
+    {
+      "delta_pts": 0.01,
+      "name": "Guingamp",
+      "part_recents_pct": 12.08,
+      "ze": "5306"
+    }
+  ]
+}

@@ -617,3 +617,36 @@
     (6,7 M m² / 3 375 ha, foncier partagé avec les autres usages), à
     convertir en logements/ha dans la sensibilité de R-10 (convention
     explicitée dans le code).
+
+- id: S-27
+  publisher: INSEE
+  title: Recensement de la population — Logements et résidences principales en 2023 (exploitation principale, jeu Melodi DS_RP_LOGEMENT_PRINC)
+  dataset_id: DS_RP_LOGEMENT_PRINC
+  source_url: https://www.insee.fr/fr/statistiques/8997194
+  publication_date: 2026-08-08
+  retrieved_at: 2026-08-08
+  geographic_scope: France hors Mayotte (communal et supracommunal, dont ZE2020 — 305 zones d'emploi, géographie COG 2026)
+  temporal_scope: millésimes RP 2012, 2017 et 2023 (concepts harmonisés européens 2023 sur les trois millésimes)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/insee-rp-logement-princ-2023.parquet
+  checksum: sha256:07fb7435169536f6336e44769eeec87ca753dcbb54d7679a64fd2ee350dd038c
+  notes: >
+    Fichier Parquet Melodi (98 209 201 octets, 11 904 165 observations,
+    téléchargé via https://api.insee.fr/melodi/file/DS_RP_LOGEMENT_PRINC_2023/PARQUET ;
+    la taille au octet près correspond au champ tailleFichierParquetEnOctets
+    des métadonnées du catalogue Melodi). Caractéristiques des résidences
+    principales par catégorie/type de logement, pièces, surface, chauffage,
+    statut d'occupation, voitures et ANCIENNETÉ D'EMMÉNAGEMENT (dimension
+    L_STAY, D-16) — la mesure DWELLINGS (comptages pondérés, valeurs
+    fractionnaires) croisée L_STAY est complète à la maille ZE2020 :
+    305 ZE × 6 classes × 3 millésimes, tout autre axe à _T. Les classes
+    L_STAY (Y_LT2, Y2T4, Y5T9, Y10T19, Y20T29, Y_GE30) sont plus fines
+    que l'ANEM commune du RP2022 (S-11). Les trois millésimes sont
+    diffusés dans la géographie COG 2026 et les concepts européens 2023 —
+    l'évolution 2012→2017→2023 est donc comparable par construction dans
+    ce fichier, mais PAS avec les bases ANEM des millésimes antérieurs
+    diffusées sous l'ancien concept de ménage (D-05/D-06). La mesure
+    DWELLING_L_STAY (ancienneté cumulée servant aux moyennes) n'est pas
+    utilisée. Codes ZE à 4 chiffres identiques à l'indexation du projet
+    (0051..). Correction INSEE du 28/06/2026 sur l'achèvement des
+    résidences principales (champ BUILD_END, non utilisé ici).

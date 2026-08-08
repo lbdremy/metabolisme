@@ -10,6 +10,7 @@ dependencies = [
     "pandas>=2.2",   # tabular reads/transforms of the frozen sources
     "openpyxl>=3.1", # xlsx engine for the INSEE files in data/raw/
     "python-calamine>=0.2", # xlsx engine tolerant of INSEE stylesheets openpyxl rejects
+    "pyarrow>=17",   # parquet engine for the INSEE Melodi files (S-27)
 ]
 
 [project.scripts]

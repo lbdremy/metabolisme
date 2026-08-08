@@ -283,3 +283,32 @@
     - Le seuil s'entend sur le taux de vacance TOTALE du parc entier au
       sens du recensement (D-03) — pas sur la seule vacance du parc privé
       LOVAC (L-06).
+
+- id: D-16
+  term: ancienneté d'emménagement dans le logement (recensement de la population)
+  source: S-04
+  url: https://www.insee.fr/fr/metadonnees/definition/c1830
+  last_updated: 2026-08-06
+  definition: >
+    L'ancienneté d'emménagement est le nombre d'années écoulées depuis la
+    date d'emménagement dans le logement. Lorsque les occupants ont
+    emménagé à des dates différentes, la date d'emménagement retenue est
+    celle du premier occupant arrivé : l'ancienneté mesure la stabilité
+    du ménage dans le logement, pas celle de chaque individu. Pour une
+    personne ayant toujours vécu dans le logement, l'année d'emménagement
+    est l'année de naissance.
+  caveats:
+    - Dans le jeu RP2023 (S-27), la dimension harmonisée européenne
+      L_STAY code l'ancienneté en 6 classes (moins de 2 ans, 2-4, 5-9,
+      10-19, 20-29, 30 ans ou plus) — découpage différent de l'ANEM des
+      bases communales RP2022 (S-11 - 0-2, 2-4, 5-9, 10 ans ou plus) ;
+      ne jamais mélanger les deux découpages dans une même série.
+    - La part d'emménagés récents est un indicateur de ROTATION du parc,
+      pas de mobilité des personnes - un emménagement récent peut être
+      une première installation, pas seulement un déménagement interne ;
+      et les mobilités vers un autre territoire ne laissent aucune trace
+      dans le parc d'origine si le logement reste vacant ou change
+      d'usage.
+    - Concepts harmonisés européens 2023 appliqués aux trois millésimes
+      diffusés (2012, 2017, 2023) du jeu S-27 - comparaison interne au
+      fichier légitime, comparaison avec les diffusions antérieures non.

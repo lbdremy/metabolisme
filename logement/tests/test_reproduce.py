@@ -80,3 +80,10 @@ def test_committed_foncier_artifact_matches_rebuild() -> None:
     root = project_root()
     committed = json.loads((root / build.FONCIER_OUTPUT).read_text(encoding="utf-8"))
     assert build.build_foncier(root) == committed
+
+
+def test_committed_mobilite_artifact_matches_rebuild() -> None:
+    """data/processed/mobilite-residentielle-ze.json matches a rebuild."""
+    root = project_root()
+    committed = json.loads((root / build.MOBILITE_OUTPUT).read_text(encoding="utf-8"))
+    assert build.build_mobilite(root) == committed

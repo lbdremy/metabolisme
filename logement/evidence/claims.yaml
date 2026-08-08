@@ -1357,3 +1357,121 @@
     chaîne ; ils bornent seulement ce que « le gisement couvre le
     besoin » veut dire — et ne pas dire. Porte sur R-07/I-07/I-10.
   depends_on: [D-15, H-08]
+
+# ------------------------------------------------- session 4 (2026-08-08) :
+# rotation résidentielle (première instruction de H-04, S-27)
+
+- id: O-25
+  type: observation
+  title: >
+    Résidences principales par classe d'ancienneté d'emménagement
+    (dimension européenne L_STAY, 6 classes) aux mailles FRANCE et
+    ZE2020, millésimes RP 2012, 2017 et 2023 — concepts harmonisés 2023
+    et géographie COG 2026 sur les trois millésimes (comparaison interne
+    au fichier légitime par construction, D-16). Les 6 classes re-somment
+    au total diffusé (écart relatif max ~2e-9).
+  depends_on: [S-27, D-16]
+
+- id: O-26
+  type: observation
+  title: >
+    Au niveau national (France hors Mayotte), la part des résidences
+    principales occupées depuis moins de 2 ans passe de 13,14 % (2012) à
+    12,89 % (2017) puis 11,97 % (2023) : la baisse s'accélère (−0,25 pt
+    en 5 ans puis −0,92 pt en 6 ans) et se concentre sur la classe
+    « moins de 2 ans » — la part « moins de 5 ans » ne perd que 0,43 pt
+    (la classe 2-4 ans gagne 0,74 pt : les ménages entrés récemment ne
+    re-bougent plus aussi vite).
+  depends_on: [O-25]
+
+- id: O-27
+  type: observation
+  title: >
+    La part d'emménagés de moins de 2 ans (2023) s'étend de 5,97 %
+    (Le Nord-Atlantique, Martinique) à 23,45 % (Corte), médiane 10,58 % ;
+    le bas de la distribution est fait de marchés détendus (ZE
+    antillaises 6,0-7,8 %, Sarreguemines 7,9, Vallée de la
+    Bresle - Vimeu 8,0, Abbeville 8,3), le haut de ZE
+    étudiantes/métropolitaines chères (Toulouse 16,9, Montpellier 16,1,
+    Rennes 15,5, Lille 15,0, Bordeaux 14,9). Entre 2012 et 2023, 293 des
+    305 ZE baissent (médiane −1,36 pt, quartiles −1,77/−0,93) ; les
+    hausses sont rares et singulières (Corte +2,24, Ouest-Guyanais
+    +2,19, Est-littoral +1,67, Saclay +0,52, puis ≤ +0,31).
+  depends_on: [O-25]
+
+- id: T-12
+  type: transformation
+  title: >
+    Rotation résidentielle par ZE : filtrage du Parquet Melodi S-27 à la
+    lecture (mesure DWELLINGS, résidences principales DW_MAIN, toutes
+    dimensions hors L_STAY au total), pivot (niveau, géo, millésime) ×
+    classe avec CONTRÔLE d'intégrité (les 6 classes doivent re-sommer au
+    total diffusé, erreur dure sinon), parts d'emménagés récents
+    (< 2 ans, < 5 ans), périmètre national F (France hors Mayotte)
+    jamais mélangé à FM, delta 2012→2023 par ZE, croisements avec le
+    statut de tension de T-08 (H-08 et H-12 centraux), le taux de
+    vacance structurelle (T-04) et l'indice de coût résidentiel (T-05) —
+    corrélations de rangs avec IC de Fisher sur les deux périmètres
+    (jamais comparés entre eux).
+  depends_on: [O-25, T-08, T-04, T-05, H-08, H-12]
+  produced_by: src/logement/core/mobilite.py
+
+- id: R-11
+  type: result
+  title: >
+    Rotation résidentielle par ZE (S-27, millésimes 2012/2017/2023) :
+    ralentissement national de −1,17 pt de la part d'emménagés de moins
+    de 2 ans (13,14 → 11,97 %), soit ~364 000 emménagements récents
+    « manquants » dans le stock 2023 à rotation 2012 constante (ordre de
+    grandeur descriptif, pas un flux annuel) ; 293 ZE sur 305 en baisse.
+    Le NIVEAU de rotation est plus haut là où le logement est cher
+    (rho métropole +0,40, IC95 [+0,30, +0,49], n = 287) et plus bas là
+    où la vacance structurelle est haute (rho −0,22, IC95
+    [−0,33, −0,11]) — il reflète la fonction du territoire (étudiants,
+    emploi), pas la détente du marché. La CHUTE 2012→2023 suit le
+    gradient inverse : plus forte là où le logement est cher (rho
+    métropole −0,29, IC95 [−0,39, −0,18] ; France entière −0,35) et là
+    où la vacance est rare (rho +0,25, IC95 [+0,14, +0,36]) ; médiane
+    −1,54 pt dans les 97 ZE tendues de R-07 contre −1,27 pt ailleurs.
+  depends_on: [T-12, O-26, O-27, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/mobilite-residentielle-ze.json
+  limitations: [L-22]
+
+- id: I-11
+  type: interpretation
+  title: >
+    Première instruction de H-04 (mobilités empêchées) : le gel de la
+    rotation est général mais SE CONCENTRE dans les marchés verrouillés
+    — chers et sans vacance disponible — pendant que dans les marchés
+    détendus la rotation, déjà faible, baisse moins. C'est la signature
+    attendue d'une mobilité EMPÊCHÉE par le marché (et non d'un simple
+    désintérêt pour la mobilité, qui ne suivrait pas le gradient de
+    coût) ; le sens niveau/chute opposé sur le même gradient de coût
+    écarte l'explication « les territoires chers tournent
+    structurellement moins ». L'interprétation reste descriptive :
+    aucun contrôle de composition (L-22) — la part démographique du
+    ralentissement n'est pas séparée de la part « blocage ». À
+    instruire ensuite : mobilité du parc social (RPLS), migrations
+    résidentielles entre ZE, coût de transaction (DVF) — NEXT-STEPS.
+  depends_on: [R-11]
+
+- id: L-22
+  type: limit
+  title: >
+    Limites de la rotation comme mesure des mobilités empêchées :
+    (1) aucun contrôle de composition — le vieillissement élève
+    mécaniquement l'ancienneté d'emménagement et une partie de la chute
+    nationale est démographique ; le gradient TERRITORIAL de la chute
+    (R-11) est le signal le moins exposé (le vieillissement est
+    national) mais les structures d'âge diffèrent aussi entre ZE ;
+    (2) rotation du parc ≠ mobilité des personnes (D-16) : un marché
+    étudiant gonfle sa rotation par les premières installations sans que
+    les ménages en place puissent bouger, et une mobilité sortante vers
+    une autre ZE ne laisse aucune trace si le logement quitte l'usage de
+    résidence principale ; (3) la classe « moins de 2 ans » du millésime
+    2023 recouvre des emménagements ~2021-2023 (collecte EAR),
+    période post-COVID atypique ; (4) les corrélations coût portent sur
+    n = 297 ZE (loyers d'annonce absents de certaines ZE), la vacance
+    sur n = 305. Porte sur R-11/I-11.
+  depends_on: [D-16, S-27]

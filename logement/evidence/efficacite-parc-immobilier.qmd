@@ -4,8 +4,9 @@ subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
   taux d'effort, tension, état du bâti, coût de remobilisation, foncier
-  immobilisé — chiffres révisés par la revue contradictoire du 2026-08-07
-date: 2026-08-07
+  immobilisé, rotation résidentielle — chiffres révisés par la revue
+  contradictoire du 2026-08-07
+date: 2026-08-08
 lang: fr
 format:
   html:
@@ -133,7 +134,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 82 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 94 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -187,6 +188,14 @@ propriétés) :
   registre (erreur dure en cas de dérive), capacités et couverture du
   besoin par ZE, densité constatée des opérations du fonds friches
   (S-25/S-26) en plancher opérationnel, propagation de H-08.
+- **T-12** (`core/mobilite.py`) — rotation résidentielle par ZE :
+  filtrage du Parquet Melodi S-27 à la lecture (résidences principales,
+  toutes dimensions hors L_STAY au total), pivot avec contrôle
+  d'intégrité (les 6 classes re-somment au total diffusé, erreur dure
+  sinon), parts d'emménagés récents (< 2 ans, < 5 ans) aux périmètres
+  jamais mélangés (national F, ZE), delta 2012→2023, croisements avec la
+  tension (T-08), la vacance structurelle (T-04) et l'indice de coût
+  (T-05) — corrélations de rangs avec IC de Fisher.
 
 ## 5. Hypothèses
 
@@ -242,16 +251,18 @@ r07 = build.build_tension(ROOT)
 r08 = build.build_etat_bati(ROOT)
 r09 = build.build_cout_remobilisation(ROOT)
 r10 = build.build_foncier(ROOT)
+r11 = build.build_mobilite(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
     ("R-05", r05, build.RS_OUTPUT), ("R-06", r06, build.EFFORT_OUTPUT),
     ("R-07", r07, build.TENSION_OUTPUT), ("R-08", r08, build.BATI_OUTPUT),
     ("R-09", r09, build.REMOB_OUTPUT), ("R-10", r10, build.FONCIER_OUTPUT),
+    ("R-11", r11, build.MOBILITE_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-10 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-11 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -790,6 +801,59 @@ zone détendue, mais 80 des 93 ZE pourvues couvriraient leur propre besoin
 (interprétation I-10 ; limites L-15, dont la frontière des bureaux
 vacants « en marché », hors donnée ouverte).
 
+### R-11 — La rotation du parc ralentit, surtout dans les marchés verrouillés
+
+```{python}
+#| code-summary: "chiffres clés R-11"
+nat = r11["national"]
+for annee, parts in nat["parts_par_millesime"].items():
+    print(f"{annee} : {parts['moins_2_ans_pct']} % des RP occupées depuis "
+          f"moins de 2 ans ({parts['moins_5_ans_pct']} % depuis moins de 5 ans)")
+print(f"Delta 2012→2023 : {nat['delta_moins_2_ans_pts']} pt (moins de 2 ans), "
+      f"{nat['delta_moins_5_ans_pts']} pt (moins de 5 ans) ; "
+      f"~{nat['emmenagements_recents_manquants']:,} emménagements récents "
+      "« manquants » dans le stock 2023 à rotation 2012 constante "
+      "(ordre descriptif)".replace(",", " "))
+d = r11["distribution_part_recents_pct"]
+print(f"Par ZE (2023) : min {d['min']} %, médiane {d['mediane']} %, "
+      f"max {d['max']} % ; {r11['n_ze_en_baisse']} des {r11['n_ze']} ZE "
+      "en baisse 2012→2023")
+mt = r11["mediane_delta_par_tension"]
+print(f"Médiane du delta : {mt['tendues_pts']} pt dans les {mt['n_tendues']} "
+      f"ZE tendues (R-07 central) vs {mt['autres_pts']} pt ailleurs")
+for label, key in [
+    ("niveau × coût résidentiel", "spearman_niveau_vs_cout"),
+    ("niveau × vacance structurelle", "spearman_niveau_vs_vacance"),
+    ("chute 2012→2023 × coût", "spearman_delta_vs_cout"),
+    ("chute 2012→2023 × vacance", "spearman_delta_vs_vacance"),
+]:
+    m = r11[key]["metropole"]
+    print(f"Spearman {label} (métropole) : {m['rho']} "
+          f"[{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']})")
+```
+
+Première instruction de **H-04 (mobilités empêchées)** : la trace
+observable d'une mobilité bloquée est la rotation effective du parc,
+mesurée par l'ancienneté d'emménagement (D-16, S-27 — trois millésimes
+comparables par construction). La part des résidences principales
+occupées depuis moins de 2 ans passe de **13,14 % (2012) à 11,97 %
+(2023)** et la baisse s'accélère (−0,25 pt sur 2012-2017, −0,92 pt sur
+2017-2023) ; **293 des 305 zones d'emploi baissent**. Le **niveau** de
+rotation reflète la fonction du territoire — plus haut là où le logement
+est cher (villes étudiantes et métropoles : +0,40 avec l'indice de
+coût), plus bas dans les marchés détendus à vacance haute (−0,22) — mais
+la **chute** suit le gradient inverse : plus forte là où le logement est
+cher (−0,29) et où la vacance disponible est rare (+0,25), médiane
+−1,54 pt dans les 97 ZE tendues contre −1,27 pt ailleurs. Le gel de la
+rotation se concentre donc dans les marchés verrouillés — la signature
+attendue d'une mobilité *empêchée*, le sens opposé niveau/chute sur le
+même gradient de coût écartant l'explication « les territoires chers
+tournent structurellement moins » (interprétation I-11). Lecture
+descriptive : pas de contrôle de composition démographique — le
+vieillissement élève mécaniquement l'ancienneté, et la fenêtre « moins
+de 2 ans » du millésime 2023 recouvre la période post-COVID (limites
+L-22).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -987,6 +1051,8 @@ hypothèses/définitions · scénarios d'échec · statistique), 45 objections,
 dont le compte rendu complet — méthode, dispositions objection par
 objection, restes ouverts — est
 [`evidence/revue-contradictoire-2026-08-07.md`](revue-contradictoire-2026-08-07.md).
+R-11 (rotation résidentielle, ajouté le 2026-08-08) est POSTÉRIEUR à
+cette revue et devra entrer dans la prochaine passe contradictoire.
 L'arithmétique publiée était exacte partout ; les objections sérieuses
 portaient sur les modèles et la mise en récit, et ont conduit aux
 corrections suivantes (toutes tracées dans les registres et le graphe,
