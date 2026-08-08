@@ -28,26 +28,30 @@ médian par UC en médiane — 7,8 mois en ZE tendues vs 5,5, jusqu'à
 11-13 mois (Paris, Bayonne, DOM chers) ; ~83 % du péage est FISCAL
 (paramètre institutionnel direct pour la future proposition P-xx,
 I-14). R-11 à R-14 sont POSTÉRIEURS à la revue du 2026-08-07 — à
-couvrir par la prochaine passe contradictoire. L'état v0.3 (couverture 1,06, besoin 194 488, détente
-15,8 Md€ ratio 2,1, foncier 10,9 ×) est inchangé.
+couvrir par la prochaine passe contradictoire. L'état v0.3 (couverture
+1,06, besoin 194 488, détente 15,8 Md€ ratio 2,1, foncier 10,9 ×) est
+inchangé. Tag : **`efficacite-parc-v0.4`**.
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Compléments H-04 possibles** (l'essentiel est fait — R-11..R-14) :
-   1. SNE : ressource data.gouv MORTE (404) ; portail vivant
-      https://www.data.logement.gouv.fr/statistiques/ = exports par
-      territoire sans bulk (effort élevé) ; raccourci possible par les
-      indicateurs SNE de l'Observatoire des Territoires (maille à vérifier
-      à la main). EnL 2020 : microdonnées sous habilitation — calibration
-      nationale seulement.
-   Le terme « coût de la mobilité résidentielle » (R-06) est disponible ;
-   la prochaine passe contradictoire devra couvrir R-11 à R-14
-   (postérieurs à la revue du 2026-08-07). Licence S-28 (RPLS) à
-   confirmer avant citation dans l'article, comme S-09 (L-09). Pistes
-   ouvertes si un résultat les demande : STOCD × IRAN (mobilité par
-   statut PAR ZE) ; territorialiser H-13 par département depuis S-31 ;
-   frais d'agence (aucune source ouverte identifiée, L-25).
-2. **Restes ouverts de la revue** (voir la section dédiée du compte rendu) :
+1. **Passe contradictoire sur R-11..R-14** (méthode INTRO étape 12) —
+   les quatre résultats de la session 4 sont postérieurs à la revue du
+   2026-08-07 ; le pattern des 4 relecteurs indépendants de la session 3
+   a fait ses preuves. Angles à couvrir en particulier : l'effet de
+   composition démographique de R-11 (L-22), la convention C-09 de
+   R-12, le statut « à l'arrivée » de R-13 (L-24), l'assiette C-10 et
+   le plancher de R-14 (L-25).
+2. **Compléments H-04 possibles** (l'essentiel est fait — R-11..R-14) :
+   SNE : ressource data.gouv MORTE (404) ; portail vivant
+   https://www.data.logement.gouv.fr/statistiques/ = exports par
+   territoire sans bulk (effort élevé) ; raccourci possible par les
+   indicateurs SNE de l'Observatoire des Territoires (maille à vérifier
+   à la main). EnL 2020 : microdonnées sous habilitation — calibration
+   nationale seulement. Pistes ouvertes si un résultat les demande :
+   STOCD × IRAN (mobilité par statut PAR ZE) ; territorialiser H-13 par
+   département depuis S-31 ; frais d'agence (aucune source ouverte
+   identifiée, L-25).
+3. **Restes ouverts de la revue** (voir la section dédiée du compte rendu) :
    - figer l'emploi localisé INSEE récent à la maille ZE (2012-2023) et
      re-exécuter R-03 en variante (L-07 corrigée le promet) ;
    - instruire l'anomalie de réconciliation LOVAC communal vs départemental
@@ -57,20 +61,23 @@ couvrir par la prochaine passe contradictoire. L'état v0.3 (couverture 1,06, be
      partie du dossier « source dégradée post-GMBI » (L-04) ;
    - sourcer proprement les référentiels de besoin en flux (L-21) si le
      premier article veut les citer.
-3. **Lever les frontières H-05 par convention** : PPPI (DREAL/DDT),
+4. **Lever les frontières H-05 par convention** : PPPI (DREAL/DDT),
    fichiers fonciers/successions (Cerema — statut « acteur public » à
    clarifier) ; seule voie pour la piste successions/indivisions (I-08),
    devenue centrale depuis que H-12 rappelle que l'EXISTENCE même du
    gisement se joue là.
-4. **Frontières de données actées** (ne pas re-tenter sans nouveau
+5. **Frontières de données actées** (ne pas re-tenter sans nouveau
    levier) : fichiers LOVAC détaillés = habilitation (sensibilité H-06 ET
    désormais L-18 taille/époque des vacants) ; éviction saisonnière
    infra-territoriale = non tranchable en open data (notebook 06).
-5. **Chemin de publication** : la revue étape 12 est faite ; le premier
-   article dans `articles/` peut s'écrire sur l'état v0.3 — ATTENTION, sur
-   le récit corrigé (couverture ~1 conditionnelle, ratio ~2, contrainte
-   institutionnelle = condition), pas sur les chiffres d'avant revue ;
-   licence du millésime loyers 2025 à confirmer avant publication (L-09).
+6. **Chemin de publication** : le premier article dans `articles/` peut
+   s'écrire sur l'état v0.4 (l'arc v0.3 revu + H-04 instruite) —
+   ATTENTION : sur le récit corrigé (couverture ~1 conditionnelle,
+   ratio ~2, contrainte institutionnelle = condition), pas sur les
+   chiffres d'avant revue ; les chiffres R-11..R-14 ne devraient être
+   titrés qu'après leur passe contradictoire (étape 1) ; licences à
+   confirmer avant publication : loyers 2025 (S-09, L-09) et RPLS
+   (S-28).
 
 ## Outillage (sans urgence — ne mord qu'avec la croissance de l'étude)
 
