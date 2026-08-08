@@ -3,11 +3,11 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
-## Session 4 — 2026-08-08 (rotation résidentielle : première instruction de H-04)
+## Session 4 — 2026-08-08 (H-04 : rotation résidentielle et parc social)
 
-Livrable unique : **R-11** — la rotation du parc par l'ancienneté
-d'emménagement, selon le plan d'éclairage données de la session 3 (option
-n° 1, rapport effort/valeur).
+Deux livrables : **R-11** (rotation du parc, ancienneté d'emménagement)
+puis **R-12** (mobilité du parc social, RPLS), selon le plan d'éclairage
+données de la session 3 (options n° 1 et 2, rapport effort/valeur).
 
 - **S-27 figée** : RP « Logement en 2023 » (jeu Melodi
   DS_RP_LOGEMENT_PRINC, Parquet 98 Mo, 11,9 M obs.) — la base publiée le
@@ -38,6 +38,23 @@ n° 1, rapport effort/valeur).
   décrochage) ; la taille au octet près est publiée dans le catalogue
   (`tailleFichierParquetEnOctets`) — contrôle d'intégrité gratuit ; le
   niveau FRANCE du fichier contient F ET FM.
+- **S-28 figée** (RPLS au 01/01/2025, zip SDES 21 Mo) : feuille COMMUNE
+  avec les SÉRIES annuelles 2013-2025 du taux de mobilité (D-17 créée),
+  de la vacance et des loyers du parc social. **R-12** : chute nationale
+  9,87 → 9,29 → 7,11 % qui S'ACCÉLÈRE après 2022, généralisée (286 ZE
+  sur 303) et UNIFORME (chute × coût ≈ 0 ; tendues −2,40 pt vs autres
+  −2,44), mais niveau miroir du marché : mobilité × coût rho métropole
+  −0,80 (la corrélation la plus forte de la chaîne), médiane 6,74 % en
+  ZE tendues (Nice 4,1, Marseille 4,7 — un logement social s'y libère
+  ~tous les 20-25 ans), vacance sociale tendue 1,63 %. Croisement des
+  segments NÉGATIF (−0,20 avec R-11) : la rotation étudiante/privée
+  masque le gel social. I-12 : quand le privé est inabordable, personne
+  ne quitte le parc social. Convention d'agrégation C-09 (ratios
+  publiés sans numérateurs → moyenne pondérée par le parc du millésime,
+  CONTRÔLE dur contre le national publié, écarts ≤ 0,014 pt) ; claims
+  C-09, O-28..O-30, T-13, R-12, I-12, L-23 (100 nœuds) ; 9 tests
+  nouveaux (103) ; masque DOM de `core/stats` étendu à Mayotte
+  (ZE 0601 — S-28 est la première source France entière avec Mayotte).
 
 ## Session 3 — 2026-08-07 (revue contradictoire et intégration) — tag `efficacite-parc-v0.3`
 

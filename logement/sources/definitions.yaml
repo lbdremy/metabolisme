@@ -312,3 +312,29 @@
     - Concepts harmonisés européens 2023 appliqués aux trois millésimes
       diffusés (2012, 2017, 2023) du jeu S-27 - comparaison interne au
       fichier légitime, comparaison avec les diffusions antérieures non.
+
+- id: D-17
+  term: taux de mobilité du parc locatif social (RPLS)
+  source: S-28
+  url: https://dreal.statistiques.developpement-durable.gouv.fr/parc_social/2022/nouvelle_aquitaine/methodo.html
+  last_updated: 2022-01-01
+  definition: >
+    « Emménagements dans les logements proposés à la location depuis un
+    an ou plus, rapportés au nombre de logements proposés à la location
+    depuis un an ou plus. » Les nouvelles mises en service ne sont pas
+    comptabilisées ; les rotations multiples au cours d'une même année
+    ne sont pas mesurées. Le taux de vacance RPLS est le « nombre de
+    logements vacants parmi les logements proposés à la location, hors
+    logements vides pour raison technique, rapporté au nombre de
+    logements proposés à la location » (dont vacance > 3 mois).
+  caveats:
+    - Champ = parc des bailleurs sociaux (hors logements-foyers,
+      résidences sociales, logements vides pour travaux/démolition/
+      vente) - ne se compare ni à la mobilité du parc privé ni à la
+      rotation du parc total (D-16).
+    - Mesure la rotation OFFERTE par le parc social - un taux bas peut
+      refléter le blocage des sorties (pas d'alternative abordable dans
+      le privé) autant que la stabilité choisie des locataires.
+    - Le fichier S-28 publie le ratio par territoire, pas ses deux
+      termes - toute agrégation supra-communale est une moyenne
+      pondérée approchée (convention à déclarer), pas un recalcul.

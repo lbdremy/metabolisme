@@ -87,3 +87,10 @@ def test_committed_mobilite_artifact_matches_rebuild() -> None:
     root = project_root()
     committed = json.loads((root / build.MOBILITE_OUTPUT).read_text(encoding="utf-8"))
     assert build.build_mobilite(root) == committed
+
+
+def test_committed_social_artifact_matches_rebuild() -> None:
+    """data/processed/mobilite-parc-social-ze.json matches a rebuild."""
+    root = project_root()
+    committed = json.loads((root / build.SOCIAL_OUTPUT).read_text(encoding="utf-8"))
+    assert build.build_social(root) == committed

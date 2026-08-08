@@ -4,8 +4,8 @@ subtitle: >
   Premiers constats : parc et ménages (1982-2025), vacance structurelle du
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
   taux d'effort, tension, état du bâti, coût de remobilisation, foncier
-  immobilisé, rotation résidentielle — chiffres révisés par la revue
-  contradictoire du 2026-08-07
+  immobilisé, rotation résidentielle, mobilité du parc social — chiffres
+  révisés par la revue contradictoire du 2026-08-07
 date: 2026-08-08
 lang: fr
 format:
@@ -134,7 +134,7 @@ srcs.style.hide(axis="index")
 
 ## 4. Transformations
 
-Toutes les transformations sont du code testé (`./test.sh`, 94 tests dont
+Toutes les transformations sont du code testé (`./test.sh`, 103 tests dont
 propriétés) :
 
 - **T-01/T-02** (`core/parc.py`) — lecture des fichiers INSEE (libellés à
@@ -196,6 +196,14 @@ propriétés) :
   jamais mélangés (national F, ZE), delta 2012→2023, croisements avec la
   tension (T-08), la vacance structurelle (T-04) et l'indice de coût
   (T-05) — corrélations de rangs avec IC de Fisher.
+- **T-13** (`core/social.py`) — mobilité du parc social par ZE :
+  lecture des feuilles COMMUNE/REGION du RPLS (S-28, PLM → commune
+  parente, secret en valeurs manquantes conservées), agrégation par
+  moyenne pondérée du parc du millésime (choix **C-09**, CONTRÔLE dur
+  contre le national publié — écarts observés ≤ 0,014 pt), seuil de
+  parc ≥ 500 logements, deltas 2019→2025 et 2013→2025, croisements
+  tension/vacance privée/coût/rotation totale (T-12) ; masque DOM
+  étendu à Mayotte (première source France entière avec Mayotte).
 
 ## 5. Hypothèses
 
@@ -252,17 +260,18 @@ r08 = build.build_etat_bati(ROOT)
 r09 = build.build_cout_remobilisation(ROOT)
 r10 = build.build_foncier(ROOT)
 r11 = build.build_mobilite(ROOT)
+r12 = build.build_social(ROOT)
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
     ("R-05", r05, build.RS_OUTPUT), ("R-06", r06, build.EFFORT_OUTPUT),
     ("R-07", r07, build.TENSION_OUTPUT), ("R-08", r08, build.BATI_OUTPUT),
     ("R-09", r09, build.REMOB_OUTPUT), ("R-10", r10, build.FONCIER_OUTPUT),
-    ("R-11", r11, build.MOBILITE_OUTPUT),
+    ("R-11", r11, build.MOBILITE_OUTPUT), ("R-12", r12, build.SOCIAL_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-11 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-12 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -854,6 +863,60 @@ vieillissement élève mécaniquement l'ancienneté, et la fenêtre « moins
 de 2 ans » du millésime 2023 recouvre la période post-COVID (limites
 L-22).
 
+### R-12 — Le parc social ne tourne plus, surtout là où le marché est cher
+
+```{python}
+#| code-summary: "chiffres clés R-12"
+nats = r12["national"]
+serie = nats["serie_mobilite_pct"]
+print("mobilité nationale du parc social (%) : " +
+      " ; ".join(f"{a} {serie[a]}" for a in ["2013", "2019", "2021", "2022", "2025"]))
+print(f"vacance sociale 2025 : {nats['vacance_pct']} % "
+      f"(dont > 3 mois {nats['vacance_plus_3_mois_pct']} %) ; parc "
+      f"{nats['parc_social']:,} logements".replace(",", " "))
+print(f"contrôle C-09 (agrégation pondérée vs national publié) : "
+      f"{nats['controle_agregation_c09_pt']} pt")
+d = r12["distribution_tx_mob_2025_pct"]
+print(f"par ZE (parc ≥ {r12['seuil_parc_social']}, {r12['n_ze']} ZE) : "
+      f"min {d['min']} %, médiane {d['mediane']} %, max {d['max']} % ; "
+      f"{r12['n_ze_en_baisse_2019_2025']} ZE en baisse 2019→2025")
+mt = r12["mediane_par_tension"]
+print(f"médianes ZE tendues : mobilité {mt['tendues']['tx_mob_2025_pct']} %, "
+      f"delta {mt['tendues']['delta_2019_2025_pts']} pt, vacance sociale "
+      f"{mt['tendues']['tx_vac_2025_pct']} % — autres : "
+      f"{mt['autres']['tx_mob_2025_pct']} % / {mt['autres']['delta_2019_2025_pts']} pt / "
+      f"{mt['autres']['tx_vac_2025_pct']} %")
+for label, key in [
+    ("niveau × coût résidentiel", "spearman_niveau_vs_cout"),
+    ("niveau × vacance structurelle privée", "spearman_niveau_vs_vacance_privee"),
+    ("niveau × rotation totale RP (R-11)", "spearman_niveau_vs_rotation_rp"),
+    ("chute 2019→2025 × coût", "spearman_delta_vs_cout"),
+    ("chute sociale × chute rotation RP", "spearman_delta_vs_delta_rotation_rp"),
+]:
+    m = r12[key]["metropole"]
+    print(f"Spearman {label} (métropole) : {m['rho']} "
+          f"[{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']})")
+```
+
+Deuxième instruction de **H-04** : la mobilité du parc social (D-17,
+S-28) chute de **9,29 % (2019) à 7,11 % (2025)** et le rythme s'accélère
+(−1,43 pt sur 2022-2025) ; la chute touche **286 des 303 ZE** et son
+ampleur est **uniforme** sur le territoire (corrélation avec le coût
+compatible avec zéro) — la file d'attente s'allonge partout. Le
+**niveau**, lui, est le miroir du marché local : corrélation **−0,80**
+avec l'indice de coût (la plus forte de toute la chaîne), médiane 6,74 %
+dans les ZE tendues — où la vacance sociale n'est que de 1,63 % — contre
+8,89 % ailleurs. À Nice, Marseille ou Roissy (4,1-4,7 %), un logement
+social se libère environ une fois tous les 20-25 ans. Le croisement avec
+la rotation totale (R-11) est **négatif** (−0,20) : la rotation
+étudiante et privée des métropoles masque le gel du segment social — les
+deux mesures se complètent. Quand le privé est inabordable, personne ne
+quitte le parc social (interprétation I-12) ; l'agrégation par ZE suit
+la convention C-09 (pondération par le parc du millésime, contrôlée
+contre le national publié à ≤ 0,014 pt près) ; limites L-23 (blocage
+des sorties et stabilité choisie non séparables, petits parcs volatils,
+Mayotte incluse contrairement à S-27).
+
 ## 7. Sensibilité
 
 L'analyse de sensibilité complète au seuil H-06 attend les fichiers LOVAC
@@ -1051,8 +1114,9 @@ hypothèses/définitions · scénarios d'échec · statistique), 45 objections,
 dont le compte rendu complet — méthode, dispositions objection par
 objection, restes ouverts — est
 [`evidence/revue-contradictoire-2026-08-07.md`](revue-contradictoire-2026-08-07.md).
-R-11 (rotation résidentielle, ajouté le 2026-08-08) est POSTÉRIEUR à
-cette revue et devra entrer dans la prochaine passe contradictoire.
+R-11 et R-12 (rotation résidentielle et mobilité du parc social,
+ajoutés le 2026-08-08) sont POSTÉRIEURS à cette revue et devront entrer
+dans la prochaine passe contradictoire.
 L'arithmétique publiée était exacte partout ; les objections sérieuses
 portaient sur les modèles et la mise en récit, et ont conduit aux
 corrections suivantes (toutes tracées dans les registres et le graphe,

@@ -1,0 +1,359 @@
+{
+  "distribution_tx_mob_2025_pct": {
+    "max": 18.12,
+    "mediane": 8.27,
+    "min": 2.64,
+    "q25": 6.8,
+    "q75": 9.53
+  },
+  "mediane_par_tension": {
+    "autres": {
+      "delta_2019_2025_pts": -2.44,
+      "tx_mob_2025_pct": 8.89,
+      "tx_vac_2025_pct": 2.8
+    },
+    "n_tendues": 95,
+    "tendues": {
+      "delta_2019_2025_pts": -2.4,
+      "tx_mob_2025_pct": 6.74,
+      "tx_vac_2025_pct": 1.63
+    }
+  },
+  "mobilite_la_plus_faible": [
+    {
+      "delta_2019_2025_pts": -0.87,
+      "name": "Porto-Vecchio",
+      "parc_social": 1009,
+      "tx_mob_2019_pct": 3.5,
+      "tx_mob_2025_pct": 2.64,
+      "ze": "9406"
+    },
+    {
+      "delta_2019_2025_pts": -0.71,
+      "name": "Sainte-Maxime",
+      "parc_social": 2420,
+      "tx_mob_2019_pct": 4.27,
+      "tx_mob_2025_pct": 3.56,
+      "ze": "9317"
+    },
+    {
+      "delta_2019_2025_pts": -1.81,
+      "name": "Menton",
+      "parc_social": 4207,
+      "tx_mob_2019_pct": 5.75,
+      "tx_mob_2025_pct": 3.94,
+      "ze": "9314"
+    },
+    {
+      "delta_2019_2025_pts": -1.87,
+      "name": "Nice",
+      "parc_social": 36542,
+      "tx_mob_2019_pct": 5.95,
+      "tx_mob_2025_pct": 4.09,
+      "ze": "9315"
+    },
+    {
+      "delta_2019_2025_pts": -1.73,
+      "name": "Roissy ",
+      "parc_social": 103976,
+      "tx_mob_2019_pct": 6.01,
+      "tx_mob_2025_pct": 4.27,
+      "ze": "1112"
+    },
+    {
+      "delta_2019_2025_pts": -0.04,
+      "name": "Ajaccio",
+      "parc_social": 5486,
+      "tx_mob_2019_pct": 4.31,
+      "tx_mob_2025_pct": 4.27,
+      "ze": "9401"
+    },
+    {
+      "delta_2019_2025_pts": -1.94,
+      "name": "L'Ouest",
+      "parc_social": 20438,
+      "tx_mob_2019_pct": 6.42,
+      "tx_mob_2025_pct": 4.48,
+      "ze": "0402"
+    },
+    {
+      "delta_2019_2025_pts": -1.48,
+      "name": "Sète",
+      "parc_social": 7870,
+      "tx_mob_2019_pct": 6.12,
+      "tx_mob_2025_pct": 4.64,
+      "ze": "7623"
+    }
+  ],
+  "mobilite_la_plus_forte": [
+    {
+      "delta_2019_2025_pts": 4.94,
+      "name": null,
+      "parc_social": 3008,
+      "tx_mob_2019_pct": 13.19,
+      "tx_mob_2025_pct": 18.12,
+      "ze": "0601"
+    },
+    {
+      "delta_2019_2025_pts": -0.52,
+      "name": "Mende",
+      "parc_social": 2967,
+      "tx_mob_2019_pct": 13.97,
+      "tx_mob_2025_pct": 13.45,
+      "ze": "7613"
+    },
+    {
+      "delta_2019_2025_pts": 7.82,
+      "name": "Mayenne",
+      "parc_social": 3036,
+      "tx_mob_2019_pct": 5.18,
+      "tx_mob_2025_pct": 13.0,
+      "ze": "5215"
+    },
+    {
+      "delta_2019_2025_pts": 0.44,
+      "name": "Avallon",
+      "parc_social": 1987,
+      "tx_mob_2019_pct": 12.38,
+      "tx_mob_2025_pct": 12.82,
+      "ze": "2703"
+    },
+    {
+      "delta_2019_2025_pts": 0.53,
+      "name": "Argentan",
+      "parc_social": 3580,
+      "tx_mob_2019_pct": 12.1,
+      "tx_mob_2025_pct": 12.63,
+      "ze": "2801"
+    },
+    {
+      "delta_2019_2025_pts": -3.61,
+      "name": "Aurillac",
+      "parc_social": 4458,
+      "tx_mob_2019_pct": 16.09,
+      "tx_mob_2025_pct": 12.48,
+      "ze": "8403"
+    },
+    {
+      "delta_2019_2025_pts": 3.31,
+      "name": "Région Pointoise",
+      "parc_social": 30487,
+      "tx_mob_2019_pct": 9.04,
+      "tx_mob_2025_pct": 12.35,
+      "ze": "0104"
+    },
+    {
+      "delta_2019_2025_pts": -0.28,
+      "name": "Châteaudun",
+      "parc_social": 3232,
+      "tx_mob_2019_pct": 12.54,
+      "tx_mob_2025_pct": 12.26,
+      "ze": "2404"
+    }
+  ],
+  "n_ze": 303,
+  "n_ze_en_baisse_2013_2025": 285,
+  "n_ze_en_baisse_2019_2025": 286,
+  "n_ze_sous_seuil": 3,
+  "n_ze_total": 306,
+  "national": {
+    "controle_agregation_c09_pt": {
+      "2013": -0.0,
+      "2019": -0.007,
+      "2025": 0.014
+    },
+    "parc_social": 5396259,
+    "serie_mobilite_pct": {
+      "2013": 9.87,
+      "2014": 9.65,
+      "2015": 9.55,
+      "2016": 9.7,
+      "2017": 9.77,
+      "2018": 9.44,
+      "2019": 9.29,
+      "2020": 9.01,
+      "2021": 7.55,
+      "2022": 8.54,
+      "2023": 8.04,
+      "2024": 7.44,
+      "2025": 7.11
+    },
+    "vacance_pct": 2.12,
+    "vacance_plus_3_mois_pct": 1.05
+  },
+  "plus_fortes_baisses": [
+    {
+      "delta_2019_2025_pts": -13.18,
+      "name": "Issoire",
+      "parc_social": 3253,
+      "tx_mob_2019_pct": 23.04,
+      "tx_mob_2025_pct": 9.86,
+      "ze": "8410"
+    },
+    {
+      "delta_2019_2025_pts": -10.11,
+      "name": "Nord-du-Lot",
+      "parc_social": 1122,
+      "tx_mob_2019_pct": 18.52,
+      "tx_mob_2025_pct": 8.42,
+      "ze": "7619"
+    },
+    {
+      "delta_2019_2025_pts": -9.9,
+      "name": "Cahors",
+      "parc_social": 3416,
+      "tx_mob_2019_pct": 20.26,
+      "tx_mob_2025_pct": 10.36,
+      "ze": "7607"
+    },
+    {
+      "delta_2019_2025_pts": -8.49,
+      "name": "Marie-Galante",
+      "parc_social": 617,
+      "tx_mob_2019_pct": 16.46,
+      "tx_mob_2025_pct": 7.97,
+      "ze": "0103"
+    },
+    {
+      "delta_2019_2025_pts": -7.44,
+      "name": "Pontivy-Loudéac",
+      "parc_social": 3241,
+      "tx_mob_2019_pct": 15.04,
+      "tx_mob_2025_pct": 7.6,
+      "ze": "5312"
+    },
+    {
+      "delta_2019_2025_pts": -7.28,
+      "name": "Sélestat",
+      "parc_social": 3096,
+      "tx_mob_2019_pct": 14.82,
+      "tx_mob_2025_pct": 7.54,
+      "ze": "4422"
+    },
+    {
+      "delta_2019_2025_pts": -6.93,
+      "name": "Ouest-Guyanais",
+      "parc_social": 4235,
+      "tx_mob_2019_pct": 14.98,
+      "tx_mob_2025_pct": 8.05,
+      "ze": "0302"
+    },
+    {
+      "delta_2019_2025_pts": -6.3,
+      "name": "Tulle",
+      "parc_social": 2774,
+      "tx_mob_2019_pct": 16.38,
+      "tx_mob_2025_pct": 10.08,
+      "ze": "7531"
+    }
+  ],
+  "seuil_parc_social": 500,
+  "spearman_delta_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        -0.03,
+        0.2
+      ],
+      "n": 295,
+      "rho": 0.09
+    },
+    "metropole": {
+      "ci95": [
+        -0.09,
+        0.14
+      ],
+      "n": 285,
+      "rho": 0.03
+    }
+  },
+  "spearman_delta_vs_delta_rotation_rp": {
+    "france_entiere": {
+      "ci95": [
+        -0.03,
+        0.19
+      ],
+      "n": 302,
+      "rho": 0.08
+    },
+    "metropole": {
+      "ci95": [
+        0.07,
+        0.3
+      ],
+      "n": 285,
+      "rho": 0.19
+    }
+  },
+  "spearman_niveau_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        -0.85,
+        -0.77
+      ],
+      "n": 295,
+      "rho": -0.82
+    },
+    "metropole": {
+      "ci95": [
+        -0.84,
+        -0.76
+      ],
+      "n": 285,
+      "rho": -0.8
+    }
+  },
+  "spearman_niveau_vs_rotation_rp": {
+    "france_entiere": {
+      "ci95": [
+        -0.26,
+        -0.04
+      ],
+      "n": 302,
+      "rho": -0.15
+    },
+    "metropole": {
+      "ci95": [
+        -0.31,
+        -0.09
+      ],
+      "n": 285,
+      "rho": -0.2
+    }
+  },
+  "spearman_niveau_vs_vacance_privee": {
+    "france_entiere": {
+      "ci95": [
+        0.26,
+        0.46
+      ],
+      "n": 303,
+      "rho": 0.36
+    },
+    "metropole": {
+      "ci95": [
+        0.39,
+        0.56
+      ],
+      "n": 285,
+      "rho": 0.48
+    }
+  },
+  "spearman_niveau_vs_vacance_sociale": {
+    "france_entiere": {
+      "ci95": [
+        0.33,
+        0.52
+      ],
+      "n": 303,
+      "rho": 0.43
+    },
+    "metropole": {
+      "ci95": [
+        0.37,
+        0.55
+      ],
+      "n": 285,
+      "rho": 0.46
+    }
+  }
+}

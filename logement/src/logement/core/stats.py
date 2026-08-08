@@ -16,8 +16,11 @@ import math
 import pandas as pd
 
 # ZE 2020 codes: 01xx Guadeloupe, 02xx Martinique, 03xx Guyane,
-# 04xx La Réunion ; the 00xx codes are metropolitan multi-region zones.
-DOM_ZE_PREFIXES = ("01", "02", "03", "04")
+# 04xx La Réunion, 06xx Mayotte (0601, absent from every source until
+# S-28 — added 2026-08-08 so the métropole perimeter stays honest for
+# France-entière datasets) ; the 00xx codes are metropolitan
+# multi-region zones.
+DOM_ZE_PREFIXES = ("01", "02", "03", "04", "06")
 
 
 class StatsError(Exception):

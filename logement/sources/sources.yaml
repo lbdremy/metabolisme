@@ -650,3 +650,33 @@
     utilisée. Codes ZE à 4 chiffres identiques à l'indexation du projet
     (0051..). Correction INSEE du 28/06/2026 sur l'achèvement des
     résidences principales (champ BUILD_END, non utilisé ici).
+
+- id: S-28
+  publisher: SDES (Commissariat général au développement durable)
+  title: Répertoire du parc locatif social (RPLS) au 1er janvier 2025 — résultats par région, département, EPCI et commune
+  dataset_id: rpls-2025
+  source_url: https://www.statistiques.developpement-durable.gouv.fr/54-millions-de-logements-locatifs-sociaux-en-france-au-1er-janvier-2025
+  publication_date: 2026-01-20
+  retrieved_at: 2026-08-08
+  geographic_scope: France entière (métropole + DROM, feuilles REGION/DEPARTEMENT/EPCI/COMMUNE — 16 863 communes)
+  temporal_scope: situation au 01/01/2025, séries annuelles 2013-2025 (mobilité, vacance, loyers)
+  license: non précisée sur la page de publication — statistique publique SDES, réutilisation habituelle Licence Ouverte 2.0 (à confirmer avant citation dans l'article, comme L-09)
+  local_file: data/raw/sdes-rpls-2025-resultats-territoires.zip
+  checksum: sha256:5228df69be12461a687ef7a318d768845ea94c05ebb68580f311e2f2102cde87
+  notes: >
+    Zip « Données nationales : régions, départements, EPCI et communes »
+    (téléchargé via https://www.statistiques.developpement-durable.gouv.fr/media/8938/download?inline=,
+    un xlsx de 21,5 Mo, version « secret_donnees » : cellules
+    secrétisées en valeurs manquantes — pas de marqueur « s » textuel,
+    les colonnes restent numériques). Feuille COMMUNE (header ligne 6) :
+    parc social par mode d'occupation, SÉRIES ANNUELLES du taux de
+    mobilité (tx_mob = millésime 2025, tx_mob_2013..tx_mob_2024 —
+    définition D-17), du taux de vacance (tx_vac, dont > 3 mois tx_vac3)
+    et des loyers moyens (loymoy). Chiffres-titres nationaux (feuille
+    REGION, ligne « Total France entière ») : parc 5 396 259 logements
+    sociaux, mobilité 7,11 % (2025) contre 9,29 % (2019) et 9,87 %
+    (2013) — creux COVID 7,55 % en 2021, rebond 8,54 % en 2022 puis
+    rechute —, vacance 2,12 % dont 1,05 % > 3 mois. Le taux de mobilité
+    est un RATIO PUBLIÉ par commune : l'agrégation par ZE doit le
+    pondérer par le parc proposé à la location (convention à déclarer),
+    faute des numérateurs (emménagements) dans le fichier.

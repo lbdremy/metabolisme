@@ -5,42 +5,43 @@ Mis à jour à chaque fin de session de travail significative.
 
 ## État au sortir de la session 4 (2026-08-08)
 
-**H-04 est ouverte** : R-11 (rotation résidentielle par l'ancienneté
-d'emménagement, S-27 — RP2023 Melodi, maille ZE native, millésimes
-2012/2017/2023 comparables) est stabilisé, testé (94 tests), inscrit au
-graphe (92 nœuds : O-25..O-27, T-12, R-11, I-11, L-22) et au document de
-preuve (marqué POSTÉRIEUR à la revue du 2026-08-07 — à couvrir par la
-prochaine passe contradictoire). Le constat : rotation en baisse dans
-293 ZE sur 305, chute concentrée dans les marchés chers et sans vacance
-(tendues −1,54 pt vs −1,27) alors que le NIVEAU de rotation suit la
-fonction du territoire — signature d'une mobilité empêchée, encore
-descriptive (pas de contrôle de composition, L-22). L'état v0.3 (revue
-contradictoire intégrée : couverture 1,06, besoin 194 488, détente
+**H-04 est ouverte, deux résultats posés** (103 tests, 100 nœuds,
+12 stages) : **R-11** (rotation résidentielle, S-27 — RP2023 Melodi,
+maille ZE native, millésimes 2012/2017/2023) : rotation en baisse dans
+293 ZE sur 305, chute CONCENTRÉE dans les marchés chers et sans vacance
+(tendues −1,54 pt vs −1,27) alors que le niveau suit la fonction du
+territoire. **R-12** (mobilité du parc social, S-28 — RPLS 2025, séries
+2013-2025) : chute nationale 9,29 → 7,11 % qui s'accélère, généralisée
+(286/303 ZE) et UNIFORME, mais niveau miroir du marché (rho −0,80 avec
+le coût — la plus forte corrélation de la chaîne ; médiane 6,74 % en ZE
+tendues, vacance sociale 1,63 %) ; croisement des segments NÉGATIF
+(−0,20) : la rotation étudiante/privée des métropoles masque le gel
+social (I-12, convention C-09 contrôlée, L-23). R-11 et R-12 sont
+POSTÉRIEURS à la revue du 2026-08-07 — à couvrir par la prochaine passe
+contradictoire. L'état v0.3 (couverture 1,06, besoin 194 488, détente
 15,8 Md€ ratio 2,1, foncier 10,9 ×) est inchangé.
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Poursuivre H-04 (mobilités empêchées)** — R-11 (rotation RP) est
-   FAIT (session 4) ; suite par rapport effort/valeur :
-   1. **RPLS SDES 2025** (zip communes/EPCI 20 Mo,
-      https://www.statistiques.developpement-durable.gouv.fr/media/8938/download?inline=) :
-      taux de mobilité du parc social 7,1 % (2025) vs 9,3 % (2019) — la
-      chute EST le phénomène ; + vacance sociale 2,1 %.
-   2. Fichier détail **migrations résidentielles RP2022**
+1. **Poursuivre H-04 (mobilités empêchées)** — R-11 (rotation RP) et
+   R-12 (mobilité du parc social) sont FAITS (session 4) ; suite par
+   rapport effort/valeur :
+   1. Fichier détail **migrations résidentielles RP2022**
       (https://www.insee.fr/fr/statistiques/8589858, Parquet 17,2 M obs.) :
       taux de mobilité annuel par ZE + flux entre ZE.
-   3. **DVF géolocalisées** (https://files.data.gouv.fr/geo-dvf/latest/csv/,
+   2. **DVF géolocalisées** (https://files.data.gouv.fr/geo-dvf/latest/csv/,
       par département) : prix → coût de transaction via une H-xx à déclarer
       (DMTO ~5,8 %, notaire, agence) ; pas d'Alsace-Moselle ni Mayotte.
-   4. SNE : ressource data.gouv MORTE (404) ; portail vivant
+   3. SNE : ressource data.gouv MORTE (404) ; portail vivant
       https://www.data.logement.gouv.fr/statistiques/ = exports par
       territoire sans bulk (effort élevé) ; raccourci possible par les
       indicateurs SNE de l'Observatoire des Territoires (maille à vérifier
       à la main). EnL 2020 : microdonnées sous habilitation — calibration
       nationale seulement.
    Le terme « coût de la mobilité résidentielle » (R-06) est disponible ;
-   la prochaine passe contradictoire devra couvrir R-11 (postérieur à la
-   revue du 2026-08-07).
+   la prochaine passe contradictoire devra couvrir R-11 ET R-12
+   (postérieurs à la revue du 2026-08-07). Licence S-28 (RPLS) à
+   confirmer avant citation dans l'article, comme S-09 (L-09).
 2. **Restes ouverts de la revue** (voir la section dédiée du compte rendu) :
    - figer l'emploi localisé INSEE récent à la maille ZE (2012-2023) et
      re-exécuter R-03 en variante (L-07 corrigée le promet) ;
@@ -97,8 +98,8 @@ changement) ; à traiter quand l'occasion s'y prête, pas avant :
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 11 artefacts data/processed/
-./check.sh && ./test.sh     # portes qualité (94 tests)
+uv run logement reproduce   # rebâtit les 12 artefacts data/processed/
+./check.sh && ./test.sh     # portes qualité (103 tests)
 ```
 
 Lire dans l'ordre : `CLAUDE.md` (doctrine + décisions arrêtées),
@@ -154,6 +155,13 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
 - **Wayback** : l'URL S-25 (présentation RNA) est morte à l'origine — figée
   via archive.org ; vérifier les URL gouvernementales anciennes avant de
   les citer.
+- **RPLS (S-28)** : la version « secret_donnees » masque les COMPTAGES
+  en valeurs manquantes mais publie les RATIOS partout ; PLM par
+  arrondissement (toujours `plm_parent`) ; le fichier contient Mayotte
+  (ZE 0601 — DOM_ZE_PREFIXES de core/stats inclut « 06 » depuis la
+  session 4) ; agrégation supra-communale UNIQUEMENT par la convention
+  C-09 (pondération par le parc du millésime + contrôle national) ; le
+  millésime « 2025 » décrit les emménagements 2024.
 - **Melodi (api.insee.fr)** : les gros téléchargements décrochent en
   HTTP/2 — reprendre en HTTP/1.1 avec `curl -C -` et une détection de
   décrochage (`--speed-limit`) ; la taille exacte du Parquet est publiée

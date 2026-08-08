@@ -1475,3 +1475,132 @@
     n = 297 ZE (loyers d'annonce absents de certaines ZE), la vacance
     sur n = 305. Porte sur R-11/I-11.
   depends_on: [D-16, S-27]
+
+- id: C-09
+  type: choice
+  title: >
+    Agrégation supra-communale des taux RPLS (S-28) : le fichier publie
+    le RATIO par commune sans ses deux termes — le taux par ZE est la
+    moyenne des taux communaux PONDÉRÉE par le parc social du MÊME
+    millésime (nb_ls, nb_ls2019, nb_ls2013), convention CONTRÔLÉE
+    contre les lignes « Total France entière » publiées : le code
+    refuse (erreur dure) un écart > 0,05 pt au national — écarts
+    observés ≤ 0,014 pt aux trois millésimes testés. Les ZE à parc
+    social < 500 logements restent dans la frame mais hors classements
+    et corrélations (taux instables, seuil publié).
+  depends_on: [S-28, D-17]
+
+- id: O-28
+  type: observation
+  title: >
+    Taux de mobilité (D-17) et de vacance du parc locatif social par
+    commune (16 863 communes, PLM par arrondissement), séries annuelles
+    2013-2025, et références nationales publiées (feuille REGION) —
+    version « secret_donnees » : comptages masqués en valeurs
+    manquantes, ratios diffusés. Parc social national : 5 396 259
+    logements au 01/01/2025.
+  depends_on: [S-28, D-17]
+
+- id: O-29
+  type: observation
+  title: >
+    La mobilité nationale du parc social passe de 9,87 % (2013) à
+    9,29 % (2019) puis 7,11 % (2025) : érosion lente avant COVID
+    (−0,58 pt en 6 ans), choc 2021 (7,55), rebond partiel 2022 (8,54),
+    puis chute rapide −1,43 pt sur 2022-2025 — le rythme récent est le
+    plus raide de la série. Vacance sociale 2025 : 2,12 % dont 1,05 %
+    > 3 mois.
+  depends_on: [O-28]
+
+- id: O-30
+  type: observation
+  title: >
+    Par ZE (parc ≥ 500 logements, 303 ZE) : mobilité sociale 2025
+    médiane 8,27 % (min 2,64 Porto-Vecchio, max 18,12 Mayotte) ; 286 ZE
+    sur 303 en baisse 2019→2025, d'ampleur UNIFORME (médiane −2,40 pt
+    en ZE tendues vs −2,44 ailleurs) ; les niveaux les plus bas sont
+    les marchés tendus/touristiques (Sainte-Maxime 3,6, Menton 3,9,
+    Nice 4,1, Roissy 4,3, Marseille 4,7 %), les plus hauts le rural
+    détendu (Mende, Avallon, Argentan ~12-13 %) ; vacance sociale
+    médiane 1,63 % en ZE tendues (2,80 ailleurs).
+  depends_on: [O-28, C-09]
+
+- id: T-13
+  type: transformation
+  title: >
+    Mobilité du parc social par ZE : lecture des feuilles COMMUNE et
+    REGION de S-28 (header ligne 6, PLM → commune parente, secret en
+    valeurs manquantes conservées), agrégation C-09 (moyenne pondérée
+    par le parc du millésime, CONTRÔLE dur contre le national publié,
+    seuil de parc ≥ 500), deltas 2019→2025 et 2013→2025, croisements
+    avec la tension (T-08, H-08/H-12 centraux), la vacance structurelle
+    privée (T-04), l'indice de coût (T-05) et la rotation totale RP
+    (T-12) — corrélations de rangs avec IC de Fisher sur les deux
+    périmètres ; masque DOM étendu à Mayotte (ZE 0601, première source
+    France entière avec Mayotte de la chaîne).
+  depends_on: [O-28, C-09, T-04, T-05, T-08, T-12, H-08, H-12]
+  produced_by: src/logement/core/social.py
+
+- id: R-12
+  type: result
+  title: >
+    Mobilité du parc social par ZE (S-28, millésimes 2013/2019/2025) :
+    chute nationale 9,29 → 7,11 % (2019-2025) qui s'accélère en fin de
+    période (O-29), généralisée (286 ZE sur 303) et d'ampleur UNIFORME
+    sur le territoire (chute × coût rho métropole +0,03, IC95
+    [−0,09 ; +0,14], compatible avec zéro ; médianes −2,40 / −2,44 pt).
+    Le NIVEAU, lui, est le miroir du marché : mobilité × indice de coût
+    rho métropole −0,80 (IC95 [−0,84 ; −0,76], n = 285) — la
+    corrélation la plus forte de la chaîne —, +0,48 avec la vacance
+    structurelle privée ; médiane 6,74 % dans les ZE tendues (vacance
+    sociale 1,63 %) contre 8,89 % ailleurs. Croisement des segments :
+    mobilité sociale × rotation totale RP (R-11) rho métropole −0,20
+    (IC95 [−0,31 ; −0,09]) — NÉGATIF : les métropoles chères cumulent
+    rotation totale élevée (étudiants, parc privé) et parc social gelé
+    (un logement social s'y libère environ une fois tous les 20-25
+    ans) ; les chutes des deux segments sont faiblement co-localisées
+    (+0,19, IC95 [+0,07 ; +0,30]).
+  depends_on: [T-13, O-29, O-30, V-01]
+  produced_by: src/logement/shell/build.py
+  output: data/processed/mobilite-parc-social-ze.json
+  limitations: [L-23]
+
+- id: I-12
+  type: interpretation
+  title: >
+    Deuxième instruction de H-04 : le parc social confirme et aggrave le
+    diagnostic de R-11. Là où R-11 montre un gel CONCENTRÉ dans les
+    marchés verrouillés, le segment social ajoute (1) un gel de NIVEAU
+    quasi proportionnel au coût du marché local (rho −0,80 : la sortie
+    vers le privé est le déterminant dominant de la rotation sociale —
+    quand le privé est inabordable, personne ne quitte le parc social)
+    et (2) une chute UNIFORME sur tout le territoire : la file
+    d'attente s'allonge partout, pas seulement en zone tendue. Le signe
+    NÉGATIF du croisement avec la rotation totale montre que la
+    rotation d'ensemble des métropoles (étudiante, privée) MASQUE le
+    gel du segment social — les deux mesures sont complémentaires, pas
+    redondantes. Reste descriptif : blocage des sorties et stabilité
+    choisie ne sont pas séparables dans un taux (D-17), et le lien
+    mécanique attributions/rotation n'est pas modélisé. À instruire
+    ensuite : migrations résidentielles entre ZE, coût de transaction
+    (DVF) — NEXT-STEPS.
+  depends_on: [R-12, I-11]
+
+- id: L-23
+  type: limit
+  title: >
+    Limites de la mobilité RPLS comme mesure des mobilités empêchées :
+    (1) agrégation par ratio publié (C-09) — approchée par
+    construction, contrôlée au national (écarts ≤ 0,014 pt) mais non
+    contrôlable ZE par ZE ; (2) un taux bas ne sépare pas blocage des
+    sorties et stabilité choisie ; mutations internes et premières
+    mises en location hors numérateur (D-17) ; (3) petits parcs
+    volatils — les plus fortes « chutes » (Issoire −13,2 pt) sont des
+    petits parcs ruraux ; le seuil de 500 logements écarte les cas
+    extrêmes, les médianes restent l'indicateur robuste ; (4) périmètre
+    France entière AVEC Mayotte (ZE 0601, absente de S-27 et sans nom
+    dans S-07) — masque DOM de core/stats étendu en conséquence ;
+    (5) millésime « 2025 » = emménagements de l'année 2024 rapportés au
+    parc au 01/01/2025 — décalage d'un an avec l'étiquette. Porte sur
+    R-12/I-12.
+  depends_on: [S-28, D-17, C-09]
