@@ -7,7 +7,7 @@ subtitle: >
   immobilisé, rotation résidentielle, mobilité du parc social et des
   personnes, coût de transaction — chiffres révisés par la revue
   contradictoire du 2026-08-07
-date: 2026-08-08
+date: 2026-08-09
 lang: fr
 format:
   html:
@@ -827,7 +827,7 @@ zone détendue, mais 80 des 93 ZE pourvues couvriraient leur propre besoin
 (interprétation I-10 ; limites L-15, dont la frontière des bureaux
 vacants « en marché », hors donnée ouverte).
 
-### R-11 — La rotation du parc ralentit, surtout dans les marchés verrouillés
+### R-11 — La rotation du parc ralentit partout ; le contraste territorial ne discrimine pas
 
 ```{python}
 #| code-summary: "chiffres clés R-11"
@@ -845,42 +845,56 @@ print(f"Par ZE (2023) : min {d['min']} %, médiane {d['mediane']} %, "
       f"max {d['max']} % ; {r11['n_ze_en_baisse']} des {r11['n_ze']} ZE "
       "en baisse 2012→2023")
 mt = r11["mediane_delta_par_tension"]
+rel = r11["mediane_delta_rel_par_tension"]
 print(f"Médiane du delta : {mt['tendues_pts']} pt dans les {mt['n_tendues']} "
-      f"ZE tendues (R-07 central) vs {mt['autres_pts']} pt ailleurs")
+      f"ZE tendues (R-07 central) vs {mt['autres_pts']} pt ailleurs "
+      f"(Mann-Whitney p = {mt['mann_whitney_p']}) ; en relatif "
+      f"{rel['tendues_rel_pct']} vs {rel['autres_rel_pct']} % "
+      f"(p = {rel['mann_whitney_p']})")
 for label, key in [
     ("niveau × coût résidentiel", "spearman_niveau_vs_cout"),
     ("niveau × vacance structurelle", "spearman_niveau_vs_vacance"),
     ("chute 2012→2023 × coût", "spearman_delta_vs_cout"),
-    ("chute 2012→2023 × vacance", "spearman_delta_vs_vacance"),
+    ("chute 2012→2023 × niveau 2012", "spearman_delta_vs_niveau_2012"),
 ]:
     m = r11[key]["metropole"]
     print(f"Spearman {label} (métropole) : {m['rho']} "
           f"[{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']})")
+pa = r11["partial_delta_vs_cout_controle_niveau_2012"]["metropole"]
+print(f"PARTIEL chute × coût | niveau 2012 (métropole) : {pa['rho']} "
+      f"[{pa['ci95'][0]} ; {pa['ci95'][1]}] (n = {pa['n']})")
+demo = r11["variante_demographique"]
+print(f"shift-share démographique (T-16) : {demo['delta_structurel_pts']} pt "
+      f"structurels ({demo['chute_relative_structurelle_pct']} % relatif), soit "
+      f"{demo['part_demographique_transposee_pct']} % de la chute observée "
+      f"({demo['chute_relative_observee_pct']} %) transposée à la rotation")
 ```
 
-Première instruction de **H-04 (mobilités empêchées)** : la trace
-observable d'une mobilité bloquée est la rotation effective du parc,
-mesurée par l'ancienneté d'emménagement (D-16, S-27 — trois millésimes
-comparables par construction). La part des résidences principales
-occupées depuis moins de 2 ans passe de **13,14 % (2012) à 11,97 %
-(2023)** et la baisse s'accélère (−0,25 pt sur 2012-2017, −0,92 pt sur
-2017-2023) ; **293 des 305 zones d'emploi baissent**. Le **niveau** de
-rotation reflète la fonction du territoire — plus haut là où le logement
-est cher (villes étudiantes et métropoles : +0,40 avec l'indice de
-coût), plus bas dans les marchés détendus à vacance haute (−0,22) — mais
-la **chute** suit le gradient inverse : plus forte là où le logement est
-cher (−0,29) et où la vacance disponible est rare (+0,25), médiane
-−1,54 pt dans les 97 ZE tendues contre −1,27 pt ailleurs. Le gel de la
-rotation se concentre donc dans les marchés verrouillés — la signature
-attendue d'une mobilité *empêchée*, le sens opposé niveau/chute sur le
-même gradient de coût écartant l'explication « les territoires chers
-tournent structurellement moins » (interprétation I-11). Lecture
-descriptive : pas de contrôle de composition démographique — le
-vieillissement élève mécaniquement l'ancienneté, et la fenêtre « moins
-de 2 ans » du millésime 2023 recouvre la période post-COVID (limites
-L-22).
+Première instruction de **H-04 (mobilités empêchées)**, requalifiée par
+la revue du 2026-08-09 : la trace observable d'une mobilité bloquée est
+la rotation effective du parc, mesurée par l'ancienneté d'emménagement
+(D-16, S-27 — trois millésimes comparables par construction). La part
+des résidences principales occupées depuis moins de 2 ans passe de
+**13,14 % (2012) à 11,97 % (2023)** et la baisse s'accélère (−0,25 pt
+sur 2012-2017, −0,92 pt sur 2017-2023) ; **293 des 305 zones d'emploi
+baissent**. Le seul vieillissement en explique une minorité — ~45 % au
+shift-share interne (T-16, transposition personnes→logements) et 14 %
+de la baisse de la mobilité des personnes selon l'INSEE (S-33) — et
+n'explique rien de l'accélération, dont la fenêtre coïncide en revanche
+avec le choc du crédit 2022-2024 (S-36, part cyclique non séparée). Le
+**niveau** de rotation reflète la fonction du territoire (+0,40 avec
+l'indice de coût — villes étudiantes et métropoles). La **chute** est
+publiée en trois vues : en points elle est plus forte dans les ZE
+tendues (−1,54 vs −1,27, MW p = 0,003) et là où le logement est cher
+(−0,29) ; en relatif l'écart se resserre (−12,2 vs −10,7 %) ; à
+**niveau 2012 contrôlé, le gradient de coût disparaît** (partiel
+−0,07 ≈ 0 — la chute suit d'abord le niveau initial, −0,52). Le
+contraste territorial est donc un fait significatif mais **non
+discriminant** entre chute quasi proportionnelle commune et
+verrouillage des marchés chers ; le signal résiduel propre à H-04 est
+l'accélération (interprétation I-11 requalifiée ; limites L-22, L-26).
 
-### R-12 — Le parc social ne tourne plus, surtout là où le marché est cher
+### R-12 — Le parc social ne tourne plus ; le miroir du marché date d'avant la fenêtre
 
 ```{python}
 #| code-summary: "chiffres clés R-12"
@@ -899,12 +913,16 @@ print(f"par ZE (parc ≥ {r12['seuil_parc_social']}, {r12['n_ze']} ZE) : "
       f"{r12['n_ze_en_baisse_2019_2025']} ZE en baisse 2019→2025")
 mt = r12["mediane_par_tension"]
 print(f"médianes ZE tendues : mobilité {mt['tendues']['tx_mob_2025_pct']} %, "
-      f"delta {mt['tendues']['delta_2019_2025_pts']} pt, vacance sociale "
+      f"delta {mt['tendues']['delta_2019_2025_pts']} pt "
+      f"({mt['tendues']['delta_rel_2019_2025_pct']} % relatif), vacance sociale "
       f"{mt['tendues']['tx_vac_2025_pct']} % — autres : "
-      f"{mt['autres']['tx_mob_2025_pct']} % / {mt['autres']['delta_2019_2025_pts']} pt / "
-      f"{mt['autres']['tx_vac_2025_pct']} %")
+      f"{mt['autres']['tx_mob_2025_pct']} % / {mt['autres']['delta_2019_2025_pts']} pt "
+      f"({mt['autres']['delta_rel_2019_2025_pct']} %) / {mt['autres']['tx_vac_2025_pct']} % "
+      f"(tension inconnue exclue : {mt['n_tension_inconnue']} ZE)")
+pm = r12["spearman_niveau_vs_cout_par_millesime"]
+print("niveau × coût par millésime (métropole) : " + " ; ".join(
+    f"{a} {pm[a]['metropole']['rho']}" for a in ("2013", "2019", "2025")))
 for label, key in [
-    ("niveau × coût résidentiel", "spearman_niveau_vs_cout"),
     ("niveau × vacance structurelle privée", "spearman_niveau_vs_vacance_privee"),
     ("niveau × rotation totale RP (R-11)", "spearman_niveau_vs_rotation_rp"),
     ("chute 2019→2025 × coût", "spearman_delta_vs_cout"),
@@ -913,28 +931,41 @@ for label, key in [
     m = r12[key]["metropole"]
     print(f"Spearman {label} (métropole) : {m['rho']} "
           f"[{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']})")
+pa = r12["partial_delta_vs_cout_controle_niveau_2019"]["metropole"]
+print(f"PARTIEL chute × coût | niveau 2019 (métropole) : {pa['rho']} "
+      f"[{pa['ci95'][0]} ; {pa['ci95'][1]}]")
+pc = r12["partial_niveau_vs_rotation_rp_controle_cout"]["metropole"]
+print(f"PARTIEL niveau × rotation RP | coût (métropole) : {pc['rho']} "
+      f"[{pc['ci95'][0]} ; {pc['ci95'][1]}]")
 ```
 
-Deuxième instruction de **H-04** : la mobilité du parc social (D-17,
-S-28) chute de **9,29 % (2019) à 7,11 % (2025)** et le rythme s'accélère
-(−1,43 pt sur 2022-2025) ; la chute touche **286 des 303 ZE** et son
-ampleur est **uniforme** sur le territoire (corrélation avec le coût
-compatible avec zéro) — la file d'attente s'allonge partout. Le
-**niveau**, lui, est le miroir du marché local : corrélation **−0,80**
-avec l'indice de coût (la plus forte de toute la chaîne), médiane 6,74 %
-dans les ZE tendues — où la vacance sociale n'est que de 1,63 % — contre
-8,89 % ailleurs. À Nice, Marseille ou Roissy (4,1-4,7 %), un logement
-social se libère environ une fois tous les 20-25 ans. Le croisement avec
-la rotation totale (R-11) est **négatif** (−0,20) : la rotation
-étudiante et privée des métropoles masque le gel du segment social — les
-deux mesures se complètent. Quand le privé est inabordable, personne ne
-quitte le parc social (interprétation I-12) ; l'agrégation par ZE suit
-la convention C-09 (pondération par le parc du millésime, contrôlée
-contre le national publié à ≤ 0,014 pt près) ; limites L-23 (blocage
-des sorties et stabilité choisie non séparables, petits parcs volatils,
-Mayotte incluse contrairement à S-27).
+Deuxième instruction de **H-04**, requalifiée par la revue du
+2026-08-09 : la mobilité du parc social (D-17, S-28) chute de **9,29 %
+(2019) à 7,11 % (2025)** et le rythme s'accélère (−1,43 pt sur
+2022-2025 — la fenêtre exacte du choc du crédit, S-36) ; la chute
+touche **286 des 303 ZE**. En points son ampleur est uniforme
+(médianes −2,40/−2,45, corrélation avec le coût compatible avec zéro) ;
+en relatif et à niveau 2019 contrôlé elle est **excédentaire dans les
+marchés chers** (−26,0 vs −22,5 % ; partiel −0,50) — partis de niveaux
+déjà minimaux, ils perdent au moins autant que les autres. Le
+**niveau** est le miroir du marché local **depuis au moins 2013**
+(−0,70 → −0,68 → **−0,80**, parmi les plus fortes corrélations de la
+chaîne, indistinguable des +0,80/+0,81 de R-13/R-14) : médiane 6,74 %
+dans les ZE tendues — où la vacance sociale n'est que de 1,63 % —
+contre 8,88 % ailleurs ; à Nice, Marseille ou Roissy (4,1-4,7 %), un
+logement social se libère environ une fois tous les 20-25 ans. Le
+croisement brut avec la rotation totale (−0,20) est un corollaire des
+deux gradients de coût opposés (à coût contrôlé, les segments
+co-varient : +0,21) — la rotation étudiante et privée des métropoles
+masque bien le gel du segment social, mais ce n'est pas un fait
+indépendant. Le vieillissement des attributaires n'explique que 9 % du
+ralentissement (ANCOLS, S-34) ; la lecture « quand le privé est
+inabordable, personne ne quitte le parc social » reste la plus
+plausible, non séparée de la mécanique de relogement (interprétation
+I-12 requalifiée) ; agrégation C-09 (contrôlée contre le national non
+arrondi, ≤ 0,010 pt) ; limites L-23, L-26.
 
-### R-13 — Les personnes bougent par le locatif privé ; les flux vident les cœurs chers
+### R-13 — Les personnes bougent par le locatif privé ; les soldes parisiens ont le profil du cycle de vie
 
 ```{python}
 #| code-summary: "chiffres clés R-13"
@@ -955,6 +986,13 @@ print(f"par ZE : min {d['min']} %, médiane {d['mediane']} %, max {d['max']} % ;
 print("soldes internes les plus négatifs :",
       "  ".join(f"{e['name'].strip()} {e['solde_pct_pop']} %"
                 for e in r13["soldes_les_plus_negatifs"][:4] if e["name"]))
+print("taux de mobilité par âge : " + " ; ".join(
+    f"{g} {b['taux_mobilite_pct']} %"
+    for g, b in natm["taux_mobilite_par_age"].items()))
+print("Paris (ZE 1109), soldes internes par âge :")
+for groupe, bloc in r13["soldes_par_age_paris"].items():
+    print(f"  {groupe} : {bloc['solde']:+,} ({bloc['entrants']:,} entrants, "
+          f"{bloc['sortants']:,} sortants)".replace(",", " "))
 for label, key in [
     ("mobilité personnes × rotation logements (R-11)", "spearman_mobilite_vs_rotation_rp"),
     ("mobilité personnes × coût", "spearman_mobilite_vs_cout"),
@@ -965,27 +1003,33 @@ for label, key in [
     print(f"Spearman {label} : {m['rho']} [{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']})")
 ```
 
-Troisième instruction de **H-04** : le fichier détail MIGCOM (S-29)
-mesure les PERSONNES — 9,87 % changent de logement dans l'année (D-18).
-Trois enseignements. D'abord une **validation croisée** : la mobilité
-des personnes et la rotation des logements (R-11, source indépendante)
-se classent presque identiquement (rho +0,80) — la géographie de la
-rotation est un fait, pas un artefact de source. Ensuite, **la mobilité
-repose sur le locatif privé** : 19,51 % de ses occupants sont entrés
-dans l'année, contre 8,34 % en HLM (qui recoupe le taux RPLS de R-12 —
-les deux chaînes de mesure se rejoignent) et 5,73 % en propriété : tout
-ce qui rétrécit ou renchérit le parc locatif privé comprime le canal
-principal des mobilités. Enfin, **les flux internes vident les cœurs
-chers** : Paris perd 1,40 % de sa population chaque année en migrations
-internes (225 906 sortants pour 133 371 entrants), et le solde est
-corrélé négativement au coût (−0,15 France entière) — des mobilités qui
-se font CONTRE la géographie de l'emploi. En niveau, le taux annuel ne
+Troisième instruction de **H-04**, requalifiée par la revue du
+2026-08-09 : le fichier détail MIGCOM (S-29) mesure les PERSONNES —
+9,87 % changent de logement dans l'année (D-18 ; moyenne de fenêtres
+2020-2024 sur une série descendante : la série publiée est passée sous
+9 % en 2023, S-33). Trois enseignements. D'abord une **cohérence
+interne** du recensement : la mobilité des personnes et la rotation des
+logements (R-11) se classent presque identiquement (rho +0,80) — deux
+variables et deux pondérations, mais le même appareil EAR ; la
+validation réellement externe est le recoupement MIGCOM-HLM 8,34 % ≈
+RPLS 8,0-8,5 % (répertoire administratif indépendant). Ensuite, **la
+mobilité repose sur le locatif privé** : 19,51 % de ses occupants sont
+entrés dans l'année, contre 8,34 % en HLM et 5,73 % en propriété — en
+taux d'ENTRÉES dans le segment (L-24) : tout ce qui rétrécit ou
+renchérit le parc locatif privé comprime le canal principal des
+mobilités. Enfin, **les flux internes vident les cœurs chers** — Paris
+perd 1,40 % de sa population chaque année en migrations internes
+(225 906 sortants pour 133 371 entrants) — mais leur **profil par âge
+est celui du cycle de vie** (O-36) : seul le groupe 15-24 est en solde
+positif, les sorties nettes se concentrent aux âges famille (56 % avec
+les enfants) et 40 ans et plus ; le solde ne se publie donc pas comme
+indice de blocage, et l'éviction par les prix reste une question
+ouverte (l'âge ne dit pas le motif). En niveau, le taux annuel ne
 montre pas de gel spécifique aux zones tendues (flux étudiants
-dominants) : le blocage se lit dans QUI bouge et dans les soldes, pas
-dans le volume brut (interprétation I-13 ; limites L-24 — statut mesuré
-à l'arrivée, fenêtre d'un an, migrations internes seulement).
+dominants) : le blocage éventuel se lit dans QUI bouge, pas dans le
+volume brut (interprétation I-13 requalifiée ; limites L-24, L-26).
 
-### R-14 — Le péage de transaction : uniforme en taux, écrasant là où tout se cumule
+### R-14 — Le péage de transaction : presque plat en taux, lourd en niveau — et surtout fiscal
 
 ```{python}
 #| code-summary: "chiffres clés R-14"
@@ -995,39 +1039,71 @@ print(f"assiette C-10 : {natt['n_ventes_retenues']:,} ventes retenues — prix m
       f"appartement {natt['prix_median_appartement_eur']:,}), "
       f"{natt['prix_m2_median_eur']:,} €/m²".replace(",", " "))
 cp = r14["cout_pct_prix"]
-print(f"péage (droits H-13 {r14['hypothesis']['central_value_pct']} % + émoluments S-32) : "
-      f"{cp['min']}-{cp['max']} % du prix (médiane {cp['mediane']})")
+print(f"péage (droits territorialisés S-31 + émoluments S-32 + CSI S-37) : "
+      f"{cp['min']}-{cp['max']} % du prix (médiane {cp['mediane']}) ; "
+      f"part fiscale médiane {r14['part_fiscale_mediane_pct']} %")
 d = r14["distribution_mois_niveau_vie"]
-print(f"en mois de niveau de vie médian par UC ({r14['n_ze_avec_niveau_vie']} ZE) : "
-      f"min {d['min']}, médiane {d['mediane']}, max {d['max']}")
+print(f"en mois de niveau de vie médian par UC ({r14['n_ze_avec_niveau_vie']} ZE, "
+      f"millésime 2021) : min {d['min']}, médiane {d['mediane']}, max {d['max']}")
 mt = r14["mediane_par_tension"]
 print(f"ZE tendues : {mt['tendues_mois']} mois (prix médian "
       f"{mt['tendues_prix_median_eur']:,} €) — autres : {mt['autres_mois']} mois "
       f"({mt['autres_prix_median_eur']:,} €)".replace(",", " "))
+sc = r14["scenarios_h13_mois"]
+print("scénarios uniformes H-13 (mois médians) : " + " ; ".join(
+    f"{label} {bloc['mediane_mois']}" for label, bloc in sorted(sc.items())))
+an = r14["peage_annualise"]
+print("annualisé (% de niveau de vie annuel, médiane) : " + " ; ".join(
+    f"{k.replace('detention_', '').replace('_ans', ' ans')} "
+    f"{v['mediane_pct_niveau_vie_annuel']}" for k, v in sorted(an.items())))
 print("péages les plus lourds :",
       " ; ".join(f"{e['name'].strip()} {e['cout_en_mois_niveau_vie']} mois"
                  for e in r14["peage_le_plus_lourd"][:5] if e["name"]))
 m = r14["spearman_mois_vs_cout_locatif"]["metropole"]
+mp = r14["spearman_mois_vs_prix"]["metropole"]
 print(f"Spearman péage (mois) × indice de coût locatif (métropole) : {m['rho']} "
-      f"[{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']})")
+      f"[{m['ci95'][0]} ; {m['ci95'][1]}] (n = {m['n']}) — "
+      f"mois × prix : {mp['rho']} (quasi mécanique)")
 ```
 
-Quatrième instruction de **H-04** : chaque achat paie un péage non
-récupérable — droits de mutation (H-13 : 6,32 % du prix dans la grande
-majorité des départements depuis la loi de finances 2025, S-31) plus les
-émoluments du notaire (barème S-32, calculé exactement). Le taux est
-quasi uniforme (**7,4-8,0 % du prix**) mais son poids en pouvoir d'achat
-local ne l'est pas : **6,1 mois de niveau de vie médian par UC en
-médiane, 7,8 mois dans les ZE tendues contre 5,5 ailleurs**, et jusqu'à
-11-13 mois à Paris, Bayonne, sur les littoraux touristiques et dans les
-DOM chers (rho +0,81 avec l'indice de coût locatif). Le péage est un
-PLANCHER (ni débours, ni agence, L-25) et il pèse exactement là où
-R-11/R-12 localisent le gel de la rotation et où R-13 montre que la
-propriété est le statut le moins mobile : le ménage des zones tendues
-est pris en tenaille — relocation locative jusqu'à ~64 % du revenu
-(R-06), péage d'achat record. ~83 % de ce péage est fiscal : c'est un
-paramètre institutionnel direct pour la proposition à venir
-(interprétation I-14).
+Quatrième instruction de **H-04**, requalifiée par la revue du
+2026-08-09 : chaque achat paie un péage non récupérable — droits de
+mutation TERRITORIALISÉS (taux votés par département, S-31 : 6,32 % du
+prix dans la grande majorité, 5,81 % dans onze départements, 5,09 %
+dans l'Indre), émoluments du notaire (barème S-32, calculé exactement)
+et contribution de sécurité immobilière (0,10 %, S-37). Le taux est
+presque plat (**6,7-8,1 % du prix**) mais son poids en pouvoir d'achat
+local ne l'est pas : **6,15 mois de niveau de vie médian par UC en
+médiane (millésime 2021, L-25), 7,87 mois dans les ZE tendues contre
+5,59 ailleurs**, et jusqu'à 11-13 mois à Paris, Bayonne, sur les
+littoraux touristiques et dans les DOM chers ; le primo-accédant
+(scénario 5,81 %) paie 5,81 mois en médiane. Le rho +0,81 avec le coût
+locatif est **quasi mécanique** — le taux étant presque plat, les mois
+re-classent le prix (mois × prix : +0,98) : la géographie du péage
+n'est pas une confirmation indépendante du gel (L-26) ; l'apport
+propre de R-14 est le **niveau absolu** du péage, son incidence
+maximale sur la mobilité répétée (≈ 10 % de niveau de vie annuel pour
+un ménage mobile tous les 5 ans, 2,6 % amorti sur 20 ans) et sa
+décomposition : **~83 % est fiscal** (droits + CSI) — un paramètre
+institutionnel direct pour la proposition à venir. Le péage reste un
+PLANCHER (ni débours ni agence, L-25) ; le ménage des zones tendues
+est bien pris en tenaille — relocation locative jusqu'à ~64 % du
+revenu (R-06), péage d'achat record — mais la part causale du péage
+dans le gel n'est pas identifiée (interprétation I-14 requalifiée).
+
+::: {.callout-warning}
+## Garde de lecture (revue du 2026-08-09)
+
+Les quatre résultats R-11..R-14 sont descriptifs : ils n'établissent
+aucun lien causal vacance→rotation ni péage→gel, partagent le même
+étalon de croisement (indice de coût et statut de tension — limite
+transverse L-26), et ne modifient pas la conclusion conditionnelle de
+l'arc R-01..R-10 (§ 8). Les recoupements réellement externes de
+l'instruction H-04 sont MIGCOM × RPLS et les bornes démographiques
+S-33/S-34 ; la part du cycle du crédit 2022-2024 dans les chutes
+récentes n'est pas séparée (S-36) — les millésimes 2026/2027 en
+seront l'arbitre.
+:::
 
 ## 7. Sensibilité
 
@@ -1218,7 +1294,7 @@ territoriale communale est bornée par la secrétisation (L-05) ; et
 l'ensemble des objections de la revue contradictoire du 2026-08-07 est
 traité à la section suivante.
 
-## 11. Revue contradictoire (2026-08-07)
+## 11. Revues contradictoires (2026-08-07 et 2026-08-09)
 
 L'arc R-01..R-10 a subi la revue contradictoire exigée par la méthode
 (INTRO étape 12) : quatre relecteurs indépendants (sources alternatives ·
@@ -1228,9 +1304,17 @@ objection, restes ouverts — est
 [`evidence/revue-contradictoire-2026-08-07.md`](revue-contradictoire-2026-08-07.md).
 R-11 à R-14 (rotation résidentielle, mobilité du parc social,
 migrations des personnes, coût de transaction — ajoutés le 2026-08-08)
-sont POSTÉRIEURS à cette revue et devront entrer dans la prochaine
-passe contradictoire.
-L'arithmétique publiée était exacte partout ; les objections sérieuses
+ont subi leur propre passe le **2026-08-09** : mêmes quatre angles,
+44 objections, ~60 chiffres recalculés indépendamment depuis le brut
+(zéro divergence), compte rendu complet dans
+[`evidence/revue-contradictoire-2026-08-09.md`](revue-contradictoire-2026-08-09.md)
+— les quatre mesures ont tenu, l'étage interprétatif a été requalifié
+(trois vues des chutes, bornes démographiques S-33/S-34, caveat du
+cycle du crédit S-36, péage territorialisé + CSI, profil par âge des
+soldes parisiens, limite transverse L-26) ; les sections R-11..R-14
+ci-dessus reflètent l'état APRÈS intégration.
+Pour la revue de l'arc du 2026-08-07 :
+l'arithmétique publiée était exacte partout ; les objections sérieuses
 portaient sur les modèles et la mise en récit, et ont conduit aux
 corrections suivantes (toutes tracées dans les registres et le graphe,
 jamais silencieuses) :

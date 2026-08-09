@@ -3,6 +3,74 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
+## Session 5 — 2026-08-09 (revue contradictoire de R-11..R-14 et intégration complète)
+
+La passe contradictoire promise sur les quatre résultats de session 4
+(méthode INTRO étape 12, même pattern des 4 relecteurs indépendants
+qu'en session 3) : **44 objections** (SA-1..9, HD-1..14, SE-1..12,
+ST-1..9), ~60 chiffres recalculés depuis le brut par le relecteur
+statistique — **arithmétique exacte partout, zéro divergence**. Les
+recalculs structurants (corrélations partielles) ont été vérifiés par
+l'orchestrateur AVANT triage. Décision de Rémy : intégration complète +
+les quatre calculs nouveaux + figement des sources citées. Compte rendu :
+`evidence/revue-contradictoire-2026-08-09.md` (+ 5 rapports bruts et le
+script de vérification en annexe dans le dossier homonyme).
+
+- **Le verdict en une phrase** : les quatre MESURES ont tenu, l'étage
+  interprétatif ne tenait pas — les quatre phrases-titres ont été
+  requalifiées, tracées dans les claims et le qmd.
+- **SE-1 (majeure, vérifiée)** : le « gel concentré dans les marchés
+  verrouillés » de R-11 était porté par le niveau initial (partiel
+  chute × coût | niveau 2012 = −0,07 ≈ 0) ; l'argument « sens opposé
+  niveau/chute » était logiquement inversé. Le fait (médianes −1,54 vs
+  −1,27, MW p = 0,003) survit, l'attribution tombe — trois vues
+  publiées (points/relatif/partiel) dans R-11 ET R-12, où le MÊME
+  contrôle montre l'inverse (chute sociale excédentaire dans les
+  marchés chers, partiel −0,50 : plus favorable à H-04 qu'avant).
+- **HD-1/SE-7** : « validation croisée entre sources indépendantes »
+  requalifiée — S-27 et S-29 partagent l'appareil EAR (3 enquêtes
+  communes ; l'EAR 2021 a été reportée, D-18 corrigée) ; la validation
+  inter-appareils est MIGCOM×RPLS (8,34 ≈ 8,0-8,5).
+- **Démographie BORNÉE** : shift-share T-16 (S-38 figée) ~45 % de la
+  chute de rotation ; bornes externes INSEE 14 % (S-33) et ANCOLS 9 %
+  (S-34) — l'ACCÉLÉRATION, que le vieillissement ne produit pas, est le
+  signal résiduel. **Cycle du crédit** 2022-2024 (S-36) entré dans
+  L-22/L-23 : les fenêtres d'accélération tombent dedans, part
+  cyclique non séparée (arbitres : RPLS 2026/2027, prochain L_STAY).
+- **SE-8 instruit SÉANCE TENANTE** : soldes parisiens décomposés par
+  âge (AGEREVQ, O-36) — seul groupe positif 15-24, sorties nettes aux
+  âges famille/retraite : profil du CYCLE DE VIE ; « contre la
+  géographie de l'emploi » retiré, éviction = question ouverte.
+- **R-14 refondu** : droits TERRITORIALISÉS depuis S-31 (11
+  départements à 4,50 % — le 65 manquait à la note du registre,
+  rattrapé), CSI 0,10 % intégrée (S-37), scénarios {5,09 ; 5,81
+  droit commun/primo ; 6,32} publiés, annualisation 5/10/20 ans,
+  assiette et couverture publiées (34 % des logements vendus hors
+  champ par construction), seuil de classement 100 ventes, ZE
+  « bornes sensibles » nommées ; rho mois × prix +0,98 publié (le
+  +0,81 est quasi mécanique) ; nouveau péage : 6,7-8,1 %, médiane
+  6,15 mois (niveau de vie 2021), tendues 7,87/5,59, 83,2 % fiscal.
+- **Statistique durcie** : Mann-Whitney maison (la propriété p ≤ 1 a
+  attrapé un vrai défaut de continuité), IC Bonett-Wright pour
+  Spearman (bornes élargies ≤ 0,01, toute la chaîne reproduite),
+  contrôle C-09 non arrondi (dérives réelles ≤ 0,010), garde
+  min_count sur les poids RPLS, réserve de multiplicité sur les rho
+  faibles (−0,15, +0,19), superlatif « la plus forte de la chaîne »
+  abandonné (récidive du motif C1).
+- **Sources S-33..S-38 figées** (IP2073 + données, ANCOLS, table DMTO
+  06/2026 en trace de fraîcheur, Stat Info BdF, page CSI, pyramide
+  des âges) ; licence RPLS confirmée Licence Ouverte (SA-6). Graphe :
+  117 nœuds (O-36, T-16, L-26 transverse « axes partagés ») ;
+  153 tests ; qmd re-rendu avec garde de lecture (SE-11).
+- **Bilan H-04 reformulé** : quatre mesures issues de TROIS appareils,
+  croisées contre un étalon partagé (L-26) ; la version défendable —
+  la mobilité baisse partout (démographie minoritaire, cycle non
+  séparé) ; elle repose structurellement sur le segment le plus cher ;
+  le parc social des zones chères est à rotation minimale depuis au
+  moins 2013 et sa chute récente y est au moins aussi forte
+  qu'ailleurs ; la sortie par l'achat paie un péage majoritairement
+  fiscal, territorialisé et désormais chiffré jusqu'à l'annualisation.
+
 ## Session 4 — 2026-08-08 (H-04 instruite : rotation, parc social, migrations, transaction)
 
 Quatre livrables : **R-11** (rotation du parc), **R-12** (mobilité du
