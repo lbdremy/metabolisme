@@ -781,3 +781,146 @@
     17 000 à 60 000 €, 0,799 % au-delà — hors TVA à 20 %. La fiche ne
     chiffre ni les débours ni la contribution de sécurité immobilière :
     le coût de transaction R-14 est donc un PLANCHER (limite dédiée).
+
+- id: S-33
+  publisher: INSEE
+  title: Insee Première n° 2073 — Moins de déménagements en dix ans, mais l'Ouest et le périurbain toujours attractifs
+  dataset_id: insee-ip2073
+  source_url: https://www.insee.fr/fr/statistiques/8648157
+  publication_date: 2025-09-30
+  retrieved_at: 2026-08-09
+  geographic_scope: France hors Mayotte
+  temporal_scope: mobilités résidentielles 2013-2023 (EAR 2014-2024)
+  license: Licence Ouverte / Open Licence 2.0 (INSEE)
+  files:
+    - path: data/raw/insee-ip2073-mobilite-residentielle-2025.pdf
+      checksum: sha256:a165f003096241313695f12a49b02048d1409c3931ad5a6dbb0c14ba5a104b54
+    - path: data/raw/insee-ip2073-donnees-figures.xlsx
+      checksum: sha256:b6d89561aeeab654fe3ea746441c161d888990174afa3d2f7fac232c7d95718e
+  notes: >
+    Enregistrée par la revue contradictoire du 2026-08-09 (SA-1) comme
+    borne EXTERNE de la part démographique du ralentissement : « le
+    vieillissement de la population et la part grandissante des plus
+    âgés, moins mobiles, sont responsables de 14 % de la baisse globale
+    de la mobilité sur dix ans ». Série annuelle de mobilité
+    résidentielle : 10,8 % (2013), 10,5 % (2018), 8,8 % (2023) — la
+    baisse touche tous les types de ménages et tous les âges et se
+    concentre sur les courtes distances (mobilité intra-communale
+    −20,9 %) ; géographie des gagnants (Ouest, périurbain) et des
+    perdants (cœurs urbains) qui recoupe indépendamment les soldes de
+    R-13. Fichiers : ip2073.pdf et ip2073.xlsx (données des figures)
+    sous /fr/statistiques/fichier/8648157/.
+
+- id: S-34
+  publisher: ANCOLS
+  title: Quelle est la part du vieillissement des attributaires dans la baisse de la mobilité au sein du parc social ? (communiqué de presse)
+  dataset_id: ancols-vieillissement-rotation
+  source_url: https://www.ancols.fr/assets/publication_file/2026/02/09/a2679302-7223-4616-a9d5-d98dc801c172-CP-Vieillissement-Rotation.pdf
+  publication_date: 2026-02-09
+  retrieved_at: 2026-08-09
+  geographic_scope: France (parc locatif social, RPLS/SNE)
+  temporal_scope: cohortes d'attributaires 2015 et 2019, rotation 2015-2023
+  license: document public ANCOLS (citation avec mention de la source)
+  local_file: data/raw/ancols-vieillissement-rotation-2026-02.pdf
+  checksum: sha256:e076122dca1ec89a56ee3a78cab37e01ad5505d105a158b26adfeffdcd911086
+  notes: >
+    Enregistrée par la revue contradictoire du 2026-08-09 (SA-2) comme
+    borne EXTERNE de l'explication démographique du gel social : « la
+    hausse de l'âge moyen des attributaires expliquerait donc 9 % de la
+    baisse du taux de mobilité à quatre ans » (cohortes 2015 vs 2019) ;
+    sans le vieillissement 2015-2022, le taux de rotation 2023 « serait
+    ainsi passé de 8,1 % à 8,2 % » (~3 800 libérations supplémentaires).
+    Le 8,1 % ANCOLS 2023 recoupe le 8,0 % RPLS 2023 de la chaîne
+    (définitions voisines : libérations vs emménagements, D-17).
+    Certificat TLS du site ancols.fr invalide au figement (fichier
+    récupéré avec vérification désactivée puis contrôlé sur pièce).
+
+- id: S-35
+  publisher: DGFiP (impots.gouv.fr, espace notaires)
+  title: Droits d'enregistrement et taxe de publicité foncière — taux, abattements et réductions applicables au 1er juin 2026
+  dataset_id: dgfip-dmto-2026-06
+  source_url: https://www.impots.gouv.fr/sites/default/files/media/1_metier/3_partenaire/notaires/dmto/dmto_2026-06.pdf
+  publication_date: 2026-06-01
+  retrieved_at: 2026-08-09
+  geographic_scope: France entière (taux votés par département)
+  temporal_scope: taux applicables au 01/06/2026
+  license: document public DGFiP (citation avec mention de la source)
+  local_file: data/raw/dgfip-dmto-taux-2026-06.pdf
+  checksum: sha256:417101716032c250c896e81a16bf37992470db7b5307c37b71a00e9fcdb57528
+  notes: >
+    Édition courante de la table figée en S-31 (01/02/2026), enregistrée
+    par la revue contradictoire du 2026-08-09 (SA-4) comme trace de
+    fraîcheur — S-31 reste la source du calcul R-14, ce fichier date
+    l'état du droit : depuis février, l'Eure (27) est passée à 5,00 %,
+    les Hautes-Pyrénées (65) sont redescendues à 4,50 %, Mayotte (976)
+    figure à 4,50 % ; l'Indre (36) reste seule à 3,80 %. La composition
+    des départements par taux bouge au fil des délibérations : toute
+    énumération publiée doit porter la date de sa table. H-13 (central
+    6,32 %, plage [5,09 ; 6,32]) inchangée par cette édition.
+
+- id: S-36
+  publisher: Banque de France
+  title: Stat Info « Crédits aux particuliers — France » • Mai 2026
+  dataset_id: bdf-stat-info-credits-particuliers-2026-05
+  source_url: https://www.banque-france.fr/system/files/webstats/Credit_particuliers_202605_20260707/FR_Stat_info_Credits_aux_particuliers_202605.pdf
+  publication_date: 2026-07-08
+  retrieved_at: 2026-08-09
+  geographic_scope: France
+  temporal_scope: séries mensuelles des crédits à l'habitat, graphiques 2019-2026, point mai 2026
+  license: document public Banque de France (citation avec mention de la source)
+  local_file: data/raw/bdf-stat-info-credits-particuliers-2026-05.pdf
+  checksum: sha256:610b62863b86bec07208a35a06c057c9cd326dfcab707ed9c0e0d291197d35da
+  notes: >
+    Source de conjoncture du choc de financement 2022-2024, enregistrée
+    par la revue contradictoire du 2026-08-09 (SA-3/SE-3) pour les
+    limites L-22/L-23 : les graphiques de séries 2019-2026 (taux des
+    crédits nouveaux à l'habitat toutes durées ; production mensuelle
+    CVS) documentent la remontée du taux moyen d'environ 1 % fin 2021 à
+    plus de 4 % début 2024 puis le reflux ; valeurs textuelles du
+    numéro : taux moyen 3,21 % en mai 2026 (après 3,22 % en avril et
+    mars), production 11,4 Md€ CVS hors renégociations. Les fenêtres
+    d'observation des millésimes RP2023 (emménagements ~2021-2023) et
+    RPLS 2025 (emménagements 2024) tombent dans ce choc.
+
+- id: S-37
+  publisher: DGFiP (impots.gouv.fr)
+  title: J'achète un bien immobilier — qu'aurai-je à payer comme frais au notaire ? (contribution de sécurité immobilière)
+  dataset_id: impots-gouv-frais-acquisition
+  source_url: https://www.impots.gouv.fr/particulier/questions/jachete-un-bien-immobilier-quaurai-je-payer-comme-frais-au-notaire
+  publication_date: 2026-08-09
+  retrieved_at: 2026-08-09
+  geographic_scope: France
+  temporal_scope: page vérifiée le 09/08/2026 (CSI stable depuis 2016, art. 879-881 CGI)
+  license: document public DGFiP (citation avec mention de la source)
+  local_file: data/raw/impots-gouv-frais-acquisition-csi-2026.html
+  checksum: sha256:faa64997b0ce2ae114c14beec7244cb13cf15d3b4972283b90c04ece9eb30e13
+  notes: >
+    Chiffre la contribution de sécurité immobilière — 0,10 % du prix
+    (exemple de la page : 100 000 € × 0,1 % = 100 €), minimum 15 € —
+    et la composition des frais d'acquisition. Enregistrée par la revue
+    contradictoire du 2026-08-09 (SA-5) : la CSI est aussi déterministe
+    que les droits et les émoluments, son exclusion de T-15 était un
+    artefact du choix de source (S-32 ne la chiffre pas) ; elle entre
+    dans le péage R-14. La date de publication est la date de constat
+    (page sans date de mise à jour affichée).
+
+- id: S-38
+  publisher: INSEE
+  title: Estimation de la population au 1er janvier — séries par département, sexe et âge quinquennal, 1975-2026
+  dataset_id: insee-estim-pop-dep-sexe-aq
+  source_url: https://www.insee.fr/fr/statistiques/8721456
+  publication_date: 2026-01-13
+  retrieved_at: 2026-08-09
+  geographic_scope: France métropolitaine + DOM (Mayotte incluse au champ France à partir de 2014 ; Guadeloupe hors Saint-Martin)
+  temporal_scope: populations au 1er janvier, 1975-2026 (2026 provisoire)
+  license: Licence Ouverte / Open Licence 2.0 (INSEE)
+  local_file: data/raw/insee-estim-pop-dep-sexe-aq-1975-2026.xlsx
+  checksum: sha256:ca025f0e6ba84d76da4c91001d8528b0cb9ab079f7b72b094e5c185c29cda091
+  notes: >
+    Fichier « estim-pop-dep-sexe-aq-1975-2026.xlsx » (une feuille par
+    année, départements × sexe × âge quinquennal), publié avec les
+    estimations de population au 1er janvier 2026. Enregistrée par la
+    revue contradictoire du 2026-08-09 (SE-2) pour le shift-share
+    démographique de R-11 : structure par âges 2012 et 2023 au
+    périmètre France hors Mayotte (exclusion du département 976 aux
+    deux millésimes, cohérent avec le périmètre F de S-27).
