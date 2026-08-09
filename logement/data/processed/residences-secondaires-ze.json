@@ -63,7 +63,7 @@
   "spearman_rs_vs_cost_index": {
     "ci95": [
       -0.16,
-      0.06
+      0.07
     ],
     "n": 297,
     "rho": -0.05

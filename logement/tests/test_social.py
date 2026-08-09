@@ -189,3 +189,37 @@ def test_social_by_ze_relative_drop() -> None:
     assert frame.loc["0051", "delta_rel_2019_2025_pct"] == pytest.approx(
         float(frame.loc["0051", "delta_2019_2025"] / frame.loc["0051", "tx_mob_2019"] * 100)
     )
+
+
+def test_weighted_rate_masks_weights_of_missing_rates() -> None:
+    """ST-9: a masked rate drops its weight; an all-masked ZE stays missing."""
+    communes = social.parse_rpls_communes(
+        _communes(
+            [
+                {"code": "01001", "tx_mob": 4.0, "nb_ls": 100},
+                {"code": "01002", "tx_mob": None, "nb_ls": 900},
+                {"code": "02001", "tx_mob": None, "nb_ls": 500},
+            ]
+        )
+    )
+    commune_ze = pd.DataFrame({"code": ["01001", "01002", "02001"], "ze": ["0051", "0051", "0052"]})
+    frame = social.social_by_ze(communes, commune_ze)
+    # The masked commune's 900 dwellings do not drag the rate toward 0.
+    assert frame.loc["0051", "tx_mob_2025"] == pytest.approx(4.0)
+    # An entirely masked ZE is missing, never zero (unknown keeps).
+    assert pd.isna(frame.loc["0052", "tx_mob_2025"])
+
+
+def test_control_aggregation_uses_unrounded_reference() -> None:
+    """ST-5: the C-09 drift subtracts the unrounded national rate."""
+    communes = social.parse_rpls_communes(
+        _communes([{"code": "01001", "tx_mob": 8.004, "nb_ls": 100}])
+    )
+    national = _national(serie_2025=8.0)
+    national["serie_mobilite_precise"] = {
+        **{str(y): 10.0 for y in range(2013, 2025)},
+        "2019": 10.0,
+        "2025": 8.004,
+    }
+    # against the unrounded reference the drift is exactly zero
+    assert social.control_aggregation(communes, national)["2025"] == 0.0

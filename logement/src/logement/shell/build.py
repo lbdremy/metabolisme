@@ -612,6 +612,7 @@ def build_social(root: Path) -> dict[str, object]:
     communes_rpls = social.parse_rpls_communes(commune_raw)
     national = social.parse_rpls_national(region_raw)
     drift = social.control_aggregation(communes_rpls, national)
+    national.pop("serie_mobilite_precise", None)
     commune_ze = ze.parse_commune_ze(_read_membership(root))
     social_ze = social.social_by_ze(communes_rpls, commune_ze)
 

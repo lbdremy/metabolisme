@@ -20,7 +20,7 @@
     "metropole": 0.56,
     "metropole_ci95": [
       0.47,
-      0.63
+      0.64
     ]
   },
   "spearman_couverture_dpe_vs_vacancy_metropole": -0.14,
@@ -30,7 +30,7 @@
     "metropole": 0.4,
     "metropole_ci95": [
       0.3,
-      0.49
+      0.5
     ]
   },
   "top_age": [

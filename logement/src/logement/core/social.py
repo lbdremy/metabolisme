@@ -37,8 +37,9 @@ COMMUNE_COLUMNS = (
     "tx_vac3",
 )
 # The commune-weighted aggregate must reproduce the published national
-# rate: the observed drift of convention C-09 is ≤ 0.011 pt on the three
-# vintages — a larger drift means the parse (or the file) broke.
+# rate (compared UNROUNDED since the 2026-08-09 review, ST-5): the
+# observed drift of convention C-09 is ≤ 0.011 pt on the three vintages
+# — a larger drift means the parse (or the file) broke.
 AGGREGATION_TOLERANCE_PT = 0.05
 # ZE with a minuscule social stock have unstable rates; they stay in the
 # frame but out of rankings and correlations (published threshold).
@@ -77,11 +78,18 @@ def parse_rpls_national(raw: pd.DataFrame) -> dict[str, object]:
         raise SocialError(f"expected one '{NATIONAL_ROW}' row, found {len(match)}")
     row = match.iloc[0]
     serie = {}
+    serie_precise = {}
     for year in range(2013, 2025):
         serie[str(year)] = round(float(row[f"tx_mob_{year}"]), 2)
+        serie_precise[str(year)] = float(row[f"tx_mob_{year}"])
     serie["2025"] = round(float(row["tx_mob"]), 2)
+    serie_precise["2025"] = float(row["tx_mob"])
     return {
         "serie_mobilite_pct": serie,
+        # ST-5 (2026-08-09 review): the C-09 control must subtract the
+        # UNROUNDED published rate — the rounded serie is for display.
+        # This key is popped by the shell before the artifact is written.
+        "serie_mobilite_precise": serie_precise,
         "vacance_pct": round(float(row["tx_vac"]), 2),
         "vacance_plus_3_mois_pct": round(float(row["tx_vac3"]), 2),
         "parc_social": int(row["nb_ls"]),
@@ -94,7 +102,7 @@ def control_aggregation(communes: pd.DataFrame, national: dict[str, object]) -> 
     Returns the per-vintage drift (weighted commune aggregate minus the
     published France-entière rate, in points) for publication.
     """
-    serie_obj = national["serie_mobilite_pct"]
+    serie_obj = national.get("serie_mobilite_precise", national["serie_mobilite_pct"])
     if not isinstance(serie_obj, dict):
         raise SocialError("national reference must carry serie_mobilite_pct")
     serie: dict[str, float] = {}
@@ -118,8 +126,15 @@ def control_aggregation(communes: pd.DataFrame, national: dict[str, object]) -> 
 
 
 def _weighted_rate(frame: pd.DataFrame, rate: str, weight: str) -> pd.Series:
-    num = (frame[rate] * frame[weight]).groupby(frame["ze"]).sum()
-    den = frame.groupby("ze")[weight].sum()
+    # ST-9 (2026-08-09 review): a commune whose rate is masked must not
+    # keep its weight in the denominator (rate biased low), and a ZE
+    # that is entirely masked must come out missing, never zero — the
+    # min_count trap already caught twice in this chain. No effect on
+    # the frozen S-28 (rates and stocks are complete), guards the next
+    # vintage.
+    weights = frame[weight].where(frame[rate].notna())
+    num = (frame[rate] * weights).groupby(frame["ze"]).sum(min_count=1)
+    den = weights.groupby(frame["ze"]).sum(min_count=1)
     return num / den
 
 

@@ -36,13 +36,19 @@ def spearman(frame: pd.DataFrame, x: str, y: str) -> float:
 
 
 def fisher_ci95(rho: float, n: int) -> tuple[float, float]:
-    """95 % confidence interval of a correlation via the Fisher z-transform."""
+    """95 % confidence interval of a SPEARMAN rho via the Fisher z-transform.
+
+    Uses the Bonett-Wright (2000) variance (1 + rho²/2)/(n − 3) — the
+    plain Pearson 1/(n − 3) is anti-conservative for rank correlations
+    at high |rho| (ST-4, 2026-08-09 review: ~15 % too narrow at 0.8;
+    the correction moves published bounds by ≤ 0.01 at 2 decimals).
+    """
     if not -1.0 < rho < 1.0:
         raise StatsError(f"degenerate correlation {rho}")
     if n < 4:
         raise StatsError(f"not enough observations for an interval ({n})")
     z = math.atanh(rho)
-    half = 1.959964 / math.sqrt(n - 3)
+    half = 1.959964 * math.sqrt((1 + rho**2 / 2) / (n - 3))
     return (math.tanh(z - half), math.tanh(z + half))
 
 
@@ -101,7 +107,7 @@ def partial_spearman_summary(frame: pd.DataFrame, x: str, y: str, z: str) -> dic
     if len(sub) < 5 or not -1.0 < rho < 1.0:
         return {"rho": round(rho, 2), "n": len(sub), "controle": z, "ci95": None}
     zt = math.atanh(rho)
-    half = 1.959964 / math.sqrt(len(sub) - 4)
+    half = 1.959964 * math.sqrt((1 + rho**2 / 2) / (len(sub) - 4))
     return {
         "rho": round(rho, 2),
         "n": len(sub),

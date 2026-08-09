@@ -40,7 +40,7 @@ def test_partial_collapses_a_covariate_driven_correlation() -> None:
 def test_partial_summary_carries_control_and_interval() -> None:
     """The publishable block names its control and keeps n − 4 dof."""
     block = stats.partial_spearman_summary(_frame(), "x", "y", "z")
-    assert block == {"rho": 0.44, "n": 10, "controle": "z", "ci95": [-0.31, 0.86]}
+    assert block == {"rho": 0.44, "n": 10, "controle": "z", "ci95": [-0.35, 0.86]}
 
 
 def test_partial_degenerate_covariate_is_a_definite_reject() -> None:
