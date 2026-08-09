@@ -16,7 +16,17 @@ import pandas as pd
 from logement.core import stats
 from logement.core.lovac import plm_parent
 
-REQUIRED_COLUMNS = ("COMMUNE", "DCRAN", "IRAN", "IPONDI", "STOCD")
+REQUIRED_COLUMNS = ("COMMUNE", "DCRAN", "IRAN", "IPONDI", "STOCD", "AGEREVQ")
+# Age groups for the life-cycle reading of the internal soldes (SE-8,
+# 2026-08-09 review): entries at student ages vs net exits at family and
+# retirement ages. AGEREVQ is the five-year age at the survey.
+AGE_GROUPS = (
+    (0, 14, "0-14"),
+    (15, 24, "15-24"),
+    (25, 39, "25-39"),
+    (40, 59, "40-59"),
+    (60, 200, "60+"),
+)
 # IRAN (D-18): 0 = commune de rattachement (out of the mobile/settled
 # field), 1 = same dwelling, 2 = other dwelling same commune, 3-7 = other
 # French commune, 8-9 = abroad.
@@ -49,6 +59,9 @@ def parse_migcom(raw: pd.DataFrame) -> pd.DataFrame:
     out["IPONDI"] = pd.to_numeric(out["IPONDI"], errors="coerce")
     if out["IPONDI"].isna().any() or (out["IPONDI"] < 0).any():
         raise MigrationsError("IPONDI weights must be present and non-negative")
+    out["AGEREVQ"] = pd.to_numeric(out["AGEREVQ"], errors="coerce")
+    if out["AGEREVQ"].isna().any() or (out["AGEREVQ"] < 0).any():
+        raise MigrationsError("AGEREVQ ages must be present and non-negative")
     known = {IRAN_RATTACHEMENT, IRAN_SAME_DWELLING, "2", *IRAN_OTHER_COMMUNE, *IRAN_ABROAD}
     unknown = set(out["IRAN"].dropna().unique()) - known
     if unknown:
@@ -59,6 +72,71 @@ def parse_migcom(raw: pd.DataFrame) -> pd.DataFrame:
 def _settled(frame: pd.DataFrame) -> pd.DataFrame:
     """Restrict to the mobile/settled field: drop the rattachement rows (D-18)."""
     return frame[frame["IRAN"] != IRAN_RATTACHEMENT]
+
+
+def age_group(age: float) -> str:
+    """Map a five-year age (AGEREVQ) to its published life-cycle group."""
+    for low, high, label in AGE_GROUPS:
+        if low <= age <= high:
+            return label
+    raise MigrationsError(f"age {age} outside every group")
+
+
+def mobility_by_age(frame: pd.DataFrame) -> dict[str, dict[str, float]]:
+    """National annual mobility rate per life-cycle age group (D-18 field)."""
+    base = _settled(frame)
+    if base.empty:
+        raise MigrationsError("no observation outside the rattachement field")
+    groups = base["AGEREVQ"].map(age_group)
+    total = base.groupby(groups)["IPONDI"].sum()
+    movers = base[base["IRAN"] != IRAN_SAME_DWELLING].groupby(groups)["IPONDI"].sum()
+    return {
+        label: {
+            "personnes": round(float(total[label])),
+            "taux_mobilite_pct": round(float(movers.get(label, 0.0) / total[label] * 100), 2),
+        }
+        for _low, _high, label in AGE_GROUPS
+        if label in total.index
+    }
+
+
+def soldes_by_age(
+    frame: pd.DataFrame, commune_ze: pd.DataFrame, target_ze: str
+) -> dict[str, dict[str, float | None]]:
+    """Split one ZE's internal entries, exits and soldes per age group (SE-8).
+
+    Same field as the R-13 soldes: internal migrations between ZE
+    (IRAN 3-7), origin mapped through the PLM parent. The life-cycle
+    signature is entries concentrated at 15-24 and net exits at family
+    and retirement ages.
+    """
+    ze_of = commune_ze.set_index("code")["ze"]
+    base = _settled(frame).copy()
+    base["ze"] = base["COMMUNE"].map(ze_of)
+    movers = base[base["IRAN"].isin(IRAN_OTHER_COMMUNE)].copy()
+    movers["ze_origine"] = movers["DCRAN"].map(plm_parent).map(ze_of)
+    inter = movers.dropna(subset=["ze", "ze_origine"])
+    inter = inter[inter["ze"] != inter["ze_origine"]]
+    groups_in = inter.loc[inter["ze"] == target_ze, "AGEREVQ"].map(age_group)
+    groups_out = inter.loc[inter["ze_origine"] == target_ze, "AGEREVQ"].map(age_group)
+    entrants = inter[inter["ze"] == target_ze].groupby(groups_in)["IPONDI"].sum()
+    sortants = inter[inter["ze_origine"] == target_ze].groupby(groups_out)["IPONDI"].sum()
+    residents = base[base["ze"] == target_ze]
+    population = residents.groupby(residents["AGEREVQ"].map(age_group))["IPONDI"].sum()
+    if population.empty:
+        raise MigrationsError(f"no resident in target ZE {target_ze}")
+    blocks: dict[str, dict[str, float | None]] = {}
+    for _low, _high, label in AGE_GROUPS:
+        ent = float(entrants.get(label, 0.0))
+        sor = float(sortants.get(label, 0.0))
+        pop = float(population.get(label, 0.0))
+        blocks[label] = {
+            "entrants": round(ent),
+            "sortants": round(sor),
+            "solde": round(ent - sor),
+            "solde_pct_pop_groupe": round((ent - sor) / pop * 100, 2) if pop else None,
+        }
+    return blocks
 
 
 def national_summary(frame: pd.DataFrame) -> dict[str, object]:
@@ -92,6 +170,7 @@ def national_summary(frame: pd.DataFrame) -> dict[str, object]:
         "dont_autre_commune_france_pct": share(base["IRAN"].isin(IRAN_OTHER_COMMUNE)),
         "dont_etranger_pct": share(base["IRAN"].isin(IRAN_ABROAD)),
         "part_mobiles_par_statut": par_statut,
+        "taux_mobilite_par_age": mobility_by_age(frame),
     }
 
 
@@ -149,6 +228,8 @@ def build_summary(
     indice_cout_pct: pd.Series,
     rotation: pd.DataFrame,
     ze_names: pd.Series,
+    tendue_variants: dict[str, pd.Series] | None = None,
+    soldes_par_age_paris: dict[str, dict[str, float | None]] | None = None,
 ) -> dict[str, object]:
     """Assemble the R-13 payload: national block, ZE geography, flows, crosses."""
     frame = (
@@ -173,8 +254,28 @@ def build_summary(
     def ranked(by: str, ascending: bool) -> pd.DataFrame:
         return frame.sort_values([by, "ze_name"], ascending=[ascending, True], kind="stable")
 
-    tendues = frame["tendue"].fillna(False).astype(bool)
+    # 2026-08-09 review (HD-2): unknown tension stays unknown — excluded
+    # from both medians and counted.
+    known = frame["tendue"].notna()
+    tendues = known & frame["tendue"].fillna(False).astype(bool)
+    autres = known & ~frame["tendue"].fillna(True).astype(bool)
     quantiles = frame["taux_mobilite_pct"].quantile([0.25, 0.5, 0.75])
+
+    def median_or_none(mask: pd.Series, column: str) -> float | None:
+        value = frame.loc[mask, column].median()
+        return None if pd.isna(value) else round(float(value), 2)
+
+    def variant_block(variant: pd.Series) -> dict[str, object]:
+        aligned = variant.reindex(frame.index)
+        v_known = aligned.notna()
+        v_tendues = v_known & aligned.fillna(False).astype(bool)
+        v_autres = v_known & ~aligned.fillna(True).astype(bool)
+        return {
+            "tendues_taux_mobilite_pct": median_or_none(v_tendues, "taux_mobilite_pct"),
+            "autres_taux_mobilite_pct": median_or_none(v_autres, "taux_mobilite_pct"),
+            "n_tendues": int(v_tendues.sum()),
+        }
+
     return {
         "national": national,
         "couverture": coverage,
@@ -204,19 +305,25 @@ def build_summary(
         ],
         "mediane_par_tension": {
             "tendues": {
-                "taux_mobilite_pct": round(
-                    float(frame.loc[tendues, "taux_mobilite_pct"].median()), 2
-                ),
-                "solde_pct_pop": round(float(frame.loc[tendues, "solde_pct_pop"].median()), 2),
+                "taux_mobilite_pct": median_or_none(tendues, "taux_mobilite_pct"),
+                "solde_pct_pop": median_or_none(tendues, "solde_pct_pop"),
             },
             "autres": {
-                "taux_mobilite_pct": round(
-                    float(frame.loc[~tendues, "taux_mobilite_pct"].median()), 2
-                ),
-                "solde_pct_pop": round(float(frame.loc[~tendues, "solde_pct_pop"].median()), 2),
+                "taux_mobilite_pct": median_or_none(autres, "taux_mobilite_pct"),
+                "solde_pct_pop": median_or_none(autres, "solde_pct_pop"),
             },
             "n_tendues": int(tendues.sum()),
+            "n_tension_inconnue": int((~known).sum()),
+            "mann_whitney_p_taux": stats.mann_whitney_p(
+                frame.loc[tendues, "taux_mobilite_pct"], frame.loc[autres, "taux_mobilite_pct"]
+            ),
         },
+        "sensibilite_h08": {
+            label: variant_block(variant) for label, variant in (tendue_variants or {}).items()
+        },
+        # SE-8: the life-cycle reading of the Paris internal soldes —
+        # entries at 15-24, net exits at family and retirement ages.
+        "soldes_par_age_paris": soldes_par_age_paris or {},
         "spearman_mobilite_vs_rotation_rp": stats.spearman_by_perimeter(
             frame, "taux_mobilite_pct", "rotation_rp_pct"
         ),

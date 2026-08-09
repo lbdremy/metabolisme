@@ -83,6 +83,8 @@ SOCIAL_OUTPUT = Path("data") / "processed" / "mobilite-parc-social-ze.json"
 
 MIGCOM_FILE = "insee-rp2022-migcom.parquet"
 MIGRATIONS_OUTPUT = Path("data") / "processed" / "migrations-residentielles-ze.json"
+# The emblematic expensive core of the R-13 soldes (SE-8 age breakdown).
+PARIS_ZE = "1109"
 
 DVF_FILE = "dvf-geolocalisees-2025.csv.gz"
 TRANSACTION_OUTPUT = Path("data") / "processed" / "cout-transaction-ze.json"
@@ -616,34 +618,25 @@ def build_migrations(root: Path) -> dict[str, object]:
     """Compute the R-13 summary payload (person-level migrations by ZE, S-29)."""
     raw = root / "data" / "raw"
     cut = pq.read_table(
-        raw / MIGCOM_FILE, columns=["COMMUNE", "DCRAN", "IRAN", "IPONDI", "STOCD"]
+        raw / MIGCOM_FILE, columns=["COMMUNE", "DCRAN", "IRAN", "IPONDI", "STOCD", "AGEREVQ"]
     ).to_pandas()
     frame = migrations.parse_migcom(cut)
     national = migrations.national_summary(frame)
     commune_ze = ze.parse_commune_ze(_read_membership(root))
     ze_frame, coverage = migrations.migrations_by_ze(frame, commune_ze)
 
-    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
-        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
-    census = rs.parse_census_housing(census_raw)
-    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
-    communes = lovac.parse_territories(
-        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
-    )
-    h08 = _load_hypothesis(root, "H-08")
-    h12 = _load_hypothesis(root, "H-12")
-    tension_frame = tension.tension_by_ze(
-        census, tlv, communes, commune_ze, h08.central_value, h12.central_value
-    )
+    tendue, tendue_variants = _tension_flag_with_variants(root)
     rotation = mobilite.rotation_by_ze(_lstay_parts(root))
     return migrations.build_summary(
         ze_frame,
         national,
         coverage,
-        tension_frame["tendue"],
+        tendue,
         _cost_frame(root)["indice_cout_pct"],
         rotation,
         _ze_names(root),
+        tendue_variants,
+        migrations.soldes_by_age(frame, commune_ze, PARIS_ZE),
     )
 
 

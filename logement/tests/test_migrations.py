@@ -11,7 +11,14 @@ from logement.core import migrations
 
 
 def _raw(rows: list[dict[str, object]]) -> pd.DataFrame:
-    defaults = {"COMMUNE": "01001", "DCRAN": "01001", "IRAN": "1", "IPONDI": 1.0, "STOCD": "10"}
+    defaults = {
+        "COMMUNE": "01001",
+        "DCRAN": "01001",
+        "IRAN": "1",
+        "IPONDI": 1.0,
+        "STOCD": "10",
+        "AGEREVQ": "030",
+    }
     return pd.DataFrame([{**defaults, **r} for r in rows])
 
 
@@ -155,3 +162,96 @@ def test_property_rates_bounded_and_flows_balanced(obs: list[tuple[str, float]])
     rates = ze_frame["taux_mobilite_pct"].dropna()
     assert ((rates >= 0) & (rates <= 100)).all()
     assert ze_frame["solde"].sum() == pytest.approx(0.0, abs=1e-9)
+
+
+def test_parse_migcom_rejects_bad_ages() -> None:
+    """Missing or negative AGEREVQ cannot feed the age decomposition."""
+    with pytest.raises(migrations.MigrationsError, match="AGEREVQ"):
+        migrations.parse_migcom(_raw([{"AGEREVQ": None}]))
+
+
+def test_mobility_by_age_groups() -> None:
+    """SE-8/SE-2: the national mobility rate is published per age group."""
+    frame = migrations.parse_migcom(
+        _raw(
+            [
+                {"IRAN": "1", "IPONDI": 80.0, "AGEREVQ": "070"},
+                {"IRAN": "3", "IPONDI": 20.0, "AGEREVQ": "070"},
+                {"IRAN": "3", "IPONDI": 30.0, "AGEREVQ": "025"},
+                {"IRAN": "1", "IPONDI": 70.0, "AGEREVQ": "030"},
+                {"IRAN": "0", "IPONDI": 9.0, "AGEREVQ": "030"},
+            ]
+        )
+    )
+    par_age = migrations.mobility_by_age(frame)
+    assert par_age["60+"] == {"personnes": 100, "taux_mobilite_pct": 20.0}
+    assert par_age["25-39"] == {"personnes": 100, "taux_mobilite_pct": 30.0}
+    assert "0-14" not in par_age
+
+
+def test_soldes_by_age_flows() -> None:
+    """The per-age block splits a ZE's internal entries and exits."""
+    frame = migrations.parse_migcom(
+        _raw(
+            [
+                # resident of ZE A, arrived from ZE B this year, aged 20
+                {
+                    "COMMUNE": "01001",
+                    "DCRAN": "02001",
+                    "IRAN": "3",
+                    "IPONDI": 10.0,
+                    "AGEREVQ": "020",
+                },
+                # resident of ZE B, arrived from ZE A, aged 30 (an exit for A)
+                {
+                    "COMMUNE": "02001",
+                    "DCRAN": "01001",
+                    "IRAN": "3",
+                    "IPONDI": 4.0,
+                    "AGEREVQ": "030",
+                },
+                # settled resident of ZE A, aged 30
+                {"COMMUNE": "01001", "IRAN": "1", "IPONDI": 86.0, "AGEREVQ": "030"},
+            ]
+        )
+    )
+    commune_ze = pd.DataFrame({"code": ["01001", "02001"], "ze": ["A", "B"]})
+    blocks = migrations.soldes_by_age(frame, commune_ze, "A")
+    assert blocks["15-24"]["entrants"] == 10
+    assert blocks["15-24"]["solde"] == 10
+    assert blocks["25-39"]["sortants"] == 4
+    assert blocks["25-39"]["solde"] == -4
+    assert blocks["60+"]["solde_pct_pop_groupe"] is None
+
+
+def test_build_summary_unknown_tension_and_age_block() -> None:
+    """HD-2: unknown tension is excluded and counted; the age block is carried."""
+    frame = migrations.parse_migcom(
+        _raw(
+            [
+                {"COMMUNE": "01001", "IRAN": "1", "IPONDI": 90.0},
+                {"COMMUNE": "01001", "DCRAN": "02001", "IRAN": "3", "IPONDI": 10.0},
+                {"COMMUNE": "02001", "IRAN": "1", "IPONDI": 60.0},
+                {"COMMUNE": "02001", "DCRAN": "01001", "IRAN": "3", "IPONDI": 40.0},
+            ]
+        )
+    )
+    commune_ze = pd.DataFrame({"code": ["01001", "02001"], "ze": ["0051", "0052"]})
+    ze_frame, coverage = migrations.migrations_by_ze(frame, commune_ze)
+    idx = ze_frame.index
+    payload = migrations.build_summary(
+        ze_frame,
+        {"taux_mobilite_pct": 25.0},
+        coverage,
+        tendue=pd.Series([True, None], index=idx),
+        indice_cout_pct=pd.Series([0.9, 0.4], index=idx),
+        rotation=pd.DataFrame({"part_recents_pct": [12.0, 10.0]}, index=idx),
+        ze_names=pd.Series(["Alpha", "Beta"], index=idx),
+        tendue_variants={"h08_5_pct": pd.Series([True, True], index=idx)},
+        soldes_par_age_paris={"15-24": {"entrants": 10}},
+    )
+    block = payload["mediane_par_tension"]
+    assert block["n_tension_inconnue"] == 1
+    assert block["autres"]["taux_mobilite_pct"] is None
+    assert payload["sensibilite_h08"]["h08_5_pct"]["n_tendues"] == 2
+    assert payload["soldes_par_age_paris"] == {"15-24": {"entrants": 10}}

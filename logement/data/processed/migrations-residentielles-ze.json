@@ -17,7 +17,9 @@
       "solde_pct_pop": 0.24,
       "taux_mobilite_pct": 9.4
     },
+    "mann_whitney_p_taux": 0.143,
     "n_tendues": 97,
+    "n_tension_inconnue": 1,
     "tendues": {
       "solde_pct_pop": 0.33,
       "taux_mobilite_pct": 9.5
@@ -152,7 +154,41 @@
     },
     "poids_rattachement_exclu": 196347,
     "population": 66859433,
+    "taux_mobilite_par_age": {
+      "0-14": {
+        "personnes": 11011745,
+        "taux_mobilite_pct": 10.49
+      },
+      "15-24": {
+        "personnes": 8023770,
+        "taux_mobilite_pct": 17.86
+      },
+      "25-39": {
+        "personnes": 12054224,
+        "taux_mobilite_pct": 17.71
+      },
+      "40-59": {
+        "personnes": 17439862,
+        "taux_mobilite_pct": 6.77
+      },
+      "60+": {
+        "personnes": 18329832,
+        "taux_mobilite_pct": 3.78
+      }
+    },
     "taux_mobilite_pct": 9.87
+  },
+  "sensibilite_h08": {
+    "h08_5_pct": {
+      "autres_taux_mobilite_pct": 9.38,
+      "n_tendues": 54,
+      "tendues_taux_mobilite_pct": 9.8
+    },
+    "h08_7_pct": {
+      "autres_taux_mobilite_pct": 9.34,
+      "n_tendues": 170,
+      "tendues_taux_mobilite_pct": 9.6
+    }
   },
   "soldes_les_plus_negatifs": [
     {
@@ -270,6 +306,38 @@
       "ze": "5304"
     }
   ],
+  "soldes_par_age_paris": {
+    "0-14": {
+      "entrants": 9867,
+      "solde": -25153,
+      "solde_pct_pop_groupe": -2.31,
+      "sortants": 35020
+    },
+    "15-24": {
+      "entrants": 53967,
+      "solde": 18169,
+      "solde_pct_pop_groupe": 2.06,
+      "sortants": 35798
+    },
+    "25-39": {
+      "entrants": 50252,
+      "solde": -36868,
+      "solde_pct_pop_groupe": -2.37,
+      "sortants": 87119
+    },
+    "40-59": {
+      "entrants": 12929,
+      "solde": -27456,
+      "solde_pct_pop_groupe": -1.61,
+      "sortants": 40385
+    },
+    "60+": {
+      "entrants": 6357,
+      "solde": -21226,
+      "solde_pct_pop_groupe": -1.54,
+      "sortants": 27582
+    }
+  },
   "spearman_entree_vs_cout": {
     "france_entiere": {
       "ci95": [
