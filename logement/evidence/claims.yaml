@@ -1379,9 +1379,12 @@
     principales occupées depuis moins de 2 ans passe de 13,14 % (2012) à
     12,89 % (2017) puis 11,97 % (2023) : la baisse s'accélère (−0,25 pt
     en 5 ans puis −0,92 pt en 6 ans) et se concentre sur la classe
-    « moins de 2 ans » — la part « moins de 5 ans » ne perd que 0,43 pt
-    (la classe 2-4 ans gagne 0,74 pt : les ménages entrés récemment ne
-    re-bougent plus aussi vite).
+    « moins de 2 ans » — la part « moins de 5 ans » ne perd que
+    0,43 pt : la classe 2-4 ans gagne 0,74 pt, un déplacement
+    mécaniquement compatible avec la seule chute du flux d'entrées en
+    fin de période (les cohortes entrées 2019-2021 vieillissent dans la
+    classe suivante) ; la lecture comportementale appartient à I-11
+    (correction de la revue 2026-08-09, HD-13).
   depends_on: [O-25]
 
 - id: O-27
@@ -1412,8 +1415,28 @@
     statut de tension de T-08 (H-08 et H-12 centraux), le taux de
     vacance structurelle (T-04) et l'indice de coût résidentiel (T-05) —
     corrélations de rangs avec IC de Fisher sur les deux périmètres
-    (jamais comparés entre eux).
+    (jamais comparés entre eux). Depuis la revue 2026-08-09 : trois
+    vues de la chute (points, relative, partielle à niveau 2012
+    contrôlé), test de Mann-Whitney des contrastes de médianes,
+    contrastes publiés aux bornes H-08, statut de tension inconnu
+    exclu des médianes (jamais assimilé à « autres »).
   depends_on: [O-25, T-08, T-04, T-05, H-08, H-12]
+  produced_by: src/logement/core/mobilite.py
+
+- id: T-16
+  type: transformation
+  title: >
+    Shift-share démographique de la chute de rotation (revue
+    2026-08-09, SE-2) : taux de mobilité annuelle par âge quinquennal
+    figés à leur valeur 2022 (S-29, classes agrégées à 95 ans et
+    plus), structures de population aux 1er janvier 2012 et 2023 au
+    périmètre France hors Mayotte (S-38 — contrôle dur : les classes
+    d'âge doivent re-sommer aux totaux départementaux diffusés) ; la
+    chute du taux agrégé prédite par le seul changement de structure
+    (−0,42 pt, soit −4,0 % relatif sur un taux prédit de 10,31 %) est
+    rapportée à la chute relative observée de la rotation (−8,9 %) —
+    transposition personnes→logements assumée comme ordre de grandeur.
+  depends_on: [S-29, S-38, O-26]
   produced_by: src/logement/core/mobilite.py
 
 - id: R-11
@@ -1423,58 +1446,79 @@
     ralentissement national de −1,17 pt de la part d'emménagés de moins
     de 2 ans (13,14 → 11,97 %), soit ~364 000 emménagements récents
     « manquants » dans le stock 2023 à rotation 2012 constante (ordre de
-    grandeur descriptif, pas un flux annuel) ; 293 ZE sur 305 en baisse.
-    Le NIVEAU de rotation est plus haut là où le logement est cher
-    (rho métropole +0,40, IC95 [+0,30, +0,49], n = 287) et plus bas là
-    où la vacance structurelle est haute (rho −0,22, IC95
-    [−0,33, −0,11]) — il reflète la fonction du territoire (étudiants,
-    emploi), pas la détente du marché. La CHUTE 2012→2023 suit le
-    gradient inverse : plus forte là où le logement est cher (rho
-    métropole −0,29, IC95 [−0,39, −0,18] ; France entière −0,35) et là
-    où la vacance est rare (rho +0,25, IC95 [+0,14, +0,36]) ; médiane
-    −1,54 pt dans les 97 ZE tendues de R-07 contre −1,27 pt ailleurs.
-  depends_on: [T-12, O-26, O-27, V-01]
+    grandeur descriptif, pas un flux annuel) — dont ~45 % attribuables
+    au seul vieillissement (shift-share T-16, transposition
+    personnes→logements ; borne externe : 14 % de la baisse de la
+    mobilité des personnes, S-33) ; 293 ZE sur 305 en baisse. Le NIVEAU
+    de rotation est plus haut là où le logement est cher (rho métropole
+    +0,40, IC95 [+0,29, +0,50], n = 287) et plus bas là où la vacance
+    structurelle est haute (rho −0,22) — il reflète la fonction du
+    territoire (étudiants, emploi). La CHUTE 2012→2023 est publiée en
+    TROIS vues (revue 2026-08-09, SE-1) : en points, plus forte en ZE
+    tendues (médianes −1,54 vs −1,27, Mann-Whitney p = 0,003 — stable
+    aux bornes H-08 : −1,71/−1,30 à 5 %, −1,50/−1,14 à 7 %) et là où le
+    logement est cher (rho −0,29) ; en relatif, l'écart se resserre
+    (−12,2 vs −10,7 %, p = 0,021) ; à NIVEAU 2012 CONTRÔLÉ, le gradient
+    de coût disparaît (rho partiel −0,07, IC95 [−0,18, +0,05] — la
+    chute suit d'abord le niveau initial, rho −0,52) : le contraste
+    tendues/autres est un fait significatif mais NON DISCRIMINANT entre
+    chute quasi proportionnelle commune et verrouillage territorial.
+  depends_on: [T-12, T-16, O-26, O-27, V-01]
   produced_by: src/logement/shell/build.py
   output: data/processed/mobilite-residentielle-ze.json
-  limitations: [L-22]
+  limitations: [L-22, L-26]
 
 - id: I-11
   type: interpretation
   title: >
-    Première instruction de H-04 (mobilités empêchées) : le gel de la
-    rotation est général mais SE CONCENTRE dans les marchés verrouillés
-    — chers et sans vacance disponible — pendant que dans les marchés
-    détendus la rotation, déjà faible, baisse moins. C'est la signature
-    attendue d'une mobilité EMPÊCHÉE par le marché (et non d'un simple
-    désintérêt pour la mobilité, qui ne suivrait pas le gradient de
-    coût) ; le sens niveau/chute opposé sur le même gradient de coût
-    écarte l'explication « les territoires chers tournent
-    structurellement moins ». L'interprétation reste descriptive :
-    aucun contrôle de composition (L-22) — la part démographique du
-    ralentissement n'est pas séparée de la part « blocage ». À
-    instruire ensuite : mobilité du parc social (RPLS), migrations
-    résidentielles entre ZE, coût de transaction (DVF) — NEXT-STEPS.
+    Première instruction de H-04 (mobilités empêchées), REQUALIFIÉE par
+    la revue du 2026-08-09 (SE-1/SE-2/SE-3, corrections tracées) : le
+    gel de la rotation est GÉNÉRAL (−11 % en proportion), sa part
+    démographique est BORNÉE minoritaire (~45 % au shift-share interne
+    T-16 ; 14 % de la baisse de la mobilité des personnes selon
+    l'INSEE, S-33 ; 9 % côté parc social selon l'ANCOLS, S-34) et sa
+    fenêtre récente coïncide avec le choc du crédit 2022-2024 (S-36) —
+    la composante cyclique n'est pas séparée. Le gradient territorial
+    de la chute est porté par le niveau initial (rho partiel ≈ 0 à
+    niveau 2012 contrôlé) : COMPATIBLE avec une mobilité empêchée, il
+    ne la démontre pas ; l'argument antérieur (« le sens opposé
+    niveau/chute écarte l'explication structurelle ») était logiquement
+    inversé — c'est la signature attendue d'une chute proportionnelle —
+    et il est retiré. Ce qui résiste comme signal propre :
+    l'ACCÉLÉRATION (−0,25 pt sur 2012-2017, −0,92 sur 2017-2023), que
+    le vieillissement, lisse, ne produit pas. L'observation qui
+    trancherait : la rotation par âge × ZE (fichier détail du RP) —
+    NEXT-STEPS.
   depends_on: [R-11]
 
 - id: L-22
   type: limit
   title: >
     Limites de la rotation comme mesure des mobilités empêchées :
-    (1) aucun contrôle de composition — le vieillissement élève
-    mécaniquement l'ancienneté d'emménagement et une partie de la chute
-    nationale est démographique ; le gradient TERRITORIAL de la chute
-    (R-11) est le signal le moins exposé (le vieillissement est
-    national) mais les structures d'âge diffèrent aussi entre ZE ;
-    (2) rotation du parc ≠ mobilité des personnes (D-16) : un marché
-    étudiant gonfle sa rotation par les premières installations sans que
-    les ménages en place puissent bouger, et une mobilité sortante vers
-    une autre ZE ne laisse aucune trace si le logement quitte l'usage de
-    résidence principale ; (3) la classe « moins de 2 ans » du millésime
-    2023 recouvre des emménagements ~2021-2023 (collecte EAR),
-    période post-COVID atypique ; (4) les corrélations coût portent sur
-    n = 297 ZE (loyers d'annonce absents de certaines ZE), la vacance
-    sur n = 305. Porte sur R-11/I-11.
-  depends_on: [D-16, S-27]
+    (1) composition démographique BORNÉE mais non éliminée — le
+    shift-share T-16 (taux par âge S-29 figés à 2022 × structures
+    S-38) attribue ~45 % de la chute relative nationale au seul
+    vieillissement (transposition personnes→logements, ordre de
+    grandeur) ; borne externe : 14 % de la baisse 2013-2023 de la
+    mobilité des personnes (S-33) — méthodes différentes, même
+    conclusion : la démographie explique une minorité de la chute et
+    aucune part de son accélération ; les structures d'âge diffèrent
+    aussi entre ZE (la chute à âge contrôlé par ZE reste à instruire) ;
+    (2) composante CYCLIQUE non séparée : la classe « moins de 2 ans »
+    du millésime 2023 recouvre des emménagements ~2021-2023 (collecte
+    EAR, période post-COVID) qui chevauchent le choc du crédit
+    immobilier — taux des nouveaux prêts ~1 % fin 2021 → plus de 4 %
+    début 2024 puis reflux (S-36) ; un rebond des millésimes suivants
+    signerait le cyclique, une persistance le structurel (RPLS
+    2026/2027, prochain L_STAY — NEXT-STEPS) ; (3) rotation du parc ≠
+    mobilité des personnes (D-16) : un marché étudiant gonfle sa
+    rotation par les premières installations sans que les ménages en
+    place puissent bouger, et une mobilité sortante vers une autre ZE
+    ne laisse aucune trace si le logement quitte l'usage de résidence
+    principale ; (4) les corrélations coût portent sur n = 287 ZE en
+    métropole (297 France entière), la vacance sur n = 305. Porte sur
+    R-11/I-11.
+  depends_on: [D-16, S-27, S-33, S-36]
 
 - id: C-09
   type: choice
@@ -1484,10 +1528,13 @@
     moyenne des taux communaux PONDÉRÉE par le parc social du MÊME
     millésime (nb_ls, nb_ls2019, nb_ls2013), convention CONTRÔLÉE
     contre les lignes « Total France entière » publiées : le code
-    refuse (erreur dure) un écart > 0,05 pt au national — écarts
-    observés ≤ 0,014 pt aux trois millésimes testés. Les ZE à parc
-    social < 500 logements restent dans la frame mais hors classements
-    et corrélations (taux instables, seuil publié).
+    refuse (erreur dure) un écart > 0,05 pt au national, comparé NON
+    ARRONDI depuis la revue 2026-08-09 (ST-5) — écarts observés
+    ≤ 0,010 pt aux trois millésimes ; une commune au taux masqué perd
+    aussi son poids et une ZE toute masquée sort manquante, jamais
+    zéro (garde min_count, ST-9). Les ZE à parc social < 500 logements
+    restent dans la frame mais hors classements et corrélations (taux
+    instables, seuil publié).
   depends_on: [S-28, D-17]
 
 - id: O-28
@@ -1496,9 +1543,11 @@
     Taux de mobilité (D-17) et de vacance du parc locatif social par
     commune (16 863 communes, PLM par arrondissement), séries annuelles
     2013-2025, et références nationales publiées (feuille REGION) —
-    version « secret_donnees » : comptages masqués en valeurs
-    manquantes, ratios diffusés. Parc social national : 5 396 259
-    logements au 01/01/2025.
+    version « secret_donnees » : le masquage ne touche en pratique que
+    les colonnes de loyers (vérifié par la revue 2026-08-09, HD-9 :
+    zéro valeur manquante sur les parcs et les taux de mobilité des
+    trois millésimes utilisés ; Σ nb_ls = le national exact). Parc
+    social national : 5 396 259 logements au 01/01/2025.
   depends_on: [S-28, D-17]
 
 - id: O-29
@@ -1517,12 +1566,15 @@
   title: >
     Par ZE (parc ≥ 500 logements, 303 ZE) : mobilité sociale 2025
     médiane 8,27 % (min 2,64 Porto-Vecchio, max 18,12 Mayotte) ; 286 ZE
-    sur 303 en baisse 2019→2025, d'ampleur UNIFORME (médiane −2,40 pt
-    en ZE tendues vs −2,44 ailleurs) ; les niveaux les plus bas sont
-    les marchés tendus/touristiques (Sainte-Maxime 3,6, Menton 3,9,
-    Nice 4,1, Roissy 4,3, Marseille 4,7 %), les plus hauts le rural
-    détendu (Mende, Avallon, Argentan ~12-13 %) ; vacance sociale
-    médiane 1,63 % en ZE tendues (2,80 ailleurs).
+    sur 303 en baisse 2019→2025 — en POINTS d'ampleur uniforme (médiane
+    −2,40 pt en ZE tendues vs −2,45 ailleurs, Mann-Whitney p = 0,95),
+    en RELATIF plus forte dans les tendues (−26,0 vs −22,5 %) ; les
+    niveaux les plus bas sont les marchés tendus/touristiques
+    (Sainte-Maxime 3,6, Menton 3,9, Nice 4,1, Roissy 4,3, Marseille
+    4,7 %), les plus hauts le rural détendu (Mende, Avallon, Argentan
+    ~12-13 %) ; vacance sociale médiane 1,63 % en ZE tendues (2,79
+    ailleurs ; Mayotte, au statut de tension inconnu, exclue des
+    médianes depuis la revue 2026-08-09).
   depends_on: [O-28, C-09]
 
 - id: T-13
@@ -1537,7 +1589,11 @@
     privée (T-04), l'indice de coût (T-05) et la rotation totale RP
     (T-12) — corrélations de rangs avec IC de Fisher sur les deux
     périmètres ; masque DOM étendu à Mayotte (ZE 0601, première source
-    France entière avec Mayotte de la chaîne).
+    France entière avec Mayotte de la chaîne). Depuis la revue
+    2026-08-09 : rho niveau × coût publié aux trois millésimes, trois
+    vues de la chute (points, relative, partielle à niveau 2019
+    contrôlé), croisement des segments publié brut ET à coût contrôlé,
+    contrastes aux bornes H-08, tension inconnue exclue des médianes.
   depends_on: [O-28, C-09, T-04, T-05, T-08, T-12, H-08, H-12]
   produced_by: src/logement/core/social.py
 
@@ -1546,64 +1602,88 @@
   title: >
     Mobilité du parc social par ZE (S-28, millésimes 2013/2019/2025) :
     chute nationale 9,29 → 7,11 % (2019-2025) qui s'accélère en fin de
-    période (O-29), généralisée (286 ZE sur 303) et d'ampleur UNIFORME
-    sur le territoire (chute × coût rho métropole +0,03, IC95
-    [−0,09 ; +0,14], compatible avec zéro ; médianes −2,40 / −2,44 pt).
-    Le NIVEAU, lui, est le miroir du marché : mobilité × indice de coût
-    rho métropole −0,80 (IC95 [−0,84 ; −0,76], n = 285) — la
-    corrélation la plus forte de la chaîne —, +0,48 avec la vacance
+    période (O-29 — fenêtre du choc du crédit, L-23), généralisée
+    (286 ZE sur 303). En POINTS la chute est uniforme (chute × coût
+    rho métropole +0,03, IC95 [−0,09 ; +0,14] ; médianes −2,40/−2,45,
+    MW p = 0,95) ; en RELATIF et à niveau 2019 contrôlé elle est
+    EXCÉDENTAIRE dans les marchés chers (−26,0 vs −22,5 % ; rho partiel
+    chute × coût −0,50, IC95 [−0,59 ; −0,40] — revue 2026-08-09,
+    SE-4) : les ZE chères, parties de niveaux déjà minimaux, perdent
+    au moins autant que les autres. Le NIVEAU est le miroir du marché
+    depuis AU MOINS 2013 : mobilité × coût rho métropole −0,70 (2013),
+    −0,68 (2019), −0,80 (2025, IC95 [−0,85 ; −0,75], n = 285) — parmi
+    les plus fortes corrélations de la chaîne, indistinguable des
+    +0,80/+0,81 de R-13/R-14 (IC chevauchants) ; +0,48 avec la vacance
     structurelle privée ; médiane 6,74 % dans les ZE tendues (vacance
-    sociale 1,63 %) contre 8,89 % ailleurs. Croisement des segments :
-    mobilité sociale × rotation totale RP (R-11) rho métropole −0,20
-    (IC95 [−0,31 ; −0,09]) — NÉGATIF : les métropoles chères cumulent
-    rotation totale élevée (étudiants, parc privé) et parc social gelé
-    (un logement social s'y libère environ une fois tous les 20-25
-    ans) ; les chutes des deux segments sont faiblement co-localisées
-    (+0,19, IC95 [+0,07 ; +0,30]).
+    sociale 1,63 %) contre 8,88 % ailleurs (un logement social s'y
+    libère environ une fois tous les 20-25 ans). Le croisement brut
+    avec la rotation totale RP (−0,20, IC95 [−0,31 ; −0,09]) est
+    fabriqué par les deux gradients de coût opposés : à coût contrôlé
+    les segments co-varient positivement (partiel +0,21, IC95
+    [+0,10 ; +0,32]) — le « masquage » du gel social par la rotation
+    étudiante/privée des métropoles est un corollaire des gradients,
+    pas un troisième fait ; chutes des deux segments faiblement
+    co-localisées (+0,19, non robuste à la correction de multiplicité,
+    L-23).
   depends_on: [T-13, O-29, O-30, V-01]
   produced_by: src/logement/shell/build.py
   output: data/processed/mobilite-parc-social-ze.json
-  limitations: [L-23]
+  limitations: [L-23, L-26]
 
 - id: I-12
   type: interpretation
   title: >
-    Deuxième instruction de H-04 : le parc social confirme et aggrave le
-    diagnostic de R-11. Là où R-11 montre un gel CONCENTRÉ dans les
-    marchés verrouillés, le segment social ajoute (1) un gel de NIVEAU
-    quasi proportionnel au coût du marché local (rho −0,80 : la sortie
-    vers le privé est le déterminant dominant de la rotation sociale —
-    quand le privé est inabordable, personne ne quitte le parc social)
-    et (2) une chute UNIFORME sur tout le territoire : la file
-    d'attente s'allonge partout, pas seulement en zone tendue. Le signe
-    NÉGATIF du croisement avec la rotation totale montre que la
-    rotation d'ensemble des métropoles (étudiante, privée) MASQUE le
-    gel du segment social — les deux mesures sont complémentaires, pas
-    redondantes. Reste descriptif : blocage des sorties et stabilité
-    choisie ne sont pas séparables dans un taux (D-17), et le lien
-    mécanique attributions/rotation n'est pas modélisé. À instruire
-    ensuite : migrations résidentielles entre ZE, coût de transaction
-    (DVF) — NEXT-STEPS.
+    Deuxième instruction de H-04, REQUALIFIÉE par la revue du
+    2026-08-09 (SE-4/SE-5/SE-6, SA-2/SA-3) : (1) le NIVEAU de mobilité
+    sociale reflète l'accessibilité du marché local depuis au moins
+    2013 (rho −0,70 → −0,80) — un trait STRUCTUREL du système, dont la
+    période n'ajoute que le creusement (−0,68 → −0,80) ; la lecture
+    « la sortie vers le privé est le déterminant dominant » reste la
+    plus plausible mais la lecture mécanique (là où le marché est
+    détendu, sortir ET reloger est facile) produit le même gradient —
+    non séparées. (2) La CHUTE est générale et, à cadrage contrôlé,
+    au moins aussi forte dans les marchés chers partis de niveaux
+    minimaux — la version en points (« uniforme ») et celle de R-11
+    (« concentrée ») étaient deux artefacts de cadrage opposés,
+    désormais publiés côte à côte ; sa part démographique est bornée
+    petite (ANCOLS : 9 % du ralentissement par le vieillissement des
+    attributaires, S-34) et sa fenêtre d'accélération coïncide avec le
+    choc du crédit 2022-2024 (S-36) — part cyclique non séparée. Le
+    masquage du gel social par la rotation d'ensemble des métropoles
+    est un corollaire des deux gradients de coût (croisement partiel
+    +0,21 à coût contrôlé). Reste descriptif : blocage des sorties et
+    stabilité choisie ne sont pas séparables dans un taux (D-17).
   depends_on: [R-12, I-11]
 
 - id: L-23
   type: limit
   title: >
     Limites de la mobilité RPLS comme mesure des mobilités empêchées :
-    (1) agrégation par ratio publié (C-09) — approchée par
-    construction, contrôlée au national (écarts ≤ 0,014 pt) mais non
-    contrôlable ZE par ZE ; (2) un taux bas ne sépare pas blocage des
-    sorties et stabilité choisie ; mutations internes et premières
-    mises en location hors numérateur (D-17) ; (3) petits parcs
-    volatils — les plus fortes « chutes » (Issoire −13,2 pt) sont des
-    petits parcs ruraux ; le seuil de 500 logements écarte les cas
-    extrêmes, les médianes restent l'indicateur robuste ; (4) périmètre
-    France entière AVEC Mayotte (ZE 0601, absente de S-27 et sans nom
-    dans S-07) — masque DOM de core/stats étendu en conséquence ;
-    (5) millésime « 2025 » = emménagements de l'année 2024 rapportés au
-    parc au 01/01/2025 — décalage d'un an avec l'étiquette. Porte sur
-    R-12/I-12.
-  depends_on: [S-28, D-17, C-09]
+    (1) agrégation par ratio publié (C-09) — moyenne pondérée exacte de
+    données complètes (le secret ne touche que les loyers, HD-9), dont
+    la seule approximation est le proxy de poids (parc total ≠ parc
+    proposé à la location, le vrai dénominateur de D-17) : contrôlée au
+    national (écarts ≤ 0,010 pt non arrondis) mais non contrôlable ZE
+    par ZE ; (2) un taux bas ne sépare pas blocage des sorties et
+    stabilité choisie ; mutations internes et premières mises en
+    location hors numérateur (D-17) ; part démographique bornée petite
+    par l'ANCOLS (9 % du ralentissement, S-34) ; (3) la fenêtre
+    d'accélération 2022-2025 coïncide avec le choc du crédit (S-36) —
+    composante cyclique non séparée, millésimes 2026/2027 arbitres ;
+    (4) les deltas 2019→2025 comparent deux pondérations de deux parcs
+    (recomposition ANRU, livraisons) : les médianes y sont insensibles
+    (vérifié en panel équilibré) mais les deltas de ZE individuels
+    bougent — Issoire −13,2 publié vs −11,8 à composition fixe — et ne
+    se commentent qu'avec ce caveat ; petits parcs volatils, seuil de
+    500 logements publié ; (5) périmètre France entière AVEC Mayotte
+    (ZE 0601, absente de S-27 et sans nom dans S-07 ; statut de
+    tension inconnu → exclue des médianes par tension) ; (6) millésime
+    « 2025 » = emménagements de l'année 2024 rapportés au parc au
+    01/01/2025 — décalage d'un an avec l'étiquette ; les rho faibles
+    (+0,19 chutes co-localisées) ne tiennent pas une correction de
+    multiplicité à l'échelle des ~32 corrélations publiées par la
+    session (ST-3). Porte sur R-12/I-12.
+  depends_on: [S-28, D-17, C-09, S-34, S-36]
 
 - id: O-31
   type: observation
@@ -1639,14 +1719,32 @@
     (min 3,51 Nord-Atlantique, max 12,82 Rennes ; ZE étudiantes en
     tête : Toulouse 12,80, Montpellier 12,66) ; 2,09 M de personnes
     changent de ZE dans l'année ; soldes internes les plus négatifs (en
-    % de population) : Savanes −2,49, PARIS −1,40 (133 371 entrants,
-    225 906 sortants), Roissy −1,11, Evry −0,96 ; les plus positifs :
-    littoral et ouest (Les Sables-d'Olonne +1,91, Brignoles +1,81,
-    La Rochelle +1,43, Dinan +1,41). Couverture publiée : 67 communes
-    de résidence sans ZE (poids 79 331, écarts de COG), 11 406 mobiles
-    sans ZE d'origine, Mayotte présente en seule origine (5 347
-    sortants, aucun résident dans le champ).
+    % de population, classement complet — revue 2026-08-09, ST-7) :
+    Savanes −2,49, PARIS −1,40 (133 371 entrants, 225 906 sortants),
+    Roissy −1,11, La Tarentaise −1,05, Evry −0,96 ; les plus positifs
+    mêlent littoraux, ouest et ZE singulières : Les Sables-d'Olonne
+    +1,91, Brignoles +1,81, Marie-Galante +1,54, Carhaix-Plouguer
+    +1,53, Ghisonaccia +1,48, Draguignan +1,45, La Rochelle +1,43,
+    Dinan +1,41. Couverture publiée : 67 communes de résidence sans ZE
+    (poids 79 331, écarts de COG), 11 406 mobiles sans ZE d'origine,
+    Mayotte présente en seule origine (5 347 sortants, aucun résident
+    dans le champ).
   depends_on: [O-31]
+
+- id: O-36
+  type: observation
+  title: >
+    Décomposition par âge (AGEREVQ, S-29 — revue 2026-08-09, SE-8) :
+    le taux de mobilité annuel décroît de 17,86 % (15-24 ans) et
+    17,71 % (25-39) à 10,49 % (0-14), 6,77 % (40-59) et 3,78 % (60 ans
+    et plus). À Paris (ZE 1109), le SEUL groupe d'âge à solde interne
+    positif est 15-24 (+18 169) ; les sorties nettes se répartissent
+    25-39 : −36 868 (33 %), 40-59 : −27 456 (25 %), 0-14 : −25 153
+    (23 %), 60+ : −21 226 (19 %) — entrées étudiantes, départs aux
+    âges famille et retraite : le profil du cycle de vie métropolitain.
+    L'âge ne révèle pas le motif du départ — l'éviction par les prix
+    n'est ni établie ni réfutée par ce profil.
+  depends_on: [O-31, D-18]
 
 - id: T-14
   type: transformation
@@ -1660,50 +1758,67 @@
     index sur l'union résidence ∪ origine pour que les soldes re-somment
     à zéro — une ZE d'origine sans résident garde ses sortants, taux
     manquants jamais zéro), croisements avec la tension (T-08), le coût
-    (T-05) et la rotation des logements (T-12).
+    (T-05) et la rotation des logements (T-12). Depuis la revue
+    2026-08-09 : taux de mobilité par groupe d'âge (AGEREVQ, validé au
+    parse) et décomposition par âge des flux internes parisiens ;
+    tension inconnue exclue des médianes, contrastes aux bornes H-08.
   depends_on: [O-31, T-05, T-08, T-12, H-08, H-12]
   produced_by: src/logement/core/migrations.py
 
 - id: R-13
   type: result
   title: >
-    Migrations résidentielles des personnes par ZE (S-29, RP2022) :
-    9,87 % de mobiles annuels au national, médiane ZE 9,42 %. La
-    mobilité est PORTÉE par le locatif privé (19,51 % d'entrées de
-    l'année contre 8,34 % en HLM et 5,73 % en propriété — O-32), et la
-    géographie des personnes VALIDE celle des logements : mobilité ×
-    rotation RP (R-11) rho métropole +0,80 (IC95 [+0,76 ; +0,84],
-    n = 287) entre deux sources indépendantes. Les flux internes vident
-    les cœurs chers : solde inter-ZE × coût rho France entière −0,15
-    (IC95 [−0,26 ; −0,04] ; métropole −0,11 [−0,22 ; +0,01]), Paris
-    −1,40 %/an de sa population en migrations internes. En NIVEAU, la
-    mobilité annuelle ne montre pas de gel spécifique aux zones tendues
-    (médianes 9,5 vs 9,4 ; entrée × coût compatible avec zéro) : sur un
-    an, les flux étudiants/jeunes actifs dominent — le blocage se lit
-    dans QUI bouge (statuts) et dans les SOLDES, pas dans le volume.
-  depends_on: [T-14, O-32, O-33, V-01]
+    Migrations résidentielles des personnes par ZE (S-29, RP2022 —
+    moyenne de fenêtres annuelles 2020-2024 sur une série descendante :
+    la série publiée est passée sous 9 % en 2023, S-33) : 9,87 % de
+    mobiles annuels au national, médiane ZE 9,42 %. La mobilité est
+    PORTÉE par le locatif privé (19,51 % d'entrées de l'année contre
+    8,34 % en HLM et 5,73 % en propriété — O-32) et décroît fortement
+    avec l'âge (O-36). La géographie des personnes RECOUPE celle des
+    logements : mobilité × rotation RP (R-11) rho métropole +0,80
+    (IC95 [+0,75 ; +0,85], n = 287) — une COHÉRENCE INTERNE du
+    recensement (S-27 et S-29 partagent l'appareil EAR, trois enquêtes
+    communes — revue 2026-08-09, HD-1), la validation inter-appareils
+    étant le recoupement MIGCOM-HLM 8,34 % ≈ RPLS 8,0-8,5 % (répertoire
+    administratif indépendant, O-32). Les flux internes vident les
+    cœurs chers (Paris −1,40 %/an : 225 906 sortants pour 133 371
+    entrants) mais leur profil par âge est celui du CYCLE DE VIE
+    (O-36) ; solde inter-ZE × coût rho France entière −0,15 (IC95
+    [−0,26 ; −0,04] — non robuste à la correction de multiplicité ;
+    métropole −0,11, compatible avec zéro). En NIVEAU, pas de gel
+    spécifique aux zones tendues sur un an (médianes 9,5 vs 9,4, MW
+    p = 0,14) : sur un an, les flux étudiants/jeunes actifs dominent —
+    le blocage éventuel se lit dans QUI bouge (statuts), pas dans le
+    volume ni, en l'état, dans les soldes.
+  depends_on: [T-14, O-32, O-33, O-36, V-01]
   produced_by: src/logement/shell/build.py
   output: data/processed/migrations-residentielles-ze.json
-  limitations: [L-24]
+  limitations: [L-24, L-26]
 
 - id: I-13
   type: interpretation
   title: >
-    Troisième instruction de H-04 — la mesure des PERSONNES complète
-    les deux mesures de LOGEMENTS : (1) la validation croisée +0,80
-    (R-11 × R-13, sources indépendantes) établit que la géographie de
-    la rotation est un fait robuste, pas un artefact de source ;
-    (2) la mobilité annuelle repose massivement sur le locatif privé —
-    2,3 × le parc social, 3,4 × la propriété : tout ce qui rétrécit ou
-    renchérit ce segment (R-04/R-06) comprime le canal principal des
-    mobilités, et le recoupement RPLS (8,34 % ≈ O-29) relie les deux
-    chaînes de mesure ; (3) les soldes internes négatifs des cœurs
-    chers (Paris −1,40 %/an) montrent des mobilités qui se font CONTRE
-    la géographie de l'emploi — partir n'est pas toujours choisi, et le
-    solde parisien n'est soutenable que par l'international et la
-    démographie. Reste descriptif : une fenêtre d'un an ne sépare pas
-    les mobilités choisies des empêchées ; l'étape suivante (DVF, coût
-    de transaction) chiffre la BARRIÈRE à la mobilité de statut.
+    Troisième instruction de H-04, REQUALIFIÉE par la revue du
+    2026-08-09 (HD-1/SE-7, SE-8) — la mesure des PERSONNES complète
+    les deux mesures de LOGEMENTS : (1) le +0,80 (R-11 × R-13) est une
+    cohérence interne du recensement entre l'unité logement et l'unité
+    personne (deux variables, deux pondérations, mais le même appareil
+    EAR — il ne protège pas d'un artefact commun de collecte) ; la
+    validation réellement externe est le recoupement MIGCOM-HLM
+    8,34 % ≈ RPLS 8,0-8,5 % (O-29), qui relie les deux chaînes de
+    mesure par deux appareils disjoints ; (2) la mobilité annuelle
+    repose massivement sur le locatif privé — 2,3 × le parc social,
+    3,4 × la propriété, en taux d'ENTRÉES dans le segment (L-24) :
+    tout ce qui rétrécit ou renchérit ce segment (R-04/R-06) comprime
+    le canal principal des mobilités ; (3) les soldes internes
+    négatifs des cœurs chers (Paris −1,40 %/an) ont le profil par âge
+    du CYCLE DE VIE métropolitain (O-36 : entrées 15-24, sorties
+    nettes aux âges famille et retraite — un trait ancien, déjà
+    documenté en 2012) : ils ne peuvent pas être publiés comme indice
+    de blocage ; l'éviction par les prix reste une question OUVERTE
+    (l'âge ne dit pas le motif ; le croisement avec l'emploi récent
+    reste à faire, L-07). Reste descriptif : une fenêtre d'un an ne
+    sépare pas les mobilités choisies des empêchées.
   depends_on: [R-13, I-11, I-12]
 
 - id: L-24
@@ -1713,16 +1828,24 @@
     d'ENQUÊTE — le taux par statut est un taux d'entrées dans le
     segment d'arrivée, pas une propension à partir du segment d'origine
     (les 19,51 % du locatif privé comptent aussi ceux qui le
-    traversent) ; (2) millésime 2022 = enquêtes 2020-2024 moyennées,
-    dont années COVID ; (3) les soldes ne couvrent que les migrations
-    INTERNES (l'étranger est dans le taux mais pas dans les flux O-D) ;
-    (4) effectifs pondérés < 200 imprécis (doc INSEE) — pas de flux
-    fins entre petites ZE publiés ; (5) 67 communes de résidence sans
-    ZE (COG 2022 vs 2026) et 11 406 mobiles sans origine, exclus et
-    publiés ; (6) fenêtre d'UN an : ne se compare pas au « moins de
-    2 ans » de D-16 (R-11) ni au taux RPLS (D-17) autrement qu'en ordre
-    de grandeur et en géographie. Porte sur R-13/I-13.
-  depends_on: [S-29, D-18]
+    traversent) ; « locatif privé » = STOCD 21 « loué vide non HLM »
+    (inclut les bailleurs sociaux non-HLM, marginaux) et le statut HLM
+    est déclaratif — le recoupement RPLS croise des périmètres voisins,
+    pas identiques ; (2) millésime 2022 = enquêtes 2020-2024 moyennées
+    (l'EAR 2021 a été reportée : quatre enquêtes), dont années COVID —
+    le niveau 9,87 % est une moyenne de fenêtres sur une série
+    descendante, pas un niveau courant (S-33 : 8,8 % en 2023) ;
+    (3) les soldes ne couvrent que les migrations INTERNES (l'étranger
+    est dans le taux mais pas dans les flux O-D) ; (4) effectifs
+    pondérés < 200 imprécis (doc INSEE) — pas de flux fins entre
+    petites ZE publiés ; (5) 67 communes de résidence sans ZE (COG
+    2022 vs 2026) et 11 406 mobiles sans origine, exclus et publiés ;
+    (6) fenêtre d'UN an : ne se compare pas au « moins de 2 ans » de
+    D-16 (R-11) ni au taux RPLS (D-17) autrement qu'en ordre de
+    grandeur et en géographie ; les rho faibles (solde × coût −0,15)
+    ne tiennent pas une correction de multiplicité (ST-3). Porte sur
+    R-13/I-13.
+  depends_on: [S-29, D-18, S-33]
 
 - id: C-10
   type: choice
@@ -1733,105 +1856,180 @@
     industriel/commercial dans la mutation (dépendances admises — une
     mutation DVF partage sa valeur_fonciere entre toutes ses lignes,
     les mutations multi-logements rendraient le prix du logement
-    indéterminé) ; bornes de plausibilité : valeur ≥ 5 000 €, surface
+    indéterminé) — l'assiette vise l'ACHAT UNITAIRE d'un ménage et ce
+    qu'elle retranche est publié (O-34 : ~34 % des logements vendus
+    changent de main en mutations multi-logements, hors champ par
+    construction). Bornes de plausibilité : valeur ≥ 5 000 €, surface
     ≥ 10 m², prix/m² entre 200 et 30 000 € (ventes à l'euro symbolique
-    et coquilles de saisie) ; médianes par ZE (robustes aux queues).
-    Codes commune re-normalisés (zéro initial), PLM par arrondissement
-    → commune parente.
+    et coquilles de saisie) — les ventes hors bornes sont marquées et
+    comptées par ZE, jamais silencieusement supprimées, et les ZE où
+    elles dépassent 10 % de l'assiette portent un avertissement
+    nominatif (petites ZE antillaises ; revue 2026-08-09, HD-6/HD-7) ;
+    médianes par ZE (robustes aux queues) ; classements réservés aux
+    ZE d'au moins 100 ventes (seuil publié, symétrique du seuil de
+    parc R-12). Codes commune re-normalisés (zéro initial), PLM par
+    arrondissement → commune parente.
   depends_on: [S-30]
 
 - id: O-34
   type: observation
   title: >
     Mutations DVF 2025 (année complète, S-30) : 3 514 036 lignes de
-    vente ; 733 529 mutations à un seul logement (C-10), 727 209 après
-    bornes de plausibilité. Prix médians France (hors Alsace-Moselle et
-    Mayotte) : 182 000 € l'ensemble, 200 000 € une maison, 166 000 € un
-    appartement, 2 658 €/m² ; 296 ZE couvertes (médiane 1 380 ventes
-    par ZE, min 22).
+    vente pour 1 245 125 mutations ; 733 529 mutations à un seul
+    logement (C-10) — hors assiette par construction : 127 555
+    mutations multi-logements portant 375 007 logements (~34 % des
+    logements vendus : blocs, immeubles de rapport) et 13 029 mutations
+    mixtes logement + local commercial —, 727 209 ventes après bornes
+    de plausibilité (6 320 marquées hors bornes) ; 332 ventes de 21
+    communes sans ZE (écarts de COG), comptées. Prix médians France
+    (hors Alsace-Moselle et Mayotte) : 182 000 € l'ensemble, 200 000 €
+    une maison, 166 000 € un appartement, 2 658 €/m² ; 296 ZE
+    couvertes (médiane 1 380 ventes par ZE, min 22 ; 6 ZE sous le
+    seuil de classement de 100 ventes).
   depends_on: [S-30, C-10]
 
 - id: O-35
   type: observation
   title: >
-    Le péage de transaction (droits H-13 centraux 6,32 % + émoluments
-    exacts du barème S-32, TVA comprise) vaut 7,43 à 8,02 % du prix
-    selon la ZE (médiane 7,60 % — la part émoluments décroît avec le
-    prix). Rapporté au niveau de vie médian local (MED_SL/12, unité
-    C-04) : médiane 6,14 mois, de 2,76 mois (Sarrebourg ; Montluçon
-    2,9, Guéret 3,2) à 13,24 mois (L'Ouest réunionnais ; Porto-Vecchio
-    13,0 ; Paris, Bayonne, La Teste-de-Buch et Le Sud réunionnais
-    ~11) ; médiane 7,76 mois dans les ZE tendues (prix médian
-    198 990 €) contre 5,53 ailleurs (133 629 €).
+    Le péage de transaction (droits TERRITORIALISÉS par département
+    depuis S-31 + émoluments exacts du barème S-32, TVA comprise, +
+    CSI 0,10 %, S-37) vaut 6,74 (Châteauroux — l'Indre est à 5,09 %) à
+    8,12 % du prix selon la ZE (médiane 7,68 % — la part émoluments
+    décroît avec le prix). Rapporté au niveau de vie médian local
+    (MED_SL/12, unité C-04, millésime 2021 — L-25) : médiane 6,15
+    mois, de 2,79 mois (Sarrebourg, sous le seuil de classement et
+    signalée « bornes sensibles » ; premiers classés : Montluçon 3,0,
+    Châteauroux 3,2, Guéret 3,3) à 13,42 mois (L'Ouest réunionnais
+    13,4 ; Porto-Vecchio 13,3 ; Paris 11,4, Bayonne 11,2, La
+    Teste-de-Buch 11,0) ; médiane 7,87 mois dans les ZE tendues (prix
+    médian 198 990 €) contre 5,59 ailleurs (133 629 €), Mann-Whitney
+    p < 1e-4. Aux scénarios uniformes H-13 : médiane 5,22 mois à
+    5,09 %, 5,81 mois à 5,81 % (droit commun / primo-accédant), 6,22
+    mois à 6,32 %.
   depends_on: [O-34, H-13]
 
 - id: T-15
   type: transformation
   title: >
     Coût de transaction par ZE : filtrage C-10 des ventes DVF, prix et
-    prix/m² médians et comptages par ZE, émoluments proportionnels
-    calculés exactement depuis le barème S-32 (contrôle unitaire sur
-    l'exemple chiffré de la fiche : 1 995,25 € HT à 200 000 €), droits
-    de mutation aux trois scénarios H-13 (5,09/6,32/6,32), poids en
-    mois de niveau de vie médian par UC (S-10, unité C-04), croisements
-    tension (T-08) et indice de coût locatif (T-05).
-  depends_on: [O-34, C-10, T-05, T-08, H-13]
+    prix/m² médians et comptages par ZE ; droits de mutation
+    TERRITORIALISÉS — taux votés par département lus sur la table S-31
+    (défaut 5,00 %, onze départements à 4,50 %, Indre et Mayotte à
+    3,80 %, vérifiés ligne à ligne sur le PDF figé), taux total =
+    départemental × 1,0237 + 1,20, moyenne par ZE pondérée par les
+    ventes ; émoluments proportionnels exacts du barème S-32 (contrôle
+    unitaire : 1 995,25 € HT à 200 000 €) ; CSI 0,10 % (min 15 €,
+    S-37) ; scénarios uniformes H-13 {5,09 ; 5,81 droit commun/primo ;
+    6,32} publiés en sensibilité ; poids en mois de niveau de vie
+    médian par UC (S-10, unité C-04) et annualisation descriptive sur
+    des détentions de 5/10/20 ans ; croisements tension (T-08, bornes
+    H-08 publiées) et indice de coût locatif (T-05) ; assiette,
+    couverture de jointure et ventes hors bornes publiées.
+  depends_on: [O-34, C-10, T-05, T-08, H-13, S-31, S-37]
   produced_by: src/logement/core/transaction.py
 
 - id: R-14
   type: result
   title: >
     Coût de transaction à l'achat du logement médian par ZE (S-30 DVF
-    2025, H-13, barème S-32) : un TAUX quasi uniforme (7,4-8,0 % du
-    prix) mais un POIDS très inégal — médiane 6,1 mois de niveau de vie
-    médian par UC, de 2,8 mois (Sarrebourg) à 13,2 (L'Ouest
-    réunionnais), 11 mois à Paris et Bayonne ; 7,8 mois en ZE tendues
-    contre 5,5 ailleurs, corrélation avec l'indice de coût locatif rho
-    métropole +0,81 (IC95 [+0,77 ; +0,85], n = 278). Le péage est un
-    PLANCHER (ni débours, ni CSI, ni agence — L-25) et il est le plus
-    lourd exactement là où R-11/R-12 localisent le gel de la rotation
-    et où R-13 montre que la propriété est le statut le moins mobile.
+    2025, droits territorialisés S-31, barème S-32, CSI S-37) : un
+    TAUX presque uniforme (6,7-8,1 % du prix, la borne basse étant
+    l'Indre à 5,09 % de droits) mais un POIDS très inégal — médiane
+    6,15 mois de niveau de vie médian par UC (millésime 2021, L-25),
+    de 2,8 mois (Sarrebourg) à 13,4 (L'Ouest réunionnais), ~11 mois à
+    Paris et Bayonne ; 7,87 mois en ZE tendues contre 5,59 ailleurs
+    (MW p < 1e-4, stable aux bornes H-08), ~83 % du péage est FISCAL
+    (droits + CSI). La corrélation avec l'indice de coût locatif (rho
+    métropole +0,81, IC95 [+0,75 ; +0,85], n = 278) est QUASI
+    MÉCANIQUE — le taux étant presque plat, les mois re-classent le
+    prix (rho mois × prix +0,98) et le +0,81 est la corrélation
+    loyers-prix : la géographie du péage n'est pas une quatrième
+    confirmation du gel (revue 2026-08-09, SE-9) — l'apport propre de
+    R-14 est le NIVEAU ABSOLU du péage et sa décomposition fiscale.
+    Annualisé sur la détention, le péage médian pèse 2,6 % de niveau
+    de vie annuel à 20 ans de détention, 5,1 % à 10 ans, 10,2 % à
+    5 ans (13,1 % en ZE tendues) : il frappe d'abord la mobilité
+    RÉPÉTÉE. Le péage reste un plancher (ni débours ni frais d'agence,
+    L-25) ; le primo-accédant paie le scénario 5,81 % (médiane 5,81
+    mois).
   depends_on: [T-15, O-35, V-01]
   produced_by: src/logement/shell/build.py
   output: data/processed/cout-transaction-ze.json
-  limitations: [L-25]
+  limitations: [L-25, L-26]
 
 - id: I-14
   type: interpretation
   title: >
-    Quatrième instruction de H-04 — le mécanisme de blocage a un prix
-    explicite : changer de logement en achetant coûte plus d'une
-    demi-année de niveau de vie médian en pur péage non récupérable
-    dans les zones tendues (jusqu'à un an à Paris, Bayonne, dans les
-    DOM chers et sur les littoraux touristiques). La géographie du
-    péage (rho +0,81 avec le coût locatif) superpose la barrière à la
-    mobilité de statut au verrouillage locatif : le ménage des zones
-    tendues est pris en tenaille — la relocation locative y absorbe de
-    ~27 % (médiane nationale) à ~64 % (Paris) du revenu (R-06) et
-    l'accès à la propriété y exige
-    d'abord un péage record. Cohérence d'ensemble de H-04 : la mobilité
-    repose sur le segment le plus cher (R-13), le parc social est gelé
-    (R-12), la rotation chute là où tout cela se cumule (R-11). La
-    part de causalité du péage dans le gel n'est PAS identifiée
-    (descriptif) ; l'essentiel du péage étant fiscal (droits ~83 % du
-    total), c'est un paramètre INSTITUTIONNEL — matière directe pour
-    la proposition (P-xx) à venir.
+    Quatrième instruction de H-04, REQUALIFIÉE par la revue du
+    2026-08-09 (SE-9/SE-10, HD-5) — le coût du changement de logement
+    par l'achat a un prix explicite : plus d'une demi-année de niveau
+    de vie médian en pur péage non récupérable dans les zones tendues
+    (jusqu'à un an à Paris, Bayonne, dans les DOM chers et sur les
+    littoraux touristiques), 5,81 mois en médiane pour le
+    primo-accédant (scénario 5,81 %) — le ménage locataire des zones
+    tendues est pris en tenaille : la relocation locative y absorbe de
+    ~27 % (médiane nationale) à ~64 % (Paris) du revenu (R-06) et la
+    sortie par l'achat paie d'abord ce péage. La géographie du péage
+    n'est PAS une confirmation indépendante du gel — elle re-exprime
+    celle des prix (rho mois × prix +0,98), et les quatre croisements
+    H-04 partagent le même étalon (L-26) ; l'apport propre de R-14 est
+    ailleurs : le NIVEAU du péage, son incidence maximale sur la
+    mobilité répétée (10-13 % de niveau de vie annuel pour un ménage
+    mobile tous les 5 ans, 2,6 % amorti sur 20 ans), et sa
+    décomposition : ~83 % est FISCAL (droits + CSI) — un paramètre
+    INSTITUTIONNEL direct, matière pour la proposition (P-xx), avec
+    la littérature comparative à l'appui (coûts de transaction
+    français parmi les plus lourds de l'OCDE). La part de causalité du
+    péage dans le gel n'est pas identifiée (descriptive) ; le test
+    possible : les discontinuités départementales S-31 × volumes DVF —
+    NEXT-STEPS.
   depends_on: [R-14, I-11, I-12, I-13]
 
 - id: L-25
   type: limit
   title: >
-    Limites du coût de transaction R-14 : (1) PLANCHER — ni débours, ni
-    contribution de sécurité immobilière, ni frais d'agence (S-32 ne
-    les chiffre pas ; l'agence peut ajouter plusieurs points) ; hors
-    primo-accédants (maintenus à 4,50 % départemental, S-31) ;
-    (2) H-13 central applique le taux majoritaire 6,32 % partout — une
-    dizaine de départements sont à 5,81 % et l'Indre à 5,09 % (la table
-    S-31 permettrait de territorialiser si un résultat en dépend) ;
-    (3) prix médian des VENTES 2025 ≠ prix du logement médian du parc
-    (échantillon non aléatoire) ; petites ZE fragiles (min 22 ventes) ;
-    (4) Alsace-Moselle (livre foncier) et Mayotte hors champ DVF —
-    296 ZE sur 305 ; 8 ZE sans niveau de vie Filosofi (n = 288 pour les
-    mois) ; (5) le poids en mois est par UC (C-04) — un ménage de
-    1,5 UC divise par 1,5. Porte sur R-14/I-14.
-  depends_on: [S-30, S-31, S-32, C-10, H-13]
+    Limites du coût de transaction R-14 : (1) PLANCHER — ni débours ni
+    frais d'agence (aucune source ouverte ne les chiffre ; l'écart
+    OCDE ~14 % de coûts complets vs ~7,7 % fiscal + émoluments + CSI
+    en donne l'ordre de grandeur) ; la CSI 0,10 % est désormais
+    INCLUSE (S-37, revue 2026-08-09 SA-5) ; (2) les droits sont
+    territorialisés depuis la table S-31 au 01/02/2026 — la
+    composition des départements par taux bouge au fil des
+    délibérations (au 01/06/2026 : l'Eure est passée à 5,00 %, les
+    Hautes-Pyrénées figurent à 4,50 %, S-35) et une partie des ventes
+    2025 de l'assiette a réellement acquitté 5,81 % (faculté applicable
+    aux actes à partir du 01/04/2025) : le péage publié est celui d'un
+    acte au barème S-31 appliqué aux prix 2025 ; le primo-accédant
+    relève du scénario 5,81 % publié ; (3) prix médian des VENTES 2025
+    ≠ prix du logement médian du parc (échantillon non aléatoire) ;
+    petites ZE fragiles — classements sous seuil de 100 ventes exclus,
+    ZE « bornes sensibles » nommées (C-10) ; (4) Alsace-Moselle (livre
+    foncier) et Mayotte hors champ DVF — 296 ZE sur 305 ; 8 ZE sans
+    niveau de vie Filosofi (n = 288 pour les mois) ; (5) le poids en
+    mois est par UC (C-04) — un ménage de 1,5 UC divise par 1,5 ;
+    (6) prix 2025 rapportés au niveau de vie Filosofi 2021 (S-10, seul
+    millésime figé) : les NIVEAUX en mois sont surestimés d'environ la
+    croissance nominale du revenu 2021-2025, les classements, écarts
+    et corrélations y sont insensibles (même motif que L-09/L-11 —
+    revue 2026-08-09, ST-2). Porte sur R-14/I-14.
+  depends_on: [S-30, S-31, S-32, S-35, S-37, C-10, H-13]
+
+- id: L-26
+  type: limit
+  title: >
+    Limite TRANSVERSE des quatre croisements H-04 (revue 2026-08-09,
+    HD-2/SE-10) : R-11..R-14 partitionnent le territoire par le MÊME
+    statut de tension (T-08, calculé aux centraux H-08/H-12) et se
+    corrèlent au MÊME indice de coût (T-05) — leur convergence
+    géographique est une convergence contre un étalon partagé, pas
+    quatre confirmations indépendantes : une erreur de T-05 ou du
+    drapeau de tension se propagerait identiquement aux quatre, et
+    trois croisements sur quatre se vident ou s'inversent une fois
+    l'axe commun contrôlé (partiels de R-11, du croisement R-12×R-11,
+    quasi-mécanique de R-14). Depuis la revue, chaque artefact publie
+    ses contrastes tendues/autres aux bornes H-08 (5 et 7 %) et exclut
+    des médianes un statut de tension inconnu ; les recoupements
+    réellement externes de l'instruction H-04 sont MIGCOM × RPLS
+    (appareils disjoints) et les bornes démographiques publiées
+    (S-33, S-34). Porte sur R-11/R-12/R-13/R-14 et I-11..I-14.
+  depends_on: [T-05, T-08]

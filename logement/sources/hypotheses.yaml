@@ -224,16 +224,23 @@
     ancien, hors primo-accédants. Les trois niveaux existants au
     01/02/2026 (S-31) : 6,32 % du prix quand le département a voté le
     taux temporaire de 5,00 % (la grande majorité, faculté ouverte par
-    la loi de finances 2025 jusqu'au 31/03/2028), 5,81 % dans la
-    dizaine de départements restés à 4,50 %, 5,09 % au taux de 3,80 %
-    (Indre ; Mayotte, hors champ DVF). Valeur centrale : 6,32 % (le cas
-    majoritaire) ; plage plausible [5,09 ; 6,32] — la borne basse est
-    aussi le taux qui redeviendrait de droit commun (5,81) puis
-    plancher si la faculté temporaire s'éteint en 2028. S'ajoutent dans
-    le calcul de R-14 les émoluments proportionnels du notaire (barème
-    S-32, calculés exactement dans le code, TVA 20 % comprise) — mais
-    NI les débours, NI la contribution de sécurité immobilière, NI les
-    éventuels frais d'agence : le coût de transaction publié est un
+    la loi de finances 2025 jusqu'au 31/03/2028), 5,81 % dans les ONZE
+    départements restés à 4,50 % (05, 06, 07, 16, 26, 27, 48, 60, 65,
+    71, 971 — liste vérifiée ligne à ligne sur le PDF par la revue
+    2026-08-09, qui a rattrapé le 65 absent de la note initiale),
+    5,09 % au taux de 3,80 % (Indre ; Mayotte, hors champ DVF). Depuis
+    la revue 2026-08-09 (HD-3/HD-4/HD-5), le calcul central de R-14
+    est TERRITORIALISÉ (taux S-31 du département de chaque vente) et
+    les trois scénarios uniformes publiés en sensibilité sont
+    {5,09 ; 5,81 ; 6,32} — 5,81 % étant à la fois le droit commun
+    d'avant 2025, le taux du PRIMO-ACCÉDANT (exclu de la faculté), et
+    le taux de retour si la faculté s'éteint en 2028 ; 5,09 % reste le
+    plancher observé. Valeur centrale : 6,32 % (le cas majoritaire) ;
+    plage plausible [5,09 ; 6,32]. S'ajoutent dans le calcul de R-14
+    les émoluments proportionnels du notaire (barème S-32, calculés
+    exactement dans le code, TVA 20 % comprise) et la contribution de
+    sécurité immobilière (0,10 %, S-37) — mais NI les débours NI les
+    éventuels frais d'agence : le coût de transaction publié reste un
     PLANCHER (limite dédiée).
   central_value: 6.32
   plausible_range: [5.09, 6.32]

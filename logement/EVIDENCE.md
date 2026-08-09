@@ -10,8 +10,8 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 | S | Sources | `sources/sources.yaml` | 32 sources (INSEE, LOVAC, ANIL, SDES, MTE, DGFiP, DILA, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 36 fichiers figés sha256/LFS + 2 collections vivantes) |
 | D | Définitions | `sources/definitions.yaml` | 18 définitions citées verbatim, datées, avec limites |
 | H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) · H-13 taux de droits de mutation (créée 2026-08-08, S-31) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-35, T-01..T-15, R-01..R-14 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-14, V-01, C-01..C-10, L-01..L-25 (L-16..L-21 et corrections L-04/L-07/L-09/L-11/L-12/L-13/L-14/L-15 : revue contradictoire du 2026-08-07, compte rendu `evidence/revue-contradictoire-2026-08-07.md`) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-36, T-01..T-16, R-01..R-14 (sorties dans `data/processed/`) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-14, V-01, C-01..C-10, L-01..L-26 (L-16..L-21 et corrections L-04/L-07/L-09/L-11..L-15 : revue du 2026-08-07 ; L-26 et requalifications I-11..I-14, L-22..L-25 : revue du 2026-08-09, comptes rendus `evidence/revue-contradictoire-*.md`) |
 | M/P | Mesures, propositions | — | à venir |
 
 Sources enregistrées :
@@ -94,8 +94,8 @@ Sources enregistrées :
   européens 2023, COG 2026 — base de R-11).
 - **S-28** — SDES, RPLS au 01/01/2025 — parc locatif social par commune
   (16 863), séries annuelles 2013-2025 du taux de mobilité (D-17), de
-  la vacance et des loyers ; parc 5,4 M de logements ; licence à
-  confirmer avant citation dans l'article (comme L-09) — base de R-12.
+  la vacance et des loyers ; parc 5,4 M de logements ; Licence Ouverte
+  (mentions légales du site SDES, constat 2026-08-09) — base de R-12.
 - **S-29** — INSEE, fichier détail MIGCOM RP2022 (Parquet 17,36 M obs.
   + dictionnaire varmod figés) — résidence actuelle × résidence un an
   auparavant, statut d'occupation, pondération IPONDI — base de R-13.
@@ -107,6 +107,24 @@ Sources enregistrées :
 - **S-32** — Service-Public/DILA, fiche F17701 — barème des émoluments
   proportionnels du notaire (contrôlé par test sur l'exemple chiffré de
   la fiche).
+- **S-33** — INSEE, Insee Première n° 2073 (30/09/2025) + données des
+  figures — mobilité résidentielle 2013-2023 (10,8 → 8,8 %) ; le
+  vieillissement explique 14 % de la baisse — borne externe de L-22
+  (revue du 2026-08-09).
+- **S-34** — ANCOLS, communiqué du 09/02/2026 — le vieillissement des
+  attributaires explique 9 % de la baisse de la mobilité du parc
+  social — borne externe de L-23 (revue du 2026-08-09).
+- **S-35** — DGFiP, table DMTO au 01/06/2026 — trace de fraîcheur de
+  S-31 (l'Eure passée à 5,00 %, les Hautes-Pyrénées à 4,50 %) ; les
+  énumérations de départements se datent.
+- **S-36** — Banque de France, Stat Info « Crédits aux particuliers »
+  mai 2026 — le choc du crédit 2022-2024 (taux ~1 % → > 4 %) qui
+  fonde le caveat cyclique de L-22/L-23.
+- **S-37** — DGFiP (impots.gouv), frais d'acquisition — la contribution
+  de sécurité immobilière (0,10 %, min 15 €) intégrée au péage R-14.
+- **S-38** — INSEE, estimations de population par département, sexe et
+  âge quinquennal 1975-2026 — structures 2012/2023 du shift-share
+  démographique T-16.
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -242,63 +260,79 @@ Valeur normative déjà posée par le cadrage (`INTRO.md` §3) :
 
 - **R-11** — Rotation résidentielle par ZE (sortie reproductible
   `data/processed/mobilite-residentielle-ze.json`, ajoutée le
-  2026-08-08 — première instruction de H-04) : la part des RP occupées
-  depuis moins de 2 ans passe de 13,14 % (2012) à 11,97 % (2023) et la
-  baisse s'accélère (−0,92 pt sur 2017-2023) — ~364 000 emménagements
-  récents « manquants » dans le stock 2023 (ordre descriptif) ; 293 ZE
-  sur 305 en baisse ; le NIVEAU de rotation suit la fonction du
-  territoire (+0,40 avec le coût, −0,22 avec la vacance, métropole),
-  la CHUTE suit le gradient inverse (−0,29 avec le coût, +0,25 avec la
-  vacance ; médiane −1,54 pt en ZE tendues vs −1,27 ailleurs).
-  Lecture : **I-11** — le gel de la rotation se concentre dans les
-  marchés verrouillés : signature attendue d'une mobilité EMPÊCHÉE
-  (H-04), le sens opposé niveau/chute sur le même gradient de coût
-  écartant l'explication structurelle ; descriptif — pas de contrôle
-  de composition. Limites L-22 (vieillissement non contrôlé, rotation
-  ≠ mobilité des personnes, fenêtre 2021-2023 post-COVID).
+  2026-08-08, revue le 2026-08-09 — première instruction de H-04) : la
+  part des RP occupées depuis moins de 2 ans passe de 13,14 % (2012) à
+  11,97 % (2023) et la baisse s'accélère (−0,92 pt sur 2017-2023) —
+  ~364 000 emménagements récents « manquants » dans le stock 2023
+  (ordre descriptif), dont ~45 % attribuables au seul vieillissement
+  (shift-share T-16 ; borne externe INSEE : 14 %, S-33) ; 293 ZE sur
+  305 en baisse ; le NIVEAU de rotation suit la fonction du territoire
+  (+0,40 avec le coût, métropole) ; la CHUTE est publiée en trois
+  vues : plus forte en ZE tendues en points (−1,54 vs −1,27, MW
+  p = 0,003) et en relatif (−12,2 vs −10,7 %), mais le gradient de
+  coût DISPARAÎT à niveau 2012 contrôlé (partiel −0,07 ≈ 0) — fait
+  significatif, non discriminant. Lecture : **I-11** (requalifiée) —
+  gel général, part démographique bornée minoritaire, fenêtre du choc
+  du crédit non séparée (S-36) ; le signal restant est l'ACCÉLÉRATION,
+  que le vieillissement ne produit pas. Limites L-22, L-26.
 
 - **R-12** — Mobilité du parc social par ZE (sortie reproductible
-  `data/processed/mobilite-parc-social-ze.json`, ajoutée le 2026-08-08 —
-  deuxième instruction de H-04) : chute nationale 9,29 → 7,11 %
-  (2019-2025), qui s'accélère (−1,43 pt sur 2022-2025), généralisée
-  (286 ZE sur 303) et d'ampleur UNIFORME (chute × coût compatible avec
-  zéro ; médianes −2,40/−2,44 pt) — mais un NIVEAU miroir du marché :
-  mobilité × coût rho métropole **−0,80** (la corrélation la plus forte
-  de la chaîne), médiane 6,74 % en ZE tendues (vacance sociale 1,63 %)
-  vs 8,89 ailleurs ; croisement des segments NÉGATIF (−0,20 avec la
-  rotation totale R-11 : la rotation étudiante/privée des métropoles
-  masque le gel social). Lecture : **I-12** — quand le privé est
-  inabordable, personne ne quitte le parc social ; la file d'attente
-  s'allonge partout. Convention C-09 (agrégation pondérée contrôlée au
-  national, ≤ 0,014 pt). Limites L-23.
+  `data/processed/mobilite-parc-social-ze.json`, ajoutée le 2026-08-08,
+  revue le 2026-08-09 — deuxième instruction de H-04) : chute nationale
+  9,29 → 7,11 % (2019-2025), qui s'accélère (−1,43 pt sur 2022-2025 —
+  fenêtre du choc du crédit, S-36), généralisée (286 ZE sur 303) —
+  uniforme en POINTS (médianes −2,40/−2,45) mais EXCÉDENTAIRE dans les
+  marchés chers en relatif et à niveau 2019 contrôlé (−26,0 vs
+  −22,5 % ; partiel −0,50) ; un NIVEAU miroir du marché depuis au
+  moins 2013 : mobilité × coût rho métropole −0,70 (2013) → **−0,80**
+  (2025, parmi les plus fortes de la chaîne, ≈ R-13/R-14), médiane
+  6,74 % en ZE tendues (vacance sociale 1,63 %) vs 8,88 ailleurs ; le
+  croisement brut −0,20 avec la rotation totale est un corollaire des
+  deux gradients de coût (partiel +0,21 à coût contrôlé). Lecture :
+  **I-12** (requalifiée) — le niveau reflète l'accessibilité du marché
+  local (trait structurel), la chute est générale et au moins aussi
+  forte dans les marchés chers ; part démographique bornée (ANCOLS
+  9 %, S-34), part cyclique non séparée. Convention C-09 (agrégation
+  pondérée contrôlée au national non arrondi, ≤ 0,010 pt). Limites
+  L-23, L-26.
 
 - **R-13** — Migrations résidentielles des personnes par ZE (sortie
   reproductible `data/processed/migrations-residentielles-ze.json`,
-  ajoutée le 2026-08-08 — troisième instruction de H-04) : 9,87 % de
-  mobiles annuels, portés par le LOCATIF PRIVÉ (19,51 % d'entrées de
-  l'année contre 8,34 % en HLM — recoupe RPLS — et 5,73 % en
-  propriété) ; validation croisée logements/personnes rho +0,80 (R-11 ×
-  R-13, sources indépendantes) ; les flux internes vident les cœurs
-  chers (Paris −1,40 %/an, solde × coût −0,15 France entière) ; en
-  niveau, pas de gel spécifique aux zones tendues sur un an (flux
-  étudiants dominants). Lecture : **I-13** — le locatif privé est le
-  canal principal des mobilités (le renchérir comprime la mobilité de
-  tous) ; les soldes se font contre la géographie de l'emploi. Limites
-  L-24.
+  ajoutée le 2026-08-08, revue le 2026-08-09 — troisième instruction de
+  H-04) : 9,87 % de mobiles annuels (fenêtres 2020-2024 ; la série
+  publiée est passée sous 9 % en 2023, S-33), portés par le LOCATIF
+  PRIVÉ (19,51 % d'entrées de l'année contre 8,34 % en HLM et 5,73 %
+  en propriété) et décroissant fortement avec l'âge (O-36) ; cohérence
+  interne logements/personnes rho +0,80 (R-11 × R-13 — même appareil
+  EAR ; la validation inter-appareils est MIGCOM-HLM ≈ RPLS) ; les
+  flux internes vident les cœurs chers (Paris −1,40 %/an) avec un
+  profil par âge de CYCLE DE VIE (seul groupe positif : 15-24 ;
+  sorties nettes aux âges famille et retraite, O-36) ; en niveau, pas
+  de gel spécifique aux zones tendues sur un an. Lecture : **I-13**
+  (requalifiée) — le locatif privé est le canal principal des
+  mobilités (le renchérir comprime la mobilité de tous) ; les soldes
+  parisiens relèvent du cycle de vie, l'éviction reste une question
+  ouverte. Limites L-24, L-26.
 
 - **R-14** — Coût de transaction à l'achat par ZE (sortie reproductible
-  `data/processed/cout-transaction-ze.json`, ajoutée le 2026-08-08 —
-  quatrième instruction de H-04) : péage quasi uniforme en taux
-  (7,4-8,0 % du prix : droits H-13 6,32 % central + émoluments exacts
-  S-32) mais très inégal en poids — médiane 6,1 MOIS de niveau de vie
-  médian par UC, 7,8 mois en ZE tendues vs 5,5 ailleurs, jusqu'à
-  ~11-13 mois (Paris, Bayonne, littoraux, DOM chers) ; rho +0,81 avec
-  l'indice de coût locatif. Lecture : **I-14** — le ménage des zones
+  `data/processed/cout-transaction-ze.json`, ajoutée le 2026-08-08,
+  revue le 2026-08-09 — quatrième instruction de H-04) : péage presque
+  uniforme en taux (6,7-8,1 % du prix : droits TERRITORIALISÉS S-31 +
+  émoluments exacts S-32 + CSI S-37) mais très inégal en poids —
+  médiane 6,15 MOIS de niveau de vie médian par UC (millésime 2021),
+  7,87 mois en ZE tendues vs 5,59 ailleurs, jusqu'à ~11-13 mois
+  (Paris, Bayonne, littoraux, DOM chers) ; 5,81 mois en médiane au
+  scénario primo-accédant ; annualisé : 2,6 %/an à 20 ans de
+  détention, ~10-13 %/an pour un ménage mobile tous les 5 ans ; le
+  rho +0,81 avec le coût locatif est quasi mécanique (mois × prix
+  +0,98). Lecture : **I-14** (requalifiée) — le ménage des zones
   tendues est pris en tenaille (relocation locative jusqu'à ~64 % du
-  revenu à Paris, R-06 ; péage d'achat record) ; ~83 % du péage est
-  fiscal : paramètre institutionnel direct pour la proposition P-xx.
-  Convention C-10 (assiette des ventes), limites L-25 (plancher — ni
-  agence ni débours ; taux majoritaire appliqué partout).
+  revenu à Paris, R-06 ; péage d'achat record, frappant d'abord la
+  mobilité répétée) ; ~83 % du péage est fiscal (droits + CSI) :
+  paramètre institutionnel direct pour la proposition P-xx — mais pas
+  une confirmation indépendante de la géographie du gel (L-26).
+  Convention C-10 (assiette publiée avec ce qu'elle écarte), limites
+  L-25 (plancher — ni agence ni débours ; prix 2025 / revenus 2021).
 
 - **R-10** — Foncier immobilisé par le non-résidentiel vacant (sortie
   reproductible `data/processed/foncier-friches-ze.json`) : 2 736

@@ -355,9 +355,13 @@
     PERSONNES (pondération IPONDI), contrairement à l'ancienneté
     d'emménagement (D-16) qui décrit les LOGEMENTS.
   caveats:
-    - Le millésime RP2022 agrège cinq enquêtes annuelles (2020-2024) -
-      le « taux annuel » est une moyenne de fenêtres annuelles
-      successives, dont les années COVID.
+    - Le millésime RP2022 agrège les enquêtes annuelles 2020-2024, soit
+      QUATRE enquêtes - l'EAR 2021 a été reportée à 2022 pour cause de
+      Covid-19 (insee.fr/fr/information/4985873 ; correction de la
+      revue 2026-08-09, HD-14) - le « taux annuel » est une moyenne de
+      fenêtres annuelles successives, dont les années COVID ; trois de
+      ces enquêtes sont communes avec le millésime RP2023 de S-27, les
+      deux fichiers partagent donc l'appareil de mesure (HD-1).
     - Les caractéristiques (statut d'occupation, âge...) sont celles à
       la date de l'enquête, pas à la date du déménagement - le statut
       STOCD d'un mobile est son statut d'ARRIVÉE.
