@@ -163,3 +163,29 @@ def test_property_weighted_rate_bounded(pairs: list[tuple[float, int]]) -> None:
     frame = social.social_by_ze(communes, commune_ze)
     rates = [rate for rate, _ in pairs]
     assert min(rates) - 1e-9 <= frame.loc["0051", "tx_mob_2025"] <= max(rates) + 1e-9
+
+
+def test_build_summary_three_views_and_vintage_gradient() -> None:
+    """SE-4/SE-5/SE-6: relative view, per-vintage rho and partials exist."""
+    payload = _summary()
+    block = payload["mediane_par_tension"]
+    assert block["tendues"]["delta_rel_2019_2025_pct"] is not None
+    assert block["n_tension_inconnue"] == 0
+    par_millesime = payload["spearman_niveau_vs_cout_par_millesime"]
+    assert set(par_millesime) == {"2013", "2019", "2025"}
+    assert payload["partial_delta_vs_cout_controle_niveau_2019"]["metropole"]["controle"] == (
+        "tx_mob_2019"
+    )
+    assert "partial_niveau_vs_rotation_rp_controle_cout" in payload
+
+
+def test_social_by_ze_relative_drop() -> None:
+    """The relative drop divides the point drop by the 2019 level."""
+    communes = social.parse_rpls_communes(
+        _communes([{"code": "01001", "tx_mob": 5.0, "nb_ls": 1000}])
+    )
+    commune_ze = pd.DataFrame({"code": ["01001"], "ze": ["0051"]})
+    frame = social.social_by_ze(communes, commune_ze)
+    assert frame.loc["0051", "delta_rel_2019_2025_pct"] == pytest.approx(
+        float(frame.loc["0051", "delta_2019_2025"] / frame.loc["0051", "tx_mob_2019"] * 100)
+    )

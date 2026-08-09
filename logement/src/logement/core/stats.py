@@ -66,6 +66,77 @@ def spearman_summary(frame: pd.DataFrame, x: str, y: str) -> dict[str, object]:
     }
 
 
+def partial_spearman(frame: pd.DataFrame, x: str, y: str, z: str) -> float:
+    """First-order partial rank correlation of x and y given z.
+
+    Added by the 2026-08-09 adversarial review (SE-1/SE-4/SE-6): a raw
+    rank correlation between a change and a gradient can be manufactured
+    entirely by the initial level (or by a shared axis) — the partial is
+    the honest companion figure whenever the covariate is suspected.
+    """
+    sub = frame[[x, y, z]].dropna()
+    if len(sub) < 3:
+        raise StatsError(f"not enough observations for a partial correlation ({len(sub)})")
+    ranks = sub.rank()
+    corr = ranks.corr()
+    rxy = float(corr.loc[x, y])
+    rxz = float(corr.loc[x, z])
+    ryz = float(corr.loc[y, z])
+    denom = math.sqrt((1.0 - rxz**2) * (1.0 - ryz**2))
+    if denom == 0.0:
+        raise StatsError("degenerate partial correlation (covariate fully explains a variable)")
+    return (rxy - rxz * ryz) / denom
+
+
+def partial_spearman_summary(frame: pd.DataFrame, x: str, y: str, z: str) -> dict[str, object]:
+    """Build the publishable partial-correlation block (rho, n, control, CI).
+
+    The interval uses n − 4 degrees of freedom (one covariate); the same
+    unknown-keeps degradation as spearman_summary applies.
+    """
+    sub = frame[[x, y, z]].dropna()
+    if len(sub) < 3:
+        return {"rho": None, "n": len(sub), "controle": z, "ci95": None}
+    rho = partial_spearman(sub, x, y, z)
+    if len(sub) < 5 or not -1.0 < rho < 1.0:
+        return {"rho": round(rho, 2), "n": len(sub), "controle": z, "ci95": None}
+    zt = math.atanh(rho)
+    half = 1.959964 / math.sqrt(len(sub) - 4)
+    return {
+        "rho": round(rho, 2),
+        "n": len(sub),
+        "controle": z,
+        "ci95": [round(math.tanh(zt - half), 2), round(math.tanh(zt + half), 2)],
+    }
+
+
+def mann_whitney_p(a: pd.Series, b: pd.Series) -> float | None:
+    """Two-sided Mann-Whitney p-value (normal approximation, tie-corrected).
+
+    Deterministic and scipy-free; the normal approximation is accurate
+    for the ZE-sized groups it is published on (n ≥ ~20 each). Returns
+    None when a group is too small for the approximation to be honest.
+    """
+    a = a.dropna()
+    b = b.dropna()
+    n1, n2 = len(a), len(b)
+    if min(n1, n2) < 8:
+        return None
+    combined = pd.concat([a, b], ignore_index=True)
+    ranks = combined.rank()
+    r1 = float(ranks.iloc[:n1].sum())
+    u1 = r1 - n1 * (n1 + 1) / 2
+    mu = n1 * n2 / 2
+    n = n1 + n2
+    ties = combined.value_counts()
+    tie_term = float(((ties**3) - ties).sum()) / (n * (n - 1))
+    sigma2 = n1 * n2 / 12 * ((n + 1) - tie_term)
+    if sigma2 <= 0:
+        return None
+    z = max(0.0, abs(u1 - mu) - 0.5) / math.sqrt(sigma2)
+    return round(math.erfc(z / math.sqrt(2.0)), 4)
+
+
 def is_dom_index(frame: pd.DataFrame) -> pd.Series:
     """Boolean mask of DOM rows from a ZE-coded index."""
     return frame.index.astype(str).str.startswith(DOM_ZE_PREFIXES)
@@ -77,4 +148,15 @@ def spearman_by_perimeter(frame: pd.DataFrame, x: str, y: str) -> dict[str, dict
     return {
         "france_entiere": spearman_summary(frame, x, y),
         "metropole": spearman_summary(frame[~dom], x, y),
+    }
+
+
+def partial_spearman_by_perimeter(
+    frame: pd.DataFrame, x: str, y: str, z: str
+) -> dict[str, dict[str, object]]:
+    """Compute the partial companion of spearman_by_perimeter (same discipline)."""
+    dom = is_dom_index(frame)
+    return {
+        "france_entiere": partial_spearman_summary(frame, x, y, z),
+        "metropole": partial_spearman_summary(frame[~dom], x, y, z),
     }

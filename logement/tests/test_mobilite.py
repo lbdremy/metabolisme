@@ -173,3 +173,56 @@ def test_property_shares_bounded_and_consistent(v12: list[float], v23: list[floa
     assert (
         frame["delta_pts"] == frame["part_recents_pct"] - frame["part_recents_debut_pct"]
     ).all()
+
+
+def test_build_summary_three_views_of_the_drop() -> None:
+    """SE-1 (2026-08-09 review): points, relative and controlled views coexist."""
+    payload = _summary()
+    rel = payload["mediane_delta_rel_par_tension"]
+    assert rel["n_tendues"] == 1
+    assert rel["tendues_rel_pct"] is not None
+    partial = payload["partial_delta_vs_cout_controle_niveau_2012"]
+    assert partial["metropole"]["controle"] == "part_recents_debut_pct"
+    assert "spearman_delta_vs_niveau_2012" in payload
+    assert "spearman_delta_rel_vs_cout" in payload
+
+
+def test_build_summary_unknown_tension_is_excluded_not_filled() -> None:
+    """HD-2: a NaN tension flag leaves BOTH medians and is counted."""
+    parts = mobilite.rotation_parts(mobilite.parse_lstay(_long(_ze_counts())))
+    frame = mobilite.rotation_by_ze(parts)
+    idx = frame.index
+    payload = mobilite.build_summary(
+        frame,
+        {"delta_moins_2_ans_pts": -2.0},
+        tendue=pd.Series([True, None], index=idx),
+        structural_rate_pct=pd.Series([2.0, 6.0], index=idx),
+        indice_cout_pct=pd.Series([0.9, 0.4], index=idx),
+        ze_names=pd.Series(["Alpha", "Beta"], index=idx),
+    )
+    block = payload["mediane_delta_par_tension"]
+    assert block["n_tension_inconnue"] == 1
+    assert block["autres_pts"] is None
+
+
+def test_build_summary_h08_variants_published() -> None:
+    """HD-2: the tense/other contrast is published at the H-08 bounds."""
+    parts = mobilite.rotation_parts(mobilite.parse_lstay(_long(_ze_counts())))
+    frame = mobilite.rotation_by_ze(parts)
+    idx = frame.index
+    payload = mobilite.build_summary(
+        frame,
+        {"delta_moins_2_ans_pts": -2.0},
+        tendue=pd.Series([True, False], index=idx),
+        structural_rate_pct=pd.Series([2.0, 6.0], index=idx),
+        indice_cout_pct=pd.Series([0.9, 0.4], index=idx),
+        ze_names=pd.Series(["Alpha", "Beta"], index=idx),
+        tendue_variants={
+            "h08_5_pct": pd.Series([False, False], index=idx),
+            "h08_7_pct": pd.Series([True, True], index=idx),
+        },
+    )
+    variants = payload["sensibilite_h08"]
+    assert variants["h08_5_pct"]["n_tendues"] == 0
+    assert variants["h08_5_pct"]["tendues_pts"] is None
+    assert variants["h08_7_pct"]["n_tendues"] == 2

@@ -8,8 +8,17 @@
   },
   "mediane_delta_par_tension": {
     "autres_pts": -1.27,
+    "mann_whitney_p": 0.0028,
     "n_tendues": 97,
+    "n_tension_inconnue": 0,
     "tendues_pts": -1.54
+  },
+  "mediane_delta_rel_par_tension": {
+    "autres_rel_pct": -10.72,
+    "mann_whitney_p": 0.0212,
+    "n_tendues": 97,
+    "n_tension_inconnue": 0,
+    "tendues_rel_pct": -12.16
   },
   "millesimes": [
     2012,
@@ -38,6 +47,46 @@
         "moins_5_ans_pct": 32.83,
         "rp_total": 31220147
       }
+    }
+  },
+  "partial_delta_rel_vs_cout_controle_niveau_2012": {
+    "france_entiere": {
+      "ci95": [
+        -0.29,
+        -0.07
+      ],
+      "controle": "part_recents_debut_pct",
+      "n": 297,
+      "rho": -0.18
+    },
+    "metropole": {
+      "ci95": [
+        -0.2,
+        0.03
+      ],
+      "controle": "part_recents_debut_pct",
+      "n": 287,
+      "rho": -0.09
+    }
+  },
+  "partial_delta_vs_cout_controle_niveau_2012": {
+    "france_entiere": {
+      "ci95": [
+        -0.28,
+        -0.06
+      ],
+      "controle": "part_recents_debut_pct",
+      "n": 297,
+      "rho": -0.17
+    },
+    "metropole": {
+      "ci95": [
+        -0.18,
+        0.05
+      ],
+      "controle": "part_recents_debut_pct",
+      "n": 287,
+      "rho": -0.07
     }
   },
   "plus_fortes_baisses": [
@@ -190,6 +239,40 @@
       "ze": "4413"
     }
   ],
+  "sensibilite_h08": {
+    "h08_5_pct": {
+      "autres_pts": -1.3,
+      "mann_whitney_p": 0.0003,
+      "n_tendues": 54,
+      "n_tension_inconnue": 0,
+      "tendues_pts": -1.71
+    },
+    "h08_7_pct": {
+      "autres_pts": -1.14,
+      "mann_whitney_p": 0.0,
+      "n_tendues": 170,
+      "n_tension_inconnue": 0,
+      "tendues_pts": -1.5
+    }
+  },
+  "spearman_delta_rel_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        -0.37,
+        -0.15
+      ],
+      "n": 297,
+      "rho": -0.26
+    },
+    "metropole": {
+      "ci95": [
+        -0.3,
+        -0.08
+      ],
+      "n": 287,
+      "rho": -0.2
+    }
+  },
   "spearman_delta_vs_cout": {
     "france_entiere": {
       "ci95": [
@@ -206,6 +289,24 @@
       ],
       "n": 287,
       "rho": -0.29
+    }
+  },
+  "spearman_delta_vs_niveau_2012": {
+    "france_entiere": {
+      "ci95": [
+        -0.55,
+        -0.37
+      ],
+      "n": 305,
+      "rho": -0.47
+    },
+    "metropole": {
+      "ci95": [
+        -0.6,
+        -0.42
+      ],
+      "n": 287,
+      "rho": -0.52
     }
   },
   "spearman_delta_vs_vacance": {

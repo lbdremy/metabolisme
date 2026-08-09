@@ -140,6 +140,10 @@ def social_by_ze(communes: pd.DataFrame, commune_ze: pd.DataFrame) -> pd.DataFra
     )
     frame["delta_2019_2025"] = frame["tx_mob_2025"] - frame["tx_mob_2019"]
     frame["delta_2013_2025"] = frame["tx_mob_2025"] - frame["tx_mob_2013"]
+    # Relative view added by the 2026-08-09 review (SE-4): the flat
+    # point-drop across territories hides a proportionally LARGER drop
+    # where the 2019 level was already minimal (expensive markets).
+    frame["delta_rel_2019_2025_pct"] = frame["delta_2019_2025"] / frame["tx_mob_2019"] * 100
     return frame
 
 
@@ -152,6 +156,7 @@ def build_summary(
     indice_cout_pct: pd.Series,
     rotation: pd.DataFrame,
     ze_names: pd.Series,
+    tendue_variants: dict[str, pd.Series] | None = None,
 ) -> dict[str, object]:
     """Assemble the R-12 payload: national fall, ZE geography, segment crosses."""
     small = social["parc_social"] < MIN_PARC_SOCIAL
@@ -187,15 +192,35 @@ def build_summary(
     def ranked(by: str, ascending: bool) -> pd.DataFrame:
         return frame.sort_values([by, "ze_name"], ascending=[ascending, True], kind="stable")
 
-    tendues = frame["tendue"].fillna(False).astype(bool)
+    # 2026-08-09 review (HD-2): an unknown tension status (Mayotte, out
+    # of the census-based T-08 frame) is excluded from BOTH medians and
+    # counted, instead of being silently filled as « autres ».
+    known = frame["tendue"].notna()
+    tendues = known & frame["tendue"].fillna(False).astype(bool)
+    autres = known & ~frame["tendue"].fillna(True).astype(bool)
     quantiles = frame["tx_mob_2025"].quantile([0.25, 0.5, 0.75])
 
-    def tension_block(mask: pd.Series) -> dict[str, float]:
-        sub = frame[mask]
+    def median_or_none(mask: pd.Series, column: str) -> float | None:
+        value = frame.loc[mask, column].median()
+        return None if pd.isna(value) else round(float(value), 2)
+
+    def tension_block(mask: pd.Series) -> dict[str, float | None]:
         return {
-            "tx_mob_2025_pct": round(float(sub["tx_mob_2025"].median()), 2),
-            "delta_2019_2025_pts": round(float(sub["delta_2019_2025"].median()), 2),
-            "tx_vac_2025_pct": round(float(sub["tx_vac_2025"].median()), 2),
+            "tx_mob_2025_pct": median_or_none(mask, "tx_mob_2025"),
+            "delta_2019_2025_pts": median_or_none(mask, "delta_2019_2025"),
+            "delta_rel_2019_2025_pct": median_or_none(mask, "delta_rel_2019_2025_pct"),
+            "tx_vac_2025_pct": median_or_none(mask, "tx_vac_2025"),
+        }
+
+    def variant_block(variant: pd.Series) -> dict[str, object]:
+        aligned = variant.reindex(frame.index)
+        v_known = aligned.notna()
+        v_tendues = v_known & aligned.fillna(False).astype(bool)
+        v_autres = v_known & ~aligned.fillna(True).astype(bool)
+        return {
+            "tendues_tx_mob_2025_pct": median_or_none(v_tendues, "tx_mob_2025"),
+            "autres_tx_mob_2025_pct": median_or_none(v_autres, "tx_mob_2025"),
+            "n_tendues": int(v_tendues.sum()),
         }
 
     return {
@@ -215,8 +240,15 @@ def build_summary(
         "n_ze_en_baisse_2013_2025": int((frame["delta_2013_2025"] < 0).sum()),
         "mediane_par_tension": {
             "tendues": tension_block(tendues),
-            "autres": tension_block(~tendues),
+            "autres": tension_block(autres),
             "n_tendues": int(tendues.sum()),
+            "n_tension_inconnue": int((~known).sum()),
+            "mann_whitney_p_delta": stats.mann_whitney_p(
+                frame.loc[tendues, "delta_2019_2025"], frame.loc[autres, "delta_2019_2025"]
+            ),
+        },
+        "sensibilite_h08": {
+            label: variant_block(variant) for label, variant in (tendue_variants or {}).items()
         },
         "mobilite_la_plus_faible": [
             entry(r) for _, r in ranked("tx_mob_2025", True).head(8).iterrows()
@@ -230,6 +262,14 @@ def build_summary(
         "spearman_niveau_vs_cout": stats.spearman_by_perimeter(
             frame, "tx_mob_2025", "indice_cout_pct"
         ),
+        # SE-5 (2026-08-09 review): the market-mirror gradient predates
+        # the study window — publish it at the three vintages so the
+        # NEW part (the −0.68 → −0.80 deepening) is visible.
+        "spearman_niveau_vs_cout_par_millesime": {
+            "2013": stats.spearman_by_perimeter(frame, "tx_mob_2013", "indice_cout_pct"),
+            "2019": stats.spearman_by_perimeter(frame, "tx_mob_2019", "indice_cout_pct"),
+            "2025": stats.spearman_by_perimeter(frame, "tx_mob_2025", "indice_cout_pct"),
+        },
         "spearman_niveau_vs_vacance_privee": stats.spearman_by_perimeter(
             frame, "tx_mob_2025", "taux_structurelle_pct"
         ),
@@ -244,5 +284,23 @@ def build_summary(
         ),
         "spearman_niveau_vs_vacance_sociale": stats.spearman_by_perimeter(
             frame, "tx_mob_2025", "tx_vac_2025"
+        ),
+        "spearman_delta_vs_niveau_2019": stats.spearman_by_perimeter(
+            frame, "delta_2019_2025", "tx_mob_2019"
+        ),
+        "spearman_delta_rel_vs_cout": stats.spearman_by_perimeter(
+            frame, "delta_rel_2019_2025_pct", "indice_cout_pct"
+        ),
+        "partial_delta_vs_cout_controle_niveau_2019": stats.partial_spearman_by_perimeter(
+            frame, "delta_2019_2025", "indice_cout_pct", "tx_mob_2019"
+        ),
+        "partial_delta_rel_vs_cout_controle_niveau_2019": stats.partial_spearman_by_perimeter(
+            frame, "delta_rel_2019_2025_pct", "indice_cout_pct", "tx_mob_2019"
+        ),
+        # SE-6: the raw −0.20 segment cross is manufactured by the two
+        # opposite cost gradients — at controlled cost the segments
+        # co-vary positively; both figures are published together.
+        "partial_niveau_vs_rotation_rp_controle_cout": stats.partial_spearman_by_perimeter(
+            frame, "tx_mob_2025", "rotation_rp_pct", "indice_cout_pct"
         ),
     }

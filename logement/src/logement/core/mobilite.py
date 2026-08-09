@@ -133,7 +133,39 @@ def rotation_by_ze(parts: pd.DataFrame) -> pd.DataFrame:
     if frame.empty:
         raise MobiliteError("no ZE with a recent-mover share")
     frame["delta_pts"] = frame["part_recents_pct"] - frame["part_recents_debut_pct"]
+    # Relative view added by the 2026-08-09 review (SE-1): a drop in
+    # points is mechanically larger where the initial level is higher.
+    frame["delta_rel_pct"] = frame["delta_pts"] / frame["part_recents_debut_pct"] * 100
     return frame
+
+
+def tension_contrast(
+    frame: pd.DataFrame, column: str, tendue: pd.Series, suffix: str
+) -> dict[str, object]:
+    """Median contrast of `column` between tense and other ZE.
+
+    2026-08-09 review (HD-2): an unknown tension status stays unknown —
+    the ZE is excluded from BOTH medians and its count is published,
+    instead of being silently filled as « autres ».
+    """
+    aligned = tendue.reindex(frame.index)
+    known = aligned.notna()
+    tendues = known & aligned.fillna(False).astype(bool)
+    autres = known & ~aligned.fillna(True).astype(bool)
+
+    def median_or_none(mask: pd.Series) -> float | None:
+        value = frame.loc[mask, column].median()
+        return None if pd.isna(value) else round(float(value), 2)
+
+    return {
+        f"tendues_{suffix}": median_or_none(tendues),
+        f"autres_{suffix}": median_or_none(autres),
+        "n_tendues": int(tendues.sum()),
+        "n_tension_inconnue": int((~known).sum()),
+        "mann_whitney_p": stats.mann_whitney_p(
+            frame.loc[tendues, column], frame.loc[autres, column]
+        ),
+    }
 
 
 def build_summary(
@@ -143,6 +175,7 @@ def build_summary(
     structural_rate_pct: pd.Series,
     indice_cout_pct: pd.Series,
     ze_names: pd.Series,
+    tendue_variants: dict[str, pd.Series] | None = None,
 ) -> dict[str, object]:
     """Assemble the R-11 payload: national slowdown, ZE distribution, crosses."""
     frame = (
@@ -164,7 +197,6 @@ def build_summary(
         return frame.sort_values([by, "ze_name"], ascending=[ascending, True], kind="stable")
 
     en_baisse = frame["delta_pts"] < 0
-    tendues = frame["tendue"].fillna(False).astype(bool)
     quantiles = frame["part_recents_pct"].quantile([0.25, 0.5, 0.75])
     return {
         "millesimes": list(VINTAGES),
@@ -188,10 +220,17 @@ def build_summary(
         "ze_en_hausse": [
             entry(r) for _, r in ranked("delta_pts", False).iterrows() if r["delta_pts"] > 0
         ],
-        "mediane_delta_par_tension": {
-            "tendues_pts": round(float(frame.loc[tendues, "delta_pts"].median()), 2),
-            "autres_pts": round(float(frame.loc[~tendues, "delta_pts"].median()), 2),
-            "n_tendues": int(tendues.sum()),
+        "mediane_delta_par_tension": tension_contrast(frame, "delta_pts", frame["tendue"], "pts"),
+        # The three views of the drop demanded by the 2026-08-09 review
+        # (SE-1): points, relative, and cost gradient at controlled
+        # initial level — interpretations may only lean on what is
+        # invariant across the three.
+        "mediane_delta_rel_par_tension": tension_contrast(
+            frame, "delta_rel_pct", frame["tendue"], "rel_pct"
+        ),
+        "sensibilite_h08": {
+            label: tension_contrast(frame, "delta_pts", variant, "pts")
+            for label, variant in (tendue_variants or {}).items()
         },
         "spearman_niveau_vs_vacance": stats.spearman_by_perimeter(
             frame, "part_recents_pct", "taux_structurelle_pct"
@@ -204,5 +243,17 @@ def build_summary(
         ),
         "spearman_delta_vs_vacance": stats.spearman_by_perimeter(
             frame, "delta_pts", "taux_structurelle_pct"
+        ),
+        "spearman_delta_vs_niveau_2012": stats.spearman_by_perimeter(
+            frame, "delta_pts", "part_recents_debut_pct"
+        ),
+        "spearman_delta_rel_vs_cout": stats.spearman_by_perimeter(
+            frame, "delta_rel_pct", "indice_cout_pct"
+        ),
+        "partial_delta_vs_cout_controle_niveau_2012": stats.partial_spearman_by_perimeter(
+            frame, "delta_pts", "indice_cout_pct", "part_recents_debut_pct"
+        ),
+        "partial_delta_rel_vs_cout_controle_niveau_2012": stats.partial_spearman_by_perimeter(
+            frame, "delta_rel_pct", "indice_cout_pct", "part_recents_debut_pct"
         ),
     }

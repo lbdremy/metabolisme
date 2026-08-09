@@ -8,13 +8,17 @@
   },
   "mediane_par_tension": {
     "autres": {
-      "delta_2019_2025_pts": -2.44,
-      "tx_mob_2025_pct": 8.89,
-      "tx_vac_2025_pct": 2.8
+      "delta_2019_2025_pts": -2.45,
+      "delta_rel_2019_2025_pct": -22.46,
+      "tx_mob_2025_pct": 8.88,
+      "tx_vac_2025_pct": 2.79
     },
+    "mann_whitney_p_delta": 0.9491,
     "n_tendues": 95,
+    "n_tension_inconnue": 1,
     "tendues": {
       "delta_2019_2025_pts": -2.4,
+      "delta_rel_2019_2025_pct": -25.96,
       "tx_mob_2025_pct": 6.74,
       "tx_vac_2025_pct": 1.63
     }
@@ -181,6 +185,66 @@
     "vacance_pct": 2.12,
     "vacance_plus_3_mois_pct": 1.05
   },
+  "partial_delta_rel_vs_cout_controle_niveau_2019": {
+    "france_entiere": {
+      "ci95": [
+        -0.57,
+        -0.39
+      ],
+      "controle": "tx_mob_2019",
+      "n": 295,
+      "rho": -0.48
+    },
+    "metropole": {
+      "ci95": [
+        -0.59,
+        -0.41
+      ],
+      "controle": "tx_mob_2019",
+      "n": 285,
+      "rho": -0.51
+    }
+  },
+  "partial_delta_vs_cout_controle_niveau_2019": {
+    "france_entiere": {
+      "ci95": [
+        -0.57,
+        -0.39
+      ],
+      "controle": "tx_mob_2019",
+      "n": 295,
+      "rho": -0.49
+    },
+    "metropole": {
+      "ci95": [
+        -0.58,
+        -0.41
+      ],
+      "controle": "tx_mob_2019",
+      "n": 285,
+      "rho": -0.5
+    }
+  },
+  "partial_niveau_vs_rotation_rp_controle_cout": {
+    "france_entiere": {
+      "ci95": [
+        0.1,
+        0.32
+      ],
+      "controle": "indice_cout_pct",
+      "n": 295,
+      "rho": 0.21
+    },
+    "metropole": {
+      "ci95": [
+        0.1,
+        0.32
+      ],
+      "controle": "indice_cout_pct",
+      "n": 285,
+      "rho": 0.21
+    }
+  },
   "plus_fortes_baisses": [
     {
       "delta_2019_2025_pts": -13.18,
@@ -247,7 +311,37 @@
       "ze": "7531"
     }
   ],
+  "sensibilite_h08": {
+    "h08_5_pct": {
+      "autres_tx_mob_2025_pct": 8.64,
+      "n_tendues": 52,
+      "tendues_tx_mob_2025_pct": 6.71
+    },
+    "h08_7_pct": {
+      "autres_tx_mob_2025_pct": 9.31,
+      "n_tendues": 168,
+      "tendues_tx_mob_2025_pct": 7.47
+    }
+  },
   "seuil_parc_social": 500,
+  "spearman_delta_rel_vs_cout": {
+    "france_entiere": {
+      "ci95": [
+        -0.29,
+        -0.07
+      ],
+      "n": 295,
+      "rho": -0.18
+    },
+    "metropole": {
+      "ci95": [
+        -0.35,
+        -0.13
+      ],
+      "n": 285,
+      "rho": -0.24
+    }
+  },
   "spearman_delta_vs_cout": {
     "france_entiere": {
       "ci95": [
@@ -284,6 +378,24 @@
       "rho": 0.19
     }
   },
+  "spearman_delta_vs_niveau_2019": {
+    "france_entiere": {
+      "ci95": [
+        -0.61,
+        -0.45
+      ],
+      "n": 303,
+      "rho": -0.53
+    },
+    "metropole": {
+      "ci95": [
+        -0.59,
+        -0.41
+      ],
+      "n": 285,
+      "rho": -0.51
+    }
+  },
   "spearman_niveau_vs_cout": {
     "france_entiere": {
       "ci95": [
@@ -300,6 +412,62 @@
       ],
       "n": 285,
       "rho": -0.8
+    }
+  },
+  "spearman_niveau_vs_cout_par_millesime": {
+    "2013": {
+      "france_entiere": {
+        "ci95": [
+          -0.77,
+          -0.66
+        ],
+        "n": 295,
+        "rho": -0.72
+      },
+      "metropole": {
+        "ci95": [
+          -0.75,
+          -0.64
+        ],
+        "n": 285,
+        "rho": -0.7
+      }
+    },
+    "2019": {
+      "france_entiere": {
+        "ci95": [
+          -0.76,
+          -0.64
+        ],
+        "n": 295,
+        "rho": -0.71
+      },
+      "metropole": {
+        "ci95": [
+          -0.74,
+          -0.61
+        ],
+        "n": 285,
+        "rho": -0.68
+      }
+    },
+    "2025": {
+      "france_entiere": {
+        "ci95": [
+          -0.85,
+          -0.77
+        ],
+        "n": 295,
+        "rho": -0.82
+      },
+      "metropole": {
+        "ci95": [
+          -0.84,
+          -0.76
+        ],
+        "n": 285,
+        "rho": -0.8
+      }
     }
   },
   "spearman_niveau_vs_rotation_rp": {

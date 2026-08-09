@@ -513,13 +513,14 @@ def _lstay_parts(root: Path) -> pd.DataFrame:
     return mobilite.rotation_parts(mobilite.parse_lstay(cut))
 
 
-def build_mobilite(root: Path) -> dict[str, object]:
-    """Compute the R-11 summary payload (residential rotation by ZE, S-27)."""
-    raw = root / "data" / "raw"
-    parts = _lstay_parts(root)
-    national = mobilite.national_rotation(parts)
-    ze_frame = mobilite.rotation_by_ze(parts)
+def _tension_flag_with_variants(root: Path) -> tuple[pd.Series, dict[str, pd.Series]]:
+    """Central R-07 tension flag plus its H-08 bound variants.
 
+    2026-08-09 review (HD-2): the four H-04 crosses all partition on the
+    SAME flag computed at the H-08/H-12 centrals — the published
+    tense/other contrasts must show their sensitivity to the H-08 range.
+    """
+    raw = root / "data" / "raw"
     with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
         census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
     census = rs.parse_census_housing(census_raw)
@@ -530,17 +531,37 @@ def build_mobilite(root: Path) -> dict[str, object]:
     )
     h08 = _load_hypothesis(root, "H-08")
     h12 = _load_hypothesis(root, "H-12")
-    tension_frame = tension.tension_by_ze(
+    central = tension.tension_by_ze(
         census, tlv, communes, commune_ze, h08.central_value, h12.central_value
+    )["tendue"]
+    variants = {
+        f"h08_{seuil:g}_pct": tension.tension_by_ze(
+            census, tlv, communes, commune_ze, seuil, h12.central_value
+        )["tendue"]
+        for seuil in h08.plausible_range
+    }
+    return central, variants
+
+
+def build_mobilite(root: Path) -> dict[str, object]:
+    """Compute the R-11 summary payload (residential rotation by ZE, S-27)."""
+    parts = _lstay_parts(root)
+    national = mobilite.national_rotation(parts)
+    ze_frame = mobilite.rotation_by_ze(parts)
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
     )
+    tendue, tendue_variants = _tension_flag_with_variants(root)
     vacancy_ze, _unmatched = ze.aggregate_vacancy_by_ze(communes, commune_ze)
     return mobilite.build_summary(
         ze_frame,
         national,
-        tension_frame["tendue"],
+        tendue,
         vacancy_ze["structural_rate_pct"],
         _cost_frame(root)["indice_cout_pct"],
         _ze_names(root),
+        tendue_variants,
     )
 
 
@@ -559,29 +580,22 @@ def build_social(root: Path) -> dict[str, object]:
     commune_ze = ze.parse_commune_ze(_read_membership(root))
     social_ze = social.social_by_ze(communes_rpls, commune_ze)
 
-    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
-        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
-    census = rs.parse_census_housing(census_raw)
-    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
     communes = lovac.parse_territories(
         _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
     )
-    h08 = _load_hypothesis(root, "H-08")
-    h12 = _load_hypothesis(root, "H-12")
-    tension_frame = tension.tension_by_ze(
-        census, tlv, communes, commune_ze, h08.central_value, h12.central_value
-    )
+    tendue, tendue_variants = _tension_flag_with_variants(root)
     vacancy_ze, _unmatched = ze.aggregate_vacancy_by_ze(communes, commune_ze)
     rotation = mobilite.rotation_by_ze(_lstay_parts(root))
     return social.build_summary(
         social_ze,
         national,
         drift,
-        tension_frame["tendue"],
+        tendue,
         vacancy_ze["structural_rate_pct"],
         _cost_frame(root)["indice_cout_pct"],
         rotation,
         _ze_names(root),
+        tendue_variants,
     )
 
 
