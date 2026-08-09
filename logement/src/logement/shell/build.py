@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import zipfile
 from pathlib import Path
+from typing import cast
 
 import pandas as pd
 import pyarrow.parquet as pq
@@ -76,6 +77,7 @@ FONCIER_OUTPUT = Path("data") / "processed" / "foncier-friches-ze.json"
 
 MOBILITE_FILE = "insee-rp-logement-princ-2023.parquet"
 MOBILITE_OUTPUT = Path("data") / "processed" / "mobilite-residentielle-ze.json"
+POPULATION_AGE_FILE = "insee-estim-pop-dep-sexe-aq-1975-2026.xlsx"
 
 RPLS_ZIP = "sdes-rpls-2025-resultats-territoires.zip"
 RPLS_XLSX = "statistiques_sdes_resultats_rpls_2025_secret_donnees.xlsx"
@@ -545,6 +547,36 @@ def _tension_flag_with_variants(root: Path) -> tuple[pd.Series, dict[str, pd.Ser
     return central, variants
 
 
+def _demographic_variant(root: Path, national: dict[str, object]) -> dict[str, object]:
+    """SE-2 shift-share: ageing alone (S-38 structures × S-29 age rates)."""
+    raw = root / "data" / "raw"
+    cut = pq.read_table(
+        raw / MIGCOM_FILE, columns=["COMMUNE", "DCRAN", "IRAN", "IPONDI", "STOCD", "AGEREVQ"]
+    ).to_pandas()
+    rates = migrations.mobility_rates_quinquennal(migrations.parse_migcom(cut))
+    structures = {}
+    for vintage in (mobilite.VINTAGES[0], mobilite.VINTAGES[-1]):
+        sheet = pd.read_excel(
+            raw / POPULATION_AGE_FILE, sheet_name=str(vintage), header=None, engine="calamine"
+        )
+        structures[vintage] = mobilite.parse_population_age_structure(sheet)
+    parts_obj = national["parts_par_millesime"]
+    if not isinstance(parts_obj, dict):
+        raise mobilite.MobiliteError("national block must carry parts_par_millesime")
+    parts = cast("dict[str, dict[str, float]]", parts_obj)
+    debut = parts[str(mobilite.VINTAGES[0])]["moins_2_ans_pct"]
+    delta = national["delta_moins_2_ans_pts"]
+    if not isinstance(delta, (int, float)):
+        raise mobilite.MobiliteError("national block must carry numeric rotation figures")
+    observed_rel = float(delta) / float(debut) * 100
+    return mobilite.demographic_shift_share(
+        rates,
+        structures[mobilite.VINTAGES[0]],
+        structures[mobilite.VINTAGES[-1]],
+        observed_rel,
+    )
+
+
 def build_mobilite(root: Path) -> dict[str, object]:
     """Compute the R-11 summary payload (residential rotation by ZE, S-27)."""
     parts = _lstay_parts(root)
@@ -564,6 +596,7 @@ def build_mobilite(root: Path) -> dict[str, object]:
         _cost_frame(root)["indice_cout_pct"],
         _ze_names(root),
         tendue_variants,
+        _demographic_variant(root, national),
     )
 
 

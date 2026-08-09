@@ -363,6 +363,14 @@
       "rho": -0.22
     }
   },
+  "variante_demographique": {
+    "chute_relative_observee_pct": -8.9,
+    "chute_relative_structurelle_pct": -4.0,
+    "delta_structurel_pts": -0.42,
+    "part_demographique_transposee_pct": 45.4,
+    "taux_predit_structure_debut_pct": 10.31,
+    "taux_predit_structure_fin_pct": 9.89
+  },
   "ze_en_hausse": [
     {
       "delta_pts": 2.24,

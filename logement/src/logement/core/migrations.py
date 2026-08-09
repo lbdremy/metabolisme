@@ -82,6 +82,24 @@ def age_group(age: float) -> str:
     raise MigrationsError(f"age {age} outside every group")
 
 
+def mobility_rates_quinquennal(frame: pd.DataFrame, cap: int = 95) -> dict[int, float]:
+    """Annual mobility rate (%) per five-year age class, capped at `cap`+.
+
+    Feeds the R-11 demographic shift-share (SE-2): the classes above the
+    cap are tiny and noisy in MIGCOM, and the S-38 population structure
+    stops at « 95 ans et plus » — both sides aggregate identically.
+    """
+    base = _settled(frame)
+    if base.empty:
+        raise MigrationsError("no observation outside the rattachement field")
+    ages = base["AGEREVQ"].clip(upper=cap)
+    total = base.groupby(ages)["IPONDI"].sum()
+    movers = base[base["IRAN"] != IRAN_SAME_DWELLING].groupby(ages)["IPONDI"].sum()
+    return {
+        int(age): round(float(movers.get(age, 0.0) / total[age] * 100), 4) for age in total.index
+    }
+
+
 def mobility_by_age(frame: pd.DataFrame) -> dict[str, dict[str, float]]:
     """National annual mobility rate per life-cycle age group (D-18 field)."""
     base = _settled(frame)

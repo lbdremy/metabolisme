@@ -255,3 +255,21 @@ def test_build_summary_unknown_tension_and_age_block() -> None:
     assert block["autres"]["taux_mobilite_pct"] is None
     assert payload["sensibilite_h08"]["h08_5_pct"]["n_tendues"] == 2
     assert payload["soldes_par_age_paris"] == {"15-24": {"entrants": 10}}
+
+
+def test_mobility_rates_quinquennal_caps_ages() -> None:
+    """Ages above the cap aggregate into the 95+ class (S-38 alignment)."""
+    frame = migrations.parse_migcom(
+        _raw(
+            [
+                {"IRAN": "1", "IPONDI": 50.0, "AGEREVQ": "100"},
+                {"IRAN": "3", "IPONDI": 50.0, "AGEREVQ": "110"},
+                {"IRAN": "3", "IPONDI": 25.0, "AGEREVQ": "020"},
+                {"IRAN": "1", "IPONDI": 75.0, "AGEREVQ": "020"},
+            ]
+        )
+    )
+    rates = migrations.mobility_rates_quinquennal(frame)
+    assert rates[95] == 50.0
+    assert rates[20] == 25.0
+    assert set(rates) == {20, 95}

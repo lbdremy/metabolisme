@@ -139,6 +139,80 @@ def rotation_by_ze(parts: pd.DataFrame) -> pd.DataFrame:
     return frame
 
 
+# S-38 sheet layout: department code in column 0, the « Ensemble » block
+# in columns 2-21 (twenty five-year classes from « 0 à 4 ans » to
+# « 95 ans et plus »), its row total in column 22.
+POP_AGE_FIRST_COL = 2
+POP_AGE_CLASSES = 20
+POP_AGE_TOTAL_COL = 22
+DEPARTEMENT_PATTERN = r"\d{2}|\d{3}|2A|2B"
+
+
+def parse_population_age_structure(
+    raw: pd.DataFrame, exclude_departements: tuple[str, ...] = ("976",)
+) -> pd.Series:
+    """National population per five-year age class from one S-38 sheet.
+
+    Sums the « Ensemble » block over the department rows (Mayotte
+    excluded by default — the France-hors-Mayotte perimeter of S-27),
+    and refuses a sheet whose age classes do not re-sum to the diffused
+    row totals (parse error, not data noise).
+    """
+    codes = raw.iloc[:, 0].astype(str)
+    rows = raw[codes.str.fullmatch(DEPARTEMENT_PATTERN)]
+    rows = rows[~codes.loc[rows.index].isin(exclude_departements)]
+    if len(rows) < 90:
+        raise MobiliteError(f"only {len(rows)} department rows in the population sheet")
+    ages = rows.iloc[:, POP_AGE_FIRST_COL : POP_AGE_FIRST_COL + POP_AGE_CLASSES].apply(
+        pd.to_numeric, errors="coerce"
+    )
+    totals = pd.to_numeric(rows.iloc[:, POP_AGE_TOTAL_COL], errors="coerce")
+    if ages.isna().any().any() or totals.isna().any():
+        raise MobiliteError("non-numeric population cell in the age block")
+    drift = (ages.sum(axis=1) - totals).abs() / totals
+    if float(drift.max()) > 1e-9:
+        raise MobiliteError("age classes drift from the department totals")
+    structure = ages.sum()
+    structure.index = pd.Index(range(0, 5 * POP_AGE_CLASSES, 5))
+    return structure
+
+
+def demographic_shift_share(
+    rates_pct: dict[int, float],
+    structure_start: pd.Series,
+    structure_end: pd.Series,
+    observed_relative_drop_pct: float,
+) -> dict[str, object]:
+    """Demographic component of the rotation drop (SE-2, 2026-08-09 review).
+
+    Holds the per-age mobility rates fixed (MIGCOM 2022, S-29) and lets
+    only the population age structure move (S-38, 2012 → 2023): the
+    predicted fall of the aggregate rate is what ageing alone produces.
+    Transposing it to the ROTATION drop is an order of magnitude, not a
+    decomposition — persons ≠ dwellings, rates frozen at 2022 (limits
+    published with the block).
+    """
+    missing = [age for age in structure_start.index if age not in rates_pct]
+    if missing or not structure_start.index.equals(structure_end.index):
+        raise MobiliteError("age classes of rates and structures do not align")
+    shares_start = structure_start / structure_start.sum()
+    shares_end = structure_end / structure_end.sum()
+    rates = pd.Series(rates_pct).reindex(structure_start.index)
+    predicted_start = float((shares_start * rates).sum())
+    predicted_end = float((shares_end * rates).sum())
+    structural_rel = (predicted_end - predicted_start) / predicted_start * 100
+    return {
+        "taux_predit_structure_debut_pct": round(predicted_start, 2),
+        "taux_predit_structure_fin_pct": round(predicted_end, 2),
+        "delta_structurel_pts": round(predicted_end - predicted_start, 2),
+        "chute_relative_structurelle_pct": round(structural_rel, 1),
+        "chute_relative_observee_pct": round(observed_relative_drop_pct, 1),
+        "part_demographique_transposee_pct": round(
+            structural_rel / observed_relative_drop_pct * 100, 1
+        ),
+    }
+
+
 def tension_contrast(
     frame: pd.DataFrame, column: str, tendue: pd.Series, suffix: str
 ) -> dict[str, object]:
@@ -176,6 +250,7 @@ def build_summary(
     indice_cout_pct: pd.Series,
     ze_names: pd.Series,
     tendue_variants: dict[str, pd.Series] | None = None,
+    variante_demographique: dict[str, object] | None = None,
 ) -> dict[str, object]:
     """Assemble the R-11 payload: national slowdown, ZE distribution, crosses."""
     frame = (
@@ -201,6 +276,7 @@ def build_summary(
     return {
         "millesimes": list(VINTAGES),
         "national": national,
+        "variante_demographique": variante_demographique or {},
         "n_ze": len(frame),
         "distribution_part_recents_pct": {
             "min": round(float(frame["part_recents_pct"].min()), 2),

@@ -224,3 +224,58 @@ def test_build_summary_h08_variants_published() -> None:
     assert variants["h08_5_pct"]["n_tendues"] == 0
     assert variants["h08_5_pct"]["tendues_pts"] is None
     assert variants["h08_7_pct"]["n_tendues"] == 2
+
+
+def _population_sheet(rows: list[tuple[str, list[float]]]) -> pd.DataFrame:
+    table = []
+    for code, ages in rows:
+        table.append([code, "Nom", *ages, sum(ages)])
+    frame = pd.DataFrame(table)
+    # Pad the sheet the way calamine delivers it: headers above, blanks around.
+    header = pd.DataFrame([[None] * len(frame.columns)] * 5)
+    return pd.concat([header, frame], ignore_index=True)
+
+
+def test_parse_population_age_structure_sums_and_excludes() -> None:
+    """SE-2: the national structure sums departments, Mayotte excluded."""
+    ages_a = [float(i + 1) for i in range(20)]
+    ages_b = [float(2 * (i + 1)) for i in range(20)]
+    rows = [(f"{i:02d}", ages_a) for i in range(1, 95)] + [("95", ages_b), ("976", ages_b)]
+    structure = mobilite.parse_population_age_structure(_population_sheet(rows))
+    assert list(structure.index) == list(range(0, 100, 5))
+    assert structure[0] == 94 * 1.0 + 2.0  # 976 excluded
+    assert structure[95] == 94 * 20.0 + 40.0
+
+
+def test_parse_population_age_structure_rejects_total_drift() -> None:
+    """A sheet whose classes do not re-sum to the totals is a parse error."""
+    ages = [float(i + 1) for i in range(20)]
+    rows = [(f"{i:02d}", ages) for i in range(1, 95)]
+    sheet = _population_sheet(rows)
+    sheet.iloc[6, 22] = 999.0  # break one row total
+    with pytest.raises(mobilite.MobiliteError, match="drift from the department totals"):
+        mobilite.parse_population_age_structure(sheet)
+
+
+def test_demographic_shift_share_pure_ageing() -> None:
+    """Moving weight to a low-mobility class produces the predicted fall."""
+    rates = {0: 20.0, 5: 10.0}
+    start = pd.Series([50.0, 50.0], index=[0, 5])
+    end = pd.Series([25.0, 75.0], index=[0, 5])
+    block = mobilite.demographic_shift_share(rates, start, end, observed_relative_drop_pct=-33.4)
+    assert block["taux_predit_structure_debut_pct"] == 15.0
+    assert block["taux_predit_structure_fin_pct"] == 12.5
+    assert block["delta_structurel_pts"] == -2.5
+    assert block["chute_relative_structurelle_pct"] == pytest.approx(-16.7)
+    assert block["part_demographique_transposee_pct"] == pytest.approx(50.0, abs=0.2)
+
+
+def test_demographic_shift_share_rejects_misaligned_classes() -> None:
+    """Rates and structures must share the same age classes."""
+    with pytest.raises(mobilite.MobiliteError, match="do not align"):
+        mobilite.demographic_shift_share(
+            {0: 20.0},
+            pd.Series([1.0, 1.0], index=[0, 5]),
+            pd.Series([1.0, 1.0], index=[0, 5]),
+            -10.0,
+        )
