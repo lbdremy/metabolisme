@@ -124,9 +124,7 @@ def test_effort_by_ze_keeps_secret_vacancy_missing() -> None:
     households = pd.DataFrame(
         {"niveau_vie_median": [24000.0], "pers_per_uc": [1.5]}, index=["0001"]
     )
-    frame = effort.effort_by_ze(
-        loyers, loyers, census_mix, lovac, commune_ze, households, 50.0
-    )
+    frame = effort.effort_by_ze(loyers, loyers, census_mix, lovac, commune_ze, households, 50.0)
     assert pd.isna(frame.loc["0001", "taux_structurelle_pct"])
 
 
@@ -140,9 +138,7 @@ def test_build_summary_shape_and_range_scaling() -> None:
             .assign(effort_brut_pct=80.0, taux_structurelle_pct=1.0),
         ]
     )
-    summary = effort.build_summary(
-        frame, pd.Series({"0001": "Alpha", "0002": "Beta"}), _h07()
-    )
+    summary = effort.build_summary(frame, pd.Series({"0001": "Alpha", "0002": "Beta"}), _h07())
     assert summary["n_ze"] == 2
     assert -1 <= summary["spearman_effort_vs_vacancy"] <= 1
     top = summary["top_effort"]

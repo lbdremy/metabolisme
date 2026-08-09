@@ -91,7 +91,12 @@ def test_build_summary_rejects_empty_join() -> None:
         index=pd.Index(["0001"], name="ze"),
     )
     emploi = pd.DataFrame(
-        {"ze_name": ["X"], "emploi_start": [1.0], "emploi_end": [1.0], "growth_pct_per_year": [0.0]},
+        {
+            "ze_name": ["X"],
+            "emploi_start": [1.0],
+            "emploi_end": [1.0],
+            "growth_pct_per_year": [0.0],
+        },
         index=pd.Index(["0002"], name="ze_code"),
     )
     with pytest.raises(ze.ZeError, match="no ZE joined"):

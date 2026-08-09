@@ -86,7 +86,7 @@ def test_mann_whitney_unknown_keeps() -> None:
     st.lists(st.floats(min_value=-100, max_value=100), min_size=8, max_size=30, unique=True),
 )
 def test_property_mann_whitney_symmetric_and_bounded(xs: list[float], ys: list[float]) -> None:
-    """p is a probability and does not depend on the argument order."""
+    """P is a probability and does not depend on the argument order."""
     a, b = pd.Series(xs), pd.Series(ys)
     p_ab = stats.mann_whitney_p(a, b)
     p_ba = stats.mann_whitney_p(b, a)

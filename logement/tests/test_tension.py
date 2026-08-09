@@ -25,7 +25,9 @@ def _tlv_raw(codes: list[str], zonings: list[str]) -> pd.DataFrame:
 
 def test_parse_tlv_dedupes_and_strips() -> None:
     """Duplicate commune codes keep their first zoning row."""
-    raw = _tlv_raw(["75056", "75056", "33063 "], ["1. Zone tendue", "3. Non tendue", "3. Non tendue"])
+    raw = _tlv_raw(
+        ["75056", "75056", "33063 "], ["1. Zone tendue", "3. Non tendue", "3. Non tendue"]
+    )
     out = tension.parse_tlv(raw).set_index("code")
     assert out.loc["75056", "zonage"] == "1. Zone tendue"
     assert out.loc["33063", "zonage"] == "3. Non tendue"
@@ -153,7 +155,9 @@ def test_build_summary_shape_and_threshold_monotonicity() -> None:
 
 def test_secrecy_bound_moves_coverage_toward_one() -> None:
     """Adding the masked mass moves an above-one coverage DOWN toward 1."""
-    census = pd.DataFrame({"code": ["00001", "00002"], "P22_LOG": [1000.0, 1000.0], "P22_LOGVAC": [40.0, 40.0]})
+    census = pd.DataFrame(
+        {"code": ["00001", "00002"], "P22_LOG": [1000.0, 1000.0], "P22_LOGVAC": [40.0, 40.0]}
+    )
     lovac = pd.DataFrame(
         {"code": ["00001", "00002"], "pp_vacant_plus_2ans_2024": [35.0, float("nan")]}
     )

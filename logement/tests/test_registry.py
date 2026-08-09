@@ -111,7 +111,9 @@ def test_cross_check_flags_duplicates_and_dangling_references() -> None:
         st.floats(allow_nan=False, allow_infinity=False, width=32),
     )
 )
-def test_hypothesis_validity_is_exactly_range_containment(values: tuple[float, float, float]) -> None:
+def test_hypothesis_validity_is_exactly_range_containment(
+    values: tuple[float, float, float],
+) -> None:
     """Property: a hypothesis validates iff low <= central <= high."""
     low, central, high = values
     payload = {**HYPOTHESIS, "central_value": central, "plausible_range": [low, high]}

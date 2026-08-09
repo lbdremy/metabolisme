@@ -82,9 +82,7 @@ def _city_frame(values: dict[str, float | None]) -> pd.DataFrame:
 
 def test_aggregate_plm_sums_arrondissements() -> None:
     """Paris arrondissements collapse into a single 75056 'Paris' row."""
-    cities = lovac.aggregate_plm(
-        _city_frame({"75101": 100, "75102": 50, "33063": 7}), ["n_2024"]
-    )
+    cities = lovac.aggregate_plm(_city_frame({"75101": 100, "75102": 50, "33063": 7}), ["n_2024"])
     paris = cities[cities["code"] == "75056"].iloc[0]
     assert paris["n_2024"] == 150
     assert paris["name"] == "Paris"

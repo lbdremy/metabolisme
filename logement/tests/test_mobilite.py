@@ -170,9 +170,7 @@ def test_property_shares_bounded_and_consistent(v12: list[float], v23: list[floa
     assert class_parts.sum(axis=1).round(6).eq(100.0).all()
     assert (parts["moins_5_ans_pct"] >= parts["moins_2_ans_pct"]).all()
     frame = mobilite.rotation_by_ze(parts)
-    assert (
-        frame["delta_pts"] == frame["part_recents_pct"] - frame["part_recents_debut_pct"]
-    ).all()
+    assert (frame["delta_pts"] == frame["part_recents_pct"] - frame["part_recents_debut_pct"]).all()
 
 
 def test_build_summary_three_views_of_the_drop() -> None:

@@ -1,15 +1,29 @@
 {
+  "assiette_c10": {
+    "n_lignes_vente": 3514036,
+    "n_logements_en_mutations_multi": 375007,
+    "n_mutations_multi_logements": 127555,
+    "n_mutations_un_logement": 733529,
+    "n_mutations_un_logement_avec_commercial": 13029,
+    "n_mutations_vente": 1245125,
+    "n_ventes_hors_bornes": 6320,
+    "n_ventes_retenues": 727209
+  },
   "cout_pct_prix": {
-    "max": 8.02,
-    "mediane": 7.6,
-    "min": 7.43
+    "max": 8.12,
+    "mediane": 7.68,
+    "min": 6.74
+  },
+  "couverture": {
+    "n_communes_sans_ze": 21,
+    "n_ventes_sans_ze": 332
   },
   "distribution_mois_niveau_vie": {
-    "max": 13.24,
-    "mediane": 6.14,
-    "min": 2.76,
-    "q25": 4.99,
-    "q75": 7.38
+    "max": 13.42,
+    "mediane": 6.15,
+    "min": 2.79,
+    "q25": 5.01,
+    "q75": 7.42
   },
   "hypothesis": {
     "central_value_pct": 6.32,
@@ -18,17 +32,21 @@
     "plausible_range": [
       5.09,
       6.32
-    ]
+    ],
+    "territorialisation": "taux S-31 par département, moyenne par ZE pondérée par les ventes"
   },
   "mediane_par_tension": {
-    "autres_mois": 5.53,
+    "autres_mois": 5.59,
     "autres_prix_median_eur": 133629,
+    "mann_whitney_p_mois": 0.0,
     "n_tendues": 96,
-    "tendues_mois": 7.76,
+    "n_tension_inconnue": 0,
+    "tendues_mois": 7.87,
     "tendues_prix_median_eur": 198990
   },
   "n_ze": 296,
   "n_ze_avec_niveau_vie": 288,
+  "n_ze_sous_seuil_classement": 6,
   "national": {
     "n_ventes_retenues": 727209,
     "prix_m2_median_eur": 2658,
@@ -36,18 +54,28 @@
     "prix_median_eur": 182000,
     "prix_median_maison_eur": 200000
   },
+  "part_fiscale_mediane_pct": 83.2,
+  "peage_annualise": {
+    "detention_10_ans": {
+      "autres_pct": 4.66,
+      "mediane_pct_niveau_vie_annuel": 5.13,
+      "tendues_pct": 6.56
+    },
+    "detention_20_ans": {
+      "autres_pct": 2.33,
+      "mediane_pct_niveau_vie_annuel": 2.56,
+      "tendues_pct": 3.28
+    },
+    "detention_5_ans": {
+      "autres_pct": 9.32,
+      "mediane_pct_niveau_vie_annuel": 10.25,
+      "tendues_pct": 13.11
+    }
+  },
   "peage_le_plus_leger": [
     {
-      "cout_en_mois_niveau_vie": 2.8,
-      "cout_transaction_eur": 5208,
-      "n_ventes": 59,
-      "name": "Sarrebourg",
-      "prix_median_eur": 65000,
-      "ze": "4419"
-    },
-    {
-      "cout_en_mois_niveau_vie": 2.9,
-      "cout_transaction_eur": 5172,
+      "cout_en_mois_niveau_vie": 3.0,
+      "cout_transaction_eur": 5235,
       "n_ventes": 1282,
       "name": "Montluçon",
       "prix_median_eur": 64500,
@@ -55,7 +83,15 @@
     },
     {
       "cout_en_mois_niveau_vie": 3.2,
-      "cout_transaction_eur": 5572,
+      "cout_transaction_eur": 5731,
+      "n_ventes": 2190,
+      "name": "Châteauroux",
+      "prix_median_eur": 85000,
+      "ze": "2405"
+    },
+    {
+      "cout_en_mois_niveau_vie": 3.3,
+      "cout_transaction_eur": 5641,
       "n_ventes": 1487,
       "name": "Guéret",
       "prix_median_eur": 70000,
@@ -63,15 +99,15 @@
     },
     {
       "cout_en_mois_niveau_vie": 3.3,
-      "cout_transaction_eur": 5717,
+      "cout_transaction_eur": 5733,
       "n_ventes": 526,
       "name": "Vierzon",
       "prix_median_eur": 72000,
       "ze": "2415"
     },
     {
-      "cout_en_mois_niveau_vie": 3.3,
-      "cout_transaction_eur": 6009,
+      "cout_en_mois_niveau_vie": 3.4,
+      "cout_transaction_eur": 6083,
       "n_ventes": 871,
       "name": "Cosne-Cours-sur-Loire",
       "prix_median_eur": 76000,
@@ -79,7 +115,7 @@
     },
     {
       "cout_en_mois_niveau_vie": 3.4,
-      "cout_transaction_eur": 6009,
+      "cout_transaction_eur": 6083,
       "n_ventes": 1858,
       "name": "Nevers",
       "prix_median_eur": 76000,
@@ -87,7 +123,7 @@
     },
     {
       "cout_en_mois_niveau_vie": 3.5,
-      "cout_transaction_eur": 6227,
+      "cout_transaction_eur": 6305,
       "n_ventes": 688,
       "name": "Avallon",
       "prix_median_eur": 79000,
@@ -95,79 +131,109 @@
     },
     {
       "cout_en_mois_niveau_vie": 3.6,
-      "cout_transaction_eur": 6300,
-      "n_ventes": 846,
-      "name": "Le Livradois",
-      "prix_median_eur": 80000,
-      "ze": "8417"
+      "cout_transaction_eur": 6188,
+      "n_ventes": 1072,
+      "name": "Saint-Junien",
+      "prix_median_eur": 79100,
+      "ze": "7527"
     }
   ],
   "peage_le_plus_lourd": [
     {
-      "cout_en_mois_niveau_vie": 13.2,
-      "cout_transaction_eur": 19966,
+      "cout_en_mois_niveau_vie": 13.4,
+      "cout_transaction_eur": 20229,
       "n_ventes": 1022,
       "name": "L'Ouest",
       "prix_median_eur": 267750,
       "ze": "0402"
     },
     {
-      "cout_en_mois_niveau_vie": 13.1,
-      "cout_transaction_eur": 24042,
+      "cout_en_mois_niveau_vie": 13.3,
+      "cout_transaction_eur": 24361,
       "n_ventes": 371,
       "name": "Porto-Vecchio",
       "prix_median_eur": 323750,
       "ze": "9406"
     },
     {
-      "cout_en_mois_niveau_vie": 11.2,
-      "cout_transaction_eur": 23914,
+      "cout_en_mois_niveau_vie": 11.4,
+      "cout_transaction_eur": 24232,
       "n_ventes": 71752,
       "name": "Paris",
       "prix_median_eur": 322000,
       "ze": "1109"
     },
     {
-      "cout_en_mois_niveau_vie": 11.0,
-      "cout_transaction_eur": 21841,
+      "cout_en_mois_niveau_vie": 11.2,
+      "cout_transaction_eur": 22130,
       "n_ventes": 5486,
       "name": "Bayonne",
       "prix_median_eur": 293513,
       "ze": "7503"
     },
     {
-      "cout_en_mois_niveau_vie": 10.8,
-      "cout_transaction_eur": 21935,
+      "cout_en_mois_niveau_vie": 11.0,
+      "cout_transaction_eur": 22225,
       "n_ventes": 2702,
       "name": "La Teste-de-Buch",
       "prix_median_eur": 294805,
       "ze": "7513"
     },
     {
-      "cout_en_mois_niveau_vie": 10.6,
-      "cout_transaction_eur": 14670,
+      "cout_en_mois_niveau_vie": 10.8,
+      "cout_transaction_eur": 14862,
       "n_ventes": 1596,
       "name": "Le Sud",
       "prix_median_eur": 195000,
       "ze": "0404"
     },
     {
-      "cout_en_mois_niveau_vie": 10.5,
-      "cout_transaction_eur": 20493,
+      "cout_en_mois_niveau_vie": 10.6,
+      "cout_transaction_eur": 20764,
       "n_ventes": 1764,
       "name": "Sainte-Maxime",
       "prix_median_eur": 275000,
       "ze": "9317"
     },
     {
-      "cout_en_mois_niveau_vie": 10.5,
-      "cout_transaction_eur": 20693,
+      "cout_en_mois_niveau_vie": 10.6,
+      "cout_transaction_eur": 20966,
       "n_ventes": 1396,
       "name": "Auray",
       "prix_median_eur": 277740,
       "ze": "5301"
     }
   ],
+  "scenarios_h13_mois": {
+    "bas": {
+      "autres_mois": 4.71,
+      "mediane_mois": 5.22,
+      "tendues_mois": 6.6
+    },
+    "central": {
+      "autres_mois": 5.6,
+      "mediane_mois": 6.22,
+      "tendues_mois": 7.87
+    },
+    "droit_commun_primo": {
+      "autres_mois": 5.23,
+      "mediane_mois": 5.81,
+      "tendues_mois": 7.34
+    }
+  },
+  "sensibilite_h08": {
+    "h08_5_pct": {
+      "autres_mois": 5.79,
+      "n_tendues": 54,
+      "tendues_mois": 8.08
+    },
+    "h08_7_pct": {
+      "autres_mois": 5.01,
+      "n_tendues": 165,
+      "tendues_mois": 7.14
+    }
+  },
+  "seuil_ventes_classement": 100,
   "spearman_mois_vs_cout_locatif": {
     "france_entiere": {
       "ci95": [
@@ -175,15 +241,33 @@
         0.85
       ],
       "n": 288,
-      "rho": 0.82
+      "rho": 0.81
     },
     "metropole": {
       "ci95": [
-        0.77,
-        0.85
+        0.76,
+        0.84
       ],
       "n": 278,
       "rho": 0.81
+    }
+  },
+  "spearman_mois_vs_prix": {
+    "france_entiere": {
+      "ci95": [
+        0.96,
+        0.98
+      ],
+      "n": 288,
+      "rho": 0.97
+    },
+    "metropole": {
+      "ci95": [
+        0.98,
+        0.98
+      ],
+      "n": 278,
+      "rho": 0.98
     }
   },
   "spearman_prix_vs_cout_locatif": {
@@ -203,5 +287,43 @@
       "n": 278,
       "rho": 0.79
     }
-  }
+  },
+  "ze_bornes_sensibles": [
+    {
+      "n_ventes_hors_bornes": 21,
+      "n_ventes_retenues": 36,
+      "name": "Côte sous le vent",
+      "ze": "0101"
+    },
+    {
+      "n_ventes_hors_bornes": 7,
+      "n_ventes_retenues": 25,
+      "name": "Marie-Galante",
+      "ze": "0103"
+    },
+    {
+      "n_ventes_hors_bornes": 30,
+      "n_ventes_retenues": 156,
+      "name": "Sud Basse-Terre ",
+      "ze": "0105"
+    },
+    {
+      "n_ventes_hors_bornes": 9,
+      "n_ventes_retenues": 22,
+      "name": "Le Nord-Atlantique",
+      "ze": "0203"
+    },
+    {
+      "n_ventes_hors_bornes": 4,
+      "n_ventes_retenues": 33,
+      "name": "Ouest-Guyanais",
+      "ze": "0302"
+    },
+    {
+      "n_ventes_hors_bornes": 10,
+      "n_ventes_retenues": 59,
+      "name": "Sarrebourg",
+      "ze": "4419"
+    }
+  ]
 }

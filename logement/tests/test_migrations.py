@@ -142,8 +142,12 @@ def test_build_summary_medians_and_lists() -> None:
 def test_property_rates_bounded_and_flows_balanced(obs: list[tuple[str, float]]) -> None:
     """Mobility rates stay in [0, 100] and inter-ZE flows sum to zero."""
     rows = [
-        {"COMMUNE": "01001" if i % 2 else "02001", "DCRAN": "02001" if i % 2 else "01001",
-         "IRAN": iran, "IPONDI": w}
+        {
+            "COMMUNE": "01001" if i % 2 else "02001",
+            "DCRAN": "02001" if i % 2 else "01001",
+            "IRAN": iran,
+            "IPONDI": w,
+        }
         for i, (iran, w) in enumerate(obs)
     ]
     frame = migrations.parse_migcom(_raw(rows))
