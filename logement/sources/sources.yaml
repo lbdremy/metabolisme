@@ -189,7 +189,16 @@
   retrieved_at: 2026-08-03
   geographic_scope: France hors Mayotte (communes)
   temporal_scope: annonces 2018-2025 (indicateur millésimé 2025)
-  license: non précisée sur data.gouv (millésimes antérieurs en Licence Ouverte 2.0) — à confirmer avant publication
+  license: >
+    non précisée sur data.gouv (« notspecified » vérifié le 2026-08-10,
+    idem millésime 2024 ; millésime 2023 en Licence Ouverte 2.0 « lov2 »).
+    Réutilisation avec attribution actée le 2026-08-10 : la page éditrice
+    (ecologie.gouv.fr/politiques-publiques/carte-loyers) publie « sauf
+    mention contraire » sous licence etalab-2.0, et le droit commun de la
+    réutilisation (CRPA, art. L321-1 s., loi pour une République
+    numérique) s'applique aux données d'une administration avec mention
+    de la source — absence de licence sur data.gouv = oubli de métadonnée
+    de la série, pas une restriction.
   files:
     - path: data/raw/carte-loyers-2025-appartement.csv
       checksum: sha256:eda84e03a269faff3335f7ab6061d1f1e9f45adc89c0a4c32632df20a5de4010
