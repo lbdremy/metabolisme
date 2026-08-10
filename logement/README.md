@@ -9,6 +9,9 @@ reproductibles.
   normatif (une résidence principale occupée n'est jamais une inefficience),
   hypothèses directrices, dimensions d'analyse, livrables.
 - **Index de la chaîne de preuves** : [`EVIDENCE.md`](EVIDENCE.md).
+- **Article** : [`articles/2026-08-efficacite-parc-etat-des-preuves.md`](articles/2026-08-efficacite-parc-etat-des-preuves.md)
+  — « Le parc immobilier français, au bord du compte », l'état des preuves
+  au tag `efficacite-parc-v0.5`.
 - **Conventions techniques** : [`CLAUDE.md`](CLAUDE.md).
 
 ## Reproduction
