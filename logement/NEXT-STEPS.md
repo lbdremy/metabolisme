@@ -3,7 +3,17 @@
 Ce qui est déjà fait est consigné dans [`PREV-STEPS.md`](PREV-STEPS.md).
 Mis à jour à chaque fin de session de travail significative.
 
-## État au sortir de la session 5 (2026-08-09)
+## État au sortir de la session 6 (2026-08-10)
+
+**Le premier article est PUBLIÉ** (tag `article-efficacite-parc-v1.0`) :
+`articles/2026-08-efficacite-parc-etat-des-preuves.md`, écrit sur l'état
+v0.5, licence S-09 levée (publication avec attribution, tracée dans
+S-09/L-09 — détail en PREV-STEPS session 6). Il annonce la proposition
+institutionnelle comme prochain article. L'état de la chaîne est
+inchangé (117 nœuds, 153 tests, 14 stages) ; le résumé v0.5 ci-dessous
+reste la référence de lecture.
+
+## État de la chaîne (session 5, 2026-08-09)
 
 **R-11..R-14 sont REVUS et intégrés** (153 tests, 117 nœuds, 14 stages,
 tag `efficacite-parc-v0.5`) : la passe contradictoire du 2026-08-09
@@ -31,17 +41,7 @@ v0.3 de l'arc (couverture 1,06, besoin 194 488, détente 15,8 Md€ ratio
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Chemin de publication** : le premier article dans `articles/` peut
-   s'écrire sur l'état v0.5 — l'arc v0.3 revu ET H-04 instruite/revue.
-   Titres sur le récit REQUALIFIÉ : couverture ~1 conditionnelle,
-   ratio ~2, contrainte institutionnelle = condition ; côté H-04 :
-   chute générale + accélération non démographique + parc social
-   miroir du marché + péage fiscal territorialisé — JAMAIS « signature
-   d'une mobilité empêchée » ni « sources indépendantes » (les
-   formulations exactes sont dans les claims). Licence à confirmer
-   avant publication : loyers 2025 (S-09, L-09) — RPLS est réglée
-   (Licence Ouverte, SA-6).
-2. **Observations qui trancheraient H-04** (par coût croissant) :
+1. **Observations qui trancheraient H-04** (par coût croissant) :
    - **discontinuités DMTO × volumes DVF** (SE-12) — S-31 est
      territorialisée dans le code : le test de causalité du péage est
      à portée (comparer les volumes/prix aux frontières 5,81/6,32) ;
@@ -51,6 +51,15 @@ v0.3 de l'arc (couverture 1,06, besoin 194 488, détente 15,8 Md€ ratio
    - **millésimes post-choc** (SE-3) — RPLS au 01/01/2026 (non paru au
      2026-08-09) puis 2027, prochain L_STAY : rebond → cyclique,
      persistance → structurel. À figer dès parution.
+2. **Proposition institutionnelle (prochain article)** : l'article v1.0
+   l'annonce explicitement. Matière déjà quantifiée : I-09 (règle mixte
+   ~15,8 Md€, ratio ~2,1, investissement ≠ coût public), I-10 (verrous
+   de propriété H-05, friches là où le gisement manque, flux de
+   construction L-19), R-14 (péage 83,2 % fiscal = paramètre
+   institutionnel direct), S-22 (canal incitatif au bilan faible).
+   Méthode INTRO §16 (scénarios) et §17 (contraintes normatives) ;
+   comparer PLUSIEURS mécanismes, pas en défendre un d'avance
+   (INTRO §2.2) ; les M-xx/P-xx du graphe sont encore vides.
 3. **Restes ouverts de la revue du 2026-08-07** (inchangés) : emploi
    localisé récent à la maille ZE (L-07) et re-exécution de R-03 ;
    anomalie de réconciliation LOVAC communal/départemental ; point

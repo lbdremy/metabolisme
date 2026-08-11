@@ -3,6 +3,43 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
+## Session 6 — 2026-08-10 (chemin de publication : licence S-09 levée, premier article)
+
+Étape 1 de NEXT-STEPS exécutée : le premier article public, écrit sur
+l'état v0.5 (arc revu + H-04 instruite/revue). Tag de publication
+**`article-efficacite-parc-v1.0`** posé le 2026-08-11 après validation
+de Rémy.
+
+- **Licence S-09 levée** (le bloqueur de publication) : au 2026-08-10,
+  data.gouv affiche « notspecified » pour les millésimes 2025 ET 2024 de
+  la carte des loyers, mais le millésime 2023 est en Licence Ouverte 2.0
+  (« lov2 »), la page éditrice du ministère (ecologie.gouv.fr) publie
+  « sauf mention contraire » en etalab-2.0, et le droit commun de la
+  réutilisation (CRPA, loi pour une République numérique) couvre les
+  données d'une administration avec mention de la source. Décision de
+  Rémy : **publier avec attribution** — vérification datée tracée dans
+  S-09 (registre) et L-09 (claims).
+- **Premier article** :
+  `articles/2026-08-efficacite-parc-etat-des-preuves.md` — « Le parc
+  immobilier français, au bord du compte ». Périmètre choisi par Rémy :
+  état des preuves COMPLET (arc + H-04), la proposition institutionnelle
+  est annoncée comme prochain article. Strictement le récit requalifié :
+  couverture 1,06 marginale et conditionnelle, ratio ~2,1 avec la
+  contrainte institutionnelle comme CONDITION (I-10), chute générale de
+  la mobilité avec accélération non démographique, parc social miroir du
+  marché, locatif privé canal des mobilités, péage 83,2 % fiscal ;
+  section dédiée « ce que ces chiffres ne disent pas » (L-26, choc du
+  crédit S-36, L-17/L-18, directions des biais L-09/L-25). Aucune des
+  formulations écartées par la revue (« signature d'une mobilité
+  empêchée », « sources indépendantes »). Chaque chiffre revérifié
+  depuis les artefacts avant écriture (le 38,4 M recalculé depuis le
+  fichier S-02 figé, le reste depuis data/processed/ et le qmd) ;
+  l'article pointe le tag `efficacite-parc-v0.5`, cite ses sources et se
+  clôt sur les instructions de reproduction. README de l'étude mis à
+  jour.
+- État inchangé par ailleurs : 117 nœuds, 153 tests, 14 stages — la
+  reprise a re-validé et re-reproduit toute la chaîne avant d'écrire.
+
 ## Session 5 — 2026-08-09 (revue contradictoire de R-11..R-14 et intégration complète)
 
 La passe contradictoire promise sur les quatre résultats de session 4
