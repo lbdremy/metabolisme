@@ -43,8 +43,12 @@ part en stockage objet : `pnpm --filter @metabolisme/tool-evidence upload-large`
 
 ## Écrire une note
 
+Les notes vivent dans le dépôt **privé** `metabolisme-notes`, cloné à côté de
+celui-ci (`../metabolisme-notes`, ou `METABOLISME_NOTES_DIR`) : leur contenu ne
+passe jamais par ce dépôt public.
+
 ```bash
-pnpm note:new ma-note              # crée content/notes/ma-note/
+pnpm note:new ma-note              # crée ../metabolisme-notes/ma-note/
 # écrire note.md (ancres [texte](ev:O-01)), evidence.yaml, déposer sources/
 pnpm content:notes                 # valide et compile (refuse une ancre sans nœud,
                                    # une source sans fichier, un nœud orphelin…)

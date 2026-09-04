@@ -16,10 +16,15 @@ import { loadEnv, type Plugin } from "vite";
 //     volumineux et jamais nécessaire au serveur → assets statiques servis
 //     par le CDN, sous /content/<posts|notes>/<id>/….
 //
-// Les fichiers de preuve ne sont pas copiés dans content/ : files.json dit
-// où les prendre dans le dépôt (les sources figées vivent dans l'étude, en
-// Git LFS). Au-delà de la taille d'un asset, un fichier est marqué
-// « object-store » et téléversé à part (tools/evidence upload).
+// Les fichiers de preuve d'un post ne sont pas copiés dans content/ :
+// files.json dit où les prendre dans le dépôt (les sources figées vivent
+// dans l'étude, en Git LFS). Au-delà de la taille d'un asset, un fichier est
+// marqué « object-store » et téléversé à part (tools/evidence upload).
+//
+// Les NOTES vivent dans un dépôt privé séparé (METABOLISME_NOTES_DIR, par
+// défaut ../metabolisme-notes à côté du dépôt public) : leurs fichiers sont
+// relatifs à leur dossier, et un dépôt de notes absent donne un site sans
+// note, pas un build cassé.
 //
 // En dev, un middleware sert les mêmes URL depuis le disque : une seule
 // façon d'accéder au contenu, dev comme prod.
@@ -29,6 +34,7 @@ import { loadEnv, type Plugin } from "vite";
 // secrètes — la production doit le fournir (NOTE_TOKEN_SECRET).
 const DEV_NOTE_SECRET = "dev-only-note-secret";
 let noteSecret = DEV_NOTE_SECRET;
+let notesDirOverride: string | undefined;
 
 const VIRTUAL_ID = "virtual:content-index";
 const RESOLVED_VIRTUAL_ID = "\0" + VIRTUAL_ID;
@@ -52,6 +58,10 @@ function repoRoot(): string {
 
 function contentDir(): string {
   return join(siteRoot(), "content");
+}
+
+function notesDir(): string {
+  return notesDirOverride ?? resolve(repoRoot(), "../metabolisme-notes");
 }
 
 async function exists(path: string): Promise<boolean> {
@@ -88,7 +98,7 @@ type Publication = {
 };
 
 async function readPublications(kind: Kind): Promise<Publication[]> {
-  const base = join(contentDir(), kind);
+  const base = kind === "posts" ? join(contentDir(), "posts") : notesDir();
   let entries;
   try {
     entries = await readdir(base, { withFileTypes: true });
@@ -173,9 +183,16 @@ async function resolveContentFile(
     const logical = rest.slice(1).join("/");
     const entry = publication.files.find((f) => f.path === logical && f.hosted !== "none");
     if (entry === undefined) return null;
-    return { path: resolve(repoRoot(), entry.from), mime: entry.mime };
+    return { path: sourcePath(publication, entry), mime: entry.mime };
   }
   return null;
+}
+
+// Un fichier de post est relatif au dépôt ; un fichier de note, à son dossier.
+function sourcePath(publication: Publication, entry: ManifestEntry): string {
+  return publication.kind === "posts"
+    ? resolve(repoRoot(), entry.from)
+    : resolve(publication.dir, entry.from);
 }
 
 function parseRange(
@@ -198,6 +215,8 @@ export function contentAssets(): Plugin {
 
     config(_config, { mode }) {
       const env = loadEnv(mode, siteRoot(), "");
+      const notes = env["METABOLISME_NOTES_DIR"] ?? process.env["METABOLISME_NOTES_DIR"];
+      if (notes !== undefined && notes !== "") notesDirOverride = resolve(notes);
       const secret = env["NOTE_TOKEN_SECRET"] ?? process.env["NOTE_TOKEN_SECRET"];
       if (secret !== undefined && secret !== "") {
         noteSecret = secret;
@@ -294,7 +313,7 @@ export function contentAssets(): Plugin {
         }
         for (const entry of publication.files) {
           if (entry.hosted !== "asset") continue;
-          const path = resolve(repoRoot(), entry.from);
+          const path = sourcePath(publication, entry);
           if (!(await exists(path))) {
             this.warn(`${entry.from} introuvable — non publié`);
             continue;

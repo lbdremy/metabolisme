@@ -2,7 +2,7 @@ import { spawnSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { FileManifestSchema } from "@metabolisme/evidence";
-import { CONTENT_DIR, fail, REPO_ROOT, SITE_ROOT } from "./paths.ts";
+import { CONTENT_DIR, fail, NOTES_DIR, REPO_ROOT, SITE_ROOT } from "./paths.ts";
 
 // Téléverse vers le stockage objet les fichiers de preuve trop lourds pour
 // être des assets statiques (files.json : hosted = "object-store"). Le Worker
@@ -55,7 +55,7 @@ function upload(bucket: string, key: string, filePath: string, mime: string, siz
 const bucket = bucketName();
 let count = 0;
 for (const kind of ["posts", "notes"] as const) {
-  const base = join(CONTENT_DIR, kind);
+  const base = kind === "posts" ? join(CONTENT_DIR, "posts") : NOTES_DIR;
   if (!existsSync(base)) continue;
   for (const entry of readdirSync(base, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
@@ -64,7 +64,9 @@ for (const kind of ["posts", "notes"] as const) {
     const manifest = FileManifestSchema.parse(JSON.parse(readFileSync(manifestPath, "utf8")));
     for (const file of manifest) {
       if (file.hosted !== "object-store") continue;
-      const source = resolve(REPO_ROOT, file.from);
+      // Un fichier de post est relatif au dépôt ; un fichier de note, à son dossier.
+      const source =
+        kind === "posts" ? resolve(REPO_ROOT, file.from) : resolve(base, entry.name, file.from);
       if (!existsSync(source)) fail(`Fichier introuvable : ${source}`);
       upload(bucket, `${kind}/${entry.name}/files/${file.path}`, source, file.mime, file.size);
       count += 1;

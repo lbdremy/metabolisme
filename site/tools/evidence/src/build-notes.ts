@@ -4,11 +4,12 @@ import { join } from "node:path";
 import { parse } from "yaml";
 import { deriveNoteToken, NoteSchema } from "@metabolisme/evidence";
 import { noteToGraph } from "./note-to-graph.ts";
-import { CONTENT_DIR, fail } from "./paths.ts";
+import { fail, NOTES_DIR } from "./paths.ts";
 
-// Compile les notes partageables :
-//   content/notes/<slug>/note.yaml, note.md, evidence.yaml, sources/…  (main)
-//   → note.json, graph.json, files.json                                 (générés)
+// Compile les notes partageables, lues dans le dépôt privé des notes
+// (METABOLISME_NOTES_DIR, par défaut ../metabolisme-notes) :
+//   <slug>/note.yaml, note.md, evidence.yaml, sources/…   (main)
+//   → note.json, graph.json, files.json                   (générés)
 //
 // Usage : pnpm content:notes                 compile toutes les notes
 //         pnpm --filter @metabolisme/tool-evidence new-note <slug>
@@ -18,7 +19,7 @@ import { CONTENT_DIR, fail } from "./paths.ts";
 // NOTE_TOKEN_SECRET (variable d'environnement, ou site/.env) : le dépôt ne
 // la révèle pas. `note-url` l'affiche, avec NOTE_SITE_URL comme base.
 
-const notesDir = join(CONTENT_DIR, "notes");
+const notesDir = NOTES_DIR;
 const SLUG = /^[a-z0-9][a-z0-9-]*$/;
 
 function sha256(path: string): string {
@@ -39,7 +40,8 @@ function buildNote(slug: string): boolean {
 
   const { graph, files, problems } = noteToGraph(readYaml(join(dir, "evidence.yaml")), markdown, {
     version: note.version,
-    notePrefix: `site/content/notes/${slug}/`,
+    // Les chemins du manifeste sont relatifs au dossier de la note.
+    notePrefix: "",
     readFile: (relativePath) => {
       const path = join(dir, relativePath);
       return existsSync(path) ? { size: statSync(path).size, checksum: sha256(path) } : null;
@@ -69,7 +71,7 @@ if (command === "--new") {
   );
   writeFileSync(join(dir, "note.md"), "Texte de la note, avec des [ancres](ev:O-01).\n");
   writeFileSync(join(dir, "evidence.yaml"), "nodes: []\n");
-  console.log(`Note créée : content/notes/${argument}/`);
+  console.log(`Note créée : ${dir}/`);
   process.exit(0);
 }
 
@@ -84,12 +86,15 @@ if (command === "--url") {
   process.exit(0);
 }
 
-if (!existsSync(notesDir)) mkdirSync(notesDir, { recursive: true });
+if (!existsSync(notesDir)) {
+  console.log(`Aucune note : dépôt des notes absent (${notesDir}).`);
+  process.exit(0);
+}
 const slugs = readdirSync(notesDir, { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && existsSync(join(notesDir, entry.name, "note.yaml")))
   .map((entry) => entry.name)
   .toSorted();
-if (slugs.length === 0) console.log("Aucune note (content/notes/<slug>/note.yaml).");
+if (slugs.length === 0) console.log(`Aucune note (${notesDir}/<slug>/note.yaml).`);
 let ok = true;
 for (const slug of slugs) ok = buildNote(slug) && ok;
 if (!ok) process.exit(1);

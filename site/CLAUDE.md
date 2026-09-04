@@ -38,9 +38,10 @@ packages/evidence/         CONTRAT du graphe (zod), index pur, ancres, jeton
 tools/evidence/            build-posts · build-notes · upload-large
 content/
   posts/<slug>/            post.yaml (main) → post.json, article.md, graph.json, files.json
-  notes/<slug>/            note.yaml, note.md, evidence.yaml, sources/ (main)
-                           → note.json, graph.json, files.json
   pages/methode.md         copie de ../INTRO.md
+../../metabolisme-notes/   DÉPÔT PRIVÉ des notes (METABOLISME_NOTES_DIR)
+  <slug>/                  note.yaml, note.md, evidence.yaml, sources/ (main, LFS)
+                           → note.json, graph.json, files.json
 ```
 
 ## Contrat central : le graphe de preuves
@@ -68,10 +69,12 @@ Ancres dans le texte : lien `[passage](ev:R-07)` ou identifiant nu `(R-07)`
   dans `content/` : `files.json` pointe vers le dépôt (`logement/data/raw/…`,
   LFS) et le plugin les émet au build. Au-delà de 25 Mio → stockage objet
   (`upload-large`), servi par le Worker sous la même URL.
-- **Notes secrètes dans un dépôt public.** Le dossier porte un slug lisible ;
-  l'URL porte `HMAC(NOTE_TOKEN_SECRET, slug)` calculé au build. Pas de
-  secret → jetons de développement, prévisibles (avertissement au build de
-  production). `robots: noindex`, jamais listées.
+- **Notes secrètes, dépôt public.** Le CONTENU des notes vit dans le dépôt
+  privé `metabolisme-notes` (lu au build, jamais copié ici ; absent → site
+  sans note). L'URL porte `HMAC(NOTE_TOKEN_SECRET, slug)` calculé au build.
+  Pas de secret → jetons de développement, prévisibles (avertissement au
+  build de production). `robots: noindex`, jamais listées. Le déploiement
+  se fait depuis une machine qui a les deux dépôts.
 - **Charte dérivée du logo** (douze disques en spirale) : une couleur par
   statut, dans l'ordre de la chaîne ; papier et encre pour le reste ; serif
   pour le texte lu, sans pour le panneau. Jetons dans `src/styles.css`,
@@ -96,4 +99,4 @@ pnpm deploy:web
 
 Code, identifiants, commits en anglais ; interface, contenus, documentation
 en français. Commits conventionnels. `content/**` est hors format/lint. Les
-sources figées des notes (`content/notes/**/sources/**`) sont en Git LFS.
+sources figées des notes sont en Git LFS dans `metabolisme-notes`.

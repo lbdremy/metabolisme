@@ -2,5 +2,3 @@
 # strongest reproducibility — the frozen bytes travel with the repo, keeping
 # `logement validate`'s sha256 checks meaningful even if INSEE moves a file.
 logement/data/raw/** filter=lfs diff=lfs merge=lfs -text
-# Sources figées des notes du site (PDF, pages HTML…) : même politique.
-site/content/notes/**/sources/** filter=lfs diff=lfs merge=lfs -text

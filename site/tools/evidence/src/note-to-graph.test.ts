@@ -25,7 +25,7 @@ const authored = {
 
 const options = {
   version: {},
-  notePrefix: "site/content/notes/abc/",
+  notePrefix: "",
   readFile: (path: string) =>
     path === "sources/datalab-395.pdf" ? { size: 10, checksum: "sha256:" + "c".repeat(64) } : null,
 };
@@ -37,7 +37,7 @@ describe("noteToGraph", () => {
     expect(files).toEqual([
       {
         path: "sources/datalab-395.pdf",
-        from: "site/content/notes/abc/sources/datalab-395.pdf",
+        from: "sources/datalab-395.pdf",
         size: 10,
         mime: "application/pdf",
         hosted: "asset",
