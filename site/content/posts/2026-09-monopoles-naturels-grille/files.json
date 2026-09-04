@@ -1,0 +1,72 @@
+[
+  {
+    "path": "sources/oecd-glossary-statistical-terms-2008.pdf",
+    "from": "monopoles/data/raw/oecd-glossary-statistical-terms-2008.pdf",
+    "size": 7036371,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/ricardo-principes-chapitre-2-rente-wikisource-fr.html",
+    "from": "monopoles/data/raw/ricardo-principes-chapitre-2-rente-wikisource-fr.html",
+    "size": 140561,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/legifrance-ccp-L1121-1.html",
+    "from": "monopoles/data/raw/legifrance-ccp-L1121-1.html",
+    "size": 139683,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/legifrance-cgct-L1411-1.html",
+    "from": "monopoles/data/raw/legifrance-cgct-L1411-1.html",
+    "size": 142085,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/legifrance-cgct-L1412-1.html",
+    "from": "monopoles/data/raw/legifrance-cgct-L1412-1.html",
+    "size": 139099,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/legifrance-cgct-L2221-1.html",
+    "from": "monopoles/data/raw/legifrance-cgct-L2221-1.html",
+    "size": 139557,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/legifrance-cg3p-L2111-1.html",
+    "from": "monopoles/data/raw/legifrance-cg3p-L2111-1.html",
+    "size": 139097,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/legifrance-cg3p-L3111-1.html",
+    "from": "monopoles/data/raw/legifrance-cg3p-L3111-1.html",
+    "size": 137806,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/openstax-principles-economics-3e-13-3-public-goods.html",
+    "from": "monopoles/data/raw/openstax-principles-economics-3e-13-3-public-goods.html",
+    "size": 409705,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/cre-deliberation-2025-77-turpe-7-htb.pdf",
+    "from": "monopoles/data/raw/cre-deliberation-2025-77-turpe-7-htb.pdf",
+    "size": 3767699,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "slug": "2026-09-monopoles-naturels-grille",
+  "title": "Là où le marché n'existe pas",
+  "subtitle": "Une grille pour reconnaître les monopoles naturels, et ce que collectiviser leur rente veut dire.",
+  "date": "2026-09-04",
+  "summary": "Dans le logement, l'énergie, l'eau, le transport, les télécommunications, le prix payé par l'usager rémunère-t-il une production ou une position ? Article de cadrage de la deuxième étude Métabolisme : ce qu'est un monopole naturel, deux rentes à ne pas confondre, une grille en quatre questions et trois niveaux, la part normative isolée, dix secteurs classés comme hypothèses, et le gabarit des études sectorielles qui mesureront la rente, son destinataire et son coût.\n",
+  "study": {
+    "slug": "monopoles",
+    "name": "Monopoles naturels et collectivisation des rentes",
+    "question": "Dans quels secteurs le prix payé par l'usager rémunère-t-il une position plutôt qu'une production ; à qui cette rente revient-elle aujourd'hui, de combien est-elle, que coûte-t-elle à la collectivité ; et sous quelles formes institutionnelles pourrait-elle revenir à l'usager, pour quel gain et avec quelle part laissée au privé ?\n"
+  },
+  "version": {
+    "repo_url": "https://github.com/lbdremy/metabolisme",
+    "evidence_doc": "monopoles/evidence/monopoles-naturels.md"
+  }
+}

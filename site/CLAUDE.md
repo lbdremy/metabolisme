@@ -11,7 +11,7 @@ frontières. Ce fichier ne décrit que ce qui est propre au site.
 Publier les productions du programme avec leur **chaîne de preuves
 explorable** (méthode : `../INTRO.md`, statuts §4, graphe §10) :
 
-1. **Posts** — les articles d'étude (`../logement/articles/*.md`), avec le
+1. **Posts** — les articles d'étude (`../<étude>/articles/*.md`, ex. `logement`, `monopoles`), avec le
    graphe complet dérivé des registres de l'étude ;
 2. **Notes** — des messages courts et sourcés, partagés par une URL non
    devinable, avec une chaîne souvent minuscule (un chiffre → sa page).

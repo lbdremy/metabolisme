@@ -5,10 +5,72 @@
 #
 # RÉSERVATION D'IDENTIFIANTS : H-01 à H-05 désignent les hypothèses
 # directrices qualitatives du cadrage (INTRO.md §7) ; elles ne figurent pas
-# ici. Les paramètres chiffrés commencent à H-06 (H-06 rémunération normale
-# du capital, H-07 seuil de part du parc faiseur de prix, H-08 écart de coût
-# délégation / régie — à instruire, INTRO.md §7).
-#
-# Vide à l'ouverture de l'étude (2026-09-04).
+# ici. Les paramètres chiffrés commencent à H-06. Aucun résultat (R-xx)
+# n'existe encore dans cette étude : le champ `affects` est vide et sera
+# renseigné par les études sectorielles qui consommeront ces paramètres.
 
-[]
+- id: H-06
+  name: normal_return_on_capital
+  description: >
+    Taux de rémunération du capital retenu comme « normal » dans la
+    définition opératoire de la rente (C-02) : la rente d'un secteur est ce
+    que paie l'usager moins le coût d'une fourniture efficace, rémunération
+    du capital à ce taux comprise. Sans ce paramètre, aucune rente n'est
+    mesurable, et toute mesure lui est sensible (INTRO §15). Valeur
+    centrale : le CMPC reconnu par la CRE pour RTE au TURPE 7 (5,0 %
+    nominal avant impôts, O-01). Plage : de 4,0 % (bas de la fourchette des
+    monopoles régulés à faible risque, TURPE 6 à 4,6 %) à 8,0 % (ordre de
+    grandeur d'un actif concédé exposé à un risque de trafic). Les études
+    sectorielles doivent figer le taux propre à leur régulateur (ARCEP, ART)
+    et présenter leur mesure de rente aux deux bornes.
+  central_value: 5.0
+  plausible_range: [4.0, 8.0]
+  unit: "% nominal avant impôts"
+  confidence: medium
+  justification:
+    - O-01
+    - D-13
+    - C-02
+  affects: []
+
+- id: H-07
+  name: price_maker_share_threshold
+  description: >
+    Part du parc locatif au-delà de laquelle un parc à loyers régulés,
+    universel et ouvert, cesse d'être preneur de prix pour devenir faiseur
+    de prix sur les loyers de l'ensemble d'une ville (hypothèse directrice
+    H-04). Valeur de travail reprise de la note d'origine (30 à 40 %),
+    cohérente avec le cas viennois (parc municipal et coopératif : 43 % du
+    parc, environ la moitié des habitants — note « Le parc social, fonction
+    régulatrice ou logique volumétrique ? », dépôt privé) mais adossée à
+    AUCUNE estimation de l'élasticité des loyers privés à la part du parc
+    régulé (L-03). Confiance faible ; c'est le point d'attaque le plus
+    probable du raisonnement logement.
+  central_value: 35.0
+  plausible_range: [30.0, 40.0]
+  unit: "% du parc locatif"
+  confidence: low
+  justification:
+    - L-03
+    - C-03
+  affects: []
+
+- id: H-08
+  name: water_delegation_cost_gap
+  description: >
+    Écart de coût, à qualité comparable, entre la gestion déléguée et la
+    régie pour un service d'eau (hypothèse directrice H-03) : ce que la
+    délégation prélève au-delà du coût de la régie, en part du prix. Valeur
+    de travail « dix à vingt pour cent » reprise de la note d'origine, sans
+    source figée (L-06) ; la comparaison est exposée à un biais de
+    sélection (les services qui reviennent en régie ne sont pas tirés au
+    hasard). À instruire par l'étude sectorielle « eau » sur les données de
+    l'observatoire national des services d'eau et d'assainissement (SISPEA),
+    qui publie prix et mode de gestion par service.
+  central_value: 15.0
+  plausible_range: [10.0, 20.0]
+  unit: "% du prix du service à qualité comparable"
+  confidence: low
+  justification:
+    - L-06
+  affects: []

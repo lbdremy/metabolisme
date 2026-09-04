@@ -10,6 +10,9 @@ on:
       - "logement/articles/**"
       - "logement/evidence/claims.yaml"
       - "logement/sources/**"
+      - "monopoles/articles/**"
+      - "monopoles/evidence/claims.yaml"
+      - "monopoles/sources/**"
       - ".github/workflows/site-ci.yml"
 
 permissions:

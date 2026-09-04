@@ -161,10 +161,14 @@ la rente se forme et à laquelle elle pourrait être récupérée.
 
 Les définitions sont des données de première classe (`../INTRO.md` §8) :
 citées verbatim depuis une source identifiée, datées, avec leurs limites. Le
-registre `sources/definitions.yaml` est vide à l'ouverture de l'étude ; les
-définitions ci-dessous sont **à figer** dans la première phase (§14), chacune
-avec sa source candidate. Tant qu'elle n'est pas figée, une définition n'est
-qu'une formulation de travail.
+tableau ci-dessous est le plan établi à l'ouverture de l'étude : les quatorze
+définitions ont été **figées le 2026-09-04** dans `sources/definitions.yaml`
+(livrable 1, §14), avec les sources effectivement retenues — le registre fait
+foi ; les sources candidates listées ici sont conservées pour tracer les
+écarts (le glossaire OCDE de 1993 a été remplacé par l'édition 2008 du
+glossaire statistique qui en reprend les entrées ; la rivalité est prise au
+manuel OpenStax faute d'entrée OCDE ; Demsetz 1968, à accès payant, n'a pas
+été enregistré ; le CMPC vient de la CRE).
 
 | Id prévu | Terme | Formulation de travail | Source candidate |
 |---|---|---|---|
@@ -616,48 +620,44 @@ note.
 
 ---
 
-## 13. Chaîne de preuves initiale
+## 13. Chaîne de preuves du cadrage
+
+État au 2026-09-04 (registres remplis, livrables 1 et 2 de §14 faits) :
 
 ```text
-S-01  Glossaire OCDE (monopole naturel, rente, biens publics)
-S-02  Ricardo, Principes, ch. 2
-S-03  Légifrance — code de la commande publique (concession)
-S-04  Légifrance — CGCT (régie, délégation de service public)
-S-05  Légifrance — CG3P (domaine public)
-S-06  Délibérations de régulateurs (coût du capital reconnu)
+S-01  Glossaire statistique OCDE 2008 (monopole naturel, rente, quasi-rente)
+S-02  Ricardo, Principes, ch. II (trad. 1847, Wikisource)
+S-03  Légifrance — code de la commande publique, L1121-1 (concession)
+S-04  Légifrance — CGCT, L1411-1, L1412-1, L2221-1 (DSP, régie)
+S-05  Légifrance — CG3P, L2111-1, L3111-1 (domaine public)
+S-06  OpenStax, Principles of Economics 3e, § 13.3 (rivalité)
+S-07  CRE, délibération 2025-77, TURPE 7 HTB (coût du capital reconnu)
 
         ↓
 
-D-01  Monopole naturel
-D-02  Rente économique
-D-03  Rente de position          (notion construite, C-xx)
-D-04  Rente d'innovation         (notion construite, C-xx)
-D-05  Substituabilité            (notion construite, C-xx)
-D-06  Rivalité de la capacité
-D-07  Différenciabilité          (notion construite, C-xx)
-D-08  Captivité de l'usager      (notion construite, C-xx)
-D-09  Concurrence pour / sur le marché
-D-10  Concession
-D-11  Régie
-D-12  Délégation de service public
-D-13  Rendement régulé / coût du capital
-D-14  Domaine public
+D-01  Monopole naturel                 D-08  Captivité de l'usager      (construite, C-02)
+D-02  Rente économique                 D-09  Concurrence pour / sur le marché
+D-03  Rente de position (construite)   D-10  Contrat de concession
+D-04  Rente d'innovation (construite)  D-11  Régie
+D-05  Substituabilité (construite)     D-12  Délégation de service public
+D-06  Rivalité                         D-13  CMPC reconnu par un régulateur
+D-07  Différenciabilité (construite)   D-14  Domaine public
 
         ↓
 
-H-01  Décorrélation prix / coût là où l'infrastructure n'est pas substituable
-H-02  La mise en concurrence déplace la rente sans la supprimer
-H-03  Régie / délégation comme étalon d'efficacité
-H-04  Seuil de bascule d'un parc régulé (logement)
-H-05  Coût système mieux optimisé intégré (électricité)
-H-06  Taux de rémunération normale du capital       (paramètre)
-H-07  Seuil de part du parc faiseur de prix         (paramètre)
-H-08  Écart de coût délégation / régie              (paramètre)
+O-01  CMPC de RTE : 5,0 % (TURPE 7), 4,6 % (TURPE 6)
 
         ↓
 
-C-01  La grille : quatre questions, trois niveaux (choix de méthode)
-C-02  Définitions opératoires construites (D-03, D-05, D-07, D-08)
+H-01..H-05  Hypothèses directrices (qualitatives, §7, hors registre)
+H-06  Taux de rémunération normale du capital   5,0 % [4 ; 8]   (paramètre)
+H-07  Seuil de part du parc faiseur de prix     35 % [30 ; 40]  (paramètre)
+H-08  Écart de coût délégation / régie          15 % [10 ; 20]  (paramètre)
+
+        ↓
+
+C-01  La grille : quatre questions, trois niveaux
+C-02  Notions construites + définition mesurable de la rente
 C-03  Logement : parc faiseur de prix, privé conservé, trois configurations
 C-04  Ordre des études sectorielles
 
@@ -671,15 +671,14 @@ V-04  Une rente collectivisée reste visible (règle publique)
         ↓
 
 I-01  Classement provisoire des dix secteurs (inventaire, §8)
-I-02  Les télécommunications comme cas où la grille est déjà appliquée
+I-02  Les télécommunications comme cas témoin
 
         ↓
 
-L-01  Brevets : rente protégée durable, hors périmètre
-L-02  Plateformes : monopole sans rareté physique, à instruire séparément
-L-03  Seuil de bascule (H-04/H-07) sans estimation économétrique
-L-04  Régime actuel de l'inventaire non sourcé à l'ouverture
-L-05  Orbite et spectre : aucune autorité d'application
+L-01  Brevets hors périmètre            L-05  Orbite et spectre : aucune autorité
+L-02  Plateformes non éprouvées         L-06  Écart régie / délégation non sourcé, biais de sélection
+L-03  Seuil de bascule sans estimation  L-07  Définitions traduites, notions construites
+L-04  Régimes actuels non sourcés       L-08  Captures Légifrance non reproductibles par script
 
         ↓  (études sectorielles, une par secteur)
 
@@ -695,7 +694,7 @@ P-xx  Propositions institutionnelles par secteur
 La première phase produit l'article de cadrage et ce qu'il faut pour le
 publier ; elle n'instruit aucun secteur.
 
-### Livrable 1 — Définitions figées
+### Livrable 1 — Définitions figées — FAIT (2026-09-04)
 
 ```text
 sources/sources.yaml
@@ -707,7 +706,7 @@ Les sources S-01 à S-06 récupérées, figées (sha256, Git LFS) et enregistré
 D-01 à D-14 citées verbatim ou, pour les notions construites, formulées et
 rattachées à un choix C-xx.
 
-### Livrable 2 — Graphe de preuves du cadrage
+### Livrable 2 — Graphe de preuves du cadrage — FAIT (2026-09-04)
 
 ```text
 evidence/claims.yaml
@@ -717,7 +716,7 @@ sources/hypotheses.yaml
 Les nœuds C, V, I, L de la chaîne initiale (§13), les paramètres H-06 à
 H-08 avec leur plage et leur confiance.
 
-### Livrable 3 — Article de cadrage
+### Livrable 3 — Article de cadrage — FAIT (2026-09-04, en attente de relecture)
 
 ```text
 articles/2026-09-monopoles-naturels-grille.md
