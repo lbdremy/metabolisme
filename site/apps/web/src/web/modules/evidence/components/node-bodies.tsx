@@ -9,6 +9,7 @@ import type {
   ObservationNode,
   SourceNode,
 } from "~/contracts/evidence";
+import { isQuantifiedHypothesis } from "~/contracts/evidence";
 import { cn } from "~/web/lib/cn";
 import { CONFIDENCE_LABEL, formatBytes, formatDate, formatNumber } from "../model/format";
 
@@ -185,18 +186,32 @@ export function DefinitionBody({ node }: { node: DefinitionNode }) {
 }
 
 export function HypothesisBody({ node }: { node: HypothesisNode }) {
+  const header = (
+    <div className="flex items-baseline justify-between">
+      <span className="font-mono text-[0.72rem] text-ink-3">{node.name}</span>
+      <span className="text-[0.7rem] text-ink-3">
+        confiance {CONFIDENCE_LABEL[node.confidence]}
+      </span>
+    </div>
+  );
+  // Hypothèse qualitative (directrice, relation) : l'énoncé, sans jauge.
+  if (!isQuantifiedHypothesis(node)) {
+    return (
+      <div className="mt-3 rounded-lg border border-rule bg-white/70 p-3 font-sans">
+        {header}
+        {node.statement !== undefined && (
+          <p className="mt-2 text-[0.85rem] leading-snug text-ink">{node.statement}</p>
+        )}
+      </div>
+    );
+  }
   const [low, high] = node.plausible_range;
   const span = high - low;
   const position = span === 0 ? 0.5 : (node.central_value - low) / span;
   return (
     <>
       <div className="mt-3 rounded-lg border border-rule bg-white/70 p-3 font-sans">
-        <div className="flex items-baseline justify-between">
-          <span className="font-mono text-[0.72rem] text-ink-3">{node.name}</span>
-          <span className="text-[0.7rem] text-ink-3">
-            confiance {CONFIDENCE_LABEL[node.confidence]}
-          </span>
-        </div>
+        {header}
         <div className="mt-2 flex items-baseline gap-2">
           <span className="text-2xl font-semibold tabular-nums">
             {formatNumber(node.central_value)}

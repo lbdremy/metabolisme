@@ -74,14 +74,23 @@ Aucune. Ce cadrage ne transforme aucune donnée.
 
 ## 5. Hypothèses
 
-Cinq hypothèses directrices qualitatives (H-01 à H-05, `../INTRO.md` §7,
-hors registre) et trois paramètres chiffrés (`../sources/hypotheses.yaml`).
+Cinq hypothèses directrices qualitatives (H-01 à H-05, enregistrées comme
+énoncés sans valeur numérique) et trois paramètres chiffrés, tous dans
+`../sources/hypotheses.yaml`.
+
+| Id | Hypothèse directrice | Confiance | Justification |
+|---|---|---|---|
+| H-01 | Là où l'infrastructure n'est pas substituable, le prix se décorrèle du coût | moyenne | D-01, D-02, D-05 |
+| H-02 | La mise en concurrence des concessions déplace la rente sans la supprimer | moyenne | D-09, D-10 |
+| H-03 | La coexistence régie / délégation fournit un étalon d'efficacité | faible | D-11, D-12, L-06 |
+| H-04 | Un parc régulé ne discipline les loyers qu'au-delà d'un seuil de part du parc | faible | C-03, L-03 |
+| H-05 | Le coût système est mieux optimisé par un opérateur intégré | faible | D-06, D-07, C-04 |
 
 | Id | Nom | Centrale | Plage | Unité | Confiance | Justification |
 |---|---|---|---|---|---|---|
 | H-06 | `normal_return_on_capital` | 5,0 | 4,0 – 8,0 | % nominal avant impôts | moyenne | O-01, D-13, C-02 |
-| H-07 | `price_maker_share_threshold` | 35 | 30 – 40 | % du parc locatif | faible | L-03, C-03 |
-| H-08 | `water_delegation_cost_gap` | 15 | 10 – 20 | % du prix à qualité comparable | faible | L-06 |
+| H-07 | `price_maker_share_threshold` | 35 | 30 – 40 | % du parc locatif | faible | H-04, L-03, C-03 |
+| H-08 | `water_delegation_cost_gap` | 15 | 10 – 20 | % du prix à qualité comparable | faible | H-03, L-06 |
 
 Pourquoi : H-06 est le terme « normale » de la définition mesurable de la
 rente (C-02) — sans lui, rien n'est mesurable. H-07 et H-08 sont les deux
@@ -160,7 +169,8 @@ Vérification indépendante possible avec les schémas de l'étude `logement`
 `DefinitionRecord`, `HypothesisRecord`, `ClaimRecord` de
 `logement/src/logement/models.py`, résoudre les références, recomparer les
 empreintes de `../data/raw/` — exécuté le 2026-09-04 : 7 sources, 14
-définitions, 3 hypothèses, 19 nœuds, aucune erreur.
+définitions, 3 paramètres (les 5 hypothèses qualitatives n'entrent pas
+dans le schéma de `logement`, voir `../CLAUDE.md`), 19 nœuds, aucune erreur.
 
 Fichiers produits : aucun. Environnement : aucun (documents et registres
 seulement). Version : commit portant ce document dans le dépôt

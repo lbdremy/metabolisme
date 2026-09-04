@@ -6,7 +6,7 @@ Index humain des éléments de preuve de l'étude, par statut épistémique
 puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 État au 2026-09-04 (cadrage) : 7 sources figées, 14 définitions,
-3 paramètres, 19 nœuds de graphe ; aucun calcul. Document de preuve :
+5 hypothèses directrices et 3 paramètres, 19 nœuds de graphe ; aucun calcul. Document de preuve :
 `evidence/monopoles-naturels.md` ; article :
 `articles/2026-09-monopoles-naturels-grille.md`.
 
@@ -14,7 +14,7 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 |------|--------|------------------------|------|
 | S | Sources | `sources/sources.yaml` | S-01 glossaire OCDE 2008 · S-02 Ricardo ch. II (Wikisource, 1847) · S-03 Légifrance CCP L1121-1 · S-04 Légifrance CGCT L1411-1 / L1412-1 / L2221-1 · S-05 Légifrance CG3P L2111-1 / L3111-1 · S-06 OpenStax § 13.3 · S-07 CRE délib. 2025-77 (10 fichiers figés sha256/LFS dans `data/raw/`) |
 | D | Définitions | `sources/definitions.yaml` | D-01 monopole naturel · D-02 rente économique · D-03 rente de position (construite) · D-04 rente d'innovation (construite) · D-05 substituabilité (construite) · D-06 rivalité · D-07 différenciabilité (construite) · D-08 captivité (construite) · D-09 concurrence pour / sur le marché · D-10 concession · D-11 régie · D-12 DSP · D-13 CMPC régulé · D-14 domaine public |
-| H | Hypothèses | `sources/hypotheses.yaml` (H-01..H-05 directrices : INTRO §7, hors registre) | H-06 rémunération normale du capital 5,0 % [4 ; 8] · H-07 seuil de part faiseur de prix 35 % [30 ; 40] · H-08 écart délégation / régie 15 % [10 ; 20] |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-01 décorrélation prix / coût · H-02 la mise en concurrence déplace la rente · H-03 étalon régie / délégation · H-04 seuil de bascule d'un parc régulé · H-05 coût système intégré (qualitatives, `statement`) · H-06 rémunération normale du capital 5,0 % [4 ; 8] · H-07 seuil de part faiseur de prix 35 % [30 ; 40] · H-08 écart délégation / régie 15 % [10 ; 20] |
 | O | Observations | `evidence/claims.yaml` | O-01 CMPC de RTE 5,0 % (TURPE 7) / 4,6 % (TURPE 6) |
 | C | Choix | `evidence/claims.yaml` | C-01 la grille · C-02 notions construites + définition mesurable de la rente · C-03 logement (parc faiseur de prix, privé conservé, trois configurations) · C-04 ordre des études |
 | V | Valeurs | `evidence/claims.yaml` | V-01 la rente de position revient à l'usager · V-02 propriété d'usage non visée · V-03 rente d'innovation légitime · V-04 rente collectivisée visible |

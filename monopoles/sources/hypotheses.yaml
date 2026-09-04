@@ -1,13 +1,114 @@
 # Registre des hypothèses (H-xx) — méthode Métabolisme, INTRO §9.
-# Paramètres nommés : valeur centrale, plage plausible, unité, confiance,
-# justification (ids S/D/O/I…), résultats affectés. Même schéma que
-# logement/sources/hypotheses.yaml (HypothesisRecord).
+# Deux formes : les PARAMÈTRES chiffrés (valeur centrale, plage plausible,
+# unité, confiance, justification, résultats affectés — même schéma que
+# logement/sources/hypotheses.yaml, HypothesisRecord) et, depuis le
+# 2026-09-04, les hypothèses QUALITATIVES (`statement` : la relation ou
+# l'hypothèse directrice, sans valeur numérique — forme acceptée par le
+# contrat du site, packages/evidence, et par sa dérivation ; le schéma
+# pydantic de `logement` ne la connaît pas encore, voir monopoles/CLAUDE.md).
 #
-# RÉSERVATION D'IDENTIFIANTS : H-01 à H-05 désignent les hypothèses
-# directrices qualitatives du cadrage (INTRO.md §7) ; elles ne figurent pas
-# ici. Les paramètres chiffrés commencent à H-06. Aucun résultat (R-xx)
-# n'existe encore dans cette étude : le champ `affects` est vide et sera
-# renseigné par les études sectorielles qui consommeront ces paramètres.
+# H-01 à H-05 : hypothèses directrices du cadrage (INTRO.md §7), qualitatives.
+# H-06 et suivants : paramètres chiffrés. Aucun résultat (R-xx) n'existe
+# encore dans cette étude : `affects` est vide et sera renseigné par les
+# études sectorielles qui consommeront ces hypothèses.
+
+- id: H-01
+  name: price_cost_decoupling_where_not_substitutable
+  description: >
+    Là où l'infrastructure n'est pas substituable, le prix payé par l'usager
+    se décorrèle du coût de fourniture (hypothèse directrice H-01).
+  statement: >
+    Signature attendue dans les données d'un secteur : le prix s'écarte
+    durablement du coût de fourniture efficace ; les marges ne s'érodent pas
+    avec le temps ; une hausse de prix ne déclenche pas de réponse d'offre ;
+    les écarts entre territoires comparables se creusent. L'absence de ces
+    quatre effets est ce qu'on attend d'un marché concurrentiel ; leur
+    présence conjointe est la signature d'une rente. Testable secteur par
+    secteur sur comptes et séries de prix (gabarit INTRO §9, questions 3 et 4).
+  confidence: medium
+  justification:
+    - D-01
+    - D-02
+    - D-05
+  affects: []
+
+- id: H-02
+  name: concession_tendering_displaces_rent
+  description: >
+    La mise en concurrence des concessions déplace la rente sans la supprimer
+    (hypothèse directrice H-02).
+  statement: >
+    Un appel d'offres capture au mieux une fraction de la rente à l'instant
+    de l'attribution ; les hausses de prix ultérieures, les gains de
+    productivité non partagés et les renégociations reviennent au
+    concessionnaire. Testable sur les comptes des concessions en cours
+    (autoroutes depuis 2006 ; renouvellements de délégations d'eau) : rente
+    mesurée selon C-02 avant et après attribution, part captée par la
+    redevance ou le prix d'attribution.
+  confidence: medium
+  justification:
+    - D-09
+    - D-10
+  affects: []
+
+- id: H-03
+  name: regie_delegation_efficiency_benchmark
+  description: >
+    La coexistence régie / délégation sur des services comparables fournit un
+    étalon d'efficacité (hypothèse directrice H-03).
+  statement: >
+    Quand les deux modes de gestion coexistent sur des services comparables
+    (eau), l'écart de coût à qualité comparable mesure ce que la délégation
+    prélève. Ordre de grandeur de travail : paramètre H-08. Exposée à un biais
+    de sélection (L-06) : les services qui passent en régie ne sont pas tirés
+    au hasard ; le test doit contrôler la taille, la densité et la ressource.
+  confidence: low
+  justification:
+    - D-11
+    - D-12
+    - L-06
+  affects: []
+
+- id: H-04
+  name: regulated_stock_price_maker_threshold
+  description: >
+    Sur le logement, un parc à loyers régulés ne discipline les loyers de
+    toute une ville qu'au-delà d'un seuil de part du parc locatif (hypothèse
+    directrice H-04).
+  statement: >
+    Un parc réservé (plafonds de ressources) loge moins cher sans réguler ;
+    un parc universel et assez large devient faiseur de prix, et la propriété
+    lucrative devient économiquement banale. Le seuil est le paramètre H-07.
+    Base empirique : le parc social français (loyers inférieurs de 31 %,
+    taux d'effort proche du secteur libre) contre Vienne (parc universel,
+    jamais privatisé, adossé à une cotisation) — note privée « Le parc
+    social, fonction régulatrice ou logique volumétrique ? ». Aucune
+    estimation de l'élasticité des loyers privés à la part du parc régulé
+    n'est disponible (L-03) : point d'attaque le plus probable.
+  confidence: low
+  justification:
+    - C-03
+    - L-03
+  affects: []
+
+- id: H-05
+  name: system_cost_better_optimised_integrated
+  description: >
+    Le coût système d'un réseau électrique (back-up, stockage, renforcement,
+    intermittence) est mieux optimisé par un opérateur intégré qu'externalisé
+    par un marché fragmenté (hypothèse directrice H-05).
+  statement: >
+    Le coût difficile du renouvelable n'est pas celui de la production, qui a
+    baissé, mais le coût système : back-up pilotable, stockage, renforcement
+    du réseau, gestion de l'intermittence. Hypothèse structurelle, la plus
+    difficile à tester ; à instruire en dernier (C-04), sur les bilans du
+    gestionnaire de réseau et les décisions du régulateur.
+  confidence: low
+  justification:
+    - D-06
+    - D-07
+    - C-04
+  affects: []
 
 - id: H-06
   name: normal_return_on_capital
@@ -51,6 +152,7 @@
   unit: "% du parc locatif"
   confidence: low
   justification:
+    - H-04
     - L-03
     - C-03
   affects: []
@@ -72,5 +174,6 @@
   unit: "% du prix du service à qualité comparable"
   confidence: low
   justification:
+    - H-03
     - L-06
   affects: []

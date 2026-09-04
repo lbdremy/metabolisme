@@ -66,6 +66,14 @@ exploration/          # exploratory material, never cited as established
 - **Housing decision (2026-09-04):** price-maker public stock with private
   ownership kept, three configurations compared (`INTRO.md` §8.1). The
   `logement/` study is referenced, never duplicated.
+- **Qualitative hypotheses (decision 2026-09-04).** `sources/hypotheses.yaml`
+  holds both numeric parameters (H-06+) and the framing hypotheses
+  H-01..H-05 as `statement` records without numeric fields. The site
+  contract (`site/packages/evidence`, `study-to-graph`) accepts both; the
+  `logement` pydantic `HypothesisRecord` does NOT (it still requires the
+  numeric triple) — when validating this study with logement's schemas,
+  skip the `statement` records; the shared validator, when extracted, must
+  carry both forms.
 - **Language:** English for identifiers and commits, French for everything
   the reader of the research sees.
 - Update `PREV-STEPS.md` (append per session) and `NEXT-STEPS.md` at

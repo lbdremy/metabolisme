@@ -65,14 +65,18 @@ const RegistryDefinition = z
   })
   .loose();
 
+// Une hypothèse du registre est un paramètre chiffré (valeur centrale,
+// plage, unité) ou une hypothèse qualitative (`statement`) — jamais ni l'un
+// ni l'autre, jamais un paramètre incomplet.
 const RegistryHypothesis = z
   .object({
     id: z.string(),
     name: z.string(),
     description: z.string(),
-    central_value: z.number(),
-    plausible_range: z.tuple([z.number(), z.number()]),
-    unit: z.string(),
+    central_value: z.number().optional(),
+    plausible_range: z.tuple([z.number(), z.number()]).optional(),
+    unit: z.string().optional(),
+    statement: optionalText,
     confidence: z.enum(["low", "medium", "high"]),
     justification: z.array(z.string()).default([]),
     affects: z.array(z.string()).default([]),
@@ -203,6 +207,18 @@ export function studyToGraph(
 
   for (const raw of registries.hypotheses) {
     const hypothesis = RegistryHypothesis.parse(raw);
+    const numeric = [hypothesis.central_value, hypothesis.plausible_range, hypothesis.unit];
+    const quantified = numeric.every((field) => field !== undefined);
+    if (!quantified && numeric.some((field) => field !== undefined)) {
+      throw new Error(
+        `${hypothesis.id} : paramètre incomplet (valeur centrale, plage et unité vont ensemble)`,
+      );
+    }
+    if (!quantified && hypothesis.statement === undefined) {
+      throw new Error(
+        `${hypothesis.id} : une hypothèse est un paramètre chiffré ou porte un énoncé (statement)`,
+      );
+    }
     nodes.push({
       id: hypothesis.id,
       type: "hypothesis",
@@ -210,9 +226,14 @@ export function studyToGraph(
       depends_on: hypothesis.justification,
       limitations: [],
       name: hypothesis.name,
-      central_value: hypothesis.central_value,
-      plausible_range: hypothesis.plausible_range,
-      unit: hypothesis.unit,
+      ...(hypothesis.central_value === undefined
+        ? {}
+        : { central_value: hypothesis.central_value }),
+      ...(hypothesis.plausible_range === undefined
+        ? {}
+        : { plausible_range: hypothesis.plausible_range }),
+      ...(hypothesis.unit === undefined ? {} : { unit: hypothesis.unit }),
+      ...(hypothesis.statement === undefined ? {} : { statement: hypothesis.statement.trim() }),
       confidence: hypothesis.confidence,
       affects: hypothesis.affects,
     });

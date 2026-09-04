@@ -41,6 +41,14 @@ const registries = {
       justification: ["S-05"],
       affects: ["R-02"],
     },
+    {
+      id: "H-01",
+      name: "framing",
+      description: "Hypothèse directrice",
+      statement: "Là où l'infrastructure n'est pas substituable, le prix se décorrèle du coût.",
+      confidence: "low",
+      justification: ["D-01"],
+    },
   ],
   claims: [
     { id: "O-01", type: "observation", title: "obs", depends_on: ["S-01", "D-01"] },
@@ -88,6 +96,7 @@ describe("studyToGraph", () => {
       "S-05",
       "D-01",
       "H-06",
+      "H-01",
       "O-01",
       "T-01",
       "R-02",
@@ -121,6 +130,27 @@ describe("studyToGraph", () => {
   it("links definitions to their source and hypotheses to their justification", () => {
     expect(graph.nodes.find((n) => n.id === "D-01")?.depends_on).toEqual(["S-01"]);
     expect(graph.nodes.find((n) => n.id === "H-06")?.depends_on).toEqual(["S-05"]);
+  });
+
+  it("accepts a qualitative hypothesis (statement, no numeric parameter)", () => {
+    const h01 = graph.nodes.find((n) => n.id === "H-01");
+    expect(h01?.type === "hypothesis" && h01.statement).toMatch(/substituable/);
+    expect(h01?.type === "hypothesis" && h01.central_value).toBeUndefined();
+  });
+
+  it("rejects a hypothesis that is neither a full parameter nor a statement", () => {
+    const broken = (extra: object) =>
+      studyToGraph(
+        {
+          ...registries,
+          claims: [],
+          definitions: [],
+          hypotheses: [{ id: "H-09", name: "x", description: "x", confidence: "low", ...extra }],
+        },
+        { studyPrefix: "s/", version: {}, statFile: () => null, maxAssetBytes: 1 },
+      );
+    expect(() => broken({})).toThrow(/statement/);
+    expect(() => broken({ central_value: 1 })).toThrow(/incomplet/);
   });
 
   it("publishes code and outputs once each, with repo paths", () => {

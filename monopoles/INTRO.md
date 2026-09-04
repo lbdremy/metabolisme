@@ -331,9 +331,11 @@ qu'elles mobilisent :
 ## 7. Hypothèses directrices
 
 Les hypothèses directrices du cadrage portent les identifiants H-01 à H-05 ;
-elles sont qualitatives et ne figurent pas dans le registre
-`sources/hypotheses.yaml`, réservé aux paramètres chiffrés (même convention
-que l'étude `logement`). Les paramètres commencent à H-06.
+elles sont qualitatives et figurent dans `sources/hypotheses.yaml` sous la
+forme d'un énoncé (`statement`), sans valeur numérique — forme ajoutée au
+contrat du site le 2026-09-04 (décision de Rémy) ; l'étude `logement` garde
+ses hypothèses directrices hors registre. Les paramètres chiffrés commencent
+à H-06.
 
 ### H-01 — Là où l'infrastructure n'est pas substituable, le prix se décorrèle du coût
 
@@ -649,7 +651,7 @@ O-01  CMPC de RTE : 5,0 % (TURPE 7), 4,6 % (TURPE 6)
 
         ↓
 
-H-01..H-05  Hypothèses directrices (qualitatives, §7, hors registre)
+H-01..H-05  Hypothèses directrices (qualitatives, `statement`, §7)
 H-06  Taux de rémunération normale du capital   5,0 % [4 ; 8]   (paramètre)
 H-07  Seuil de part du parc faiseur de prix     35 % [30 ; 40]  (paramètre)
 H-08  Écart de coût délégation / régie          15 % [10 ; 20]  (paramètre)

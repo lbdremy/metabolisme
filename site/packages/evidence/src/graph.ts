@@ -112,15 +112,36 @@ export const DefinitionNodeSchema = NodeBase.extend({
   caveats: z.array(z.string()).default([]),
 });
 
+// Une hypothèse est soit un PARAMÈTRE (valeur centrale, plage plausible,
+// unité — INTRO §9), soit une hypothèse QUALITATIVE (une relation ou une
+// hypothèse directrice, portée par `statement`, sans valeur numérique). La
+// dérivation (study-to-graph) exige l'une ou l'autre forme ; le contrat les
+// accepte toutes deux pour que le panneau sache les afficher.
 export const HypothesisNodeSchema = NodeBase.extend({
   type: z.literal("hypothesis"),
   name: z.string().min(1),
-  central_value: z.number(),
-  plausible_range: z.tuple([z.number(), z.number()]),
-  unit: z.string().min(1),
+  central_value: z.number().optional(),
+  plausible_range: z.tuple([z.number(), z.number()]).optional(),
+  unit: z.string().min(1).optional(),
+  statement: z.string().min(1).optional(),
   confidence: z.enum(["low", "medium", "high"]),
   affects: z.array(NodeIdSchema).default([]),
 });
+
+// Un paramètre chiffré porte ses trois champs numériques ensemble.
+export function isQuantifiedHypothesis(node: z.infer<typeof HypothesisNodeSchema>): node is z.infer<
+  typeof HypothesisNodeSchema
+> & {
+  central_value: number;
+  plausible_range: [number, number];
+  unit: string;
+} {
+  return (
+    node.central_value !== undefined &&
+    node.plausible_range !== undefined &&
+    node.unit !== undefined
+  );
+}
 
 // Une observation peut porter la valeur lue et l'endroit exact où la lire.
 export const ObservationNodeSchema = NodeBase.extend({
