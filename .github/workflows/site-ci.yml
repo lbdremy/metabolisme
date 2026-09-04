@@ -55,7 +55,8 @@ jobs:
       # à jour avec les registres des études et les notes.
       - run: pnpm content
       - name: Contenu généré à jour
-        run: git diff --exit-code -- content || (echo "content/ n'est pas à jour : lancer pnpm content" && exit 1)
+        run: |
+          git diff --exit-code -- content || (echo "content/ n'est pas à jour — lancer pnpm content" && exit 1)
 
       - run: pnpm build
         env:
