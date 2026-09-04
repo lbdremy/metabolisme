@@ -1,0 +1,31 @@
+{
+  "name": "metabolisme-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @metabolisme/web dev",
+    "build": "pnpm --filter @metabolisme/web build",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "oxlint .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "content:posts": "pnpm --filter @metabolisme/tool-evidence build-posts",
+    "content:notes": "pnpm --filter @metabolisme/tool-evidence build-notes",
+    "content": "pnpm content:posts && pnpm content:notes",
+    "deploy:web": "pnpm typecheck && pnpm test && pnpm --filter @metabolisme/web release",
+    "note:url": "pnpm --filter @metabolisme/tool-evidence note-url",
+    "note:new": "pnpm --filter @metabolisme/tool-evidence new-note"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@10.15.1"
+}

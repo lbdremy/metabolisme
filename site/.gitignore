@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.output/
+.nitro/
+.tanstack/
+*.log
+coverage/
+.wrangler/
+*.cpuprofile
+# Secrets locaux Wrangler — jamais versionnés
+.dev.vars
+.dev.vars.*
+.env
+.env.*

@@ -1,0 +1,62 @@
+name: site • web CI
+
+# Rejoue le site dans un environnement neuf à chaque changement : format,
+# lint, types, tests, puis contenu (posts dérivés des études, notes) et build.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "site/**"
+      - "logement/articles/**"
+      - "logement/evidence/claims.yaml"
+      - "logement/sources/**"
+      - ".github/workflows/site-ci.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+    working-directory: site
+
+jobs:
+  check:
+    name: Format, lint, types, tests, contenu, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Les sources figées (études et notes) sont en Git LFS : le build les
+          # publie en assets.
+          lfs: true
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: site/package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+
+      # Le contenu généré est versionné ; le régénérer ici vérifie qu'il est
+      # à jour avec les registres des études et les notes.
+      - run: pnpm content
+      - name: Contenu généré à jour
+        run: git diff --exit-code -- content || (echo "content/ n'est pas à jour : lancer pnpm content" && exit 1)
+
+      - run: pnpm build
+        env:
+          NOTE_TOKEN_SECRET: ${{ secrets.NOTE_TOKEN_SECRET }}

@@ -1,0 +1,17 @@
+{
+  "slug": "2026-08-efficacite-parc-etat-des-preuves",
+  "title": "Le parc immobilier français, au bord du compte",
+  "subtitle": "Capacité à peine suffisante, mobilité en chute : l'état des preuves.",
+  "date": "2026-08-10",
+  "summary": "La France compte 38,4 millions de logements dont 2,96 millions vacants. Faut-il « remplir les logements vides » ou construire massivement ? Premier état des preuves de l'étude sur l'efficacité du parc immobilier français : le stock a suivi les ménages, la vacance durable est là où l'emploi croît, le gisement couvre à peine le besoin — et la mobilité résidentielle chute partout.\n",
+  "study": {
+    "slug": "logement",
+    "name": "Efficacité du parc immobilier français",
+    "question": "Dans quelle mesure le parc immobilier français permet-il de loger correctement la population, dans les territoires où elle souhaite ou a besoin de vivre, à un coût soutenable et avec une mobilité suffisante ?\n"
+  },
+  "version": {
+    "repo_url": "https://github.com/lbdremy/metabolisme",
+    "tag": "article-efficacite-parc-v1.0",
+    "evidence_doc": "logement/evidence/efficacite-parc-immobilier.qmd"
+  }
+}

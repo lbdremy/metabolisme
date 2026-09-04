@@ -1,0 +1,506 @@
+[
+  {
+    "path": "sources/insee-focus-359-parc-logements-2025.xlsx",
+    "from": "logement/data/raw/insee-focus-359-parc-logements-2025.xlsx",
+    "size": 52462,
+    "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-eapl-parc-residence-2025.xlsx",
+    "from": "logement/data/raw/insee-eapl-parc-residence-2025.xlsx",
+    "size": 11290,
+    "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-rp-menages-series-longues-2022.xlsx",
+    "from": "logement/data/raw/insee-rp-menages-series-longues-2022.xlsx",
+    "size": 14094,
+    "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/lovac-opendata-communes26.csv",
+    "from": "logement/data/raw/lovac-opendata-communes26.csv",
+    "size": 7628201,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/lovac-opendata-departements26.csv",
+    "from": "logement/data/raw/lovac-opendata-departements26.csv",
+    "size": 31224,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/lovac-opendata-france26.csv",
+    "from": "logement/data/raw/lovac-opendata-france26.csv",
+    "size": 470,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/lovac-opendata-metadonnees26.csv",
+    "from": "logement/data/raw/lovac-opendata-metadonnees26.csv",
+    "size": 4096,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-table-appartenance-geo-communes-2026.zip",
+    "from": "logement/data/raw/insee-table-appartenance-geo-communes-2026.zip",
+    "size": 2047330,
+    "mime": "application/zip",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-emploi-zone-1998-2018.xlsx",
+    "from": "logement/data/raw/insee-emploi-zone-1998-2018.xlsx",
+    "size": 338029,
+    "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/carte-loyers-2025-appartement.csv",
+    "from": "logement/data/raw/carte-loyers-2025-appartement.csv",
+    "size": 4774352,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/carte-loyers-2025-maison.csv",
+    "from": "logement/data/raw/carte-loyers-2025-maison.csv",
+    "size": 4763456,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-filosofi-2021-geo2025.zip",
+    "from": "logement/data/raw/insee-filosofi-2021-geo2025.zip",
+    "size": 5063469,
+    "mime": "application/zip",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-rp-base-cc-logement-2022.zip",
+    "from": "logement/data/raw/insee-rp-base-cc-logement-2022.zip",
+    "size": 42941446,
+    "mime": "application/zip",
+    "hosted": "object-store"
+  },
+  {
+    "path": "sources/sdes-datalab-296-conditions-logement-2020.pdf",
+    "from": "logement/data/raw/sdes-datalab-296-conditions-logement-2020.pdf",
+    "size": 514924,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/zonage-tlv-decret-2025-12-22.csv",
+    "from": "logement/data/raw/zonage-tlv-decret-2025-12-22.csv",
+    "size": 3372583,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/zonage-tlv-decret-2025-1267-jo.pdf",
+    "from": "logement/data/raw/zonage-tlv-decret-2025-1267-jo.pdf",
+    "size": 819850,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/dreal-pdl-2020-lutte-vacance-logements.pdf",
+    "from": "logement/data/raw/dreal-pdl-2020-lutte-vacance-logements.pdf",
+    "size": 1116170,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/oll-alencon-2025-vacance-cadrage.pdf",
+    "from": "logement/data/raw/oll-alencon-2025-vacance-cadrage.pdf",
+    "size": 402369,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/ademe-dpe-existants-communes-etiquettes.csv",
+    "from": "logement/data/raw/ademe-dpe-existants-communes-etiquettes.csv",
+    "size": 2345930,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/enertech-ademe-2016-couts-renovation.pdf",
+    "from": "logement/data/raw/enertech-ademe-2016-couts-renovation.pdf",
+    "size": 3557041,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/banque-territoires-eclairages-33-prix-revient-2024.pdf",
+    "from": "logement/data/raw/banque-territoires-eclairages-33-prix-revient-2024.pdf",
+    "size": 1657187,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-ipea-residentiel-011779962.xml",
+    "from": "logement/data/raw/insee-ipea-residentiel-011779962.xml",
+    "size": 11460,
+    "mime": "application/xml; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/cerema-cartofriches-2026-06-15.csv",
+    "from": "logement/data/raw/cerema-cartofriches-2026-06-15.csv",
+    "size": 26220435,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "object-store"
+  },
+  {
+    "path": "sources/insee-comparateur-territoires-2026.zip",
+    "from": "logement/data/raw/insee-comparateur-territoires-2026.zip",
+    "size": 18362572,
+    "mime": "application/zip",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/cour-des-comptes-logements-vacants-2025.pdf",
+    "from": "logement/data/raw/cour-des-comptes-logements-vacants-2025.pdf",
+    "size": 2695725,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/sdes-datalab-determinants-vacance-longue-duree-2023.pdf",
+    "from": "logement/data/raw/sdes-datalab-determinants-vacance-longue-duree-2023.pdf",
+    "size": 780391,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/apur-logements-inoccupes-paris-2023.pdf",
+    "from": "logement/data/raw/apur-logements-inoccupes-paris-2023.pdf",
+    "size": 31424960,
+    "mime": "application/pdf",
+    "hosted": "object-store"
+  },
+  {
+    "path": "sources/cerema-rna-bilan-fonds-friches-2023.pdf",
+    "from": "logement/data/raw/cerema-rna-bilan-fonds-friches-2023.pdf",
+    "size": 1261275,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/cerema-article-enseignements-fonds-friches-2023.html",
+    "from": "logement/data/raw/cerema-article-enseignements-fonds-friches-2023.html",
+    "size": 173708,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-rp-logement-princ-2023.parquet",
+    "from": "logement/data/raw/insee-rp-logement-princ-2023.parquet",
+    "size": 98209201,
+    "mime": "application/vnd.apache.parquet",
+    "hosted": "object-store"
+  },
+  {
+    "path": "sources/sdes-rpls-2025-resultats-territoires.zip",
+    "from": "logement/data/raw/sdes-rpls-2025-resultats-territoires.zip",
+    "size": 21150091,
+    "mime": "application/zip",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-rp2022-migcom.parquet",
+    "from": "logement/data/raw/insee-rp2022-migcom.parquet",
+    "size": 183472132,
+    "mime": "application/vnd.apache.parquet",
+    "hosted": "object-store"
+  },
+  {
+    "path": "sources/insee-rp2022-migcom-varmod.csv",
+    "from": "logement/data/raw/insee-rp2022-migcom-varmod.csv",
+    "size": 9829291,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/dvf-geolocalisees-2025.csv.gz",
+    "from": "logement/data/raw/dvf-geolocalisees-2025.csv.gz",
+    "size": 98313852,
+    "mime": "application/gzip",
+    "hosted": "object-store"
+  },
+  {
+    "path": "sources/dgfip-dmto-taux-2026-02.pdf",
+    "from": "logement/data/raw/dgfip-dmto-taux-2026-02.pdf",
+    "size": 96026,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/service-public-f17701-emoluments-notaire-2026.html",
+    "from": "logement/data/raw/service-public-f17701-emoluments-notaire-2026.html",
+    "size": 127772,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-ip2073-mobilite-residentielle-2025.pdf",
+    "from": "logement/data/raw/insee-ip2073-mobilite-residentielle-2025.pdf",
+    "size": 841307,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-ip2073-donnees-figures.xlsx",
+    "from": "logement/data/raw/insee-ip2073-donnees-figures.xlsx",
+    "size": 30646,
+    "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/ancols-vieillissement-rotation-2026-02.pdf",
+    "from": "logement/data/raw/ancols-vieillissement-rotation-2026-02.pdf",
+    "size": 107183,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/dgfip-dmto-taux-2026-06.pdf",
+    "from": "logement/data/raw/dgfip-dmto-taux-2026-06.pdf",
+    "size": 74738,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/bdf-stat-info-credits-particuliers-2026-05.pdf",
+    "from": "logement/data/raw/bdf-stat-info-credits-particuliers-2026-05.pdf",
+    "size": 738749,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/impots-gouv-frais-acquisition-csi-2026.html",
+    "from": "logement/data/raw/impots-gouv-frais-acquisition-csi-2026.html",
+    "size": 65587,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-estim-pop-dep-sexe-aq-1975-2026.xlsx",
+    "from": "logement/data/raw/insee-estim-pop-dep-sexe-aq-1975-2026.xlsx",
+    "size": 2207700,
+    "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/parc.py",
+    "from": "logement/src/logement/core/parc.py",
+    "size": 7710,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/lovac.py",
+    "from": "logement/src/logement/core/lovac.py",
+    "size": 8316,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/ze.py",
+    "from": "logement/src/logement/core/ze.py",
+    "size": 6968,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/shell/build.py",
+    "from": "logement/src/logement/shell/build.py",
+    "size": 31879,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/parc-menages.json",
+    "from": "logement/data/processed/parc-menages.json",
+    "size": 1386,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/vacance-structurelle.json",
+    "from": "logement/data/processed/vacance-structurelle.json",
+    "size": 4033,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/vacance-emploi-ze.json",
+    "from": "logement/data/processed/vacance-emploi-ze.json",
+    "size": 3151,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/cout.py",
+    "from": "logement/src/logement/core/cout.py",
+    "size": 6159,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/cout-residentiel-ze.json",
+    "from": "logement/data/processed/cout-residentiel-ze.json",
+    "size": 2803,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/rs.py",
+    "from": "logement/src/logement/core/rs.py",
+    "size": 4366,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/residences-secondaires-ze.json",
+    "from": "logement/data/processed/residences-secondaires-ze.json",
+    "size": 3109,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/effort.py",
+    "from": "logement/src/logement/core/effort.py",
+    "size": 9571,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/taux-effort-relocation-ze.json",
+    "from": "logement/data/processed/taux-effort-relocation-ze.json",
+    "size": 5179,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/tension.py",
+    "from": "logement/src/logement/core/tension.py",
+    "size": 17497,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/tension-manque-absolu-ze.json",
+    "from": "logement/data/processed/tension-manque-absolu-ze.json",
+    "size": 11621,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/bati.py",
+    "from": "logement/src/logement/core/bati.py",
+    "size": 8706,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/etat-bati-ze.json",
+    "from": "logement/data/processed/etat-bati-ze.json",
+    "size": 5152,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/remob.py",
+    "from": "logement/src/logement/core/remob.py",
+    "size": 11554,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/cout-remobilisation-ze.json",
+    "from": "logement/data/processed/cout-remobilisation-ze.json",
+    "size": 5147,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/foncier.py",
+    "from": "logement/src/logement/core/foncier.py",
+    "size": 10142,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/foncier-friches-ze.json",
+    "from": "logement/data/processed/foncier-friches-ze.json",
+    "size": 3539,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/mobilite.py",
+    "from": "logement/src/logement/core/mobilite.py",
+    "size": 14910,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/mobilite-residentielle-ze.json",
+    "from": "logement/data/processed/mobilite-residentielle-ze.json",
+    "size": 8550,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/social.py",
+    "from": "logement/src/logement/core/social.py",
+    "size": 14428,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/mobilite-parc-social-ze.json",
+    "from": "logement/data/processed/mobilite-parc-social-ze.json",
+    "size": 10201,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/migrations.py",
+    "from": "logement/src/logement/core/migrations.py",
+    "size": 15564,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/migrations-residentielles-ze.json",
+    "from": "logement/data/processed/migrations-residentielles-ze.json",
+    "size": 8237,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/logement/core/transaction.py",
+    "from": "logement/src/logement/core/transaction.py",
+    "size": 17949,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/cout-transaction-ze.json",
+    "from": "logement/data/processed/cout-transaction-ze.json",
+    "size": 7213,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  }
+]

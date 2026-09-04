@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* Charte dérivée du logo : douze disques en spirale, un par statut
+   épistémique de la méthode (S, D, O, T, M, H, R, I, V, C, P, L). Le reste
+   du site est du papier et de l'encre — le texte est éditorial, les preuves
+   sont techniques. */
+@theme {
+  --font-serif:
+    "Iowan Old Style", "Palatino Linotype", Palatino, Charter, "Source Serif Pro", Georgia, serif;
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --color-paper: #fbfaf7;
+  --color-paper-2: #f3f1ea;
+  --color-ink: #1c1b18;
+  --color-ink-2: #4a4843;
+  --color-ink-3: #7c7973;
+  --color-rule: #e4e1d8;
+  --color-rule-2: #cfcbc0;
+
+  /* Statuts, dans l'ordre de la chaîne (source → proposition), sur le cercle
+     chromatique du logo ; la limite est graphite, hors du cercle. */
+  --color-status-source: #29369a;
+  --color-status-definition: #0072d1;
+  --color-status-observation: #02abb1;
+  --color-status-transformation: #02a752;
+  --color-status-measure: #8fb01a;
+  --color-status-hypothesis: #e0a800;
+  --color-status-result: #fc7113;
+  --color-status-interpretation: #f11d23;
+  --color-status-value: #da1d7b;
+  --color-status-choice: #7432a7;
+  --color-status-proposal: #5b2c8f;
+  --color-status-limit: #5c5f66;
+
+  --color-logo-yellow: #f9d901;
+  --color-logo-lime: #acca1d;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-logo-yellow) 45%, white);
+  }
+}
+
+/* Texte éditorial (article, note) : rendu Markdown. */
+@layer components {
+  .prose-reading {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+    max-width: 68ch;
+  }
+  .prose-reading > * + * {
+    margin-top: 1.05em;
+  }
+  .prose-reading h2 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-top: 2.4em;
+  }
+  .prose-reading h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-top: 1.8em;
+  }
+  .prose-reading p {
+    text-wrap: pretty;
+  }
+  .prose-reading strong {
+    font-weight: 700;
+  }
+  .prose-reading em {
+    font-style: italic;
+  }
+  .prose-reading blockquote {
+    border-left: 3px solid var(--color-rule-2);
+    padding-left: 1rem;
+    color: var(--color-ink-2);
+    font-style: italic;
+  }
+  .prose-reading ul,
+  .prose-reading ol {
+    padding-left: 1.4rem;
+  }
+  .prose-reading ul {
+    list-style: disc;
+  }
+  .prose-reading ol {
+    list-style: decimal;
+  }
+  .prose-reading li + li {
+    margin-top: 0.4em;
+  }
+  .prose-reading hr {
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+    margin: 2.5em 0;
+  }
+  .prose-reading a:not([data-evidence]) {
+    color: var(--color-status-definition);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+  .prose-reading code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--color-paper-2);
+    padding: 0.1em 0.35em;
+    border-radius: 0.25rem;
+  }
+  .prose-reading pre {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    background: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    border-radius: 0.5rem;
+    padding: 0.9rem 1rem;
+    overflow-x: auto;
+  }
+  .prose-reading pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+  .prose-reading table {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .prose-reading th,
+  .prose-reading td {
+    border-bottom: 1px solid var(--color-rule);
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .prose-reading th {
+    font-weight: 600;
+    color: var(--color-ink-2);
+  }
+  .prose-reading td:has(> :is(.num)),
+  .prose-reading .num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Le code source mis en couleur par shiki : fond papier, pas de thème sombre. */
+  .shiki {
+    background: transparent !important;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+  .shiki .line {
+    display: inline-block;
+    width: 100%;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@metabolisme/tool-evidence",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build-posts": "node src/build-posts.ts",
+    "build-notes": "node src/build-notes.ts",
+    "typecheck": "tsc",
+    "test": "vitest run",
+    "upload-large": "node src/upload-large.ts",
+    "new-note": "node src/build-notes.ts --new",
+    "note-url": "node src/build-notes.ts --url"
+  },
+  "dependencies": {
+    "@metabolisme/evidence": "workspace:*",
+    "yaml": "^2.9.0",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "vitest": "^4.1.11"
+  }
+}

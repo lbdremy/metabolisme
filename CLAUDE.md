@@ -15,11 +15,17 @@ values / choices, …).
 INTRO.md      # the method: executable evidence chain (authoritative)
 logement/     # first study: efficiency of the French housing stock
               # (see logement/INTRO.md + logement/CLAUDE.md)
+site/         # the public website: posts + shareable notes, each with its
+              # explorable evidence chain (see site/CLAUDE.md, site/README.md)
 .github/workflows/logement-ci.yml   # CI: gates + tests + validate + reproduce
+.github/workflows/site-ci.yml       # CI: format + lint + types + tests + content + build
 .gitignore    # single root gitignore (git lives at the repo root only)
 ```
 
-Each study is a **self-contained uv Python project** (like `vttae/`/`casarent/`
+`site/` is a self-contained pnpm workspace (TanStack Start on Cloudflare
+Workers, same framework and doctrine as the sibling `livretlogementlfi`
+repo); it derives each post's evidence graph from a study's registries and
+never duplicates them. Each study is a **self-contained uv Python project** (like `vttae/`/`casarent/`
 in the sibling `learn` repo): `pyproject.toml`, `src/<study>/`, `tests/`,
 `check.sh` + `test.sh`, its own `.venv/`. No shared engine yet — extract one
 only after several studies show a real common need (INTRO §20).
