@@ -1,0 +1,13 @@
+# Registre des sources (S-xx) — méthode Métabolisme, INTRO §7.
+# Chaque source retenue est enregistrée ici AVANT d'alimenter une définition
+# ou un calcul : organisme, titre, URL, dates (publication + récupération),
+# périmètres, licence, fichier local figé dans data/raw/ et son empreinte
+# sha256. Même schéma que logement/sources/sources.yaml (SourceRecord) ;
+# l'étude n'ayant pas de code, le contrôle est fait au build du site
+# (site/tools/evidence, study-to-graph) jusqu'à ce qu'un validateur partagé
+# soit justifié (INTRO §20).
+#
+# Vide à l'ouverture de l'étude (2026-09-04) : les sources candidates sont
+# listées dans INTRO.md §10 et ne deviennent des sources qu'une fois figées.
+
+[]

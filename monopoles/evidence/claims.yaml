@@ -1,0 +1,10 @@
+# Graphe de preuves (méthode Métabolisme, INTRO §10) — les statuts hors
+# registres : O observations, T transformations, M mesures, R résultats,
+# I interprétations, V valeurs, C choix, P propositions, L limites.
+# Chaque nœud référence ses dépendances par identifiant ; contrôle au build
+# du site (références résolues, pas d'orphelin).
+#
+# Vide à l'ouverture de l'étude (2026-09-04) : la chaîne initiale prévue
+# (C-01..C-04, V-01..V-04, I-01..I-02, L-01..L-05) est dans INTRO.md §13.
+
+[]

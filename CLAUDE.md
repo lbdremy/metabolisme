@@ -15,6 +15,8 @@ values / choices, …).
 INTRO.md      # the method: executable evidence chain (authoritative)
 logement/     # first study: efficiency of the French housing stock
               # (see logement/INTRO.md + logement/CLAUDE.md)
+monopoles/    # second study: natural-monopoly rents — framing, grid, sector
+              # template; registries + article, no Python (see monopoles/CLAUDE.md)
 site/         # the public website: posts + shareable notes, each with its
               # explorable evidence chain (see site/CLAUDE.md, site/README.md)
 .github/workflows/logement-ci.yml   # CI: gates + tests + validate + reproduce

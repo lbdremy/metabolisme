@@ -1,0 +1,14 @@
+# Registre des hypothèses (H-xx) — méthode Métabolisme, INTRO §9.
+# Paramètres nommés : valeur centrale, plage plausible, unité, confiance,
+# justification (ids S/D/O/I…), résultats affectés. Même schéma que
+# logement/sources/hypotheses.yaml (HypothesisRecord).
+#
+# RÉSERVATION D'IDENTIFIANTS : H-01 à H-05 désignent les hypothèses
+# directrices qualitatives du cadrage (INTRO.md §7) ; elles ne figurent pas
+# ici. Les paramètres chiffrés commencent à H-06 (H-06 rémunération normale
+# du capital, H-07 seuil de part du parc faiseur de prix, H-08 écart de coût
+# délégation / régie — à instruire, INTRO.md §7).
+#
+# Vide à l'ouverture de l'étude (2026-09-04).
+
+[]
