@@ -79,7 +79,7 @@ if (command === "--url") {
   if (secret === undefined || secret === "") {
     fail("NOTE_TOKEN_SECRET absent : définissez-le (site/.env ou environnement).");
   }
-  const base = (process.env["NOTE_SITE_URL"] ?? "https://metabolisme.example").replace(/\/$/, "");
+  const base = (process.env["NOTE_SITE_URL"] ?? "https://metabolisme.dev").replace(/\/$/, "");
   console.log(`${base}/notes/${await deriveNoteToken(secret, argument)}`);
   process.exit(0);
 }

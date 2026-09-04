@@ -8,6 +8,12 @@
   // résout seul. C'est là que les fichiers de preuve trop lourds pour le CDN
   // sont servis depuis le stockage objet.
   "main": "./src/server.ts",
+  // Domaine du site : Cloudflare crée et gère les enregistrements DNS et le
+  // certificat des domaines personnalisés au déploiement.
+  "routes": [
+    { "pattern": "metabolisme.dev", "custom_domain": true },
+    { "pattern": "www.metabolisme.dev", "custom_domain": true },
+  ],
   "assets": {
     "binding": "ASSETS",
     // Les fichiers de contenu absents des assets (stockage objet) doivent

@@ -13,6 +13,9 @@ import { env } from "cloudflare:workers";
 
 const CONTENT_PREFIX = "/content/";
 
+// Une seule adresse canonique : www renvoie sur l'apex.
+const CANONICAL_HOST = "metabolisme.dev";
+
 async function serveLargeFile(request: Request, key: string): Promise<Response> {
   const object = await env.EVIDENCE_FILES.get(key, {
     range: request.headers,
@@ -45,7 +48,12 @@ async function serveLargeFile(request: Request, key: string): Promise<Response> 
 
 export default createServerEntry({
   async fetch(request) {
-    const { pathname } = new URL(request.url);
+    const url = new URL(request.url);
+    if (url.hostname === `www.${CANONICAL_HOST}`) {
+      url.hostname = CANONICAL_HOST;
+      return Response.redirect(url.toString(), 301);
+    }
+    const { pathname } = url;
     if (pathname.startsWith(CONTENT_PREFIX)) {
       const fromAssets = await env.ASSETS.fetch(request);
       if (fromAssets.status !== 404) return fromAssets;
