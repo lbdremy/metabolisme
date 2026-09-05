@@ -1,11 +1,14 @@
 # Registre des définitions (D-xx) — méthode Métabolisme, INTRO §8.
-# Chaque définition est citée VERBATIM depuis sa page source, avec l'URL, la
-# date de version et les limites connues. Les définitions anglophones (S-01,
-# S-06) sont citées dans leur langue ; la traduction de travail est donnée
-# en limite (L-07). Les notions construites par l'étude (D-03, D-05, D-07,
-# D-08) sont rattachées au choix C-02 qui les formule et à la source qui
-# les ancre. Même schéma que logement/sources/definitions.yaml
-# (DefinitionRecord).
+# Chaque définition officielle est citée VERBATIM depuis sa page source, avec
+# l'URL, la date de version et les limites connues ; les coupes sont marquées
+# […]. Les définitions anglophones (S-01, S-06) sont citées dans leur langue ;
+# la traduction de travail est donnée en limite (L-07). Sept notions sont
+# CONSTRUITES par l'étude (D-03, D-04, D-05, D-07, D-08, D-09 pour sa partie
+# « pour / sur le marché », D-15, D-16) : leur champ `source` désigne la
+# source qui les ANCRE (la notion voisine la plus proche), pas une source qui
+# les définirait ; `constructed_by: C-02` le dit dans le graphe. Révisé le
+# 2026-09-05 après la revue contradictoire (index PDF corrigés, D-04
+# complétée, D-05 scindée, D-13 sans valeur, D-15..D-21 ajoutées).
 
 - id: D-01
   term: monopole naturel
@@ -23,10 +26,11 @@
     firm to fully exploit available economies of scale and supply the
     market.
   caveats:
-    - "Traduction de travail : un monopole naturel existe sur un marché si une seule entreprise peut le servir à un coût inférieur à toute combinaison de deux entreprises ou plus ; il naît des propriétés de la technique de production, souvent combinées à la demande, et non de l'action des pouvoirs publics ou des concurrents."
-    - "Entrée « Natural monopoly », index PDF 346 ; source citée par le glossaire : Khemani & Shapiro, OCDE, 1993. Le contexte de l'entrée ajoute que les monopoles naturels « are thought to exist in some portions of industries such as electricity, railroads, natural gas, and telecommunications » et « are typically subject to government regulation »."
-    - "La définition est une propriété de coût (sous-additivité), pas une propriété de la demande ni de la propriété du réseau : elle dit qu'une seule entreprise doit produire, pas qui doit la posséder ni qui doit encaisser."
-    - "Elle porte sur « a particular market » : la délimitation du marché (l'infrastructure seule, ou l'infrastructure et le service) est un choix de l'analyste — la grille (C-01) sépare les deux."
+    - "Traduction de travail (L-07) : un monopole naturel existe sur un marché si une seule entreprise peut le servir à un coût inférieur à toute combinaison de deux entreprises ou plus ; il naît des propriétés de la technique de production, souvent combinées à la demande, et non de l'action des pouvoirs publics ou des concurrents."
+    - "Entrée « Natural monopoly », page 353 du PDF (folio imprimé 351) ; source citée par le glossaire : Khemani & Shapiro, OCDE, 1993. Contexte de l'entrée : « In essence natural monopolies exist because of economies of scale and economies of scope which are significant relative to market demand. Natural monopolies are thought to exist in some portions of industries such as electricity, railroads, natural gas, and telecommunications. Because productive efficiency requires that only one firm exist, natural monopolies are typically subject to government regulation. »"
+    - "La définition est une propriété de COÛT (sous-additivité : dupliquer coûte plus cher que partager), pas une propriété de l'offre du facteur ni de la propriété du réseau : elle dit qu'une seule entreprise doit produire, pas qui doit la posséder ni qui doit encaisser, et ne dit rien du prix. Elle EXCLUT explicitement ce qui naît « from the activities of governments » : un monopole légal (police du domaine public, exclusivité réglementaire) n'est pas un monopole naturel."
+    - "Elle porte sur « a particular market » : la délimitation du marché (l'infrastructure seule, ou l'infrastructure et le service ; le réseau, ou l'énergie qu'il transporte) est un choix de l'analyste — la grille (C-01) impose de dire quel objet est classé."
+    - "Définition officielle francophone, moins opératoire, dans le glossaire de l'Autorité de régulation des transports (S-16) : « Entreprise à laquelle il est confié l'ensemble de la production du bien ou du service sur un marché, du fait de conditions techniques particulières de production. Cette situation survient dans la plupart des industries de réseau qui nécessitent des investissements d'infrastructure lourds […], de sorte qu'il est plus avantageux de ne pas dupliquer l'infrastructure et de confier l'intégralité de la production à une seule entreprise. » — définie par le régime confié, non par le coût."
 
 - id: D-02
   term: rente économique
@@ -46,69 +50,90 @@
     the increased earnings of the remaining suppliers are termed monopoly
     rents.
   caveats:
-    - "Traduction de travail : la rente est le revenu d'un facteur de production dont l'offre est fixe ; en élever le prix n'en augmente pas la disponibilité, seulement le revenu de son détenteur. Dans le cas d'une rente économique, le fournisseur reçoit un paiement supérieur à ce qui serait nécessaire pour l'amener à fournir le facteur."
-    - "Entrée « Rent - OECD », index PDF 452. L'entrée distingue la rente économique (facteur en offre fixe de façon permanente) de la quasi-rente (offre temporairement fixe, voir D-04) et de la rente de monopole (restriction artificielle de l'offre)."
-    - "La définition n'est pas opératoire : elle ne dit pas comment mesurer « the amount required to induce the supplier to supply the factor ». La définition mesurable de l'étude — prix payé moins coût d'une fourniture efficace, rémunération normale du capital comprise — est un choix (C-02) dont le terme « normale » est le paramètre H-06."
+    - "Traduction de travail (L-07) : la rente est le revenu des facteurs de production dont l'offre est fixe ; en élever le prix n'en augmente pas la disponibilité, seulement le revenu de leur détenteur. Dans le cas d'une rente économique, le fournisseur reçoit un paiement supérieur à ce qui serait nécessaire pour l'amener à fournir le facteur."
+    - "Entrée « Rent - OECD », page 462 du PDF (folio imprimé ≈ 460). L'entrée distingue trois cas : la rente économique (facteur « permanently in fixed supply »), la quasi-rente (facteur « temporarily in fixed supply », voir D-04) et la rente de monopole (restriction ARTIFICIELLE de l'offre, « for example by laws limiting entry »)."
+    - "La définition n'est pas opératoire : elle ne dit pas comment mesurer « the amount required to induce the supplier to supply the factor ». La définition mesurable de l'étude est D-15 (surprofit sur base d'actifs, taux de référence H-06) ; c'est une construction (C-02)."
 
 - id: D-03
   term: rente de position (notion construite)
   source: S-02
+  constructed_by: C-02
   url: https://fr.wikisource.org/wiki/Des_principes_de_l%E2%80%99%C3%A9conomie_politique_et_de_l%E2%80%99imp%C3%B4t/Chapitre_2
   last_updated: null
   definition: >
     Rente tirée du contrôle d'une ressource que personne ne peut reproduire
-    ni contourner — un réseau non duplicable, un site, une localisation,
-    une fréquence, une orbite — et qui, pour cette raison, ne se dissipe
-    pas par imitation ni par entrée de nouveaux offreurs. C'est la rente
-    économique de D-02 lorsque le facteur en offre fixe est une position.
-    Ancrage : Ricardo définit la rente comme « cette portion du produit de
-    la terre que l'on paie au propriétaire pour avoir le droit d'exploiter
-    les facultés productives et impérissables du sol ».
+    ni contourner, et qui pour cette raison ne se dissipe pas par imitation
+    ni par entrée de nouveaux offreurs. L'étude en distingue deux cas, qui
+    ne relèvent pas du même mécanisme : (a) la rente ricardienne stricte,
+    quand le facteur n'est augmentable à aucun coût — le sol, un site de
+    barrage, une bande de fréquences, une orbite (fixité positionnelle,
+    D-16) ; (b) la rente de monopole naturel, quand le facteur est
+    augmentable mais que le dupliquer est inefficace (D-01, D-05) — la
+    rente y est bornée par le coût de duplication, dans le premier cas elle
+    ne l'est pas. Ancrage : Ricardo définit la rente comme « cette portion
+    du produit de la terre que l'on paie au propriétaire pour avoir le droit
+    d'exploiter les facultés productives et impérissables du sol ».
   caveats:
-    - "Notion construite par l'étude (choix C-02) : la formulation n'est pas celle d'une source ; seule la citation de Ricardo l'est (S-02, ouverture du chapitre II, p. 38 de l'édition de 1847)."
+    - "Notion construite par l'étude (C-02) : la formulation n'est pas celle d'une source ; seule la citation de Ricardo l'est (S-02, ouverture du chapitre II, p. 38 de l'édition de 1847)."
     - "Ricardo pose la rente sur la fertilité différentielle des terres ; l'extension à la « position » (localisation, réseau, spectre) est une transposition assumée, courante dans l'économie urbaine et des réseaux, mais non tirée du texte."
-    - "Se distingue de la rente de monopole au sens de D-02 (restriction ARTIFICIELLE de l'offre) : ici la fixité de l'offre est physique ou positionnelle, pas réglementaire — le cas du brevet, où elle est juridique, est hors périmètre (L-01)."
+    - "Dans la taxonomie du glossaire OCDE (D-02), le cas (a) est une rente économique au sens strict ; le cas (b), revenu d'un capital augmentable et amortissable, relève plutôt de la quasi-rente — la revue contradictoire (HD-3) l'a relevé : ce que l'étude appelle « rente de position » agrège deux catégories de la source. La grille (C-01, Q1) les sépare désormais."
+    - "Se distingue de la rente de monopole au sens de D-02 (restriction ARTIFICIELLE de l'offre) : le brevet, où la fixité est juridique, est hors périmètre (L-01) ; la captivité créée par le droit (classement d'un réseau de chaleur, D-08) relève de cette catégorie, pas de la position."
 
 - id: D-04
   term: rente d'innovation (notion construite)
   source: S-01
+  constructed_by: C-02
   url: https://www.oecd.org/content/dam/oecd/en/publications/reports/2008/09/oecd-glossary-of-statistical-terms_g1gh9ad7/9789264055087-en.pdf
   last_updated: 2008-08-13
   definition: >
     Rente temporaire qui rémunère une découverte, une avance technique ou un
     risque pris, et qui se dissipe à mesure que d'autres offreurs reproduisent
-    l'avancée. Ancrage : la quasi-rente du glossaire OCDE — « Economists use
-    the term economic rent to denote the payment to factors which are
-    permanently in fixed supply and quasi-rent to denote payments for
-    factors which are temporarily in fixed supply. […] Quasi-rents exist
-    when factors can be augmented over time ».
+    l'avancée. Notion conceptuelle assumée par l'étude, d'inspiration
+    schumpétérienne, SANS source figée qui la définisse. Ce qu'elle emprunte
+    au glossaire OCDE est seulement la fixité temporaire de l'offre :
+    « Economists use the term economic rent to denote the payment to factors
+    which are permanently in fixed supply and quasi-rent to denote payments
+    for factors which are temporarily in fixed supply. […] Quasi-rents exist
+    when factors can be augmented over time, or when their supply can be
+    reduced over time through depreciation. […] Quasi-rents, on the other
+    hand, are returns in excess of that required to keep the factor active,
+    but may not be sufficient to have induced the supplier to enter in the
+    first place. »
   caveats:
-    - "Notion construite (C-02) : « rente d'innovation » est le nom donné par l'étude à la quasi-rente lorsque la fixité temporaire de l'offre vient d'une avance technique ; la citation est celle de l'entrée « Rent - OECD » (S-01, index PDF 452)."
-    - "Traduction de travail : les économistes appellent rente économique le paiement aux facteurs dont l'offre est fixe de façon permanente, et quasi-rente le paiement aux facteurs dont l'offre n'est fixe que temporairement."
-    - "Le glossaire ne parle pas d'innovation ni de Schumpeter ; le rapprochement est celui de l'étude. Le brevet, qui prolonge juridiquement la fixité de l'offre, brouille la frontière avec D-03 (L-01)."
+    - "Notion construite (C-02). La quasi-rente du glossaire OCDE (S-01, page 462) est la quasi-rente marshallienne : le rendement d'un capital fixe à court terme et amortissable — le glossaire ne parle ni d'innovation ni de Schumpeter. La revue contradictoire (HD-3) a montré que la version antérieure de cette entrée coupait la citation avant « or when their supply can be reduced over time through depreciation », ce qui masquait cet écart ; la citation est ici complète."
+    - "Conséquence à tenir : dans la taxonomie de la source, le revenu d'une infrastructure de réseau (capital augmentable, amortissable) relève de la quasi-rente, pas de la rente économique stricte ; « rente d'innovation » n'en est qu'un cas, celui où la fixité temporaire vient d'une avance technique."
+    - "Traduction de travail (L-07) : les économistes appellent rente économique le paiement aux facteurs dont l'offre est fixe de façon permanente, et quasi-rente le paiement aux facteurs dont l'offre n'est fixe que temporairement."
+    - "Le brevet, qui prolonge juridiquement la fixité de l'offre, brouille la frontière avec D-03 (L-01)."
 
 - id: D-05
-  term: substituabilité de l'infrastructure (notion construite)
+  term: non-duplicabilité de l'infrastructure (notion construite)
   source: S-01
+  constructed_by: C-02
   url: https://www.oecd.org/content/dam/oecd/en/publications/reports/2008/09/oecd-glossary-of-statistical-terms_g1gh9ad7/9789264055087-en.pdf
   last_updated: 2008-08-13
   definition: >
-    Une infrastructure est substituable s'il est possible d'en construire à
-    coût raisonnable une seconde qui concurrence la première pour les mêmes
-    usagers. Elle ne l'est pas lorsque, au sens de D-01, une seule
-    infrastructure sert le marché à moindre coût que toute combinaison de
-    deux ou plus (rareté physique), ou lorsque ce qu'elle procure tient à
-    une localisation qui ne se reproduit pas (rareté positionnelle).
+    Une infrastructure est non duplicable lorsqu'une seconde infrastructure
+    servant les mêmes usagers coûterait plus cher que le partage de la
+    première (sous-additivité des coûts, D-01) et que l'investissement
+    nécessaire est largement irrécupérable (D-19), de sorte qu'aucun
+    entrant ne la construit ni ne peut menacer de la construire. Critère
+    opératoire, à établir par chaque étude sectorielle : le rapport entre
+    le coût de duplication et le coût du réseau existant, la part
+    irrécupérable de cet investissement, ou une décision motivée d'un
+    régulateur reconnaissant une facilité non duplicable. Elle est
+    substituable dans le cas contraire, et partiellement substituable
+    lorsque la duplication est rentable sur une partie seulement du
+    territoire ou de la demande.
   caveats:
-    - "Notion construite (C-02) : c'est la question Q1 de la grille, dérivée de la définition du monopole naturel (D-01) et étendue à la rareté positionnelle (D-03)."
-    - "« Coût raisonnable » n'est pas quantifié ici : chaque étude sectorielle doit dire sur quoi elle fonde la non-substituabilité (coûts de duplication documentés, décision d'un régulateur, nature physique du site)."
-    - "La substituabilité s'apprécie pour l'infrastructure, pas pour le service : un service satellitaire peut concurrencer la fibre alors que ni l'orbite ni la boucle locale ne sont substituables (INTRO §8)."
+    - "Notion construite (C-02) : c'est la question Q1 de la grille, dérivée de la définition du monopole naturel (D-01) et des coûts irrécupérables (D-19). La revue contradictoire (SE-1, HD-4) a fait scinder l'ancienne « substituabilité », qui agrégeait ce cas et la fixité positionnelle (désormais D-16) : ce sont deux mécanismes, aux conséquences différentes sur la rente (bornée ici par le coût de duplication, non bornée en D-16)."
+    - "Q1 admet donc trois réponses : substituable / non duplicable (monopole naturel, D-05) / fixe (rente ricardienne, D-16), plus « partiellement » quand la réponse dépend du territoire (fibre en zone très dense contre zone peu dense)."
+    - "La non-duplicabilité s'apprécie pour un OBJET dit (l'infrastructure, pas le service ; le réseau, pas l'énergie qu'il transporte) : un service satellitaire peut concurrencer la fibre alors que la boucle locale n'est pas duplicable hors zones denses ; des constellations sont dupliquées alors que le spectre est fixe."
 
 - id: D-06
   term: rivalité (d'un bien ou d'une capacité)
   source: S-06
   url: https://openstax.org/books/principles-economics-3e/pages/13-3-public-goods
-  last_updated: 2022-12-14
+  last_updated: 2026-07-09
   definition: >
     The second main characteristic of a public good, that it is non-rival,
     means that when one person uses the public good, another can also use
@@ -118,48 +143,57 @@
     of national defense does not reduce the amount left for Michelle, so
     they are non-rival in this area.
   caveats:
-    - "Traduction de travail : un bien est rival lorsque sa consommation par une personne le rend indisponible pour une autre ; non rival lorsque l'usage de l'un n'ôte rien à l'autre."
-    - "La grille (C-01, question Q2a) applique la notion à une UNITÉ DE CAPACITÉ du réseau (un sillon, un créneau, une place, un mètre cube), pas au réseau entier : un lien de fibre est presque non rival, un sillon ferroviaire est rival."
-    - "Le manuel définit les biens publics par deux propriétés (non-exclusion et non-rivalité) ; seule la rivalité est reprise ici. L'exclusion est traitée séparément, par la captivité (D-08)."
+    - "Traduction de travail (L-07) : un bien est rival lorsque sa consommation par une personne le rend indisponible pour une autre ; non rival lorsque l'usage de l'un n'ôte rien à l'autre."
+    - "Date de version : la page figée porte « © Jul 9, 2026 » (version web) ; l'édition imprimée date du 14/12/2022 (S-06)."
+    - "La grille (C-01, question Q2a) applique la notion à une UNITÉ DE CAPACITÉ du réseau (un sillon, un créneau, une place, un mètre cube, un fil en congestion), pas au réseau entier ni au bien transporté : un lien de fibre est presque non rival, un sillon ferroviaire est rival, un fil de transport d'électricité n'est rival qu'en congestion — comme une autoroute. L'objet classé doit être dit (SE-14)."
+    - "Le manuel définit les biens publics par deux propriétés (non-exclusion et non-rivalité) ; l'exclusion est D-17."
     - "Manuel sous CC BY-NC-SA, attribution OpenStax requise (S-06)."
 
 - id: D-07
   term: différenciabilité du bien livré (notion construite)
   source: S-06
+  constructed_by: C-02
   url: https://openstax.org/books/principles-economics-3e/pages/13-3-public-goods
-  last_updated: 2022-12-14
+  last_updated: 2026-07-09
   definition: >
     Un bien livré par un réseau est différenciable si l'usager peut
     distinguer, à l'arrivée, la fourniture d'un opérateur de celle d'un
-    autre — par sa qualité, son contenu ou ses caractéristiques. Il ne
-    l'est pas lorsque les unités livrées sont physiquement indistinguables
-    (un kilowattheure, un mètre cube d'eau au robinet, une calorie de
-    chaleur) : une concurrence entre fournisseurs porte alors sur la
-    facturation, pas sur le produit.
+    autre — par sa qualité, son contenu ou ses caractéristiques physiques.
+    Il ne l'est pas lorsque les unités livrées sont physiquement
+    indistinguables (un kilowattheure, un mètre cube d'eau au robinet, une
+    calorie de chaleur) : une concurrence entre fournisseurs peut alors
+    porter sur le contrat (prix, origine déclarée, services associés,
+    facturation), pas sur le bien lui-même.
   caveats:
-    - "Notion construite (C-02), question Q2b de la grille. Aucune des sources figées ne la définit ; S-06 n'est cité que pour la notion voisine de bien « separate and identifiable » qui fonde l'exclusion (« you can buy and sell a piece of pizza fairly easily because it is a separate and identifiable item »)."
-    - "La différenciabilité porte sur le bien tel qu'il arrive chez l'usager, pas sur l'origine de production : un électron n'a pas d'origine identifiable même si les producteurs diffèrent."
+    - "Notion construite (C-02), question Q2b de la grille. Aucune des sources figées ne la définit ; S-06 n'est cité que pour la notion voisine de bien « separate and identifiable » qui fonde l'échange (« We can buy and sell a piece of pizza fairly easily because it is a separate and identifiable item ») — c'est la négociabilité, pas la différenciabilité : l'ancrage est faible et dit tel (L-07). La notion voisine du glossaire OCDE, « product differentiation », n'y a pas d'entrée propre (citée dans D-20)."
+    - "La différenciation CONTRACTUELLE existe sur des biens physiquement indistinguables (garanties d'origine, tarification dynamique, effacement, pour l'électricité) : la version antérieure la disait « purement comptable », ce qui était un jugement (SE-14) ; elle est réelle mais ne porte pas sur le bien physique."
+    - "La différenciabilité porte sur le bien tel qu'il arrive chez l'usager, pas sur l'origine de production."
 
 - id: D-08
   term: captivité de l'usager (notion construite)
   source: S-06
+  constructed_by: C-02
   url: https://openstax.org/books/principles-economics-3e/pages/13-3-public-goods
-  last_updated: 2022-12-14
+  last_updated: 2026-07-09
   definition: >
     Un usager est captif d'un réseau lorsque le coût de s'en détacher —
     changer de fournisseur, de source, d'installation ou de localisation —
     est prohibitif au regard du service, ou lorsque la décision de
     raccordement ou de sortie ne lui appartient pas (copropriété,
-    collectivité). La captivité se mesure par le coût de sortie et par
-    l'identité de celui qui décide.
+    collectivité). Deux sous-critères : la captivité PHYSIQUE (coût de
+    sortie technique) et la captivité RÉGLEMENTAIRE (obligation de
+    raccordement, exclusivité). Échelle : le coût de sortie exprimé en
+    années de facture du service, et l'identité de celui qui décide
+    (l'usager ; un tiers ; personne, la sortie étant interdite).
   caveats:
-    - "Notion construite (C-02), question Q3 de la grille ; voisine des « coûts de changement » (switching costs) de la littérature de régulation, entrée absente du glossaire OCDE figé (S-01)."
-    - "Rattachée à S-06 pour le seul contraste avec l'exclusion : l'exclusion dit si le fournisseur peut écarter l'usager, la captivité dit si l'usager peut écarter le fournisseur."
-    - "Ne change pas le classement Q1-Q2 ; change l'urgence de la protection et le poids de la durée des contrats (INTRO §5, Q3)."
+    - "Notion construite (C-02), question Q3 de la grille ; voisine des « coûts de changement » (switching costs) de la littérature de régulation, entrée absente du glossaire OCDE figé (S-01). Rattachée à S-06 pour le seul contraste avec l'exclusion (D-17) : l'exclusion dit si le fournisseur peut écarter l'usager, la captivité dit si l'usager peut écarter le fournisseur (L-07)."
+    - "La captivité réglementaire relève de la rente de monopole au sens de D-02 (restriction artificielle), pas de la rente de position : quand la collectivité impose le raccordement (classement d'un réseau de chaleur), elle crée elle-même la captivité qu'elle invoque (SE-18). La grille doit dire laquelle des deux elle constate."
+    - "Ne change pas le classement Q1-Q2 ; change l'urgence de la protection et le poids de la durée des contrats (INTRO §5, Q3). Les qualificatifs de l'inventaire (faible / moyenne / forte / totale) renvoient à cette échelle et restent à chiffrer par les études sectorielles."
 
 - id: D-09
-  term: concurrence pour le marché / concurrence sur le marché
+  term: concurrence pour le marché / concurrence sur le marché (notion en partie construite)
   source: S-03
+  constructed_by: C-02
   url: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037703286
   last_updated: 2019-04-01
   definition: >
@@ -174,9 +208,9 @@
     La concurrence SUR le marché est la coexistence de plusieurs opérateurs
     servant simultanément des usagers différents sur la même infrastructure.
   caveats:
-    - "La distinction est celle de la littérature économique (Demsetz, « Why regulate utilities? », 1968, non figé — accès payant) ; seule la partie juridique (concession) est citée verbatim, depuis S-03."
+    - "La distinction est celle de la littérature économique (Demsetz, « Why regulate utilities? », 1968 — accès libre : non, vérifié le 2026-09-05 chez l'éditeur ; non figé) ; seule la partie juridique (concession) est citée verbatim, depuis S-03. La formulation « pour / sur » est donc de l'étude (C-02, L-07)."
     - "La grille ajoute un troisième cas, distinct des deux : la délégation de l'exploitation et de l'entretien rémunérée au forfait, SANS transfert de la recette d'usage (INTRO §5, Q4). Ce n'est une concession au sens de D-10 que si un risque d'exploitation est transféré."
-    - "Une concession transfère la recette et le risque : c'est ce qui en fait, pour l'étude, un transfert de rente (H-02) et non une simple délégation de travaux."
+    - "Une concession transfère la recette et le risque : c'est ce qui en fait, pour l'étude, un transfert de rente possible (H-02) et non une simple délégation de travaux — possible, pas certain : le risque transféré peut être réel (O-07, SE-6)."
 
 - id: D-10
   term: contrat de concession
@@ -199,8 +233,8 @@
     l'exploitation de l'ouvrage ou du service, qu'il a supportés.
   caveats:
     - "Code de la commande publique, art. L1121-1, version en vigueur depuis le 01/04/2019 (création par l'ordonnance n° 2018-1074 du 26 novembre 2018)."
-    - "Le critère juridique est le TRANSFERT DU RISQUE d'exploitation ; l'étude s'intéresse au transfert de la RECETTE, qui l'accompagne. Une concession sur un monopole naturel transfère un risque faible (usager captif) et une recette élevée : c'est l'asymétrie que mesurent les études sectorielles."
-    - "Les concessions autoroutières historiques relèvent aussi du code de la voirie routière ; les concessions hydroélectriques du code de l'énergie — régimes spéciaux à figer par les études sectorielles."
+    - "Le critère juridique est le TRANSFERT DU RISQUE d'exploitation ; l'étude s'intéresse au transfert de la RECETTE, qui l'accompagne. L'asymétrie « risque faible, recette élevée » sur un monopole à usager captif est une HYPOTHÈSE à mesurer secteur par secteur, pas une règle : des concessions à risque de trafic réel existent (O-07 : SANEF à TRI négatif en 2019 ; SE-6 : A65, viaduc de Millau)."
+    - "Les concessions autoroutières historiques relèvent aussi du code de la voirie routière ; les concessions hydroélectriques du code de l'énergie, dont le régime est en cours de réforme (O-09) — régimes spéciaux à figer par les études sectorielles."
 
 - id: D-11
   term: régie (gestion directe d'un service public)
@@ -218,7 +252,7 @@
   caveats:
     - "CGCT, art. L1412-1, premier alinéa, version en vigueur depuis le 03/05/2025 (loi n° 2025-391 du 30 avril 2025, art. 24). Les alinéas suivants (régie unique eau / assainissement / eaux pluviales) ne sont pas repris."
     - "Complété par l'art. L2221-1 (version du 24/02/1996, S-04) : « Les communes et les syndicats de communes peuvent exploiter directement des services d'intérêt public à caractère industriel ou commercial. Sont considérées comme industrielles ou commerciales les exploitations susceptibles d'être gérées par des entreprises privées, soit par application de la loi des 2-17 mars 1791, soit, en ce qui concerne l'exploitation des services publics communaux, en vertu des contrats de concession ou d'affermage. »"
-    - "La régie est la forme juridique de la « collectivisation » au niveau communal (eau, chaleur, stationnement) ; au niveau national, la forme est l'entreprise publique ou l'établissement public, hors de ces articles."
+    - "La régie est la forme juridique de la « collectivisation » au niveau communal (eau, chaleur, stationnement) ; au niveau national, la forme est l'entreprise publique ou l'établissement public, hors de ces articles. Une régie n'implique pas rente nulle : un budget annexe peut transférer un excédent au budget général sous conditions (SE-17) — la destination de la rente est une question distincte (V-05)."
 
 - id: D-12
   term: délégation de service public
@@ -235,7 +269,7 @@
   caveats:
     - "CGCT, art. L1411-1, version en vigueur depuis le 01/04/2019 (ordonnance n° 2018-1074 du 26 novembre 2018, art. 6)."
     - "Depuis 2019 la DSP est une espèce du contrat de concession (D-10) : l'article renvoie à l'art. L1121-3 du code de la commande publique, non figé (S-03, notes). L'ancienne définition par la rémunération « substantiellement liée aux résultats de l'exploitation » n'est plus dans le texte."
-    - "C'est le mode de gestion majoritaire de l'eau et des réseaux de chaleur ; la comparaison régie / délégation (H-03, H-08) porte sur ces deux formes."
+    - "C'est le mode de gestion majoritaire de l'eau et des réseaux de chaleur ; la comparaison régie / délégation (H-03, H-08) porte sur ces deux formes, et un écart de prix entre elles n'est pas une rente (L-06)."
 
 - id: D-13
   term: coût moyen pondéré du capital reconnu par un régulateur (rendement régulé)
@@ -245,13 +279,11 @@
   definition: >
     La CRE définit le coût moyen pondéré du capital (CMPC) sur la base
     d'une méthode à structure normative qui assure une rémunération
-    raisonnable des capitaux investis. […] Compte tenu des valeurs retenues
-    par la CRE pour les autres paramètres, le CMPC de RTE pour le TURPE 7
-    HTB est de 5,0 % nominal, avant impôts.
+    raisonnable des capitaux investis.
   caveats:
-    - "Délibération CRE n° 2025-77 du 13 mars 2025, section « Rémunération du capital » (index PDF 4) ; tableau de synthèse à l'index PDF 9 : 5,0 % (TURPE 7) contre 4,6 % (TURPE 6), prime de 0,5 % pour les actifs de raccordement des parcs éoliens en mer."
-    - "Le CMPC rémunère la base d'actifs régulés (BAR) : charges de capital = amortissement + BAR × CMPC (index PDF 9). C'est la définition opératoire de la « rémunération normale du capital » d'un monopole régulé, et la base du paramètre H-06."
-    - "Propre à RTE (transport d'électricité, risque faible, actifs longs) ; un concessionnaire autoroutier ou un délégataire d'eau n'a ni le même risque ni la même structure — H-06 porte une plage, pas ce seul point."
+    - "Délibération CRE n° 2025-77 du 13 mars 2025, section « Rémunération du capital » (page 4 du PDF). La VALEUR retenue pour RTE est l'observation O-01, pas la définition."
+    - "Le CMPC rémunère la base d'actifs régulés (D-21). Formule de la délibération (page 18 du PDF) : « CCN Autres actifs = Amortissement de la BAR + BAR x CMPC + IEC x coût de la dette » (IEC : immobilisations en cours), avec une prime de 0,5 % sur les actifs de raccordement des parcs éoliens en mer. La version antérieure de cette entrée omettait le terme des immobilisations en cours (HD-9)."
+    - "C'est un jugement du régulateur, pas une mesure de marché : la méthode est « normative » et ses paramètres (bêta de l'actif 0,37, prime de risque de marché 5,2 %, levier 60 % — pages 97-99) tiennent compte d'un cadre qui « continue à protéger le niveau du chiffre d'affaires de RTE contre la plupart des risques ». Sur un secteur régulé, prix − coût − CMPC est nul par construction ; sur un secteur non régulé, ce taux est un plancher de risque. La rente mesurée avec ce taux (D-15, H-06) est donc « l'excédent sur le rendement qu'un régulateur français accorderait », et doit être dite ainsi (HD-2)."
 
 - id: D-14
   term: domaine public
@@ -267,5 +299,140 @@
     service public.
   caveats:
     - "CG3P, art. L2111-1, version en vigueur depuis le 01/07/2006. Complété par l'art. L3111-1 (même date, S-05) : « Les biens des personnes publiques mentionnées à l'article L. 1, qui relèvent du domaine public, sont inaliénables et imprescriptibles. »"
-    - "Un actif du domaine public concédé (voirie, sous-sol, autoroute) reste propriété publique : la collectivisation de la rente ne demande alors ni expropriation ni rachat de l'actif, seulement la fin ou la non-reconduction du contrat (INTRO §8, stationnement)."
+    - "Un actif du domaine public concédé (voirie, sous-sol, autoroute) reste propriété publique : la collectivisation de la rente ne demande alors ni expropriation ni rachat de l'actif, seulement la fin ou la non-reconduction du contrat. La position de la collectivité y est un monopole LÉGAL (police du domaine), que D-01 exclut du monopole naturel : c'est une catégorie propre de l'inventaire, « domaine public concédé » (SE-16)."
     - "L'inaliénabilité vaut pour le bien, pas pour la recette : le domaine public peut être concédé et sa recette transférée (D-10)."
+
+- id: D-15
+  term: rente mesurable — surprofit sur base d'actifs (notion construite)
+  source: S-07
+  constructed_by: C-02
+  url: https://www.cre.fr/fileadmin/Documents/Deliberations/2025/250313_2025-77_Post-CSE_TURPE_7_HTB.pdf
+  last_updated: 2025-03-13
+  definition: >
+    La rente mesurable d'un secteur, pour une période donnée, est l'écart
+    entre ce que paient les usagers (prix, redevances, abonnements) et le
+    coût d'une fourniture efficace du service, celui-ci comprenant :
+    l'exploitation et l'entretien ; l'amortissement des actifs productifs
+    sur leur durée technique ; la rémunération du capital immobilisé au
+    taux de référence H-06, appliquée à une BASE D'ACTIFS égale au coût
+    historique des actifs productifs net des subventions et participations
+    reçues — jamais au prix d'acquisition d'un contrat ou d'un bien, qui
+    capitalise la rente future. Tout est compté avant impôts (l'impôt sur
+    les sociétés est une DESTINATION de la rente, part de l'État, pas un
+    coût). Les coûts externalisés (sous-investissement, dégradation de la
+    qualité, arbitrages d'usage non rendus) n'entrent pas dans la rente :
+    ils relèvent du coût collectif (gabarit, question 6). Le « coût
+    efficace » est celui d'un exploitant efficace au sens que le droit des
+    réseaux donne à cette notion — les tarifs « couvrent l'ensemble des
+    coûts supportés par les gestionnaires de ces réseaux dans la mesure où
+    ces coûts correspondent à ceux d'un gestionnaire de réseau efficace »
+    (code de l'énergie, L. 341-2, cité par S-07) — et s'établit par
+    comparaison : coût reconnu par un régulateur, coût d'un exploitant
+    comparable, coût d'un secteur ou segment TÉMOIN substituable mesuré de
+    la même façon. Ce que cette définition mesure est un SURPROFIT ;
+    l'attribuer à une position (D-03) plutôt qu'à une avance technique,
+    une restriction réglementaire ou une prime de risque est une
+    interprétation séparée (I-03), qui suppose le témoin.
+  caveats:
+    - "Notion construite (C-02), créée le 2026-09-05 à la demande de la revue contradictoire (HD-1, SE-4, SE-5, SE-6, CR-6) : la version antérieure (« prix payé moins coût d'une fourniture efficace, rémunération normale du capital comprise ») ne fixait ni la base d'actifs — sur les autoroutes, le signe de la rente change selon qu'on retient le coût de construction ou le prix de cession de 2006 (O-07) —, ni le coût efficace, ni les postes."
+    - "Ancrage : le modèle est celui de la base d'actifs régulés de la CRE (D-21, S-07 page 18 : « valeur nette des actifs immobilisés, déduction faite des subventions et participations reçues de tiers » ; « Les CCN correspondent à la somme de l'amortissement des actifs constitutifs de la BAR et de la rémunération du capital immobilisé ») et du coût efficace de L. 341-2 (S-07 page 14). La définition n'est pas une citation ; elle applique ce modèle hors des secteurs régulés."
+    - "La forme est fixée ici pour toutes les études sectorielles ; les PARAMÈTRES sont figés par secteur (durées d'amortissement, base reconstituée, taux sectoriel reconnu par le régulateur du secteur, à côté du taux de référence commun H-06). La comparabilité entre secteurs tient à la forme et aux deux bornes de H-06, pas à un taux unique."
+    - "Limites connues (L-11) : en régie, sans témoin, le coût observé tient lieu de coût efficace et la rente est nulle par construction même si le service est inefficace ; les subventions croisées (tarif national unique) rendent une rente positive ici et négative là ; une baisse de qualité convertit de la qualité en surprofit sans que la mesure le voie ; une prime de risque ex ante réelle (O-07) apparaît comme surprofit ex post."
+
+- id: D-16
+  term: fixité positionnelle (notion construite)
+  source: S-02
+  constructed_by: C-02
+  url: https://fr.wikisource.org/wiki/Des_principes_de_l%E2%80%99%C3%A9conomie_politique_et_de_l%E2%80%99imp%C3%B4t/Chapitre_2
+  last_updated: null
+  definition: >
+    Une ressource est fixe lorsque son offre ne peut être augmentée à aucun
+    coût : ce qu'elle procure tient à une localisation, un site ou un
+    emplacement dans un espace fini qui ne se reproduit pas — le sol d'un
+    quartier, une vallée équipable, une bande de fréquences, une coquille
+    orbitale. C'est le cas ricardien strict : « les facultés productives et
+    impérissables du sol ». La rente qui en découle (D-03, cas a) n'est
+    bornée par aucun coût de duplication, à la différence de celle d'une
+    infrastructure non duplicable (D-05).
+  caveats:
+    - "Notion construite (C-02), issue de la scission de l'ancienne « substituabilité » (SE-1, HD-4). C'est la troisième réponse à Q1 (« fixe »)."
+    - "Une ressource fixe n'est pas un monopole naturel au sens de D-01 : des millions d'offreurs peuvent se partager le sol d'une ville sans aucune économie d'échelle. Le logement et le stationnement relèvent de cette catégorie, pas de la première (décision de Rémy, 2026-09-05, C-01)."
+    - "La rareté positionnelle urbaine est aussi un effet d'agglomération (demande), pas seulement une propriété du sol (HD-10) ; et la fixité peut être renforcée par le droit des sols (D-20). L'étude sectorielle « logement » doit séparer ces trois composantes."
+
+- id: D-17
+  term: exclusion (excludability)
+  source: S-06
+  url: https://openstax.org/books/principles-economics-3e/pages/13-3-public-goods
+  last_updated: 2026-07-09
+  definition: >
+    The first characteristic, that a public good is nonexcludable, means
+    that it is costly or impossible to exclude someone from using the good.
+    If Larry buys a private good like a piece of pizza, then he can exclude
+    others, like Lorna, from eating that pizza. However, if national defense
+    is provided, then it includes everyone.
+  caveats:
+    - "Traduction de travail (L-07) : un bien est exclusif lorsque son fournisseur peut, à un coût raisonnable, en écarter qui ne paie pas ; non exclusif lorsque c'est coûteux ou impossible."
+    - "Ajoutée le 2026-09-05 (HD-10) : l'exclusion conditionne la possibilité même d'un péage ou d'une tarification de la rareté (orbite, spectre : sans exclusion, pas de recette à collectiviser) ; elle est l'inverse de la captivité (D-08) — l'une dit si le fournisseur peut écarter l'usager, l'autre si l'usager peut écarter le fournisseur."
+    - "Manuel sous CC BY-NC-SA, attribution OpenStax requise (S-06)."
+
+- id: D-18
+  term: économies d'envergure (economies of scope)
+  source: S-01
+  url: https://www.oecd.org/content/dam/oecd/en/publications/reports/2008/09/oecd-glossary-of-statistical-terms_g1gh9ad7/9789264055087-en.pdf
+  last_updated: 2008-08-13
+  definition: >
+    Economies of scope exist when it is cheaper to produce two products
+    together (joint production) than to produce them separately.
+  caveats:
+    - "Traduction de travail (L-07) : il y a économies d'envergure lorsqu'il est moins coûteux de produire deux biens ensemble que séparément."
+    - "Entrée « Economies of scope », page 163 du PDF. Le contexte de D-01 en fait l'une des deux causes du monopole naturel (« economies of scale and economies of scope »)."
+    - "Ajoutée le 2026-09-05 (HD-10) : c'est ce que la séparation infrastructure / service (Q2, trois niveaux) peut PERDRE, et le fond de l'hypothèse H-05 (coût système d'un réseau électrique) — la grille doit compter ce coût de séparation, pas seulement le gain de concurrence."
+
+- id: D-19
+  term: coûts irrécupérables et contestabilité (sunk costs)
+  source: S-01
+  url: https://www.oecd.org/content/dam/oecd/en/publications/reports/2008/09/oecd-glossary-of-statistical-terms_g1gh9ad7/9789264055087-en.pdf
+  last_updated: 2008-08-13
+  definition: >
+    Sunk costs are costs which, once committed, cannot be recovered. Sunk
+    costs arise because some activities require specialized assets that
+    cannot readily be diverted to other uses. Second-hand markets for such
+    assets are therefore limited. Sunk costs are always fixed costs, but not
+    all fixed costs are sunk. […] Context: The absence of sunk costs is
+    critical for the existence of contestable markets. When sunk costs are
+    present, firms face a barrier to exit. Free and costless exit is
+    necessary for contestability.
+  caveats:
+    - "Traduction de travail (L-07) : les coûts irrécupérables sont ceux qu'on ne peut pas récupérer une fois engagés, parce que les actifs sont spécialisés ; leur absence est la condition d'un marché contestable, leur présence une barrière à la sortie."
+    - "Entrée « Sunk costs », page 525 du PDF. Ajoutée le 2026-09-05 (HD-10) : c'est le critère opératoire qui manquait à Q1 (D-05) — un réseau est non duplicable quand le dupliquer coûte plus cher que le partager ET que cet investissement est irrécupérable, de sorte que la menace d'entrée ne discipline pas le prix."
+
+- id: D-20
+  term: barrières à l'entrée
+  source: S-01
+  url: https://www.oecd.org/content/dam/oecd/en/publications/reports/2008/09/oecd-glossary-of-statistical-terms_g1gh9ad7/9789264055087-en.pdf
+  last_updated: 2008-08-13
+  definition: >
+    Barriers to entry are factors which prevent or deter the entry of new
+    firms into an industry even when incumbent firms are earning excess
+    profits. Context: There are two broad classes of barriers: structural
+    (or innocent) and strategic. These two classes are also often referred
+    to as economic and behavioural barriers to entry. Structural barriers to
+    entry arise from basic industry characteristics such as technology,
+    costs and demand.
+  caveats:
+    - "Traduction de travail (L-07) : les barrières à l'entrée sont ce qui empêche ou dissuade l'entrée de nouvelles entreprises alors même que les entreprises en place font des surprofits ; elles sont structurelles (technique, coûts, demande) ou stratégiques."
+    - "Entrée « Barriers to entry », page 47 du PDF. Ajoutée le 2026-09-05 (HD-10) pour distinguer, dans chaque secteur, la barrière physique (D-05, D-16), la barrière réglementaire (droit des sols, exclusivité, brevet — L-01, D-08 captivité réglementaire) et la barrière stratégique : seules les deux premières fondent une rente de position ou de monopole ; la troisième relève du droit de la concurrence."
+
+- id: D-21
+  term: base d'actifs régulés (BAR) et charges de capital normatives
+  source: S-07
+  url: https://www.cre.fr/fileadmin/Documents/Deliberations/2025/250313_2025-77_Post-CSE_TURPE_7_HTB.pdf
+  last_updated: 2025-03-13
+  definition: >
+    La BAR est déterminée sur la base d'une valeur nette des actifs
+    immobilisés, déduction faite des subventions et participations reçues
+    de tiers. Les CCN correspondent à la somme de l'amortissement des actifs
+    constitutifs de la BAR et de la rémunération du capital immobilisé.
+  caveats:
+    - "Délibération CRE n° 2025-77, page 18 du PDF (section 2.1.1.2, charges de capital normatives) ; formule à la même page : « CCN Autres actifs = Amortissement de la BAR + BAR x CMPC + IEC x coût de la dette »."
+    - "Ajoutée le 2026-09-05 (HD-1, HD-10) : c'est le modèle de la base d'actifs de D-15 — coût historique net des subventions, jamais le prix d'acquisition. Le régulateur applique ce modèle à un réseau public régulé ; l'étude le transpose aux secteurs concédés ou privés, ce qui suppose de RECONSTITUER la base (coût de construction, subventions, amortissements passés) là où aucun régulateur ne la tient — tâche de chaque étude sectorielle."

@@ -1,3 +1,7 @@
+# Reconnaître une rente de position
+
+**Monopoles naturels, ressources fixes, et ce que collectiviser une rente veut dire.**
+
 *Septembre 2026 — article de cadrage de l'étude « Monopoles naturels, rentes
 de position et collectivisation des rentes » du programme Métabolisme,
 réécrit après une revue contradictoire de quatre relecteurs indépendants

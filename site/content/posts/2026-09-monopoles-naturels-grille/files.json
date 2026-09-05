@@ -1,12 +1,5 @@
 [
   {
-    "path": "sources/oecd-glossary-statistical-terms-2008.pdf",
-    "from": "monopoles/data/raw/oecd-glossary-statistical-terms-2008.pdf",
-    "size": 7036371,
-    "mime": "application/pdf",
-    "hosted": "asset"
-  },
-  {
     "path": "sources/ricardo-principes-chapitre-2-rente-wikisource-fr.html",
     "from": "monopoles/data/raw/ricardo-principes-chapitre-2-rente-wikisource-fr.html",
     "size": 140561,
@@ -67,6 +60,69 @@
     "from": "monopoles/data/raw/cre-deliberation-2025-77-turpe-7-htb.pdf",
     "size": 3767699,
     "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/art-economie-concessions-autoroutieres-2024.pdf",
+    "from": "monopoles/data/raw/art-economie-concessions-autoroutieres-2024.pdf",
+    "size": 13809124,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/legifrance-jorf-arcep-decision-2025-2047.html",
+    "from": "monopoles/data/raw/legifrance-jorf-arcep-decision-2025-2047.html",
+    "size": 167296,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/eaufrance-quel-prix-pour-leau.html",
+    "from": "monopoles/data/raw/eaufrance-quel-prix-pour-leau.html",
+    "size": 171866,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/persee-carpentier-nauges-reynaud-thomas-2006.html",
+    "from": "monopoles/data/raw/persee-carpentier-nauges-reynaud-thomas-2006.html",
+    "size": 102701,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/senat-r19-709-1-130.html",
+    "from": "monopoles/data/raw/senat-r19-709-1-130.html",
+    "size": 182572,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/fipeco-autoroutes.html",
+    "from": "monopoles/data/raw/fipeco-autoroutes.html",
+    "size": 47339,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/igedd-tunnel-friggit.html",
+    "from": "monopoles/data/raw/igedd-tunnel-friggit.html",
+    "size": 50898,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/senat-l25-498-mono.html",
+    "from": "monopoles/data/raw/senat-l25-498-mono.html",
+    "size": 773791,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/art-glossaire-monopole-naturel.html",
+    "from": "monopoles/data/raw/art-glossaire-monopole-naturel.html",
+    "size": 105838,
+    "mime": "text/html; charset=utf-8",
     "hosted": "asset"
   }
 ]

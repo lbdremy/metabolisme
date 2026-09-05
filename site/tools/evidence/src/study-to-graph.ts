@@ -46,6 +46,10 @@ const RegistrySource = z
       .array(z.object({ path: z.string(), checksum: optionalText }))
       .nullable()
       .optional(),
+    // Une copie figée peut être conservée pour vérification sans être servie
+    // par le site (droits de redistribution non établis) : l'URL d'origine
+    // reste, le fichier n'est pas publié.
+    redistributable: z.boolean().optional(),
   })
   .loose();
 
@@ -54,6 +58,10 @@ const RegistryDefinition = z
     id: z.string(),
     term: z.string(),
     source: optionalText,
+    // Une notion construite par l'étude dépend du choix qui la formule,
+    // en plus de la source qui l'ancre (INTRO §8 : ne pas présenter une
+    // construction comme une citation).
+    constructed_by: optionalText,
     url: optionalText,
     last_updated: optionalText,
     definition: z.string(),
@@ -79,6 +87,7 @@ const RegistryHypothesis = z
     statement: optionalText,
     confidence: z.enum(["low", "medium", "high"]),
     justification: z.array(z.string()).default([]),
+    limitations: z.array(z.string()).default([]),
     affects: z.array(z.string()).default([]),
   })
   .loose();
@@ -135,13 +144,18 @@ export function studyToGraph(
     logicalPath: string,
     studyRelativePath: string,
     checksum: string | undefined,
+    redistributable = true,
   ): EvidenceFile {
     const repoPath = `${options.studyPrefix}${studyRelativePath}`;
     const stat = options.statFile(repoPath);
     const size = stat?.size ?? 0;
     const hosted: EvidenceFile["hosted"] =
-      stat === null ? "none" : size > options.maxAssetBytes ? "object-store" : "asset";
-    if (!seenFiles.has(logicalPath)) {
+      stat === null || !redistributable
+        ? "none"
+        : size > options.maxAssetBytes
+          ? "object-store"
+          : "asset";
+    if (!seenFiles.has(logicalPath) && hosted !== "none") {
       seenFiles.add(logicalPath);
       files.push({ path: logicalPath, from: repoPath, size, mime: mimeOf(logicalPath), hosted });
     }
@@ -184,7 +198,12 @@ export function studyToGraph(
       ...(source.temporal_scope === undefined ? {} : { temporal_scope: source.temporal_scope }),
       ...(source.license === undefined ? {} : { license: source.license }),
       files: attached.map((file) =>
-        publish(`sources/${basename(file.path)}`, file.path, file.checksum),
+        publish(
+          `sources/${basename(file.path)}`,
+          file.path,
+          file.checksum,
+          source.redistributable !== false,
+        ),
       ),
     });
   }
@@ -195,7 +214,10 @@ export function studyToGraph(
       id: definition.id,
       type: "definition",
       title: trimTitle(definition.term),
-      depends_on: definition.source === undefined ? [] : [definition.source],
+      depends_on: [
+        ...(definition.source === undefined ? [] : [definition.source]),
+        ...(definition.constructed_by === undefined ? [] : [definition.constructed_by]),
+      ],
       limitations: [],
       term: definition.term,
       definition: definition.definition.trim(),
@@ -224,7 +246,7 @@ export function studyToGraph(
       type: "hypothesis",
       title: trimTitle(hypothesis.description),
       depends_on: hypothesis.justification,
-      limitations: [],
+      limitations: hypothesis.limitations,
       name: hypothesis.name,
       ...(hypothesis.central_value === undefined
         ? {}

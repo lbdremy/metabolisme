@@ -2,43 +2,50 @@
 # Chaque source retenue est enregistrée ici AVANT d'alimenter une définition
 # ou un calcul : organisme, titre, URL, dates (publication + récupération),
 # périmètres, licence, fichier local figé dans data/raw/ et son empreinte
-# sha256. Même schéma que logement/sources/sources.yaml (SourceRecord) ;
-# l'étude n'ayant pas de code, le contrôle est fait au build du site
-# (site/tools/evidence, study-to-graph) jusqu'à ce qu'un validateur partagé
-# soit justifié (INTRO §20).
+# sha256. Même schéma que logement/sources/sources.yaml (SourceRecord), plus
+# un champ `redistributable: false` quand la copie figée est conservée pour
+# vérification sans être servie par le site (droits non établis, L-10).
+# Contrôle : le build du site recalcule chaque empreinte déclarée et échoue
+# sur un écart (site/tools/evidence/build-posts).
 #
-# Toutes les sources ont été récupérées et figées le 2026-09-04. Les pages
-# Légifrance sont protégées par un défi anti-robot (Cloudflare) qui bloque la
-# récupération directe : les copies sont le DOM rendu par un navigateur
-# (Chromium, mode fenêtré), pas les octets de la réponse HTTP — le texte
-# intégral de chaque article y figure, avec sa date de version (L-08).
+# Modes de capture (L-08) : les pages Légifrance (S-03..S-05) et OpenStax
+# (S-06) sont le DOM rendu par un navigateur (défi anti-robot, application
+# web) ; toutes les autres copies sont des téléchargements directs. Révisé le
+# 2026-09-05 après la revue contradictoire : index PDF corrigés (S-01),
+# licences reformulées (SA-2), neuf sources ajoutées (S-08..S-16 ; S-09 figée depuis sa
+# publication au JORF, le PDF de l'ARCEP étant derrière un pare-feu).
 
 - id: S-01
   publisher: OCDE
-  title: OECD Glossary of Statistical Terms (édition 2008) — entrées « Natural monopoly » et « Rent - OECD », reprises du Glossary of Industrial Organisation Economics and Competition Law (Khemani & Shapiro, 1993)
-  dataset_id: ISBN 978-92-64-05508-7
+  title: OECD Glossary of Statistical Terms (édition 2008) — entrées « Natural monopoly », « Rent - OECD », « Economies of scope », « Sunk costs », « Barriers to entry », reprises du Glossary of Industrial Organisation Economics and Competition Law (Khemani & Shapiro, 1993)
+  dataset_id: ISBN 978-92-64-05508-7 (édition en ligne) ; 978-92-64-02556-1 (imprimé, pied de page)
   source_url: https://www.oecd.org/content/dam/oecd/en/publications/reports/2008/09/oecd-glossary-of-statistical-terms_g1gh9ad7/9789264055087-en.pdf
   publication_date: 2008-08-13
   retrieved_at: 2026-09-04
   geographic_scope: sans objet (glossaire)
-  temporal_scope: édition 2008 ; les deux entrées citées proviennent du glossaire d'économie industrielle et de droit de la concurrence de l'OCDE (1993)
-  license: © OCDE 2008 — citation avec attribution ; pas de licence ouverte déclarée sur le document
+  temporal_scope: édition 2008 ; les entrées citées proviennent du glossaire d'économie industrielle et de droit de la concurrence de l'OCDE (1993)
+  license: "© OECD 2008, sans licence ouverte déclarée — courte citation avec attribution (L. 122-5 CPI) ; redistribution du PDF non établie (L-10) : copie de vérification, non servie par le site"
   local_file: data/raw/oecd-glossary-statistical-terms-2008.pdf
   checksum: sha256:7fc75343b978b498732972305b6abd22a2671f1b30acd3f6f463a020a36d1459
+  redistributable: false
   notes: >
     PDF de 605 pages, date de création dans les métadonnées : 13/08/2008.
-    Entrée « Natural monopoly » à l'index PDF 346, entrée « Rent - OECD »
-    à l'index PDF 452 (mise en page sur deux colonnes : lire en ordre de
-    lecture, pas en mode « layout »). Chaque entrée cite sa source :
-    « Glossary of Industrial Organisation Economics and Competition Law,
-    compiled by R. S. Khemani and D. M. Shapiro, commissioned by the
-    Directorate for Financial, Fiscal and Enterprise Affairs, OECD, 1993 ».
-    Le glossaire de 1993 lui-même n'est plus servi par l'OCDE au
-    2026-09-04 (ancienne adresse www.oecd.org/regreform/sectors/2376087.pdf
-    : HTTP 410) ; l'édition 2008 du glossaire statistique en est la copie
-    officielle encore accessible. Aucune entrée « public good », « product
-    differentiation », « switching cost » ou « franchise bidding » dans
-    cette édition (vérifié par recherche plein texte).
+    Pages du PDF (mise en page sur deux colonnes : lire en ordre de lecture,
+    pas en mode « layout ») : « Natural monopoly » p. 353 (folio imprimé
+    351), « Rent - OECD » p. 462 (folio ≈ 460), « Economies of scope »
+    p. 163, « Sunk costs » p. 525, « Barriers to entry » p. 47. Les index
+    346 / 452 de la version antérieure de ce registre étaient faux (revue
+    contradictoire, HD-8, SA-1). Chaque entrée cite sa source : « Glossary
+    of Industrial Organisation Economics and Competition Law, compiled by
+    R. S. Khemani and D. M. Shapiro, commissioned by the Directorate for
+    Financial, Fiscal and Enterprise Affairs, OECD, 1993 ». Le glossaire de
+    1993 lui-même n'est plus servi par l'OCDE (ancienne adresse
+    www.oecd.org/regreform/sectors/2376087.pdf : HTTP 410 ; autre adresse
+    historique : 404, vérifiées le 2026-09-05) ; une copie tierce sur
+    concurrences.com répond 403 aux clients non navigateur (piste non
+    vérifiée). Aucune entrée « public good », « product differentiation »,
+    « switching cost », « franchise bidding » ou « quasi-rent » dans cette
+    édition (vérifié par recherche plein texte).
 
 - id: S-02
   publisher: Wikisource (Wikimedia) — édition Guillaumin, Œuvres complètes de David Ricardo, 1847
@@ -49,7 +56,7 @@
   retrieved_at: 2026-09-04
   geographic_scope: sans objet (texte théorique)
   temporal_scope: texte de 1817 (troisième édition 1821), dans la traduction française de 1847, p. 38-57 de l'édition Guillaumin
-  license: domaine public (texte et traduction) ; mise en forme Wikisource sous CC BY-SA 4.0
+  license: domaine public (texte et traduction) ; mise en forme Wikisource sous CC BY-SA (le pied de page figé ne précise pas la version ; 4.0 pour Wikisource depuis 2023)
   local_file: data/raw/ricardo-principes-chapitre-2-rente-wikisource-fr.html
   checksum: sha256:1e6b1c1e154f784bb7b44bfbfaa87bc95e947f0ebdf9c14668256552ae192f8e
   notes: >
@@ -57,9 +64,9 @@
     Collection des principaux économistes, t. 13). La définition ricardienne
     de la rente (« cette portion du produit de la terre que l'on paie au
     propriétaire pour avoir le droit d'exploiter les facultés productives et
-    impérissables du sol ») ouvre le chapitre. L'original anglais (Project
-    Gutenberg n° 33310) est accessible mais n'a pas été figé : la traduction
-    française est celle citée dans l'étude.
+    impérissables du sol ») ouvre le chapitre, sous le marqueur de page 38.
+    L'original anglais (Project Gutenberg n° 33310) est accessible mais n'a
+    pas été figé : la traduction française est celle citée dans l'étude.
 
 - id: S-03
   publisher: Légifrance (DILA)
@@ -74,11 +81,11 @@
   local_file: data/raw/legifrance-ccp-L1121-1.html
   checksum: sha256:16a9ee60681a2bdf7b6615e34477f14fb8205c2c7ff3ae674d40f6faa9ef809d
   notes: >
-    Copie du DOM rendu (voir l'en-tête du registre, L-08). La page porte
-    « Version en vigueur depuis le 01/04/2019 » et « Création Ordonnance
-    n° 2018-1074 du 26 novembre 2018 ». L'article L1121-3 du même code
-    (délégation de service public), auquel renvoie le CGCT, n'a pas été
-    figé : la définition retenue pour la DSP est celle du CGCT (S-04).
+    Copie du DOM rendu (L-08). La page porte « Version en vigueur depuis le
+    01/04/2019 » et « Création Ordonnance n° 2018-1074 du 26 novembre
+    2018 ». L'article L1121-3 du même code (délégation de service public),
+    auquel renvoie le CGCT, n'a pas été figé : la définition retenue pour la
+    DSP est celle du CGCT (S-04).
 
 - id: S-04
   publisher: Légifrance (DILA)
@@ -133,17 +140,17 @@
   publication_date: 2022-12-14
   retrieved_at: 2026-09-04
   geographic_scope: sans objet (manuel)
-  temporal_scope: 3e édition, publiée le 14/12/2022 ; version web datée « © Jul 9, 2026 » sur la page
-  license: CC BY-NC-SA 4.0 — attribution OpenStax requise (« Access for free at https://openstax.org/books/principles-economics-3e/pages/1-introduction »)
+  temporal_scope: 3e édition, publiée le 14/12/2022 ; version web datée « © Jul 9, 2026 » sur la page (date de version retenue pour les définitions)
+  license: CC BY-NC-SA 4.0 — attribution OpenStax requise (« Access for free at https://openstax.org/books/principles-economics-3e/pages/1-introduction ») ; la page porte en outre une clause interdisant l'ingestion par des modèles de langage sans permission (L-10)
   local_file: data/raw/openstax-principles-economics-3e-13-3-public-goods.html
   checksum: sha256:8594e0bc5c8bb0074de9012cecbec8bc1c02b00caa67ce189c45821c5749fddc
   notes: >
     Page rendue par navigateur (application web : la version HTML servie par
-    HTTP ne contient pas le texte du chapitre). Retenue pour la définition
-    de la rivalité d'un bien (« non-rival ») : manuel de référence sous
-    licence libre, à défaut d'une entrée dans le glossaire OCDE (S-01). La
-    page interdit l'ingestion par des modèles de langage ; elle est citée,
-    pas réutilisée au-delà de la citation.
+    HTTP ne contient pas le texte du chapitre ; L-08). Retenue pour la
+    rivalité (D-06) et l'exclusion (D-17) : manuel de référence sous licence
+    libre, à défaut d'une entrée dans le glossaire OCDE (S-01). Citée, pas
+    réutilisée au-delà de la citation ; remplacement par une source CC BY
+    ou domaine public souhaitable à la première révision (SA-3).
 
 - id: S-07
   publisher: Commission de régulation de l'énergie (CRE)
@@ -154,15 +161,210 @@
   retrieved_at: 2026-09-04
   geographic_scope: France (réseau public de transport d'électricité, RTE)
   temporal_scope: période tarifaire TURPE 7 HTB (à compter du 1er août 2025) ; comparaison avec TURPE 6 HTB
-  license: document public de la CRE (publié au Journal officiel pour la version HTA-BT, délibération n° 2025-78)
+  license: information publique d'une autorité administrative indépendante — réutilisation libre avec mention de la source (CRPA, L. 321-1 et s.) ; pas de mention de licence sur le document
   local_file: data/raw/cre-deliberation-2025-77-turpe-7-htb.pdf
   checksum: sha256:089eb4ee6f3b4402122fbdeb0bdffb7c79906e74b550c15a52585939ffd8c760
   notes: >
-    PDF de 216 pages (métadonnées : 20/03/2025). Retenue comme source d'un
-    taux de rémunération du capital reconnu par un régulateur français :
-    « le CMPC de RTE pour le TURPE 7 HTB est de 5,0 % nominal, avant impôts »
-    (index PDF 4, section « Rémunération du capital ») ; tableau de synthèse
-    à l'index PDF 9 : CMPC 5,0 % (TURPE 7) contre 4,6 % (TURPE 6), prime
-    de 0,5 % sur les actifs de raccordement des parcs éoliens en mer. Ce
-    taux est propre au transport d'électricité ; d'autres régulateurs (ARCEP,
-    ART) fixent le leur — à figer par les études sectorielles.
+    PDF de 216 pages (métadonnées : 20/03/2025). Pages du PDF citées :
+    4 (« le CMPC de RTE pour le TURPE 7 HTB est de 5,0 % nominal, avant
+    impôts », définition du CMPC), 9 (tableau de synthèse : 5,0 % contre
+    4,6 % au TURPE 6, prime de 0,5 % sur les actifs de raccordement des
+    parcs éoliens en mer), 14 (article L. 341-2 du code de l'énergie :
+    coûts « d'un gestionnaire de réseau efficace »), 18 (base d'actifs
+    régulés : « valeur nette des actifs immobilisés, déduction faite des
+    subventions et participations reçues de tiers » ; formule des charges
+    de capital normatives), 97-99 (paramètres : bêta 0,37, prime de risque
+    de marché 5,2 %, levier 60 %, demande de RTE à 5,67 %). Ce taux est
+    propre au transport d'électricité ; l'ARCEP retient le même (S-09).
+
+- id: S-08
+  publisher: Autorité de régulation des transports (ART)
+  title: Économie des concessions autoroutières — 3e édition (novembre 2024)
+  dataset_id: rapport EGC 3
+  source_url: https://www.autorite-transports.fr/wp-content/uploads/2023/04/20241202_egc3_compresse-1.pdf
+  publication_date: 2024-12-02
+  retrieved_at: 2026-09-05
+  geographic_scope: France (concessions autoroutières historiques et récentes)
+  temporal_scope: exercices 2017-2023 ; projections jusqu'aux échéances 2031-2036
+  license: information publique d'une autorité administrative indépendante — réutilisation libre avec mention de la source (CRPA, L. 321-1 et s.)
+  local_file: data/raw/art-economie-concessions-autoroutieres-2024.pdf
+  checksum: sha256:9ef14061d38601ae1e6b1605546519a18d452f10d1f6dcc2e356927ae8e39e80
+  notes: >
+    PDF de 183 pages, 13,8 Mo (métadonnées : 02/12/2024). Identifié par la
+    revue contradictoire (SA-5) et téléchargé, lu et cité par
+    l'orchestrateur. Passages cités (O-03) : édito (« entre 2031 et 2036,
+    les sept principales concessions autoroutières arriveront à leur
+    terme »), chapitre 1 (fin des concessions : Sanef fin 2031, Escota début
+    2032, SAPN 2033, toutes avant fin 2036), chapitre 3 (TRI projet 7 % en
+    2002, intervalle de confiance [5,3 % ; 8,8 %] en 2036 ; 0,7 point de
+    TRI ≈ 500 M€ de revenus supplémentaires par an sur 2003-2036), annexe
+    (réponse de Sanef : échéance au 31 décembre 2031). Les dates par société
+    de la figure 1.2 ne sont pas rendues par l'extraction texte : à lire sur
+    la figure avant citation. Première source de l'étude sectorielle
+    « autoroutes ».
+
+- id: S-09
+  publisher: Légifrance (DILA) — Journal officiel ; auteur ARCEP
+  title: Décision ARCEP n° 2025-2047 du 28 octobre 2025 fixant le taux de rémunération du capital employé pour la comptabilisation des coûts et le contrôle tarifaire des activités fixes régulées à compter de l'année 2026 (JORF n° 0038 du 14 février 2026, texte n° 65)
+  dataset_id: JORFTEXT000053483172 · NOR ARTE2604310S
+  source_url: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053483172
+  publication_date: 2026-02-14
+  retrieved_at: 2026-09-05
+  geographic_scope: France (activités fixes régulées)
+  temporal_scope: à compter de l'année 2026 ; décision du 28 octobre 2025, publiée au JORF le 14 février 2026
+  license: Licence Ouverte 2.0 (données publiques de la DILA) ; information publique de l'ARCEP
+  local_file: data/raw/legifrance-jorf-arcep-decision-2025-2047.html
+  checksum: sha256:5d6f9d42b1e26dc608f8ec9b997b315d082190941b0e5e421bf4f5859731c3a7
+  notes: >
+    Copie du DOM rendu de la page Légifrance (L-08). Le PDF publié par
+    l'ARCEP (https://www.arcep.fr/uploads/tx_gsavis/25-2047.pdf, cité par
+    le relecteur n°1, SA-7) est derrière un pare-feu applicatif qui rejette
+    toute récupération non interactive (« Request Rejected », puis page de
+    vérification par image, 2026-09-05) ; la publication au Journal officiel
+    en est la version authentique. Dispositif (O-02) : « Article 1 — Le taux
+    de rémunération du capital nominal avant impôts […] est de 5,0 % à
+    compter de l'année 2026. Article 2 — Le taux de rémunération du capital
+    réel avant impôts […] est de 3,0 % à compter de l'année 2026. »
+    Paramètres (tableau 1) : taux sans risque 1,67 %, prime de risque de
+    marché 5,96 %, bêta de l'actif 0,36, ratio d'endettement 47,35 %, coût
+    des fonds propres avant IS 7,0 %, coût de la dette avant IS 2,8 % ;
+    inflation prévisionnelle 2,0 % (tableau 2).
+
+- id: S-10
+  publisher: Économie Eaufrance (Office français de la biodiversité)
+  title: Quel prix pour l'eau ? — Tarification de l'eau (page du 12 septembre 2024, données SISPEA 2022)
+  dataset_id: economie.eaufrance.fr / quel-prix-pour-leau
+  source_url: https://economie.eaufrance.fr/quel-prix-pour-leau
+  publication_date: 2024-09-12
+  retrieved_at: 2026-09-05
+  geographic_scope: France (services publics d'eau et d'assainissement)
+  temporal_scope: données SISPEA 2022 ; évolution depuis 2010
+  license: information publique d'un service de l'État — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/eaufrance-quel-prix-pour-leau.html
+  checksum: sha256:f5f770b71c1f5866180dd5cd499a65587f480b0a886d2ae790c41dd067d6284e
+  notes: >
+    Téléchargement direct (HTML). Identifiée par la revue contradictoire
+    (SA-6). Passages cités (O-04) : « Le prix des SPEA est en moyenne plus
+    élevé pour les services en délégation, mais l'ampleur de cet écart
+    varie dans le temps » ; explication par la sélection (« les
+    collectivités ont plus souvent recours à la gestion déléguée lorsque
+    les enjeux de la qualité de l'eau potable […] supposent la gestion
+    d'équipements complexes ») ; « depuis 2010 l'écart semble se réduire ».
+    Les chiffres par mode de gestion sont dans les rapports SISPEA, non
+    figés.
+
+- id: S-11
+  publisher: Persée — Économie & Prévision (ministère de l'Économie), 2006
+  title: Carpentier, Nauges, Reynaud, Thomas — « Effets de la délégation sur le prix de l'eau potable en France. Une analyse à partir de la littérature sur les “effets de traitement” », Économie & Prévision n° 174, 2006, p. 1-19
+  dataset_id: ecop_0249-4744_2006_num_174_3_7950
+  source_url: https://www.persee.fr/doc/ecop_0249-4744_2006_num_174_3_7950
+  publication_date: 2006-01-01
+  retrieved_at: 2026-09-05
+  geographic_scope: France (services d'eau potable)
+  temporal_scope: données du début des années 2000 ; enquête Scees / Ifen antérieure
+  license: article diffusé par Persée (consultation libre) ; droits de l'éditeur sur le texte — courte citation avec attribution
+  local_file: data/raw/persee-carpentier-nauges-reynaud-thomas-2006.html
+  checksum: sha256:1fb07f761be3db77ce72491b40996948f4f99ebbcc550a0cc454767b5d9df787
+  notes: >
+    Page Persée (résumé, références, début du texte) ; le PDF intégral n'a
+    pas été figé. Passages cités (O-05) : « un prix, pour les services
+    délégués, en moyenne supérieur de 27 % pour la distribution d'eau et de
+    20,5 % pour l'assainissement » (enquête officielle antérieure) ; « le
+    mode de gestion ne suffit pas à expliquer les différences de prix »
+    (Sage, 1999). Source de méthode pour H-03 (effets de traitement).
+
+- id: S-12
+  publisher: Sénat — commission d'enquête sur le contrôle, la régulation et l'évolution des concessions autoroutières
+  title: "Rapport n° 709 (2019-2020), tome I, « Concessions autoroutières : des profits futurs à partager équitablement avec l'État et les usagers » — page sur la régulation par l'ART"
+  dataset_id: r19-709-1, page 130
+  source_url: https://www.senat.fr/rap/r19-709-1/r19-709-130.html
+  publication_date: 2020-09-16
+  retrieved_at: 2026-09-05
+  geographic_scope: France (concessions autoroutières)
+  temporal_scope: négociations du plan d'investissement autoroutier (2017) ; avis de l'ART 2017-2020
+  license: document parlementaire — réutilisation libre avec mention de la source
+  local_file: data/raw/senat-r19-709-1-130.html
+  checksum: sha256:574bf62e9b54f309131f93cc151553960e23578aacee1006509bc5e3f4273e55
+  notes: >
+    Téléchargement direct (HTML). Identifiée par la revue contradictoire
+    (SE-7), rouverte et citée par l'orchestrateur (O-06) : « diminution du
+    taux de rémunération du capital investi, qui est passé de 6,5 % à 5,9 %
+    lors des nouvelles négociations entre la DGITM et les SCA ».
+
+- id: S-13
+  publisher: FIPECO (association, finances publiques et économie)
+  title: Fallait-il concéder et privatiser les autoroutes ? (fiche de l'encyclopédie FIPECO)
+  dataset_id: fipeco.fr / fiche
+  source_url: https://www.fipeco.fr/fiche/Fallait-il-conc%C3%A9der-et-privatiser-les-autoroutes-%3F
+  publication_date: null
+  retrieved_at: 2026-09-05
+  geographic_scope: France (ASF, APRR, SANEF)
+  temporal_scope: TRI prévisionnels 2006, constatés 2019, prévus au terme des concessions
+  license: site associatif — courte citation avec attribution
+  local_file: data/raw/fipeco-autoroutes.html
+  checksum: sha256:f9027adce6443ce236d21fc0e812fb1ad9e35feab0391264c2cf33149879908d
+  notes: >
+    Téléchargement direct (HTML) ; pas de date visible dans la page (le
+    relecteur n°3 la date du 10/12/2020, non retrouvé dans la copie). SOURCE
+    SECONDAIRE (L-12) : la fiche rapporte les TRI d'« une étude
+    indépendante […] commandée par la commission d'enquête » du Sénat
+    (O-07) ; l'étude d'origine est à figer par l'étude sectorielle.
+
+- id: S-14
+  publisher: Inspection générale de l'environnement et du développement durable (IGEDD)
+  title: « Tunnel de Friggit » et « courbe de Friggit » — qu'est-ce ? (questions fréquentes, publié le 31/10/2022, mis à jour le 01/08/2025)
+  dataset_id: igedd.developpement-durable.gouv.fr / a3578
+  source_url: https://www.igedd.developpement-durable.gouv.fr/tunnel-de-friggit-et-courbe-de-friggit-qu-est-ce-a3578.html
+  publication_date: 2025-08-01
+  retrieved_at: 2026-09-05
+  geographic_scope: France
+  temporal_scope: séries longues 1914-2025 (loyers et prix rapportés au revenu par ménage)
+  license: information publique d'un service de l'État — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/igedd-tunnel-friggit.html
+  checksum: sha256:abbdfe59299a5481c013c791a6ecc122ebd44048abdb1bff946982410e134a63
+  notes: >
+    Téléchargement direct (HTML). Identifiée par la revue contradictoire
+    (SE-3), citée en O-08 : loyers rapportés au revenu disponible par
+    ménage « presque constant » depuis le milieu des années 1970 (tunnel de
+    20 %) ; prix de vente stables par rapport au revenu de 1965 à 2000,
+    décrochage depuis 2002. Les séries elles-mêmes (fichiers de l'IGEDD)
+    ne sont pas figées.
+
+- id: S-15
+  publisher: Sénat — commission des affaires économiques
+  title: Rapport n° 498 (2025-2026) sur la proposition de loi visant à relancer les investissements dans le secteur de l'hydroélectricité pour contribuer à la transition énergétique (rapporteurs Gremillet, Chauvet, Michau, Gay)
+  dataset_id: l25-498
+  source_url: https://www.senat.fr/rap/l25-498/l25-498_mono.html
+  publication_date: 2026-04-01
+  retrieved_at: 2026-09-05
+  geographic_scope: France (installations hydroélectriques de plus de 4,5 MW)
+  temporal_scope: proposition de loi, première lecture, avril 2026 ; promulgation non vérifiée (L-12)
+  license: document parlementaire — réutilisation libre avec mention de la source
+  local_file: data/raw/senat-l25-498-mono.html
+  checksum: sha256:999f225e719e726bfa59377af54e7f2de4a67bab9696bb4aa227e11f43bd916a
+  notes: >
+    Téléchargement direct (HTML). Identifiée par la revue contradictoire
+    (SE-8, « à vérifier »), rouverte et citée par l'orchestrateur (O-09) :
+    résiliation des concessions > 4,5 MW (art. 1er), droit réel avec
+    autorisation domaniale (art. 2), redevance progressive versée à l'État
+    (art. 8, L. 543-1), régime transitoire des « délais glissants ». La
+    page ministérielle annonçant la promulgation (economie.gouv.fr, DAJ)
+    répond 403 : date et numéro de la loi non vérifiés.
+
+- id: S-16
+  publisher: Autorité de régulation des transports (ART)
+  title: Glossaire — « Monopole naturel »
+  dataset_id: autorite-transports.fr / glossaire
+  source_url: https://www.autorite-transports.fr/glossaire/monopole-naturel/
+  publication_date: null
+  retrieved_at: 2026-09-05
+  geographic_scope: France (régulation des transports)
+  temporal_scope: page sans date
+  license: information publique d'une autorité administrative indépendante — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/art-glossaire-monopole-naturel.html
+  checksum: sha256:fe18513b3fa55ef11b5eeb3b0fe3a1d5cf2cdbfd26bf62dbdd1b91acfdb8799f
+  notes: >
+    Téléchargement direct (HTML). Identifiée par la revue contradictoire
+    (SA-4) : définition francophone officielle, citée en caveat de D-01
+    — moins opératoire que l'OCDE (définie par le régime confié, non par le
+    coût).

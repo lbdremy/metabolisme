@@ -2,14 +2,16 @@
 # registres : O observations, T transformations, M mesures, R résultats,
 # I interprétations, V valeurs, C choix, P propositions, L limites.
 # Chaque nœud référence ses dépendances par identifiant ; contrôle au build
-# du site (références résolues, pas d'orphelin).
+# du site (références résolues, empreintes recalculées).
 #
-# Étude de cadrage : pas de transformation ni de résultat. Les nœuds
-# portent la grille (C-01), les notions construites (C-02), la position
-# normative (V-01..V-04), l'inventaire des secteurs comme interprétation
-# provisoire (I-01, I-02) et les limites (L-01..L-08). Les mesures de rente
-# (M-xx), résultats (R-xx) et propositions (P-xx) relèvent des études
-# sectorielles (INTRO §9).
+# Étude de cadrage : pas de transformation ni de résultat. Révisé le
+# 2026-09-05 après la revue contradictoire (58 objections, annexe
+# revue-contradictoire-2026-09-04/) : observations O-01..O-09 tirées des
+# sources figées, grille C-01 à trois réponses, configurations C-05,
+# destination de la rente V-05, valeurs orphelines rattachées, limites
+# L-09..L-12. Les nœuds C et I portent une clause « ce qui le renverserait »
+# (SE-22). Les mesures de rente (M-xx), résultats (R-xx) et propositions
+# (P-xx) relèvent des études sectorielles (INTRO §9).
 
 # ---------------------------------------------------------- observations
 
@@ -19,78 +21,241 @@
     La CRE retient pour RTE, au TURPE 7 HTB (délibération n° 2025-77 du
     13 mars 2025), un coût moyen pondéré du capital de 5,0 % nominal avant
     impôts, contre 4,6 % au TURPE 6, avec une prime de 0,5 % sur les actifs
-    de raccordement des parcs éoliens en mer (index PDF 4 et 9).
+    de raccordement des parcs éoliens en mer (pages 4 et 9 du PDF ;
+    paramètres pages 97-99 : bêta de l'actif 0,37, prime de risque de marché
+    5,2 %, levier 60 %).
   depends_on: [S-07, D-13]
+
+- id: O-02
+  type: observation
+  title: >
+    L'ARCEP fixe, par sa décision n° 2025-2047 du 28 octobre 2025 (JORF du
+    14 février 2026), le taux de rémunération du capital des activités
+    fixes régulées à 5,0 % nominal avant impôts et 3,0 % réel avant impôts
+    à compter de 2026 (articles 1 et 2 ; paramètres : taux sans risque
+    1,67 %, prime de risque de marché 5,96 %, bêta de l'actif 0,36, coût des
+    fonds propres avant IS 7,0 %) — identique au CMPC retenu par la CRE pour
+    RTE.
+  depends_on: [S-09]
+
+- id: O-03
+  type: observation
+  title: >
+    Autorité de régulation des transports, « Économie des concessions
+    autoroutières », 3e édition, novembre 2024 : « entre 2031 et 2036, les
+    sept principales concessions autoroutières arriveront à leur terme » —
+    Sanef au 31 décembre 2031, Escota début 2032, SAPN en 2033, toutes les
+    concessions historiques privées (APRR, Area, ASF, Cofiroute, Escota,
+    Sanef, SAPN) avant fin 2036 ; « en partant d'un TRI prévisionnel de 7 %
+    en 2002, il existe 95 % de chances que celui-ci [se] situe dans
+    l'intervalle [5,3 % ; 8,8 %] en 2036 », un écart de 0,7 point de TRI
+    équivalant à environ 500 millions d'euros de revenus supplémentaires par
+    an sur 2003-2036.
+  depends_on: [S-08]
+
+- id: O-04
+  type: observation
+  title: >
+    Économie Eaufrance (OFB), « Quel prix pour l'eau ? », 12 septembre 2024,
+    données SISPEA 2022 : « Le prix des SPEA est en moyenne plus élevé pour
+    les services en délégation, mais l'ampleur de cet écart varie dans le
+    temps » ; la raison mise en avant est la sélection (« les collectivités
+    ont plus souvent recours à la gestion déléguée lorsque les enjeux de la
+    qualité de l'eau potable […] supposent la gestion d'équipements
+    complexes ») ; « depuis 2010 l'écart semble se réduire ».
+  depends_on: [S-10]
+
+- id: O-05
+  type: observation
+  title: >
+    Carpentier, Nauges, Reynaud et Thomas, « Effets de la délégation sur le
+    prix de l'eau potable en France », Économie & Prévision n° 174, 2006 :
+    une enquête officielle antérieure (Scees / Ifen) « a conclu à un prix,
+    pour les services délégués, en moyenne supérieur de 27 % pour la
+    distribution d'eau et de 20,5 % pour l'assainissement », et la
+    littérature citée établit que « le mode de gestion ne suffit pas à
+    expliquer les différences de prix » — d'où l'usage des méthodes d'effet
+    de traitement pour corriger la sélection.
+  depends_on: [S-11]
+
+- id: O-06
+  type: observation
+  title: >
+    Sénat, commission d'enquête sur les concessions autoroutières, rapport
+    n° 709 (2019-2020), tome I, 16 septembre 2020 : les avis de l'ART ont
+    « permis de justifier la diminution du taux de rémunération du capital
+    investi, qui est passé de 6,5 % à 5,9 % lors des nouvelles négociations
+    entre la DGITM et les SCA » (plan d'investissement autoroutier, 2017).
+  depends_on: [S-12]
+
+- id: O-07
+  type: observation
+  title: >
+    FIPECO, « Fallait-il concéder et privatiser les autoroutes ? », citant
+    l'étude indépendante commandée par la commission d'enquête du Sénat :
+    TRI prévisionnel pour les actionnaires à la privatisation / TRI atteint
+    en 2019 / TRI prévu au terme — ASF 7,1 % / 4,9 % / 10,9 % ; APRR 9,2 % /
+    4,3 % / 11,2 % ; SANEF 8,0 % / −1,4 % / 7,2 %. Source secondaire
+    (L-12) : l'étude d'origine est à figer par l'étude sectorielle.
+  depends_on: [S-13]
+  limitations: [L-12]
+
+- id: O-08
+  type: observation
+  title: >
+    IGEDD, « Tunnel de Friggit et courbe de Friggit : qu'est-ce ? » (publié
+    le 31/10/2022, mis à jour le 01/08/2025) : « Depuis le milieu des années
+    1970, l'indice des loyers observés par l'Insee à structure constante,
+    rapporté au revenu disponible par ménage, est resté presque constant :
+    il a évolué dans un « tunnel » horizontal de largeur 20 % » ; « De 1965
+    à 2000, de même, l'indice du prix de vente des logements est resté très
+    stable par rapport au revenu par ménage » ; le décrochage du prix de
+    vente date de 2002.
+  depends_on: [S-14]
+
+- id: O-09
+  type: observation
+  title: >
+    Sénat, rapport n° 498 (2025-2026) du 1er avril 2026 sur la proposition
+    de loi visant à relancer les investissements dans le secteur de
+    l'hydroélectricité : résiliation des contrats de concession d'énergie
+    hydraulique de plus de 4,5 MW (art. 1er), création d'un régime de droit
+    réel associé à un droit d'occupation domaniale pour ces installations
+    (art. 2), redevance progressive versée à l'État (art. 8, nouvel article
+    L. 543-1 du code de l'énergie) ; le régime transitoire des « délais
+    glissants » des concessions échues est décrit comme n'offrant « ni la
+    possibilité juridique ni la visibilité économique nécessaires à de
+    nouveaux investissements ». Promulgation non vérifiée (L-12).
+  depends_on: [S-15]
+  limitations: [L-12]
 
 # ------------------------------------------------------------- choix
 
 - id: C-01
   type: choice
   title: >
-    La grille d'identification : quatre questions posées dans l'ordre —
-    Q1 l'infrastructure est-elle substituable ? (D-05) ; Q2 le réseau
-    est-il partageable entre opérateurs de service, par la rivalité de la
-    capacité (D-06) et la différenciabilité du bien livré (D-07) ? ; Q3
-    l'usager est-il captif ? (D-08) ; Q4 qui exploite le réseau ? (choix de
-    gestion, D-09, D-11, D-12) — plus une entrée empirique Q5 : où va la
-    recette d'usage aujourd'hui ? Trois niveaux tenus séparés : propriété
-    de l'infrastructure (Q1), opérateurs de service (Q2), exploitation et
-    entretien (Q4). Choix de méthode ; la note d'origine n'avait que Q1 et
-    Q2, la captivité y était présente sans figurer dans la grille.
-  depends_on: [D-01, D-05, D-06, D-07, D-08, D-09, D-10, D-11, D-12, D-14]
+    La grille d'identification : quatre questions posées dans l'ordre, sur
+    un OBJET dit (le réseau, le site, la ressource — jamais le service ni le
+    bien transporté). Q1 : l'infrastructure ou la ressource est-elle
+    substituable, non duplicable (monopole naturel, D-05, D-19) ou fixe
+    (rente ricardienne, D-16) ? — trois réponses, plus « partiellement »
+    quand elle dépend du territoire ; Q2 : le réseau est-il partageable
+    entre opérateurs de service, par la rivalité d'une unité de capacité
+    (D-06) et la différenciabilité du bien livré (D-07) ? — non partageable
+    signifie que la concurrence de service ne discipline pas le prix
+    d'accès, sans préjuger du mode d'allocation ; Q3 : l'usager est-il
+    captif, physiquement ou par le droit (D-08, D-17) ? ; Q4 : qui exploite
+    le réseau ? (choix de gestion, D-09, D-11, D-12) — plus une entrée
+    empirique Q5 : qui possède, qui encaisse (D-10, D-14). Trois niveaux
+    tenus séparés : propriété de l'infrastructure (Q1), opérateurs de
+    service (Q2), exploitation et entretien (Q4). Révisée le 2026-09-05 :
+    la version antérieure agrégeait non-duplicabilité et fixité, concluait
+    « nécessairement administré » pour tout réseau non partageable et
+    répondait « non » à Q1 pour les dix lignes de l'inventaire (SE-1, HD-4,
+    SE-2, SE-14). Ce qui le renverserait : un secteur classé « non
+    duplicable » à prix libre sans surprofit D-15, ou un secteur
+    « substituable » qui en montre autant — Q1 ne prédirait pas la rente.
+  depends_on: [D-01, D-05, D-06, D-07, D-08, D-09, D-10, D-11, D-12, D-14, D-16, D-17, D-18, D-19]
+  limitations: [L-02, L-09]
 
 - id: C-02
   type: choice
   title: >
-    Quatre notions sont construites par l'étude faute de définition
-    officielle — rente de position (D-03), rente d'innovation (D-04),
-    substituabilité de l'infrastructure (D-05), différenciabilité (D-07) et
-    captivité de l'usager (D-08) — chacune ancrée sur la source la plus
-    proche (Ricardo pour la rente foncière, la quasi-rente du glossaire
-    OCDE, la rivalité d'OpenStax) sans prétendre en être une citation. La
-    définition OPÉRATOIRE de la rente est fixée ici, une fois pour toutes
-    les études sectorielles : ce que paie l'usager moins le coût d'une
-    fourniture efficace, rémunération du capital au taux H-06 comprise.
-  depends_on: [D-01, D-02, D-06, S-01, S-02, S-06]
-  limitations: [L-07]
+    Sept notions sont construites par l'étude faute de définition officielle
+    — rente de position (D-03), rente d'innovation (D-04),
+    non-duplicabilité (D-05), différenciabilité (D-07), captivité (D-08),
+    concurrence pour / sur le marché dans sa formulation (D-09), fixité
+    positionnelle (D-16) — chacune ancrée sur la source la plus proche sans
+    prétendre en être une citation, et la DÉFINITION MESURABLE de la rente
+    est D-15 : surprofit sur une base d'actifs au coût historique net des
+    subventions, au taux de référence H-06, avant impôts, coûts externalisés
+    exclus, avec secteur témoin. La forme est fixée ici pour toutes les
+    études sectorielles, les paramètres sont figés par secteur. La version
+    antérieure (« prix payé moins coût d'une fourniture efficace,
+    rémunération normale du capital comprise », « une fois pour toutes »)
+    ne fixait ni base ni postes (HD-1, SE-4). Ce qui le renverserait : deux
+    bases d'actifs légitimes donnant des signes opposés sur un même secteur
+    malgré D-15, ou un secteur concurrentiel témoin affichant un surprofit
+    comparable.
+  depends_on: [D-01, D-02, D-06, D-13, D-21, S-01, S-02, S-06, S-07]
+  limitations: [L-07, L-11]
 
 - id: C-03
   type: choice
   title: >
-    Logement (décision du 2026-09-04) : l'étude défend la configuration
-    « parc universel faiseur de prix, propriété privée conservée », et
-    instruit trois configurations côte à côte — l'existant (parc social
-    réservé sous plafonds, résiduel), le parc universel assez large pour
-    discipliner les loyers de toute la ville (seuil H-07), le privé intégral
-    comme borne. La ligne « allocation administrée nécessaire » de la note
-    d'origine est abandonnée : la grille dit que le marché ne discipline pas
-    le prix, pas que l'allocation doit être administrée.
-  depends_on: [V-02, I-01]
+    Logement (décisions de Rémy, 2026-09-04 et 2026-09-05) : le logement
+    relève de la rente de position (D-16, H-19), pas du monopole naturel ;
+    la configuration défendue est « parc ouvert faiseur de prix, propriété
+    privée conservée » — un choix fondé sur H-04 et sur les valeurs V-01 et
+    V-02, PAS une sortie de la grille (la version antérieure la présentait
+    ainsi, SE-2). Quatre configurations instruites côte à côte : l'existant
+    (parc réservé sous plafonds, résiduel), le parc ouvert faiseur de prix
+    (seuil H-07), l'ENCADREMENT DES LOYERS sans changement de propriété
+    (régulation du prix, SE-20), le privé intégral comme borne. Étude
+    sectorielle adossée à `logement/`. Ce qui le renverserait : un parc
+    ouvert et large qui n'infléchit pas les loyers privés ; un encadrement
+    des loyers qui obtient le même effet sans parc.
+  depends_on: [V-01, V-02, H-04, H-19]
   limitations: [L-03]
 
 - id: C-04
   type: choice
   title: >
     Ordre des études sectorielles, par visibilité de la rente dans des
-    comptes publics et disponibilité de données ouvertes : autoroutes, eau,
-    hydroélectricité, stationnement, réseaux de chaleur, télécommunications,
-    électricité en dernier. Orbite et spectre restent dans l'inventaire sans
-    étude prévue (L-05). Chaque étude sectorielle est un projet autonome au
-    niveau racine du dépôt, suivant le gabarit INTRO §9 et référençant D-01
-    à D-14.
-  depends_on: [I-01]
-  limitations: [L-04, L-05]
+    comptes publics et disponibilité de données ouvertes : autoroutes (le
+    régulateur publie déjà TRI et échéances, O-03), eau (observatoire public
+    par service, O-04), hydroélectricité (régime en réforme, O-09 — l'étude
+    porte sur ce qui suit), stationnement, réseaux de chaleur,
+    télécommunications, électricité en dernier (H-05). Orbite et spectre
+    restent dans l'inventaire sans étude prévue (L-05). Chaque étude
+    sectorielle est un projet autonome au niveau racine du dépôt, suivant
+    le gabarit INTRO §9 et référençant D-01 à D-21. Ce qui le renverserait :
+    des comptes de concessionnaires trop consolidés pour isoler une
+    concession (l'ordre changerait au profit de l'eau).
+  depends_on: [I-01, O-03, O-04, O-09]
+  limitations: [L-04, L-05, L-12]
+
+- id: C-05
+  type: choice
+  title: >
+    Configurations comparées par chaque étude sectorielle — QUATRE, et non
+    trois : le statu quo (contrats, échéances, retour de l'actif par
+    défaut) ; le PRIVÉ RÉGULÉ (propriété privée sous régulation du prix par
+    base d'actifs régulés, D-21 — régime effectif de la fibre, des réseaux
+    électriques, des télécoms, et l'objection la plus directe à V-01 :
+    pourquoi changer de propriétaire si l'on peut réguler le prix ?) ; la
+    collectivisation de la rente, dans ses variantes (régie, entreprise
+    publique, concession à recette publique avec exploitation au forfait),
+    chaque variante décrite par son PORTEUR DE RISQUE et son classement en
+    dette publique ; le privé intégral, borne facultative. Pour chaque
+    configuration, la DESTINATION de la rente est dite (V-05 : prix au coût
+    ou recette affectée). Configurations proposées à l'instruction en
+    premier, par secteur (choix dépendant de V-01, V-04, V-05, pas sortie de
+    la grille — CR-2) : autoroutes → recette affectée à l'échéance,
+    exploitation au forfait ; eau et chaleur → régie ou privé régulé, prix
+    au coût ; stationnement → non-reconduction des concessions d'ouvrages ;
+    logement → C-03 ; rail, fibre, électricité → privé ou public régulé,
+    question du taux reconnu ; orbite et spectre → tarification de la
+    rareté avec produit affecté, configuration à part (SE-15). Ce qui le
+    renverserait : une étude sectorielle où le privé régulé donne à
+    l'usager le même prix que la collectivisation à moindre coût de
+    transition.
+  depends_on: [I-01, V-01, V-04, V-05, D-21]
+  limitations: [L-04]
 
 # ------------------------------------------------------------ valeurs
 
 - id: V-01
   type: value
   title: >
-    Une rente de position (D-03) doit revenir à l'usager sous forme de
-    prix plutôt qu'à un propriétaire sous forme de profit. C'est le principe
-    défendu par l'étude ; il ne se déduit d'aucune donnée. Ce que la chaîne
-    peut établir est l'existence, le montant et le destinataire d'une rente,
-    jamais son illégitimité.
+    Une rente de position (D-03) ne doit pas revenir à un propriétaire privé
+    au seul titre de la position qu'il détient : elle revient à la
+    collectivité des usagers. C'est le principe défendu par l'étude ; il ne
+    se déduit d'aucune donnée. Ce que la chaîne peut établir est
+    l'existence, le montant et le destinataire d'un surprofit (D-15) et son
+    attribution à une position (I-03) ; jamais l'illégitimité de la rente.
+    La FORME de ce retour (prix au coût ou recette affectée) est un second
+    choix, V-05.
   depends_on: [D-03]
 
 - id: V-02
@@ -99,140 +264,261 @@
     La propriété d'usage n'est pas visée : ce qui est en cause est la rente
     lucrative tirée d'une position, pas l'occupation d'un bien par celui
     qui s'en sert. Aucune configuration étudiée ne porte sur le propriétaire
-    occupant ni sur l'usager d'un bien qu'il s'est approprié pour s'en
-    servir.
+    occupant. Limite dite : V-02 protège l'OCCUPATION, pas la VALEUR du
+    bien — une configuration qui fait baisser les prix touche la valeur du
+    bien de l'occupant, et un primo-accédant endetté à prix haut peut se
+    retrouver avec une dette supérieure à la valeur ; ce cas est un poste du
+    tableau des configurations (C-05), non couvert par V-02 (SE-22).
 
 - id: V-03
   type: value
   title: >
-    La rente d'innovation (D-04) est légitime tant que la ressource reste
-    substituable : elle rémunère une découverte et un risque et se dissipe
-    par imitation. La grille conserve la concurrence partout où le réseau
-    est partageable (Q2) ; c'est un critère d'application, pas une doctrine
-    d'extension de la propriété publique.
+    Une rente temporaire qui rémunère une découverte ou un risque pris
+    (D-04) est légitime tant que la ressource reste substituable. La grille
+    conserve la concurrence partout où le réseau est partageable (Q2) ;
+    c'est un critère d'application, pas une doctrine d'extension de la
+    propriété publique. Le brevet, qui rend une innovation non substituable
+    par le droit, est hors de cette valeur et hors périmètre (L-01).
   depends_on: [D-04]
+  limitations: [L-01]
 
 - id: V-04
   type: value
   title: >
     Une rente collectivisée doit rester visible : prix administré couvrant
-    le coût complet, comptes séparés, règle publique et vérifiable. Le
-    remplacement d'une opacité privée par une opacité publique n'est pas un
-    gain.
+    le coût complet, comptes séparés, transferts au budget général dits et
+    chiffrés, règle publique et vérifiable. Le remplacement d'une opacité
+    privée par une opacité publique n'est pas un gain. Critère de
+    visibilité pour les études sectorielles : la rente D-15 et sa
+    destination doivent pouvoir être recalculées depuis des comptes publiés.
+
+- id: V-05
+  type: value
+  title: >
+    Destination de la rente (décision de Rémy, 2026-09-05) : deux
+    destinations sont admises et doivent être DITES, secteur par secteur —
+    (a) le prix au coût, qui dissipe la rente au profit de l'usager ;
+    (b) une recette affectée, visible, qui la capte au profit d'un usage
+    lié (entretien et extension du réseau, nettoyage orbital, fonds dédié).
+    Le budget général n'est pas retenu par défaut. Les deux ne sont pas
+    équivalentes : la première baisse le prix et peut accroître la demande
+    (congestion), la seconde substitue la collectivité au propriétaire
+    comme rentier. La version antérieure les confondait — V-01 « sous forme
+    de prix » contre « recette publique » pour les autoroutes (SE-15). La
+    tarification de la rareté (congestion, orbite) est une configuration à
+    part : elle CRÉE une recette là où V-01 voudrait dissiper.
+  depends_on: [V-01]
+
+- id: V-06
+  type: value
+  title: >
+    Continuité du service : une reprise de rente ne peut pas dégrader la
+    fourniture pendant la transition ; l'exploitation est assurée en
+    continu, quel que soit son mode. Enregistrée le 2026-09-05 (CR-12) ; les
+    autres contraintes de INTRO §11 (« chaque mesure tient seule »,
+    transparence des fins) relèvent de l'article ultérieur sur la mise en
+    œuvre et n'ont pas de nœud ici.
 
 # ---------------------------------------------------- interprétations
 
 - id: I-01
   type: interpretation
   title: >
-    Classement provisoire des dix secteurs de l'inventaire (INTRO §8) par
-    la grille C-01 : fibre et boucle locale (non substituable, non rivale,
-    différenciable, partageable) ; rail (rivalité des sillons, partiellement
-    partageable) ; électricité (rivale et non différenciable, contrainte
-    temporelle) ; hydroélectricité (sites finis) ; eau et réseaux de chaleur
-    (non partageables, usager captif) ; autoroutes (faiblement rivales, non
-    différenciables, non partageables) ; stationnement (sol non
-    substituable, capacité totalement rivale, actif déjà public) ; logement
-    (rareté positionnelle, capacité totalement rivale, bâti différenciable) ;
-    orbite basse et spectre (partageables sous quota). Chaque ligne est une
-    hypothèse de classement à confirmer ou réfuter par l'étude sectorielle
-    correspondante, pas un résultat.
-  depends_on: [C-01, D-05, D-06, D-07, D-08]
-  limitations: [L-04]
+    Lecture d'ensemble de l'inventaire (H-09 à H-20) : passée à la grille
+    révisée, la liste ne donne PAS dix « non » — deux lignes témoins
+    répondent « substituable » ou « partiellement » à Q1 (mobiles, fibre en
+    zone très dense), trois relèvent de la fixité positionnelle et non du
+    monopole naturel (hydroélectricité, stationnement, logement), une du
+    domaine public concédé (stationnement), et l'électricité ne se classe
+    qu'une fois le réseau séparé de la production. Ce qui reste comme
+    monopoles naturels de réseau au sens de D-01 : boucle locale hors zones
+    denses, rail, réseaux d'électricité, eau, chaleur, autoroutes. Cette
+    lecture est une interprétation d'hypothèses de classement, pas
+    d'observations : aucune ligne n'est confirmée avant son étude
+    sectorielle, et les régimes actuels ne sont sourcés que pour les
+    autoroutes et l'hydroélectricité (L-04). Ce qui la renverserait : une
+    ligne « non duplicable » dont l'étude sectorielle montre la duplication
+    rentable ; une ligne « fixe » où l'offre s'avère augmentable.
+  depends_on: [C-01, H-09, H-10, H-11, H-12, H-13, H-14, H-15, H-16, H-17, H-18, H-19, H-20]
+  limitations: [L-04, L-09]
 
 - id: I-02
   type: interpretation
   title: >
-    Les télécommunications sont le cas où la grille décrit un dispositif
-    existant : boucle locale non duplicable, capacité peu rivale, service
+    Télécommunications, cas À INSTRUIRE et non cas témoin : boucle locale
+    non duplicable hors zones denses, capacité peu rivale, service
     différenciable, donc réseau partageable — ce que le dégroupage puis la
-    mutualisation de la fibre sous régulation ont organisé. C'est le cas
-    témoin de l'inventaire : la grille n'y propose rien, elle y reconnaît ce
-    qui est déjà en place. Interprétation à sourcer (décisions du régulateur,
-    comparaisons européennes de prix) par l'étude sectorielle.
-  depends_on: [I-01]
-  limitations: [L-04]
+    mutualisation de la fibre sous régulation ont organisé. Mais trois
+    faits, à figer, peuvent retourner la lecture : la boucle fibre est
+    dupliquée là où c'est rentable (H-11) ; les prix bas français viennent
+    d'abord du mobile, où quatre réseaux se concurrencent (H-10, le modèle
+    inverse de la grille) ; les réseaux fibre sont détenus par des fonds
+    d'infrastructure parce qu'ils rendent un flux régulé — si la rente D-15
+    y est positive, le cas où « la grille ne propose rien » devient un cas
+    où elle devrait proposer quelque chose (SE-12). Ce qui la renverserait :
+    surprofit positif chez les détenteurs de réseaux fibre ; prix fixe non
+    compétitif en comparaison européenne.
+  depends_on: [H-09, H-10, H-11, I-01]
+  limitations: [L-04, L-09]
+
+- id: I-03
+  type: interpretation
+  title: >
+    Attribuer un surprofit (D-15) à une position (D-03) plutôt qu'à une
+    avance technique, une restriction réglementaire ou une prime de risque
+    est une interprétation, pas une mesure. Elle exige : que le surprofit
+    soit positif aux deux bornes de H-06 ; qu'un secteur ou segment témoin
+    substituable, mesuré de la même façon, n'en montre pas ; et que les
+    causes concurrentes des indices complémentaires (marges qui ne
+    s'érodent pas, hausse sans réponse d'offre, écarts territoriaux qui se
+    creusent) aient été contrôlées — coûts fixes, prix administré, rareté
+    réglementaire (D-20), cycle du crédit, divergence des revenus. Sans
+    témoin, H-01 n'est pas réfutable (SE-5, HD-6). Ce qui la renverserait :
+    un témoin substituable montrant le même surprofit.
+  depends_on: [D-15, D-03, H-01, H-06]
+  limitations: [L-11]
 
 # ------------------------------------------------------------ limites
 
 - id: L-01
   type: limit
   title: >
-    Le brevet crée une rente juridiquement protégée et durable, donc pas si
-    temporaire que la rente d'innovation (D-04) le suppose : la fixité de
-    l'offre y est réglementaire, ni physique ni positionnelle. Hors
-    périmètre de l'étude ; c'est un choix de politique publique, révisable,
-    que la grille ne tranche pas.
-  depends_on: [D-03, D-04]
+    Périmètre : le brevet est exclu de l'étude. Il prolonge par le droit la
+    fixité d'une offre issue d'une innovation, ce qui le place entre D-04 et
+    la rente de monopole réglementaire de D-02 ; c'est un choix de politique
+    publique que la grille ne tranche pas. Aucune assertion sur sa durée ou
+    sa légitimité n'est portée ici.
+  depends_on: [D-04, V-03]
 
 - id: L-02
   type: limit
   title: >
-    Les plateformes numériques fabriquent des monopoles par effets de
-    réseau, sans rareté physique ; le critère de non-substituabilité (D-05)
-    les attrape, ce qui est un indice de sa robustesse mais aussi une
-    extension à instruire séparément — la grille a été construite pour des
-    réseaux physiques et n'a pas été éprouvée sur des réseaux d'usagers.
-  depends_on: [D-05]
+    Périmètre : la grille a été construite pour des réseaux et des ressources
+    PHYSIQUES ; elle n'a pas été éprouvée sur des marchés à effets de réseau
+    (plateformes numériques), où la non-substituabilité viendrait de la
+    demande et non de l'offre. Extension à instruire séparément ; aucune
+    assertion sur ces marchés n'est portée ici.
+  depends_on: [D-05, C-01]
 
 - id: L-03
   type: limit
   title: >
-    Le seuil de bascule d'un parc régulé (H-04, paramètre H-07) n'est
-    adossé à aucune estimation de l'élasticité des loyers privés à la part
-    du parc régulé : la fourchette 30-40 % est une intuition cohérente avec
-    le cas viennois, pas un résultat. Point d'attaque le plus probable du
-    raisonnement logement ; travail de sourçage dédié à prévoir.
+    Le seuil de bascule d'un parc ouvert (H-04, H-07) n'est adossé à aucune
+    estimation de l'élasticité des loyers privés à la part du parc ouvert à
+    loyer administré ; l'ancienne fourchette 30-40 % était contredite par
+    les deux observations disponibles (France, Vienne). Point d'attaque le
+    plus probable du raisonnement logement ; travail de sourçage dédié à
+    prévoir, avec les sources de la note privée à enregistrer (CR-3).
+  depends_on: [H-04, H-07]
 
 - id: L-04
   type: limit
   title: >
-    La colonne « régime actuel » de l'inventaire (qui possède, qui exploite,
-    qui encaisse, échéances) n'est pas sourcée à l'ouverture de l'étude :
-    c'est un rappel de connaissance générale. Aucune de ces mentions ne
-    doit être citée avant que l'étude sectorielle correspondante l'ait
-    figée (contrats, comptes, décisions de régulateurs).
+    Les régimes actuels de l'inventaire (qui possède, qui exploite, qui
+    encaisse, échéances) ne sont sourcés que pour les autoroutes (S-08,
+    S-12) et l'hydroélectricité (S-15) ; pour les autres lignes (H-09 à
+    H-13, H-15, H-16, H-18, H-20), ce sont des rappels de connaissance
+    générale à figer par l'étude sectorielle avant toute citation.
+  depends_on: [I-01]
 
 - id: L-05
   type: limit
   title: >
-    Orbite basse et spectre : la grille s'y applique intégralement mais
-    aucune autorité n'existe pour la mettre en œuvre (coordination
-    internationale des fréquences par priorité au premier déclarant,
-    responsabilité des États de lancement, pas d'exécution). Conservés
-    dans l'inventaire comme cas d'observation d'une rente en formation,
-    sans étude sectorielle prévue et sans source figée.
+    Orbite basse et spectre (H-20) : conservés dans l'inventaire comme cas
+    d'observation d'une rente en formation, sans étude sectorielle prévue et
+    sans source figée ; le régime international des fréquences et des
+    orbites n'est pas décrit ici, faute de source.
+  depends_on: [H-20]
 
 - id: L-06
   type: limit
   title: >
-    L'écart de coût régie / délégation sur l'eau (H-03, paramètre H-08,
-    « dix à vingt pour cent ») n'a pas de source figée et la comparaison
-    est exposée à un biais de sélection : les services qui reviennent en
-    régie ne sont pas tirés au hasard, l'écart observé mélange l'effet du
-    mode de gestion et celui de la sélection. À traiter comme une
-    fourchette et à instruire sur données ouvertes (SISPEA).
+    L'écart de prix régie / délégation sur l'eau (H-03, H-08) n'est pas une
+    rente : il mélange la marge du délégataire, la SÉLECTION (les services
+    complexes sont plus souvent délégués — reconnue par la source officielle
+    O-04), les différences de ressource et de traitement, l'investissement
+    (une régie qui renouvelle moins affiche un coût différé, pas une
+    économie), la fiscalité et la qualité. L'écart brut historique (27 % en
+    2001, O-05) s'est réduit depuis 2010 (O-04) ; l'écart corrigé est
+    inconnu et peut être nul.
+  depends_on: [O-04, O-05]
 
 - id: L-07
   type: limit
   title: >
-    Trois définitions (D-01, D-02, D-06) sont citées verbatim en anglais ;
-    les traductions françaises données en limite de chaque définition sont
-    des traductions de travail de l'étude, pas des textes officiels. Quatre
-    notions (D-03, D-04, D-05, D-07, D-08) sont construites (C-02) : elles
-    n'ont pas de source qui les définisse, seulement une source qui les
-    ancre.
-  depends_on: [C-02]
+    Cinq définitions (D-01, D-02, D-06, D-17, D-18, D-19, D-20) sont citées
+    verbatim en anglais ; les traductions françaises données en limite de
+    chaque définition, et reprises entre guillemets dans l'article avec la
+    mention « traduction de travail », sont celles de l'étude, pas des textes
+    officiels. Sept notions (D-03, D-04, D-05, D-07, D-08, D-09 pour sa
+    formulation, D-16) et la définition mesurable D-15 sont construites
+    (C-02) : elles n'ont pas de source qui les définisse, seulement une
+    source qui les ancre, et le lien de chacune à C-02 est porté dans le
+    graphe.
+  depends_on: [C-02, D-03, D-04, D-05, D-07, D-08, D-09, D-15, D-16]
 
 - id: L-08
   type: limit
   title: >
-    Les pages Légifrance (S-03, S-04, S-05) sont protégées par un défi
-    anti-robot qui bloque la récupération directe : les fichiers figés sont
-    le DOM rendu par un navigateur, pas les octets de la réponse HTTP. Le
-    texte intégral et la date de version de chaque article y figurent, mais
-    l'empreinte sha256 ne peut pas être recomparée à un téléchargement
-    ultérieur par script — une nouvelle capture donnera une empreinte
-    différente. Alternative reproductible à évaluer : la base LEGI (DILA,
-    données ouvertes) ou l'API Légifrance (PISTE, sur inscription).
-  depends_on: [S-03, S-04, S-05]
+    Les pages Légifrance (S-03, S-04, S-05, S-09) et OpenStax (S-06) sont figées
+    comme DOM rendu par un navigateur, pas comme octets de la réponse HTTP :
+    Légifrance oppose un défi anti-robot, OpenStax ne sert le texte qu'en
+    application. Le texte intégral et la date de version y figurent, mais
+    une nouvelle capture donnera une empreinte différente. Les autres pages
+    HTML (S-10 à S-16) sont des téléchargements directs, reproductibles.
+    Alternative pour Légifrance : la base LEGI (DILA) ou l'API PISTE.
+  depends_on: [S-03, S-04, S-05, S-06, S-09]
+
+- id: L-09
+  type: limit
+  title: >
+    Propriétés physiques des secteurs affirmées sans source à l'ouverture de
+    l'étude : coût marginal d'un utilisateur supplémentaire sur la fibre
+    « proche de zéro » ; coût de sortie d'un réseau de chaleur ;
+    « risque faible, recette élevée » d'une concession sur usager captif
+    (contredit par O-07) ; publication des comptes des concessionnaires ;
+    « ce qui fonctionne » dans les télécommunications. Ces énoncés, hérités
+    de la note d'origine (CR-10), sont portés par les hypothèses de
+    classement H-09 à H-20 comme énoncés à sourcer, jamais comme faits.
+  depends_on: [I-01]
+
+- id: L-10
+  type: limit
+  title: >
+    Redistribution des fichiers figés : la courte citation avec attribution
+    est licite pour toutes les sources ; la redistribution intégrale du PDF
+    de l'OCDE (S-01, « © OECD 2008 », sans licence ouverte) n'est pas
+    établie — le fichier reste dans le dépôt comme copie de vérification
+    mais n'est pas servi par le site (`redistributable: false`). Les
+    documents des autorités françaises (CRE, ART, ARCEP, Sénat, Eaufrance)
+    sont des informations publiques réutilisables (CRPA, L. 321-1) ; OpenStax
+    (CC BY-NC-SA) autorise la redistribution non commerciale avec
+    attribution, sous une clause anti-ingestion par des modèles de langage
+    que l'étude signale (SA-2, SA-3).
+  depends_on: [S-01, S-06]
+
+- id: L-11
+  type: limit
+  title: >
+    Ce que D-15 mesure est un SURPROFIT sur une base d'actifs à un taux de
+    référence ; ce n'est une rente de position que par l'interprétation
+    I-03. Cas d'échec connus (SE-5, SE-6, HD-2) : en régie sans témoin, le
+    coût observé tient lieu de coût efficace et la mesure est nulle même si
+    le service est inefficace ; sur un secteur régulé, la mesure au taux
+    reconnu est nulle par construction ; les subventions croisées d'un tarif
+    unique donnent une rente positive ici et négative là ; une baisse de
+    qualité passe pour un surprofit ; une prime de risque ex ante réelle
+    apparaît comme surprofit ex post. Toute mesure est présentée aux deux
+    bornes de H-06.
+  depends_on: [D-15, H-06]
+
+- id: L-12
+  type: limit
+  title: >
+    Deux observations sont de second rang : O-07 (FIPECO) rapporte les TRI
+    d'une étude commandée par la commission d'enquête du Sénat, non figée ;
+    O-09 décrit une proposition de loi au stade du rapport de commission
+    (1er avril 2026) dont la promulgation n'a pas pu être vérifiée (page
+    ministérielle inaccessible au 2026-09-05). À figer et à vérifier par
+    l'étude sectorielle.
+  depends_on: [O-07, O-09]

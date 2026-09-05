@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { parse } from "yaml";
@@ -41,6 +42,24 @@ function buildPost(slug: string): void {
     },
     maxAssetBytes: MAX_ASSET_BYTES,
   });
+
+  // Les empreintes déclarées dans les registres sont RECALCULÉES ici : une
+  // copie figée dont le sha256 ne correspond plus fait échouer le build
+  // (méthode INTRO §7 ; la dérivation pure ne fait que recopier).
+  for (const node of graph.nodes) {
+    if (node.type !== "source") continue;
+    for (const file of node.files) {
+      if (file.checksum === undefined) continue;
+      const manifest = files.find((f) => f.path === file.path);
+      const repoPath = manifest?.from ?? `${config.study.dir}/${file.name}`;
+      const absolute = resolve(REPO_ROOT, repoPath);
+      if (!existsSync(absolute)) continue;
+      const digest = `sha256:${createHash("sha256").update(readFileSync(absolute)).digest("hex")}`;
+      if (digest !== file.checksum) {
+        fail(`${slug} : empreinte de ${repoPath} (${node.id}) ≠ registre — ${digest}`);
+      }
+    }
+  }
 
   const dangling = danglingReferences(graph);
   if (dangling.length > 0) {

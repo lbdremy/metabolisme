@@ -28,6 +28,13 @@ const registries = {
   ],
   definitions: [
     { id: "D-01", term: "logement", source: "S-01", definition: "Un local…", caveats: ["c1"] },
+    {
+      id: "D-02",
+      term: "captivité (notion construite)",
+      source: "S-01",
+      constructed_by: "C-01",
+      definition: "Notion de l'étude…",
+    },
   ],
   hypotheses: [
     {
@@ -48,6 +55,7 @@ const registries = {
       statement: "Là où l'infrastructure n'est pas substituable, le prix se décorrèle du coût.",
       confidence: "low",
       justification: ["D-01"],
+      limitations: ["L-01"],
     },
   ],
   claims: [
@@ -69,6 +77,7 @@ const registries = {
       limitations: ["L-01"],
     },
     { id: "L-01", type: "limit", title: "l" },
+    { id: "C-01", type: "choice", title: "c" },
     { id: "I-01", type: "interpretation", title: "i", depends_on: ["R-02"] },
   ],
 };
@@ -95,12 +104,14 @@ describe("studyToGraph", () => {
       "S-01",
       "S-05",
       "D-01",
+      "D-02",
       "H-06",
       "H-01",
       "O-01",
       "T-01",
       "R-02",
       "L-01",
+      "C-01",
       "I-01",
     ]);
     expect(danglingReferences(graph)).toEqual([]);
@@ -136,6 +147,27 @@ describe("studyToGraph", () => {
     const h01 = graph.nodes.find((n) => n.id === "H-01");
     expect(h01?.type === "hypothesis" && h01.statement).toMatch(/substituable/);
     expect(h01?.type === "hypothesis" && h01.central_value).toBeUndefined();
+    expect(h01?.limitations).toEqual(["L-01"]);
+  });
+
+  it("links a constructed notion to the choice that formulates it", () => {
+    expect(graph.nodes.find((n) => n.id === "D-02")?.depends_on).toEqual(["S-01", "C-01"]);
+  });
+
+  it("keeps a non-redistributable file out of the manifest but on the node", () => {
+    const { graph: g, files: f } = studyToGraph(
+      {
+        ...registries,
+        sources: [{ ...registries.sources[0], redistributable: false }],
+        claims: [],
+        definitions: [],
+        hypotheses: [],
+      },
+      { studyPrefix: "logement/", version: {}, statFile: () => ({ size: 10 }), maxAssetBytes: 100 },
+    );
+    const s01 = g.nodes[0];
+    expect(s01?.type === "source" && s01.files[0]?.hosted).toBe("none");
+    expect(f).toEqual([]);
   });
 
   it("rejects a hypothesis that is neither a full parameter nor a statement", () => {

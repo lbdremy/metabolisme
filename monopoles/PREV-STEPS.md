@@ -3,6 +3,70 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
+## Session 2 — 2026-09-04 / 05 (revue contradictoire du cadrage et intégration complète)
+
+Rémy a demandé, après lecture du cadrage : garder le titre et la section
+d'objections (point 1), faire entrer les hypothèses qualitatives dans le
+graphe (point 2), mener la revue contradictoire (point 3).
+
+- **Contrat du site étendu aux hypothèses qualitatives** (commit
+  `59d021f`) : `statement` sans triplet numérique dans
+  `packages/evidence`, rejet d'un paramètre incomplet dans
+  `study-to-graph`, corps du panneau sans jauge, tests ; H-01..H-05
+  enregistrées ; post à 48 nœuds.
+- **Revue contradictoire** (méthode `logement`) : quatre relecteurs
+  indépendants — sources alternatives (mandat réduit après une
+  interruption par la limite de dépense : SA-1..SA-7), définitions et
+  hypothèses (HD-1..HD-12), scénarios d'échec (SE-1..SE-22), cohérence et
+  statuts épistémiques (CR-1..CR-17) — 58 objections, 7 bloquantes.
+  Vérifications de l'orchestrateur avant triage (index OCDE, V-01
+  orpheline, coupe de D-04, formule D-13, empreintes non vérifiées,
+  chiffres privés dans H-04/H-07, dix « non » à Q1, Sénat 6,5 → 5,9 %,
+  proposition de loi hydro) : toutes confirmées. Synthèse de triage et
+  rapports bruts commités en annexe AVANT intégration (commit `b173008`).
+- **Décisions de Rémy** (AskUserQuestion, 2026-09-05) : monopoles naturels
+  ET rentes de position (logement et stationnement reclassés) ; les deux
+  destinations de la rente, explicites par secteur ; nouveau titre neutre ;
+  intégration complète.
+- **Intégration** : D-05 scindée (non-duplicabilité D-05, fixité D-16),
+  Q1 à trois réponses, deux lignes témoins (mobiles, fibre en zone très
+  dense), objet classé sur chaque ligne, Q2 sans « nécessairement
+  administré » ; **D-15 rente mesurable** (base d'actifs au coût
+  historique net des subventions, coût efficace L. 341-2, postes, avant
+  impôts, témoin) et D-17..D-21 (exclusion, envergure, coûts
+  irrécupérables, barrières, BAR) ; D-04 citation complète et statut de
+  construction assumé ; D-13 sans valeur, formule complète ; index OCDE
+  corrigés (353 / 462) ; H-01 réécrite (périmètre prix non administré,
+  test D-15 avec témoin, réfutation), H-03 scindée, H-04 sur l'ouverture,
+  H-05 question de recherche, H-06 « taux de référence » [4,0 ; 8,8]
+  sourcé, H-07 qualitative sans valeur, H-08 écart brut [0 ; 27] ;
+  H-09..H-20 hypothèses de classement ; V-01 principe, V-05 destination,
+  V-06 continuité, V-03 réduite ; C-03 logement hors grille (4
+  configurations), C-05 quatre configurations ; I-02 « cas à instruire »,
+  I-03 attribution avec témoin ; L-09..L-12 ; dépendances remises dans le
+  bon sens (`justification` S/O/I, `limitations`, `constructed_by`).
+- **Neuf sources figées** : ART EGC 2024 (S-08, 13,8 Mo), ARCEP 2025-2047
+  via sa publication au JORF sur Légifrance (S-09 ; le PDF de l'ARCEP est
+  derrière un pare-feu qui rejette script, navigateur automatisé et service
+  de lecture), Eaufrance (S-10), Persée / Carpentier et al. 2006 (S-11),
+  Sénat n° 709 p. 130 (S-12), FIPECO (S-13, secondaire), IGEDD tunnel de
+  Friggit (S-14), Sénat n° 498 PPL hydro (S-15), glossaire ART (S-16) ;
+  neuf observations O-01..O-09. Licences reformulées ; PDF OCDE
+  `redistributable: false`.
+- **Site** : `build-posts` recalcule les empreintes sha256 et échoue sur
+  un écart ; `study-to-graph` porte `constructed_by`, `redistributable`
+  (fichier non servi) et `limitations` des hypothèses ; 12 tests ; post
+  à 92 nœuds, 18 fichiers servis, aucun identifiant cité absent du
+  graphe.
+- **Documents** : INTRO.md réécrit ; article réécrit sous le titre
+  « Reconnaître une rente de position »
+  (`articles/2026-09-reconnaitre-une-rente-de-position.md`, l'ancien
+  fichier retiré) ; document de preuve ; EVIDENCE, README, CLAUDE.md ;
+  compte rendu `evidence/revue-contradictoire-2026-09-04.md` avec
+  dispositions et tableau avant / après.
+- Non fait, volontairement : tag et déploiement (relecture de Rémy de la
+  version révisée) ; loi hydro promulguée et étude TRI d'origine (L-12).
+
 ## Session 1 — 2026-09-04 (ouverture, cadrage, sources, article)
 
 Point de départ : la note de travail « La grille des deux questions —
@@ -26,66 +90,19 @@ collectiviser la rente là où le marché n'existe pas » (Rémy, septembre
   privé conservé, trois configurations comparées ; article de cadrage
   limité au cadrage, mise en œuvre et tactique renvoyées à un article
   ultérieur.
-- **Cadrage écrit** (`INTRO.md`) : question en cinq temps ; ce que
-  l'approche matérialiste impose ; quatorze définitions à figer ; la grille
-  passée de deux à quatre questions (captivité Q3 ajoutée, Q4 « qui
-  exploite » isolé comme choix de gestion) plus l'entrée empirique Q5 ; la
-  part normative isolée (V-01..V-04) ; H-01..H-05 directrices, H-06..H-08
-  paramètres ; inventaire des dix secteurs comme hypothèses, ligne logement
-  corrigée ; gabarit sectoriel en neuf questions ; ordre des études ;
-  contraintes normatives ; risques ; chaîne initiale ; première phase.
-- **Scaffold** : README, CLAUDE.md, EVIDENCE.md, registres vides, NEXT/PREV
-  -STEPS, note d'origine archivée dans `exploration/` avec ses divergences
-  en préambule ; LFS ; arborescence du `CLAUDE.md` racine.
+- **Cadrage écrit** (`INTRO.md`), **scaffold** (README, CLAUDE.md,
+  EVIDENCE.md, registres vides, NEXT/PREV-STEPS, note d'origine archivée
+  dans `exploration/` avec ses divergences en préambule ; LFS ;
+  arborescence du `CLAUDE.md` racine).
 
-### Sources, définitions, graphe, article
+### Sources, définitions, graphe, article (commit `3efce86`)
 
-- **Sept sources figées** (`data/raw/`, sha256, LFS). Le glossaire OCDE de
-  1993 n'est plus servi (HTTP 410) : remplacé par l'édition 2008 du
-  glossaire statistique de l'OCDE, qui reprend ses entrées « Natural
-  monopoly » (index PDF 346) et « Rent - OECD » (index 452), y compris la
-  quasi-rente. Ricardo ch. II pris sur Wikisource (trad. Guillaumin 1847,
-  révision 6570316). Légifrance est derrière un défi anti-robot (Cloudflare)
-  qui bloque `curl` et le navigateur headless : captures du DOM rendu par
-  un Chromium fenêtré (`agent-browser --headed`), une relance du navigateur
-  par page (seule la première navigation passe le défi) — CCP L1121-1, CGCT
-  L1411-1 / L1412-1 / L2221-1, CG3P L2111-1 / L3111-1, avec la date de
-  version de chaque article ; limite L-08 (empreintes non reproductibles par
-  script). OpenStax § 13.3 (CC BY-NC-SA) pour la rivalité, faute d'entrée
-  OCDE (vérifié : pas de « public good », « switching cost », « franchise
-  bidding » dans le glossaire). CRE délibération 2025-77 (TURPE 7 HTB) pour
-  le CMPC reconnu : 5,0 % nominal avant impôts (4,6 % au TURPE 6). Demsetz
-  1968 non enregistré (accès payant).
-- **Quatorze définitions** (D-01..D-14) : verbatim pour les officielles
-  (anglais pour OCDE et OpenStax, traduction de travail en limite L-07) ;
-  cinq notions construites (rente de position, rente d'innovation,
-  substituabilité, différenciabilité, captivité) rattachées à C-02 et à
-  leur source d'ancrage. **Définition mesurable de la rente** fixée dans
-  C-02 : prix payé moins coût d'une fourniture efficace, rémunération du
-  capital au taux H-06 comprise.
-- **Trois paramètres** : H-06 `normal_return_on_capital` 5,0 % [4 ; 8]
-  (O-01, D-13) ; H-07 `price_maker_share_threshold` 35 % [30 ; 40],
-  confiance faible (L-03) ; H-08 `water_delegation_cost_gap` 15 % [10 ; 20],
-  confiance faible (L-06).
-- **Graphe** (`evidence/claims.yaml`) : O-01, C-01..C-04, V-01..V-04,
-  I-01..I-02, L-01..L-08. Validation indépendante avec les schémas
-  pydantic de `logement` (mêmes formats) : 43 identifiants, références
-  résolues, empreintes vérifiées, aucune erreur.
-- **Article de cadrage** `articles/2026-09-monopoles-naturels-grille.md`
-  (« Là où le marché n'existe pas ») : la question en cinq plans ; ce qu'est
-  un monopole naturel (la définition dit qui doit produire, pas qui doit
-  posséder) ; deux rentes ; la rente mesurable et H-06 ; la grille (Q1-Q5,
-  trois niveaux) ; la part normative (V-01..V-04) ; l'inventaire comme
-  hypothèses avec les trois lignes commentées (télécoms, logement, orbite) ;
-  le gabarit et les trois configurations ; objections examinées en registre
-  de recherche ; ce que ces pages ne disent pas ; reproduction. Aucun
-  chiffre non figé (les chiffres logement de la note écartés et dits tels).
-  Document de preuve `evidence/monopoles-naturels.md` (INTRO §11, sans
-  calcul, avec les données écartées et pourquoi).
-- **Site** : post déclaré (`site/content/posts/2026-09-monopoles-naturels-grille/post.yaml`,
-  sans tag pour l'instant), `pnpm content` → 43 nœuds, 10 fichiers en
-  assets ; tests, lint, format, types et build verts ; déclencheurs
-  `monopoles/**` ajoutés à `site-ci.yml` ; note dans `site/CLAUDE.md`.
-- Non fait, volontairement : tag et déploiement (relecture de Rémy
-  d'abord) ; revue contradictoire ; extension du contrat du site aux
-  hypothèses qualitatives (H-01..H-05 restent hors graphe).
+- **Sept sources figées** (glossaire OCDE 2008 à la place du glossaire
+  1993 plus servi ; Ricardo sur Wikisource ; six articles Légifrance
+  capturés en DOM rendu par un Chromium fenêtré, une relance par page ;
+  OpenStax ; CRE 2025-77). Demsetz 1968 non enregistré.
+- **Quatorze définitions**, trois paramètres (H-06 5,0 % [4 ; 8], H-07
+  35 % [30 ; 40], H-08 15 % [10 ; 20]), dix-neuf nœuds ; validation avec
+  les schémas pydantic de `logement`.
+- **Article** « Là où le marché n'existe pas » et document de preuve ;
+  post déclaré et construit (43 nœuds), non tagué.

@@ -1,179 +1,513 @@
 # Registre des hypothèses (H-xx) — méthode Métabolisme, INTRO §9.
 # Deux formes : les PARAMÈTRES chiffrés (valeur centrale, plage plausible,
-# unité, confiance, justification, résultats affectés — même schéma que
-# logement/sources/hypotheses.yaml, HypothesisRecord) et, depuis le
-# 2026-09-04, les hypothèses QUALITATIVES (`statement` : la relation ou
-# l'hypothèse directrice, sans valeur numérique — forme acceptée par le
-# contrat du site, packages/evidence, et par sa dérivation ; le schéma
-# pydantic de `logement` ne la connaît pas encore, voir monopoles/CLAUDE.md).
+# unité — même schéma que logement/sources/hypotheses.yaml) et les hypothèses
+# QUALITATIVES (`statement`, sans valeur numérique — forme acceptée par le
+# contrat du site depuis le 2026-09-04 ; le schéma pydantic de `logement` ne
+# la connaît pas, voir monopoles/CLAUDE.md).
 #
-# H-01 à H-05 : hypothèses directrices du cadrage (INTRO.md §7), qualitatives.
-# H-06 et suivants : paramètres chiffrés. Aucun résultat (R-xx) n'existe
-# encore dans cette étude : `affects` est vide et sera renseigné par les
-# études sectorielles qui consommeront ces hypothèses.
+# Règles adoptées après la revue contradictoire (2026-09-05, HD-7, CR-7) :
+# - `justification` ne contient que des sources (S), observations (O) ou
+#   interprétations (I) ; une définition ou un choix ne justifie pas un
+#   énoncé empirique ; les limites vont dans `limitations`. Vide = honnête.
+# - `confidence` : `medium` seulement si au moins une observation figée
+#   porte la valeur ou l'énoncé ; `low` sinon.
+# - chaque hypothèse qualitative dit ce qui la RÉFUTERAIT.
+#
+# H-01..H-05 : hypothèses directrices du cadrage (INTRO.md §7).
+# H-06..H-08 : paramètres et ordre de grandeur (H-07 est désormais qualitative).
+# H-09..H-20 : hypothèses de classement de l'inventaire, une par ligne (INTRO
+# §8), dont deux lignes témoins où Q1 ne répond pas « non duplicable ».
+# Aucun résultat (R-xx) n'existe encore : `affects` est vide.
+
+# ------------------------------------------------------ directrices
 
 - id: H-01
-  name: price_cost_decoupling_where_not_substitutable
+  name: price_cost_decoupling_where_not_duplicable
   description: >
-    Là où l'infrastructure n'est pas substituable, le prix payé par l'usager
-    se décorrèle du coût de fourniture (hypothèse directrice H-01).
+    Là où l'infrastructure n'est pas duplicable (ou la ressource fixe) ET où
+    le prix n'est pas administré, le prix payé par l'usager se décorrèle
+    durablement du coût de fourniture efficace (hypothèse directrice H-01).
   statement: >
-    Signature attendue dans les données d'un secteur : le prix s'écarte
-    durablement du coût de fourniture efficace ; les marges ne s'érodent pas
-    avec le temps ; une hausse de prix ne déclenche pas de réponse d'offre ;
-    les écarts entre territoires comparables se creusent. L'absence de ces
-    quatre effets est ce qu'on attend d'un marché concurrentiel ; leur
-    présence conjointe est la signature d'une rente. Testable secteur par
-    secteur sur comptes et séries de prix (gabarit INTRO §9, questions 3 et 4).
-  confidence: medium
+    Périmètre : secteurs classés « non duplicable » ou « fixe » à Q1 (D-05,
+    D-16) dont le prix d'accès n'est pas fixé par un régulateur — là où il
+    l'est (transport d'électricité, accès fibre régulé), le prix couvre par
+    construction coût efficace + rémunération reconnue (S-07, L. 341-2) et
+    l'hypothèse n'a pas d'objet. Test : la rente mesurable D-15, aux deux
+    bornes de H-06, est positive et ne décroît pas sur dix ans, ALORS qu'un
+    secteur ou segment témoin substituable, mesuré de la même façon, n'en
+    montre pas. Réfutée si, sur un secteur du périmètre, la rente D-15 est
+    nulle ou décroissante aux deux bornes, ou si le témoin substituable en
+    montre autant. Les indices complémentaires — marges qui ne s'érodent
+    pas, hausse sans réponse d'offre, écarts territoriaux qui se creusent —
+    sont un faisceau d'indices (I-03), pas un test : chacun a des causes
+    concurrentes (coûts fixes, prix administré, rareté réglementaire, cycle
+    du crédit, divergence des revenus) que l'étude sectorielle doit
+    contrôler. Sur le logement, le loyer rapporté au revenu est resté dans
+    un tunnel de 20 % depuis 1975 alors que le prix de vente a décroché
+    depuis 2002 (O-08) : la décorrélation ne porte que sur le prix des
+    actifs, pas sur le prix payé par l'usager locataire — l'hypothèse doit
+    y être formulée sur le prix d'acquisition et le rendement, pas sur le
+    loyer.
+  confidence: low
   justification:
-    - D-01
-    - D-02
-    - D-05
+    - O-08
+  limitations:
+    - L-11
   affects: []
 
 - id: H-02
   name: concession_tendering_displaces_rent
   description: >
-    La mise en concurrence des concessions déplace la rente sans la supprimer
-    (hypothèse directrice H-02).
+    La mise en concurrence des concessions déplace la rente sans la
+    supprimer (hypothèse directrice H-02).
   statement: >
-    Un appel d'offres capture au mieux une fraction de la rente à l'instant
-    de l'attribution ; les hausses de prix ultérieures, les gains de
-    productivité non partagés et les renégociations reviennent au
-    concessionnaire. Testable sur les comptes des concessions en cours
-    (autoroutes depuis 2006 ; renouvellements de délégations d'eau) : rente
-    mesurée selon C-02 avant et après attribution, part captée par la
-    redevance ou le prix d'attribution.
-  confidence: medium
+    Un appel d'offres ou une cession capture au mieux une fraction de la
+    rente à l'instant de l'attribution ; les hausses de prix ultérieures,
+    les gains de productivité non partagés et les renégociations reviennent
+    au concessionnaire. Indices : sur les autoroutes, le taux de rémunération
+    du capital reconnu par l'État a été renégocié de 6,5 % à 5,9 % en 2017
+    (O-06), et les TRI actionnaires constatés en 2019 sont inférieurs aux
+    TRI prévisionnels de 2006 (O-07) — ce qui montre qu'une part de la rente
+    est captée ou disputée, pas qu'elle est supprimée. Réfutée si, mesurée
+    selon D-15 sur une concession attribuée par mise en concurrence, la
+    rente actualisée sur la vie du contrat est intégralement captée par le
+    prix d'attribution et les redevances (dispositifs existants à tester :
+    redevance hydroélectrique proportionnelle aux résultats, enchères de
+    capacité), ou si les avenants successifs ont réduit la rente plutôt que
+    l'augmenter.
+  confidence: low
   justification:
-    - D-09
-    - D-10
+    - O-06
+    - O-07
   affects: []
 
 - id: H-03
-  name: regie_delegation_efficiency_benchmark
+  name: regie_delegation_cost_comparison
   description: >
-    La coexistence régie / délégation sur des services comparables fournit un
-    étalon d'efficacité (hypothèse directrice H-03).
+    À service, ressource, investissement et fiscalité comparables, la
+    gestion déléguée coûte plus cher à l'usager que la régie (hypothèse
+    directrice H-03).
   statement: >
-    Quand les deux modes de gestion coexistent sur des services comparables
-    (eau), l'écart de coût à qualité comparable mesure ce que la délégation
-    prélève. Ordre de grandeur de travail : paramètre H-08. Exposée à un biais
-    de sélection (L-06) : les services qui passent en régie ne sont pas tirés
-    au hasard ; le test doit contrôler la taille, la densité et la ressource.
+    Hypothèse : à service comparable, le prix en délégation excède celui en
+    régie. Ce que dit la source officielle (O-04) : le prix est en moyenne
+    plus élevé en délégation, l'écart varie dans le temps et semble se
+    réduire depuis 2010, et il s'explique d'abord par la SÉLECTION (les
+    collectivités délèguent plus souvent les services complexes). Méthode
+    imposée : l'écart brut (H-08) n'est pas une rente ; il faut le corriger
+    de la sélection (méthodes d'effet de traitement, O-05), de la ressource
+    et du traitement, de l'investissement (une régie qui renouvelle moins
+    « coûte » moins : coût différé, pas rente), de la fiscalité (IS, TVA),
+    du coût de la dette et de la qualité. Ce qui reste après correction est
+    le candidat « ce que la délégation prélève », à rapprocher de D-15.
+    Réfutée si l'écart corrigé est nul ou négatif, ou entièrement expliqué
+    par l'investissement et la ressource.
   confidence: low
   justification:
-    - D-11
-    - D-12
+    - O-04
+    - O-05
+  limitations:
     - L-06
   affects: []
 
 - id: H-04
-  name: regulated_stock_price_maker_threshold
+  name: open_regulated_stock_disciplines_rents
   description: >
-    Sur le logement, un parc à loyers régulés ne discipline les loyers de
-    toute une ville qu'au-delà d'un seuil de part du parc locatif (hypothèse
+    Sur le logement, un parc à loyers administrés ne discipline les loyers
+    privés d'une ville que s'il est OUVERT (sans condition de ressources) et
+    assez large ; un parc réservé loge moins cher sans réguler (hypothèse
     directrice H-04).
   statement: >
-    Un parc réservé (plafonds de ressources) loge moins cher sans réguler ;
-    un parc universel et assez large devient faiseur de prix, et la propriété
-    lucrative devient économiquement banale. Le seuil est le paramètre H-07.
-    Base empirique : le parc social français (loyers inférieurs de 31 %,
-    taux d'effort proche du secteur libre) contre Vienne (parc universel,
-    jamais privatisé, adossé à une cotisation) — note privée « Le parc
-    social, fonction régulatrice ou logique volumétrique ? ». Aucune
-    estimation de l'élasticité des loyers privés à la part du parc régulé
-    n'est disponible (L-03) : point d'attaque le plus probable.
+    La variable n'est pas la part du parc social dans le parc locatif —
+    l'étude a elle-même relevé que la France se situe entre un tiers et
+    43 % du locatif sans que les loyers privés soient disciplinés, et que
+    le parc viennois est à une part comparable (INTRO §12) — mais son
+    OUVERTURE : plafonds de ressources hauts ou absents, absence de
+    rationnement (files d'attente), inaliénabilité. Le seuil de part ouverte
+    au-delà duquel le parc devient faiseur de prix est H-07, sans valeur
+    numérique tant qu'aucune estimation n'existe (L-03). Réfutée si, à
+    revenu et tension comparables, aucune relation dose-réponse n'apparaît
+    entre la part du parc ouvert à loyer administré et le niveau des loyers
+    privés ; ou si un encadrement des loyers sans parc obtient le même
+    effet (configuration à comparer, C-03). Base empirique à ENREGISTRER
+    avant tout usage : les sources de la note privée « Le parc social,
+    fonction régulatrice ou logique volumétrique ? » (SDES, Insee, Ancols,
+    Ville de Vienne, Statistik Austria, OLAP) ne sont pas dans ce registre
+    (CR-3) — l'étude sectorielle « logement » les figera ou s'adossera à
+    `logement/`.
   confidence: low
-  justification:
-    - C-03
+  justification: []
+  limitations:
     - L-03
   affects: []
 
 - id: H-05
-  name: system_cost_better_optimised_integrated
+  name: system_cost_organisation_open_question
   description: >
-    Le coût système d'un réseau électrique (back-up, stockage, renforcement,
-    intermittence) est mieux optimisé par un opérateur intégré qu'externalisé
-    par un marché fragmenté (hypothèse directrice H-05).
+    Le coût système d'un réseau électrique (back-up pilotable, stockage,
+    renforcement, gestion de l'intermittence) serait mieux optimisé par un
+    opérateur intégré que par un marché fragmenté (hypothèse directrice
+    H-05, non fondée à ce stade).
   statement: >
-    Le coût difficile du renouvelable n'est pas celui de la production, qui a
-    baissé, mais le coût système : back-up pilotable, stockage, renforcement
-    du réseau, gestion de l'intermittence. Hypothèse structurelle, la plus
-    difficile à tester ; à instruire en dernier (C-04), sur les bilans du
-    gestionnaire de réseau et les décisions du régulateur.
+    Énoncé repris de la note d'origine, sans source ni observation qui le
+    porte : la version antérieure le justifiait par des définitions et par
+    l'ordre des études, ce qui ne justifie rien (HD-7, SE-11). Il confond
+    deux choses : l'existence d'un coût système (réelle, et liée aux
+    économies d'envergure D-18 que la séparation des niveaux peut perdre)
+    et la forme d'organisation qui le minimise (question ouverte — un
+    opérateur intégré a aussi produit des dépassements de coûts documentés,
+    à figer par l'étude sectorielle). Traitée comme QUESTION DE RECHERCHE
+    de l'étude « électricité » (C-04, en dernier) : observable = coût
+    système par MWh livré sous chaque organisation, à design comparable.
+    Réfutée si le coût système est égal ou plus bas dans les systèmes
+    fragmentés à mix comparable.
   confidence: low
-  justification:
-    - D-06
-    - D-07
-    - C-04
+  justification: []
   affects: []
 
+# ------------------------------------------------ paramètres et ordres de grandeur
+
 - id: H-06
-  name: normal_return_on_capital
+  name: reference_return_on_capital
   description: >
-    Taux de rémunération du capital retenu comme « normal » dans la
-    définition opératoire de la rente (C-02) : la rente d'un secteur est ce
-    que paie l'usager moins le coût d'une fourniture efficace, rémunération
-    du capital à ce taux comprise. Sans ce paramètre, aucune rente n'est
-    mesurable, et toute mesure lui est sensible (INTRO §15). Valeur
-    centrale : le CMPC reconnu par la CRE pour RTE au TURPE 7 (5,0 %
-    nominal avant impôts, O-01). Plage : de 4,0 % (bas de la fourchette des
-    monopoles régulés à faible risque, TURPE 6 à 4,6 %) à 8,0 % (ordre de
-    grandeur d'un actif concédé exposé à un risque de trafic). Les études
-    sectorielles doivent figer le taux propre à leur régulateur (ARCEP, ART)
-    et présenter leur mesure de rente aux deux bornes.
+    Taux de RÉFÉRENCE de rémunération du capital, commun à toutes les
+    études sectorielles, appliqué à la base d'actifs de D-15 pour mesurer
+    le surprofit : la rente mesurée est l'excédent sur le rendement qu'un
+    régulateur français accorderait à un réseau à faible risque. Valeur
+    centrale 5,0 % nominal avant impôts — deux régulateurs indépendants
+    convergent : la CRE pour RTE au TURPE 7 (O-01) et l'ARCEP pour les
+    activités fixes régulées à compter de 2026 (O-02). Borne basse 4,0 % :
+    sous le TURPE 6 (4,6 %, O-01). Borne haute 8,8 % : haut de l'intervalle
+    de confiance du TRI projet des concessions autoroutières estimé par
+    l'ART ([5,3 % ; 8,8 %], O-03), qui porte un risque de trafic. Chaque
+    étude sectorielle présente sa mesure AUX DEUX BORNES et enregistre en
+    plus le taux propre reconnu par le régulateur de son secteur (ARCEP,
+    ART, CRE) : un taux de référence commun rend les mesures comparables,
+    le taux sectoriel les rend justes. Limite (D-13, HD-2) : sur un secteur
+    régulé, la mesure à ce taux est nulle par construction ; ce taux est un
+    jugement de régulateur, pas un prix de marché.
   central_value: 5.0
-  plausible_range: [4.0, 8.0]
+  plausible_range: [4.0, 8.8]
   unit: "% nominal avant impôts"
   confidence: medium
   justification:
     - O-01
-    - D-13
-    - C-02
+    - O-02
+    - O-03
+  limitations:
+    - L-11
   affects: []
 
 - id: H-07
-  name: price_maker_share_threshold
+  name: open_stock_price_maker_threshold
   description: >
-    Part du parc locatif au-delà de laquelle un parc à loyers régulés,
-    universel et ouvert, cesse d'être preneur de prix pour devenir faiseur
-    de prix sur les loyers de l'ensemble d'une ville (hypothèse directrice
-    H-04). Valeur de travail reprise de la note d'origine (30 à 40 %),
-    cohérente avec le cas viennois (parc municipal et coopératif : 43 % du
-    parc, environ la moitié des habitants — note « Le parc social, fonction
-    régulatrice ou logique volumétrique ? », dépôt privé) mais adossée à
-    AUCUNE estimation de l'élasticité des loyers privés à la part du parc
-    régulé (L-03). Confiance faible ; c'est le point d'attaque le plus
-    probable du raisonnement logement.
-  central_value: 35.0
-  plausible_range: [30.0, 40.0]
-  unit: "% du parc locatif"
+    Part du parc locatif d'une ville OUVERT à tout ménage sans condition de
+    ressources et à loyer administré, au-delà de laquelle ce parc devient
+    faiseur de prix sur les loyers privés (seuil de bascule de H-04).
+  statement: >
+    Dénominateur : le parc locatif de la ville ; numérateur : les logements
+    à loyer administré accessibles sans plafond de ressources (ou à plafond
+    couvrant l'essentiel de la population) et sans rationnement durable. La
+    France est alors proche de zéro ; Vienne, dont le parc municipal et
+    coopératif est ouvert à la plupart des ménages, proche de sa part
+    totale — c'est ce que la variable doit capter, là où l'ancienne
+    formulation (« 35 % [30 ; 40] du parc locatif », reprise de la note
+    d'origine) plaçait la France DANS la plage sans qu'elle soit faiseur de
+    prix (HD-5, CR-4). Aucune valeur numérique tant qu'aucune estimation de
+    l'élasticité des loyers privés à cette part n'existe (L-03). Réfutée si
+    aucune relation dose-réponse n'apparaît (voir H-04).
   confidence: low
-  justification:
-    - H-04
+  justification: []
+  limitations:
     - L-03
-    - C-03
   affects: []
 
 - id: H-08
-  name: water_delegation_cost_gap
+  name: water_delegation_gross_price_gap
   description: >
-    Écart de coût, à qualité comparable, entre la gestion déléguée et la
-    régie pour un service d'eau (hypothèse directrice H-03) : ce que la
-    délégation prélève au-delà du coût de la régie, en part du prix. Valeur
-    de travail « dix à vingt pour cent » reprise de la note d'origine, sans
-    source figée (L-06) ; la comparaison est exposée à un biais de
-    sélection (les services qui reviennent en régie ne sont pas tirés au
-    hasard). À instruire par l'étude sectorielle « eau » sur les données de
-    l'observatoire national des services d'eau et d'assainissement (SISPEA),
-    qui publie prix et mode de gestion par service.
-  central_value: 15.0
-  plausible_range: [10.0, 20.0]
-  unit: "% du prix du service à qualité comparable"
+    Écart BRUT de prix entre gestion déléguée et régie pour un service
+    d'eau, non corrigé de la sélection ni des différences de ressource,
+    d'investissement et de fiscalité — ordre de grandeur d'entrée pour
+    l'étude sectorielle « eau », PAS une mesure de rente.
+  central_value: 10.0
+  plausible_range: [0.0, 27.0]
+  unit: "% du prix du service, écart brut délégation / régie"
   confidence: low
   justification:
-    - H-03
+    - O-04
+    - O-05
+  limitations:
     - L-06
+  affects: []
+
+# ------------------------------------------- inventaire : hypothèses de classement
+
+- id: H-09
+  name: inventory_fibre_local_loop
+  description: >
+    Fibre / boucle locale hors zones très denses — objet classé : le réseau
+    d'accès. Q1 : non duplicable (D-05). Q2a : capacité peu rivale. Q2b :
+    service différenciable. Q3 : captivité faible (changement d'opérateur).
+    Partageable ; concurrence de service sur infrastructure mutualisée.
+  statement: >
+    Régime actuel (non sourcé, L-04) : réseaux privés et réseaux d'initiative
+    publique, accès mutualisé régulé. Réfutée si la duplication est rentable
+    hors zones denses, ou si la rente D-15 mesurée chez les détenteurs de
+    réseaux est positive malgré la régulation (I-02).
+  confidence: low
+  justification: []
+  limitations:
+    - L-04
+    - L-09
+  affects: []
+
+- id: H-10
+  name: inventory_mobile_networks_witness
+  description: >
+    Réseaux mobiles (ligne TÉMOIN) — objet classé : le réseau d'accès radio.
+    Q1 : substituable — plusieurs opérateurs ont déployé chacun leur réseau.
+    Hors du champ des monopoles naturels ; sert de témoin à Q1 et de secteur
+    de contrôle pour H-01.
+  statement: >
+    Ajoutée le 2026-09-05 (SE-1) : la grille doit produire au moins un « Oui »
+    à Q1 pour être un critère. Le spectre utilisé est une ressource fixe
+    (D-16) attribuée sous licence payante : la rente éventuelle porte sur le
+    spectre, pas sur le réseau. Régime à sourcer (L-04). Réfutée comme témoin
+    si une étude montre que le réseau mobile n'est pas duplicable à coût
+    raisonnable hors zones denses.
+  confidence: low
+  justification: []
+  limitations:
+    - L-04
+  affects: []
+
+- id: H-11
+  name: inventory_fibre_very_dense_witness
+  description: >
+    Fibre en zones très denses (ligne TÉMOIN) — objet classé : le réseau
+    d'accès. Q1 : partiellement substituable — chaque opérateur peut y
+    déployer son réseau jusqu'au point de mutualisation.
+  statement: >
+    Ajoutée le 2026-09-05 (SE-1, SE-12) : montre que la réponse à Q1 dépend du
+    territoire pour une même technique, et que « non duplicable » (H-09)
+    n'est vrai qu'en zone moins dense. Régime et périmètre des zones très
+    denses à sourcer (décision du régulateur, L-04). Réfutée si la
+    duplication observée y disparaît.
+  confidence: low
+  justification: []
+  limitations:
+    - L-04
+  affects: []
+
+- id: H-12
+  name: inventory_rail
+  description: >
+    Rail — objet classé : le réseau (voies, sillons), pas le service. Q1 :
+    non duplicable. Q2a : capacité rivale (un sillon consommé n'existe plus).
+    Q2b : service partiellement différenciable. Q3 : captivité moyenne.
+    Partiellement partageable ; sillons administrés.
+  statement: >
+    Régime actuel (non sourcé, L-04) : réseau public à péages, services
+    ouverts à la concurrence. La version antérieure concluait « concurrence
+    marginale » ; l'ouverture à la concurrence des services (open access)
+    peut produire des baisses de prix réelles là où la capacité n'est pas
+    saturée (SE-13, à figer) : la conclusion est reformulée en « partageable
+    là où la capacité n'est pas saturée ». Réfutée comme classement si les
+    sillons s'avèrent allouables par un marché sans arbitrage administratif.
+  confidence: low
+  justification: []
+  limitations:
+    - L-04
+    - L-09
+  affects: []
+
+- id: H-13
+  name: inventory_electricity_network
+  description: >
+    Électricité — objet classé : les réseaux de transport et de distribution
+    (la production est un autre objet). Q1 : non duplicable. Q2a : capacité
+    du réseau rivale seulement en congestion (comme une autoroute). Q2b :
+    bien livré non différenciable physiquement, différenciation contractuelle
+    possible. Q3 : captivité forte. Prix d'accès régulé (S-07).
+  statement: >
+    La version antérieure classait l'ÉNERGIE (« rivale, contrainte
+    temporelle ») et non le réseau (SE-14) ; la ligne est refaite sur le
+    réseau, et la production (base amortie, marché de gros, ARENH) devient
+    un objet séparé, hors de cette ligne — à instruire en dernier (C-04,
+    H-05). Sur le réseau régulé, la rente D-15 au taux H-06 est nulle par
+    construction (D-13) : la question y est la pertinence du taux reconnu,
+    pas la rente. Réfutée si la congestion rend la capacité rivale en régime
+    courant, ou si un réseau parallèle apparaît.
+  confidence: low
+  justification:
+    - O-01
+  limitations:
+    - L-04
+  affects: []
+
+- id: H-14
+  name: inventory_hydropower_sites
+  description: >
+    Hydroélectricité — objet classé : le SITE (une vallée équipée), pas un
+    réseau. Q1 : fixe (D-16). Q2 : sans objet (production vendue sur un
+    marché de gros). Rente ricardienne de producteur inframarginal, à
+    mesurer par D-15 ; usages multiples de l'eau arbitrés politiquement.
+  statement: >
+    Régime : concessions d'État, en cours de RÉFORME — la proposition de loi
+    examinée au Sénat le 1er avril 2026 résilie les concessions de plus de
+    4,5 MW et crée un droit réel de 70 ans associé à une autorisation
+    domaniale, avec une redevance progressive versée à l'État (O-09 ;
+    promulgation non vérifiée, L-12). La ligne antérieure (« concessions non
+    renouvelées, exploitation publique ») décrivait un régime en train de
+    disparaître (SE-8). Réfutée comme classement si de nouveaux sites
+    équipables existent à coût comparable (la fixité ne tiendrait plus).
+  confidence: low
+  justification:
+    - O-09
+  limitations:
+    - L-04
+    - L-12
+  affects: []
+
+- id: H-15
+  name: inventory_water
+  description: >
+    Eau — objet classé : le réseau de distribution. Q1 : non duplicable.
+    Q2a : capacité rivale. Q2b : bien non différenciable. Q3 : captivité
+    forte (physique ; non totale pour les gros consommateurs à ressource
+    propre). Non partageable.
+  statement: >
+    Régime : compétence communale, régie ou délégation (D-11, D-12). La
+    version antérieure concluait « Régie » : c'est une CONFIGURATION à
+    instruire (C-05), pas une conclusion — une régie peut prélever une rente
+    par transferts au budget général (SE-17), et l'écart de prix régie /
+    délégation n'est pas une rente (H-03, L-06). Réfutée comme classement si
+    la ressource propre (forages) rend l'usager non captif à grande échelle.
+  confidence: low
+  justification:
+    - O-04
+  limitations:
+    - L-04
+    - L-06
+  affects: []
+
+- id: H-16
+  name: inventory_district_heating
+  description: >
+    Réseaux de chaleur — objet classé : le réseau de canalisations. Q1 : non
+    duplicable. Q2a : rivale. Q2b : non différenciable. Q3 : captivité
+    forte, EN PARTIE RÉGLEMENTAIRE (obligation de raccordement dans les
+    périmètres classés) et en partie physique (coût de sortie à chiffrer).
+  statement: >
+    La version antérieure affirmait que sortir du réseau suppose de « refaire
+    l'installation complète de l'immeuble » : énoncé de la note d'origine,
+    non sourcé, et probablement faux pour un immeuble à distribution
+    hydraulique où seule la sous-station change (SE-18, à vérifier sur un
+    guide technique). Et la captivité y est pour partie créée par le droit
+    (classement automatique des réseaux) : relève alors de la rente de
+    monopole (D-02), pas de la position (D-03, D-08). Régime : compétence
+    communale, délégation majoritaire, contrats longs (L-04). Réfutée comme
+    classement si le coût de sortie mesuré est de l'ordre de quelques années
+    de facture.
+  confidence: low
+  justification: []
+  limitations:
+    - L-04
+    - L-09
+  affects: []
+
+- id: H-17
+  name: inventory_motorways
+  description: >
+    Autoroutes concédées — objet classé : l'infrastructure. Q1 : non
+    duplicable. Q2a : faiblement rivale, sauf congestion. Q2b : non
+    différenciable. Q3 : captivité forte (alternative lente et gratuite).
+    Non partageable. Domaine public concédé (D-14).
+  statement: >
+    Régime SOURCÉ (S-08, O-03) : concessions privées dont les sept
+    principales arrivent à échéance entre 2031 et 2036 (Sanef fin 2031,
+    Escota début 2032, SAPN 2033, toutes avant fin 2036) ; le régulateur
+    estime le TRI projet à 7 % avec un intervalle [5,3 % ; 8,8 %] en 2036,
+    et le taux reconnu par l'État a été ramené de 6,5 % à 5,9 % en 2017
+    (O-06). Le statu quo n'est pas un point fixe : à l'échéance, l'actif
+    revient à l'État par défaut (SE-20). Le risque transféré n'est pas
+    négligeable partout (O-07 : TRI actionnaires 2019 de −1,4 % à 4,9 %).
+    Réfutée comme classement si une alternative routière gratuite de
+    qualité comparable existe sur l'axe.
+  confidence: medium
+  justification:
+    - O-03
+    - O-06
+    - O-07
+  limitations:
+    - L-09
+  affects: []
+
+- id: H-18
+  name: inventory_parking_public_domain
+  description: >
+    Stationnement — objet classé : l'emplacement sur ou sous le domaine
+    public. Q1 : fixe (le sol, D-16) ; la position de la commune est un
+    monopole LÉGAL (police du domaine), pas naturel (D-01, D-14). Q2a :
+    totalement rivale. Q2b : non différenciable. Q3 : captivité moyenne
+    (offre hors voirie substituable).
+  statement: >
+    Catégorie « domaine public concédé » (SE-16), distincte des monopoles
+    naturels : l'actif est déjà public (D-14), la question est la
+    non-reconduction des concessions d'ouvrages — configuration C-05, pas
+    conclusion. Régime à sourcer (décentralisation du stationnement payant,
+    concessions de parcs ; L-04). Réfutée comme classement si l'offre hors
+    voirie discipline le prix de voirie.
+  confidence: low
+  justification: []
+  limitations:
+    - L-04
+  affects: []
+
+- id: H-19
+  name: inventory_housing_positional_rent
+  description: >
+    Logement — objet classé : le SOL urbain, pas un réseau. Q1 : fixe
+    (rareté positionnelle, D-16) ; PAS un monopole naturel au sens de D-01
+    (des millions d'offreurs, aucune économie d'échelle). Q2 : sans objet
+    (pas de réseau à partager). Q3 : captivité forte par le coût de
+    transaction (logement:R-14).
+  statement: >
+    Reclassé le 2026-09-05 (décision de Rémy ; SE-1, SE-2, HD-4) : le
+    logement relève de la rente de position (D-03, cas a), pas du monopole
+    naturel ; la grille des réseaux (Q2, Q4) n'y a pas de sens, et la
+    conclusion antérieure « non partageable → allocation administrée » ne
+    s'y applique pas. La configuration défendue (C-03 : parc ouvert faiseur
+    de prix, propriété privée conservée) vient de H-04, non de la grille.
+    Étude sectorielle adossée à `logement/`. La rente y porte sur le prix
+    des actifs (O-08 : prix décroché du revenu depuis 2002, loyers non) :
+    D-15 s'y applique au rendement du capital immobilier, pas au loyer.
+    Réfutée comme classement si le prix du sol suit le coût de construction
+    (la position ne porterait alors aucune rente).
+  confidence: low
+  justification:
+    - O-08
+  limitations:
+    - L-03
+  affects: []
+
+- id: H-20
+  name: inventory_orbit_spectrum
+  description: >
+    Orbite basse et spectre — objet classé : la RESSOURCE (bande de
+    fréquences, coquille orbitale), pas l'infrastructure. Q1 : ressource
+    fixe (D-16) ; infrastructure (constellations) substituable — plusieurs
+    sont déployées. Q2 : partageable sous quota. Q3 : captivité faible.
+    Exclusion (D-17) partielle : sans autorité d'exécution.
+  statement: >
+    La version antérieure répondait « Non » à Q1 sans dire l'objet et
+    affirmait une « occupation gratuite » : au niveau national, les licences
+    de fréquences sont payantes (redevances, enchères), la gratuité ne
+    concerne que les dépôts internationaux (SE-19, à figer). Aucune étude
+    sectorielle prévue (L-05). Réfutée comme classement si une autorité
+    tarifie effectivement l'occupation orbitale.
+  confidence: low
+  justification: []
+  limitations:
+    - L-04
+    - L-05
   affects: []
