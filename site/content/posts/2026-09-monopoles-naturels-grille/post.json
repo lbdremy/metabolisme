@@ -11,6 +11,7 @@
   },
   "version": {
     "repo_url": "https://github.com/lbdremy/metabolisme",
+    "tag": "monopoles-cadrage-v1.0",
     "evidence_doc": "monopoles/evidence/monopoles-naturels.md"
   }
 }

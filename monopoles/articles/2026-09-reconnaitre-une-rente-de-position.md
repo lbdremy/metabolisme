@@ -14,7 +14,8 @@ public ([metabolisme](https://github.com/lbdremy/metabolisme), dossier
 `monopoles/`), chaque hypothèse est nommée avec ce qui la réfuterait,
 chaque valeur défendue est marquée comme telle. Les identifiants entre
 parenthèses (S-xx, D-xx, O-xx, H-xx, C-xx, V-xx, I-xx, L-xx) pointent vers
-ce dépôt ; le document de preuve est `monopoles/evidence/monopoles-naturels.md`.*
+ce dépôt. Version de référence : tag `monopoles-cadrage-v1.0` ; le document
+de preuve est `monopoles/evidence/monopoles-naturels.md`.*
 
 ---
 

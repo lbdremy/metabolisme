@@ -14,24 +14,19 @@ sources figées, 21 définitions, 20 hypothèses, 92 nœuds ; l'article
 « Reconnaître une rente de position » est réécrit ; le site recalcule les
 empreintes au build, porte les hypothèses qualitatives, les notions
 construites et les fichiers non redistribuables ; `pnpm content`, tests,
-lint, types et build sont verts. **Le post n'est ni tagué ni déployé :
-il attend la relecture de Rémy de la version révisée.**
+lint, types et build sont verts. **Tag `monopoles-cadrage-v1.0` posé et post déployé le 2026-09-05
+après relecture de Rémy.**
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Relecture de Rémy** de l'article révisé et du cadrage, puis tag
-   `monopoles-cadrage-v1.0` (à reporter dans `post.yaml` → `version.tag`,
-   dans l'en-tête de l'article et dans le document de preuve §11),
-   `pnpm content`, commit, déploiement (`pnpm deploy:web`, depuis une
-   machine qui a les deux dépôts).
-2. **Deux restes de la revue à figer** (L-12) : la loi hydroélectricité
+1. **Deux restes de la revue à figer** (L-12) : la loi hydroélectricité
    promulguée (date, numéro, texte définitif — S-15 est le rapport de
    commission du 1er avril 2026) ; l'étude indépendante sur les TRI
    commandée par la commission d'enquête du Sénat (S-13 la rapporte).
    Et le PDF de l'ARCEP (S-09 est figé depuis le JORF ; la version ARCEP
    est derrière un pare-feu — à récupérer depuis un navigateur ordinaire
    si l'on veut les deux).
-3. **Première étude sectorielle : `autoroutes/`** (C-04). Projet autonome
+2. **Première étude sectorielle : `autoroutes/`** (C-04). Projet autonome
    au niveau racine, gabarit INTRO §9 : objet classé et témoin ; régime et
    échéances (S-08, S-12 ; figure 1.2 de S-08 à lire pour les dates par
    société) ; flux et base d'actifs reconstituée au coût historique net des
@@ -41,12 +36,12 @@ il attend la relecture de Rémy de la version révisée.**
    se passe par défaut aux échéances 2031-2036. Projet `uv` dès le premier
    calcul ; ajouter le dossier aux déclencheurs de `site-ci.yml` et au
    filtre LFS.
-4. **Étude « eau »** ensuite : rapports SISPEA (chiffres par mode de
+3. **Étude « eau »** ensuite : rapports SISPEA (chiffres par mode de
    gestion), PDF intégral de S-11, correction de la sélection (H-03,
    H-08, L-06).
-5. **Revue contradictoire** après la première étude sectorielle, sur la
+4. **Revue contradictoire** après la première étude sectorielle, sur la
    mesure D-15 appliquée (base d'actifs, témoin, bornes).
-6. **Logement** : enregistrer les sources de la note privée sur le parc
+5. **Logement** : enregistrer les sources de la note privée sur le parc
    social avant tout usage chiffré (CR-3), et instruire L-03 (élasticité
    des loyers privés à la part du parc ouvert) — l'étude sectorielle
    s'adosse à `../logement/`.

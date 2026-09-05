@@ -234,6 +234,5 @@ hypothèses qualitatives et les champs `constructed_by` / `redistributable`
 `../CLAUDE.md`).
 
 Fichiers produits : aucun. Environnement : aucun (documents et registres
-seulement). Version : commit portant ce document dans le dépôt
-`metabolisme` ; le tag de publication (`monopoles-cadrage-v1.0`) sera posé
-avec le post, après relecture.
+seulement). Version : tag `monopoles-cadrage-v1.0` du dépôt `metabolisme`
+(posé le 2026-09-05 après relecture de Rémy).
