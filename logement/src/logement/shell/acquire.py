@@ -107,3 +107,45 @@ def run(root: Path) -> int:
         "figure in the S-16 notes."
     )
     return 0
+
+
+# ------------------------------------------------------------ S-54 Sitadel
+
+SITADEL_URL = "https://www.data.gouv.fr/api/1/datasets/r/ec384558-f6ab-4e67-8071-71bc7fedcc2e"
+SITADEL_OUTPUT = Path("data") / "raw" / "sdes-sitadel2-logements-communes-annuel-2013-2026.csv"
+
+
+def run_sitadel(root: Path, source: Path | None = None) -> int:
+    """Freeze the annual « Tous Logements » extract of the Sitadel communal series (S-54).
+
+    The monthly file is > 1 GB (29 M rows, all TYPE_LGT); the chain keeps
+    only what it consumes — sums per commune × year of the « Tous
+    Logements » rows — as a deterministic extract (method INTRO §7.1:
+    recovery script + frozen extract, like S-16). Pass `source` to
+    re-run the reduction on an already-downloaded monthly file; the
+    registry note records the monthly file's sha256 and size.
+    """
+    import pandas as pd
+
+    from logement.core import flux
+
+    path = source
+    if path is None:
+        path = root / "data" / "raw" / "sitadel-monthly-download.csv"
+        print(f"acquire-sitadel: downloading {SITADEL_URL} → {path}")
+        urllib.request.urlretrieve(SITADEL_URL, path)
+    parts: list[pd.DataFrame] = []
+    with pd.read_csv(path, sep=";", dtype=str, chunksize=3_000_000) as reader:
+        for chunk in reader:
+            parts.append(flux.aggregate_sitadel_monthly(chunk))
+    annual = (
+        pd.concat(parts, ignore_index=True)
+        .groupby(["CODE_INSEE", "ANNEE"], as_index=False)[
+            ["LOG_AUT", "LOG_COM", "SDP_AUT", "SDP_COM"]
+        ]
+        .sum()
+    )
+    out = root / SITADEL_OUTPUT
+    annual.to_csv(out, sep=";", index=False)
+    print(f"acquire-sitadel: wrote {out} ({len(annual)} commune × year rows)")
+    return 0

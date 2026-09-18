@@ -19,6 +19,7 @@ from logement.core import (
     bati,
     cout,
     effort,
+    flux,
     foncier,
     institution,
     lovac,
@@ -93,6 +94,9 @@ DVF_FILE = "dvf-geolocalisees-2025.csv.gz"
 TRANSACTION_OUTPUT = Path("data") / "processed" / "cout-transaction-ze.json"
 
 INSTITUTION_OUTPUT = Path("data") / "processed" / "scenarios-institutionnels-ze.json"
+
+SITADEL_FILE = "sdes-sitadel2-logements-communes-annuel-2013-2026.csv"
+FLUX_OUTPUT = Path("data") / "processed" / "flux-construction-menages-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -978,5 +982,61 @@ def run_institution(root: Path) -> int:
         f"investissement {central['investissement_mdeur']} Md€, "
         f"loyer d'équilibre rénové {central['loyer_equilibre_renove_m2']}, "
         f"neuf {central['loyer_equilibre_neuf_m2']}"
+    )
+    return 0
+
+
+def _read_sitadel_annual(root: Path) -> pd.DataFrame:
+    """Read the frozen annual Sitadel extract (S-54, built by `acquire-sitadel`)."""
+    raw = pd.read_csv(root / "data" / "raw" / SITADEL_FILE, sep=";", dtype=str)
+    return flux.parse_sitadel_annual(raw)
+
+
+def build_flux(root: Path) -> dict[str, object]:
+    """Compute the R-18 payload (household formation vs construction by ZE)."""
+    raw = root / "data" / "raw"
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *flux.CENSUS_FLOW_COLS])
+    census = flux.parse_census_vintages(census_raw)
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    frame = flux.flux_by_ze(census, _read_sitadel_annual(root), commune_ze)
+    tendue, tendue_variants = _tension_flag_with_variants(root)
+    # The detente need (R-07 central) the flow is compared with.
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_t = rs.parse_census_housing(
+            pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+        )
+    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    tense = tension.tension_by_ze(
+        census_t,
+        tlv,
+        communes,
+        commune_ze,
+        _load_hypothesis(root, "H-08").central_value,
+        _load_hypothesis(root, "H-12").central_value,
+    )
+    besoin = float(tense.loc[tense["tendue"], "besoin_mobilisation"].sum())
+    return flux.build_summary(
+        frame,
+        tendue,
+        _cost_frame(root)["indice_cout_pct"],
+        _ze_names(root),
+        besoin,
+        tendue_variants,
+    )
+
+
+def run_flux(root: Path) -> int:
+    """Rebuild data/processed/flux-construction-menages-ze.json; return an exit code."""
+    payload = build_flux(root)
+    _write_json(root, FLUX_OUTPUT, payload)
+    national = cast(dict[str, object], payload["national"])
+    stock = cast(dict[str, object], payload["stock_vs_flux"])
+    print(
+        f"flux-construction: wrote {FLUX_OUTPUT} — ratio national "
+        f"{national['ratio_production']}, tendues {stock}"
     )
     return 0

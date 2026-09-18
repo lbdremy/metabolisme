@@ -44,10 +44,20 @@ class AcquireDpe(Command):
         raise SystemExit(acquire.run(project_root()))
 
 
+class AcquireSitadel(Command):
+    """Freeze the annual Sitadel « Tous Logements » extract per commune (S-54)."""
+
+    @override
+    async def run(self) -> None:
+        from logement.shell import acquire
+
+        raise SystemExit(acquire.run_sitadel(project_root()))
+
+
 class Logement(Command):
     """Executable evidence chain: efficacité du parc immobilier français."""
 
-    subcommand: Validate | Reproduce | AcquireDpe
+    subcommand: Validate | Reproduce | AcquireDpe | AcquireSitadel
 
 
 def main() -> None:

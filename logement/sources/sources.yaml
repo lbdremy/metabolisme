@@ -1344,3 +1344,72 @@
     Paris perçoit 1 039 M€ (p. 2, encadré 2). Sert à L-28 (la charge
     de détention du périmètre constant ne vaut pas pour Paris, le Rhône,
     la Corse, la Guyane et la Martinique).
+
+# --------------------------------------------------------------------------
+# Article 3 (2026-09-18, suite) — le flux : formation de ménages et
+# construction neuve par zone d'emploi.
+
+- id: S-55
+  publisher: SDES (ministère de la Transition écologique)
+  title: La base de données Sitadel — méthodologie (page de référence, mise à jour du 31/03/2026)
+  source_url: https://www.statistiques.developpement-durable.gouv.fr/la-base-de-donnees-sitadel-methodologie
+  publication_date: 2026-03-31
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: méthodologie en vigueur au 31/03/2026
+  license: Réutilisation libre des informations publiques (CRPA) — page du SDES publiée sans mention contraire (Licence Ouverte 2.0 par défaut)
+  local_file: data/raw/sdes-sitadel-methodologie-2026-03.html
+  checksum: sha256:b4da7b9b06d971970243c79b126c316402739114043c21b4a8222eb2404659de
+  notes: >
+    Page de méthodologie (HTML figé) : « Les données sur la construction
+    de logements de la base Sitadel proviennent des formulaires de permis
+    de construire traités par les services instructeurs (État,
+    collectivité territoriale) dont relève la commune » ; « Les
+    informations relatives aux mises en chantier et aux achèvements de
+    travaux sont issues des formulaires de déclaration d'ouverture de
+    chantier (DOC) et de déclaration attestant l'achèvement et la
+    conformité des travaux (DAACT) » ; délais : « les informations
+    relatives aux autorisations sont transmises par les services
+    instructeurs dans les six mois après le prononcé. Les déclarations
+    de mises en chantier et d'achèvement des travaux sont à l'initiative
+    des pétitionnaires ; leur remontée est plus tardive et intervient
+    généralement dans les dix-huit mois après l'ouverture de chantier »
+    ; « Les séries estimées en date réelle visent à retracer dès le mois
+    suivant les autorisations et les mises en chantier à la date réelle
+    de l'événement ». Base de D-24 et de la limite sur les séries
+    communales en date de prise en compte (S-54).
+
+- id: S-54
+  publisher: SDES (ministère de la Transition écologique) — via data.gouv.fr
+  title: Sit@del2 — logements autorisés et commencés, séries mensuelles communales en date de prise en compte (extrait annuel « Tous Logements » figé par la chaîne)
+  dataset_id: logements-autorises-et-commences-series-mensuelles-communales-en-date-de-prise-en-compte
+  source_url: https://www.data.gouv.fr/datasets/logements-autorises-et-commences-series-mensuelles-communales-en-date-de-prise-en-compte
+  publication_date: 2026-09-15
+  retrieved_at: 2026-09-18
+  geographic_scope: France (36 708 communes, DOM compris ; codes INSEE au millésime de publication, arrondissements PLM séparés)
+  temporal_scope: janvier 2013 → juillet 2026 (2026 en cours ; date de prise en compte)
+  license: Licence Ouverte / Open Licence 2.0 (Etalab)
+  local_file: data/raw/sdes-sitadel2-logements-communes-annuel-2013-2026.csv
+  checksum: sha256:ec50d34cdd84e8699f78f4a7886619092c05735769c76109013d7462664f1a37
+  notes: >
+    Ressource CSV du jeu (identifiant ec384558-f6ab-4e67-8071-71bc7fedcc2e,
+    mise à jour du 15/09/2026) : 29 049 155 lignes commune × mois ×
+    TYPE_LGT (« Collectif », « Individuel groupe », « Individuel pur »,
+    « Residence », « Tous Logements »), colonnes ANNEE, MOIS, CODE_INSEE,
+    TYPE_LGT, LOG_AUT, LOG_COM, SDP_AUT, SDP_COM ; 1 273 808 565 octets,
+    sha256 d60893d1adbdc203d0bc3701495751fb32c38b1402fc8a9e6d7e01e02aeec16c
+    (fichier mensuel téléchargé le 2026-09-18, NON figé dans le dépôt —
+    trop volumineux pour Git LFS). Ce que la chaîne fige est l'EXTRAIT
+    déterministe que produit `uv run logement acquire-sitadel` (INTRO
+    §7.1, même statut que S-16) : sommes par commune × année des lignes
+    « Tous Logements » (497 934 lignes, 10,8 Mo), les autres TYPE_LGT
+    étant ses composantes. Totaux nationaux de logements commencés par
+    année dans l'extrait (contrôle) : 2013 319 975 ; 2017 377 769 ; 2019
+    361 803 ; 2022 345 203 ; 2023 264 819 ; 2024 234 808 ; 2025 239 519 ;
+    2026 (7 mois) 140 878. Séries « en date de prise en compte » : les
+    événements sont comptés au mois de leur enregistrement (remontée des
+    DOC dans les dix-huit mois, S-55) — D-24 ; la fenêtre 2017-2022 de
+    R-18 est une moyenne pluriannuelle, les années 2023-2025 mêlent la
+    baisse réelle de la construction et les remontées encore en cours.
+    Hors Alsace-Moselle ? NON — couverture nationale (contrairement à
+    DVF) ; Mayotte présente.

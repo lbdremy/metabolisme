@@ -7,11 +7,11 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 53 sources (session 7 : + OFGL ×2, Banque des Territoires ×5, INSEE-ES Bérard-Trannoy, OCDE, CPO, DGCL, Service-Public ×2, DREAL Occitanie, préfecture de l'Hérault — S-39..S-53) ; historique : 32 sources (INSEE, LOVAC, ANIL, SDES, MTE, DGFiP, DILA, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 36 fichiers figés sha256/LFS + 2 collections vivantes) |
-| D | Définitions | `sources/definitions.yaml` | 23 définitions citées verbatim, datées, avec limites (D-19..D-23 : DMTO, loyer net/structure d'exploitation, bail à réhabilitation, expropriation-valeur vénale, loyer d'équilibre — session 7) |
+| S | Sources | `sources/sources.yaml` | 55 sources (article 3 : + Sitadel S-54, méthodologie SDES S-55 ; session 7 : + OFGL ×2, Banque des Territoires ×5, INSEE-ES Bérard-Trannoy, OCDE, CPO, DGCL, Service-Public ×2, DREAL Occitanie, préfecture de l'Hérault — S-39..S-53) ; historique : 32 sources (INSEE, LOVAC, ANIL, SDES, MTE, DGFiP, DILA, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 36 fichiers figés sha256/LFS + 2 collections vivantes) |
+| D | Définitions | `sources/definitions.yaml` | 24 définitions (D-24 logement commencé / date de prise en compte — article 3) ; 23 définitions citées verbatim, datées, avec limites (D-19..D-23 : DMTO, loyer net/structure d'exploitation, bail à réhabilitation, expropriation-valeur vénale, loyer d'équilibre — session 7) |
 | H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) · H-13 taux de droits de mutation (créée 2026-08-08, S-31) · H-14 taux de sortie du canal incitatif · H-15 décote d'acquisition · H-16 taux d'emprunt · H-17 durée d'amortissement · H-18 charges d'exploitation par logement · H-19 durée du bail à réhabilitation · H-20 indemnité de remploi (session 7, 2026-09-18 — décisions DEC-04..DEC-19 dans `evidence/decisions-2026-09-18.md` ; H-14/H-16/H-18 refondues par la revue du 2026-09-18) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-40, T-01..T-17, R-01..R-17 (sorties dans `data/processed/` ; R-15..R-17 = les mécanismes institutionnels comparés, session 7) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-17, V-01..V-04, C-01..C-15, L-01..L-33 (session 7 : V-02..V-04 contraintes normatives INTRO §17, C-11..C-15 choix de conception, L-27..L-33 ; revue du 2026-09-18 : `evidence/revue-contradictoire-2026-09-18.md` (L-16..L-21 et corrections L-04/L-07/L-09/L-11..L-15 : revue du 2026-08-07 ; L-26 et requalifications I-11..I-14, L-22..L-25 : revue du 2026-08-09, comptes rendus `evidence/revue-contradictoire-*.md`) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-41, T-01..T-18, R-01..R-18 (sorties dans `data/processed/` ; R-15..R-17 = les mécanismes institutionnels comparés, session 7 ; R-18 = le flux, article 3) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-18, V-01..V-04, C-01..C-16, L-01..L-34 (session 7 : V-02..V-04 contraintes normatives INTRO §17, C-11..C-15 choix de conception, L-27..L-33 ; revue du 2026-09-18 : `evidence/revue-contradictoire-2026-09-18.md` (L-16..L-21 et corrections L-04/L-07/L-09/L-11..L-15 : revue du 2026-08-07 ; L-26 et requalifications I-11..I-14, L-22..L-25 : revue du 2026-08-09, comptes rendus `evidence/revue-contradictoire-*.md`) |
 | M/P | Mesures, propositions | `evidence/claims.yaml` | **P-01** — l'opérateur collectif de détente (acquisition à la valeur vénale = l'outil qui sécurise, à créer en droit ; bail à réhabilitation offert sans être attendu ; arbitrage au m² avec le neuf sur friches) + voie séparée : bascule progressive de la part départementale des DMTO vers la détention, conditionnée (CPO) ; assemblé après comparaison de cinq mécanismes (C-11) et requalifié par la revue du 2026-09-18 (C-15). Journal des décisions de conception : `evidence/decisions-2026-09-18.md` |
 
 Sources enregistrées :
@@ -451,3 +451,22 @@ avant d'être assemblée, revue le même jour (décisions :
   créer) → bail offert → arbitrage au m² avec le neuf sur friches ;
   loyers proches du marché, subvention sociale 1,56 Md€/an au central ;
   M-D voie séparée. Limites propres L-27..L-33.
+
+Article 3 (2026-09-18, suite) — le flux (décisions DEC-21..DEC-23) :
+
+- **R-18** — Construction et formation de ménages par ZE, 2016-2022
+  (sortie reproductible `data/processed/flux-construction-menages-ze.json`,
+  S-11 × Sitadel S-54) : 347 340 commencés/an en France contre un besoin
+  de flux de 335 470 (ratio 1,04 ; 1,17 hors RS) ; ZE tendues : 54 % de la
+  formation de ménages pour 41 % du parc, 52 % des commencés, ratio 0,97
+  (46 ZE déficitaires, 18 279/an) mais 1,13 HORS résidences secondaires
+  (+ 20 423/an) — le déficit est littoral et touristique (Perpignan,
+  Bayonne, Sables-d'Olonne, Toulon), pas métropolitain (Paris 1,84 ;
+  exceptions Marseille, Montpellier) ; tendues vs autres non
+  discriminées (MW p 0,59), ratio non corrélé au coût (− 0,06) ;
+  intensité 10,3 vs 5,1 commencés pour 1 000 logements. Stock vs flux :
+  le besoin de détente vaut 1,3 an de formation de ménages, absorbé en
+  10,6 ans par le déficit des ZE tendues déficitaires (37,5 hors RS).
+  Lecture : **I-18** — le flux n'est pas le problème national ni celui
+  des zones tendues hors littoral ; là où il manque, c'est l'affectation
+  de la construction (RS) qui est en cause. Limites L-34.

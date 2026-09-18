@@ -506,3 +506,35 @@
     - Sans inflation des loyers, sans vacance ni impayés (S-40 isole
       2,2 % de risques locatifs hors des 54,9 %), sans valeur résiduelle
       du bien en fin d'amortissement — voir L-30.
+
+- id: D-24
+  term: logement commencé (mise en chantier) et date de prise en compte (Sitadel)
+  source: S-55
+  url: https://www.statistiques.developpement-durable.gouv.fr/la-base-de-donnees-sitadel-methodologie
+  last_updated: 2026-03-31
+  definition: >
+    Un logement est « commencé » lorsque son chantier est déclaré ouvert :
+    « Les informations relatives aux mises en chantier et aux achèvements
+    de travaux sont issues des formulaires de déclaration d'ouverture de
+    chantier (DOC) » (S-55). Les séries communales publiées en open data
+    (S-54) sont « en date de prise en compte » : l'événement est compté
+    au mois où l'administration l'enregistre, non au mois où il a eu
+    lieu ; « Les déclarations de mises en chantier […] sont à
+    l'initiative des pétitionnaires ; leur remontée est plus tardive et
+    intervient généralement dans les dix-huit mois après l'ouverture de
+    chantier » (S-55). Les séries « en date réelle » recalent
+    l'événement à sa date effective, par estimation pour les mois
+    récents.
+  caveats:
+    - Une série annuelle en date de prise en compte décale une partie des
+      mises en chantier vers l'année suivante — sur une moyenne
+      pluriannuelle, le décalage se compense sauf aux bords de la
+      fenêtre ; la dernière année est incomplète par construction
+      (remontées en cours).
+    - Une mise en chantier n'est pas un logement livré (achèvement =
+      DAACT) ; les démolitions et les changements d'usage ne sont pas
+      dans Sitadel — le flux NET de logements n'est observé que par les
+      millésimes censitaires (S-11).
+    - Champ - constructions neuves créant des logements (permis,
+      déclarations préalables) ; l'acquisition-amélioration et la
+      remobilisation d'un vacant ne créent pas de logement commencé.

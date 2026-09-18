@@ -115,3 +115,10 @@ def test_committed_institution_artifact_matches_rebuild() -> None:
     root = project_root()
     committed = json.loads((root / build.INSTITUTION_OUTPUT).read_text(encoding="utf-8"))
     assert build.build_institution(root) == committed
+
+
+def test_committed_flux_artifact_matches_rebuild() -> None:
+    """data/processed/flux-construction-menages-ze.json matches a rebuild."""
+    root = project_root()
+    committed = json.loads((root / build.FLUX_OUTPUT).read_text(encoding="utf-8"))
+    assert build.build_flux(root) == committed

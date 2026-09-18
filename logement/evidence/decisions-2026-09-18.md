@@ -338,3 +338,69 @@ donnée) ; chacune est réversible à la lecture.
 - **SE-13 (M-D agit sur le statut le moins mobile)** : intégré en texte
   (L-28(6)), pas de calcul supplémentaire possible sans source sur les
   mobilités des propriétaires.
+
+---
+
+## Article 3 (même session, suite de l'autonomie : « continue le prochain article »)
+
+## DEC-21 — Sujet du troisième article : le flux
+
+- **Options** : (a) les observations qui trancheraient H-04 — rotation
+  par âge × ZE (fichier détail RP2022, 26,3 M d'observations) ; (b) le
+  FLUX : la formation de ménages rattrape-t-elle le stock que P-01
+  détend, et construit-on là où les ménages se forment ? (S-11 porte
+  déjà les millésimes 2011/2016/2022 par commune ; Sit@del2 à figer) ;
+  (c) les territoires détendus laissés entiers par P-01 (L-20(3)) ;
+  (d) l'instruction juridique de l'outil d'acquisition et du prix de
+  repli (C-15).
+- **Abandonné** : (a) — raffinerait le diagnostic de mobilité déjà
+  publié sans toucher à la proposition ; les vrais arbitres (RPLS 2026,
+  DVF 2026) ne sont pas parus, et la rotation par âge n'en est pas un ;
+  (c) — sujet entier, mais sans mécanisme chiffrable en open data au-delà
+  de I-02/I-03 ; (d) — travail juridique, pas une chaîne de preuves
+  exécutable ; à faire avec Rémy.
+- **Retenu** : (b). C'est le trou le plus large laissé par la revue du
+  2026-09-18 (L-19/L-32 : « P-01 ne traite que le stock ») et une
+  question du cadrage restée sans réponse (INTRO logement §15, q. 9 :
+  « Où la production neuve diverge-t-elle des besoins ? » ; §7 :
+  « mauvaise production »). Les données sont à portée : ménages et
+  logements par commune aux trois millésimes (S-11), logements
+  commencés par commune (Sit@del2, open data SDES).
+- **Trace** : ce journal, S-54, R-18.
+
+## DEC-22 — Figer un extrait annuel de Sit@del2, pas le fichier mensuel
+
+- **Options** : (a) figer le fichier mensuel complet (1,27 Go, 29 M de
+  lignes) en Git LFS ; (b) figer un extrait déterministe (sommes par
+  commune × année des lignes « Tous Logements », 10,8 Mo) produit par
+  une commande d'acquisition versionnée, en consignant le sha256 et la
+  taille du fichier mensuel ; (c) figer les séries « en date réelle »
+  millésimées diffusées par des portails tiers (Opendatasoft).
+- **Abandonné** : (a) — au-delà du raisonnable pour LFS (le dépôt
+  porte déjà ~1 Go de sources) et la chaîne n'en consomme que les
+  sommes annuelles ; (c) — les miroirs ne sont pas le producteur, et
+  leur date réelle n'est disponible qu'en millésimes fermés.
+- **Retenu** : (b), même statut que S-16 (extrait DPE) : INTRO §7.1
+  « conserver un script de récupération » — `logement acquire-sitadel`.
+  Le prix : les mois ne sont plus dans le dépôt ; la fenêtre de R-18
+  est annuelle.
+- **Trace** : S-54, `shell/acquire.py`, D-24.
+
+## DEC-23 — Mesure du flux : fenêtres, besoin, variante hors RS
+
+- **Options** : (a) fenêtre de construction 2017-2022 alignée sur les
+  millésimes censitaires 2016→2022 ; (b) 2013-2024 (plus longue, mais
+  2023-2024 incomplètes en date de prise en compte) ; (c) 2019-2024.
+  Besoin de flux : (d) un logement par ménage formé ; (e) ménages
+  formés / (1 − RS − vacants) de 2022 (structure constante) ; (f) une
+  norme nationale (ex. 1,2 logement par ménage).
+- **Abandonné** : (b) et (c) comme central — la dernière année
+  disponible est incomplète par construction (D-24) et le besoin est
+  mesuré 2016-2022 ; (b) reste publié. (d) — sous-estime : un parc a
+  besoin de vacance et de RS pour rester lui-même ; (f) — une norme
+  inventée. 
+- **Retenu** : (a) + (e), avec la variante hors RS (ménages formés /
+  (1 − vacants)) publiée SYSTÉMATIQUEMENT, parce qu'elle renverse le
+  signe du solde des ZE tendues (− 5 253 → + 20 423/an) : le résultat
+  ne peut pas être lu sans les deux.
+- **Trace** : C-16, R-18, L-34(3).
