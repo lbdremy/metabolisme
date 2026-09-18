@@ -5,9 +5,10 @@ subtitle: >
   parc privé (2020-2026), croisements emploi et coût par zone d'emploi,
   taux d'effort, tension, état du bâti, coût de remobilisation, foncier
   immobilisé, rotation résidentielle, mobilité du parc social et des
-  personnes, coût de transaction — chiffres révisés par la revue
-  contradictoire du 2026-08-07
-date: 2026-08-09
+  personnes, coût de transaction — chiffres révisés par les revues
+  contradictoires du 2026-08-07 et du 2026-08-09 ; puis les mécanismes
+  institutionnels comparés et la proposition P-01 (session 7, 2026-09-18)
+date: 2026-09-18
 lang: fr
 format:
   html:
@@ -277,6 +278,7 @@ r11 = build.build_mobilite(ROOT)
 r12 = build.build_social(ROOT)
 r13 = build.build_migrations(ROOT)
 r14 = build.build_transaction(ROOT)
+r15 = build.build_institution(ROOT)  # R-15..R-17 partagent un artefact
 for name, computed, output in [
     ("R-01", r01, build.OUTPUT), ("R-02", r02, build.LOVAC_OUTPUT),
     ("R-03", r03, build.ZE_OUTPUT), ("R-04", r04, build.COUT_OUTPUT),
@@ -285,10 +287,11 @@ for name, computed, output in [
     ("R-09", r09, build.REMOB_OUTPUT), ("R-10", r10, build.FONCIER_OUTPUT),
     ("R-11", r11, build.MOBILITE_OUTPUT), ("R-12", r12, build.SOCIAL_OUTPUT),
     ("R-13", r13, build.MIGRATIONS_OUTPUT), ("R-14", r14, build.TRANSACTION_OUTPUT),
+    ("R-15..R-17", r15, build.INSTITUTION_OUTPUT),
 ]:
     committed = json.loads((ROOT / output).read_text(encoding="utf-8"))
     assert computed == committed, f"{name} diverge de l'artefact publié"
-print("R-01..R-14 : artefacts publiés == recalcul depuis les sources figées ✔")
+print("R-01..R-17 : artefacts publiés == recalcul depuis les sources figées ✔")
 ```
 
 ### R-01 — Le parc suit les ménages, pas la population (1982-2025)
@@ -1092,6 +1095,86 @@ revenu (R-06), péage d'achat record — mais la part causale du péage
 dans le gel n'est pas identifiée (interprétation I-14 requalifiée).
 
 ::: {.callout-warning}
+### R-15 à R-17 — Les mécanismes institutionnels comparés (session 7, 2026-09-18)
+
+Étape 13 de la méthode (concevoir le système) : les mécanismes qui
+pourraient répondre aux contraintes de l'arc sont chiffrés sur la
+**même géographie** que le diagnostic (97 ZE tendues, besoin 194 488,
+règle mixte C-07 — choix C-11), avant qu'aucun ne soit retenu. Les
+paramètres nouveaux sont H-14..H-18 ; chaque choix de valeur est
+consigné dans
+[`evidence/decisions-2026-09-18.md`](decisions-2026-09-18.md).
+
+```{python}
+#| code-summary: "chiffres clés R-15 (M-A, canal incitatif)"
+per = r15["perimetre"]
+print(f"périmètre : {per['n_ze_tendues']} ZE tendues, besoin {per['besoin']:,}, "
+      f"rénovables {per['renovables']:,}, déficit au neuf {per['deficit_neuf']:,}".replace(",", " "))
+ma = r15["m_a_canal_incitatif"]
+c10 = ma["central_10_ans"]
+print(f"M-A à H-14 central ({c10['taux_pct_an']} %/an) : {c10['sorties']:,} sorties en 10 ans "
+      f"= {c10['part_gisement_pct']} % du gisement effectif ({ma['gisement_effectif']:,}), "
+      f"couverture du besoin {c10['couverture_besoin']:.2f}".replace(",", " "))
+print("grille (taux × horizon → couverture) : " + " ; ".join(
+    f"{g['taux']} {g['horizon_ans']} ans {g['couverture_besoin']:.2f}" for g in ma["grille"]))
+print(f"rendement TLV 2023 : {ma['rendement_tlv_2023_meur']} M€ (S-22)")
+```
+
+```{python}
+#| code-summary: "chiffres clés R-16 (M-B opérateur avec acquisition, M-C bail à réhabilitation)"
+mb = r15["m_b_operateur_acquisition"]; c = mb["central"]
+print(f"M-B investissement {c['investissement_mdeur']} Md€ (acquisition {c['dont_acquisition_mdeur']}, "
+      f"rénovation {c['dont_renovation_mdeur']}, neuf {c['dont_neuf_mdeur']}) ; "
+      f"coût unitaire médian d'un vacant acquis-rénové {c['cout_unitaire_renove_median_eur']:,} € "
+      f"vs neuf {mb['prix_revient_neuf_eur_2023']:,.0f} €".replace(",", " "))
+print(f"annuité {c['annuite_mdeur_an']} Md€/an = {c['annuite_par_residence_principale_eur_an']} € "
+      f"par résidence principale des ZE tendues ; facteur d'annuité {mb['annuity_factor_central']}")
+for k in ("loyer_equilibre_renove_m2", "loyer_equilibre_neuf_m2", "loyer_marche_m2", "loyer_social_m2"):
+    q = c[k]; print(f"  {k}: médiane {q['median']} €/m²/mois (p25 {q['p25']}, p75 {q['p75']}, min {q['min']}, max {q['max']})")
+print(f"ZE où l'équilibre rénové ≤ marché : {c['n_ze_equilibre_renove_sous_marche']}/{c['n_ze_avec_loyers']} ; "
+      f"≤ social : {c['n_ze_equilibre_renove_sous_social']} ; subvention d'équilibre au loyer social "
+      f"{c['subvention_equilibre_social_mdeur_an']} Md€/an")
+sens = mb["sensibilite"]
+for k in ("h15_decote", "h16_taux_pct", "h17_duree_ans", "h18_charges"):
+    print(f"  {k}: " + " ; ".join(f"{v} → loyer {b['loyer_equilibre_renove_median_m2']} (subv. {b['subvention_equilibre_social_mdeur_an']})"
+                                  for v, b in sens[k].items()))
+print(f"  coins : favorable {sens['favorable']['loyer_equilibre_renove_median_m2']} €/m², "
+      f"défavorable {sens['defavorable']['loyer_equilibre_renove_median_m2']} €/m²")
+print("loyers d'équilibre les plus hauts : " + " ; ".join(
+    f"{e['name'].strip()} {e['loyer_equilibre_renove_m2']} (marché {e['loyer_marche_m2']})"
+    for e in mb["loyer_equilibre_le_plus_haut"][:5]))
+mc = r15["m_c_bail_rehabilitation"]; q = mc["loyer_equilibre_travaux_m2"]
+print(f"M-C (travaux seuls, {mc['duree_amortissement_ans']:.0f} ans) : loyer d'équilibre médian {q['median']} €/m² "
+      f"({q['min']}-{q['max']}), sous le social dans {mc['n_ze_travaux_sous_social']}/{mc['n_ze_avec_loyers']} ZE ; "
+      f"travaux {mc['investissement_travaux_plein_mdeur']} + neuf {mc['investissement_neuf_mdeur']} Md€")
+print("grille de consentement : " + " ; ".join(
+    f"{g['consentement_pct']} % → couverture {g['couverture_besoin']}" for g in mc["grille_consentement"]))
+```
+
+```{python}
+#| code-summary: "chiffres clés R-17 (M-D, bascule DMTO → détention)"
+md = r15["m_d_bascule_dmto"]
+print(f"produit DMTO 2024 {md['produit_dmto_2024_mdeur']} Md€ ({md['perimetre']}) / "
+      f"{md['logements_perimetre']:,} logements = {md['charge_detention_eur_logement_an']} €/logement/an".replace(",", " "))
+for k in ("peage_fiscal_eur", "peage_fiscal_mois_niveau_vie", "peage_residuel_mois_niveau_vie",
+          "annees_equivalentes", "annees_equivalentes_tendues", "annees_equivalentes_autres"):
+    q = md[k]; print(f"  {k}: médiane {q['median']} (p25 {q['p25']}, p75 {q['p75']}, min {q['min']}, max {q['max']})")
+print("bascule la plus favorable au mobile : " + " ; ".join(
+    f"{e['name'].strip()} {e['annees_equivalentes']} ans" for e in md["bascule_la_plus_favorable_au_mobile"][:4]))
+print("la moins favorable : " + " ; ".join(
+    f"{e['name'].strip()} {e['annees_equivalentes']} ans" for e in md["bascule_la_moins_favorable_au_mobile"][:4]))
+```
+
+Lecture (I-15..I-17) : le canal incitatif seul livre moins d'un dixième
+du besoin en dix ans ; la seule voie qui sécurise le volume — l'opérateur
+qui acquiert — le paie au prix du marché des zones tendues, où un vacant
+acquis et rénové coûte PLUS qu'un logement social neuf (le ratio ~2 de
+R-09 ne valait que pour les travaux) ; le bail à réhabilitation est le
+moins cher par logement mais achète un consentement que rien ne
+paramètre ; la bascule DMTO → détention allège le péage d'un ordre de
+grandeur mais redistribue d'abord (33 ans d'équivalence, 44 en zones
+tendues) et n'a qu'une preuve causale de court terme.
+
 ## Garde de lecture (revue du 2026-08-09)
 
 Les quatre résultats R-11..R-14 sont descriptifs : ils n'établissent
@@ -1264,17 +1347,36 @@ perdants, incitations des propriétaires, territoires détendus laissés
 entiers, attribution des logements) restent à instruire dans la
 proposition (L-20).
 
-## 9. Implications de conception (préliminaires)
+## 9. Implications de conception et proposition (P-01)
 
-Prudentes à ce stade :
+Les deux implications préliminaires de la v0.5 tiennent : le problème
+n'est pas un déficit brut (I-01) et un mécanisme calibré sur « la France
+vacante » se trompe de cible (I-02). La session 7 les prolonge par la
+comparaison de cinq mécanismes (C-11, R-15..R-17) sous les contraintes
+normatives de l'INTRO §17, désormais des nœuds V-02..V-04.
 
-1. Le « problème du logement » national n'est pas d'abord un déficit brut de
-   logements par rapport aux ménages : le stock a suivi. Les écarts sont
-   dans la **disponibilité réelle, la localisation et l'accès** — ce qui
-   oriente la suite de la recherche vers H-02/H-03/H-04.
-2. Un mécanisme de remise en usage calibré sur « la France vacante » se
-   trompe de cible s'il ignore le clivage intensité rurale / volume urbain
-   (I-02).
+**P-01 — l'opérateur collectif de détente**, assemblé après comparaison :
+
+1. **Offre** — à tout propriétaire d'un vacant durable d'une ZE tendue,
+   un bail à réhabilitation (M-C) : travaux financés au Livret A,
+   loyer d'équilibre ~4 €/m², bien rendu rénové après 30 ans.
+2. **Repli** — passé un délai, acquisition à la valeur vénale (M-B,
+   C-12) : c'est le repli qui rend l'offre préférable et sécurise le
+   volume ; son coût (248 k€ par logement médian, plus qu'un neuf) est
+   la borne qui oblige l'opérateur à
+3. **Arbitrer** logement par logement avec la construction sur friches
+   (R-10 : le foncier suffit ; R-16 : le neuf s'équilibre au marché).
+
+Financement par prêts PLUS portés par les loyers ; subvention
+d'équilibre au loyer social ≤ 2,4 Md€/an au pire cas tout-acquisition,
+≈ 0 si le bail domine — à comparer aux 271 M€ de TLV et aux 9,9 Md€ de
+DMTO (O-37). En parallèle, la bascule progressive de la part
+départementale des DMTO vers une charge de détention (M-D), assumée
+comme choix de valeur (V-03) et non comme levier causal démontré
+(I-17). Ce que P-01 ne démontre pas : le taux d'adhésion au bail
+(L-29), l'effet-prix de la détente (L-20), le flux au-delà du stock
+(L-19), la mobilité locative (L-31). Les arbitrages restés politiques
+sont nommés dans le journal des décisions.
 
 ## 10. Limites et objections
 
@@ -1361,7 +1463,7 @@ elle en est la **condition**.
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 82 tests (unitaires, propriétés, régression)
+./test.sh                   # 168 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 

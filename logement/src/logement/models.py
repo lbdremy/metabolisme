@@ -77,6 +77,10 @@ class SourceRecord(StrictModel):
     checksum: str | None = Field(default=None, pattern=r"^sha256:[0-9a-f]{64}$")
     # Multi-file sources (e.g. a dataset shipping data + schema + summaries).
     files: list[FrozenFile] = Field(default_factory=list)
+    # False when the frozen file is under a licence that does not allow the
+    # site to serve it (checksummed and cited, never redistributed — same
+    # contract as the site's `redistributable`, packages/evidence).
+    redistributable: bool = True
     notes: str = ""
 
     @model_validator(mode="after")
@@ -154,7 +158,7 @@ ClaimType = Literal[
     "interpretation",
     "value",
     "choice",
-    "proposition",
+    "proposal",
     "limit",
 ]
 
@@ -167,7 +171,7 @@ CLAIM_PREFIXES: dict[str, ClaimType] = {
     "I": "interpretation",
     "V": "value",
     "C": "choice",
-    "P": "proposition",
+    "P": "proposal",
     "L": "limit",
 }
 

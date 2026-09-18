@@ -1,0 +1,770 @@
+{
+  "m_a_canal_incitatif": {
+    "besoin": 194488,
+    "central_10_ans": {
+      "couverture_besoin": 0.08,
+      "horizon_ans": 10,
+      "part_gisement_pct": 7.5,
+      "sorties": 15500,
+      "taux": "central",
+      "taux_pct_an": 0.75
+    },
+    "gisement_effectif": 206664,
+    "grille": [
+      {
+        "couverture_besoin": 0.013,
+        "horizon_ans": 5,
+        "part_gisement_pct": 1.2,
+        "sorties": 2583,
+        "taux": "bas",
+        "taux_pct_an": 0.25
+      },
+      {
+        "couverture_besoin": 0.027,
+        "horizon_ans": 10,
+        "part_gisement_pct": 2.5,
+        "sorties": 5167,
+        "taux": "bas",
+        "taux_pct_an": 0.25
+      },
+      {
+        "couverture_besoin": 0.053,
+        "horizon_ans": 20,
+        "part_gisement_pct": 5.0,
+        "sorties": 10333,
+        "taux": "bas",
+        "taux_pct_an": 0.25
+      },
+      {
+        "couverture_besoin": 0.04,
+        "horizon_ans": 5,
+        "part_gisement_pct": 3.8,
+        "sorties": 7750,
+        "taux": "central",
+        "taux_pct_an": 0.75
+      },
+      {
+        "couverture_besoin": 0.08,
+        "horizon_ans": 10,
+        "part_gisement_pct": 7.5,
+        "sorties": 15500,
+        "taux": "central",
+        "taux_pct_an": 0.75
+      },
+      {
+        "couverture_besoin": 0.159,
+        "horizon_ans": 20,
+        "part_gisement_pct": 15.0,
+        "sorties": 31000,
+        "taux": "central",
+        "taux_pct_an": 0.75
+      },
+      {
+        "couverture_besoin": 0.133,
+        "horizon_ans": 5,
+        "part_gisement_pct": 12.5,
+        "sorties": 25833,
+        "taux": "haut",
+        "taux_pct_an": 2.5
+      },
+      {
+        "couverture_besoin": 0.266,
+        "horizon_ans": 10,
+        "part_gisement_pct": 25.0,
+        "sorties": 51666,
+        "taux": "haut",
+        "taux_pct_an": 2.5
+      },
+      {
+        "couverture_besoin": 0.531,
+        "horizon_ans": 20,
+        "part_gisement_pct": 50.0,
+        "sorties": 103332,
+        "taux": "haut",
+        "taux_pct_an": 2.5
+      }
+    ],
+    "hypothese": {
+      "central_pct_an": 0.75,
+      "id": "H-14",
+      "plausible_range": [
+        0.25,
+        2.5
+      ]
+    },
+    "rendement_tlv_2023_meur": 271
+  },
+  "m_b_operateur_acquisition": {
+    "annuity_factor_central": 0.03851,
+    "central": {
+      "annuite_mdeur_an": 1.72,
+      "annuite_par_residence_principale_eur_an": 140,
+      "cout_unitaire_renove_median_eur": 248038,
+      "dont_acquisition_mdeur": 28.8,
+      "dont_neuf_mdeur": 9.8,
+      "dont_neuf_mdeur_an": 0.41,
+      "dont_renovation_mdeur": 6.0,
+      "dont_renove_mdeur_an": 1.97,
+      "investissement_mdeur": 44.6,
+      "logements": {
+        "neufs": 57945,
+        "renoves": 136353
+      },
+      "loyer_equilibre_neuf_m2": {
+        "max": 15.78,
+        "median": 12.47,
+        "min": 10.9,
+        "p25": 11.7,
+        "p75": 13.57
+      },
+      "loyer_equilibre_renove_m2": {
+        "max": 29.32,
+        "median": 18.34,
+        "min": 11.19,
+        "p25": 15.7,
+        "p75": 21.54
+      },
+      "loyer_marche_m2": {
+        "max": 21.79,
+        "median": 12.29,
+        "min": 8.8,
+        "p25": 10.98,
+        "p75": 14.7
+      },
+      "loyer_social_m2": {
+        "max": 7.95,
+        "median": 6.43,
+        "min": 5.21,
+        "p25": 6.06,
+        "p75": 6.78
+      },
+      "n_ze": 96,
+      "n_ze_avec_loyers": 93,
+      "n_ze_equilibre_renove_sous_marche": 0,
+      "n_ze_equilibre_renove_sous_social": 0,
+      "ratio_equilibre_renove_sur_marche": {
+        "max": 2.06,
+        "median": 1.44,
+        "min": 1.0,
+        "p25": 1.31,
+        "p75": 1.58
+      },
+      "ratio_equilibre_renove_sur_social": {
+        "max": 4.2,
+        "median": 2.81,
+        "min": 1.77,
+        "p25": 2.52,
+        "p75": 3.16
+      },
+      "subvention_equilibre_social_mdeur_an": 2.38
+    },
+    "hypotheses": {
+      "H-15": {
+        "central": 1.0,
+        "name": "vacant_acquisition_price_discount_factor",
+        "plausible_range": [
+          0.5,
+          1.0
+        ]
+      },
+      "H-16": {
+        "central": 2.3,
+        "name": "operator_borrowing_rate_pct",
+        "plausible_range": [
+          1.5,
+          2.81
+        ]
+      },
+      "H-17": {
+        "central": 40.0,
+        "name": "operator_amortisation_years",
+        "plausible_range": [
+          30.0,
+          50.0
+        ]
+      },
+      "H-18": {
+        "central": 0.549,
+        "name": "operator_operating_cost_share_of_net_rent",
+        "plausible_range": [
+          0.4,
+          0.6
+        ]
+      }
+    },
+    "loyer_equilibre_le_plus_bas": [
+      {
+        "cout_unitaire_renove_eur": 152573,
+        "deficit_neuf": 0,
+        "investissement_meur": 129.1,
+        "loyer_equilibre_neuf_m2": 12.41,
+        "loyer_equilibre_renove_m2": 11.19,
+        "loyer_marche_m2": 10.38,
+        "loyer_social_m2": 6.32,
+        "name": "Digne-les-Bains",
+        "prix_acquisition_eur": 104755,
+        "renovables": 846,
+        "subvention_meur_an": 4.8,
+        "ze": "9307"
+      },
+      {
+        "cout_unitaire_renove_eur": 145155,
+        "deficit_neuf": 333,
+        "investissement_meur": 139.4,
+        "loyer_equilibre_neuf_m2": 13.72,
+        "loyer_equilibre_renove_m2": 11.77,
+        "loyer_marche_m2": 11.73,
+        "loyer_social_m2": 6.03,
+        "name": "Corte",
+        "prix_acquisition_eur": 105000,
+        "renovables": 572,
+        "subvention_meur_an": 6.2,
+        "ze": "9404"
+      },
+      {
+        "cout_unitaire_renove_eur": 162552,
+        "deficit_neuf": 219,
+        "investissement_meur": 169.2,
+        "loyer_equilibre_neuf_m2": 12.93,
+        "loyer_equilibre_renove_m2": 12.43,
+        "loyer_marche_m2": 11.53,
+        "loyer_social_m2": 6.12,
+        "name": "La Maurienne",
+        "prix_acquisition_eur": 118000,
+        "renovables": 813,
+        "subvention_meur_an": 7.4,
+        "ze": "8411"
+      },
+      {
+        "cout_unitaire_renove_eur": 190077,
+        "deficit_neuf": 0,
+        "investissement_meur": 138.3,
+        "loyer_equilibre_neuf_m2": 11.37,
+        "loyer_equilibre_renove_m2": 12.77,
+        "loyer_marche_m2": 9.6,
+        "loyer_social_m2": 6.64,
+        "name": "Lens",
+        "prix_acquisition_eur": 135000,
+        "renovables": 727,
+        "subvention_meur_an": 5.7,
+        "ze": "3215"
+      },
+      {
+        "cout_unitaire_renove_eur": 179776,
+        "deficit_neuf": 0,
+        "investissement_meur": 82.2,
+        "loyer_equilibre_neuf_m2": 12.27,
+        "loyer_equilibre_renove_m2": 13.04,
+        "loyer_marche_m2": 8.8,
+        "loyer_social_m2": 5.22,
+        "name": "Remiremont",
+        "prix_acquisition_eur": 131101,
+        "renovables": 457,
+        "subvention_meur_an": 4.2,
+        "ze": "4414"
+      },
+      {
+        "cout_unitaire_renove_eur": 197787,
+        "deficit_neuf": 0,
+        "investissement_meur": 61.4,
+        "loyer_equilibre_neuf_m2": 11.31,
+        "loyer_equilibre_renove_m2": 13.22,
+        "loyer_marche_m2": 9.41,
+        "loyer_social_m2": 5.78,
+        "name": "Abbeville",
+        "prix_acquisition_eur": 142250,
+        "renovables": 311,
+        "subvention_meur_an": 3.0,
+        "ze": "3201"
+      },
+      {
+        "cout_unitaire_renove_eur": 180175,
+        "deficit_neuf": 0,
+        "investissement_meur": 22.5,
+        "loyer_equilibre_neuf_m2": 12.51,
+        "loyer_equilibre_renove_m2": 13.32,
+        "loyer_marche_m2": 10.04,
+        "loyer_social_m2": 6.14,
+        "name": "Chalon-sur-Saône",
+        "prix_acquisition_eur": 133000,
+        "renovables": 125,
+        "subvention_meur_an": 1.0,
+        "ze": "2707"
+      },
+      {
+        "cout_unitaire_renove_eur": 202028,
+        "deficit_neuf": 0,
+        "investissement_meur": 12.4,
+        "loyer_equilibre_neuf_m2": 11.31,
+        "loyer_equilibre_renove_m2": 13.51,
+        "loyer_marche_m2": 8.85,
+        "loyer_social_m2": 5.94,
+        "name": "Saint-Omer",
+        "prix_acquisition_eur": 146500,
+        "renovables": 61,
+        "subvention_meur_an": 0.6,
+        "ze": "3219"
+      }
+    ],
+    "loyer_equilibre_le_plus_haut": [
+      {
+        "cout_unitaire_renove_eur": 348971,
+        "deficit_neuf": 0,
+        "investissement_meur": 469.5,
+        "loyer_equilibre_neuf_m2": 14.22,
+        "loyer_equilibre_renove_m2": 29.32,
+        "loyer_marche_m2": 17.73,
+        "loyer_social_m2": 7.26,
+        "name": "Annecy",
+        "prix_acquisition_eur": 311317,
+        "renovables": 1345,
+        "subvention_meur_an": 30.2,
+        "ze": "8401"
+      },
+      {
+        "cout_unitaire_renove_eur": 321904,
+        "deficit_neuf": 0,
+        "investissement_meur": 455.8,
+        "loyer_equilibre_neuf_m2": 14.43,
+        "loyer_equilibre_renove_m2": 27.45,
+        "loyer_marche_m2": 19.99,
+        "loyer_social_m2": 7.95,
+        "name": "Versailles-Saint-Quentin",
+        "prix_acquisition_eur": 285275,
+        "renovables": 1416,
+        "subvention_meur_an": 27.6,
+        "ze": "1115"
+      },
+      {
+        "cout_unitaire_renove_eur": 333994,
+        "deficit_neuf": 3410,
+        "investissement_meur": 1509.1,
+        "loyer_equilibre_neuf_m2": 13.66,
+        "loyer_equilibre_renove_m2": 26.97,
+        "loyer_marche_m2": 14.7,
+        "loyer_social_m2": 6.77,
+        "name": "Bayonne",
+        "prix_acquisition_eur": 293513,
+        "renovables": 2791,
+        "subvention_meur_an": 84.4,
+        "ze": "7503"
+      },
+      {
+        "cout_unitaire_renove_eur": 373489,
+        "deficit_neuf": 576,
+        "investissement_meur": 613.1,
+        "loyer_equilibre_neuf_m2": 12.11,
+        "loyer_equilibre_renove_m2": 26.74,
+        "loyer_marche_m2": 13.01,
+        "loyer_social_m2": 6.37,
+        "name": "Porto-Vecchio",
+        "prix_acquisition_eur": 323750,
+        "renovables": 1381,
+        "subvention_meur_an": 37.5,
+        "ze": "9406"
+      },
+      {
+        "cout_unitaire_renove_eur": 283478,
+        "deficit_neuf": 0,
+        "investissement_meur": 646.0,
+        "loyer_equilibre_neuf_m2": 15.64,
+        "loyer_equilibre_renove_m2": 26.21,
+        "loyer_marche_m2": 21.79,
+        "loyer_social_m2": 7.8,
+        "name": "Menton",
+        "prix_acquisition_eur": 252178,
+        "renovables": 2279,
+        "subvention_meur_an": 38.7,
+        "ze": "9314"
+      },
+      {
+        "cout_unitaire_renove_eur": 325675,
+        "deficit_neuf": 0,
+        "investissement_meur": 141.5,
+        "loyer_equilibre_neuf_m2": 13.18,
+        "loyer_equilibre_renove_m2": 25.37,
+        "loyer_marche_m2": 17.01,
+        "loyer_social_m2": 6.72,
+        "name": "Aix-en-Provence",
+        "prix_acquisition_eur": 282540,
+        "renovables": 434,
+        "subvention_meur_an": 8.9,
+        "ze": "9301"
+      },
+      {
+        "cout_unitaire_renove_eur": 315948,
+        "deficit_neuf": 1568,
+        "investissement_meur": 730.3,
+        "loyer_equilibre_neuf_m2": 13.57,
+        "loyer_equilibre_renove_m2": 25.35,
+        "loyer_marche_m2": 18.32,
+        "loyer_social_m2": 6.89,
+        "name": "Sainte-Maxime",
+        "prix_acquisition_eur": 275000,
+        "renovables": 1472,
+        "subvention_meur_an": 40.1,
+        "ze": "9317"
+      },
+      {
+        "cout_unitaire_renove_eur": 307084,
+        "deficit_neuf": 0,
+        "investissement_meur": 860.2,
+        "loyer_equilibre_neuf_m2": 13.93,
+        "loyer_equilibre_renove_m2": 25.28,
+        "loyer_marche_m2": 19.05,
+        "loyer_social_m2": 7.41,
+        "name": "Seine-Yvelinoise",
+        "prix_acquisition_eur": 268000,
+        "renovables": 2801,
+        "subvention_meur_an": 51.9,
+        "ze": "1114"
+      }
+    ],
+    "prix_revient_neuf_eur_2023": 169200.0,
+    "sensibilite": {
+      "defavorable": {
+        "annuite_mdeur_an": 2.22,
+        "investissement_mdeur": 44.6,
+        "loyer_equilibre_renove_median_m2": 26.73,
+        "n_ze_equilibre_renove_sous_marche": 0,
+        "subvention_equilibre_social_mdeur_an": 4.12
+      },
+      "favorable": {
+        "annuite_mdeur_an": 0.86,
+        "investissement_mdeur": 30.2,
+        "loyer_equilibre_renove_median_m2": 6.07,
+        "n_ze_equilibre_renove_sous_marche": 93,
+        "subvention_equilibre_social_mdeur_an": 0.07
+      },
+      "h15_decote": {
+        "0.5": {
+          "annuite_mdeur_an": 1.16,
+          "investissement_mdeur": 30.2,
+          "loyer_equilibre_renove_median_m2": 10.88,
+          "n_ze_equilibre_renove_sous_marche": 77,
+          "subvention_equilibre_social_mdeur_an": 1.15
+        },
+        "0.75": {
+          "annuite_mdeur_an": 1.44,
+          "investissement_mdeur": 37.4,
+          "loyer_equilibre_renove_median_m2": 14.61,
+          "n_ze_equilibre_renove_sous_marche": 14,
+          "subvention_equilibre_social_mdeur_an": 1.76
+        },
+        "1": {
+          "annuite_mdeur_an": 1.72,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 18.34,
+          "n_ze_equilibre_renove_sous_marche": 0,
+          "subvention_equilibre_social_mdeur_an": 2.38
+        }
+      },
+      "h16_taux_pct": {
+        "1.5": {
+          "annuite_mdeur_an": 1.49,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 15.92,
+          "n_ze_equilibre_renove_sous_marche": 4,
+          "subvention_equilibre_social_mdeur_an": 1.88
+        },
+        "2.3": {
+          "annuite_mdeur_an": 1.72,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 18.34,
+          "n_ze_equilibre_renove_sous_marche": 0,
+          "subvention_equilibre_social_mdeur_an": 2.38
+        },
+        "2.81": {
+          "annuite_mdeur_an": 1.87,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 19.98,
+          "n_ze_equilibre_renove_sous_marche": 0,
+          "subvention_equilibre_social_mdeur_an": 2.72
+        }
+      },
+      "h17_duree_ans": {
+        "30": {
+          "annuite_mdeur_an": 2.07,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 22.15,
+          "n_ze_equilibre_renove_sous_marche": 0,
+          "subvention_equilibre_social_mdeur_an": 3.17
+        },
+        "40": {
+          "annuite_mdeur_an": 1.72,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 18.34,
+          "n_ze_equilibre_renove_sous_marche": 0,
+          "subvention_equilibre_social_mdeur_an": 2.38
+        },
+        "50": {
+          "annuite_mdeur_an": 1.51,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 16.13,
+          "n_ze_equilibre_renove_sous_marche": 4,
+          "subvention_equilibre_social_mdeur_an": 1.92
+        }
+      },
+      "h18_charges": {
+        "0.4": {
+          "annuite_mdeur_an": 1.72,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 13.79,
+          "n_ze_equilibre_renove_sous_marche": 30,
+          "subvention_equilibre_social_mdeur_an": 1.43
+        },
+        "0.549": {
+          "annuite_mdeur_an": 1.72,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 18.34,
+          "n_ze_equilibre_renove_sous_marche": 0,
+          "subvention_equilibre_social_mdeur_an": 2.38
+        },
+        "0.6": {
+          "annuite_mdeur_an": 1.72,
+          "investissement_mdeur": 44.6,
+          "loyer_equilibre_renove_median_m2": 20.68,
+          "n_ze_equilibre_renove_sous_marche": 0,
+          "subvention_equilibre_social_mdeur_an": 2.86
+        }
+      }
+    }
+  },
+  "m_c_bail_rehabilitation": {
+    "annuity_factor": 0.04651,
+    "duree_amortissement_ans": 30.0,
+    "grille_consentement": [
+      {
+        "consentement_pct": 10,
+        "couverture_besoin": 0.37,
+        "investissement_total_mdeur": 10.4,
+        "investissement_travaux_mdeur": 0.6,
+        "logements_renoves": 13654
+      },
+      {
+        "consentement_pct": 25,
+        "couverture_besoin": 0.47,
+        "investissement_total_mdeur": 11.3,
+        "investissement_travaux_mdeur": 1.5,
+        "logements_renoves": 34136
+      },
+      {
+        "consentement_pct": 50,
+        "couverture_besoin": 0.65,
+        "investissement_total_mdeur": 12.8,
+        "investissement_travaux_mdeur": 3.0,
+        "logements_renoves": 68272
+      },
+      {
+        "consentement_pct": 100,
+        "couverture_besoin": 1.0,
+        "investissement_total_mdeur": 15.8,
+        "investissement_travaux_mdeur": 6.0,
+        "logements_renoves": 136544
+      }
+    ],
+    "investissement_neuf_mdeur": 9.8,
+    "investissement_travaux_plein_mdeur": 6.0,
+    "loyer_equilibre_travaux_m2": {
+      "max": 4.58,
+      "median": 4.22,
+      "min": 3.46,
+      "p25": 3.97,
+      "p75": 4.39
+    },
+    "n_ze_avec_loyers": 94,
+    "n_ze_travaux_sous_social": 94,
+    "taux_pct": 2.3
+  },
+  "m_d_bascule_dmto": {
+    "annees_equivalentes": {
+      "max": 72.6,
+      "median": 32.9,
+      "min": 14.5,
+      "p25": 26.2,
+      "p75": 41.7
+    },
+    "annees_equivalentes_autres": {
+      "max": 72.2,
+      "median": 29.7,
+      "min": 14.5,
+      "p25": 24.7,
+      "p75": 35.0
+    },
+    "annees_equivalentes_tendues": {
+      "max": 72.6,
+      "median": 44.3,
+      "min": 23.4,
+      "p25": 38.0,
+      "p75": 52.3
+    },
+    "bascule_la_moins_favorable_au_mobile": [
+      {
+        "annees_equivalentes": 14.5,
+        "name": "Montluçon",
+        "peage_fiscal_eur": 4140,
+        "prix_median_eur": 64500,
+        "tendue": false,
+        "ze": "8423"
+      },
+      {
+        "annees_equivalentes": 14.6,
+        "name": "Sarrebourg",
+        "peage_fiscal_eur": 4172,
+        "prix_median_eur": 65000,
+        "tendue": false,
+        "ze": "4419"
+      },
+      {
+        "annees_equivalentes": 15.5,
+        "name": "Châteauroux",
+        "peage_fiscal_eur": 4439,
+        "prix_median_eur": 85000,
+        "tendue": false,
+        "ze": "2405"
+      },
+      {
+        "annees_equivalentes": 15.7,
+        "name": "Guéret",
+        "peage_fiscal_eur": 4493,
+        "prix_median_eur": 70000,
+        "tendue": false,
+        "ze": "7511"
+      },
+      {
+        "annees_equivalentes": 15.9,
+        "name": "Vierzon",
+        "peage_fiscal_eur": 4566,
+        "prix_median_eur": 72000,
+        "tendue": false,
+        "ze": "2415"
+      },
+      {
+        "annees_equivalentes": 17.0,
+        "name": "Nevers",
+        "peage_fiscal_eur": 4878,
+        "prix_median_eur": 76000,
+        "tendue": false,
+        "ze": "0060"
+      },
+      {
+        "annees_equivalentes": 17.0,
+        "name": "Cosne-Cours-sur-Loire",
+        "peage_fiscal_eur": 4878,
+        "prix_median_eur": 76000,
+        "tendue": false,
+        "ze": "0056"
+      },
+      {
+        "annees_equivalentes": 17.3,
+        "name": "Saint-Junien",
+        "peage_fiscal_eur": 4952,
+        "prix_median_eur": 79100,
+        "tendue": false,
+        "ze": "7527"
+      }
+    ],
+    "bascule_la_plus_favorable_au_mobile": [
+      {
+        "annees_equivalentes": 72.6,
+        "name": "Porto-Vecchio",
+        "peage_fiscal_eur": 20780,
+        "prix_median_eur": 323750,
+        "tendue": true,
+        "ze": "9406"
+      },
+      {
+        "annees_equivalentes": 72.2,
+        "name": "Paris",
+        "peage_fiscal_eur": 20668,
+        "prix_median_eur": 322000,
+        "tendue": false,
+        "ze": "1109"
+      },
+      {
+        "annees_equivalentes": 69.8,
+        "name": "Annecy",
+        "peage_fiscal_eur": 19982,
+        "prix_median_eur": 311317,
+        "tendue": true,
+        "ze": "8401"
+      },
+      {
+        "annees_equivalentes": 67.2,
+        "name": "Le Genevois Français",
+        "peage_fiscal_eur": 19255,
+        "prix_median_eur": 300000,
+        "tendue": false,
+        "ze": "8416"
+      },
+      {
+        "annees_equivalentes": 66.1,
+        "name": "La Teste-de-Buch",
+        "peage_fiscal_eur": 18922,
+        "prix_median_eur": 294805,
+        "tendue": true,
+        "ze": "7513"
+      },
+      {
+        "annees_equivalentes": 65.8,
+        "name": "Bayonne",
+        "peage_fiscal_eur": 18839,
+        "prix_median_eur": 293513,
+        "tendue": true,
+        "ze": "7503"
+      },
+      {
+        "annees_equivalentes": 63.9,
+        "name": "Versailles-Saint-Quentin",
+        "peage_fiscal_eur": 18310,
+        "prix_median_eur": 285275,
+        "tendue": true,
+        "ze": "1115"
+      },
+      {
+        "annees_equivalentes": 63.3,
+        "name": "Aix-en-Provence",
+        "peage_fiscal_eur": 18135,
+        "prix_median_eur": 282540,
+        "tendue": true,
+        "ze": "9301"
+      }
+    ],
+    "charge_detention_eur_logement_an": 286,
+    "logements_perimetre": 34565110,
+    "n_ze": 296,
+    "n_ze_tendues": 96,
+    "peage_fiscal_eur": {
+      "max": 20780.0,
+      "median": 9419.0,
+      "min": 4140.0,
+      "p25": 7494.0,
+      "p75": 11951.0
+    },
+    "peage_fiscal_mois_niveau_vie": {
+      "max": 11.4,
+      "median": 5.15,
+      "min": 2.21,
+      "p25": 4.14,
+      "p75": 6.24
+    },
+    "peage_residuel_mois_niveau_vie": {
+      "max": 2.02,
+      "median": 1.02,
+      "min": 0.58,
+      "p25": 0.89,
+      "p75": 1.21
+    },
+    "perimetre": "OFGL périmètre constant (hors 75, 69, 2A, 2B, 972, 973)",
+    "produit_dmto_2024_mdeur": 9.9
+  },
+  "perimetre": {
+    "besoin": 194488,
+    "deficit_neuf": 57945,
+    "existence_h12": 0.75,
+    "n_ze_tendues": 97,
+    "renovables": 136544,
+    "residences_principales_ze_tendues": 12302355,
+    "seuil_h08_pct": 6.0
+  }
+}

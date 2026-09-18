@@ -20,6 +20,7 @@ from logement.core import (
     cout,
     effort,
     foncier,
+    institution,
     lovac,
     migrations,
     mobilite,
@@ -90,6 +91,8 @@ PARIS_ZE = "1109"
 
 DVF_FILE = "dvf-geolocalisees-2025.csv.gz"
 TRANSACTION_OUTPUT = Path("data") / "processed" / "cout-transaction-ze.json"
+
+INSTITUTION_OUTPUT = Path("data") / "processed" / "scenarios-institutionnels-ze.json"
 
 
 def build_parc_menages(root: Path) -> dict[str, object]:
@@ -794,5 +797,167 @@ def run_rs(root: Path) -> int:
     print(
         f"residences-secondaires: wrote {RS_OUTPUT} — spearman RS×vacance "
         f"{payload['spearman_rs_vs_structural_vacancy']}, touristic {payload['touristic_ze']}"
+    )
+    return 0
+
+
+def _effort_frame(root: Path) -> pd.DataFrame:
+    """Build the R-06 per-ZE frame (mixed market rent, incomes) at the H-07 central."""
+    raw = root / "data" / "raw"
+    loyers_appart = cout.parse_loyers(
+        pd.read_csv(raw / LOYERS_FILE, sep=";", encoding="cp1252", dtype=str)
+    )
+    loyers_maison = cout.parse_loyers(
+        pd.read_csv(raw / LOYERS_MAISON_FILE, sep=";", encoding="cp1252", dtype=str)
+    )
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(
+            fh, sep=";", dtype=str, usecols=["CODGEO", *effort.CENSUS_MIX_COLS]
+        )
+    census_mix = effort.parse_census_mix(census_raw)
+    with zipfile.ZipFile(raw / FILOSOFI_ZIP) as zf, zf.open(FILOSOFI_CSV) as fh:
+        filosofi = pd.read_csv(
+            fh, sep=";", dtype=str, usecols=["GEO", "GEO_OBJECT", "FILOSOFI_MEASURE", "OBS_VALUE"]
+        )
+    households = effort.household_frame(
+        cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="MED_SL"),
+        cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="NUM_PER"),
+        cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="NUM_CU"),
+    )
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    return effort.effort_by_ze(
+        loyers_appart,
+        loyers_maison,
+        census_mix,
+        communes,
+        commune_ze,
+        households,
+        _load_hypothesis(root, "H-07").central_value,
+    )
+
+
+def build_institution(root: Path) -> dict[str, object]:
+    """Compute the R-15..R-17 payload (the institutional mechanisms compared).
+
+    Consumes the SAME frames as R-07/R-09/R-14 (tension at the H-08/H-12
+    centrals, mixed rule, DVF medians) so the mechanisms are priced on the
+    geography the diagnostic established — no second definition of the
+    need (C-11).
+    """
+    raw = root / "data" / "raw"
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
+    census = rs.parse_census_housing(census_raw)
+    with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
+        mix_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *effort.CENSUS_MIX_COLS])
+    census_mix = effort.parse_census_mix(mix_raw)
+    tlv = tension.parse_tlv(pd.read_csv(raw / TLV_FILE, sep=";", dtype=str))
+    commune_ze = ze.parse_commune_ze(_read_membership(root))
+    communes = lovac.parse_territories(
+        _read_lovac(root, LOVAC_COMMUNES), code_col="CODGEO_26", name_col="LIBGEO_26"
+    )
+    h08 = _load_hypothesis(root, "H-08")
+    h12 = _load_hypothesis(root, "H-12")
+    tense_all = tension.tension_by_ze(
+        census, tlv, communes, commune_ze, h08.central_value, h12.central_value
+    )
+    tense = tense_all[tense_all["tendue"]]
+    mix = (
+        census_mix.merge(commune_ze, on="code", how="left")
+        .dropna(subset=["ze"])
+        .groupby("ze")[["rp_maison", "rp_appart"]]
+        .sum()
+    )
+    part_maison = mix["rp_maison"] / (mix["rp_maison"] + mix["rp_appart"])
+    ze_names = _ze_names(root)
+    detente = remob.detente_frame(tense, part_maison, ze_names)
+    factor = remob.ipea_factor(
+        remob.parse_ipea_annual_means((raw / IPEA_FILE).read_text(encoding="utf-8"))
+    )
+    unit_cost = remob.unit_cost_eur(
+        detente["part_maison"],
+        _load_hypothesis(root, "H-09").central_value,
+        _load_hypothesis(root, "H-10").central_value,
+        factor,
+    )
+
+    dvf = pd.read_csv(
+        raw / DVF_FILE, usecols=list(transaction.DVF_COLUMNS), dtype={"code_commune": str}
+    )
+    sales, _assiette = transaction.parse_dvf_sales(dvf)
+    prix, _couverture = transaction.prices_by_ze(sales, commune_ze)
+
+    with zipfile.ZipFile(raw / FILOSOFI_ZIP) as zf, zf.open(FILOSOFI_CSV) as fh:
+        filosofi = pd.read_csv(
+            fh, sep=";", dtype=str, usecols=["GEO", "GEO_OBJECT", "FILOSOFI_MEASURE", "OBS_VALUE"]
+        )
+    niveau_vie = cout.parse_filosofi(filosofi, geo_object="ZE2020", measure="MED_SL")
+    loyer_marche = _effort_frame(root)["loyer_mix_m2"]
+
+    with zipfile.ZipFile(raw / RPLS_ZIP) as zf, zf.open(RPLS_XLSX) as fh:
+        rpls_raw = pd.read_excel(
+            fh, sheet_name="COMMUNE", engine="calamine", header=5, dtype={"DEPCOM_ARM": str}
+        )
+    loyer_social = institution.social_rent_by_ze(institution.parse_rpls_rents(rpls_raw), commune_ze)
+
+    rp_ze = census.merge(commune_ze, on="code", how="inner").groupby("ze")["P22_RP"].sum()
+    rp_total = float(rp_ze.reindex(detente.index).fillna(0).sum())
+    departement = census["code"].map(transaction.departement_of)
+    in_perimeter = ~departement.isin(institution.DMTO_PERIMETER_EXCLUDED_DEPARTEMENTS)
+    dwellings_perimeter = float(census.loc[in_perimeter, "P22_LOG"].sum())
+
+    return {
+        "perimetre": {
+            "n_ze_tendues": len(detente),
+            "besoin": round(float(detente["besoin_mobilisation"].sum())),
+            "renovables": round(float(detente["renovables"].sum())),
+            "deficit_neuf": round(float(detente["deficit_neuf"].sum())),
+            "residences_principales_ze_tendues": round(rp_total),
+            "seuil_h08_pct": h08.central_value,
+            "existence_h12": h12.central_value,
+        },
+        "m_a_canal_incitatif": institution.incentive_scenario(
+            detente, _load_hypothesis(root, "H-14")
+        ),
+        "m_b_operateur_acquisition": institution.operator_scenario(
+            detente,
+            unit_cost,
+            prix["prix_median"],
+            loyer_marche,
+            loyer_social,
+            niveau_vie,
+            rp_total,
+            _load_hypothesis(root, "H-15"),
+            _load_hypothesis(root, "H-16"),
+            _load_hypothesis(root, "H-17"),
+            _load_hypothesis(root, "H-18"),
+        ),
+        "m_c_bail_rehabilitation": institution.lease_scenario(
+            detente,
+            unit_cost,
+            loyer_marche,
+            loyer_social,
+            _load_hypothesis(root, "H-16").central_value,
+            _load_hypothesis(root, "H-18").central_value,
+        ),
+        "m_d_bascule_dmto": institution.toll_shift_scenario(
+            prix, niveau_vie, detente.index, dwellings_perimeter, ze_names
+        ),
+    }
+
+
+def run_institution(root: Path) -> int:
+    """Rebuild data/processed/scenarios-institutionnels-ze.json; return an exit code."""
+    payload = build_institution(root)
+    _write_json(root, INSTITUTION_OUTPUT, payload)
+    m_b = cast(dict[str, object], payload["m_b_operateur_acquisition"])
+    central = cast(dict[str, object], m_b["central"])
+    print(
+        f"scenarios-institutionnels: wrote {INSTITUTION_OUTPUT} — "
+        f"investissement {central['investissement_mdeur']} Md€, "
+        f"loyer d'équilibre {central['loyer_equilibre_renove_m2']}"
     )
     return 0

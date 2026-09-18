@@ -108,3 +108,10 @@ def test_committed_transaction_artifact_matches_rebuild() -> None:
     root = project_root()
     committed = json.loads((root / build.TRANSACTION_OUTPUT).read_text(encoding="utf-8"))
     assert build.build_transaction(root) == committed
+
+
+def test_committed_institution_artifact_matches_rebuild() -> None:
+    """data/processed/scenarios-institutionnels-ze.json matches a rebuild."""
+    root = project_root()
+    committed = json.loads((root / build.INSTITUTION_OUTPUT).read_text(encoding="utf-8"))
+    assert build.build_institution(root) == committed

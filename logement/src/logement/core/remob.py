@@ -99,6 +99,15 @@ def _join_mix(tense: pd.DataFrame, part_maison: pd.Series, ze_names: pd.Series) 
     )
 
 
+def detente_frame(tense: pd.DataFrame, part_maison: pd.Series, ze_names: pd.Series) -> pd.DataFrame:
+    """Public view of the mixed-rule frame (renovables / deficit per tense ZE).
+
+    Consumed by the institutional scenarios (core/institution.py) so they
+    price exactly the geography R-09 prices — one rule, one frame.
+    """
+    return _join_mix(tense, part_maison, ze_names)
+
+
 def _mixed_cost_eur(
     frame: pd.DataFrame, cu: pd.Series, factor_renovation: float = 1.0
 ) -> dict[str, float]:

@@ -301,6 +301,34 @@
     "hosted": "asset"
   },
   {
+    "path": "sources/ofgl-rapport-2025-fiches-departements.pdf",
+    "from": "logement/data/raw/ofgl-rapport-2025-fiches-departements.pdf",
+    "size": 1048766,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-es500-berard-trannoy-2018-dmto.pdf",
+    "from": "logement/data/raw/insee-es500-berard-trannoy-2018-dmto.pdf",
+    "size": 2067858,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/service-public-f762-expropriation-2025.html",
+    "from": "logement/data/raw/service-public-f762-expropriation-2025.html",
+    "size": 144683,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/dreal-occitanie-fiche-3-1-bail-rehabilitation-2025.pdf",
+    "from": "logement/data/raw/dreal-occitanie-fiche-3-1-bail-rehabilitation-2025.pdf",
+    "size": 243773,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
     "path": "code/src/logement/core/parc.py",
     "from": "logement/src/logement/core/parc.py",
     "size": 7710,
@@ -324,7 +352,7 @@
   {
     "path": "code/src/logement/shell/build.py",
     "from": "logement/src/logement/shell/build.py",
-    "size": 31879,
+    "size": 38975,
     "mime": "text/x-python; charset=utf-8",
     "hosted": "asset"
   },
@@ -422,7 +450,7 @@
   {
     "path": "code/src/logement/core/remob.py",
     "from": "logement/src/logement/core/remob.py",
-    "size": 11554,
+    "size": 11940,
     "mime": "text/x-python; charset=utf-8",
     "hosted": "asset"
   },
@@ -500,6 +528,13 @@
     "path": "data/cout-transaction-ze.json",
     "from": "logement/data/processed/cout-transaction-ze.json",
     "size": 7213,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/scenarios-institutionnels-ze.json",
+    "from": "logement/data/processed/scenarios-institutionnels-ze.json",
+    "size": 21371,
     "mime": "application/json; charset=utf-8",
     "hosted": "asset"
   }

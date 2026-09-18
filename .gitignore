@@ -23,3 +23,6 @@ logement/notebooks/**/*.ipynb
 
 # OS
 .DS_Store
+
+# Quarto intermediate notebook (rendering by-product)
+logement/evidence/*.quarto_ipynb

@@ -7,12 +7,12 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 32 sources (INSEE, LOVAC, ANIL, SDES, MTE, DGFiP, DILA, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 36 fichiers figés sha256/LFS + 2 collections vivantes) |
-| D | Définitions | `sources/definitions.yaml` | 18 définitions citées verbatim, datées, avec limites |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) · H-13 taux de droits de mutation (créée 2026-08-08, S-31) |
-| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-36, T-01..T-16, R-01..R-14 (sorties dans `data/processed/`) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-14, V-01, C-01..C-10, L-01..L-26 (L-16..L-21 et corrections L-04/L-07/L-09/L-11..L-15 : revue du 2026-08-07 ; L-26 et requalifications I-11..I-14, L-22..L-25 : revue du 2026-08-09, comptes rendus `evidence/revue-contradictoire-*.md`) |
-| M/P | Mesures, propositions | — | à venir |
+| S | Sources | `sources/sources.yaml` | 46 sources (session 7 : + OFGL, Banque des Territoires ×3, INSEE-ES Bérard-Trannoy, OCDE, Service-Public, DREAL Occitanie — S-39..S-46) ; historique : 32 sources (INSEE, LOVAC, ANIL, SDES, MTE, DGFiP, DILA, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 36 fichiers figés sha256/LFS + 2 collections vivantes) |
+| D | Définitions | `sources/definitions.yaml` | 22 définitions citées verbatim, datées, avec limites (D-19..D-22 : DMTO, loyer net/structure d'exploitation, bail à réhabilitation, expropriation-valeur vénale — session 7) |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) · H-13 taux de droits de mutation (créée 2026-08-08, S-31) · H-14 taux de sortie du canal incitatif · H-15 décote d'acquisition · H-16 taux d'emprunt · H-17 durée d'amortissement · H-18 part des charges d'exploitation (session 7, 2026-09-18 — décisions DEC-04..DEC-08 dans `evidence/decisions-2026-09-18.md`) |
+| O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-40, T-01..T-17, R-01..R-17 (sorties dans `data/processed/` ; R-15..R-17 = les mécanismes institutionnels comparés, session 7) |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-17, V-01..V-04, C-01..C-14, L-01..L-31 (session 7 : V-02..V-04 contraintes normatives INTRO §17, C-11..C-14 choix de conception, L-27..L-31 (L-16..L-21 et corrections L-04/L-07/L-09/L-11..L-15 : revue du 2026-08-07 ; L-26 et requalifications I-11..I-14, L-22..L-25 : revue du 2026-08-09, comptes rendus `evidence/revue-contradictoire-*.md`) |
+| M/P | Mesures, propositions | `evidence/claims.yaml` | **P-01** — l'opérateur collectif de détente à trois étages (offre de bail à réhabilitation → repli par acquisition à la valeur vénale → arbitrage avec le neuf sur friches) + bascule progressive DMTO → détention ; assemblé après comparaison de cinq mécanismes (C-11). Journal des décisions de conception : `evidence/decisions-2026-09-18.md` |
 
 Sources enregistrées :
 
@@ -125,6 +125,30 @@ Sources enregistrées :
 - **S-38** — INSEE, estimations de population par département, sexe et
   âge quinquennal 1975-2026 — structures 2012/2023 du shift-share
   démographique T-16.
+- **S-39** — OFGL (DGCL), rapport 2025, fiches départements — produit
+  des DMTO départementaux 2024 : 9,9 Md€ (− 13,5 %, périmètre constant
+  hors 75/69/2A/2B/972/973, point bas du cycle) — base de R-17.
+- **S-40** — Banque des Territoires, Perspectives 2025 — structure
+  d'exploitation des bailleurs sociaux (pour 100 € de loyers nets :
+  54,9 de charges, 43,8 d'annuités) — base de H-18 ; non redistribué.
+- **S-41** — Banque des Territoires, page prêt PLUS — Livret A + 60 pb,
+  bâti jusqu'à 40 ans — base de H-16/H-17 ; non redistribué.
+- **S-42** — Banque des Territoires, Livret A à 1,7 % au 01/08/2026 —
+  niveau du Livret A dans H-16 ; non redistribué.
+- **S-43** — INSEE, Économie et Statistique n° 500-502 (Bérard &
+  Trannoy 2018) — expérience naturelle de la hausse DMTO 2014 : − 6 %
+  de transactions sur trois mois, aucun effet à moyen terme — la source
+  causale de R-17/I-17 (à la place du test maison SE-12, DEC-01).
+- **S-44** — OCDE (2022), la fiscalité immobilière dans les pays de
+  l'OCDE, points clés — recommandation « alléger les impôts sur les
+  transactions, renforcer les impôts périodiques », avec phasage ;
+  non redistribué.
+- **S-45** — Service-Public (DILA), fiche F762 procédure
+  d'expropriation — l'indemnité principale « correspond à la valeur
+  vénale du bien » : base de D-22 et du prix d'acquisition C-12.
+- **S-46** — DREAL Occitanie (2025), fiche 3.1 bail à réhabilitation
+  (CCH L252-1 s.) — durée 12-99 ans, 30 en moyenne : base de D-21 et
+  du mécanisme M-C.
 
 Définitions enregistrées : D-01 logement · D-02 résidence principale ·
 D-03 logement vacant · D-04 résidence secondaire · D-05 ménage (recensement,
@@ -137,8 +161,10 @@ D-15 vacance de fluidité · D-16 ancienneté d'emménagement (RP —
 rotation du parc, pas mobilité des personnes) · D-17 taux de mobilité
 du parc locatif social (RPLS — hors mises en service et mutations
 internes) · D-18 migration résidentielle annuelle (MIGCOM — personnes,
-résidence un an auparavant). Le registre des définitions du cadrage est
-complet.
+résidence un an auparavant) · D-19 droits de mutation à titre onéreux ·
+D-20 loyer net et structure d'exploitation d'un bailleur social · D-21
+bail à réhabilitation · D-22 expropriation et valeur vénale. Le registre
+des définitions du cadrage est complet.
 
 Hypothèses : **H-06** — seuil de vacance structurelle, valeur centrale 2 ans
 (convention C-01), plage plausible 1-3 ans (sensibilité complète possible
@@ -386,3 +412,35 @@ Résultats stabilisés (2026-08-03) :
   (décohabitation), régime inversé vers 2005-2006, la remontée de la capacité
   hors résidence principale depuis 2006 est de la vacance. Limites L-01..L-03
   (national seulement, 2023-2025 provisoires, écart conceptuel ménage/RP).
+
+
+Session 7 (2026-09-18) — la proposition institutionnelle, comparée
+avant d'être assemblée (décisions : `evidence/decisions-2026-09-18.md`) :
+
+- **R-15** — M-A, le canal incitatif seul (sortie reproductible
+  `data/processed/scenarios-institutionnels-ze.json`) : au taux de
+  sortie documenté (H-14, 0,75 %/an — ZLV, S-22), ~15 500 sorties de
+  vacance en dix ans dans les 97 ZE tendues, 8 % du besoin (3-27 % sur
+  la plage) ; 271 M€/an de TLV. Lecture : **I-15** — le canal incitatif
+  ne peut pas être le mécanisme de la détente.
+- **R-16** — M-B/M-C, l'opérateur collectif : AVEC acquisition à la
+  valeur vénale, 44,6 Md€ (28,8 d'acquisition), 248 k€ par vacant
+  acquis-rénové — plus qu'un logement social neuf (169 k€) — loyer
+  d'équilibre 18,34 €/m² (marché 12,29, social 6,43), subvention
+  d'équilibre 2,38 Md€/an ; le segment NEUF sur friches s'équilibre au
+  marché (12,47) ; SANS acquisition (bail à réhabilitation), 4,22 €/m²
+  sous le social partout, mais volume = consentement (grille). Lecture :
+  **I-15/I-16** — la voie qui sécurise le volume le paie au prix du
+  marché ; le bail est le moins cher mais achète le consentement que
+  M-A n'obtient pas ; d'où l'enchaînement offre → repli de P-01.
+- **R-17** — M-D, bascule DMTO → détention : 9,9 Md€ / 34,6 M de
+  logements = 286 €/logement/an ; péage fiscal médian 9 419 € (5,15
+  mois) = 33 ans de charge (44 en ZE tendues) ; résiduel 1,02 mois.
+  Lecture : **I-17** — redistribution avant outil de mobilité (effet
+  causal court terme seulement, S-43) ; justifiée par V-03, pas par une
+  élasticité.
+- **P-01** — l'opérateur collectif de détente : offre de bail à
+  réhabilitation → repli par acquisition à la valeur vénale → arbitrage
+  logement par logement avec le neuf sur friches ; financement Livret A,
+  subvention d'équilibre ≤ 2,4 Md€/an au pire cas ; bascule DMTO
+  progressive comme choix de valeur. Limites propres L-27..L-31.

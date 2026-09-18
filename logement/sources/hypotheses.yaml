@@ -252,3 +252,137 @@
     - S-08
   affects:
     - R-14
+
+# --------------------------------------------------------------------------
+# Session 7 (2026-09-18) — paramètres des mécanismes comparés (R-15..R-17).
+# Chaque choix de valeur est tracé dans evidence/decisions-2026-09-18.md.
+
+- id: H-14
+  name: incentive_channel_exit_rate_pct_per_year
+  description: >
+    Part du gisement structurel effectif qui SORT de vacance chaque
+    année sous le seul canal incitatif existant (taxe sur les logements
+    vacants, THLV, dispositifs Anah) — le mécanisme de référence M-A.
+    Valeur centrale tirée du seul constat d'exécution figé : la Cour
+    des comptes (S-22) chiffre ~6 700 sorties de vacance attribuables
+    au dispositif ZLV en 4 ans, soit ~3 % du stock ciblé en zone tendue
+    (L-17), donc 0,75 %/an en linéaire. Plage plausible : 0,25 %/an
+    (bilan « non démontré » de la TLV, S-22 — borne basse d'un canal
+    qui ne déclencherait presque rien) à 2,50 %/an (un canal incitatif
+    renforcé, sans précédent documenté : trois fois le constat). Le
+    taux s'applique au gisement EFFECTIF (LOVAC × H-12) de chaque ZE
+    tendue et n'est pas cumulé avec les entrées en vacance (flux non
+    instruit, L-29). DEC-08.
+  central_value: 0.75
+  plausible_range: [0.25, 2.5]
+  unit: pct_of_effective_stock_per_year
+  confidence: low
+  justification:
+    - S-22
+    - L-17
+  affects:
+    - R-15
+
+- id: H-15
+  name: vacant_acquisition_price_discount_factor
+  description: >
+    Facteur appliqué au prix médian local des logements vendus (DVF
+    2025, assiette C-10, R-14) pour obtenir le prix d'acquisition d'un
+    logement vacant durable par l'opérateur collectif (M-B). Valeur
+    centrale 1,0 : pas de décote — l'acquisition se fait à la valeur
+    vénale, qui est le principe légal de l'indemnité principale
+    d'expropriation (D-22, S-45), et aucune source ouverte figée ne
+    mesure la décote d'un vacant durable (DEC-04). Plage plausible
+    [0,5 ; 1,0] : la borne basse représente l'état dégradé et la
+    petite taille des vacants durables (S-23 : × 2,8 si < 35 m², × 3,3
+    si avant 1900 — L-18), qui abaissent la valeur vénale sous la
+    médiane des biens vendus ; la sensibilité est donc orientée à la
+    BAISSE du coût d'acquisition, le central étant conservateur
+    (majorant). Ne couvre pas les indemnités accessoires (L-27).
+  central_value: 1.0
+  plausible_range: [0.5, 1.0]
+  unit: factor_on_median_price
+  confidence: low
+  justification:
+    - S-45
+    - S-30
+    - S-23
+    - C-12
+  affects:
+    - R-16
+
+- id: H-16
+  name: operator_borrowing_rate_pct
+  description: >
+    Taux d'intérêt annuel de l'emprunt qui finance l'investissement de
+    l'opérateur collectif (acquisition + rénovation, ou construction
+    sur friches). Valeur centrale : le prêt PLUS de la Banque des
+    Territoires, « Taux Livret A + 60 pb » (S-41), au Livret A de
+    1,70 % en vigueur depuis le 01/08/2026 (S-42) : 2,30 %. Plage
+    plausible : 1,50 % (PLAI, Livret A − 0,20 — logements très
+    sociaux) à 2,81 % (PLS, Livret A + 1,11). La plage couvre les
+    MARGES du circuit existant au Livret A du jour, pas la révision
+    future du Livret A (deux fois par an) ni un financement de marché
+    (L-30). DEC-05.
+  central_value: 2.30
+  plausible_range: [1.50, 2.81]
+  unit: pct_per_year
+  confidence: medium
+  justification:
+    - S-41
+    - S-42
+    - C-13
+  affects:
+    - R-16
+
+- id: H-17
+  name: operator_amortisation_years
+  description: >
+    Durée d'amortissement de l'emprunt de l'opérateur (annuité
+    constante). Valeur centrale : 40 ans, la durée maximale « bâti » du
+    prêt PLUS (S-41 : « Bâti : de 5 à 40 ans »). Plage plausible
+    [30 ; 50] : 30 ans = pratique courante des réhabilitations
+    (S-40, p. 33 : « une maturité allongée jusqu'à 30 ans » pour
+    l'éco-prêt), 50 ans = durée « partie foncière » du PLUS (S-41),
+    appliquée ici à tout l'investissement faute de séparation
+    foncier/bâti dans le prix médian DVF (DEC-05). Un vacant durable
+    acquis et rénové a une durée de vie résiduelle qui n'est pas
+    observée : la durée est une convention de financement, pas une
+    durée de vie technique.
+  central_value: 40.0
+  plausible_range: [30.0, 50.0]
+  unit: years
+  confidence: medium
+  justification:
+    - S-41
+    - S-40
+    - C-13
+  affects:
+    - R-16
+
+- id: H-18
+  name: operator_operating_cost_share_of_net_rent
+  description: >
+    Part du loyer net absorbée par les charges d'exploitation de
+    l'opérateur (gestion, maintenance, taxe foncière) — le loyer
+    d'équilibre est annuité / (1 − H-18). Valeur centrale : 0,549, la
+    structure observée du macro-organisme des bailleurs sociaux en 2023
+    (S-40, p. 15 : « pour 100 € de loyers nets […] 54,9 € sont destinés
+    à couvrir les charges d'exploitation »), dont gestion 27,8,
+    maintenance 15,5, TFPB 11,6. Plage plausible [0,40 ; 0,60] : borne
+    basse = opérateur exonéré de TFPB et gestion plus légère (≈ 0,549 −
+    0,116 − quelques points), borne haute = gestion en diffus dans les
+    zones tendues (la structure sectorielle est une moyenne de parcs
+    groupés). Les charges sont supposées proportionnelles au loyer, ce
+    qui, pour un loyer d'équilibre élevé, SURESTIME les charges — le
+    résultat est un majorant (L-30). DEC-06.
+  central_value: 0.549
+  plausible_range: [0.40, 0.60]
+  unit: fraction_of_net_rent
+  confidence: medium
+  justification:
+    - S-40
+    - D-20
+    - C-13
+  affects:
+    - R-16

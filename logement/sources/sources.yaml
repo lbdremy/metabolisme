@@ -935,3 +935,240 @@
     démographique de R-11 : structure par âges 2012 et 2023 au
     périmètre France hors Mayotte (exclusion du département 976 aux
     deux millésimes, cohérent avec le périmètre F de S-27).
+
+# --------------------------------------------------------------------------
+# Session 7 (2026-09-18) — sources de la proposition institutionnelle.
+# Enregistrées AVANT tout calcul (INTRO §7) ; fichiers figés en LFS.
+
+- id: S-39
+  publisher: Observatoire des finances et de la gestion publique locales (OFGL, DGCL)
+  title: Rapport OFGL 2025 — fiches « Les finances des départements » (exercice 2024)
+  source_url: https://www.collectivites-locales.gouv.fr/files/files/Etudes-et-statistiques/OFGL/rapport%202025/Rapport%20OFGL%202025%203%20Fiches%20d%C3%A9partements.pdf
+  publication_date: 2025-07-22
+  retrieved_at: 2026-09-18
+  geographic_scope: France (départements, collectivités à statut particulier exercant les compétences départementales)
+  temporal_scope: comptes de gestion 2024 (évolutions 2021-2024)
+  license: Réutilisation libre des informations publiques (CRPA, art. L321-1 s.) — document de l'administration publié sans mention contraire (Licence Ouverte 2.0 par défaut)
+  local_file: data/raw/ofgl-rapport-2025-fiches-departements.pdf
+  checksum: sha256:64e036b6d06c9bed9fd71f340a0ea54ae4315bc8b28314004a24e1045b26d06c
+  notes: >
+    Fiche 3 du rapport 2025 de l'OFGL (14 pages, date de création du PDF
+    22/07/2025). Enregistrée pour le PRODUIT NATIONAL des droits de
+    mutation à titre onéreux perçus par les départements — p. 4 : « Au
+    total, le produit des DMTO décroit de - 13,5 % en 2024 pour un
+    montant total de 9,9 Md€ » ; le même paragraphe rappelle qu'en 2024
+    « trois départements ont de nouveau maintenu leur taux à 3,80 %
+    (Morbihan, Indre et Mayotte) ; tous les autres conservent un taux
+    correspondant au taux plafond qui était de 4,5 % avant de passer à
+    5 % en 2025 (hors primo-accédants) », et que 2024 est une année de
+    marché bas (- 7,5 % de ventes sur un an, prix des logements anciens
+    - 2,0 %). PÉRIMÈTRE : la fiche raisonne « à périmètre constant
+    entre 2018 et 2024, donc hors Rhône, Martinique, Guyane, Corse et
+    Paris » (champ des graphiques 6, p. 5 ; le décompte du texte —
+    94 départements en baisse + Nord, Belfort, Mayotte = 96 — confirme
+    que le 9,9 Md€ est sur ce champ de 96 départements) : c'est un
+    PLANCHER du produit France entière, et R-17 le rapporte au parc de
+    logements du MÊME champ (S-11 hors 75, 69, 2A, 2B, 972, 973 —
+    C-14). Le produit 2024 est en outre un point BAS du cycle
+    (2021-2022 étaient des records) : la bascule est calibrée sur ce
+    point bas, pour la charge de détention équivalente comme pour la
+    recette compensée. Ne couvre que la part DÉPARTEMENTALE : la taxe
+    communale additionnelle (1,20 %) et les frais d'assiette de l'État
+    ne sont pas dans ce montant (L-28).
+
+- id: S-40
+  publisher: Banque des Territoires (Caisse des Dépôts)
+  title: Perspectives — L'étude sur le logement social, édition 2025 (comptes 2023 des bailleurs sociaux, projection à 40 ans)
+  source_url: https://www.banquedesterritoires.fr/sites/default/files/2025-09/Banque_des_Territoires_PERSPECTIVES%202025.pdf
+  publication_date: 2025-09-11
+  retrieved_at: 2026-09-18
+  geographic_scope: France hexagonale (macro-organisme de 468 bailleurs sociaux, 5,6 M de logements)
+  temporal_scope: comptes 2018-2023, projection 2024-2063
+  license: © Banque des Territoires — document public en accès libre, réutilisation non ouverte (cité, non redistribué)
+  local_file: data/raw/banque-territoires-perspectives-2025-logement-social.pdf
+  checksum: sha256:1df99cfd7852f3755e45bf4fe5dd18bce653c5812032a05cc0f6f18bef57f5e0
+  redistributable: false
+  notes: >
+    Étude annuelle (64 pages, PDF du 09-11/09/2025). Enregistrée pour la
+    STRUCTURE D'EXPLOITATION observée du seul opérateur collectif de
+    logement à l'échelle nationale, base de H-18 — p. 15, schéma « pour
+    100 € de loyers nets » du macro-organisme 2023 : loyers nets 100,
+    autres produits 2,4, risques locatifs - 2,2, charges d'exploitation
+    - 54,9 (charges de gestion - 27,8, effort de maintenance - 15,5,
+    TFPB - 11,6), excédent brut d'exploitation 45,3, annuités
+    financières - 43,8 (capital - 25,5, intérêts - 18,4),
+    autofinancement locatif 1,5 ; note de lecture : « en 2023, pour
+    100 € de loyers nets perçus par un bailleur social, en moyenne,
+    54,9 € sont destinés à couvrir les charges d'exploitation et 43,8 €
+    le paiement des annuités financières ». Les loyers sont les loyers
+    QUITTANCÉS, déjà nets des pertes de vacance (D-20). Maintenance
+    2023 : 4,2 Md€ (2,2 entretien courant + 2,0 gros entretien, p. 19).
+    Ne redistribue pas le fichier (droits Caisse des Dépôts) : la
+    chaîne le cite avec page et citation, sha256 vérifiable.
+
+- id: S-41
+  publisher: Banque des Territoires (Caisse des Dépôts)
+  title: Prêt Locatif à Usage Social (PLUS) — conditions financières (page produit)
+  source_url: https://www.banquedesterritoires.fr/produits-services/prets-long-terme/pret-plus
+  publication_date: null
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: conditions en vigueur au 2026-09-18
+  license: © Banque des Territoires — page publique, réutilisation non ouverte (citée, non redistribuée)
+  local_file: data/raw/banque-territoires-pret-plus-2026.html
+  checksum: sha256:de2a4ffac095eb67b72e4de7d572d81ac52157a80fe87cb65a6a260ee7c553a8
+  redistributable: false
+  notes: >
+    Page produit (HTML figé, non datée par l'éditeur) : « Prêt PLUS :
+    conditions financières — Durée du prêt : Bâti : de 5 à 40 ans ;
+    Partie foncière : de 5 à 50 ans, jusqu'à 80 ans maximum ; […] Taux
+    Livret A + 60 pb ». Base de H-16 (marge sur le Livret A) et H-17
+    (durée bâti). Le prêt PLUS finance « construction et acquisition »
+    du parc social — c'est le circuit de financement existant que
+    l'opérateur de M-B/M-C emprunterait sans institution nouvelle.
+
+- id: S-42
+  publisher: Banque des Territoires (Caisse des Dépôts)
+  title: Livret A à 1,7 % — une évolution maîtrisée qui confirme l'attractivité des prêts de la Banque des Territoires
+  source_url: https://www.banquedesterritoires.fr/evolution-taux-livretA
+  publication_date: 2026-07-31
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: taux du Livret A à compter du 2026-08-01
+  license: © Banque des Territoires — page publique, réutilisation non ouverte (citée, non redistribuée)
+  local_file: data/raw/banque-territoires-livret-a-2026-08.html
+  checksum: sha256:a9bb7866b1718e1086c79c3d42877f0916805dab19c33ec16e3aadb484ec8be1
+  redistributable: false
+  notes: >
+    Article du 31/07/2026 : « le taux du Livret A retrouvera un niveau
+    de 1,7 % à compter du 1er août 2026 », après « plusieurs baisses
+    successives en 2025 et au début de l'année 2026 ». Fixe le niveau
+    du Livret A dans H-16 (taux PLUS = 1,70 + 0,60 = 2,30 %). Le taux
+    du Livret A est révisable deux fois par an : la valeur figée est
+    celle de la date de la session, la plage de H-16 couvre les
+    marges PLAI (- 0,20) et PLS (+ 1,11) au même Livret A, pas la
+    variation future du Livret A lui-même (L-30).
+
+- id: S-43
+  publisher: INSEE — Économie et Statistique n° 500-501-502 (Bérard G. & Trannoy A., Aix-Marseille School of Economics)
+  title: L'impact de la hausse des droits de mutation immobiliers de 2014 sur le marché du logement français
+  dataset_id: 10.24187/ecostat.2018.500t.1951
+  source_url: https://www.insee.fr/fr/statistiques/fichier/3622035/500-501-502_Berard-Trannoy_FR.pdf
+  publication_date: 2018-11-08
+  retrieved_at: 2026-09-18
+  geographic_scope: France (départements ayant ou non voté la hausse de 2014)
+  temporal_scope: transactions mensuelles 2013-2015 autour de la réforme du 1er mars 2014
+  license: Licence Ouverte / Open Licence 2.0 (INSEE — publications)
+  local_file: data/raw/insee-es500-berard-trannoy-2018-dmto.pdf
+  checksum: sha256:77c3df7cecf03f4aabb9e839300f52ca94298990cdee572b7e4e3ff126326743
+  notes: >
+    Article évalué par les pairs (24 pages, version française, pp.
+    179-200 de la revue), enregistré comme SOURCE CAUSALE sur l'effet
+    des DMTO sur les volumes de transactions — la seule expérience
+    naturelle française publiée, à la place du test maison SE-12
+    (DEC-01). Résumé (p. 1 du PDF) : hausse de la part départementale
+    « de 3.80 % à 4.50 % » non votée par tous les départements à la
+    même date ; doubles différences ; « (1) Un effet d'anticipation,
+    un mois avant la mise en œuvre de la réforme […] (2) Un effet de
+    rétention dans la période postérieure à la réforme. Au final,
+    l'effet net (rétention moins anticipation) correspond à une baisse
+    moyenne des transactions de l'ordre de 6 % sur les trois premiers
+    mois après la réforme, soit environ 15 000 transactions perdues au
+    niveau national. Si nous constatons un effet à court terme de la
+    réforme, nous n'observons aucune preuve d'un effet à moyen ou long
+    terme. » Conséquence pour M-D : l'effet d'une BAISSE du péage sur la
+    mobilité n'est établi qu'à court terme et pour une variation de
+    0,7 point ; une bascule complète (- 5,00 points départementaux)
+    est hors du support de l'estimation (L-28). Les auteurs concluent
+    aussi que les recettes restent « sur la partie ascendante de la
+    courbe de Laffer » (les DMTO rapportent malgré la distorsion).
+
+- id: S-44
+  publisher: OCDE (Centre de politique et d'administration fiscales)
+  title: La fiscalité immobilière dans les pays de l'OCDE — points clés (brochure)
+  source_url: https://www.oecd.org/fr/fiscalite/politiques-fiscales/brochure-la-fiscalite-immobiliere-dans-les-pays-de-l-ocde.pdf
+  publication_date: 2022-11-09
+  retrieved_at: 2026-09-18
+  geographic_scope: 38 pays de l'OCDE (dont la France)
+  temporal_scope: état des systèmes fiscaux 2022
+  license: © OCDE 2022 — conditions d'utilisation OCDE (http://www.oecd.org/fr/conditionsdutilisation), citation autorisée, redistribution non ouverte
+  local_file: data/raw/ocde-2022-fiscalite-immobiliere-points-cles.pdf
+  checksum: sha256:06949e00a206d419e02fd99cddedd8acc263d284f786c9ba1e10de295624c4ee
+  redistributable: false
+  notes: >
+    Brochure de synthèse (20 pages) du rapport « Housing Taxation in
+    OECD Countries » (2022), enregistrée à la demande de la revue du
+    2026-08-09 (SA-8) comme littérature comparative pour la proposition.
+    Constats et recommandations cités : « Le recours aux impôts sur les
+    transactions immobilières est important, malgré le fait qu'ils
+    risquent d'entraver la mobilité résidentielle et, dans une certaine
+    mesure, professionnelle » (p. 4) ; « 30 des 38 pays de l'OCDE
+    appliquent des impôts sur les transactions lors de l'acquisition »
+    (p. 15) ; recommandation : « Renforcer le rôle des impôts
+    périodiques sur la propriété immobilière, en particulier en
+    veillant à ce qu'ils reposent sur des valeurs cadastrales
+    régulièrement mises à jour, tout en allégeant les impôts sur les
+    transactions immobilières afin de rendre le marché du logement plus
+    efficient » (pp. 5 et 17) ; garde : « Il existe de solides arguments
+    à l'appui de la réduction ou de la suppression des impôts sur les
+    transactions, mais une telle mesure doit être mise en œuvre
+    progressivement et s'accompagner d'autres réformes fiscales
+    (renforcement du rôle des impôts périodiques […]) afin d'éviter
+    toute hausse des prix de l'immobilier et les effets de manne pour
+    les propriétaires existants » (p. 18). La brochure ne publie PAS le
+    chiffre « ~14 % de coûts de transaction en France » évoqué par la
+    revue (il vient du rapport OCDE 2011, non figé) : la chaîne ne le
+    cite pas. Fichier non redistribué (droits OCDE), cité avec pages.
+
+- id: S-45
+  publisher: Service-Public.gouv.fr (DILA, Premier ministre)
+  title: Procédure d'expropriation (fiche F762)
+  dataset_id: F762
+  source_url: https://www.service-public.gouv.fr/particuliers/vosdroits/F762
+  publication_date: 2025-11-28
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: droit en vigueur (fiche « vérifiée le 28 novembre 2025 »)
+  license: Licence Ouverte / Open Licence 2.0 (DILA — contenus service-public.fr)
+  local_file: data/raw/service-public-f762-expropriation-2025.html
+  checksum: sha256:e213e323984f889a44b0a3216274b3ad2729021886e79cd0a43e7a7c3076711a
+  notes: >
+    Fiche pratique (HTML figé) : « L'expropriation est une procédure
+    encadrée par la loi qui permet de contraindre un propriétaire à
+    céder son bien […] pour la réalisation d'un projet reconnu d'utilité
+    publique » ; le juge « fixera le montant des indemnités à verser à
+    l'exproprié, à savoir : L'indemnité principale qui correspond à la
+    valeur vénale du bien exproprié ; Les indemnités accessoires qui ont
+    pour objet de réparer les autres préjudices résultant de
+    l'expropriation (par exemple, frais de déménagement et de
+    réinstallation, la perte de revenu locatif […]) » dont
+    « l'indemnité de remploi ». Base de D-22 et du choix C-12 (prix
+    d'acquisition = valeur vénale locale, sans décote au central). Les
+    indemnités accessoires ne sont pas chiffrées par la chaîne (L-27).
+
+- id: S-46
+  publisher: DREAL Occitanie (ministère de la Transition écologique)
+  title: Fiche 3.1 — Bail à réhabilitation (B.A.R) — boîte à outils « lutte contre la vacance »
+  source_url: https://www.occitanie.developpement-durable.gouv.fr/IMG/pdf/fiche_3.1_-_bail_a_rehabilitation_bar_.pdf
+  publication_date: 2025-06-23
+  retrieved_at: 2026-09-18
+  geographic_scope: France (outil national du CCH)
+  temporal_scope: droit en vigueur au 23/06/2025 (mise à jour de la fiche)
+  license: Réutilisation libre des informations publiques (CRPA) — document d'un service de l'État publié sans mention contraire (Licence Ouverte 2.0 par défaut)
+  local_file: data/raw/dreal-occitanie-fiche-3-1-bail-rehabilitation-2025.pdf
+  checksum: sha256:e86835f844d97522af4e76e00194eeee4454594fa447ff7cdca1429b0e3edd9d
+  notes: >
+    Fiche de deux pages (mise à jour 23/06/2025) décrivant l'outil du
+    Code de la construction et de l'habitation, articles L252-1 à
+    L252-6 : « permet à un propriétaire privé ou public de confier son
+    bien, souvent dégradé ou vacant, à un preneur, qui est en général un
+    opérateur social […] pour qu'il le réhabilite, l'entretienne et le
+    loue à des ménages précaires à un loyer plafonné, pendant une durée
+    déterminée (entre 12 et 99 ans, en moyenne 30 ans). À l'issue du
+    bail, le bien revient au propriétaire, rénové et valorisé, sans
+    qu'il ait eu à supporter le coût des travaux. » Preneurs :
+    organismes HLM, SEM, collectivités, OFS, organismes agréés. Base de
+    D-21 et du mécanisme M-C (opérateur SANS acquisition). Légifrance
+    (S-08) n'est pas figé pour ces articles (capture derrière
+    Cloudflare, voir monopoles/CLAUDE.md) : la fiche officielle en tient
+    lieu, avec la référence des articles.

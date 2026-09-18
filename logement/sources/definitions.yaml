@@ -370,3 +370,112 @@
     - IRAN = 0 (commune de rattachement, personnes sans domicile fixe)
       est hors du champ mobile/non-mobile - exclu du numérateur ET du
       dénominateur, poids publié.
+
+# --------------------------------------------------------------------------
+# Session 7 (2026-09-18) — définitions de la proposition institutionnelle.
+
+- id: D-19
+  term: droits de mutation à titre onéreux (DMTO)
+  source: S-43
+  url: https://www.insee.fr/fr/statistiques/fichier/3622035/500-501-502_Berard-Trannoy_FR.pdf
+  last_updated: 2018-11-08
+  definition: >
+    Droits perçus lors de la vente d'un bien immobilier : « La
+    spécificité du cas français a trait au fait que les DMTO sont
+    proportionnels, qu'ils sont payés uniquement par l'acheteur, et
+    qu'il s'agit d'une réforme qui a touché l'ensemble du pays »
+    (S-43, p. 3 du PDF). Le taux TOTAL appliqué au prix se compose de
+    la part départementale (taux de publicité foncière voté par le
+    département : 3,80 / 4,50 / 5,00 %), de la taxe communale
+    additionnelle (1,20 %) et des frais d'assiette de l'État (2,37 % du
+    droit départemental) — décomposition portée par H-13 et S-31.
+  caveats:
+    - Le produit publié par l'OFGL (S-39) est la seule part
+      DÉPARTEMENTALE encaissée par les départements ; la part communale
+      et les frais d'assiette n'y sont pas.
+    - « Depuis 2014, il dépend également des taux de la taxe de
+      publicité foncière » (S-39, p. 4) - le produit mêle effet volume,
+      effet prix et effet taux ; les comparaisons interannuelles ne
+      séparent pas les trois.
+    - Le primo-accédant reste au taux 4,50 % (droit commun) pendant la
+      faculté 2025-2028 (S-31, H-13).
+
+- id: D-20
+  term: loyer net et structure d'exploitation d'un bailleur social (macro-organisme)
+  source: S-40
+  url: https://www.banquedesterritoires.fr/sites/default/files/2025-09/Banque_des_Territoires_PERSPECTIVES%202025.pdf
+  last_updated: 2025-09-11
+  definition: >
+    « Les loyers évoqués dans la présente étude sont les loyers
+    quittancés auprès des locataires, inférieurs aux loyers
+    théoriquement perçus par l'organisme, car déjà corrigés des pertes
+    de loyers liées à la vacance de logements » (S-40, p. 15, note 13).
+    Structure 2023 pour 100 € de loyers nets : charges d'exploitation
+    54,9 (charges de gestion 27,8, effort de maintenance 15,5, taxe
+    foncière sur les propriétés bâties 11,6), excédent brut
+    d'exploitation 45,3, annuités financières 43,8, autofinancement
+    locatif 1,5 (S-40, p. 15). La chaîne appelle « loyer d'équilibre »
+    le loyer net qui couvre exactement l'annuité d'un investissement
+    ET les charges d'exploitation à cette structure (H-18) —
+    construction de l'étude, pas une définition de la source.
+  caveats:
+    - Périmètre hexagonal (468 bailleurs, 5,6 M de logements) ; la
+      structure d'un opérateur nouveau, plus petit et concentré en
+      zones tendues (TFPB plus élevée, gestion en diffus) peut
+      différer - c'est la plage de H-18.
+    - Les annuités observées (43,8) reflètent l'endettement HISTORIQUE
+      du secteur, pas celui d'un investissement neuf  — la chaîne
+      n'utilise que la part des charges d'exploitation (54,9), l'annuité
+      étant recalculée depuis H-16/H-17.
+
+- id: D-21
+  term: bail à réhabilitation (CCH, art. L252-1 à L252-6)
+  source: S-46
+  url: https://www.occitanie.developpement-durable.gouv.fr/IMG/pdf/fiche_3.1_-_bail_a_rehabilitation_bar_.pdf
+  last_updated: 2025-06-23
+  definition: >
+    « Le Bail à réhabilitation (BAR) est un dispositif juridique et
+    financier qui permet à un propriétaire privé ou public de confier
+    son bien, souvent dégradé ou vacant, à un preneur, qui est en
+    général un opérateur social […] pour qu'il le réhabilite,
+    l'entretienne et le loue à des ménages précaires à un loyer
+    plafonné, pendant une durée déterminée (entre 12 et 99 ans, en
+    moyenne 30 ans). À l'issue du bail, le bien revient au
+    propriétaire, rénové et valorisé, sans qu'il ait eu à supporter le
+    coût des travaux. » (S-46, p. 1.) Preneurs possibles : organismes
+    HLM, SEM, collectivités territoriales, organismes de foncier
+    solidaire, organismes agréés (S-46, « porteur de l'outil »).
+  caveats:
+    - Outil VOLONTAIRE - il suppose le consentement du propriétaire ;
+      aucune source figée ne donne le taux d'adhésion (R-16 publie une
+      grille, DEC-09).
+    - Le preneur ne devient pas propriétaire  — l'investissement
+      (travaux) est amorti sur la durée du bail, pas sur la vie du bien.
+    - Fiche d'un service déconcentré, pas le texte de loi lui-même
+      (Légifrance non figé, S-08) ; les articles sont cités par leur
+      numéro.
+
+- id: D-22
+  term: expropriation pour cause d'utilité publique et indemnité principale (valeur vénale)
+  source: S-45
+  url: https://www.service-public.gouv.fr/particuliers/vosdroits/F762
+  last_updated: 2025-11-28
+  definition: >
+    « L'expropriation est une procédure encadrée par la loi qui permet
+    de contraindre un propriétaire à céder son bien (appartement,
+    maison, terrain etc) pour la réalisation d'un projet reconnu
+    d'utilité publique. » Le juge « fixera le montant des indemnités à
+    verser à l'exproprié, à savoir : L'indemnité principale qui
+    correspond à la valeur vénale du bien exproprié ; Les indemnités
+    accessoires qui ont pour objet de réparer les autres préjudices
+    résultant de l'expropriation (par exemple, frais de déménagement et
+    de réinstallation, la perte de revenu locatif, la perte de
+    stationnement) » dont « l'indemnité de remploi » (S-45).
+  caveats:
+    - La chaîne ne modélise que l'indemnité principale (valeur vénale =
+      prix médian local DVF, C-12) ; les indemnités accessoires
+      (remploi notamment) ne sont pas chiffrées (L-27).
+    - L'utilité publique d'une acquisition de logements vacants durables
+      n'est pas acquise en droit  — c'est un CHOIX de conception (C-12),
+      pas un constat ; les outils intermédiaires (préemption,
+      réquisition) ne sont pas instruits.
