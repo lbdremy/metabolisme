@@ -227,3 +227,114 @@ qu'on y perd) · retenu · pourquoi · trace dans le graphe.
   figé (la réforme 2025 est l'expérience naturelle, par date de vote
   départemental) ; RPLS 01/01/2026 dès parution ; fichier détail RP
   (ANEM × AGEMEN8) pour la rotation par âge.
+
+---
+
+## Intégration de la revue contradictoire du 2026-09-18 (61 objections)
+
+Quatre relecteurs indépendants (sources alternatives SA-1..15, hypothèses
+et définitions HD-1..18, scénarios d'échec SE-1..15, statistique
+ST-1..13) ; rapports bruts commités AVANT intégration (commit 0498b4c,
+dossier `evidence/revue-contradictoire-2026-09-18/`). Compte rendu :
+`evidence/revue-contradictoire-2026-09-18.md`. Les décisions ci-dessous
+sont celles de l'intégration — Rémy n'a pas été consulté (autonomie
+donnée) ; chacune est réversible à la lecture.
+
+## DEC-14 — Charges d'exploitation : forme fixe par logement (révise DEC-06)
+
+- **Options** : (a) garder la proportion « 54,9 % du loyer » ; (b)
+  passer aux euros par logement (S-40 p. 24 : 2 652 €) ; (c) publier
+  les deux formes en central.
+- **Abandonné** : (a) — HD-2/ST-1 : la proportion du secteur appliquée
+  à un loyer d'équilibre ~3 × plus haut faisait porter à l'opérateur
+  3 × les charges observées et décidait seule le titre « au-dessus du
+  marché partout » ; DEC-06 reposait sur un motif inexact (SA-13 : S-40
+  publie bien les €/logement). (c) — un central est un central ; la
+  forme proportionnelle reste en trace dans le compte rendu.
+- **Retenu** : (b), H-18 refondue (2 652 € ; plage 2 093 hors TFPB —
+  3 978 conventionnelle), D-23 créée.
+- **Trace** : H-18, D-23, C-13.
+
+## DEC-15 — Unités : tout au m² (ST-1 / SE-1 / HD-1)
+
+- **Options** : (a) corriger seulement la surface du neuf (66 m² S-18) ;
+  (b) porter TOUS les coûts au m² (prix DVF au m², rénovation au m²,
+  neuf 2 550 €/m²) et convertir avec la surface du segment.
+- **Abandonné** : (a) — laissait le segment rénové sur un prix par
+  logement vendu (~69 m²) divisé par une surface de RP (~96 m²).
+- **Retenu** : (b). Conséquence assumée : les totaux d'acquisition
+  utilisent la surface C-07 des RP (majorant, L-27) — une surface
+  propre aux vacants n'existe pas en open data.
+- **Trace** : C-12, C-13, T-17, L-27.
+
+## DEC-16 — Indemnité de remploi : hypothèse H-20 (SA-4)
+
+- **Options** : (a) laisser « non chiffrée » (L-27 initiale) ; (b) H-20
+  = 10 % [0 ; 10,5] sur la trace administrative du barème (S-50, dossier
+  de DUP) ; (c) attendre la capture de Légifrance R322-5.
+- **Abandonné** : (a) — c'est chiffrable et cela pèse + 7 % sur
+  l'acquisition ; (c) — Cloudflare, et l'article ne fixe pas le barème
+  (pratique jurisprudentielle) : le dossier de DUP est la trace
+  publique du barème appliqué.
+- **Retenu** : (b), en disant que S-50 n'est pas le texte réglementaire.
+- **Trace** : H-20, S-50, C-12.
+
+## DEC-17 — M-D : millésime 2025, numérateur départemental, périmètre (SA-1 / ST-2 / ST-3 / SE-9)
+
+- **Options** : (a) garder 2024 et le péage fiscal total ; (b) central
+  2025 (S-47, 11,9 Md€), 2024 en sensibilité ; numérateur = droit
+  départemental seul ; ZE < 50 % dans le périmètre hors quantiles ;
+  charge publiée en % du prix médian.
+- **Abandonné** : (a) — 2025 était publié avant la session ; le
+  numérateur total contredisait L-28(2) ; Porto-Vecchio et Paris
+  étaient cités pour une charge qui ne s'applique pas chez eux.
+- **Retenu** : (b). Le seuil de 50 % est une convention (Paris à 61 %
+  reste dedans, Lyon à 8 % sort) — publiée, avec la liste des ZE
+  partielles.
+- **Trace** : C-14, R-17, L-28, S-47, S-53.
+
+## DEC-18 — P-01 : l'acquisition sécurise, le bail est offert (SE-2 / HD-4 / SE-3)
+
+- **Options** : (a) garder l'enchaînement « offre → repli rend l'offre
+  préférable » ; (b) l'inverser honnêtement : l'acquisition est l'outil
+  (à créer en droit), le bail une option dont la préférence n'est pas
+  établie ; (c) chiffrer un prix de repli sous la valeur vénale qui
+  rendrait le bail préférable.
+- **Abandonné** : (a) — la revue a montré (valeur actuelle du bail
+  28-67 % de la vente) que la cession domine ; (c) — aucune source
+  pour un tel prix, et il contredirait C-12 (valeur vénale = principe
+  légal) ; c'est un paramètre à concevoir, nommé dans C-15, pas chiffré.
+- **Retenu** : (b), C-15 créé, I-16 requalifiée, P-01 réécrite.
+- **Trace** : C-15, I-16, P-01.
+
+## DEC-19 — H-14 : majorant par propriétaire contacté (HD-3 / SA-2 / SE-10)
+
+- **Options** : (a) recentrer H-14 plus bas (le canal réel contacte une
+  fraction) ; (b) garder 0,75 %/an en le déclarant MAJORANT et en
+  plafonnant par ZE au besoin local.
+- **Abandonné** : (a) — la fraction contactée n'a pas de source ; un
+  recentrage serait une constante inventée.
+- **Retenu** : (b) — conservateur pour I-15 (le canal, même majoré, ne
+  détend pas) ; la description de H-14 dit désormais ce que S-22 dit.
+- **Trace** : H-14, R-15, L-33 (TVLH 2027).
+
+## DEC-20 — Ce qui n'est PAS intégré, et pourquoi
+
+- **ST-5 (médianes pondérées en central)** : les médianes simples par
+  ZE restent le central (convention de R-14, une ZE = un point) ; les
+  médianes pondérées (ventes, rénovables) sont publiées à côté.
+- **HD-10 (« opérateur collectif » comme définition)** : sa forme
+  juridique (agrément, fiscalité) est un choix de conception, pas une
+  définition de source — porté par C-15, pas par un D-xx.
+- **HD-6 (part résidentielle des DMTO en hypothèse)** : aucune source
+  n'isole cette part ; consigné en L-28(1), pas en H-xx.
+- **SE-14 (propager H-08/H-12 dans R-16)** : la sensibilité au seuil
+  est publiée dans R-09 (facteur ~4,6 sur les volumes) ; R-16 le
+  rappelle dans C-11 plutôt que de tripler son artefact.
+- **SA-10 (communiqué Bercy pour le Livret A)** : S-42 suffit (la page
+  cite le taux et sa date) ; à enregistrer si S-42 disparaît.
+- **SA-12 (bilan national du bail à réhabilitation)** : aucune source
+  trouvée par le relecteur non plus — reste en L-29.
+- **SE-13 (M-D agit sur le statut le moins mobile)** : intégré en texte
+  (L-28(6)), pas de calcul supplémentaire possible sans source sur les
+  mobilités des propriétaires.

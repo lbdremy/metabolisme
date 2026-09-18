@@ -1095,29 +1095,33 @@ revenu (R-06), péage d'achat record — mais la part causale du péage
 dans le gel n'est pas identifiée (interprétation I-14 requalifiée).
 
 ::: {.callout-warning}
-### R-15 à R-17 — Les mécanismes institutionnels comparés (session 7, 2026-09-18)
+### R-15 à R-17 — Les mécanismes institutionnels comparés (session 7, 2026-09-18, revus le même jour)
 
 Étape 13 de la méthode (concevoir le système) : les mécanismes qui
 pourraient répondre aux contraintes de l'arc sont chiffrés sur la
 **même géographie** que le diagnostic (97 ZE tendues, besoin 194 488,
 règle mixte C-07 — choix C-11), avant qu'aucun ne soit retenu. Les
-paramètres nouveaux sont H-14..H-18 ; chaque choix de valeur est
-consigné dans
-[`evidence/decisions-2026-09-18.md`](decisions-2026-09-18.md).
+résultats sont des **simulations** (INTRO §15). Les paramètres nouveaux
+sont H-14..H-20 ; chaque choix de valeur est consigné dans
+[`evidence/decisions-2026-09-18.md`](decisions-2026-09-18.md) ; la revue
+contradictoire du 2026-09-18 (61 objections) a corrigé trois erreurs de
+construction avant publication —
+[`evidence/revue-contradictoire-2026-09-18.md`](revue-contradictoire-2026-09-18.md).
 
 ```{python}
 #| code-summary: "chiffres clés R-15 (M-A, canal incitatif)"
 per = r15["perimetre"]
 print(f"périmètre : {per['n_ze_tendues']} ZE tendues, besoin {per['besoin']:,}, "
-      f"rénovables {per['renovables']:,}, déficit au neuf {per['deficit_neuf']:,}".replace(",", " "))
+      f"rénovables {per['renovables']:,}, déficit au neuf {per['deficit_neuf']:,} "
+      f"({per['n_ze_tendues_hors_dvf']} ZE hors DVF)".replace(",", " "))
 ma = r15["m_a_canal_incitatif"]
 c10 = ma["central_10_ans"]
-print(f"M-A à H-14 central ({c10['taux_pct_an']} %/an) : {c10['sorties']:,} sorties en 10 ans "
-      f"= {c10['part_gisement_pct']} % du gisement effectif ({ma['gisement_effectif']:,}), "
-      f"couverture du besoin {c10['couverture_besoin']:.2f}".replace(",", " "))
+print(f"M-A à H-14 central ({c10['taux_pct_an']} %/an, {ma['hypothese']['assiette']}) : "
+      f"{c10['sorties']:,} sorties en 10 ans = {c10['part_gisement_pct']} % du gisement effectif "
+      f"({ma['gisement_effectif']:,}), couverture du besoin {c10['couverture_besoin']:.3f}".replace(",", " "))
 print("grille (taux × horizon → couverture) : " + " ; ".join(
-    f"{g['taux']} {g['horizon_ans']} ans {g['couverture_besoin']:.2f}" for g in ma["grille"]))
-print(f"rendement TLV 2023 : {ma['rendement_tlv_2023_meur']} M€ (S-22)")
+    f"{g['taux']} {g['horizon_ans']} ans {g['couverture_besoin']:.3f}" for g in ma["grille"]))
+print(f"rendement TLV 2023 : {ma['rendement_tlv_2023_meur']} M€ (S-22) — TVLH en 2027 (S-52, L-33)")
 ```
 
 ```{python}
@@ -1125,55 +1129,81 @@ print(f"rendement TLV 2023 : {ma['rendement_tlv_2023_meur']} M€ (S-22)")
 mb = r15["m_b_operateur_acquisition"]; c = mb["central"]
 print(f"M-B investissement {c['investissement_mdeur']} Md€ (acquisition {c['dont_acquisition_mdeur']}, "
       f"rénovation {c['dont_renovation_mdeur']}, neuf {c['dont_neuf_mdeur']}) ; "
-      f"coût unitaire médian d'un vacant acquis-rénové {c['cout_unitaire_renove_median_eur']:,} € "
-      f"vs neuf {mb['prix_revient_neuf_eur_2023']:,.0f} €".replace(",", " "))
-print(f"annuité {c['annuite_mdeur_an']} Md€/an = {c['annuite_par_residence_principale_eur_an']} € "
-      f"par résidence principale des ZE tendues ; facteur d'annuité {mb['annuity_factor_central']}")
-for k in ("loyer_equilibre_renove_m2", "loyer_equilibre_neuf_m2", "loyer_marche_m2", "loyer_social_m2"):
+      f"coût médian d'un vacant acquis-rénové {c['cout_renove_m2_median_eur']:,} €/m² "
+      f"({c['cout_unitaire_renove_median_eur']:,} € à la surface C-07) vs neuf "
+      f"{mb['neuf']['prix_revient_m2_eur_2023']:,.0f} €/m² ({mb['neuf']['surface_m2']} m², S-18)".replace(",", " "))
+print(f"annuité {c['annuite_mdeur_an']} Md€/an ({c['annuite_cumulee_40_ans_mdeur']} Md€ sur 40 ans) = "
+      f"{c['annuite_par_residence_principale_eur_an']} € par résidence principale des ZE tendues, "
+      f"{c['annuite_par_logement_porte_eur_an']:,} € par logement porté ; facteur {mb['annuity_factor_central']}".replace(",", " "))
+for k in ("loyer_equilibre_renove_m2", "loyer_marche_m2", "loyer_social_m2"):
     q = c[k]; print(f"  {k}: médiane {q['median']} €/m²/mois (p25 {q['p25']}, p75 {q['p75']}, min {q['min']}, max {q['max']})")
-print(f"ZE où l'équilibre rénové ≤ marché : {c['n_ze_equilibre_renove_sous_marche']}/{c['n_ze_avec_loyers']} ; "
-      f"≤ social : {c['n_ze_equilibre_renove_sous_social']} ; subvention d'équilibre au loyer social "
-      f"{c['subvention_equilibre_social_mdeur_an']} Md€/an")
+print(f"  loyer_equilibre_renove pondéré rénovables : {c['loyer_equilibre_renove_m2_median_pondere_renovables']} ; "
+      f"neuf : {c['loyer_equilibre_neuf_m2']} €/m²")
+print(f"ratio rénové/marché médian {c['ratio_equilibre_renove_sur_marche']['median']} "
+      f"({c['ratio_equilibre_renove_sur_marche']['min']}-{c['ratio_equilibre_renove_sur_marche']['max']}) ; "
+      f"rénové/social {c['ratio_equilibre_renove_sur_social']['median']}")
+print(f"ZE où rénové ≤ marché : {c['n_ze_equilibre_renove_sous_marche']}/{c['n_ze_avec_loyers']} ; "
+      f"neuf ≤ marché : {c['n_ze_equilibre_neuf_sous_marche']} ; rénové ≤ social : {c['n_ze_equilibre_renove_sous_social']}")
+print(f"subvention d'équilibre au loyer SOCIAL {c['subvention_equilibre_social_mdeur_an']} Md€/an "
+      f"({c['subvention_social_par_logement_porte_eur_an']:,} €/logement/an) ; au loyer de MARCHÉ "
+      f"{c['subvention_equilibre_marche_mdeur_an']} Md€/an".replace(",", " "))
 sens = mb["sensibilite"]
-for k in ("h15_decote", "h16_taux_pct", "h17_duree_ans", "h18_charges"):
-    print(f"  {k}: " + " ; ".join(f"{v} → loyer {b['loyer_equilibre_renove_median_m2']} (subv. {b['subvention_equilibre_social_mdeur_an']})"
+for k in ("h15_decote", "h20_remploi_pct", "h16_taux_pct", "h17_duree_ans", "h18_charges_eur"):
+    print(f"  {k}: " + " ; ".join(f"{v} → rénové {b['loyer_equilibre_renove_median_m2']} (subv. sociale {b['subvention_equilibre_social_mdeur_an']})"
                                   for v, b in sens[k].items()))
-print(f"  coins : favorable {sens['favorable']['loyer_equilibre_renove_median_m2']} €/m², "
-      f"défavorable {sens['defavorable']['loyer_equilibre_renove_median_m2']} €/m²")
+print(f"  coins : favorable {sens['favorable']['loyer_equilibre_renove_median_m2']} €/m² "
+      f"({sens['favorable']['subvention_equilibre_social_mdeur_an']} Md€/an), défavorable "
+      f"{sens['defavorable']['loyer_equilibre_renove_median_m2']} €/m² ({sens['defavorable']['subvention_equilibre_social_mdeur_an']})")
+print("rythme : " + " ; ".join(f"{r['programme_ans']} ans → {r['investissement_mdeur_an']} Md€/an, {r['logements_par_an']:,} logements/an".replace(",", " ")
+                              for r in mb["rythme_programme"]))
 print("loyers d'équilibre les plus hauts : " + " ; ".join(
     f"{e['name'].strip()} {e['loyer_equilibre_renove_m2']} (marché {e['loyer_marche_m2']})"
     for e in mb["loyer_equilibre_le_plus_haut"][:5]))
 mc = r15["m_c_bail_rehabilitation"]; q = mc["loyer_equilibre_travaux_m2"]
-print(f"M-C (travaux seuls, {mc['duree_amortissement_ans']:.0f} ans) : loyer d'équilibre médian {q['median']} €/m² "
+print(f"M-C (travaux seuls, {mc['duree_amortissement_ans']:.0f} ans, charges hors TFPB "
+      f"{mc['charges_hors_tfpb_eur_logement_an']} €) : loyer d'équilibre médian {q['median']} €/m² "
       f"({q['min']}-{q['max']}), sous le social dans {mc['n_ze_travaux_sous_social']}/{mc['n_ze_avec_loyers']} ZE ; "
       f"travaux {mc['investissement_travaux_plein_mdeur']} + neuf {mc['investissement_neuf_mdeur']} Md€")
-print("grille de consentement : " + " ; ".join(
-    f"{g['consentement_pct']} % → couverture {g['couverture_besoin']}" for g in mc["grille_consentement"]))
+print("grille de consentement (bail seul / avec le neuf) : " + " ; ".join(
+    f"{g['consentement_pct']} % → {g['couverture_besoin_bail_seul']} / {g['couverture_besoin_avec_neuf']}"
+    for g in mc["grille_consentement"]))
 ```
 
 ```{python}
-#| code-summary: "chiffres clés R-17 (M-D, bascule DMTO → détention)"
+#| code-summary: "chiffres clés R-17 (M-D, bascule de la part départementale des DMTO vers la détention)"
 md = r15["m_d_bascule_dmto"]
-print(f"produit DMTO 2024 {md['produit_dmto_2024_mdeur']} Md€ ({md['perimetre']}) / "
-      f"{md['logements_perimetre']:,} logements = {md['charge_detention_eur_logement_an']} €/logement/an".replace(",", " "))
-for k in ("peage_fiscal_eur", "peage_fiscal_mois_niveau_vie", "peage_residuel_mois_niveau_vie",
-          "annees_equivalentes", "annees_equivalentes_tendues", "annees_equivalentes_autres"):
+print(f"produit DMTO {md['produit_dmto_mdeur']} Md€ ({md['perimetre']}) / "
+      f"{md['logements_perimetre']:,} logements = {md['charge_detention_eur_logement_an']} €/logement/an "
+      f"(central {md['millesime_central']})".replace(",", " "))
+print(f"numérateur : {md['numerateur']} ; {md['n_ze_dans_perimetre']} ZE dans le périmètre "
+      f"({md['n_ze_hors_perimetre']} exclues, {md['n_ze_perimetre_partiel']} partielles : "
+      + ", ".join(f"{e['name'].strip()} {e['part_perimetre_pct']} %" for e in md['ze_perimetre_partiel']) + ")")
+for k in ("droit_departemental_eur", "peage_total_mois_niveau_vie", "droit_departemental_mois_niveau_vie",
+          "peage_residuel_mois_niveau_vie", "annees_equivalentes", "annees_equivalentes_tendues",
+          "annees_equivalentes_autres", "charge_pct_prix_median"):
     q = md[k]; print(f"  {k}: médiane {q['median']} (p25 {q['p25']}, p75 {q['p75']}, min {q['min']}, max {q['max']})")
+print(f"  pondérés par les ventes : droit {md['droit_departemental_eur_median_pondere_ventes']} €, "
+      f"{md['annees_equivalentes_median_pondere_ventes']} ans")
 print("bascule la plus favorable au mobile : " + " ; ".join(
     f"{e['name'].strip()} {e['annees_equivalentes']} ans" for e in md["bascule_la_plus_favorable_au_mobile"][:4]))
 print("la moins favorable : " + " ; ".join(
     f"{e['name'].strip()} {e['annees_equivalentes']} ans" for e in md["bascule_la_moins_favorable_au_mobile"][:4]))
 ```
 
-Lecture (I-15..I-17) : le canal incitatif seul livre moins d'un dixième
-du besoin en dix ans ; la seule voie qui sécurise le volume — l'opérateur
-qui acquiert — le paie au prix du marché des zones tendues, où un vacant
-acquis et rénové coûte PLUS qu'un logement social neuf (le ratio ~2 de
-R-09 ne valait que pour les travaux) ; le bail à réhabilitation est le
-moins cher par logement mais achète un consentement que rien ne
-paramètre ; la bascule DMTO → détention allège le péage d'un ordre de
-grandeur mais redistribue d'abord (33 ans d'équivalence, 44 en zones
-tendues) et n'a qu'une preuve causale de court terme.
+Lecture (I-15..I-17, après revue) : le canal incitatif, même lu comme
+si tous les propriétaires étaient contactés, livre moins d'un dixième du
+besoin en dix ans ; la seule voie qui sécuriserait le volume — un
+opérateur qui acquiert — suppose un outil de contrainte à créer et paie
+le prix du marché des zones tendues, où un vacant acquis et rénové
+coûte plus par m² qu'un logement social neuf ; le loyer d'équilibre qui
+en résulte est proche du marché (1,14 ×) et ~2 × le loyer social —
+l'opérateur produit du logement DISPONIBLE au prix du marché, ce que la
+fluidité demande, pas du logement social sans subvention (1,6 Md€/an) ;
+le bail à réhabilitation est le moins cher par logement mais la cession
+à la valeur vénale le domine pour le propriétaire ; la bascule DMTO →
+détention redistribue d'abord (21 ans d'équivalence, 29 en zones
+tendues, régressive en valeur) et n'a qu'une preuve causale de court
+terme.
 
 ## Garde de lecture (revue du 2026-08-09)
 
@@ -1353,30 +1383,40 @@ Les deux implications préliminaires de la v0.5 tiennent : le problème
 n'est pas un déficit brut (I-01) et un mécanisme calibré sur « la France
 vacante » se trompe de cible (I-02). La session 7 les prolonge par la
 comparaison de cinq mécanismes (C-11, R-15..R-17) sous les contraintes
-normatives de l'INTRO §17, désormais des nœuds V-02..V-04.
+normatives de l'INTRO §17, désormais des nœuds V-02..V-04, et par la
+revue contradictoire du même jour, qui a inversé un des étages de la
+première version (C-15).
 
 **P-01 — l'opérateur collectif de détente**, assemblé après comparaison :
 
-1. **Offre** — à tout propriétaire d'un vacant durable d'une ZE tendue,
-   un bail à réhabilitation (M-C) : travaux financés au Livret A,
-   loyer d'équilibre ~4 €/m², bien rendu rénové après 30 ans.
-2. **Repli** — passé un délai, acquisition à la valeur vénale (M-B,
-   C-12) : c'est le repli qui rend l'offre préférable et sécurise le
-   volume ; son coût (248 k€ par logement médian, plus qu'un neuf) est
-   la borne qui oblige l'opérateur à
-3. **Arbitrer** logement par logement avec la construction sur friches
-   (R-10 : le foncier suffit ; R-16 : le neuf s'équilibre au marché).
+1. **Acquérir** les vacants durables des ZE tendues à la valeur vénale
+   plus remploi (M-B, C-12) : c'est l'outil qui sécurise le volume — et
+   il reste à créer en droit (utilité publique d'une acquisition de
+   logements vacants, D-22).
+2. **Offrir**, avant d'acquérir, un bail à réhabilitation (M-C : ~3,7 €/m²,
+   bien rendu rénové après 30 ans) — sans compter dessus : à prix de
+   repli égal à la valeur vénale, la cession domine (I-16).
+3. **Arbitrer** au m², logement par logement, entre acquérir-rénover
+   (3 776 €/m² médian) et construire sur friches (2 550 €/m² ; R-10 : le
+   foncier suffit).
 
-Financement par prêts PLUS portés par les loyers ; subvention
-d'équilibre au loyer social ≤ 2,4 Md€/an au pire cas tout-acquisition,
-≈ 0 si le bail domine — à comparer aux 271 M€ de TLV et aux 9,9 Md€ de
-DMTO (O-37). En parallèle, la bascule progressive de la part
-départementale des DMTO vers une charge de détention (M-D), assumée
-comme choix de valeur (V-03) et non comme levier causal démontré
-(I-17). Ce que P-01 ne démontre pas : le taux d'adhésion au bail
-(L-29), l'effet-prix de la détente (L-20), le flux au-delà du stock
-(L-19), la mobilité locative (L-31). Les arbitrages restés politiques
-sont nommés dans le journal des décisions.
+Financement par prêts PLUS portés par des loyers proches du marché
+(14,4 €/m² rénové, 11,5 neuf, contre 12,3 de marché) : l'opérateur
+produit du logement disponible au prix du marché — ce que le besoin de
+fluidité demande — pas du logement social sans subvention (1,56 Md€/an
+au central pour ramener tout au loyer social, 0,17-2,83 sur les coins ;
+0,31 au loyer de marché). Ordre de grandeur : 61,8 Md€ d'investissement
+(6,2 Md€/an sur dix ans), annuité 2,38 Md€/an, contre 271 M€ de TLV et
+11,9 Md€ de DMTO départementaux (O-37). Voie séparée : la bascule
+progressive de la part départementale des DMTO vers une charge de
+détention (M-D), conditionnée à la réforme de l'assiette foncière (CPO,
+S-51), régressive si uniforme, assumée comme choix de valeur (V-03) et
+non comme levier causal démontré (I-17). Ce que P-01 ne démontre pas :
+l'existence de l'outil d'acquisition et le taux d'adhésion au bail
+(L-29), l'effet-prix de la détente et ses perdants (L-20, L-32), le
+flux au-delà du stock — ~24 Md€/an au prix S-18 (L-19, L-32), la
+mobilité locative (L-31). Les arbitrages restés politiques sont nommés
+dans le journal des décisions.
 
 ## 10. Limites et objections
 
@@ -1396,7 +1436,7 @@ territoriale communale est bornée par la secrétisation (L-05) ; et
 l'ensemble des objections de la revue contradictoire du 2026-08-07 est
 traité à la section suivante.
 
-## 11. Revues contradictoires (2026-08-07 et 2026-08-09)
+## 11. Revues contradictoires (2026-08-07, 2026-08-09 et 2026-09-18)
 
 L'arc R-01..R-10 a subi la revue contradictoire exigée par la méthode
 (INTRO étape 12) : quatre relecteurs indépendants (sources alternatives ·
@@ -1409,7 +1449,15 @@ migrations des personnes, coût de transaction — ajoutés le 2026-08-08)
 ont subi leur propre passe le **2026-08-09** : mêmes quatre angles,
 44 objections, ~60 chiffres recalculés indépendamment depuis le brut
 (zéro divergence), compte rendu complet dans
-[`evidence/revue-contradictoire-2026-08-09.md`](revue-contradictoire-2026-08-09.md)
+[`evidence/revue-contradictoire-2026-08-09.md`](revue-contradictoire-2026-08-09.md).
+La proposition institutionnelle (R-15..R-17, P-01 — session 7,
+2026-09-18) a subi la sienne le jour même : 61 objections, ~130
+valeurs recalculées indépendamment (écart nul), trois erreurs de
+construction corrigées avant publication (unités au m², charges fixes
+par logement, numérateur de la bascule), un étage de la proposition
+inversé (le bail n'est pas préféré à la cession), sept sources
+ajoutées — compte rendu
+[`evidence/revue-contradictoire-2026-09-18.md`](revue-contradictoire-2026-09-18.md)
 — les quatre mesures ont tenu, l'étage interprétatif a été requalifié
 (trois vues des chutes, bornes démographiques S-33/S-34, caveat du
 cycle du crédit S-36, péage territorialisé + CSI, profil par âge des
@@ -1463,7 +1511,7 @@ elle en est la **condition**.
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 168 tests (unitaires, propriétés, régression)
+./test.sh                   # 176 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 

@@ -7,12 +7,12 @@ puis `evidence/claims.yaml` pour le graphe de dépendances.
 
 | Code | Statut | Registre / emplacement | État |
 |------|--------|------------------------|------|
-| S | Sources | `sources/sources.yaml` | 46 sources (session 7 : + OFGL, Banque des Territoires ×3, INSEE-ES Bérard-Trannoy, OCDE, Service-Public, DREAL Occitanie — S-39..S-46) ; historique : 32 sources (INSEE, LOVAC, ANIL, SDES, MTE, DGFiP, DILA, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 36 fichiers figés sha256/LFS + 2 collections vivantes) |
-| D | Définitions | `sources/definitions.yaml` | 22 définitions citées verbatim, datées, avec limites (D-19..D-22 : DMTO, loyer net/structure d'exploitation, bail à réhabilitation, expropriation-valeur vénale — session 7) |
-| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) · H-13 taux de droits de mutation (créée 2026-08-08, S-31) · H-14 taux de sortie du canal incitatif · H-15 décote d'acquisition · H-16 taux d'emprunt · H-17 durée d'amortissement · H-18 part des charges d'exploitation (session 7, 2026-09-18 — décisions DEC-04..DEC-08 dans `evidence/decisions-2026-09-18.md`) |
+| S | Sources | `sources/sources.yaml` | 53 sources (session 7 : + OFGL ×2, Banque des Territoires ×5, INSEE-ES Bérard-Trannoy, OCDE, CPO, DGCL, Service-Public ×2, DREAL Occitanie, préfecture de l'Hérault — S-39..S-53) ; historique : 32 sources (INSEE, LOVAC, ANIL, SDES, MTE, DGFiP, DILA, DREAL, ADEME, Cerema, Enertech, Banque des Territoires, Légifrance, Cour des comptes, Apur ; 36 fichiers figés sha256/LFS + 2 collections vivantes) |
+| D | Définitions | `sources/definitions.yaml` | 23 définitions citées verbatim, datées, avec limites (D-19..D-23 : DMTO, loyer net/structure d'exploitation, bail à réhabilitation, expropriation-valeur vénale, loyer d'équilibre — session 7) |
+| H | Hypothèses | `sources/hypotheses.yaml` | H-06 seuil de vacance structurelle · H-07 surface de relocation (RECENTRÉE 2026-08-07 : emménagés récents) · H-08 seuil de fluidité · H-09/H-10 coûts de rénovation performante · H-11 densité de référence haussmannienne (dérivée S-11×S-21, contrôlée par la chaîne) · H-12 taux d'existence du gisement LOVAC (créée 2026-08-07, revue contradictoire) · H-13 taux de droits de mutation (créée 2026-08-08, S-31) · H-14 taux de sortie du canal incitatif · H-15 décote d'acquisition · H-16 taux d'emprunt · H-17 durée d'amortissement · H-18 charges d'exploitation par logement · H-19 durée du bail à réhabilitation · H-20 indemnité de remploi (session 7, 2026-09-18 — décisions DEC-04..DEC-19 dans `evidence/decisions-2026-09-18.md` ; H-14/H-16/H-18 refondues par la revue du 2026-09-18) |
 | O/T/R | Observations, transformations, résultats | `evidence/claims.yaml` | O-01..O-40, T-01..T-17, R-01..R-17 (sorties dans `data/processed/` ; R-15..R-17 = les mécanismes institutionnels comparés, session 7) |
-| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-17, V-01..V-04, C-01..C-14, L-01..L-31 (session 7 : V-02..V-04 contraintes normatives INTRO §17, C-11..C-14 choix de conception, L-27..L-31 (L-16..L-21 et corrections L-04/L-07/L-09/L-11..L-15 : revue du 2026-08-07 ; L-26 et requalifications I-11..I-14, L-22..L-25 : revue du 2026-08-09, comptes rendus `evidence/revue-contradictoire-*.md`) |
-| M/P | Mesures, propositions | `evidence/claims.yaml` | **P-01** — l'opérateur collectif de détente à trois étages (offre de bail à réhabilitation → repli par acquisition à la valeur vénale → arbitrage avec le neuf sur friches) + bascule progressive DMTO → détention ; assemblé après comparaison de cinq mécanismes (C-11). Journal des décisions de conception : `evidence/decisions-2026-09-18.md` |
+| I/V/C/L | Interprétations, valeurs, choix, limites | `evidence/claims.yaml` | I-01..I-17, V-01..V-04, C-01..C-15, L-01..L-33 (session 7 : V-02..V-04 contraintes normatives INTRO §17, C-11..C-15 choix de conception, L-27..L-33 ; revue du 2026-09-18 : `evidence/revue-contradictoire-2026-09-18.md` (L-16..L-21 et corrections L-04/L-07/L-09/L-11..L-15 : revue du 2026-08-07 ; L-26 et requalifications I-11..I-14, L-22..L-25 : revue du 2026-08-09, comptes rendus `evidence/revue-contradictoire-*.md`) |
+| M/P | Mesures, propositions | `evidence/claims.yaml` | **P-01** — l'opérateur collectif de détente (acquisition à la valeur vénale = l'outil qui sécurise, à créer en droit ; bail à réhabilitation offert sans être attendu ; arbitrage au m² avec le neuf sur friches) + voie séparée : bascule progressive de la part départementale des DMTO vers la détention, conditionnée (CPO) ; assemblé après comparaison de cinq mécanismes (C-11) et requalifié par la revue du 2026-09-18 (C-15). Journal des décisions de conception : `evidence/decisions-2026-09-18.md` |
 
 Sources enregistrées :
 
@@ -415,32 +415,39 @@ Résultats stabilisés (2026-08-03) :
 
 
 Session 7 (2026-09-18) — la proposition institutionnelle, comparée
-avant d'être assemblée (décisions : `evidence/decisions-2026-09-18.md`) :
+avant d'être assemblée, revue le même jour (décisions :
+`evidence/decisions-2026-09-18.md` ; compte rendu :
+`evidence/revue-contradictoire-2026-09-18.md`) :
 
-- **R-15** — M-A, le canal incitatif seul (sortie reproductible
+- **R-15** (simulé) — M-A, le canal incitatif seul (sortie reproductible
   `data/processed/scenarios-institutionnels-ze.json`) : au taux de
-  sortie documenté (H-14, 0,75 %/an — ZLV, S-22), ~15 500 sorties de
-  vacance en dix ans dans les 97 ZE tendues, 8 % du besoin (3-27 % sur
-  la plage) ; 271 M€/an de TLV. Lecture : **I-15** — le canal incitatif
+  sortie documenté par propriétaire CONTACTÉ (H-14, 0,75 %/an — S-22),
+  appliqué au gisement entier (majorant), ~15 300 sorties en dix ans
+  dans les 97 ZE tendues, 8 % du besoin (3-25 % sur la plage) ; 271 M€
+  de TLV (TVLH en 2027, L-33). Lecture : **I-15** — le canal incitatif
   ne peut pas être le mécanisme de la détente.
-- **R-16** — M-B/M-C, l'opérateur collectif : AVEC acquisition à la
-  valeur vénale, 44,6 Md€ (28,8 d'acquisition), 248 k€ par vacant
-  acquis-rénové — plus qu'un logement social neuf (169 k€) — loyer
-  d'équilibre 18,34 €/m² (marché 12,29, social 6,43), subvention
-  d'équilibre 2,38 Md€/an ; le segment NEUF sur friches s'équilibre au
-  marché (12,47) ; SANS acquisition (bail à réhabilitation), 4,22 €/m²
-  sous le social partout, mais volume = consentement (grille). Lecture :
-  **I-15/I-16** — la voie qui sécurise le volume le paie au prix du
-  marché ; le bail est le moins cher mais achète le consentement que
-  M-A n'obtient pas ; d'où l'enchaînement offre → repli de P-01.
-- **R-17** — M-D, bascule DMTO → détention : 9,9 Md€ / 34,6 M de
-  logements = 286 €/logement/an ; péage fiscal médian 9 419 € (5,15
-  mois) = 33 ans de charge (44 en ZE tendues) ; résiduel 1,02 mois.
-  Lecture : **I-17** — redistribution avant outil de mobilité (effet
-  causal court terme seulement, S-43) ; justifiée par V-03, pas par une
-  élasticité.
-- **P-01** — l'opérateur collectif de détente : offre de bail à
-  réhabilitation → repli par acquisition à la valeur vénale → arbitrage
-  logement par logement avec le neuf sur friches ; financement Livret A,
-  subvention d'équilibre ≤ 2,4 Md€/an au pire cas ; bascule DMTO
-  progressive comme choix de valeur. Limites propres L-27..L-31.
+- **R-16** (simulé) — M-B/M-C, l'opérateur collectif, tout au m² :
+  AVEC acquisition à la valeur vénale + remploi, 61,8 Md€ (46,1
+  d'acquisition), 3 776 €/m² par vacant acquis-rénové — plus qu'un
+  logement social neuf (2 550) — loyer d'équilibre 14,40 €/m² (marché
+  12,29, social 6,43 ; 1,14 × le marché, sous le marché dans 18 ZE sur
+  93), neuf 11,51 (sous le marché dans 61 ZE) ; subvention au loyer
+  social 1,56 Md€/an (0,17-2,83), au loyer de marché 0,31 ; SANS
+  acquisition (bail à réhabilitation, hors TFPB), 3,71 €/m² sous le
+  social partout, volume = consentement (bail seul 7-70 %). Lecture :
+  **I-15/I-16** — la voie qui sécurise le volume paie le prix du marché
+  et produit du logement DISPONIBLE au prix du marché, pas du social
+  sans subvention ; le bail est offert, pas préféré (la cession à la
+  valeur vénale domine).
+- **R-17** (simulé) — M-D, bascule de la part départementale des DMTO :
+  11,9 Md€ (2025) / 34,6 M de logements = 344 €/logement/an ; droit
+  départemental médian 7 250 € (3,92 mois) = 21 ans de charge (29 en
+  ZE tendues, 19 ailleurs) ; résiduel 2,14 mois ; charge 0,11-0,53 %
+  du prix médian (régressive). Lecture : **I-17** — redistribution
+  avant outil de mobilité (preuve causale de court terme, S-43) ;
+  conditionnée à la réforme de l'assiette (CPO, S-51) ; choix de
+  valeur (V-03).
+- **P-01** — l'opérateur collectif de détente : acquisition (outil à
+  créer) → bail offert → arbitrage au m² avec le neuf sur friches ;
+  loyers proches du marché, subvention sociale 1,56 Md€/an au central ;
+  M-D voie séparée. Limites propres L-27..L-33.

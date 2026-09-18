@@ -384,7 +384,7 @@
     spécificité du cas français a trait au fait que les DMTO sont
     proportionnels, qu'ils sont payés uniquement par l'acheteur, et
     qu'il s'agit d'une réforme qui a touché l'ensemble du pays »
-    (S-43, p. 3 du PDF). Le taux TOTAL appliqué au prix se compose de
+    (S-43, p. 5 du PDF). Le taux TOTAL appliqué au prix se compose de
     la part départementale (taux de publicité foncière voté par le
     département : 3,80 / 4,50 / 5,00 %), de la taxe communale
     additionnelle (1,20 %) et des frais d'assiette de l'État (2,37 % du
@@ -479,3 +479,30 @@
       n'est pas acquise en droit  — c'est un CHOIX de conception (C-12),
       pas un constat ; les outils intermédiaires (préemption,
       réquisition) ne sont pas instruits.
+
+- id: D-23
+  term: loyer d'équilibre (construction de l'étude)
+  source: S-40
+  url: https://www.banquedesterritoires.fr/sites/default/files/2025-09/Banque_des_Territoires_PERSPECTIVES%202025.pdf
+  last_updated: 2026-09-18
+  definition: >
+    Loyer net mensuel par m² de surface habitable qui couvre exactement,
+    pour un logement porté par l'opérateur collectif, l'annuité
+    constante de son financement (investissement par m² × facteur
+    d'annuité H-16/H-17) ET ses charges d'exploitation annuelles par
+    logement (H-18, en euros par logement, rapportées à la surface du
+    logement). Construction de l'étude (revue 2026-09-18, HD-2/HD-10) —
+    la source S-40 fournit la structure et les montants par logement
+    (p. 24 : charges d'exploitation 2 652 € par logement en 2023, dont
+    gestion 1 343, maintenance 749, TFPB 559), pas la définition. Il se
+    compare au loyer de MARCHÉ (S-09, loyer d'annonce charges comprises
+    — majorant du loyer net) et au loyer SOCIAL (S-28, loyer principal
+    hors charges) de la même ZE.
+  caveats:
+    - Les trois loyers comparés n'ont pas la même assiette (annonce
+      charges comprises / loyer social hors charges / équilibre net de
+      vacance et hors charges récupérables) — l'écart d'assiette joue
+      contre le marché de quelques points (HD-11), pas contre le social.
+    - Sans inflation des loyers, sans vacance ni impayés (S-40 isole
+      2,2 % de risques locatifs hors des 54,9 %), sans valeur résiduelle
+      du bien en fin d'amortissement — voir L-30.

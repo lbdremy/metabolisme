@@ -73,11 +73,27 @@ def test_annuity_factor_rejects_bad_inputs() -> None:
         institution.annuity_factor(-1.0, 10)
 
 
-def test_equilibrium_rent_covers_operating_costs() -> None:
-    """At the S-40 structure, 43.8 € of annuity needs ~97 € of net rent."""
-    assert institution.equilibrium_rent(43.8, 0.549) == pytest.approx(43.8 / 0.451)
+def test_equilibrium_rent_m2_adds_annuity_and_fixed_charges() -> None:
+    """Rent/m²/month = (investment/m² × factor + charges/surface) / 12 (D-23)."""
+    rent = institution.equilibrium_rent_m2(3_000.0, 0.04, 2_652.0, 66.0)
+    assert rent == pytest.approx((3_000.0 * 0.04 + 2_652.0 / 66.0) / 12)
     with pytest.raises(institution.InstitutionError):
-        institution.equilibrium_rent(10.0, 1.0)
+        institution.equilibrium_rent_m2(3_000.0, 0.04, 2_652.0, 0.0)
+    with pytest.raises(institution.InstitutionError):
+        institution.equilibrium_rent_m2(3_000.0, 0.04, -1.0, 66.0)
+
+
+def test_weighted_median() -> None:
+    """Weighted median picks the value where cumulative weight crosses half."""
+    values = pd.Series([1.0, 2.0, 3.0, 4.0])
+    assert institution.weighted_median(values, pd.Series([1.0, 1.0, 1.0, 10.0])) == 4.0
+    assert institution.weighted_median(values, pd.Series([1.0, 1.0, 1.0, 1.0])) == 2.0
+    assert institution.weighted_median(values, pd.Series([0.0, 0.0, 0.0, 0.0])) is None
+
+
+def test_neuf_surface_is_derived_from_s18() -> None:
+    """169 200 € at 2 550 €/m² is the ~66 m² surface utile S-18 reports."""
+    assert institution.SURFACE_NEUF_M2 == pytest.approx(66.35, abs=0.01)
 
 
 # ---------------------------------------------------------------- RPLS rents
@@ -116,6 +132,11 @@ def test_incentive_scenario_is_linear_and_capped() -> None:
     assert isinstance(central_10, dict)
     assert central_10["sorties"] == round(1900 * 0.075)
     assert central_10["couverture_besoin"] == pytest.approx(1900 * 0.075 / 2000, abs=1e-3)
+    # At the high rate over 20 years the first ZE saturates its NEED (1000),
+    # not its stock (1500): exits are capped per ZE (HD-18).
+    haut_20 = next(g for g in out["grille"] if g["taux"] == "haut" and g["horizon_ans"] == 20)
+    assert haut_20["sorties"] == 750 + 200
+    assert all(g["sorties"] <= 2000 for g in out["grille"])
     grid = out["grille"]
     assert isinstance(grid, list)
     assert all(g["part_gisement_pct"] <= 100 for g in grid)
@@ -127,65 +148,114 @@ def test_incentive_scenario_is_linear_and_capped() -> None:
 def _operator_inputs() -> dict[str, pd.Series]:
     idx = pd.Index(["0001", "0002"], name="ze")
     return {
-        "cu": pd.Series([40_000.0, 50_000.0], index=idx),
-        "prix": pd.Series([200_000.0, 100_000.0], index=idx),
+        "reno_m2": pd.Series([600.0, 400.0], index=idx),
+        "prix_m2": pd.Series([3_000.0, 1_000.0], index=idx),
         "marche": pd.Series([12.0, 9.0], index=idx),
         "social": pd.Series([6.0, 5.0], index=idx),
-        "nv": pd.Series([24_000.0, 20_000.0], index=idx),
     }
 
 
-def test_operator_frame_prices_both_segments() -> None:
-    """Acquisition at discount × price + works; deficit at the S-18 price."""
+def _run(
+    discount: float = 1.0,
+    reemploy: float = 10.0,
+    rate: float = 2.3,
+    years: float = 40,
+    charges: float = 2_652.0,
+) -> pd.DataFrame:
     i = _operator_inputs()
-    frame = institution.operator_frame(
-        _detente(), i["cu"], i["prix"], i["marche"], i["social"], i["nv"], 1.0, 2.3, 40, 0.549
+    return institution.operator_frame(
+        _detente(),
+        i["reno_m2"],
+        i["prix_m2"],
+        i["marche"],
+        i["social"],
+        discount,
+        reemploy,
+        rate,
+        years,
+        charges,
     )
-    assert frame.loc["0001", "investissement"] == pytest.approx(1000 * 240_000)
+
+
+def test_operator_frame_prices_both_segments_per_m2() -> None:
+    """Acquisition/m² × (1 + remploi) + works/m², at the ZE surface; deficit at S-18."""
+    frame = _run()
+    surface_flat = remob.SURFACE_APPART_M2  # ZE 0001 is 100 % flats
+    unit = (3_000.0 * 1.10 + 600.0) * surface_flat
+    assert frame.loc["0001", "cout_unitaire_renove"] == pytest.approx(unit)
+    assert frame.loc["0001", "investissement"] == pytest.approx(1000 * unit)
+    unit_house = (1_000.0 * 1.10 + 400.0) * remob.SURFACE_MAISON_M2
     assert frame.loc["0002", "investissement"] == pytest.approx(
-        400 * 150_000 + 600 * remob.PRIX_REVIENT_NEUF_EUR_2023
+        400 * unit_house + 600 * remob.PRIX_REVIENT_NEUF_EUR_2023
     )
     af = institution.annuity_factor(2.3, 40)
-    expected = 240_000 * af / (1 - 0.549) / 12 / remob.SURFACE_APPART_M2
+    expected = ((3_000.0 * 1.10 + 600.0) * af + 2_652.0 / surface_flat) / 12
     assert frame.loc["0001", "loyer_equilibre_renove_m2"] == pytest.approx(expected)
-    # The subsidy is the positive gap to the social rent, over the surface and the count.
+    neuf = (2_550.0 * af + 2_652.0 / institution.SURFACE_NEUF_M2) / 12
+    assert frame.loc["0001", "loyer_equilibre_neuf_m2"] == pytest.approx(neuf)
+    # Subsidies: positive gap to the reference × surface × 12 × count; never negative.
     gap = expected - 6.0
-    assert frame.loc["0001", "subvention_renove_eur_an"] == pytest.approx(
-        gap * remob.SURFACE_APPART_M2 * 12 * 1000
+    assert frame.loc["0001", "subvention_social_renove_eur_an"] == pytest.approx(
+        gap * surface_flat * 12 * 1000
     )
-    assert frame.loc["0001", "subvention_neuf_eur_an"] == 0.0
+    assert frame.loc["0001", "subvention_social_neuf_eur_an"] == 0.0
+    assert (frame[[c for c in frame.columns if c.startswith("subvention_")]] >= 0).all().all()
+    assert frame["subvention_social_eur_an"].sum() == pytest.approx(
+        frame["subvention_social_renove_eur_an"].sum()
+        + frame["subvention_social_neuf_eur_an"].sum()
+    )
 
 
 @given(discount=st.floats(min_value=0.1, max_value=1.0))
 @settings(max_examples=50)
 def test_operator_investment_is_monotone_in_discount(discount: float) -> None:
     """A lower acquisition price never raises the investment or the rent."""
-    i = _operator_inputs()
-    base = institution.operator_frame(
-        _detente(), i["cu"], i["prix"], i["marche"], i["social"], i["nv"], 1.0, 2.3, 40, 0.549
-    )
-    frame = institution.operator_frame(
-        _detente(), i["cu"], i["prix"], i["marche"], i["social"], i["nv"], discount, 2.3, 40, 0.549
-    )
+    base, frame = _run(), _run(discount=discount)
     assert (frame["investissement"] <= base["investissement"] + 1e-6).all()
     assert (frame["loyer_equilibre_renove_m2"] <= base["loyer_equilibre_renove_m2"] + 1e-9).all()
     assert (frame["loyer_equilibre_neuf_m2"] == base["loyer_equilibre_neuf_m2"]).all()
 
 
+def test_operator_rent_is_monotone_in_rate_years_and_charges() -> None:
+    """Dearer money, shorter amortisation or higher charges never lower the rent."""
+    base = _run()
+    for frame in (_run(rate=3.6), _run(years=30), _run(charges=3_978.0), _run(reemploy=10.5)):
+        assert (frame["loyer_equilibre_renove_m2"] >= base["loyer_equilibre_renove_m2"]).all()
+    for frame in (_run(rate=1.5), _run(years=50), _run(charges=2_093.0), _run(reemploy=0.0)):
+        assert (frame["loyer_equilibre_renove_m2"] <= base["loyer_equilibre_renove_m2"]).all()
+
+
 def test_operator_summary_totals_and_counts() -> None:
     """National sums equal the per-ZE sums; ZE counts partition correctly."""
-    i = _operator_inputs()
-    frame = institution.operator_frame(
-        _detente(), i["cu"], i["prix"], i["marche"], i["social"], i["nv"], 1.0, 2.3, 40, 0.549
-    )
+    frame = _run()
     summary = institution.operator_summary(frame, 500_000.0)
     assert summary["investissement_mdeur"] == round(float(frame["investissement"].sum()) / 1e9, 1)
+    parts = (
+        float(frame["cout_acquisition"].sum())
+        + float(frame["cout_renovation"].sum())
+        + float(frame["cout_neuf"].sum())
+    )
+    assert parts == pytest.approx(float(frame["investissement"].sum()))
     assert summary["n_ze"] == 2
     assert summary["n_ze_avec_loyers"] == 2
+    assert summary["n_ze_sans_loyer_social"] == 0
     n_under = summary["n_ze_equilibre_renove_sous_marche"]
     assert isinstance(n_under, int) and 0 <= n_under <= 2
     with pytest.raises(institution.InstitutionError):
         institution.operator_summary(frame, 0.0)
+
+
+def test_operator_summary_counts_ze_without_reference_rent() -> None:
+    """A ZE without a social rent is counted out of the subsidy, never zeroed silently."""
+    i = _operator_inputs()
+    social = i["social"].copy()
+    social.iloc[1] = float("nan")
+    frame = institution.operator_frame(
+        _detente(), i["reno_m2"], i["prix_m2"], i["marche"], social, 1.0, 10.0, 2.3, 40, 2_652.0
+    )
+    summary = institution.operator_summary(frame, 500_000.0)
+    assert summary["n_ze_sans_loyer_social"] == 1
+    assert summary["n_ze_avec_loyers"] == 1
 
 
 def test_operator_scenario_sensitivity_orders() -> None:
@@ -193,16 +263,16 @@ def test_operator_scenario_sensitivity_orders() -> None:
     i = _operator_inputs()
     out = institution.operator_scenario(
         _detente(),
-        i["cu"],
-        i["prix"],
+        i["reno_m2"],
+        i["prix_m2"],
         i["marche"],
         i["social"],
-        i["nv"],
         500_000.0,
         _hypothesis("H-15", 1.0, 0.5, 1.0),
-        _hypothesis("H-16", 2.3, 1.5, 2.81),
+        _hypothesis("H-16", 2.3, 1.5, 3.6),
         _hypothesis("H-17", 40.0, 30.0, 50.0),
-        _hypothesis("H-18", 0.549, 0.40, 0.60),
+        _hypothesis("H-18", 2_652.0, 2_093.0, 3_978.0),
+        _hypothesis("H-20", 10.0, 0.0, 10.5),
     )
     sens = out["sensibilite"]
     assert isinstance(sens, dict)
@@ -210,10 +280,13 @@ def test_operator_scenario_sensitivity_orders() -> None:
     assert isinstance(central, dict)
     fav, unfav = sens["favorable"], sens["defavorable"]
     assert isinstance(fav, dict) and isinstance(unfav, dict)
-    assert fav["loyer_equilibre_renove_median_m2"] < central["loyer_equilibre_renove_m2"]["median"]
+    median = central["loyer_equilibre_renove_m2"]["median"]
     assert (
-        unfav["loyer_equilibre_renove_median_m2"] > central["loyer_equilibre_renove_m2"]["median"]
+        fav["loyer_equilibre_renove_median_m2"] < median < unfav["loyer_equilibre_renove_median_m2"]
     )
+    rythme = out["rythme_programme"]
+    assert isinstance(rythme, list)
+    assert rythme[0]["investissement_mdeur_an"] >= rythme[-1]["investissement_mdeur_an"]
 
 
 # --------------------------------------------------------------- M-C lease
@@ -222,37 +295,55 @@ def test_operator_scenario_sensitivity_orders() -> None:
 def test_lease_scenario_consent_grid() -> None:
     """Coverage grows with consent; full consent reaches the whole need."""
     i = _operator_inputs()
-    out = institution.lease_scenario(_detente(), i["cu"], i["marche"], i["social"], 2.3, 0.549)
+    out = institution.lease_scenario(
+        _detente(), i["reno_m2"], i["marche"], i["social"], 2.3, 30.0, 2_652.0
+    )
     grid = out["grille_consentement"]
     assert isinstance(grid, list)
-    coverages = [g["couverture_besoin"] for g in grid]
+    coverages = [g["couverture_besoin_avec_neuf"] for g in grid]
     assert coverages == sorted(coverages)
-    assert grid[-1]["couverture_besoin"] == pytest.approx(1.0)
+    assert grid[-1]["couverture_besoin_avec_neuf"] == pytest.approx(1.0)
+    assert grid[-1]["couverture_besoin_bail_seul"] == pytest.approx(1400 / 2000)
     assert grid[-1]["logements_renoves"] == 1400
-    assert out["duree_amortissement_ans"] == institution.BAR_AMORTISATION_YEARS
+    assert out["duree_amortissement_ans"] == 30.0
+    # TFPB exempt: the charges carried are the H-18 central minus the S-40 TFPB.
+    assert out["charges_hors_tfpb_eur_logement_an"] == round(2_652.0 - 559.0)
 
 
 # ---------------------------------------------------------- M-D toll shift
 
 
 def test_toll_shift_break_even_years() -> None:
-    """Years-equivalent = fiscal toll / holding charge; tense flag partitions."""
-    idx = pd.Index(["0001", "0002"], name="ze")
+    """Years-equivalent = departmental duty / holding charge; perimeter partitions."""
+    idx = pd.Index(["0001", "0002", "0003"], name="ze")
     prix = pd.DataFrame(
-        {"prix_median": [200_000.0, 100_000.0], "taux_dmto_pct": [6.32, 5.81]}, index=idx
+        {
+            "prix_median": [200_000.0, 100_000.0, 300_000.0],
+            "taux_dmto_pct": [5.00 * 1.0237 + 1.20, 4.50 * 1.0237 + 1.20, 5.00 * 1.0237 + 1.20],
+            "n_ventes": [500, 100, 50],
+        },
+        index=idx,
     )
-    nv = pd.Series([24_000.0, 20_000.0], index=idx)
-    names = pd.Series(["Alpha", "Beta"], index=idx)
-    out = institution.toll_shift_scenario(prix, nv, pd.Index(["0001"]), 34_565_110.0, names)
-    charge = institution.DMTO_PRODUCT_2024_EUR / 34_565_110.0
-    assert out["charge_detention_eur_logement_an"] == round(charge)
+    nv = pd.Series([24_000.0, 20_000.0, 30_000.0], index=idx)
+    names = pd.Series(["Alpha", "Beta", "Corsica"], index=idx)
+    share = pd.Series([1.0, 0.8, 0.0], index=idx)
+    out = institution.toll_shift_scenario(prix, nv, pd.Index(["0001"]), share, 34_565_110.0, names)
+    charge = institution.DMTO_PRODUCT_EUR["2025"] / 34_565_110.0
+    charges = out["charge_detention_eur_logement_an"]
+    assert isinstance(charges, dict) and charges["2025"] == round(charge)
     top = out["bascule_la_plus_favorable_au_mobile"]
     assert isinstance(top, list)
+    assert all(e["ze"] != "0003" for e in top)  # outside the perimeter: excluded
     alpha = next(e for e in top if e["ze"] == "0001")
-    expected_toll = 200_000 * 0.0632 + 200.0
-    assert alpha["peage_fiscal_eur"] == round(expected_toll)
-    assert alpha["annees_equivalentes"] == round(expected_toll / charge, 1)
+    duty = 200_000 * 5.00 / 100  # total = 5.00 departmental × 1.0237 + 1.20 (H-13)
+    assert alpha["droit_departemental_eur"] == round(duty)
+    assert alpha["annees_equivalentes"] == round(duty / charge, 1)
     assert alpha["tendue"] is True
-    assert out["n_ze_tendues"] == 1
+    assert out["n_ze_hors_perimetre"] == 1
+    assert out["n_ze_perimetre_partiel"] == 1
+    assert out["n_ze_tendues_dans_perimetre"] == 1
+    # The residual toll is everything but the departmental duty.
+    residual = out["peage_residuel_mois_niveau_vie"]
+    assert isinstance(residual, dict) and residual["min"] > 0
     with pytest.raises(institution.InstitutionError):
         institution.holding_charge_eur_per_dwelling(1.0, 0.0)

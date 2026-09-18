@@ -329,6 +329,41 @@
     "hosted": "asset"
   },
   {
+    "path": "sources/ofgl-pre-rapport-2026-finances-locales-2025.pdf",
+    "from": "logement/data/raw/ofgl-pre-rapport-2026-finances-locales-2025.pdf",
+    "size": 8889947,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/prefecture-herault-dup-enjalbert-piece-8-estimation.pdf",
+    "from": "logement/data/raw/prefecture-herault-dup-enjalbert-piece-8-estimation.pdf",
+    "size": 1407670,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/cpo-2023-fiscalite-du-logement.pdf",
+    "from": "logement/data/raw/cpo-2023-fiscalite-du-logement.pdf",
+    "size": 4121008,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/service-public-a18896-tvlh-2027.html",
+    "from": "logement/data/raw/service-public-a18896-tvlh-2027.html",
+    "size": 68706,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/dgcl-bis-190-dmto-departements-2023.pdf",
+    "from": "logement/data/raw/dgcl-bis-190-dmto-departements-2023.pdf",
+    "size": 890062,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
     "path": "code/src/logement/core/parc.py",
     "from": "logement/src/logement/core/parc.py",
     "size": 7710,
@@ -352,7 +387,7 @@
   {
     "path": "code/src/logement/shell/build.py",
     "from": "logement/src/logement/shell/build.py",
-    "size": 38975,
+    "size": 39869,
     "mime": "text/x-python; charset=utf-8",
     "hosted": "asset"
   },
@@ -534,7 +569,7 @@
   {
     "path": "data/scenarios-institutionnels-ze.json",
     "from": "logement/data/processed/scenarios-institutionnels-ze.json",
-    "size": 21371,
+    "size": 29427,
     "mime": "application/json; charset=utf-8",
     "hosted": "asset"
   }

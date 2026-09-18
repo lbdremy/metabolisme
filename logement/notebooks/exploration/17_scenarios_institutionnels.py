@@ -33,18 +33,18 @@ pd.DataFrame(payload["m_a_canal_incitatif"]["grille"])
 
 # %% [markdown]
 # ## M-B — l'opérateur qui acquiert
-# Vérification manuelle du facteur d'annuité et du loyer d'équilibre
-# médian : 248 k€ de coût unitaire × facteur 40 ans à 2,30 % → annuité →
-# / (1 − 0,549) → / 12 / surface.
+# Vérification manuelle (après revue : tout au m², charges fixes par
+# logement) : coût médian €/m² × facteur 40 ans à 2,30 % + 2 652 € /
+# surface → / 12.
 
 # %%
 m_b = payload["m_b_operateur_acquisition"]
 af = institution.annuity_factor(2.30, 40)
-unit = m_b["central"]["cout_unitaire_renove_median_eur"]
-annuite = unit * af
-loyer_annuel = institution.equilibrium_rent(annuite, 0.549)
-print(f"facteur {af:.5f}  annuité {annuite:,.0f} €  loyer net {loyer_annuel:,.0f} €/an")
-print(f"soit {loyer_annuel / 12 / 65.5:.2f} €/m²/mois pour un appartement de 65,5 m²")
+cout_m2 = m_b["central"]["cout_renove_m2_median_eur"]
+print(f"facteur {af:.5f}")
+print(f"loyer d'équilibre d'un appartement de 65,5 m² à {cout_m2} €/m² : "
+      f"{institution.equilibrium_rent_m2(cout_m2, af, 2652.0, 65.5):.2f} €/m²/mois")
+print(f"neuf S-18 : {institution.equilibrium_rent_m2(2550.0, af, 2652.0, institution.SURFACE_NEUF_M2):.2f}")
 m_b["central"]
 
 # %%
@@ -52,11 +52,12 @@ pd.DataFrame(m_b["loyer_equilibre_le_plus_haut"])
 
 # %% [markdown]
 # Le fait saillant : acheter un vacant à la valeur vénale d'une zone
-# tendue (prix médian) puis le rénover coûte PLUS qu'un logement social
-# neuf (169 200 €, foncier compris) — le ratio ~2 de R-09 ne valait que
-# pour les travaux (L-14 le disait : « tendrait vers ~1 » — il passe
-# sous 1). D'où le loyer d'équilibre du segment NEUF (≈ marché) plus bas
-# que celui du segment rénové-acquis.
+# tendue puis le rénover coûte PLUS au m² qu'un logement social neuf
+# (3 776 vs 2 550 €/m²) — le ratio ~2 de R-09 ne valait que pour les
+# travaux (L-14 le disait : « tendrait vers ~1 » — il passe sous 1).
+# La première version de ce carnet concluait « le neuf s'équilibre au
+# marché » : erreur d'unité (169 200 € divisés par la surface des RP au
+# lieu des 66 m² de S-18), attrapée par la revue du 2026-09-18.
 
 # %%
 pd.DataFrame(
@@ -65,17 +66,18 @@ pd.DataFrame(
 
 # %% [markdown]
 # ## M-C — le bail à réhabilitation (sans acquisition)
-# Travaux seuls amortis sur 30 ans : loyer d'équilibre ~4 €/m², sous le
-# loyer social partout — mais le volume dépend du consentement.
+# Travaux seuls amortis sur 30 ans (H-19), hors TFPB : loyer d'équilibre
+# ~3,7 €/m², sous le loyer social partout — mais le volume dépend du
+# consentement, et la cession à la valeur vénale domine le bail (I-16).
 
 # %%
 pd.DataFrame(payload["m_c_bail_rehabilitation"]["grille_consentement"])
 
 # %% [markdown]
 # ## M-D — la bascule DMTO → détention
-# 9,9 Md€ (2024, périmètre OFGL) / 34,6 M de logements du même périmètre
-# = 286 €/logement/an ; le péage fiscal médian (~9 400 €) vaut ~33 ans
-# de cette charge (44 ans en ZE tendues).
+# 11,9 Md€ (2025, périmètre OFGL) / 34,6 M de logements du même
+# périmètre = 344 €/logement/an ; le droit DÉPARTEMENTAL médian
+# (~7 250 €) vaut ~21 ans de cette charge (29 ans en ZE tendues).
 
 # %%
 m_d = payload["m_d_bascule_dmto"]

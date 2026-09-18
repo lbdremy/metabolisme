@@ -965,8 +965,9 @@
     - 2,0 %). PÉRIMÈTRE : la fiche raisonne « à périmètre constant
     entre 2018 et 2024, donc hors Rhône, Martinique, Guyane, Corse et
     Paris » (champ des graphiques 6, p. 5 ; le décompte du texte —
-    94 départements en baisse + Nord, Belfort, Mayotte = 96 — confirme
-    que le 9,9 Md€ est sur ce champ de 96 départements) : c'est un
+    94 départements en baisse, Mayotte en hausse, soit 95 collectivités
+    sur les 96 du champ constant — est cohérent avec ce champ ; la
+    revue 2026-09-18, SA-8, a corrigé le décompte initial « 94 + 3 ») : c'est un
     PLANCHER du produit France entière, et R-17 le rapporte au parc de
     logements du MÊME champ (S-11 hors 75, 69, 2A, 2B, 972, 973 —
     C-14). Le produit 2024 est en outre un point BAS du cycle
@@ -1062,8 +1063,9 @@
   local_file: data/raw/insee-es500-berard-trannoy-2018-dmto.pdf
   checksum: sha256:77c3df7cecf03f4aabb9e839300f52ca94298990cdee572b7e4e3ff126326743
   notes: >
-    Article évalué par les pairs (24 pages, version française, pp.
-    179-200 de la revue), enregistré comme SOURCE CAUSALE sur l'effet
+    Article évalué par les pairs (24 pages, version française, folios
+    187-209 ; la version anglaise originale occupe les pp. 179-200
+    citées dans la référence), enregistré comme SOURCE CAUSALE sur l'effet
     des DMTO sur les volumes de transactions — la seule expérience
     naturelle française publiée, à la place du test maison SE-12
     (DEC-01). Résumé (p. 1 du PDF) : hausse de la part départementale
@@ -1109,7 +1111,7 @@
     veillant à ce qu'ils reposent sur des valeurs cadastrales
     régulièrement mises à jour, tout en allégeant les impôts sur les
     transactions immobilières afin de rendre le marché du logement plus
-    efficient » (pp. 5 et 17) ; garde : « Il existe de solides arguments
+    efficient » (pp. 5 et 15) ; garde : « Il existe de solides arguments
     à l'appui de la réduction ou de la suppression des impôts sur les
     transactions, mais une telle mesure doit être mise en œuvre
     progressivement et s'accompagner d'autres réformes fiscales
@@ -1172,3 +1174,173 @@
     (S-08) n'est pas figé pour ces articles (capture derrière
     Cloudflare, voir monopoles/CLAUDE.md) : la fiche officielle en tient
     lieu, avec la référence des articles.
+
+
+# --------------------------------------------------------------------------
+# Revue contradictoire du 2026-09-18 — sources demandées par les relecteurs
+# (SA-1, SA-3, SA-4, SA-6, SA-7, SA-8), figées avant intégration.
+
+- id: S-47
+  publisher: Observatoire des finances et de la gestion publique locales (OFGL, DGCL)
+  title: Pré-rapport OFGL 2026 — les finances des collectivités locales en 2025 (version « def » du 11/06/2026)
+  source_url: https://www.collectivites-locales.gouv.fr/files/files/Etudes-et-statistiques/OFGL/rapport%202026/Pr%C3%A9-Rapport%20OFGL%202026%20def.pdf
+  publication_date: 2026-06-11
+  retrieved_at: 2026-09-18
+  geographic_scope: France (départements — périmètre constant 2019-2025 hors Rhône, Martinique, Guyane, Corse et Paris pour la fiche)
+  temporal_scope: comptes 2025 (provisoires), séries 2022-2025
+  license: Réutilisation libre des informations publiques (CRPA) — document de l'administration publié sans mention contraire (Licence Ouverte 2.0 par défaut)
+  local_file: data/raw/ofgl-pre-rapport-2026-finances-locales-2025.pdf
+  checksum: sha256:e351ef2581cc8937cbd5df48b3e32322d008e26a6e67478434f896d0ef65f264
+  notes: >
+    Pré-rapport complet (176 pages), enregistré par la revue du
+    2026-09-18 (SA-1) : le millésime 2025 du produit des DMTO était
+    publié AVANT la session et remplace 2024 comme central de R-17 —
+    p. 47 : « Au total, le produit des DMTO progresse de + 20,4 % en
+    2025 pour atteindre 11,9 Md€ » (« sans pour autant retrouver les
+    niveaux très élevés (plus de 14 Md€) de 2021 et 2022 »), marché
+    en hausse (+ 12,8 % de transactions, prix + 1,0 %), taux plafond
+    « fixé à 5 % depuis avril 2025 (hors primo-accédants) », Indre et
+    Mayotte à 3,80 % ; p. 48, champ : « périmètre constant entre 2019
+    et 2025, donc hors Rhône, Martinique, Guyane, Corse et Paris » ;
+    annexe p. 110 : série 14,60 / 11,40 / 9,86 / 11,87 Md€ (2022-2025,
+    valeurs provisoires). Le millésime 2025 est le premier au taux
+    5,00 % — cohérent avec le péage 2025 de R-14 (ST-6).
+
+- id: S-48
+  publisher: Banque des Territoires (Caisse des Dépôts)
+  title: Prêt locatif aidé d'intégration (PLAI) — conditions financières (page produit)
+  source_url: https://www.banquedesterritoires.fr/produits-services/prets-long-terme/pret-plai
+  publication_date: null
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: conditions en vigueur au 2026-09-18
+  license: © Banque des Territoires — page publique, réutilisation non ouverte (citée, non redistribuée)
+  local_file: data/raw/banque-territoires-pret-plai-2026.html
+  checksum: sha256:1526fa6d01c5f73f5c6adb9de7a4b6f0113c6e18887eb07156bedb3b6ae6e7f6
+  redistributable: false
+  notes: >
+    Page produit (HTML figé) : « Taux Livret A -0,20 % », « durée
+    d'amortissement de 40 ans pour le bâti et 50 ans pour le foncier »,
+    « une exonération de TFPB pendant 25 ans et d'une TVA au taux réduit
+    de 5,5 % ». Source de la borne basse de H-16 (SA-3) et de la note
+    d'exonération de TFPB des opérations sociales (L-30).
+
+- id: S-49
+  publisher: Banque des Territoires (Caisse des Dépôts)
+  title: Prêt locatif social (PLS) — conditions financières (page produit)
+  source_url: https://www.banquedesterritoires.fr/produits-services/prets-long-terme/pret-locatif-social
+  publication_date: null
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: conditions en vigueur au 2026-09-18
+  license: © Banque des Territoires — page publique, réutilisation non ouverte (citée, non redistribuée)
+  local_file: data/raw/banque-territoires-pret-pls-2026.html
+  checksum: sha256:1a5db82bd6f32aa9e4db329bec0af3884c9d0afab51e88c0c086cf3b812af7b8
+  redistributable: false
+  notes: >
+    Page produit (HTML figé) : « Taux Livret A + 111 pb », « De 15 à
+    40 ans pour la partie bâtie ». Source de la marge haute du circuit
+    Livret A dans H-16 (SA-3).
+
+- id: S-50
+  publisher: Préfecture de l'Hérault (dossier de DUP, ZAC Enjalbert — pièce 8, estimation sommaire des dépenses)
+  title: Estimation sommaire des dépenses d'une DUP — calcul de l'indemnité de remploi (art. R322-5 du code de l'expropriation)
+  source_url: https://www.herault.gouv.fr/contenu/telechargement/25559/182390/file/Dossier%20DUP%20ZAC%20Enjalbert%20-%20Piece%208%20estimation%20depenses.pdf
+  publication_date: 2016-12-09
+  retrieved_at: 2026-09-18
+  geographic_scope: France (règle nationale, illustrée par un dossier de l'Hérault)
+  temporal_scope: barème en vigueur (dossier de 2016 ; article R322-5 inchangé au 2026-09-18 selon la revue)
+  license: Réutilisation libre des informations publiques (CRPA) — document administratif publié par une préfecture
+  local_file: data/raw/prefecture-herault-dup-enjalbert-piece-8-estimation.pdf
+  checksum: sha256:4c7fa6c8efac620f8e7b27f73b0d8a20ab6492d6b91fe738d40d78894aaa44b3
+  notes: >
+    Pièce d'un dossier public d'utilité publique (3 pages) qui énonce
+    le barème pratiqué : « Conformément aux dispositions de l'article
+    R 322-5 du Code de l'Expropriation, il conviendra d'allouer à la
+    partie expropriée une indemnité de remploi en cas d'expropriation.
+    Elle représente un pourcentage du montant d'acquisition : Elle
+    s'élève à 20% pour les premiers 5000€, de 15% pour les 10 000€
+    suivants et de 10% pour la somme restante » (p. 1). Enregistrée par
+    la revue (SA-4) comme trace ADMINISTRATIVE du barème, faute de
+    capture de Légifrance (S-08, Cloudflare) : ce n'est pas le texte
+    réglementaire, et le barème est une pratique jurisprudentielle
+    (l'article fixe le principe). Base de H-20.
+
+- id: S-51
+  publisher: Conseil des prélèvements obligatoires (CPO, Cour des comptes)
+  title: Pour une fiscalité du logement plus cohérente (rapport, 18 décembre 2023)
+  source_url: https://www.ccomptes.fr/sites/default/files/2023-12/20231218-Fiscalite-du-logement.pdf
+  publication_date: 2023-12-18
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: fiscalité 2022-2023, recommandations
+  license: Réutilisation libre des informations publiques (CRPA) — publication de la Cour des comptes
+  local_file: data/raw/cpo-2023-fiscalite-du-logement.pdf
+  checksum: sha256:7589d3d7266b2342a45452302a084a90c3d5565780545ce8d8a742c6776eac43
+  notes: >
+    Rapport (115 pages) enregistré par la revue (SA-6) : la source
+    française officielle qui recommande le mécanisme M-D et en pose les
+    conditions — p. 17 : « chercher à taxer plus la détention que
+    l'acquisition, au vu notamment des effets économiques peu efficients
+    des droits de mutation à titre onéreux (DMTO) qui sont plus élevés
+    en France que dans les autres pays européens. Cette orientation
+    générale implique d'une part d'envisager une bascule des DMTO vers
+    la taxe foncière, sans perte pour les collectivités locales » ;
+    p. 106 : « Elle ne saurait non plus être mise en œuvre tant que la
+    fiscalité foncière apparaît décorrélée des réalités économiques
+    locales et que ses effets régressifs ne sont pas davantage pris en
+    compte » ; recommandation n° 8 (pp. 21 et 106) : « Une fois le lien
+    rétabli entre l'assiette de la taxe foncière et la valeur locative
+    de marché des logements taxés, engager une réflexion sur le niveau
+    et l'affectation des droits de mutation à titre onéreux (DMTO)
+    visant à moins taxer l'acquisition de logements et à compenser le
+    manque à gagner pour les finances publiques par un relèvement des
+    impôts portant sur leur détention » ; p. 32 : DMTO toutes
+    collectivités 16,8 Md€. Fonde la condition préalable de M-D dans
+    P-01 (réforme de l'assiette avant bascule) et L-28.
+
+- id: S-52
+  publisher: Service-Public.gouv.fr (DILA, Premier ministre)
+  title: Une taxe unique pour les logements vacants à partir de 2027 (actualité A18896)
+  dataset_id: A18896
+  source_url: https://www.service-public.gouv.fr/particuliers/actualites/A18896
+  publication_date: 2026-09-02
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: droit applicable à partir du 1er janvier 2027 (art. 108 de la loi n° 2026-103 du 19/02/2026 de finances pour 2026 ; décret n° 2026-831 du 25/08/2026)
+  license: Licence Ouverte / Open Licence 2.0 (DILA — contenus service-public.fr)
+  local_file: data/raw/service-public-a18896-tvlh-2027.html
+  checksum: sha256:48a2ab78d728744e2f39924069288469b7a139b7c78378cb66f3c80900b077de
+  notes: >
+    Actualité publiée le 21/05/2026, mise à jour le 02/09/2026 (HTML
+    figé) : la loi de finances pour 2026 remplace la TLV et la THLV par
+    une taxe unique sur la vacance des locaux d'habitation (TVLH, art.
+    1406 bis du CGI) au 1er janvier 2027 — logement « vacant depuis au
+    moins 2 ans au 1er janvier de l'année d'imposition », taux en zone
+    tendue « 17 % pour la 1re année d'imposition ; et 34 % pour les
+    années suivantes », majorable par délibération communale, taux
+    libre hors zone tendue. Enregistrée par la revue (SA-7) : le
+    « canal incitatif existant » de M-A change de droit en 2027 — le
+    constat d'exécution S-22 (TLV/ZLV) reste la seule mesure d'effet
+    disponible (L-33).
+
+- id: S-53
+  publisher: DGCL (Département des études et des statistiques locales) — Bulletin d'information statistique n° 190
+  title: Les droits de mutation à titre onéreux des départements en 2023 (BIS n° 190, novembre 2024)
+  source_url: https://www.collectivites-locales.gouv.fr/files/files/Etudes-et-statistiques/BIS/2024/BIS_190_DMTO.pdf
+  publication_date: 2024-11-01
+  retrieved_at: 2026-09-18
+  geographic_scope: France entière (départements, Ville de Paris, métropole de Lyon, collectivités uniques)
+  temporal_scope: 2012-2023
+  license: Réutilisation libre des informations publiques (CRPA) — publication de la DGCL
+  local_file: data/raw/dgcl-bis-190-dmto-departements-2023.pdf
+  checksum: sha256:35088872f2ab8d86f39f932062751d8fa2449df8465985f0eaf2841e676ade16
+  notes: >
+    Bulletin (10 pages) enregistré par la revue (SA-8) pour mesurer
+    l'écart entre le champ constant de l'OFGL et la France entière :
+    « En 2023, les droits de mutation à titre onéreux (DMTO) perçus par
+    les départements s'élèvent à 13,0 milliards d'euros » (p. 1) contre
+    11,40 Md€ au champ constant (S-47, annexe) — + 14 % ; la Ville de
+    Paris perçoit 1 039 M€ (p. 2, encadré 2). Sert à L-28 (la charge
+    de détention du périmètre constant ne vaut pas pour Paris, le Rhône,
+    la Corse, la Guyane et la Martinique).

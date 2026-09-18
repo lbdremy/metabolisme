@@ -260,25 +260,34 @@
 - id: H-14
   name: incentive_channel_exit_rate_pct_per_year
   description: >
-    Part du gisement structurel effectif qui SORT de vacance chaque
-    année sous le seul canal incitatif existant (taxe sur les logements
-    vacants, THLV, dispositifs Anah) — le mécanisme de référence M-A.
-    Valeur centrale tirée du seul constat d'exécution figé : la Cour
-    des comptes (S-22) chiffre ~6 700 sorties de vacance attribuables
-    au dispositif ZLV en 4 ans, soit ~3 % du stock ciblé en zone tendue
-    (L-17), donc 0,75 %/an en linéaire. Plage plausible : 0,25 %/an
-    (bilan « non démontré » de la TLV, S-22 — borne basse d'un canal
-    qui ne déclencherait presque rien) à 2,50 %/an (un canal incitatif
-    renforcé, sans précédent documenté : trois fois le constat). Le
-    taux s'applique au gisement EFFECTIF (LOVAC × H-12) de chaque ZE
-    tendue et n'est pas cumulé avec les entrées en vacance (flux non
-    instruit, L-29). DEC-08.
+    Part du gisement structurel effectif d'une ZE tendue qui SORT de
+    vacance chaque année sous le seul canal incitatif existant (contact
+    des propriétaires, taxe sur les logements vacants — TLV/THLV, TVLH
+    à partir de 2027, S-52 — dispositifs Anah), mécanisme de référence
+    M-A. REFORMULÉE par la revue du 2026-09-18 (HD-3, SA-2, SE-10) : le
+    constat de la Cour des comptes porte sur les logements dont les
+    propriétaires ont été CONTACTÉS, pas sur le stock — « Entre 2020 et
+    2024, 6 700 logements identifiés grâce à ZLV sont sortis de
+    vacance, représentant 6,6 % des 102 000 logements dont les
+    propriétaires ont été contactés » et, en zone tendue, « 3 % de
+    logements sortis de vacance in fine » parmi les contactés (S-22,
+    p. 24). Appliquer ce taux au gisement ENTIER revient à supposer que
+    tous les propriétaires sont contactés : la valeur centrale est donc
+    un MAJORANT du canal actuel (qui ne contacte qu'une fraction), ce
+    qui va dans le sens conservateur pour I-15. Valeur centrale :
+    0,75 %/an (3 % sur la période 2020-2024 lue comme quatre années
+    pleines ; lue comme cinq, 0,6 — dans la plage). Plage plausible :
+    0,25 %/an (bilan « non démontré » de la TLV, S-22) à 2,50 %/an
+    (trois fois le constat, sans précédent documenté). Linéaire, sans
+    cumul, sans soustraction des entrées en vacance (L-29) ; les
+    sorties d'une ZE sont plafonnées par son besoin local (HD-18). DEC-08.
   central_value: 0.75
   plausible_range: [0.25, 2.5]
   unit: pct_of_effective_stock_per_year
   confidence: low
   justification:
     - S-22
+    - S-52
     - L-17
   affects:
     - R-15
@@ -319,18 +328,22 @@
     sur friches). Valeur centrale : le prêt PLUS de la Banque des
     Territoires, « Taux Livret A + 60 pb » (S-41), au Livret A de
     1,70 % en vigueur depuis le 01/08/2026 (S-42) : 2,30 %. Plage
-    plausible : 1,50 % (PLAI, Livret A − 0,20 — logements très
-    sociaux) à 2,81 % (PLS, Livret A + 1,11). La plage couvre les
-    MARGES du circuit existant au Livret A du jour, pas la révision
-    future du Livret A (deux fois par an) ni un financement de marché
-    (L-30). DEC-05.
+    plausible ÉLARGIE par la revue du 2026-09-18 (SE-11, HD-17, SA-3) :
+    de 1,50 % (PLAI, « Livret A -0,20 % », S-48, au Livret A du jour)
+    à 3,60 % (PLUS au Livret A de 3 %, son niveau « en début d'année
+    2025 » selon S-42 — un taux d'il y a moins de deux ans, donc
+    plausible sur la durée d'un programme) ; la marge PLS (+ 1,11,
+    S-49) est dans la plage. Le Livret A est révisé deux fois par an :
+    le central est celui de la date de la session (L-30). DEC-05.
   central_value: 2.30
-  plausible_range: [1.50, 2.81]
+  plausible_range: [1.50, 3.60]
   unit: pct_per_year
   confidence: medium
   justification:
     - S-41
     - S-42
+    - S-48
+    - S-49
     - C-13
   affects:
     - R-16
@@ -361,28 +374,89 @@
     - R-16
 
 - id: H-18
-  name: operator_operating_cost_share_of_net_rent
+  name: operator_operating_cost_eur_per_dwelling_per_year
   description: >
-    Part du loyer net absorbée par les charges d'exploitation de
-    l'opérateur (gestion, maintenance, taxe foncière) — le loyer
-    d'équilibre est annuité / (1 − H-18). Valeur centrale : 0,549, la
-    structure observée du macro-organisme des bailleurs sociaux en 2023
-    (S-40, p. 15 : « pour 100 € de loyers nets […] 54,9 € sont destinés
-    à couvrir les charges d'exploitation »), dont gestion 27,8,
-    maintenance 15,5, TFPB 11,6. Plage plausible [0,40 ; 0,60] : borne
-    basse = opérateur exonéré de TFPB et gestion plus légère (≈ 0,549 −
-    0,116 − quelques points), borne haute = gestion en diffus dans les
-    zones tendues (la structure sectorielle est une moyenne de parcs
-    groupés). Les charges sont supposées proportionnelles au loyer, ce
-    qui, pour un loyer d'équilibre élevé, SURESTIME les charges — le
-    résultat est un majorant (L-30). DEC-06.
-  central_value: 0.549
-  plausible_range: [0.40, 0.60]
-  unit: fraction_of_net_rent
-  confidence: medium
+    Charges d'exploitation annuelles de l'opérateur PAR LOGEMENT
+    (gestion, maintenance, taxe foncière), en euros 2023. REFONDUE par
+    la revue du 2026-09-18 (HD-2, SA-13) : la version initiale prenait
+    la structure « 54,9 % du loyer net » (S-40, p. 15) en PROPORTION du
+    loyer d'équilibre — ce qui faisait porter à l'opérateur ~3 fois les
+    charges du secteur dès que son loyer d'équilibre dépassait le
+    loyer social, et décidait à lui seul le titre « au-dessus du marché
+    partout » ; DEC-06 avait écarté la forme en euros par logement sur
+    un motif inexact (S-40 la publie, p. 24, tableau 1). Valeur
+    centrale : 2 652 € par logement en 2023 (charges de gestion 1 343,
+    effort de maintenance 749, TFPB 559 — S-40, p. 24). Plage
+    plausible : 2 093 € (le même opérateur EXONÉRÉ de TFPB — les
+    opérations PLAI/PLUS le sont 25 ans, S-48 ; le preneur d'un bail à
+    réhabilitation aussi, S-46) à 3 978 € (× 1,5 : gestion en diffus
+    dans des zones tendues, sans source — borne conventionnelle,
+    déclarée telle). Le loyer d'équilibre (D-23) = annuité par m² /
+    12 + charges / surface / 12. Les charges sont supposées fixes par
+    logement, indépendantes du loyer : c'est la forme qui correspond à
+    des données en €/logement ; la forme proportionnelle initiale reste
+    publiée en trace dans le compte rendu de revue. DEC-06 (révisée
+    DEC-14).
+  central_value: 2652.0
+  plausible_range: [2093.0, 3978.0]
+  unit: eur_per_dwelling_per_year
+  confidence: low
   justification:
     - S-40
+    - S-48
+    - S-46
     - D-20
+    - D-23
     - C-13
+  affects:
+    - R-16
+
+- id: H-19
+  name: lease_amortisation_years
+  description: >
+    Durée d'amortissement des travaux du bail à réhabilitation (M-C) —
+    le preneur ne possède pas le bien et ne peut amortir au-delà du
+    bail (D-21). Créée par la revue du 2026-09-18 (HD-13) à la place de
+    la constante initiale (DEC-10). Valeur centrale : 30 ans, la durée
+    moyenne constatée (S-46 : « entre 12 et 99 ans, en moyenne 30
+    ans »). Plage plausible [12 ; 40] : 12 ans = minimum légal (S-46),
+    40 ans = durée « bâti » maximale du prêt qui finance les travaux
+    (S-41) — au-delà, le preneur amortirait plus longtemps que son
+    prêteur ne prête.
+  central_value: 30.0
+  plausible_range: [12.0, 40.0]
+  unit: years
+  confidence: medium
+  justification:
+    - S-46
+    - S-41
+    - D-21
+  affects:
+    - R-16
+
+- id: H-20
+  name: expropriation_reemployment_indemnity_pct
+  description: >
+    Indemnité de remploi ajoutée au prix d'acquisition d'un logement
+    acquis par voie d'expropriation (M-B, repli de P-01) — l'indemnité
+    accessoire principale (D-22), que la version initiale laissait
+    « non chiffrée » (L-27) alors qu'elle est chiffrable (revue
+    2026-09-18, SA-4). Barème pratiqué (S-50, art. R322-5 du code de
+    l'expropriation) : 20 % des premiers 5 000 €, 15 % des 10 000 €
+    suivants, 10 % du surplus — soit ≈ 10,4 % d'un logement à 250 000 €.
+    Valeur centrale : 10 % du prix d'acquisition. Plage plausible :
+    0 % (acquisition AMIABLE, sans expropriation — l'offre acceptée) à
+    10,5 % (expropriation d'un bien de prix médian, barème plein). La
+    borne haute ne compte ni les autres indemnités accessoires
+    (déménagement, perte de revenu locatif) ni les frais de
+    transaction de l'opérateur (L-27).
+  central_value: 10.0
+  plausible_range: [0.0, 10.5]
+  unit: pct_of_acquisition_price
+  confidence: medium
+  justification:
+    - S-50
+    - S-45
+    - D-22
   affects:
     - R-16

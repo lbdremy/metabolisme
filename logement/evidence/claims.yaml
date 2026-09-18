@@ -2041,7 +2041,10 @@
 # Session 7 (2026-09-18) — la proposition institutionnelle : valeurs (V),
 # choix (C), observations/transformations, résultats R-15..R-17,
 # interprétations, limites, proposition P-01. Journal des décisions :
-# evidence/decisions-2026-09-18.md (DEC-nn).
+# evidence/decisions-2026-09-18.md (DEC-nn). REVUS et intégrés le même
+# jour (revue contradictoire 2026-09-18, 61 objections : compte rendu
+# evidence/revue-contradictoire-2026-09-18.md) — les nœuds ci-dessous
+# sont l'état APRÈS revue ; l'état d'avant est au commit 0498b4c.
 
 # ----------------------------------------------------- valeurs (INTRO §17)
 
@@ -2050,8 +2053,12 @@
   title: >
     Stabilité du domicile : l'occupation d'une résidence principale ne
     peut pas être remise en cause au nom d'un meilleur rendement du parc
-    (INTRO.md §17). Aucun mécanisme comparé ne touche un logement occupé ;
+    (INTRO.md §17). Aucun mécanisme comparé ne déplace un occupant ;
     l'acquisition de M-B ne porte que sur des vacants durables (D-10).
+    PRÉCISÉ par la revue (HD-8) : la bascule M-D, elle, TOUCHE les
+    logements occupés — par une charge annuelle, pas par un
+    déplacement — et cette charge est en tension avec le droit à
+    l'ancrage (V-03) : c'est dit dans R-17/I-17, pas caché ici.
   depends_on: [V-01]
 
 - id: V-03
@@ -2060,9 +2067,11 @@
     Mobilité volontaire et droit à l'ancrage : le système doit augmenter
     les possibilités de déménagement sans créer d'obligation de partir ;
     les liens avec un lieu sont des usages réels (INTRO.md §17). La
-    bascule M-D redistribue entre ménages mobiles et immobiles — le
-    perdant est le ménage qui reste : c'est un arbitrage de valeur, pas
-    un résultat.
+    bascule M-D redistribue des ménages qui restent vers ceux qui
+    bougent, et une charge uniforme par logement pèse plus, en
+    proportion, sur les biens de faible valeur (R-17, SE-9) : c'est un
+    arbitrage de valeur, pas un résultat — le droit à l'ancrage est
+    l'objection à M-D autant que sa justification.
   depends_on: [V-01]
 
 - id: V-04
@@ -2070,11 +2079,12 @@
   title: >
     Accessibilité, qualité, soutenabilité, transparence (INTRO.md §17) :
     un logement supportable économiquement (le loyer d'équilibre se
-    compare au loyer SOCIAL local, pas au marché), pas de capacité au
-    prix de l'insalubrité (rénovation complète et performante, H-09/
-    H-10), remise en usage comparée au neuf (R-09/R-16), règles
-    d'attribution, de financement et de mobilité inspectables (la chaîne
-    elle-même).
+    compare au loyer SOCIAL local et au loyer de MARCHÉ — deux lectures,
+    attribution et fluidité, publiées toutes deux depuis la revue,
+    SE-7), pas de capacité au prix de l'insalubrité (rénovation complète
+    et performante, H-09/H-10), remise en usage comparée au neuf
+    (R-09/R-16), règles d'attribution, de financement et de mobilité
+    inspectables (la chaîne elle-même).
   depends_on: [V-01]
 
 # ----------------------------------------------------- choix de conception
@@ -2093,77 +2103,129 @@
     la mobilité locative (non chiffré, L-31). Aucun mécanisme n'est
     défendu d'avance ; la proposition P-01 est assemblée APRÈS la
     comparaison. Les coûts de rénovation restent au central H-09/H-10
-    (leur sensibilité est déjà publiée dans R-09).
+    (sensibilité déjà dans R-09, DEC-12) ; H-08/H-12 ne sont pas
+    propagées dans R-16 — le besoin varie d'un facteur ~4,6 sur la
+    plage H-08 (R-09), et les volumes de R-16 avec lui (SE-14). Les
+    résultats R-15..R-17 sont des SIMULATIONS (INTRO §15 : calculées
+    sur hypothèses, pas observées), étiquetées telles (HD-9).
   depends_on: [R-07, R-09, I-10, C-07, V-01]
 
 - id: C-12
   type: choice
   title: >
     Prix d'acquisition d'un vacant durable par l'opérateur (M-B) = prix
-    médian des logements vendus dans la ZE (DVF 2025, assiette C-10) ×
-    H-15 (central 1,0 : pas de décote). Justification : l'indemnité
-    principale d'expropriation « correspond à la valeur vénale du bien »
-    (D-22, S-45) — c'est le prix de l'outil de contrainte ultime, donc
-    un majorant du prix d'une acquisition amiable ou par préemption. Les
-    indemnités accessoires (remploi, etc.) ne sont pas chiffrées (L-27).
-    L'utilité publique d'une telle acquisition est un choix, pas un
-    constat (D-22). DEC-04.
-  depends_on: [D-22, S-45, S-30, C-10, H-15]
+    médian AU M² des logements vendus dans la ZE (DVF 2025, assiette
+    C-10, R-14) × H-15 (central 1,0 : pas de décote) × (1 + H-20,
+    indemnité de remploi 10 %), à la surface C-07 de la ZE (mix
+    maison/appartement S-12). Justification : l'indemnité principale
+    d'expropriation « correspond à la valeur vénale du bien » (D-22,
+    S-45) et l'indemnité de remploi suit le barème 20/15/10 % (S-50) —
+    c'est le prix de l'outil de contrainte ultime, majorant d'une
+    acquisition amiable. CORRIGÉ par la revue (ST-1/SE-1/HD-1) : la
+    version initiale prenait le prix médian PAR LOGEMENT vendu (surface
+    implicite ~69 m²) et le rapportait à la surface des résidences
+    principales (~96 m²) — les €/m² sont désormais homogènes de bout en
+    bout. L'utilité publique d'une telle acquisition est un CHOIX à
+    créer, pas un constat (D-22, C-15). DEC-04.
+  depends_on: [D-22, S-45, S-50, S-30, C-10, H-15, H-20]
 
 - id: C-13
   type: choice
   title: >
     Modèle financier de l'opérateur (M-B/M-C) : emprunt au circuit
     existant du logement social (prêt PLUS, Livret A + 0,60 % — H-16),
-    annuité constante sur la durée « bâti » du même prêt (40 ans, H-17 ;
-    30 ans pour le bail à réhabilitation, durée moyenne de S-46),
-    charges d'exploitation à la structure observée du secteur (H-18 :
-    54,9 % du loyer net, S-40). Loyer d'équilibre = annuité / (1 − H-18),
-    exprimé en €/m²/mois aux surfaces C-07 et comparé au loyer de marché
-    (S-09, mix C-05) et au loyer social (S-28, pondération C-09) de la
-    même ZE. Pas de subvention d'investissement au central : la
-    « subvention d'équilibre » publiée est ce qu'il faudrait verser
-    chaque année pour ramener chaque logement au loyer social local.
-    DEC-05, DEC-06.
-  depends_on: [S-40, S-41, S-42, S-46, H-16, H-17, H-18, D-20, C-07, C-09]
+    annuité constante sur la durée « bâti » du même prêt (40 ans,
+    H-17 ; sur la durée du bail pour M-C, H-19), charges d'exploitation
+    FIXES PAR LOGEMENT à la valeur observée du secteur (H-18 : 2 652 €
+    en 2023, S-40 p. 24 — hors TFPB pour le preneur d'un bail à
+    réhabilitation, exonéré, S-46). Loyer d'équilibre (D-23) =
+    (investissement par m² × facteur d'annuité + charges / surface) /
+    12, comparé au loyer de marché (S-09, mix C-05) et au loyer social
+    (S-28, pondération C-09) de la même ZE ; le segment neuf est
+    chiffré au prix S-18 par m² de surface utile (2 550 €/m², 66 m²).
+    CORRIGÉ par la revue (HD-2) : la forme initiale « charges = 54,9 %
+    du loyer » appliquait la proportion du secteur à un loyer d'équilibre
+    ~3 fois plus haut, et décidait à elle seule le titre « au-dessus du
+    marché partout ». Pas de subvention d'investissement au central :
+    les « subventions d'équilibre » publiées (au loyer social, au loyer
+    de marché) sont ce qu'il faudrait verser chaque année. DEC-05,
+    DEC-06 (révisée DEC-14), DEC-10 (révisée DEC-15).
+  depends_on: [S-40, S-41, S-42, S-46, S-48, S-49, H-16, H-17, H-18, H-19, D-20, D-23, C-07, C-09]
 
 - id: C-14
   type: choice
   title: >
     Assiette de la bascule DMTO → détention (M-D) : le produit
-    DÉPARTEMENTAL 2024 (9,9 Md€, S-39, périmètre constant OFGL) rapporté
-    au parc de logements du MÊME périmètre (recensement S-11, hors 75,
-    69, 2A, 2B, 972, 973 : 34,6 M de logements), en charge uniforme par
-    logement et par an. Convention de neutralité : elle ne préjuge ni de
-    la progressivité ni d'une assiette en valeur (l'OCDE recommande des
-    valeurs cadastrales à jour, S-44) — ce sont des choix ultérieurs.
-    Le péage fiscal par ZE = droits territorialisés S-31 + CSI, sur le
-    prix médian R-14 ; le nombre d'« années équivalentes » = péage
-    fiscal / charge annuelle. DEC-07.
-  depends_on: [S-39, S-11, S-44, R-14, H-13]
+    DÉPARTEMENTAL 2025 (11,9 Md€, S-47, périmètre constant OFGL — 2024,
+    9,9 Md€, en sensibilité, S-39) rapporté au parc de logements du
+    MÊME périmètre (recensement S-11, hors 75, 69, 2A, 2B, 972, 973 :
+    34,6 M de logements), en charge uniforme par logement et par an.
+    Le numérateur du péage est le SEUL droit départemental (taux voté ×
+    prix médian) — la part que la charge remplace ; taxe communale,
+    frais d'assiette, CSI et émoluments restent un péage résiduel
+    (CORRIGÉ par la revue, ST-2/HD-5). Les ZE dont moins de la moitié
+    du parc est dans le périmètre sont publiées mais hors quantiles
+    (ST-3). La charge uniforme n'est PAS neutre : en proportion de la
+    valeur elle est régressive (0,11-0,53 % du prix médian selon la
+    ZE, R-17) — le CPO (S-51) conditionne toute bascule à la réforme
+    préalable de l'assiette foncière. DEC-07, DEC-11.
+  depends_on: [S-47, S-39, S-53, S-11, S-44, S-51, R-14, H-13]
+
+- id: C-15
+  type: choice
+  title: >
+    Architecture de P-01 (créé par la revue, HD-4/HD-12/SE-2/SE-3 —
+    aucun nœud ne portait les choix propres à la proposition) :
+    (1) l'outil qui SÉCURISE le volume est l'acquisition par
+    l'opérateur — il n'existe pas en droit pour des logements vacants
+    (utilité publique à créer, D-22) : sans lui, P-01 se réduit à M-C,
+    un canal incitatif amélioré d'un montant inconnu ; (2) le bail à
+    réhabilitation est OFFERT, pas attendu : la revue a établi qu'à
+    prix de repli = valeur vénale sans décote, la cession domine le
+    bail pour le propriétaire (SE-2 : valeur actuelle du bail 28-67 %
+    de la vente selon le taux d'actualisation) — la version initiale
+    affirmait l'inverse sans source ; l'écart de prix entre offre et
+    repli qui rendrait le bail préférable est un paramètre à concevoir,
+    sans source, NON chiffré ; (3) l'opérateur arbitre logement par
+    logement entre acquérir-rénover et construire sur friches (R-10)
+    au coût par m² ; (4) rythme : programme sur 10 ans au central
+    (grille 5/10/20, R-16), l'outil de contrainte étant supposé exister
+    dès l'an 1 (L-29) ; (5) M-D est une voie SÉPARÉE, conditionnée à la
+    réforme de l'assiette foncière (S-51) et assumée comme valeur
+    (V-03), pas un étage de l'opérateur.
+  depends_on: [R-15, R-16, R-17, D-22, D-21, S-51, V-03, C-12, C-13, C-14]
 
 # --------------------------------------------------- observations, transformations
 
 - id: O-37
   type: observation
   title: >
-    Produit des droits de mutation à titre onéreux des départements en
-    2024 : 9,9 Md€, en baisse de 13,5 % (S-39, p. 4 — périmètre constant
-    hors Rhône, Martinique, Guyane, Corse et Paris ; marché bas : ventes
-    − 7,5 %, prix − 2,0 %). Rendement de la taxe sur les logements
-    vacants : 271 M€ en 2023 (S-22, p. 36).
-  depends_on: [S-39, S-22, D-19]
+    Produit des droits de mutation à titre onéreux des départements
+    (périmètre constant OFGL, hors Rhône, Martinique, Guyane, Corse et
+    Paris) : 11,9 Md€ en 2025 (+ 20,4 % — S-47, p. 47, premier
+    millésime au taux 5,00 %), 9,9 Md€ en 2024 (point bas, − 13,5 % —
+    S-39, p. 4) ; France entière 2023 : 13,0 Md€ contre 11,4 au champ
+    constant (S-53) ; toutes collectivités 16,8 Md€ (S-51, p. 32).
+    Rendement de la taxe sur les logements vacants : 271 M€ en 2023
+    (S-22, p. 36) ; TLV et THLV remplacées par la TVLH au 01/01/2027
+    (S-52).
+  depends_on: [S-47, S-39, S-53, S-51, S-22, S-52, D-19]
 
 - id: O-38
   type: observation
   title: >
-    Structure d'exploitation des bailleurs sociaux en 2023 (S-40,
-    p. 15) : pour 100 € de loyers nets, charges d'exploitation 54,9
-    (gestion 27,8, maintenance 15,5, TFPB 11,6), annuités 43,8,
-    autofinancement locatif 1,5. Conditions du prêt PLUS : Livret A +
-    60 pb, bâti jusqu'à 40 ans (S-41) ; Livret A à 1,70 % depuis le
-    01/08/2026 (S-42).
-  depends_on: [S-40, S-41, S-42, D-20]
+    Bailleurs sociaux en 2023 (S-40) : pour 100 € de loyers nets,
+    charges d'exploitation 54,9 (gestion 27,8, maintenance 15,5, TFPB
+    11,6), annuités 43,8, autofinancement locatif 1,5 (p. 15) ; en
+    euros PAR LOGEMENT : charges d'exploitation 2 652 € (gestion
+    1 343, maintenance 749, TFPB 559 — p. 24, tableau 1). Prêts de la
+    Banque des Territoires : PLUS Livret A + 60 pb, bâti jusqu'à 40 ans
+    (S-41) ; PLAI Livret A − 0,20 %, exonération de TFPB 25 ans, TVA
+    5,5 % (S-48) ; PLS Livret A + 111 pb (S-49) ; Livret A à 1,70 %
+    depuis le 01/08/2026 après 3 % début 2025 (S-42). Prix de revient
+    du logement social neuf 2023 : 169 200 € par logement, 2 550 €/m²
+    de surface utile, ~66 m² (S-18).
+  depends_on: [S-40, S-41, S-42, S-48, S-49, S-18, D-20]
 
 - id: O-39
   type: observation
@@ -2172,172 +2234,233 @@
     part départementale, S-43) : effet net de − 6 % sur les transactions
     pendant les trois mois suivant la réforme (~15 000 transactions
     perdues), effet d'anticipation le mois précédent, « aucune preuve
-    d'un effet à moyen ou long terme ». Recommandation OCDE (S-44) :
-    renforcer les impôts périodiques sur la propriété, alléger les
-    impôts sur les transactions, progressivement et avec des mesures
-    contre l'effet de manne.
-  depends_on: [S-43, S-44, D-19]
+    d'un effet à moyen ou long terme ». Recommandations convergentes :
+    OCDE (S-44) — renforcer les impôts périodiques sur la propriété,
+    alléger les impôts sur les transactions, progressivement et avec
+    des mesures contre l'effet de manne ; CPO (S-51, reco n° 8) —
+    « moins taxer l'acquisition […] et compenser le manque à gagner
+    […] par un relèvement des impôts portant sur leur détention », une
+    fois l'assiette de la taxe foncière réformée.
+  depends_on: [S-43, S-44, S-51, D-19]
 
 - id: O-40
   type: observation
   title: >
     Loyer moyen du parc social par commune au 01/01/2025 (S-28, colonne
-    loymoy, €/m² de surface habitable par mois), agrégé par ZE en
-    pondérant par le parc (C-09) : médiane 6,43 €/m² dans les ZE tendues
-    (5,21-7,95). Loyer de marché mix C-05 (S-09) : médiane 12,29 €/m²
-    dans les mêmes ZE (8,80-21,79).
+    loymoy, €/m² de surface habitable par mois, hors charges), agrégé
+    par ZE en pondérant par le parc (C-09) : médiane 6,43 €/m² dans les
+    ZE tendues (5,21-7,95). Loyer de marché mix C-05 (S-09, loyers
+    d'annonce charges comprises) : médiane 12,29 €/m² dans les mêmes ZE
+    (8,80-21,79). Les deux assiettes diffèrent (D-23, HD-11).
   depends_on: [S-28, S-09, C-05, C-09, T-07]
 
 - id: T-17
   type: transformation
   title: >
     Chaîne des scénarios (core/institution.py, stage
-    scenarios-institutionnels) : reprend le cadre de détente de R-09
-    (remob.detente_frame : rénovables = min(besoin, gisement effectif),
-    déficit au neuf), les prix médians par ZE de R-14
-    (transaction.prices_by_ze), le loyer mix de R-06 et le niveau de vie
-    S-10 ; ajoute le loyer social S-28 (parse_rpls_rents,
-    social_rent_by_ze) ; calcule pour chaque mécanisme : M-A sorties =
-    gisement × H-14 × horizon (grille 5/10/20 ans, plafonné au
-    gisement) ; M-B investissement = rénovables × (prix × H-15 + coût de
-    rénovation C-07) + déficit × 169 200 €, annuité = investissement ×
-    facteur(H-16, H-17), loyer d'équilibre par segment = annuité
-    unitaire / (1 − H-18) / 12 / surface ; M-C travaux seuls amortis sur
-    30 ans, volume × grille de consentement ; M-D charge = 9,9 Md€ /
-    parc du périmètre, années équivalentes = péage fiscal / charge.
-    Sensibilités une-à-une H-15..H-18 et coins favorable/défavorable.
-  depends_on: [T-10, T-15, T-07, O-37, O-38, O-40, H-14, H-15, H-16, H-17, H-18, C-11, C-12, C-13, C-14]
+    scenarios-institutionnels — refondue par la revue) : reprend le
+    cadre de détente de R-09 (remob.detente_frame : rénovables =
+    min(besoin, gisement effectif), déficit au neuf), les prix médians
+    AU M² par ZE de R-14 (transaction.prices_by_ze), le loyer mix de
+    R-06 et le niveau de vie S-10 ; ajoute le loyer social S-28
+    (parse_rpls_rents, social_rent_by_ze) ; tout en €/m² : rénovation
+    €/m² = coût unitaire C-07 / surface C-07, acquisition €/m² = prix
+    m² × H-15 × (1 + H-20), neuf = 2 550 €/m² (S-18). M-A : sorties =
+    gisement × H-14 × horizon, plafonnées par ZE au min(gisement,
+    besoin). M-B : investissement = rénovables × surface × (acquisition
+    + rénovation) €/m² + déficit × 169 200 €, annuité = investissement ×
+    facteur(H-16, H-17), loyer d'équilibre par m² = (coût €/m² × facteur
+    + H-18 / surface) / 12, par segment ; subventions d'équilibre au
+    loyer social et au loyer de marché ; sensibilités une-à-une
+    H-15/H-16/H-17/H-18/H-20 et coins ; rythme 5/10/20 ans. M-C :
+    travaux seuls amortis sur H-19, charges hors TFPB, grille de
+    consentement (bail seul / avec le neuf). M-D : charge = produit
+    départemental (2025 central, 2024 en sensibilité) / parc du
+    périmètre ; années équivalentes = droit DÉPARTEMENTAL (taux voté ×
+    prix médian) / charge ; ZE < 50 % dans le périmètre hors quantiles ;
+    médianes simples par ZE + médianes pondérées (ventes, rénovables).
+  depends_on: [T-10, T-15, T-07, O-37, O-38, O-40, H-14, H-15, H-16, H-17, H-18, H-19, H-20, C-11, C-12, C-13, C-14]
 
 # ------------------------------------------------------------- résultats
 
 - id: R-15
   type: result
   title: >
-    M-A, le canal incitatif seul (sortie reproductible
+    SIMULÉ — M-A, le canal incitatif seul (sortie reproductible
     `data/processed/scenarios-institutionnels-ze.json`, clé
-    m_a_canal_incitatif) : au taux de sortie documenté (H-14 central
-    0,75 %/an), le gisement effectif des 97 ZE tendues (206 664) livre
-    ~15 500 logements en dix ans — 8 % du besoin de détente (194 488) ;
-    4 % à cinq ans, 16 % à vingt ans ; même au triple du constat
-    (2,50 %/an), 27 % à dix ans ; à la borne basse, 3 %. Le canal lève
-    par ailleurs 271 M€/an de TLV (2023). Lecture : la référence
-    « prolongement des tendances » ne détend pas — elle ne mobilise
-    qu'une fraction du gisement en une génération.
+    m_a_canal_incitatif ; requalifié par la revue HD-3/SA-2/SE-10) : au
+    taux de sortie documenté par propriétaire CONTACTÉ (S-22 : 3 % en
+    zone tendue sur 2020-2024, soit H-14 = 0,75 %/an) appliqué au
+    gisement ENTIER — un majorant du canal réel — le gisement effectif
+    des 97 ZE tendues (206 664) livre ~15 300 logements en dix ans
+    (plafonnés au besoin de chaque ZE) : 8 % du besoin de détente
+    (194 488) ; 4 % à cinq ans, 15 % à vingt ans ; au triple du
+    constat, 25 % à dix ans ; à la borne basse, 3 %. Le canal lève par
+    ailleurs 271 M€/an de TLV (2023) et change de droit en 2027 (TVLH,
+    S-52 — L-33). Lecture : la référence ne détend pas — même
+    généreusement lue, elle mobilise moins d'un dixième du besoin en
+    dix ans ; ce n'est pas un « prolongement des tendances » (ni
+    sorties naturelles ni entrées en vacance, L-29).
   depends_on: [T-17, H-14, R-07, O-37, V-01]
   produced_by: src/logement/shell/build.py
   output: data/processed/scenarios-institutionnels-ze.json
-  limitations: [L-17, L-29]
+  limitations: [L-17, L-29, L-33]
 
 - id: R-16
   type: result
   title: >
-    M-B et M-C, l'opérateur collectif (même sortie, clés
+    SIMULÉ — M-B et M-C, l'opérateur collectif (même sortie, clés
     m_b_operateur_acquisition et m_c_bail_rehabilitation ; 96 ZE
-    tendues avec prix DVF, 93 avec les deux loyers). AVEC ACQUISITION à
-    la valeur vénale (M-B) : investissement 44,6 Md€ (28,8 d'acquisition,
-    6,0 de rénovation, 9,8 de neuf), coût unitaire médian d'un vacant
-    acquis-rénové 248 038 € — PLUS CHER qu'un logement social neuf
-    (169 200 €, foncier compris) ; annuité 1,72 Md€/an (140 € par
-    résidence principale des ZE tendues) ; loyer d'équilibre du segment
-    rénové 18,34 €/m²/mois en médiane (11,19-29,32) contre 12,29 de
-    marché et 6,43 de loyer social : au-dessus du marché dans les 93 ZE
-    (ratio médian 1,44 ; 2,81 × le social), alors que le segment NEUF
-    s'équilibre à 12,47 €/m² ≈ le marché ; subvention d'équilibre pour
-    ramener tout au loyer social : 2,38 Md€/an. Sensibilités : décote
-    0,5 → 30,2 Md€, loyer 10,88 (sous le marché dans 77 ZE) ; taux 1,50
-    → 15,92 ; durée 50 ans → 16,13 ; charges 0,40 → 13,79 ; coin
-    favorable 6,07 €/m² (subvention 0,07 Md€/an), coin défavorable
-    26,73. SANS ACQUISITION (M-C, bail à réhabilitation, travaux seuls
-    sur 30 ans) : loyer d'équilibre 4,22 €/m² (3,46-4,58), SOUS le loyer
+    tendues avec prix DVF — Colmar, hors DVF, reste dans le besoin mais
+    hors des totaux de M-B, 191 rénovables —, 93 avec les deux loyers ;
+    RECALCULÉ par la revue, unités au m² : ST-1/SE-1/HD-1, charges
+    fixes : HD-2, remploi : SA-4). AVEC ACQUISITION à la valeur vénale
+    + remploi (M-B, central H-15 = 1, H-20 = 10 %) : investissement
+    61,8 Md€ (46,1 d'acquisition, 6,0 de rénovation, 9,8 de neuf) ;
+    coût médian d'un vacant acquis-rénové 3 776 €/m², soit 363 k€ à la
+    surface C-07 — plus qu'un logement social neuf (2 550 €/m²,
+    169 200 €) ; annuité 2,38 Md€/an (95 Md€ sur 40 ans ; 194 € par
+    résidence principale des ZE tendues, 12 256 € par logement porté) ;
+    programme sur 10 ans : 6,2 Md€/an, ~19 400 logements/an. Loyer
+    d'équilibre (D-23) du segment rénové : 14,40 €/m²/mois en médiane
+    des ZE (9,37-25,22 ; 15,73 pondéré par les rénovables) contre 12,29
+    de marché et 6,43 de social — ratio médian 1,14 × le marché (0,87-
+    1,71), sous le marché dans 18 ZE sur 93, 2,2 × le social, au-dessus
+    du social partout ; segment NEUF (S-18) : 11,51 €/m², sous le
+    marché dans 61 ZE sur 93. Subvention d'équilibre pour ramener tout
+    au loyer SOCIAL : 1,56 Md€/an (8 159 € par logement porté et par
+    an ; 1,34 rénové + 0,23 neuf) ; au loyer de MARCHÉ : 0,31 Md€/an.
+    Sensibilités : décote 0,5 → 38,8 Md€, loyer 9,13 (sous le marché
+    dans 92 ZE) ; taux 1,50 → 12,81 ; 3,60 (Livret A à 3 %) → 17,25 ;
+    durée 30 ans → 16,92 ; charges hors TFPB → 13,92 ; remploi 0 →
+    13,45 ; coin favorable 6,53 €/m² (subvention sociale 0,17 Md€/an),
+    coin défavorable 20,83 (2,83 Md€/an). SANS ACQUISITION (M-C, bail à
+    réhabilitation : travaux seuls sur H-19 = 30 ans, charges hors
+    TFPB) : loyer d'équilibre 3,71 €/m² (3,64-3,85), SOUS le loyer
     social dans les 94 ZE ; investissement 6,0 Md€ de travaux + 9,8 de
     neuf = 15,8 (le chiffre de R-09) — mais le volume dépend du
-    consentement des propriétaires : couverture du besoin 0,37 à 10 %
-    de consentement (le neuf compris), 0,65 à 50 %, 1,0 à 100 %.
-  depends_on: [T-17, H-15, H-16, H-17, H-18, R-09, R-14, O-38, O-40, C-12, C-13, V-01, V-04]
+    consentement : le bail SEUL couvre 7 % du besoin à 10 % de
+    consentement, 35 % à 50 %, 70 % à 100 % (0,37 / 0,65 / 1,0 en
+    comptant le neuf du déficit).
+  depends_on: [T-17, H-15, H-16, H-17, H-18, H-19, H-20, R-09, R-14, O-38, O-40, C-12, C-13, V-01, V-04]
   produced_by: src/logement/shell/build.py
   output: data/processed/scenarios-institutionnels-ze.json
-  limitations: [L-14, L-27, L-29, L-30]
+  limitations: [L-14, L-27, L-29, L-30, L-32]
+  notes: >
+    Avant revue (commit 0498b4c, pour trace) : 44,6 Md€, loyer rénové
+    18,34 €/m² « au-dessus du marché dans les 93 ZE », neuf 12,47 « ≈ le
+    marché », subvention 2,38 Md€/an — trois erreurs de construction
+    (prix par logement divisé par une surface d'un autre segment ;
+    charges proportionnelles à un loyer trois fois plus haut que celui
+    qui a produit le ratio ; remploi omis).
 
 - id: R-17
   type: result
   title: >
-    M-D, la bascule du péage fiscal vers la détention (même sortie, clé
-    m_d_bascule_dmto ; 296 ZE, dont 96 tendues) : les 9,9 Md€ de DMTO
-    départementaux 2024 rapportés aux 34,6 M de logements du même
-    périmètre font une charge de 286 €/logement/an. Le péage fiscal
-    (droits territorialisés + CSI) sur le logement médian vaut 9 419 €
-    en médiane (4 140-20 780), soit 5,15 mois de niveau de vie médian ;
-    le péage RÉSIDUEL (émoluments seuls) tomberait à 1,02 mois. En
-    années de charge équivalente, le péage médian vaut 33 ans (26-42
-    en quartiles) — 44 ans dans les ZE tendues contre 30 ailleurs : la
-    bascule favorise le ménage qui transacte plus d'une fois par
-    génération et pénalise celui qui reste, D'AUTANT PLUS dans les
-    marchés chers (Porto-Vecchio, Paris, Annecy ~70 ans ; Montluçon,
-    Sarrebourg ~15). L'effet sur les VOLUMES n'est pas extrapolé : la
-    seule expérience naturelle publiée (S-43, + 0,7 point) montre un
-    effet de court terme de − 6 % et aucun effet à moyen terme ; une
-    bascule de − 5 points est hors de son support (L-28).
+    SIMULÉ — M-D, la bascule de la part DÉPARTEMENTALE du péage vers la
+    détention (même sortie, clé m_d_bascule_dmto ; RECALCULÉ par la
+    revue : millésime 2025 SA-1, numérateur ST-2/HD-5, périmètre ST-3,
+    régressivité SE-9). Les 11,9 Md€ de DMTO départementaux 2025
+    rapportés aux 34,6 M de logements du même périmètre font une
+    charge de 344 €/logement/an (286 au point bas 2024). Sur les 277 ZE
+    dont au moins la moitié du parc est dans le périmètre (19 ZE en
+    sont exclues — Corse, Martinique, Guyane, Lyon, Tarare,
+    Villefranche —, Paris n'y est qu'à 61 %), le droit départemental
+    sur le logement médian vaut 7 250 € en médiane (3 225-16 100 ;
+    9 200 pondéré par les ventes), soit 3,92 mois de niveau de vie
+    médian sur un péage total de 6,07 mois ; le péage RÉSIDUEL (taxe
+    communale, frais d'assiette, CSI, émoluments) resterait 2,14 mois.
+    En années de charge équivalente, le droit départemental médian vaut
+    21 ans (17-27 en quartiles ; 27 pondéré par les ventes) — 29 ans
+    dans les 86 ZE tendues du périmètre contre 19 ailleurs : la bascule
+    favorise le ménage qui transacte plus d'une fois par génération et
+    pénalise celui qui reste, d'autant plus dans les marchés chers
+    (Paris 47 ans, Annecy 45 ; Montluçon, Sarrebourg 9). La charge
+    uniforme vaut 0,24 % du prix médian (0,11 % dans les ZE chères,
+    0,53 % dans les moins chères) : RÉGRESSIVE en valeur. L'effet sur
+    les VOLUMES n'est pas extrapolé : la seule expérience naturelle
+    publiée (S-43, + 0,7 point) montre un effet de court terme de − 6 %
+    et aucun effet à moyen terme ; une bascule de − 5 points est hors
+    de son support (L-28).
   depends_on: [T-17, O-37, O-39, R-14, C-14, V-03]
   produced_by: src/logement/shell/build.py
   output: data/processed/scenarios-institutionnels-ze.json
   limitations: [L-25, L-28]
+  notes: >
+    Avant revue (commit 0498b4c, pour trace) : produit 2024, péage
+    fiscal TOTAL au numérateur (droits + CSI), toutes ZE — 286 €, 33 ans
+    (44 en ZE tendues), « résiduel 1,02 mois » ; Porto-Vecchio et Paris
+    cités alors qu'ils sont hors du périmètre de la charge.
 
 # ------------------------------------------------------- interprétations
 
 - id: I-15
   type: interpretation
   title: >
-    Le canal incitatif ne peut pas être le mécanisme de la détente : à
-    son rendement documenté il livre moins d'un dixième du besoin en dix
-    ans (R-15), et ce constat est robuste à la plage entière de H-14. La
-    seule voie qui SÉCURISE le volume est celle où un opérateur porte le
-    bien (acquisition, M-B) — mais elle le paie au prix du marché des
-    zones tendues, où un vacant acquis et rénové coûte plus cher qu'un
-    logement neuf (R-16). Le levier réel de M-B n'est donc pas
-    « remobiliser coûte deux fois moins que construire » (I-09, qui ne
-    valait que pour les travaux) : c'est que l'opérateur, en portant à
-    la fois le gisement et les friches, peut arbitrer logement par
-    logement entre acquérir-rénover et construire, au lieu de subir la
-    géographie du gisement — et que le segment neuf sur friches
-    s'équilibre au loyer de marché sans subvention d'investissement.
-  depends_on: [R-15, R-16, I-09, I-10, R-10]
-  limitations: [L-27, L-29, L-30]
+    REQUALIFIÉE par la revue (SE-1/HD-1/ST-1). Le canal incitatif ne
+    peut pas être le mécanisme de la détente : même lu comme si tous
+    les propriétaires étaient contactés, il livre moins d'un dixième du
+    besoin en dix ans (R-15), sur toute la plage de H-14 — c'est le
+    seul énoncé de la comparaison qui ne dépend d'aucune hypothèse
+    nouvelle. La seule voie qui SÉCURISERAIT le volume — un opérateur
+    qui porte le bien (M-B) — suppose un outil de contrainte qui
+    n'existe pas (C-15) et paie le prix du marché des zones tendues :
+    un vacant acquis et rénové y coûte plus par m² qu'un logement
+    social neuf (R-16), ce qui rend caduc « remobiliser coûte deux
+    fois moins que construire » (I-09) dès qu'il faut acquérir. Le
+    loyer d'équilibre qui en résulte est PROCHE DU MARCHÉ (1,14 × en
+    médiane ; sous le marché dans une ZE sur cinq et dans presque
+    toutes à la moindre décote) et ~2 × le loyer social : l'opérateur
+    ne produit pas du logement social sans subvention (1,6 Md€/an au
+    central, 8 000 € par logement et par an), il produit du logement
+    au prix du marché DISPONIBLE — ce que le besoin de fluidité de
+    R-07 demande (SE-7). Le segment neuf s'équilibre en dessous du
+    marché dans deux ZE sur trois (11,5 €/m²), d'où le choix C-15(3)
+    de laisser l'opérateur arbitrer au m² entre acquérir et construire.
+  depends_on: [R-15, R-16, I-09, I-10, R-10, C-15]
+  limitations: [L-27, L-29, L-30, L-32]
 
 - id: I-16
   type: interpretation
   title: >
-    Le bail à réhabilitation est le mécanisme le moins cher par logement
-    (4 €/m², sous le loyer social partout) parce qu'il ne paie ni le
-    foncier ni le bâti — mais il achète ce que M-A n'obtient pas
-    davantage : le consentement du propriétaire (R-16, grille). Sa
-    couverture est bornée par l'inconnue comportementale que la chaîne
-    n'a jamais pu paramétrer (L-17, L-29) ; il n'est crédible comme
-    mécanisme principal que couplé à une contrainte de repli (M-B après
-    délai), qui fixe le prix de sortie du propriétaire (la valeur
-    vénale) et rend l'offre de bail préférable à la cession. La
-    proposition P-01 tient à cet enchaînement, pas à un des deux
-    mécanismes seul.
-  depends_on: [R-15, R-16, I-15, L-17]
+    REQUALIFIÉE par la revue (SE-2/HD-4) — la version initiale
+    affirmait que « le repli rend l'offre de bail préférable » ; c'est
+    l'inverse. Le bail à réhabilitation est le mécanisme le moins cher
+    par logement (3,7 €/m², sous le loyer social partout) parce qu'il
+    ne paie ni le foncier ni le bâti — mais un propriétaire à qui l'on
+    garantit une acquisition à la valeur vénale n'a aucune raison
+    financière de le préférer à la vente (valeur actuelle du bail 28-67
+    % de la vente, SE-2) : le bail n'attire que ceux qui veulent garder
+    le bien, et rien ne dit combien ils sont (L-29). Le bail est donc
+    OFFERT (il abaisse le coût là où il est accepté) ; la sécurisation
+    du volume vient de l'acquisition, et le paramètre qui rendrait
+    l'offre préférable — un prix de repli sous la valeur vénale — est un
+    choix de conception non chiffré et juridiquement non acquis (C-15).
+  depends_on: [R-15, R-16, I-15, L-17, C-15]
   limitations: [L-29]
 
 - id: I-17
   type: interpretation
   title: >
-    La bascule DMTO → détention (M-D) est une redistribution AVANT d'être
-    un outil de mobilité : elle transfère ~286 €/logement/an des ménages
-    qui bougent vers ceux qui restent, avec un point d'équivalence
-    (33 ans, 44 en zones tendues) qui dépasse la durée de détention
-    médiane du ménage mobile ; elle allège d'un ordre de grandeur le
-    péage à l'achat (5,15 → 1,02 mois, R-17), ce qui répond à I-14 — mais
-    l'effet causal sur les volumes est, dans la seule preuve disponible,
-    de court terme et petit (O-39). Le mécanisme se justifie donc par la
-    valeur V-03 (ne pas taxer le comportement rare que H-04 déplore) et
-    par la recommandation comparative (S-44), pas par une élasticité
-    établie ; ses perdants (ménages immobiles, départements dont la
-    recette devient assise sur la détention) et sa transition (double
-    paiement des acquéreurs récents — l'OCDE demande un phasage) sont
-    des paramètres institutionnels, pas des résidus (L-28).
-  depends_on: [R-17, O-39, I-14, V-03]
+    REQUALIFIÉE par la revue (SE-9/ST-2/ST-13/HD-8). La bascule de la
+    part départementale des DMTO vers la détention (M-D) est une
+    REDISTRIBUTION avant d'être un outil de mobilité : elle transfère
+    ~344 €/logement/an des ménages qui bougent vers ceux qui restent
+    (point d'équivalence 21 ans, 29 en zones tendues — sans mesure de
+    la durée de détention effective dans la chaîne) ; elle divise le
+    péage à l'achat par ~1,6 (6,07 → 2,14 mois de niveau de vie), ce
+    qui répond à I-14 — mais l'effet causal sur les volumes est, dans
+    la seule preuve disponible, de court terme et petit (O-39), et la
+    charge uniforme est régressive en valeur (0,11-0,53 % du prix
+    médian), en tension avec le droit à l'ancrage (V-03). Le mécanisme
+    se justifie par la valeur V-03 (ne pas taxer le comportement rare
+    que H-04 déplore) et par deux recommandations convergentes (OCDE
+    S-44, CPO S-51), pas par une élasticité établie ; ses conditions
+    (réforme préalable de l'assiette foncière, S-51 ; phasage ;
+    compensation des départements ; acquéreurs récents) sont des
+    paramètres institutionnels, pas des résidus (L-28) — d'où son
+    statut de voie séparée dans P-01 (C-15).
+  depends_on: [R-17, O-39, I-14, V-03, C-15]
   limitations: [L-28]
 
 # -------------------------------------------------------------- limites
@@ -2345,66 +2468,97 @@
 - id: L-27
   type: limit
   title: >
-    Prix d'acquisition : la médiane DVF des logements VENDUS dans la ZE
-    n'est pas le prix des vacants durables, plus petits et plus anciens
-    (L-18) — la médiane est vraisemblablement un MAJORANT, dans le même
-    sens que l'absence de décote au central de H-15 ; les indemnités
-    accessoires d'expropriation (remploi, réinstallation — D-22) et les
-    frais de transaction de l'opérateur lui-même (R-14 !) ne sont pas
-    comptés, dans l'autre sens. Un ZE tendue sur 97 (hors champ DVF) et
-    3 sur 96 sans loyer social ou de marché sortent des comparaisons de
-    loyers, jamais des totaux. Porte sur R-16.
-  depends_on: [L-18, D-22, R-14]
+    Prix et surface d'acquisition (COMPLÉTÉE par la revue, ST-1/ST-7/
+    SE-5) : le prix médian au m² des logements VENDUS dans la ZE n'est
+    pas celui des vacants durables, plus petits et plus anciens (L-18) ;
+    la SURFACE retenue pour les totaux est celle des résidences
+    principales (C-07, ~96 m² au médian, maisons comprises) alors que
+    le vacant durable est plutôt petit (S-23) — les totaux
+    d'investissement de M-B sont donc des MAJORANTS par deux voies
+    (prix au m² et surface), dans le même sens que l'absence de décote
+    (H-15) ; les indemnités accessoires autres que le remploi (H-20)
+    et les frais de transaction de l'opérateur (R-14) ne sont pas
+    comptés, dans l'autre sens. Sélection adverse non modélisée : ce
+    que les propriétaires cèdent à l'opérateur peut être le pire du
+    gisement (coût de rénovation ×2 : stress de R-09, non repropagé).
+    Colmar (hors DVF, Alsace-Moselle) reste dans le besoin mais sort
+    des totaux de M-B (191 rénovables, ~0,05 Md€) ; trois ZE (DOM)
+    sans loyer de marché sortent des comparaisons de loyers. Porte sur
+    R-16.
+  depends_on: [L-18, D-22, R-14, S-23]
 
 - id: L-28
   type: limit
   title: >
-    Bascule DMTO : (1) le produit 9,9 Md€ est un point BAS du cycle (2024)
-    et le périmètre OFGL exclut Paris, le Rhône, la Corse, la Guyane et
-    la Martinique — la charge par logement est calculée au même
-    périmètre (C-14) mais ne vaut pas pour ces territoires ; (2) seule la
-    part départementale est basculée (la taxe communale 1,20 % et les
-    frais d'assiette restent) ; (3) la charge uniforme par logement est
-    une convention de neutralité, pas un barème — une assiette en valeur
-    changerait l'incidence entre territoires ; (4) l'effet sur les
+    Bascule DMTO (COMPLÉTÉE par la revue, SA-1/ST-2/ST-3/ST-6/SE-9/
+    HD-6) : (1) le produit est celui du périmètre constant OFGL (hors
+    Paris, Rhône, Corse, Guyane, Martinique : − 14 % vs France entière
+    en 2023, S-53) — la charge est calculée au même périmètre (C-14),
+    ne vaut pas pour ces territoires, et les ZE qui y sont pour plus de
+    moitié sont hors quantiles ; le millésime 2025 est le premier au
+    taux 5,00 %, 2024 un point bas ; la part des DMTO qui vient des
+    logements (vs locaux, terrains) n'est pas isolée ; (2) seule la
+    part départementale est basculée (taxe communale 1,20 %, frais
+    d'assiette, CSI restent) — le numérateur est cohérent avec cela
+    depuis la revue ; (3) la charge uniforme par logement est une
+    convention, régressive en valeur (0,11-0,53 % du prix médian) —
+    une assiette en valeur changerait l'incidence entre territoires et
+    entre ménages ; capitalisée dans les prix, la charge ferait baisser
+    les prix bas plus que les prix hauts (SE-9) ; (4) l'effet sur les
     volumes de transactions n'est établi qu'à court terme et pour
     + 0,7 point (S-43) : aucune élasticité n'est appliquée ; (5) la
-    transition (acquéreurs récents ayant déjà payé le péage) et
-    l'incidence sur les prix (capitalisation de la charge) ne sont pas
-    modélisées — l'OCDE (S-44) en fait la condition d'une telle
-    réforme. Porte sur R-17/I-17.
-  depends_on: [S-39, S-43, S-44, C-14]
+    transition (acquéreurs récents ayant déjà payé le péage), la
+    compensation des départements et la réforme préalable de l'assiette
+    foncière (S-51) ne sont pas modélisées — le CPO en fait la
+    condition d'une telle bascule ; (6) M-D agit sur le statut le moins
+    mobile (propriétaires occupants, 5,73 % d'entrées annuelles, R-13)
+    alors que le canal principal des mobilités est le locatif privé
+    (L-31). Porte sur R-17/I-17.
+  depends_on: [S-39, S-47, S-53, S-43, S-44, S-51, C-14, R-13]
 
 - id: L-29
   type: limit
   title: >
-    Comportement des propriétaires non paramétré (prolonge L-17) : le
-    taux de sortie du canal incitatif (H-14) est un constat d'exécution
-    unique (ZLV, S-22) étendu linéairement ; le consentement au bail à
-    réhabilitation n'a aucune source (grille, DEC-09) ; le taux de
+    Comportement des propriétaires et rythme non paramétrés (prolonge
+    L-17 ; COMPLÉTÉE par la revue, SE-2/SE-3/SE-4/HD-3/HD-4) : le taux
+    de sortie du canal incitatif (H-14) est un constat d'exécution
+    unique par propriétaire contacté, étendu linéairement au gisement
+    entier (majorant) ; le consentement au bail à réhabilitation n'a
+    aucune source (grille, DEC-09) et sa DIRECTION est défavorable
+    (la cession à la valeur vénale domine le bail, I-16) ; le taux de
     remobilisation par acquisition suppose que l'outil de contrainte
-    existe et s'applique (utilité publique à créer — D-22). Les flux
-    d'entrée en vacance ne sont pas soustraits des sorties. Porte sur
-    R-15/R-16/I-16.
-  depends_on: [L-17, S-22, D-22]
+    existe et s'applique dès l'an 1 (utilité publique à créer — D-22,
+    C-15) ; M-B est chiffré au volume plein sans horizon propre (le
+    rythme 5/10/20 ans est arithmétique) ; les propriétaires peuvent
+    sortir de la cible avant le repli (relouer, vendre, transformer en
+    résidence secondaire ou meublé touristique — les ZE aux loyers
+    d'équilibre les plus hauts sont littorales et alpines) : H-12
+    devient endogène à la politique ; les flux d'entrée en vacance ne
+    sont pas soustraits des sorties. Porte sur R-15/R-16/I-16.
+  depends_on: [L-17, S-22, D-22, C-15]
 
 - id: L-30
   type: limit
   title: >
-    Modèle financier : annuité constante à un Livret A figé (révisable
-    deux fois par an), pas d'inflation des loyers ni des charges (le
-    loyer d'équilibre est en euros courants de 2025 sur 40 ans — il
-    baisserait en termes réels si les loyers suivaient l'inflation, ce
-    qui est favorable à l'opérateur, mais les charges aussi), charges
-    proportionnelles au loyer (H-18 : SURESTIME les charges d'un loyer
-    d'équilibre élevé — majorant), pas de subvention d'investissement,
-    pas de valeur résiduelle du bien à 40 ans (l'opérateur de M-B
-    possède un actif en fin de période — majorant du loyer, dans le
-    même sens), TFPB incluse dans H-18 alors qu'un opérateur public peut
-    en être exonéré. Le prix de revient du neuf (S-18) est un prix 2023
-    de logement social, pas un prix sur friche dépolluée (S-25 : + 780
-    k€/ha de remise en état — L-15). Porte sur R-16.
-  depends_on: [H-16, H-17, H-18, S-18, L-15]
+    Modèle financier (COMPLÉTÉE par la revue, HD-14/ST-12/SE-11) :
+    annuité constante à un Livret A figé (révisable deux fois par an —
+    la plage H-16 couvre désormais le 3 % de début 2025), pas
+    d'inflation des loyers ni des charges (loyer d'équilibre en euros
+    courants sur 40 ans), charges fixes par logement à la valeur d'un
+    parc groupé (gestion en diffus = borne haute conventionnelle de
+    H-18), occupation à 100 % dès l'an 1, ni vacance ni impayés (S-40
+    isole 2,2 % de risques locatifs hors des charges), ni portage
+    pendant les travaux ni TVA sur l'acquisition, pas de subvention
+    d'investissement, pas de valeur résiduelle du bien à 40 ans (M-B
+    possède un actif en fin de période — majorant du loyer), TFPB
+    comptée pour M-B alors que les opérations PLAI/PLUS en sont
+    exonérées 25 ans (S-48 — borne basse de H-18), gros entretien à
+    20-25 ans non provisionné au-delà de la maintenance courante. Le
+    prix de revient du neuf (S-18) est un prix moyen 2023 de logement
+    social, pas un prix sur friche dépolluée (S-25 : 780 k€/ha, soit
+    + 26 k€/logement à 30 logements/ha, L-15) ni un prix de zone A bis
+    (S-18 : + 50 % vs A). Porte sur R-16.
+  depends_on: [H-16, H-17, H-18, S-18, S-25, S-40, S-48, L-15]
 
 - id: L-31
   type: limit
@@ -2418,34 +2572,74 @@
     P-01.
   depends_on: [R-13, L-25]
 
+- id: L-32
+  type: limit
+  title: >
+    Effets d'équilibre général non modélisés (créée par la revue,
+    SE-6/SE-8/HD-15) : (1) un opérateur qui achète ~136 000 logements
+    dans les marchés tendus (~5 % du flux annuel de ventes, concentré
+    sur le segment petit et ancien) paie la valeur vénale d'AVANT son
+    entrée — la demande qu'il ajoute peut la faire monter ; (2) la
+    détente recherchée fait baisser les loyers de marché alors que le
+    loyer d'équilibre, lui, ne bouge pas : plus le mécanisme réussit,
+    plus l'écart à couvrir croît — la subvention est croissante avec
+    le succès ; (3) le besoin de 194 488 est un besoin de STOCK — la
+    formation de ménages des ZE tendues (~140 000/an, L-19) le
+    rattrape en 1,4 an et représenterait, au prix S-18, ~24 Md€/an
+    d'investissement de flux, davantage que tout le programme de stock
+    (61,8 Md€ sur 10 ans) : P-01 ne traite que le stock. Porte sur
+    R-16/I-15/P-01.
+  depends_on: [R-16, L-19, L-20, S-18]
+
+- id: L-33
+  type: limit
+  title: >
+    Le droit du canal incitatif change (créée par la revue, SA-7) : la
+    loi de finances pour 2026 remplace TLV et THLV par la TVLH au
+    01/01/2027 (S-52 : 17 % la première année puis 34 % en zone tendue,
+    majorable) — le constat d'exécution S-22 (2020-2024) qui fonde H-14
+    décrit un régime qui n'existera plus ; aucune évaluation de la
+    TVLH n'existe. Porte sur R-15.
+  depends_on: [S-52, S-22, H-14]
+
 # ---------------------------------------------------------- proposition
 
 - id: P-01
   type: proposal
   title: >
-    Architecture proposée (assemblée après comparaison, C-11) — un
-    OPÉRATEUR COLLECTIF DE DÉTENTE des zones tendues, à trois étages
-    enchaînés : (1) OFFRE — à tout propriétaire d'un vacant durable
-    (> H-06) d'une ZE tendue, un bail à réhabilitation (M-C : travaux
-    financés au Livret A, loyer d'équilibre ~4 €/m², bien rendu rénové
-    après 30 ans) ; (2) REPLI — passé un délai après l'offre, acquisition
-    à la valeur vénale (M-B, C-12) : c'est le repli qui rend l'offre
-    préférable et sécurise le volume, et son coût (248 k€/logement
-    médian) est la borne qui pousse l'opérateur à ARBITRER avec (3)
-    CONSTRUIRE sur friches là où le gisement manque ou coûte plus cher
-    que le neuf (R-10 : le foncier suffit ; R-16 : le neuf s'équilibre
-    au loyer de marché). Financement : prêts PLUS (H-16/H-17) portés par
-    les loyers ; subvention d'équilibre au loyer social ≤ 2,4 Md€/an au
-    pire cas tout-acquisition (R-16), ≈ 0 si le bail domine et le neuf
-    prend le déficit — à comparer aux 271 M€/an de TLV et aux 9,9 Md€
-    de DMTO (O-37). Attribution au loyer social local (V-04). En
-    parallèle, le péage de mobilité : bascule progressive de la part
-    départementale des DMTO vers une charge de détention (M-D, R-17),
-    phasée et accompagnée (L-28), assumée comme choix de valeur (V-03)
-    plutôt que comme levier causal démontré (I-17). Sur le locatif
-    privé, principes seulement (L-31). Ce que la proposition NE
-    démontre PAS : le taux d'adhésion au bail (L-29), l'effet-prix de la
-    détente et ses perdants (L-20), le flux de construction nécessaire
-    au-delà du stock (L-19).
-  depends_on: [I-15, I-16, I-17, R-15, R-16, R-17, C-11, C-12, C-13, C-14, V-01, V-02, V-03, V-04, I-10]
-  limitations: [L-19, L-20, L-27, L-28, L-29, L-30, L-31]
+    Architecture proposée (assemblée après comparaison, C-11 ;
+    REQUALIFIÉE par la revue, C-15) — un OPÉRATEUR COLLECTIF DE DÉTENTE
+    des zones tendues : (1) il ACQUIERT les vacants durables (> H-06) à
+    la valeur vénale plus remploi (M-B, C-12) — c'est l'outil qui
+    sécurise le volume, et il reste À CRÉER en droit (utilité publique
+    d'une acquisition de logements vacants, D-22) ; (2) il OFFRE, avant
+    d'acquérir, un bail à réhabilitation (M-C : travaux au Livret A,
+    loyer d'équilibre ~3,7 €/m², bien rendu rénové après 30 ans) — sans
+    compter dessus : à prix de repli égal à la valeur vénale, la cession
+    domine (I-16), et le prix de repli qui rendrait l'offre préférable
+    est un paramètre non chiffré ; (3) il ARBITRE au m², logement par
+    logement, entre acquérir-rénover (3 776 €/m² médian) et construire
+    sur friches (2 550 €/m², R-10 : le foncier suffit). Financement par
+    prêts PLUS portés par des loyers PROCHES DU MARCHÉ (14,4 €/m²
+    médian rénové, 11,5 neuf, contre 12,3 de marché) : l'opérateur
+    produit du logement disponible au prix du marché — ce que le besoin
+    de fluidité demande — pas du logement social sans subvention : la
+    ramener au loyer social coûte 1,56 Md€/an au central (0,17-2,83
+    sur les coins), 8 000 € par logement et par an, sur 40 ans ; au
+    loyer de marché 0,31 Md€/an. Ordre de grandeur : 61,8 Md€
+    d'investissement (6,2 Md€/an sur 10 ans, ~19 400 logements/an),
+    annuité 2,38 Md€/an — contre 271 M€/an de TLV et 11,9 Md€ de DMTO
+    départementaux (O-37). Attribution : au loyer d'équilibre (fluidité)
+    ou au loyer social avec la subvention (attribution) — c'est un choix
+    de valeur laissé ouvert (V-04). VOIE SÉPARÉE : la bascule progressive
+    de la part départementale des DMTO vers une charge de détention
+    (M-D, R-17), conditionnée à la réforme de l'assiette foncière (CPO,
+    S-51), régressive si uniforme, assumée comme choix de valeur (V-03)
+    et non comme levier causal démontré (I-17). Sur le locatif privé,
+    principes seulement (L-31). Ce que la proposition NE démontre PAS :
+    le taux d'adhésion au bail et l'existence de l'outil d'acquisition
+    (L-29), l'effet-prix de la détente et ses perdants (L-20, L-32),
+    le flux de construction au-delà du stock — ~24 Md€/an au prix S-18,
+    davantage que tout le programme (L-19, L-32).
+  depends_on: [I-15, I-16, I-17, R-15, R-16, R-17, C-11, C-12, C-13, C-14, C-15, V-01, V-02, V-03, V-04, I-10]
+  limitations: [L-19, L-20, L-27, L-28, L-29, L-30, L-31, L-32, L-33]

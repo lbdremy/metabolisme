@@ -877,11 +877,21 @@ def build_institution(root: Path) -> dict[str, object]:
     factor = remob.ipea_factor(
         remob.parse_ipea_annual_means((raw / IPEA_FILE).read_text(encoding="utf-8"))
     )
-    unit_cost = remob.unit_cost_eur(
-        detente["part_maison"],
-        _load_hypothesis(root, "H-09").central_value,
-        _load_hypothesis(root, "H-10").central_value,
-        factor,
+    surface_mix = (
+        detente["part_maison"] * remob.SURFACE_MAISON_M2
+        + (1 - detente["part_maison"]) * remob.SURFACE_APPART_M2
+    )
+    # Renovation cost PER m² (C-07 mix at the H-09/H-10 centrals, VAT and
+    # IPEA included) — the per-dwelling unit cost of R-09 divided by the
+    # same surface it was built on (ST-1: per-m² end to end).
+    renovation_m2 = (
+        remob.unit_cost_eur(
+            detente["part_maison"],
+            _load_hypothesis(root, "H-09").central_value,
+            _load_hypothesis(root, "H-10").central_value,
+            factor,
+        )
+        / surface_mix
     )
 
     dvf = pd.read_csv(
@@ -903,12 +913,18 @@ def build_institution(root: Path) -> dict[str, object]:
         )
     loyer_social = institution.social_rent_by_ze(institution.parse_rpls_rents(rpls_raw), commune_ze)
 
-    rp_ze = census.merge(commune_ze, on="code", how="inner").groupby("ze")["P22_RP"].sum()
-    rp_total = float(rp_ze.reindex(detente.index).fillna(0).sum())
-    departement = census["code"].map(transaction.departement_of)
-    in_perimeter = ~departement.isin(institution.DMTO_PERIMETER_EXCLUDED_DEPARTEMENTS)
-    dwellings_perimeter = float(census.loc[in_perimeter, "P22_LOG"].sum())
+    census_ze = census.merge(commune_ze, on="code", how="inner")
+    rp_total = float(census_ze.groupby("ze")["P22_RP"].sum().reindex(detente.index).fillna(0).sum())
+    departement = census_ze["code"].map(transaction.departement_of)
+    census_ze["in_perimeter"] = ~departement.isin(institution.DMTO_PERIMETER_EXCLUDED_DEPARTEMENTS)
+    dwellings_perimeter = float(census_ze.loc[census_ze["in_perimeter"], "P22_LOG"].sum())
+    parc_ze = census_ze.groupby("ze")["P22_LOG"].sum()
+    perimeter_share = (
+        census_ze[census_ze["in_perimeter"]].groupby("ze")["P22_LOG"].sum().reindex(parc_ze.index)
+    ).fillna(0) / parc_ze
 
+    h16 = _load_hypothesis(root, "H-16")
+    h18 = _load_hypothesis(root, "H-18")
     return {
         "perimetre": {
             "n_ze_tendues": len(detente),
@@ -918,33 +934,35 @@ def build_institution(root: Path) -> dict[str, object]:
             "residences_principales_ze_tendues": round(rp_total),
             "seuil_h08_pct": h08.central_value,
             "existence_h12": h12.central_value,
+            "n_ze_tendues_hors_dvf": int((~detente.index.isin(prix.index)).sum()),
         },
         "m_a_canal_incitatif": institution.incentive_scenario(
             detente, _load_hypothesis(root, "H-14")
         ),
         "m_b_operateur_acquisition": institution.operator_scenario(
             detente,
-            unit_cost,
-            prix["prix_median"],
+            renovation_m2,
+            prix["prix_m2_median"],
             loyer_marche,
             loyer_social,
-            niveau_vie,
             rp_total,
             _load_hypothesis(root, "H-15"),
-            _load_hypothesis(root, "H-16"),
+            h16,
             _load_hypothesis(root, "H-17"),
-            _load_hypothesis(root, "H-18"),
+            h18,
+            _load_hypothesis(root, "H-20"),
         ),
         "m_c_bail_rehabilitation": institution.lease_scenario(
             detente,
-            unit_cost,
+            renovation_m2,
             loyer_marche,
             loyer_social,
-            _load_hypothesis(root, "H-16").central_value,
-            _load_hypothesis(root, "H-18").central_value,
+            h16.central_value,
+            _load_hypothesis(root, "H-19").central_value,
+            h18.central_value,
         ),
         "m_d_bascule_dmto": institution.toll_shift_scenario(
-            prix, niveau_vie, detente.index, dwellings_perimeter, ze_names
+            prix, niveau_vie, detente.index, perimeter_share, dwellings_perimeter, ze_names
         ),
     }
 
@@ -958,6 +976,7 @@ def run_institution(root: Path) -> int:
     print(
         f"scenarios-institutionnels: wrote {INSTITUTION_OUTPUT} — "
         f"investissement {central['investissement_mdeur']} Md€, "
-        f"loyer d'équilibre {central['loyer_equilibre_renove_m2']}"
+        f"loyer d'équilibre rénové {central['loyer_equilibre_renove_m2']}, "
+        f"neuf {central['loyer_equilibre_neuf_m2']}"
     )
     return 0
