@@ -3,6 +3,64 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
+## Session 7 — 2026-09-18 (proposition institutionnelle : cinq mécanismes comparés, revue, second article)
+
+Étape 2 de NEXT-STEPS exécutée en autonomie (Rémy : « autonomie
+jusqu'à l'écriture du nouvel article » ; condition : chaque choix
+consigné avec ce qu'il abandonne — `evidence/decisions-2026-09-18.md`,
+DEC-01..DEC-20). Tag de chaîne **`efficacite-parc-v0.6`**, tag d'article
+**`article-proposition-institutionnelle-v1.0`**.
+
+- **Périmètre** (DEC-01) : l'article 2 est la proposition ; les trois
+  observations qui trancheraient H-04 sont reportées avec leurs
+  conditions (RPLS 01/01/2026 non paru au 2026-09-18 ; le test SE-12
+  attend DVF 2026 — la réforme 2025 est la vraie expérience naturelle ;
+  la littérature causale existante est enregistrée à la place, S-43).
+- **Cinq mécanismes chiffrés sur la géographie de R-07/R-09** (C-11) :
+  M-A canal incitatif (R-15), M-B opérateur qui acquiert (R-16), M-C
+  bail à réhabilitation (R-16), M-D bascule de la part départementale
+  des DMTO vers la détention (R-17), M-E mobilité locative (non
+  chiffré, L-31). Nouveau module pur `core/institution.py`, stage
+  `scenarios-institutionnels` (15e), 24 tests ; H-14..H-20 ; D-19..D-23 ;
+  S-39..S-53 (OFGL 2025/2026, Perspectives 2025, pages PLUS/PLAI/PLS,
+  Livret A, Bérard-Trannoy 2018, OCDE 2022, CPO 2023, BIS 190,
+  Service-Public expropriation et TVLH, DREAL Occitanie BAR, DUP
+  Hérault pour le remploi) ; V-02..V-04 (contraintes normatives §17
+  en nœuds) ; C-11..C-15 ; L-27..L-33 ; P-01. Schéma : `redistributable`
+  ajouté à SourceRecord ; type `proposal` aligné sur le contrat du site.
+- **Revue contradictoire le jour même** (61 objections, 4 relecteurs,
+  ~130 recalculs exacts) — compte rendu
+  `evidence/revue-contradictoire-2026-09-18.md`. Trois erreurs de
+  construction attrapées avant publication : (1) « le neuf s'équilibre
+  au marché » = prix S-18 d'un logement de 66 m² divisé par la surface
+  des RP (~96 m²) — tout est désormais au m² ; (2) charges
+  d'exploitation en proportion d'un loyer trois fois plus haut que
+  celui du secteur — H-18 refondue en €/logement (S-40 p. 24) ; (3)
+  numérateur du péage ≠ part basculée, millésime DMTO dépassé (2025
+  publié), ZE hors périmètre citées. Et un étage de P-01 inversé :
+  le bail n'est PAS préféré à la cession à la valeur vénale (C-15).
+  Sept sources ajoutées. Intégration complète moins sept points
+  écartés avec raison (DEC-20).
+- **Ce que la comparaison établit (après revue)** : le canal incitatif,
+  même lu comme si tous les propriétaires étaient contactés, livre
+  8 % du besoin en dix ans (I-15) ; l'opérateur qui acquiert paie
+  3 776 €/m² (plus qu'un neuf à 2 550) et s'équilibre à 14,4 €/m²,
+  1,14 × le marché, 2,2 × le social : du logement DISPONIBLE au prix
+  du marché, pas du social sans subvention (1,56 Md€/an au central) ;
+  61,8 Md€ d'investissement (majorant), 2,38 Md€/an d'annuité ; le
+  bail à réhabilitation coûte 3,7 €/m² mais le propriétaire préfère
+  vendre (I-16) ; la bascule DMTO fait 344 €/logement/an, 21 ans
+  d'équivalence (29 en ZE tendues), régressive en valeur, preuve
+  causale de court terme seulement (I-17). P-01 : acquisition (outil
+  à créer) → bail offert → arbitrage au m² avec le neuf sur friches ;
+  M-D voie séparée conditionnée (CPO S-51).
+- **Second article** :
+  `articles/2026-09-proposition-institutionnelle.md`, écrit sur
+  l'état v0.6, post du site enregistré, chaque chiffre relu depuis
+  l'artefact. Notification envoyée à Rémy à la fin (sa demande).
+- État : 53 sources, 23 définitions, 15 hypothèses, 144 nœuds, 15
+  stages, 172 tests.
+
 ## Session 6 — 2026-08-10 (chemin de publication : licence S-09 levée, premier article)
 
 Étape 1 de NEXT-STEPS exécutée : le premier article public, écrit sur

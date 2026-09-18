@@ -9,9 +9,15 @@ reproductibles.
   normatif (une résidence principale occupée n'est jamais une inefficience),
   hypothèses directrices, dimensions d'analyse, livrables.
 - **Index de la chaîne de preuves** : [`EVIDENCE.md`](EVIDENCE.md).
-- **Article** : [`articles/2026-08-efficacite-parc-etat-des-preuves.md`](articles/2026-08-efficacite-parc-etat-des-preuves.md)
+- **Articles** :
+  [`articles/2026-08-efficacite-parc-etat-des-preuves.md`](articles/2026-08-efficacite-parc-etat-des-preuves.md)
   — « Le parc immobilier français, au bord du compte », l'état des preuves
-  au tag `efficacite-parc-v0.5`.
+  au tag `efficacite-parc-v0.5` ;
+  [`articles/2026-09-proposition-institutionnelle.md`](articles/2026-09-proposition-institutionnelle.md)
+  — « Détendre le parc, au prix du marché », la proposition institutionnelle
+  au tag `efficacite-parc-v0.6` (cinq mécanismes comparés, revue
+  contradictoire, journal des décisions
+  [`evidence/decisions-2026-09-18.md`](evidence/decisions-2026-09-18.md)).
 - **Conventions techniques** : [`CLAUDE.md`](CLAUDE.md).
 
 ## Reproduction
@@ -20,5 +26,5 @@ reproductibles.
 uv sync --locked            # environnement figé (uv.lock)
 ./test.sh                   # tests (pytest + hypothesis)
 uv run logement validate    # contrôle des registres (sources, définitions, hypothèses)
-uv run logement reproduce   # rejoue la chaîne stabilisée (encore vide à ce stade)
+uv run logement reproduce   # rejoue la chaîne stabilisée (15 stages)
 ```

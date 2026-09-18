@@ -1,0 +1,17 @@
+{
+  "slug": "2026-09-proposition-institutionnelle",
+  "title": "Détendre le parc, au prix du marché",
+  "subtitle": "Cinq mécanismes comparés sur les mêmes chiffres — et ce que la comparaison impose à la proposition.",
+  "date": "2026-09-18",
+  "summary": "Le premier article établissait que le gisement vacant couvre à peine le besoin de détente et que rien ne se déclenche seul. Celui-ci conçoit le mécanisme sans en défendre un d'avance : cinq mécanismes chiffrés sur la même géographie — le canal incitatif livre 8 % du besoin en dix ans ; l'opérateur qui acquiert paie plus au m² qu'un neuf et s'équilibre au prix du marché, pas au loyer social ; le bail à réhabilitation coûte 3,7 €/m² mais le propriétaire préfère vendre ; la bascule des droits de mutation redistribue avant de libérer. Une proposition assemblée après comparaison, revue le jour même, avec le journal de toutes ses décisions.\n",
+  "study": {
+    "slug": "logement",
+    "name": "Efficacité du parc immobilier français",
+    "question": "Dans quelle mesure le parc immobilier français permet-il de loger correctement la population, dans les territoires où elle souhaite ou a besoin de vivre, à un coût soutenable et avec une mobilité suffisante ?\n"
+  },
+  "version": {
+    "repo_url": "https://github.com/lbdremy/metabolisme",
+    "tag": "efficacite-parc-v0.6",
+    "evidence_doc": "logement/evidence/efficacite-parc-immobilier.qmd"
+  }
+}

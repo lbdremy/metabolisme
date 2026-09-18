@@ -3,79 +3,64 @@
 Ce qui est déjà fait est consigné dans [`PREV-STEPS.md`](PREV-STEPS.md).
 Mis à jour à chaque fin de session de travail significative.
 
-## État au sortir de la session 6 (2026-08-10)
+## État au sortir de la session 7 (2026-09-18)
 
-**Le premier article est PUBLIÉ** (tag `article-efficacite-parc-v1.0`) :
-`articles/2026-08-efficacite-parc-etat-des-preuves.md`, écrit sur l'état
-v0.5, licence S-09 levée (publication avec attribution, tracée dans
-S-09/L-09 — détail en PREV-STEPS session 6). Il annonce la proposition
-institutionnelle comme prochain article. L'état de la chaîne est
-inchangé (117 nœuds, 153 tests, 14 stages) ; le résumé v0.5 ci-dessous
-reste la référence de lecture.
-
-## État de la chaîne (session 5, 2026-08-09)
-
-**R-11..R-14 sont REVUS et intégrés** (153 tests, 117 nœuds, 14 stages,
-tag `efficacite-parc-v0.5`) : la passe contradictoire du 2026-08-09
-(44 objections, 4 relecteurs — compte rendu
-`evidence/revue-contradictoire-2026-08-09.md`) a confirmé toute
-l'arithmétique et requalifié l'étage interprétatif. Les énoncés à
-retenir : **R-11** — chute générale de la rotation (−1,17 pt, dont
-~45 % démographiques au shift-share T-16 ; INSEE 14 %, S-33), contraste
-tendues/autres significatif mais NON DISCRIMINANT (partiel ≈ 0 à
-niveau 2012 contrôlé) ; le signal résiduel est l'ACCÉLÉRATION.
-**R-12** — miroir du marché depuis au moins 2013 (−0,70 → −0,80, parmi
-les plus fortes de la chaîne, ≈ R-13/R-14), chute uniforme en points
-mais EXCÉDENTAIRE dans les marchés chers en relatif/partiel (−0,50).
-**R-13** — cohérence interne du recensement (+0,80) et validation
-inter-appareils MIGCOM×RPLS ; canal privé 19,51 % ; soldes parisiens =
-profil du CYCLE DE VIE par âge (O-36), éviction = question ouverte.
-**R-14** — péage territorialisé S-31 + CSI : 6,7-8,1 % du prix, médiane
-6,15 mois (niveau de vie 2021), tendues 7,87 vs 5,59, 83,2 % fiscal,
-primo 5,81 mois, annualisé 2,6-10 %/an ; rho +0,81 quasi mécanique
-(mois × prix +0,98). Limite transverse L-26 (étalon T-05/T-08 partagé
-par les quatre croisements). Part cyclique du choc du crédit 2022-2024
-NON SÉPARÉE partout (S-36) — arbitres : millésimes 2026/2027. L'état
-v0.3 de l'arc (couverture 1,06, besoin 194 488, détente 15,8 Md€ ratio
-2,1, foncier 10,9 ×) est inchangé ; garde de lecture ajoutée au qmd.
+**Le second article est ÉCRIT** (tag `article-proposition-institutionnelle-v1.0`,
+chaîne `efficacite-parc-v0.6`) :
+`articles/2026-09-proposition-institutionnelle.md`, sur les résultats
+R-15..R-17 et la proposition P-01 revus le jour même (61 objections,
+`evidence/revue-contradictoire-2026-09-18.md`). Toutes les décisions
+prises en autonomie sont dans `evidence/decisions-2026-09-18.md`
+(DEC-01..DEC-20) — **Rémy doit les relire** : chacune est réversible,
+en particulier DEC-01 (périmètre), DEC-04/DEC-16 (prix d'acquisition à
+la valeur vénale + remploi, sans décote), DEC-17 (seuil de 50 % du
+périmètre M-D), DEC-18 (l'acquisition sécurise, le bail est offert),
+DEC-20 (objections écartées). État : 53 sources, 23 définitions, 15
+hypothèses, 144 nœuds, 15 stages, 172 tests.
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Observations qui trancheraient H-04** (par coût croissant) :
-   - **discontinuités DMTO × volumes DVF** (SE-12) — S-31 est
-     territorialisée dans le code : le test de causalité du péage est
-     à portée (comparer les volumes/prix aux frontières 5,81/6,32) ;
-   - **rotation par âge × ZE** (SE-1c) — fichier détail Logement du RP
-     (ANEM × AGEMEN8) : ferait renaître ou réfuterait proprement la
-     lecture territoriale de I-11 ;
-   - **millésimes post-choc** (SE-3) — RPLS au 01/01/2026 (non paru au
-     2026-08-09) puis 2027, prochain L_STAY : rebond → cyclique,
-     persistance → structurel. À figer dès parution.
-2. **Proposition institutionnelle (prochain article)** : l'article v1.0
-   l'annonce explicitement. Matière déjà quantifiée : I-09 (règle mixte
-   ~15,8 Md€, ratio ~2,1, investissement ≠ coût public), I-10 (verrous
-   de propriété H-05, friches là où le gisement manque, flux de
-   construction L-19), R-14 (péage 83,2 % fiscal = paramètre
-   institutionnel direct), S-22 (canal incitatif au bilan faible).
-   Méthode INTRO §16 (scénarios) et §17 (contraintes normatives) ;
-   comparer PLUSIEURS mécanismes, pas en défendre un d'avance
-   (INTRO §2.2) ; les M-xx/P-xx du graphe sont encore vides.
-3. **Restes ouverts de la revue du 2026-08-07** (inchangés) : emploi
-   localisé récent à la maille ZE (L-07) et re-exécution de R-03 ;
-   anomalie de réconciliation LOVAC communal/départemental ; point
-   Paris 32 091 vs Apur ~18 600 (L-04) ; sourcer les référentiels de
-   besoin en flux (L-21).
-4. **Lever les frontières H-05 par convention** : PPPI (DREAL/DDT),
-   fichiers fonciers/successions (Cerema) ; seule voie pour la piste
-   successions/indivisions (I-08). Frontières consignées par la revue
-   (SA-9) : Fidéli, EnL 2020, bases notariales BIEN/Perval, DV3F —
-   toutes sous habilitation ; SNE : ressource data.gouv morte,
-   portail territorial sans bulk.
-5. **Frontières de données actées** (ne pas re-tenter sans nouveau
-   levier) : fichiers LOVAC détaillés = habilitation ; éviction
-   saisonnière infra-territoriale = non tranchable en open data ;
-   frais d'agence = aucune source ouverte (l'écart OCDE ~14 % vs
-   ~7,7 % calculés donne l'ordre de grandeur, S-33..S-38 notes).
+1. **Lecture de Rémy** : article 2, journal des décisions, compte rendu
+   de revue ; puis tag/déploiement du site (post enregistré, contenu
+   reconstruit, non déployé).
+2. **Ce que P-01 laisse ouvert et qui est instruisable** :
+   - le **prix de repli** qui rendrait le bail préférable à la cession
+     (C-15(2)) — un paramètre de conception sans source : chercher les
+     précédents (OFS/BRS, portage EPF, préemption avec décote) ;
+   - l'**outil d'acquisition** (utilité publique d'une acquisition de
+     logements vacants, D-22) — instruction juridique, pas
+     statistique ;
+   - la **surface des vacants durables** (L-27 : les totaux de M-B
+     utilisent la surface des RP, majorant) — fichiers LOVAC détaillés
+     ou Fidéli, sous habilitation ;
+   - l'**assiette foncière** préalable à M-D (CPO S-51) ;
+   - le **flux** (L-32 : ~24 Md€/an au prix S-18) — Sit@del par ZE.
+3. **Observations qui trancheraient H-04** (reportées, DEC-13) :
+   - **DVF 2026** : la réforme DMTO 2025 (passage à 5,00 % département
+     par département, dates de vote S-31/S-35) est l'expérience
+     naturelle propre — doubles différences à la Bérard-Trannoy (S-43)
+     sur les volumes mensuels ; figer DVF 2026 dès parution ;
+   - **RPLS au 01/01/2026** (non paru au 2026-09-18, page SDES
+     vérifiée) puis 2027 : rebond → cyclique, persistance →
+     structurel ;
+   - **rotation par âge × ZE** (fichier détail RP, ANEM × AGEMEN8).
+4. **Restes ouverts des revues précédentes** (inchangés) : emploi ZE
+   récent (L-07) et re-exécution de R-03 ; réconciliation LOVAC
+   communal/départemental ; Paris 32 091 vs Apur ~18 600 (L-04) ;
+   référentiels de besoin en flux (L-21).
+5. **Frontières H-05 et frontières de données** : inchangées (voir
+   sessions précédentes) ; s'y ajoute : aucune source ouverte sur la
+   décote des vacants durables (SA-14), aucun bilan national du bail à
+   réhabilitation (SA-12), aucune évaluation de la TVLH 2027 (L-33).
+
+## État de la chaîne R-01..R-14 (sessions 1-6)
+
+Résumé de lecture de l'arc et de l'instruction de H-04 : voir
+`PREV-STEPS.md` (session 5 pour les énoncés à retenir de R-11..R-14,
+session 3 pour l'arc R-01..R-10) et `EVIDENCE.md`. L'état v0.3 de l'arc
+(couverture 1,06, besoin 194 488, détente 15,8 Md€ ratio 2,1, foncier
+10,9 ×) et les quatre mesures de mobilité sont inchangés par la
+session 7, qui les CONSOMME (C-11).
 
 ## Outillage (sans urgence — ne mord qu'avec la croissance de l'étude)
 
@@ -108,14 +93,15 @@ changement) ; à traiter quand l'occasion s'y prête, pas avant :
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 14 artefacts data/processed/
-./check.sh && ./test.sh     # portes qualité (153 tests)
+uv run logement reproduce   # rebâtit les 15 artefacts data/processed/
+./check.sh && ./test.sh     # portes qualité (172 tests)
 ```
 
 Lire dans l'ordre : `CLAUDE.md` (doctrine + décisions arrêtées),
-`EVIDENCE.md` (index humain), les deux comptes rendus de revue
-(`evidence/revue-contradictoire-2026-08-07.md` et `-2026-08-09.md`),
-puis `evidence/claims.yaml`.
+`EVIDENCE.md` (index humain), `evidence/decisions-2026-09-18.md` (le
+journal des décisions de conception), les trois comptes rendus de revue
+(`evidence/revue-contradictoire-2026-08-07.md`, `-2026-08-09.md`,
+`-2026-09-18.md`), puis `evidence/claims.yaml`.
 Le rendu du document de preuve : `QUARTO_PYTHON=.venv/bin/python quarto
 render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
 
@@ -211,3 +197,15 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
   Mayotte, FM = métropole — ne jamais mélanger, cf. T-12) ; les classes
   L_STAY 2023 ne se raccordent PAS à l'ANEM des diffusions antérieures
   (D-16).
+- **Scénarios institutionnels (core/institution.py)** : TOUT au m² —
+  un prix par logement divisé par la surface d'un autre segment a coûté
+  une revue (ST-1) ; S-18 = 169 200 € pour ~66 m² (2 550 €/m²), pas pour
+  la surface des RP ; charges d'exploitation en €/logement (S-40 p. 24),
+  jamais en proportion d'un loyer d'équilibre ; le produit DMTO OFGL est
+  au périmètre constant (hors 75/69/2A/2B/972/973) — rapporter au parc
+  du même périmètre et ne basculer que le droit départemental (taux
+  voté × prix), pas le péage total ; le millésime OFGL de l'année N est
+  publié en juin N+1 (pré-rapport) — vérifier avant de figer.
+- **Cour des comptes S-22, p. 24** : les 6 700 sorties ZLV sont « 6,6 %
+  des 102 000 logements dont les propriétaires ont été contactés », et
+  « 3 % » en zone tendue = parmi les contactés — jamais « du stock ».
