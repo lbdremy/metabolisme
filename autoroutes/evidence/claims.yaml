@@ -426,7 +426,7 @@
     amortissements − subventions nettes + encours = valeur nette publiée, à
     1 M€ près) avant toute mesure. Les sources étant des PDF, la
     transcription est la seule étape non automatisée de la chaîne ; elle
-    est vérifiable page par page.
+    est vérifiable page par page. Décision DEC-03.
   depends_on: [O-17, O-18, O-19, O-20, O-21, O-16]
   produced_by: src/autoroutes/core/accounts.py
   output: data/transcribed/comptes-2023.csv
@@ -684,7 +684,8 @@
     monopoles-cadrage-v1.0) : les notions communes (D-15, D-21, H-06, H-17,
     C-05, V-01, V-05) sont reprises comme définitions et hypothèses locales
     qui citent cette source et portent l'identifiant d'origine, plutôt que
-    résolues par le site entre études ou recopiées sans lien (DEC-01). Ce
+    résolues par le site entre études ou recopiées sans lien (décision
+    DEC-01, options écartées : résolution inter-études, recopie). Ce
     qui le renverserait : une deuxième étude sectorielle, qui justifierait
     la résolution inter-études dans le contrat du site.
   depends_on: [S-01, O-01]
@@ -701,7 +702,9 @@
     Sanef-SAPN extrapolé faute de comptes figés (H-07, H-09). Les
     concessions récentes (attribuées par appel d'offres, TRI 5,9 %) ne
     sont pas mesurées : elles seraient le témoin « contractuel » de
-    monopoles:H-02, à instruire (DEC-04). Ce qui le renverserait : des
+    monopoles:H-02, à instruire (DEC-05). Décision DEC-03 (options
+    écartées : comptes sociaux, agrégats seuls, extraction automatique).
+    Ce qui le renverserait : des
     comptes sociaux montrant une base d'actifs au coût historique
     sensiblement différente de la base IFRS.
   depends_on: [O-02, O-17, O-18, O-19, O-20]
@@ -720,7 +723,8 @@
     lui-même les traite comme des éléments de l'équilibre à compenser par
     le péage (art. 32, O-22). Ce qui le renverserait : la démonstration
     que la TAT finance un coût du service (elle finance l'AFIT France, donc
-    d'autres infrastructures).
+    d'autres infrastructures). Décision DEC-04 (option écartée : les
+    compter en coût, comme l'ART).
   depends_on: [O-14, O-15, O-22, D-01, D-06]
   limitations: [L-05]
 
@@ -738,7 +742,8 @@
     remplacement (actif moderne équivalent) n'est pas une base admise par
     D-15 ; il est présenté par M-03. Ce qui le renverserait : une source
     donnant le coût historique de construction année par année (O-28 dit
-    qu'elle n'existe pas chez les SCA).
+    qu'elle n'existe pas chez les SCA). Décision DEC-06 (options
+    écartées : une base unique ; la base de l'ART).
   depends_on: [D-01, D-02, D-05, O-13, O-28]
   limitations: [L-03, L-07]
 
@@ -754,7 +759,8 @@
     d'acquisition est ajouté comme contre-exemple de base. Le marché des
     autocars librement organisés (régulé par la même autorité) était le
     témoin envisagé ; ses rapports ne publient pas de résultats
-    d'exploitation par opérateur (DEC-05). Ce qui le renverserait : un
+    d'exploitation par opérateur (décision DEC-05, options écartées :
+    autocars, concessions récentes). Ce qui le renverserait : un
     témoin de construction montrant un surprofit rapporté au chiffre
     d'affaires supérieur à 25 %.
   depends_on: [O-21, O-25, D-01]
@@ -779,7 +785,8 @@
     soulte ; (d) chiffrer avant 2031 ce que la recette publique finance et
     à quel prix (au coût, ou affecté), poste par poste. Ceci est une
     proposition conditionnelle à la valeur V-01, pas une conséquence des
-    données.
+    données. Décision DEC-07 (options écartées : ne rien proposer ;
+    proposer comme conséquence des mesures).
   depends_on: [R-01, R-04, I-03, V-01, O-24]
   limitations: [L-08, L-09]
 
