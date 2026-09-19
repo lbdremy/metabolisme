@@ -2645,143 +2645,217 @@
   limitations: [L-19, L-20, L-27, L-28, L-29, L-30, L-31, L-32, L-33, L-34]
 
 # ==========================================================================
-# Article 3 (2026-09-18, suite) — le flux : formation de ménages et
-# construction neuve par zone d'emploi (R-18). Décisions DEC-21..DEC-23.
+# Article 3 (2026-09-18/19) — le flux : formation de ménages et
+# construction neuve par zone d'emploi (R-18). Décisions DEC-21..DEC-28.
+# REVU le 2026-09-18 (revue contradictoire « flux », 3 relecteurs, 31
+# objections : compte rendu evidence/revue-contradictoire-2026-09-18-flux.md)
+# — état APRÈS revue ; l'état d'avant est au commit 8317526.
 
 - id: C-16
   type: choice
   title: >
-    Mesure du flux (DEC-23) : la formation de ménages d'une ZE est la
-    différence des millésimes censitaires 2016 et 2022 (S-11, ménages
-    D-05) rapportée aux six années qui séparent leurs centres ; la
-    construction est la moyenne annuelle des logements commencés
-    « Tous Logements » de Sitadel (S-54, D-24) sur 2017-2022, fenêtre
-    alignée sur les millésimes (la moyenne 2013-2024 est publiée à
-    côté) ; le BESOIN de flux d'une ZE est le nombre de logements qui
-    maintient sa structure de 2022 (parts de résidences secondaires et
-    de logements vacants) : ménages formés / (1 − part RS − part
-    vacants), avec la variante « hors RS » (ménages formés / (1 − part
-    vacants)) publiée systématiquement — dans une ZE touristique, la
-    première demande de construire des résidences secondaires pour
-    chaque ménage formé, la seconde non ; aucune hypothèse nouvelle,
-    chaque ZE fournit sa propre structure. Le solde = commencés −
-    besoin ; les ZE dont les ménages baissent ont un besoin nul et un
-    ratio indéfini (publiées, jamais infinies). Classements sous un
-    plancher de 200 ménages formés par an.
-  depends_on: [S-11, S-54, S-55, D-05, D-24, C-11]
+    Mesure du flux (DEC-23, révisée DEC-25..27 après revue) : la
+    formation de ménages d'une ZE est la différence des millésimes
+    censitaires 2016 et 2022 (S-11, ménages D-05) sur les six années qui
+    séparent leurs centres, et la croissance du parc est DÉCOMPOSÉE sur
+    la même période (résidences principales, résidences secondaires,
+    vacants) ; la construction est la série communale du SDES EN DATE
+    RÉELLE (S-56, « Tous Logements », années closes 2013-2024), codes
+    communaux ramenés au COG 2026 par les mouvements de communes
+    (S-59), publiée en DEUX LECTURES — « déclarée » (les DOC remontées)
+    et « estimée » (× H-21, le sous-compte documenté par le SDES) — la
+    lecture estimée étant la centrale ; fenêtre centrale 2017-2022
+    (alignée sur les millésimes), fenêtres 2015-2020, 2018-2023,
+    2019-2024 et années closes 2023-2024 publiées à côté. Le BESOIN de
+    flux d'une ZE = ménages formés / (1 − part du neuf allant en
+    résidences secondaires − part de vacants 2022), sous TROIS
+    affectations : aucune RS (borne basse), la part des RS dans la
+    croissance OBSERVÉE du parc de la ZE 2016-2022 (centrale — c'est
+    une donnée, pas une norme), la structure 2022 (borne haute). Ce
+    que le ratio mesure : ménages ≡ résidences principales dans le
+    recensement, donc le besoin « à structure constante » est proche de
+    la croissance observée du parc — le ratio dit combien il a fallu
+    construire pour produire la croissance que le recensement
+    enregistre, PAS si une formation de ménages plus forte a été
+    empêchée (HD-1). Les ZE dont les ménages baissent ont un besoin
+    nul et un ratio indéfini ; plancher de 200 ménages formés par an
+    pour les classements ET les corrélations (HD-9/ST-1).
+  depends_on: [S-11, S-56, S-57, S-58, S-59, D-05, D-24, H-21, C-11]
 
 - id: O-41
   type: observation
   title: >
-    Logements commencés en France (Sitadel, S-54, date de prise en
-    compte, « Tous Logements ») : 377 769 en 2017, 361 803 en 2019,
-    345 203 en 2022, puis 264 819 (2023), 234 808 (2024), 239 519
-    (2025) — les trois dernières années mêlent la chute réelle de la
-    construction et les déclarations non encore remontées (S-55 :
-    « dans les dix-huit mois »). Ménages recensés (S-11, France hors
+    Logements commencés en France (REQUALIFIÉE par la revue, SA-1/SE-1).
+    Statistique PUBLIÉE du SDES (S-57, estimée en date réelle, hors
+    Mayotte) : 433 911 en 2017, 385 384 en 2019, 389 501 en 2022,
+    296 477 en 2023, 259 595 en 2024, 263 402 en 2025. Série COMMUNALE en
+    date réelle (S-56, déclarations remontées) : 395 782 (2017), 341 882
+    (2019), 331 216 (2022), 248 087 (2023), 212 868 (2024) — un
+    sous-compte de 12 à 24 % selon l'année, parce qu'« environ 15 % des
+    mises en chantier […] ne remontent jamais à Sitadel » (S-58, p. 7).
+    Les années 2023 et 2024 sont CLOSES (en date réelle, un événement
+    2023 déclaré tard est compté en 2023) : la construction a chuté de
+    ~32 % entre 2017-2022 et 2024. Ménages recensés (S-11, France hors
     Mayotte, 305 ZE) : 29 236 888 en 2016, 30 888 593 en 2022, soit
-    275 284 ménages formés par an ; parc + 332 142 logements par an
-    sur la même période.
-  depends_on: [S-54, S-55, S-11, D-24, D-05]
+    275 284 ménages formés par an ; parc + 332 142 logements par an sur
+    la même période, dont + 275 284 résidences principales, + 40 751
+    résidences secondaires (12,3 %), + 16 108 vacants.
+  depends_on: [S-57, S-56, S-58, S-11, D-24, D-05]
+
+- id: O-42
+  type: observation
+  title: >
+    Sorties de parc mesurées par le SDES depuis les fichiers fonciers
+    2018-2023 (S-60, p. 66) : « il se crée, en moyenne sur une année,
+    27 000 logements à partir du parc non résidentiel. Dans le même
+    temps, 14 000 logements sont transformés en locaux et 50 000 sont
+    démolis. Les divisions accroissent le parc de 18 000 logements et
+    les fusions le diminuent de 8 000 unités. Au total, le parc diminue
+    sous l'effet des transformations en moyenne de 27 000 logements par
+    an. » Enregistrée par la revue (SA-3) comme mesure directe à
+    laquelle confronter l'écart commencés − croissance du parc de R-18.
+  depends_on: [S-60]
 
 - id: T-18
   type: transformation
   title: >
-    Chaîne du flux (core/flux.py, stage flux-construction) : extrait
-    annuel Sitadel (acquire-sitadel : filtre « Tous Logements », sommes
-    par commune × année, PLM en commune parente) ; millésimes censitaires
-    2011/2016/2022 par commune (S-11) agrégés par ZE (S-06) ; formation
-    de ménages 2016-2022 / 6 ; besoin de flux (C-16) et variante hors
-    RS ; commencés moyens 2017-2022 et 2013-2024 ; solde, ratio
-    production = commencés / besoin, commencés pour 1 000 logements,
-    disparitions implicites = commencés − croissance du parc ; parts
-    des ZE tendues (R-07) dans la formation, le besoin, les commencés et
-    le parc ; médianes par tension (Mann-Whitney) aux bornes H-08 ;
-    Spearman ratio × indice de coût (T-05) par périmètre ; stock vs
-    flux : besoin de détente R-07 / déficit annuel des ZE tendues
-    déficitaires.
-  depends_on: [O-41, T-05, T-08, C-16, S-06]
+    Chaîne du flux (core/flux.py, stage flux-construction — refondue par
+    la revue) : série communale en date réelle S-56 (lignes « Tous
+    Logements », arrondissements de Paris écartés au profit de la
+    commune parente, 2025 sans commencés écarté), codes ramenés au COG
+    2026 par les mouvements S-59 (fusions 31-34, changements de code
+    41/50/70, jusqu'à 8 sauts — codes non résolus comptés, jamais
+    perdus : 0 après remappage) ; rapport annuel estimé (S-57) /
+    communal → contrôle de H-21 à chaque reproduction ; millésimes
+    censitaires 2011/2016/2022 par commune (S-11) agrégés par ZE (S-06),
+    décomposition RP/RS/vacants de la croissance 2016-2022 ; besoin de
+    flux sous trois affectations (C-16) ; commencés moyens sur quatre
+    fenêtres et 2013-2024, années 2023 et 2024 ; lectures déclarée et
+    estimée ; solde, ratio, commencés pour 1 000 logements ; parts des
+    ZE tendues (R-07) ; médianes par tension au plancher (Mann-
+    Whitney) ; Spearman ratio × coût au plancher et sans, intensité ×
+    coût ; stock vs flux PAR ZE : besoin de détente R-07 de chaque ZE
+    tendue / son propre déficit annuel (fenêtre 2017-2022 et années
+    2023-2024), médiane et agrégat ; sensibilité H-08.
+  depends_on: [O-41, O-42, T-05, T-08, C-16, H-21, S-06, S-59]
 
 - id: R-18
   type: result
   title: >
-    Construction et formation de ménages par ZE, 2016-2022 (sortie
-    reproductible `data/processed/flux-construction-menages-ze.json`) :
-    en France, 347 340 logements commencés par an contre un besoin de
-    flux de 335 470 (ratio 1,04 ; 297 873 hors RS, ratio 1,17) — le
-    flux national est couvert. Les 97 ZE TENDUES : 54 % de la formation
-    de ménages (150 057/an) pour 41 % du parc, 52 % des commencés
-    (180 190/an) ; ratio 0,97 (solde − 5 253/an), 46 ZE sur 97 en
-    déficit pour 18 279 logements/an ; mais 1,13 HORS RS (solde
-    + 20 423/an, déficit 5 181) : l'essentiel du déficit des ZE tendues
-    est la structure touristique — Perpignan (30 % de RS) passe de
-    − 1 484 à + 9, Les Sables-d'Olonne (36 %) de − 818 à − 190,
-    Bayonne (24 %) de − 1 466 à − 319 ; Marseille (5 %) et Montpellier
-    (13 %) restent déficitaires (− 1 080, − 762). Autres ZE : ratio
-    1,11. Les médianes par ZE ne distinguent pas tendues et autres
-    (1,02 vs 0,98, MW p = 0,59) et le ratio n'est pas corrélé au coût
-    (rho − 0,06 [− 0,18 ; 0,06], métropole − 0,08) : à cette maille, la
-    construction ne suit pas la cherté — mais l'intensité si : 10,3
-    commencés pour 1 000 logements en ZE tendues contre 5,1 ailleurs.
-    Plus gros surplus : Paris (35 015 commencés pour 19 001 de besoin,
-    ratio 1,84), Rennes 1,21, Marne-la-Vallée 1,39 ; plus gros
-    déficits : Montpellier, Perpignan, Bayonne, Marseille, Toulon,
-    Nice. Disparitions implicites (commencés − croissance du parc) :
-    15 198/an. STOCK vs FLUX : le besoin de détente de 194 488 (R-07)
-    vaut 1,3 an de formation de ménages des ZE tendues ; au rythme du
-    déficit des ZE tendues déficitaires il serait absorbé en 10,6 ans
-    (37,5 ans hors RS). Sensibilité H-08 : solde tendues − 5 387 (seuil
-    5 %) / + 9 946 (7 %).
-  depends_on: [T-18, O-41, R-07, C-16, V-01]
+    SIMULÉ — Construction et formation de ménages par ZE (sortie
+    reproductible `data/processed/flux-construction-menages-ze.json` ;
+    RECALCULÉ par la revue : lecture estimée H-21, date réelle S-56,
+    COG S-59, affectation observée, années closes). LECTURE ESTIMÉE,
+    fenêtre 2017-2022 : 398 460 commencés/an en France contre un besoin
+    de flux de 350 689 (ratio 1,14 ; 1,34 sans RS, 1,19 à la structure
+    2022) — en lecture déclarée 344 987 et 0,98. Les 97 ZE TENDUES :
+    54 % de la formation de ménages (150 057/an) pour 41 % du parc,
+    52 % des commencés ; 206 540 commencés/an estimés contre 190 409 de
+    besoin — ratio 1,08 (0,94 déclaré), solde + 16 131/an (+ 46 773
+    sans RS ; + 21 097 à la structure 2022) ; 38 ZE en déficit pour
+    10 134/an, presque toutes littorales ou alpines (Est-littoral,
+    Narbonne, Marseille, Tarentaise, Toulon, Bayonne, Digne) ; 13 % de
+    la croissance du parc des ZE tendues est allée en résidences
+    secondaires (12,3 % en France). Au plancher de classement (207 ZE
+    formant ≥ 200 ménages/an), le ratio médian est PLUS HAUT dans les
+    ZE tendues (1,11) qu'ailleurs (1,00 ; MW p = 0,049) et CROÎT avec
+    le coût (rho + 0,20 [0,06 ; 0,33], métropole + 0,23) — sans
+    plancher, − 0,11 : le signe dépend des 72 petites ZE aux ratios
+    dégénérés ; l'intensité (commencés pour 1 000 logements) : 11,8 en
+    ZE tendues contre 5,9, rho + 0,67 avec le coût. FENÊTRES : 2015-2020
+    ratio 1,11 (solde tendues + 15 666), 2018-2023 1,06 (+ 526),
+    2019-2024 0,98 (− 15 729) — la fenêtre centrale est la plus haute
+    de la série. ANNÉES CLOSES 2023-2024 : 263 113 commencés/an estimés
+    en France (− 34 % vs 2017-2022), ZE tendues 132 193 contre 190 409
+    de besoin — solde − 58 216/an, 77 ZE tendues sur 97 en déficit
+    (61 635/an), Toulouse − 5 862, Bordeaux − 5 456, Nantes − 3 928,
+    Montpellier − 3 889, Marseille − 3 627. STOCK vs FLUX, par ZE : le
+    besoin de détente de R-07 (194 488) vaut 1,3 an de formation de
+    ménages des ZE tendues ; sur 2017-2022, les 38 ZE déficitaires
+    portent 38 % du besoin de détente et l'absorbent en 6 ans (médiane
+    par ZE ; 7,3 agrégé) ; au rythme de 2023-2024, les 77 ZE
+    déficitaires portent 86 % du besoin et l'absorbent en 2,9 ans
+    (médiane ; 2,7 agrégé). Écart commencés estimés − croissance du parc
+    : 66 318/an (O-42 mesure 27 000 sorties nettes — le reste est
+    commencé non livré, annulé, ou lissage censitaire, L-34).
+    Sensibilité H-08 : solde tendues + 5 205 (seuil 5 %, 54 ZE) /
+    + 40 469 (7 %, 170 ZE).
+  depends_on: [T-18, O-41, O-42, R-07, C-16, H-21, V-01]
   produced_by: src/logement/shell/build.py
   output: data/processed/flux-construction-menages-ze.json
   limitations: [L-19, L-34]
+  notes: >
+    Avant revue (commit 8317526, pour trace) : série en date de prise
+    en compte S-54 sans facteur de sous-compte, ratio national 1,04,
+    ZE tendues 0,97 (− 5 253/an, 46 ZE déficitaires) et 1,13 « hors
+    RS », déficit « littoral et touristique », absorption « 10,6 ans »
+    calculée en mélangeant les ZE, années 2023-2024 écartées comme
+    « incomplètes », 943 codes de communes fusionnées perdus
+    (Sables-d'Olonne changeait de signe), corrélation « nulle » avec le
+    coût portée par les ZE sous le plancher.
 
 - id: I-18
   type: interpretation
   title: >
-    Le flux n'est pas le problème national et pas d'abord celui des
-    zones tendues : à la maille des zones d'emploi, la construction
-    couvre la formation de ménages en France (1,04) et, hors résidences
-    secondaires, dans les zones tendues aussi (1,13) — elle s'y
-    concentre même deux fois plus qu'ailleurs par logement existant. Le
-    déficit de flux est LITTORAL et TOURISTIQUE : là où la structure du
-    parc (25-36 % de résidences secondaires) absorbe une part de chaque
-    logement construit, la formation de ménages n'est pas couverte —
-    c'est la géographie des 41 ZE « non couvertes » par leur gisement
-    (I-07) et des loyers d'équilibre les plus hauts (R-16), pas celle
-    des grandes métropoles (Paris construit 1,8 fois sa formation de
-    ménages ; Marseille et Montpellier font exception). Conséquence
-    pour P-01 : le stock de détente vaut 1,3 an de formation de
-    ménages, mais il n'est pas « rattrapé par le flux » là où le flux
-    est couvert ; il l'est en 10 ans dans les ZE déficitaires, presque
-    toutes littorales — où le problème est l'affectation de la
-    construction (résidences secondaires), pas son volume. L'opérateur
-    de P-01 n'a donc pas à porter le flux national ; il a à peser sur
-    l'AFFECTATION du flux dans une trentaine de ZE littorales, ce que
-    ni la construction ni l'acquisition ne font seules (L-34).
-  depends_on: [R-18, I-07, R-16, P-01, L-32]
+    REQUALIFIÉE par la revue (HD-1, SE-1, SE-2, ST-1, SA-1). Ce que la
+    mesure établit : sur 2016-2022, la construction a produit la
+    croissance du parc que le recensement enregistre, en France (1,14)
+    comme dans les zones tendues (1,08 ; 1,29 sans les résidences
+    secondaires) — où elle est deux fois plus intense qu'ailleurs par
+    logement existant et où le ratio CROÎT avec le coût (rho + 0,20 au
+    plancher) : à la maille des zones d'emploi, on n'a pas construit
+    moins là où c'est cher. Ce que la mesure ne peut PAS établir : que
+    le flux « couvrait le besoin » — ménages et résidences principales
+    étant la même chose dans le recensement, le besoin à structure
+    constante est la croissance observée, et une formation de ménages
+    empêchée par le parc lui-même est invisible (la ZE de Paris
+    construit 1,8 fois sa croissance et forme peu de ménages pour son
+    parc : cause ou conséquence, la chaîne ne tranche pas). Le
+    déficit de la fenêtre 2017-2022 est littoral et alpin (38 ZE, 13 %
+    du neuf en résidences secondaires en zones tendues, jusqu'à 73 % en
+    Tarentaise) : là, le problème est l'affectation de la construction,
+    pas son volume. Mais l'énoncé qui compte est celui des ANNÉES
+    CLOSES : depuis 2023, la construction s'est effondrée d'un tiers, et
+    dans les zones tendues elle ne couvre plus que 69 % du besoin de
+    flux 2016-2022 — 77 ZE sur 97 en déficit, Toulouse, Bordeaux,
+    Nantes, Montpellier, Marseille en tête. À ce rythme, le stock de
+    détente de P-01 (194 488, soit 1,3 an de formation de ménages) est
+    consommé en trois ans par le déficit de flux des ZE qui en portent
+    86 %. Conséquence pour P-01 : la détente par le stock n'a de sens
+    que si le flux revient au niveau 2017-2022 ; sinon l'opérateur
+    (19 400 logements/an au rythme de dix ans) couvre un tiers du
+    déficit courant des zones tendues — le flux, pas le stock, est
+    devenu la contrainte dominante (L-32, L-34).
+  depends_on: [R-18, I-07, R-16, P-01, L-32, O-41]
   limitations: [L-19, L-34]
 
 - id: L-34
   type: limit
   title: >
-    Flux : (1) les commencés sont en date de prise en compte (D-24) —
-    une moyenne 2017-2022 absorbe le décalage sauf aux bords, et les
-    années 2023-2025 ne sont pas exploitables sans les remontées ;
-    (2) un logement commencé n'est pas livré et Sitadel ne voit ni les
-    démolitions ni les changements d'usage — les « disparitions
-    implicites » (15 198/an) sont un résidu, pas une mesure ; (3) le
-    besoin de flux maintient la structure 2022 de chaque ZE — la
-    variante hors RS suppose au contraire que la structure touristique
-    n'appelle aucune construction ; la vérité est entre les deux et
-    dépend de qui achète le neuf (non observé) ; (4) les ménages
+    Flux (COMPLÉTÉE par la revue) : (1) SOUS-COMPTE — la série communale
+    ne voit que les déclarations remontées ; le facteur H-21 est
+    national et uniforme alors que la non-remontée varie par
+    département (p10-p90 1,11-1,31 en date de prise en compte, revue
+    ST/SA) : les soldes par ZE portent cette incertitude, de l'ordre de
+    ± 10 % des commencés ; (2) un logement commencé n'est pas livré et
+    Sitadel ne voit ni démolitions ni changements d'usage — l'écart
+    commencés estimés − croissance du parc (66 318/an) dépasse la mesure
+    directe des sorties nettes (27 000/an, O-42) : le reste est
+    commencé non livré, annulé après DOC, ou lissage censitaire, et
+    l'écart change de signe selon la fenêtre (HD-5) — jamais un chiffre
+    de démolitions ; (3) l'AFFECTATION du neuf aux résidences
+    secondaires est une hypothèse : la part observée dans la croissance
+    du parc 2016-2022 est le central, sans RS et structure 2022 les
+    bornes — elle se vérifierait par ZE avec le fichier détail RP2022
+    (année d'achèvement × catégorie, non figé) ; (4) le besoin de flux
+    maintient la vacance de 2022, que R-07 juge insuffisante en zones
+    tendues (H-08) : « couvrir le flux » n'ajoute aucune vacance de
+    fluidité — le stock et le flux sont deux besoins qui s'ajoutent, et
+    la production de P-01 n'est pas nettée du flux ; (5) les ménages
     censitaires 2016 et 2022 sont des moyennes de fenêtres d'enquêtes
-    (2014-2018, 2020-2024) : la formation de ménages est lissée, la
-    fenêtre COVID est dedans ; (5) la maille ZE masque l'infra-ZE
-    (construire en périphérie d'une ZE tendue couvre son ratio sans
-    détendre son centre) ; (6) rien ici n'est causal : un surplus de
-    construction peut être la cause OU la conséquence d'une formation
-    de ménages (Paris : 1,84 avec une formation de ménages faible pour
-    son parc). Porte sur R-18/I-18.
-  depends_on: [D-24, S-54, S-11, L-19]
+    (2014-2018, 2020-2024, quatre collectes pour 2022) : la formation
+    est lissée ; (6) la maille ZE masque l'infra-ZE (construire en
+    périphérie couvre le ratio sans détendre le centre) ; (7) rien ici
+    n'est causal (I-18) ; (8) 2025 : autorisations seulement (S-56) —
+    la reprise ou non du flux se lira en 2027. Porte sur R-18/I-18.
+  depends_on: [D-24, S-56, S-57, S-58, S-60, S-11, H-21, L-19]

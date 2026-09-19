@@ -1384,32 +1384,158 @@
   title: Sit@del2 — logements autorisés et commencés, séries mensuelles communales en date de prise en compte (extrait annuel « Tous Logements » figé par la chaîne)
   dataset_id: logements-autorises-et-commences-series-mensuelles-communales-en-date-de-prise-en-compte
   source_url: https://www.data.gouv.fr/datasets/logements-autorises-et-commences-series-mensuelles-communales-en-date-de-prise-en-compte
-  publication_date: 2026-09-15
+  publication_date: 2026-09-05
   retrieved_at: 2026-09-18
-  geographic_scope: France (36 708 communes, DOM compris ; codes INSEE au millésime de publication, arrondissements PLM séparés)
-  temporal_scope: janvier 2013 → juillet 2026 (2026 en cours ; date de prise en compte)
+  geographic_scope: France (36 708 communes dont Mayotte, Alsace-Moselle incluse ; codes INSEE de la commune parente pour Paris/Lyon/Marseille, aucun arrondissement dans l'extrait)
+  temporal_scope: janvier 2013 → juillet 2026 (date de prise en compte administrative)
   license: Licence Ouverte / Open Licence 2.0 (Etalab)
   local_file: data/raw/sdes-sitadel2-logements-communes-annuel-2013-2026.csv
   checksum: sha256:ec50d34cdd84e8699f78f4a7886619092c05735769c76109013d7462664f1a37
   notes: >
-    Ressource CSV du jeu (identifiant ec384558-f6ab-4e67-8071-71bc7fedcc2e,
-    mise à jour du 15/09/2026) : 29 049 155 lignes commune × mois ×
-    TYPE_LGT (« Collectif », « Individuel groupe », « Individuel pur »,
-    « Residence », « Tous Logements »), colonnes ANNEE, MOIS, CODE_INSEE,
-    TYPE_LGT, LOG_AUT, LOG_COM, SDP_AUT, SDP_COM ; 1 273 808 565 octets,
-    sha256 d60893d1adbdc203d0bc3701495751fb32c38b1402fc8a9e6d7e01e02aeec16c
-    (fichier mensuel téléchargé le 2026-09-18, NON figé dans le dépôt —
-    trop volumineux pour Git LFS). Ce que la chaîne fige est l'EXTRAIT
-    déterministe que produit `uv run logement acquire-sitadel` (INTRO
-    §7.1, même statut que S-16) : sommes par commune × année des lignes
-    « Tous Logements » (497 934 lignes, 10,8 Mo), les autres TYPE_LGT
-    étant ses composantes. Totaux nationaux de logements commencés par
-    année dans l'extrait (contrôle) : 2013 319 975 ; 2017 377 769 ; 2019
-    361 803 ; 2022 345 203 ; 2023 264 819 ; 2024 234 808 ; 2025 239 519 ;
-    2026 (7 mois) 140 878. Séries « en date de prise en compte » : les
-    événements sont comptés au mois de leur enregistrement (remontée des
-    DOC dans les dix-huit mois, S-55) — D-24 ; la fenêtre 2017-2022 de
-    R-18 est une moyenne pluriannuelle, les années 2023-2025 mêlent la
-    baisse réelle de la construction et les remontées encore en cours.
-    Hors Alsace-Moselle ? NON — couverture nationale (contrairement à
-    DVF) ; Mayotte présente.
+    Ressource CSV du jeu (DiDo datafile 577a8a66-4157-4787-b00a-031b61afea61,
+    millésime 2026-09, modifiée le 2026-09-05) : 29 049 155 lignes
+    commune × mois × TYPE_LGT, 1 273 808 565 octets, sha256
+    d60893d1adbdc203d0bc3701495751fb32c38b1402fc8a9e6d7e01e02aeec16c
+    (fichier mensuel NON figé — trop volumineux ; DEC-22). Ce que la
+    chaîne fige est l'EXTRAIT déterministe produit par `uv run logement
+    acquire-sitadel` : sommes par commune × année des lignes « Tous
+    Logements » (497 934 lignes, 10,8 Mo). REQUALIFIÉE par la revue du
+    2026-09-18-flux (SA-1, SA-2, SA-5) : (1) le producteur avertit sur ce
+    fichier même — « données à titre indicatif et non comparables aux
+    données estimées en date réelle diffusées par ailleurs » ; (2) le
+    SDES publie la série communale EN DATE RÉELLE (S-56), désormais
+    l'entrée de la chaîne — S-54 ne sert plus qu'à la comparaison des
+    deux dates (écarts annuels de − 5,8 % à + 6,3 %, qui se compensent
+    sur 2017-2022 : 349 169 contre 350 918) ; (3) comme S-56, la série
+    communale compte les seules déclarations remontées : ~15 % des
+    mises en chantier ne remontent jamais (S-58) — lecture « estimée »
+    par H-21. Totaux nationaux annuels de l'extrait : 2013 319 975 ;
+    2017 377 769 ; 2019 361 803 ; 2022 345 203 ; 2023 264 819 ; 2024
+    234 808 ; 2025 239 519 ; 2026 (7 mois) 140 878.
+
+- id: S-56
+  publisher: SDES (ministère de la Transition écologique) — catalogue DiDo
+  title: Sit@del2 — logements autorisés et commencés, données annuelles communales en date réelle (données non estimées), 2013-2025
+  dataset_id: 9c90a880-4ba0-49b4-b99d-d7dd6c810dd0
+  source_url: https://data.statistiques.developpement-durable.gouv.fr/dido/api/v1/datafiles/9c90a880-4ba0-49b4-b99d-d7dd6c810dd0/csv
+  publication_date: 2026-09-04
+  retrieved_at: 2026-09-18
+  geographic_scope: France (36 737 codes communaux dont 17 communes de Mayotte ; Paris présent en commune parente ET en 20 arrondissements — les arrondissements sont écartés à la lecture)
+  temporal_scope: "années 2013 → 2025 en date réelle de l'événement (2025 - autorisations seulement, mises en chantier non publiées)"
+  license: Licence Ouverte / Open Licence 2.0 (mentions légales SDES, décret n° 2017-638)
+  local_file: data/raw/sdes-sitadel2-logements-communes-annuel-date-reelle-2013-2025.csv
+  checksum: sha256:bddd6c4a39965260583f832db15b6b8ec71fae33610186f2b92f0c8dc8c0bd82
+  notes: >
+    Jeu DiDo 6513ee3a3b05e5cd969c270f « Logements autorisés et
+    commencés, nombre et surfaces, séries annuelles (données non
+    estimées) », datafile « Données annuelles communales - Logements »,
+    « Données en date réelle à partir de 2011 », millésime 2026-09 ;
+    colonnes ANNEE, COMM, TYPE_LGT, LOG_AUT, LOG_COM, SDP_AUT, SDP_COM
+    (91,9 Mo, 463 366 lignes « Tous Logements »). Enregistrée par la
+    revue du 2026-09-18-flux (SA-2) : c'est la série du producteur que
+    DEC-22 croyait n'exister que chez des miroirs — l'ENTRÉE de R-18
+    depuis l'intégration. Totaux nationaux « Tous Logements » commencés :
+    2013 316 029 ; 2016 331 139 ; 2017 395 782 ; 2018 358 862 ; 2019
+    341 882 ; 2020 321 252 ; 2021 356 515 ; 2022 331 216 ; 2023
+    248 087 ; 2024 212 868 (années closes : en date réelle, les
+    remontées tardives d'un événement 2023 sont comptées en 2023) ;
+    2025 vide pour les commencés. Codes communaux au COG de
+    l'événement : les communes fusionnées depuis sont ramenées à leur
+    commune actuelle par S-59 (revue, HD-6/ST-3). Sous-compte : série
+    des seules DOC remontées (S-58) — lecture « estimée » par H-21.
+
+- id: S-57
+  publisher: SDES (ministère de la Transition écologique) — catalogue DiDo
+  title: Sit@del2 — logements autorisés et commencés, données mensuelles nationales estimées en date réelle (brut et CVS-CJO), 2000-2026
+  dataset_id: 175486a6-76a3-4c6c-a34b-aeb96758910b
+  source_url: https://data.statistiques.developpement-durable.gouv.fr/dido/api/v1/datafiles/175486a6-76a3-4c6c-a34b-aeb96758910b/csv
+  publication_date: 2026-08-28
+  retrieved_at: 2026-09-18
+  geographic_scope: France hors Mayotte
+  temporal_scope: janvier 2000 → juillet 2026 (séries estimées en date réelle, brutes et CVS-CJO)
+  license: Licence Ouverte / Open Licence 2.0 (mentions légales SDES, décret n° 2017-638)
+  local_file: data/raw/sdes-sitadel2-logements-national-mensuel-estime-2000-2026.csv
+  checksum: sha256:7666ee0d581afb8c689c4b7bf3477ceabd7b18537ee61f5c5f5f100c71da17aa
+  notes: >
+    Jeu DiDo 6513eed03b05e5cd969c2710 « séries mensuelles (données
+    estimées) », millésime 2026-08 ; colonnes ANNEE, MOIS, TYPE_LGT,
+    NAT_SERIES (Brute / CVS-CJO), LOG_AUT, LOG_COM, SDP_AUT, SDP_COM.
+    La STATISTIQUE PUBLIÉE des logements commencés (celle que reprend
+    l'INSEE), estimée par le SDES à partir des remontées ET d'une
+    enquête sur les chantiers non déclarés (S-58) : « Tous Logements »
+    brut — 2013 357 919 ; 2016 369 432 ; 2017 433 911 ; 2019 385 384 ;
+    2022 389 501 ; 2023 296 477 ; 2024 259 595 ; 2025 263 402. Le
+    rapport annuel estimé / communal (S-56) fonde H-21. Enregistrée par
+    la revue du 2026-09-18-flux (SA-1).
+
+- id: S-58
+  publisher: SDES (ministère de la Transition écologique)
+  title: Présentation de la base nationale en open data des autorisations d'urbanisme (extraite de Sitadel) — note du 1er juin 2021
+  source_url: https://data.statistiques.developpement-durable.gouv.fr/dido/api/files/52ce326b-45b2-42ce-a2e7-4a60554ef559
+  publication_date: 2021-06-01
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: méthodologie de la base (2021)
+  license: Licence Ouverte / Open Licence 2.0 (mentions légales SDES)
+  local_file: data/raw/sdes-sitadel-presentation-base-open-data-2021.pdf
+  checksum: sha256:b3d250b187c47de641d18ed741ccfe1238cb950606c0691000b1a25ed8bc1e3a
+  notes: >
+    Note de 7 pages (PDF du 13/12/2021) jointe au jeu « Liste des
+    permis de construire » du catalogue DiDo. La phrase qui fonde H-21
+    (p. 7) : « On estime ainsi qu'environ 15 % des mises en chantier
+    (malgré une relance courrier et plusieurs modalités de collecte),
+    un tiers des achèvements de travaux et près de la moitié des
+    annulations de projets ne remontent jamais à Sitadel. Les
+    statistiques publiées des logements commencés et annulés se fondent
+    sur une enquête par sondage sur le champ non renseigné dans
+    Sitadel, et diverses techniques d'estimation statistique. »
+    Enregistrée par la revue du 2026-09-18-flux (SA-1).
+
+- id: S-59
+  publisher: INSEE
+  title: Code officiel géographique au 1er janvier 2026 — ensemble des fichiers (dont mouvements sur les communes)
+  dataset_id: cog_ensemble_2026_csv
+  source_url: https://www.insee.fr/fr/information/8740222
+  publication_date: 2026-02-13
+  retrieved_at: 2026-09-18
+  geographic_scope: France
+  temporal_scope: mouvements de communes depuis 1943, état au 1er janvier 2026
+  license: Licence Ouverte / Open Licence 2.0 (INSEE)
+  local_file: data/raw/insee-cog-ensemble-2026-csv.zip
+  checksum: sha256:5c037e2977c9d476cfe2e7b7f923bbe09a87cbe448c59e492a71ef6a917aa53f
+  notes: >
+    Archive « cog_ensemble_2026_csv.zip » (fichier v_mvt_commune_2026.csv
+    du 13/02/2026 : MOD, DATE_EFF, COM_AV, COM_AP, TYPECOM_AV/AP…). Sert
+    à ramener les codes communaux de Sitadel (au COG de l'événement,
+    S-56) à la géographie de la table d'appartenance (S-06, COG 2026) :
+    codes des modalités absorbantes 31, 32, 33, 34 (fusions), 41, 50, 70
+    (changements de code), suivis jusqu'à un code connu ; les codes non
+    résolus sont comptés (commencés « sans ZE »), jamais perdus en
+    silence. Enregistrée par la revue du 2026-09-18-flux (HD-6/ST-3 :
+    943 codes et ~1 278 commencés/an perdus avant correction).
+
+- id: S-60
+  publisher: SDES (ministère de la Transition écologique) — collection Études
+  title: Besoins en logements à horizon 2030, 2040 et 2050 (B. Boutchenik, G. Rateau, juin 2025)
+  source_url: https://www.statistiques.developpement-durable.gouv.fr/media/8479/download?inline=
+  publication_date: 2025-06-11
+  retrieved_at: 2026-09-18
+  geographic_scope: France (déclinaisons par zone d'emploi)
+  temporal_scope: 2018-2023 (transformations du parc), projections 2030-2050
+  license: Réutilisation libre des informations publiques (CRPA) — publication du SDES (mentions légales - Licence Ouverte)
+  local_file: data/raw/sdes-besoins-en-logements-2030-2050-2025.pdf
+  checksum: sha256:7b2d22747a848eba38b966b61acc754d925a32d9e07609c33a47fce1586d240b
+  notes: >
+    Étude (83 pages) dont la partie 6 mesure les SORTIES de parc depuis
+    les fichiers fonciers (DGFiP-Cerema, 2018-2023) — p. 66 : « Sur cette
+    période, il se crée, en moyenne sur une année, 27 000 logements à
+    partir du parc non résidentiel. Dans le même temps, 14 000 logements
+    sont transformés en locaux et 50 000 sont démolis. Les divisions
+    accroissent le parc de 18 000 logements et les fusions le diminuent
+    de 8 000 unités. Au total, le parc diminue sous l'effet des
+    transformations en moyenne de 27 000 logements par an. » Enregistrée
+    par la revue du 2026-09-18-flux (SA-3) : la mesure directe à laquelle
+    confronter l'écart « commencés − croissance du parc » de R-18 ; et
+    le comparateur méthodologique — le SDES retient la maille zone
+    d'emploi et un besoin à structure constante augmenté d'une
+    composante de renouvellement (L-34).

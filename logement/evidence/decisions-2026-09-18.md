@@ -404,3 +404,96 @@ donnée) ; chacune est réversible à la lecture.
   signe du solde des ZE tendues (− 5 253 → + 20 423/an) : le résultat
   ne peut pas être lu sans les deux.
 - **Trace** : C-16, R-18, L-34(3).
+
+## DEC-24 — Revue de R-18 à trois relecteurs, pas quatre
+
+- **Options** : (a) les quatre angles habituels (sources · hypothèses/
+  définitions · scénarios d'échec · statistique) ; (b) trois, en
+  fusionnant hypothèses/définitions et scénarios d'échec.
+- **Abandonné** : (a) pour cette revue — R-18 est un résultat
+  descriptif unique, sans hypothèse H-xx nouvelle (C-16 est une
+  convention de mesure) ; les deux angles auraient lu les mêmes six
+  nœuds.
+- **Retenu** : (b), avec le brief fusionné listant explicitement les
+  questions d'hypothèses (besoin de flux, fenêtres, statuts) ET de
+  scénarios d'échec (stock vs flux par ZE, années 2023-2025, causalité
+  inverse). Le rythme à quatre reste la règle pour les livrables à
+  hypothèses.
+- **Trace** : `evidence/revue-contradictoire-2026-09-18-flux/`.
+
+---
+
+## Intégration de la revue « flux » du 2026-09-18 (3 relecteurs, 40 objections)
+
+Rapports bruts commités avant intégration (commit 8317526, dossier
+`evidence/revue-contradictoire-2026-09-18-flux/`) ; compte rendu :
+`evidence/revue-contradictoire-2026-09-18-flux.md`.
+
+## DEC-25 — La série en date réelle du SDES remplace l'extrait en date de prise en compte (révise DEC-22)
+
+- **Options** : (a) garder S-54 (extrait DPC) ; (b) figer la série
+  communale annuelle EN DATE RÉELLE que le SDES publie (S-56, 92 Mo) et
+  en faire l'entrée de R-18, S-54 restant en trace.
+- **Abandonné** : (a) — DEC-22 reposait sur une prémisse fausse (SA-2 :
+  le producteur diffuse bien cette série) ; la DPC portait en outre un
+  avertissement du producteur que la note S-54 taisait.
+- **Retenu** : (b). Les deux dates donnent la même moyenne 2017-2022 à
+  0,5 % près — le changement ne déplace aucun chiffre, il rend la chaîne
+  fidèle à la doctrine du producteur.
+- **Trace** : S-54 (note), S-56, T-18.
+
+## DEC-26 — Le sous-compte devient une hypothèse (H-21) et une double lecture
+
+- **Options** : (a) ignorer le sous-compte (~15 % des DOC ne remontent
+  jamais, S-58) ; (b) recaler par département (taux de non-remontée
+  départemental, non publié) ; (c) un facteur national H-21 = rapport
+  série estimée / série communale, appliqué uniformément, avec les deux
+  lectures publiées partout.
+- **Abandonné** : (a) — le signe du solde des ZE tendues en dépend
+  (SA-1) ; (b) — pas de source ouverte au grain départemental (la série
+  estimée départementale existe, S-57 en a la version nationale ; la
+  déclinaison serait une seconde hypothèse — reportée, L-34(1)).
+- **Retenu** : (c), central 1,155 (moyenne 2017-2022 recalculée à chaque
+  reproduction), plage [1,122 ; 1,235] (min-max annuels 2013-2024).
+- **Trace** : H-21, S-57, S-58, C-16, L-34(1).
+
+## DEC-27 — L'affectation du neuf aux résidences secondaires : trois variantes, centrale observée
+
+- **Options** : (a) structure 2022 (initial) ; (b) sans RS (initial
+  « variante ») ; (c) la part des RS dans la croissance OBSERVÉE du parc
+  de la ZE 2016-2022 ; (d) une hypothèse H-xx nationale.
+- **Abandonné** : (a) et (b) comme central — la première fait construire
+  des RS pour chaque ménage formé même là où la RS se dilue (Perpignan
+  9 % observé vs 30 % de structure), la seconde nie un flux qui est
+  réalisé (13 % du neuf des ZE tendues) ; (d) — la donnée existe par ZE,
+  une constante nationale serait moins bonne qu'elle.
+- **Retenu** : (c) au central, (a) et (b) en bornes publiées partout ;
+  le fichier détail RP2022 (achèvement × catégorie) permettrait de
+  l'observer directement — non figé, L-34(3).
+- **Trace** : C-16, R-18, L-34(3).
+
+## DEC-28 — Années closes, fenêtres, absorption par ZE, plancher
+
+- **Années 2023-2024** : traitées comme CLOSES (en date réelle, un
+  événement 2023 est compté en 2023 quelle que soit sa remontée) et
+  publiées comme la lecture qui compte (SE-1) ; l'énoncé initial « le
+  flux n'est pas le problème » est abandonné. Abandonné : les écarter
+  comme « incomplètes » (erreur de lecture de D-24).
+- **Fenêtres** : la centrale 2017-2022 reste (alignée sur les
+  millésimes) mais elle est la plus haute de la série — 2015-2020,
+  2018-2023, 2019-2024 sont publiées (HD-4).
+- **Absorption du stock** : par ZE (besoin R-07 de la ZE / déficit de la
+  ZE), médiane et agrégat, sur la fenêtre et sur 2023-2024 (SE-2) ;
+  abandonné : le quotient national qui mélangeait les ZE.
+- **Plancher** : 200 ménages formés/an appliqué aux classements ET aux
+  corrélations ; sans plancher publié à côté (ST-1/HD-9) — la
+  corrélation ratio × coût est POSITIVE au plancher (+ 0,20).
+- **Disparitions implicites** : retirées des chiffres-titres, confrontées
+  à la mesure du SDES (O-42) dans L-34(2).
+- **COG** : mouvements de communes figés (S-59) et appliqués (1 833
+  codes, 25 822 commencés récupérés, 0 perdu).
+- **Non intégré** : la ventilation TLV / hors TLV des commencés (SE-5,
+  faisable, hors périmètre de l'article) ; la déclinaison départementale
+  du sous-compte (DEC-26) ; le fichier détail RP2022 (SA-4, 500 Mo) ;
+  l'étude SDES « Besoins en logements » n'est utilisée que pour O-42 et
+  comme comparateur de méthode (L-34), pas comme source de besoin.

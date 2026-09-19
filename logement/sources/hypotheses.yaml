@@ -460,3 +460,35 @@
     - D-22
   affects:
     - R-16
+
+- id: H-21
+  name: sitadel_communal_undercount_factor
+  description: >
+    Facteur multiplicatif appliqué aux logements commencés de la série
+    COMMUNALE Sitadel (S-56, déclarations d'ouverture de chantier
+    remontées) pour retrouver la statistique PUBLIÉE par le SDES
+    (S-57, série nationale estimée en date réelle) : le SDES documente
+    qu'« environ 15 % des mises en chantier […] ne remontent jamais à
+    Sitadel » et que la statistique publiée « se fonde sur une enquête
+    par sondage sur le champ non renseigné » (S-58, p. 7). Créée par la
+    revue du 2026-09-18-flux (SA-1) : sans ce facteur, la série
+    communale sous-estime le flux de ~12-19 % et renverse le signe du
+    solde des ZE tendues. Valeur centrale : le rapport moyen estimé /
+    communal sur la fenêtre 2017-2022 de R-18, calculé par la chaîne
+    depuis les deux fichiers figés et contrôlé à chaque reproduction
+    (1,155 ; 2017 1,122, 2022 1,190). Plage plausible : le minimum et
+    le maximum des rapports annuels 2013-2024 (1,122 ; 1,235 — le
+    sous-compte s'aggrave depuis 2020). Appliqué UNIFORMÉMENT à toutes
+    les ZE, alors que le taux de non-remontée varie par département
+    (revue : p10-p90 1,11-1,31 en date de prise en compte) — limite
+    L-34 ; la lecture « déclarée » (facteur 1) reste publiée partout.
+  central_value: 1.155
+  plausible_range: [1.122, 1.235]
+  unit: factor
+  confidence: medium
+  justification:
+    - S-57
+    - S-56
+    - S-58
+  affects:
+    - R-18

@@ -1206,50 +1206,62 @@ détention redistribue d'abord (21 ans d'équivalence, 29 en zones
 tendues, régressive en valeur) et n'a qu'une preuve causale de court
 terme.
 
-### R-18 — Le flux : la construction couvre-t-elle la formation de ménages ? (article 3)
+### R-18 — Le flux : la construction et la formation de ménages, par ZE (article 3, revu le 2026-09-18)
 
 La proposition P-01 détend un STOCK ; L-32 objectait que le flux le
-rattrape. R-18 mesure, par zone d'emploi, la formation de ménages
-(millésimes censitaires 2016 → 2022, S-11) et la construction commencée
-(Sitadel S-54, 2017-2022), et le besoin de flux qui maintient la
-structure de chaque ZE (C-16) — avec la variante hors résidences
-secondaires, qui change le signe du solde des ZE tendues.
+rattrape. R-18 mesure, par zone d'emploi, la formation de ménages et la
+décomposition de la croissance du parc (millésimes censitaires 2016 →
+2022, S-11) contre la construction commencée (série communale du SDES en
+date réelle S-56, codes ramenés au COG 2026 par S-59), en deux lectures —
+déclarée et estimée (× H-21, le sous-compte des déclarations que le SDES
+documente, S-58) — et sous trois affectations du neuf aux résidences
+secondaires (C-16). La revue du même jour (31 objections,
+[`evidence/revue-contradictoire-2026-09-18-flux.md`](revue-contradictoire-2026-09-18-flux.md))
+a changé la série, la lecture et la conclusion.
 
 ```{python}
 #| code-summary: "chiffres clés R-18"
+print("H-21 :", r18["hypothese_h21"], "contrôle :", r18["h21_controle"], "COG :", r18["cog"])
 for k in ("national", "tendues", "autres"):
     b = r18[k]
-    print(f"{k}: {b['n_ze']} ZE — ménages formés {b['formation_menages_an']:,}/an, besoin de flux "
-          f"{b['besoin_flux_an']:,} (hors RS {b['besoin_flux_hors_rs_an']:,}), commencés {b['commences_an']:,} "
-          f"(2013-2024 : {b['commences_an_long']:,}) ; ratio {b['ratio_production']} ; solde {b['solde_flux_an']:,} "
-          f"(hors RS {b['solde_flux_hors_rs_an']:,}) ; ZE déficitaires {b['n_ze_deficitaires']} "
-          f"(déficit {b['deficit_des_ze_deficitaires_an']:,}/an, hors RS {b['deficit_hors_rs_des_ze_deficitaires_an']:,}) ; "
-          f"disparitions implicites {b['disparitions_implicites_an']:,}/an".replace(",", " "))
+    print(f"{k}: {b['n_ze']} ZE — ménages formés {b['formation_menages_an']:,}/an ; croissance du parc "
+          f"{b['croissance_parc_an']:,} (RP {b['dont_rp_an']:,}, RS {b['dont_rs_an']:,} = {b['part_rs_neuf_observee_pct']} %, "
+          f"vacants {b['dont_vacants_an']:,}) ; besoin de flux {b['besoin_flux_an']:,} (sans RS {b['besoin_sans_rs_an']:,}, "
+          f"structure 2022 {b['besoin_structure_2022_an']:,}) ; commencés 2017-2022 déclarés {b['commences_declares_an']:,} / "
+          f"estimés {b['commences_estimes_an']:,} ; ratio estimé {b['ratio_estime']} (déclaré {b['ratio_declare']}, "
+          f"sans RS {b['ratio_estime_sans_rs']}) ; solde estimé {b['solde_estime_an']:,}/an, {b['n_ze_deficitaires_estime']} ZE "
+          f"déficitaires ({b['deficit_des_ze_deficitaires_estime_an']:,}/an) ; 2023-2024 : {b['commences_2023_2024_estimes_an']:,} "
+          f"commencés/an, solde {b['solde_2023_2024_estime_an']:,}, {b['n_ze_deficitaires_2023_2024']} ZE déficitaires "
+          f"({b['deficit_2023_2024_des_ze_deficitaires_an']:,}/an)".replace(",", " "))
 print("parts des ZE tendues :", r18["parts_des_ze_tendues"])
-rp = r18["ratio_production"]
-print(f"ratio médian par ZE : tendues {rp['tendues']['median']} vs autres {rp['autres']['median']} "
-      f"(MW p = {rp['mann_whitney_p_tendues_vs_autres']}) ; commencés pour 1 000 logements : "
-      f"tendues {r18['commences_pour_1000_logements']['tendues']['median']} vs autres "
-      f"{r18['commences_pour_1000_logements']['autres']['median']}")
-print("ratio × coût :", r18["spearman_ratio_vs_cout"])
+rp = r18["ratio_estime"]
+print(f"ratio médian au plancher : tendues {rp['tendues_au_plancher']['median']} vs autres {rp['autres_au_plancher']['median']} "
+      f"(MW p = {rp['mann_whitney_p_tendues_vs_autres_au_plancher']}) ; ZE à besoin nul {rp['n_ze_besoin_nul']}")
+print("ratio × coût :", r18["spearman_ratio_estime_vs_cout"])
+c1000 = r18["commences_pour_1000_logements_estimes"]
+print(f"commencés pour 1 000 logements : tendues {c1000['tendues']['median']} vs autres {c1000['autres']['median']} ; × coût {c1000['spearman_vs_cout']}")
+print("fenêtres :", r18["fenetres_sensibilite"])
 print("stock vs flux :", r18["stock_vs_flux"])
-print("sensibilité H-08 :", r18["sensibilite_h08"])
-print("déficits en ZE tendues : " + " ; ".join(
-    f"{e['name'].strip()} {e['solde_flux_an']:,} (hors RS {e['solde_flux_hors_rs_an']:,}, RS {e['part_rs_2022_pct']} %)".replace(",", " ")
-    for e in r18["deficits_tendues"][:8]))
-print("plus gros surplus : " + " ; ".join(
-    f"{e['name'].strip()} ratio {e['ratio_production']}" for e in r18["plus_gros_surplus"][:5]))
+print("séries (déclarées, France) :", r18["series_annuelles"]["communal_declare_france"])
+print("séries (estimées SDES) :", r18["series_annuelles"]["national_estime_sdes"])
+print("déficits 2023-2024 en ZE tendues : " + " ; ".join(
+    f"{e['name'].strip()} {e['solde_2023_2024_estime_an']:,.0f}".replace(",", " ")
+    for e in r18["deficits_tendues_2023_2024"][:8]))
+print("déficits 2017-2022 en ZE tendues : " + " ; ".join(
+    f"{e['name'].strip()} {e['solde_estime_an']:,} (RS du neuf {e['part_rs_neuf_observee_pct']} %)".replace(",", " ")
+    for e in r18["deficits_tendues_estimes"][:6]))
 ```
 
-Lecture (I-18) : le flux est couvert en France (1,04) et, hors
-résidences secondaires, dans les zones tendues (1,13) où la construction
-est deux fois plus intense qu'ailleurs par logement existant ; le
-déficit est littoral et touristique — là où la structure du parc
-absorbe une part de chaque logement construit — pas métropolitain (Paris
-construit 1,8 fois sa formation de ménages ; Marseille et Montpellier
-font exception). Le stock de détente vaut 1,3 an de formation de
-ménages des ZE tendues ; il ne serait rattrapé par le flux qu'en 10 ans
-dans les ZE déficitaires (37 ans hors RS).
+Lecture (I-18, après revue) : sur 2016-2022 la construction a produit la
+croissance du parc que le recensement enregistre (1,14 en France, 1,08
+en zones tendues, où elle est deux fois plus intense et croît avec le
+coût) — sans pouvoir dire si une formation de ménages plus forte a été
+empêchée (ménages ≡ résidences principales). Le déficit de cette
+fenêtre est littoral et alpin, question d'affectation du neuf. Mais
+depuis 2023 la construction s'est effondrée d'un tiers : dans les zones
+tendues elle ne couvre plus que 69 % du besoin de flux, 77 ZE sur 97
+sont en déficit, et le stock de détente de P-01 serait consommé en
+trois ans par ce déficit. Le flux est devenu la contrainte dominante.
 
 ## Garde de lecture (revue du 2026-08-09)
 
@@ -1482,7 +1494,7 @@ territoriale communale est bornée par la secrétisation (L-05) ; et
 l'ensemble des objections de la revue contradictoire du 2026-08-07 est
 traité à la section suivante.
 
-## 11. Revues contradictoires (2026-08-07, 2026-08-09 et 2026-09-18)
+## 11. Revues contradictoires (2026-08-07, 2026-08-09, 2026-09-18 ×2)
 
 L'arc R-01..R-10 a subi la revue contradictoire exigée par la méthode
 (INTRO étape 12) : quatre relecteurs indépendants (sources alternatives ·
@@ -1557,7 +1569,7 @@ elle en est la **condition**.
 git clone <dépôt> && cd metabolisme/logement
 uv sync --locked            # environnement figé (uv.lock)
 uv run logement validate    # registres + empreintes sha256 + graphe
-./test.sh                   # 179 tests (unitaires, propriétés, régression)
+./test.sh                   # 180 tests (unitaires, propriétés, régression)
 uv run logement reproduce   # reconstruit data/processed/*.json
 ```
 

@@ -364,6 +364,55 @@
     "hosted": "asset"
   },
   {
+    "path": "sources/sdes-sitadel-methodologie-2026-03.html",
+    "from": "logement/data/raw/sdes-sitadel-methodologie-2026-03.html",
+    "size": 80566,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/sdes-sitadel2-logements-communes-annuel-2013-2026.csv",
+    "from": "logement/data/raw/sdes-sitadel2-logements-communes-annuel-2013-2026.csv",
+    "size": 10779295,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/sdes-sitadel2-logements-communes-annuel-date-reelle-2013-2025.csv",
+    "from": "logement/data/raw/sdes-sitadel2-logements-communes-annuel-date-reelle-2013-2025.csv",
+    "size": 91895467,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "object-store"
+  },
+  {
+    "path": "sources/sdes-sitadel2-logements-national-mensuel-estime-2000-2026.csv",
+    "from": "logement/data/raw/sdes-sitadel2-logements-national-mensuel-estime-2000-2026.csv",
+    "size": 199038,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/sdes-sitadel-presentation-base-open-data-2021.pdf",
+    "from": "logement/data/raw/sdes-sitadel-presentation-base-open-data-2021.pdf",
+    "size": 179545,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/insee-cog-ensemble-2026-csv.zip",
+    "from": "logement/data/raw/insee-cog-ensemble-2026-csv.zip",
+    "size": 1961824,
+    "mime": "application/zip",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/sdes-besoins-en-logements-2030-2050-2025.pdf",
+    "from": "logement/data/raw/sdes-besoins-en-logements-2030-2050-2025.pdf",
+    "size": 6180689,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
     "path": "code/src/logement/core/parc.py",
     "from": "logement/src/logement/core/parc.py",
     "size": 7710,
@@ -387,7 +436,7 @@
   {
     "path": "code/src/logement/shell/build.py",
     "from": "logement/src/logement/shell/build.py",
-    "size": 39869,
+    "size": 44339,
     "mime": "text/x-python; charset=utf-8",
     "hosted": "asset"
   },
@@ -570,6 +619,13 @@
     "path": "data/scenarios-institutionnels-ze.json",
     "from": "logement/data/processed/scenarios-institutionnels-ze.json",
     "size": 29427,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/flux-construction-menages-ze.json",
+    "from": "logement/data/processed/flux-construction-menages-ze.json",
+    "size": 38564,
     "mime": "application/json; charset=utf-8",
     "hosted": "asset"
   }

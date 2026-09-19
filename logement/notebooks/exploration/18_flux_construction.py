@@ -1,9 +1,11 @@
 # %% [markdown]
 # # 18 — Le flux : formation de ménages et construction (article 3)
 #
-# Carnet d'exploration du stage `flux-construction` (core/flux.py) :
-# lecture de l'artefact, vérification à la main du besoin de flux, et
-# la découverte qui a fait publier la variante hors RS.
+# Carnet d'exploration du stage `flux-construction` (core/flux.py),
+# réécrit après la revue du 2026-09-18 : la première version lisait la
+# série en date de prise en compte sans le sous-compte des déclarations
+# (H-21) et écartait 2023-2024 comme « incomplètes » — deux erreurs qui
+# inversaient la conclusion.
 
 # %%
 from __future__ import annotations
@@ -20,22 +22,24 @@ payload = json.loads((ROOT / build.FLUX_OUTPUT).read_text(encoding="utf-8"))
 pd.DataFrame({k: payload[k] for k in ("national", "tendues", "autres")})
 
 # %% [markdown]
-# Le ratio national est 1,04 : la France construit ce que ses ménages
-# forment (au sens de la structure 2022). Les ZE tendues : 0,97 avec RS,
-# 1,13 hors RS — le déficit est la structure touristique.
+# Lecture estimée 2017-2022 : 1,14 en France, 1,08 en ZE tendues. Mais
+# les années closes 2023-2024 : − 58 216/an dans les ZE tendues.
 
 # %%
-pd.DataFrame(payload["deficits_tendues"])[
-    ["name", "formation_menages_an", "commences_an", "solde_flux_an", "solde_flux_hors_rs_an", "part_rs_2022_pct"]
+pd.DataFrame(payload["series_annuelles"])
+
+# %%
+pd.DataFrame(payload["deficits_tendues_2023_2024"])[
+    ["name", "formation_menages_an", "besoin_flux_an", "commences_estimes_an", "solde_2023_2024_estime_an", "besoin_detente", "annees_absorption_2023_2024"]
 ]
 
 # %%
 payload["stock_vs_flux"]
 
 # %% [markdown]
-# Vérification à la main : Perpignan, part RS 29,9 %, part vacants ~9 % →
-# 1/(1 − 0,299 − 0,09) ≈ 1,64 logement par ménage formé ; hors RS
-# 1/(1 − 0,09) ≈ 1,10. Avec 2 895 ménages/an : besoin 4 750 vs 3 180.
+# Vérification à la main : H-21 = série estimée SDES / série communale
+# 2017-2022 ; besoin de flux = ménages formés / (1 − part RS du neuf
+# observée − part vacants 2022).
 
 # %%
-pd.DataFrame(payload["plus_gros_surplus"])[["name", "formation_menages_an", "commences_an", "ratio_production", "tendue"]]
+pd.DataFrame(payload["plus_gros_surplus_estimes"])[["name", "formation_menages_an", "commences_estimes_an", "ratio_estime", "tendue"]]

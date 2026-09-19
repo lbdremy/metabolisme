@@ -95,7 +95,10 @@ TRANSACTION_OUTPUT = Path("data") / "processed" / "cout-transaction-ze.json"
 
 INSTITUTION_OUTPUT = Path("data") / "processed" / "scenarios-institutionnels-ze.json"
 
-SITADEL_FILE = "sdes-sitadel2-logements-communes-annuel-2013-2026.csv"
+SITADEL_REAL_DATE_FILE = "sdes-sitadel2-logements-communes-annuel-date-reelle-2013-2025.csv"
+SITADEL_NATIONAL_FILE = "sdes-sitadel2-logements-national-mensuel-estime-2000-2026.csv"
+COG_ZIP = "insee-cog-ensemble-2026-csv.zip"
+COG_MVT_CSV = "v_mvt_commune_2026.csv"
 FLUX_OUTPUT = Path("data") / "processed" / "flux-construction-menages-ze.json"
 
 
@@ -986,22 +989,33 @@ def run_institution(root: Path) -> int:
     return 0
 
 
-def _read_sitadel_annual(root: Path) -> pd.DataFrame:
-    """Read the frozen annual Sitadel extract (S-54, built by `acquire-sitadel`)."""
-    raw = pd.read_csv(root / "data" / "raw" / SITADEL_FILE, sep=";", dtype=str)
-    return flux.parse_sitadel_annual(raw)
-
-
 def build_flux(root: Path) -> dict[str, object]:
-    """Compute the R-18 payload (household formation vs construction by ZE)."""
+    """Compute the R-18 payload (household formation vs construction by ZE).
+
+    Starts come from the SDES communal series in real date (S-56), with
+    event-date commune codes brought to the 2026 COG (S-59); the
+    undercount factor H-21 is loaded from the registry and checked
+    against the yearly ratio of the estimated national series (S-57).
+    """
     raw = root / "data" / "raw"
     with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
         census_raw = pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *flux.CENSUS_FLOW_COLS])
     census = flux.parse_census_vintages(census_raw)
     commune_ze = ze.parse_commune_ze(_read_membership(root))
-    frame = flux.flux_by_ze(census, _read_sitadel_annual(root), commune_ze)
+    communal = flux.parse_sitadel_annual(
+        pd.read_csv(raw / SITADEL_REAL_DATE_FILE, sep=";", dtype=str), code_col="COMM"
+    )
+    with zipfile.ZipFile(raw / COG_ZIP) as zf, zf.open(COG_MVT_CSV) as fh:
+        successors = flux.cog_successor_map(pd.read_csv(fh, dtype=str))
+    communal, cog_report = flux.remap_to_membership(communal, set(commune_ze["code"]), successors)
+    national_estimated = flux.parse_national_estimated(
+        pd.read_csv(raw / SITADEL_NATIONAL_FILE, sep=";", dtype=str)
+    )
+    ratios = flux.undercount_ratios(national_estimated, communal)
+    h21 = _load_hypothesis(root, "H-21")
+    by_year = flux.starts_by_ze_year(communal, commune_ze)
+    frame = flux.flux_by_ze(census, by_year, commune_ze, h21.central_value)
     tendue, tendue_variants = _tension_flag_with_variants(root)
-    # The detente need (R-07 central) the flow is compared with.
     with zipfile.ZipFile(raw / CENSUS_ZIP) as zf, zf.open(CENSUS_CSV) as fh:
         census_t = rs.parse_census_housing(
             pd.read_csv(fh, sep=";", dtype=str, usecols=["CODGEO", *rs.CENSUS_COLS])
@@ -1018,15 +1032,42 @@ def build_flux(root: Path) -> dict[str, object]:
         _load_hypothesis(root, "H-08").central_value,
         _load_hypothesis(root, "H-12").central_value,
     )
-    besoin = float(tense.loc[tense["tendue"], "besoin_mobilisation"].sum())
-    return flux.build_summary(
+    besoin_detente = tense.loc[tense["tendue"], "besoin_mobilisation"]
+    closed = [y for y in by_year.columns if flux.LONG_WINDOW[0] <= int(y) <= flux.LONG_WINDOW[1]]
+    tense_flag = tendue.reindex(by_year.index).fillna(False).astype(bool)
+    yearly = {
+        "communal_declare_france": by_year[closed].sum(),
+        "communal_declare_tendues": by_year.loc[tense_flag, closed].sum(),
+        "communal_declare_autres": by_year.loc[~tense_flag, closed].sum(),
+        "national_estime_sdes": national_estimated.loc[
+            [y for y in national_estimated.index if flux.LONG_WINDOW[0] <= y <= flux.LONG_WINDOW[1]]
+        ],
+        "ratio_estime_sur_communal": ratios.round(3),
+    }
+    payload = flux.build_summary(
         frame,
         tendue,
         _cost_frame(root)["indice_cout_pct"],
         _ze_names(root),
-        besoin,
+        besoin_detente,
+        h21,
+        yearly,
+        cog_report,
         tendue_variants,
     )
+    payload["h21_controle"] = {
+        "ratio_moyen_2017_2022": round(
+            float(
+                ratios.loc[
+                    [y for y in ratios.index if flux.WINDOW[0] <= y <= flux.WINDOW[1]]
+                ].mean()
+            ),
+            3,
+        ),
+        "ratio_min_2013_2024": round(float(ratios.min()), 3),
+        "ratio_max_2013_2024": round(float(ratios.max()), 3),
+    }
+    return payload
 
 
 def run_flux(root: Path) -> int:
@@ -1034,9 +1075,10 @@ def run_flux(root: Path) -> int:
     payload = build_flux(root)
     _write_json(root, FLUX_OUTPUT, payload)
     national = cast(dict[str, object], payload["national"])
-    stock = cast(dict[str, object], payload["stock_vs_flux"])
+    tendues = cast(dict[str, object], payload["tendues"])
     print(
-        f"flux-construction: wrote {FLUX_OUTPUT} — ratio national "
-        f"{national['ratio_production']}, tendues {stock}"
+        f"flux-construction: wrote {FLUX_OUTPUT} — ratio estimé national "
+        f"{national['ratio_estime']}, tendues {tendues['ratio_estime']} "
+        f"(2023-2024 : {tendues['solde_2023_2024_estime_an']}/an)"
     )
     return 0
