@@ -1,0 +1,448 @@
+# Registre des sources (S-xx) — méthode Métabolisme, INTRO §7.
+# Chaque source retenue est enregistrée ici AVANT d'alimenter une définition,
+# une observation ou un calcul : organisme, titre, URL, dates (publication +
+# récupération), périmètres, licence, fichier local figé dans data/raw/ et son
+# empreinte sha256 (Git LFS). Même schéma que logement/ et monopoles/.
+# Contrôle : `uv run autoroutes validate` (empreintes) et le build du site.
+#
+# Étude sectorielle n° 1 du cadrage monopoles/ (S-01 = le cadrage lui-même,
+# figé à son tag). Modes de capture : téléchargements directs, sauf
+# indication contraire dans les notes. Session 1, 2026-09-18.
+
+- id: S-01
+  publisher: Métabolisme — étude « monopoles » (Rémy Loubradou)
+  title: Cadrage « Monopoles naturels, rentes de position et collectivisation des rentes » — registres des définitions (D-01..D-21), des hypothèses (H-01..H-20) et graphe de preuves, au tag monopoles-cadrage-v1.0 (commit 265d6e1, 2026-09-05)
+  dataset_id: monopoles-cadrage-v1.0
+  source_url: https://github.com/lbdremy/metabolisme/tree/monopoles-cadrage-v1.0/monopoles
+  publication_date: 2026-09-05
+  retrieved_at: 2026-09-18
+  geographic_scope: sans objet (cadrage méthodologique)
+  temporal_scope: version taguée le 2026-09-05 après la revue contradictoire du 2026-09-04
+  license: dépôt public du programme Métabolisme — réutilisation avec attribution
+  files:
+    - path: data/raw/monopoles-cadrage-v1.0-definitions.yaml
+      checksum: sha256:6f6f059c61c8bde386395f99ef9bc32fc97e25e2bb75ec7412e4a49e71e24c0d
+    - path: data/raw/monopoles-cadrage-v1.0-hypotheses.yaml
+      checksum: sha256:cca2a39cbacdc0c65abb547633f42fbc54da15e42aa546ae6ff42d9fa2367faf
+    - path: data/raw/monopoles-cadrage-v1.0-claims.yaml
+      checksum: sha256:be881b9a4b953240b56907340b22ffe10699839bd7ead95421635515376c7f91
+  notes: >
+    Copies figées (`git show monopoles-cadrage-v1.0:monopoles/sources/…`)
+    des trois registres du cadrage. Cette étude sectorielle en reprend, sans
+    les redéfinir, la rente mesurable D-15 (base d'actifs au coût historique
+    net des subventions, taux de référence, avant impôts, témoin), la base
+    d'actifs D-21, le taux de référence H-06 (5,0 % [4,0 ; 8,8]),
+    l'hypothèse de classement H-17 (autoroutes), les quatre configurations
+    C-05 et les valeurs V-01 / V-05 (décision DEC-01 :
+    `evidence/decisions-2026-09-18.md`). Les identifiants du cadrage sont
+    cités sous la forme « monopoles:D-15 » et ne se résolvent pas dans le
+    graphe de cette étude.
+
+- id: S-02
+  publisher: Autorité de régulation des transports (ART)
+  title: Économie des concessions autoroutières — 3e édition (novembre 2024)
+  dataset_id: rapport EGC 3
+  source_url: https://www.autorite-transports.fr/wp-content/uploads/2023/04/20241202_egc3_compresse-1.pdf
+  publication_date: 2024-12-02
+  retrieved_at: 2026-09-05
+  geographic_scope: France (sept concessions autoroutières historiques privées ; concessions récentes)
+  temporal_scope: exercices 2017-2023 ; projections jusqu'aux échéances 2031-2036
+  license: information publique d'une autorité administrative indépendante — réutilisation libre avec mention de la source (CRPA, L. 321-1 et s.)
+  local_file: data/raw/art-economie-concessions-autoroutieres-2024.pdf
+  checksum: sha256:9ef14061d38601ae1e6b1605546519a18d452f10d1f6dcc2e356927ae8e39e80
+  notes: >
+    Même fichier que monopoles:S-08 (13,8 Mo, 184 pages du PDF). Pages du
+    PDF citées ici : 19 (figure 1.2, échéances par société : Sanef
+    31/12/2031, Escota 29/2/2032, SAPN 31/8/2033, Cofiroute 30/6/2034, APRR
+    30/11/2035, ASF 30/4/2036, Area 30/9/2036), 85-87 (méthode : TRI projet
+    de la concession vs TRI de la privatisation, TRI actionnaire vs projet),
+    90-91 (troncature au 31/12/2002, actif moderne équivalent, ± 1 point),
+    94 (figure 3.5 : TRI projet à terminaison 2023 par société, 7,9 %
+    ensemble ; tableau 3.2 : TRI constaté à date), 95 (coût du capital de
+    l'ordre de 7 % ; 0,7 point de TRI ≈ 5,5 % de chiffre d'affaires ≈ 500
+    M€ par an sur 2003-2036), 96 (intervalle [5,3 ; 8,8]), 98-99 (TEITLD :
+    500 M€ en 2024, 6,3 Md€ cumulés, − 0,17 point ; effort d'entretien 1,2 à
+    1,6 Md€), 100-101 (investissements de seconde phase 0,4 à 4,7 Md€ ;
+    flux opérationnels 83 Md€ courants d'ici 2036, dette 21 Md€,
+    investissements 19 Md€ dont 8 Md€ de fin de contrat), 102 (dividendes
+    plus importants en fin de contrat), 104-105 (1,7 Md€ de hausses de
+    péage contractualisées 2016-2024, avenants).
+
+- id: S-03
+  publisher: Autorité de régulation des transports (ART)
+  title: Focus — La rentabilité des concessions autoroutières (juillet 2023, complément du 2e rapport sur l'économie générale des concessions)
+  dataset_id: focus-rentabilite_vf
+  source_url: https://www.autorite-transports.fr/wp-content/uploads/2023/07/focus-rentabilite_vf.pdf
+  publication_date: 2023-07-06
+  retrieved_at: 2026-09-18
+  geographic_scope: France (sept concessions historiques privées)
+  temporal_scope: estimations à fin 2022 ; comparaison des travaux 2020-2023 (ART, Sénat, IGF-CGEDD) ; coût du capital 1960-2022
+  license: information publique d'une autorité administrative indépendante — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/art-focus-rentabilite-2023.pdf
+  checksum: sha256:aa2cf5f3f323d37910c8069b760e8ba349c2d313eab7f7e571df0ed466b8dc39
+  notes: >
+    PDF de 26 pages (métadonnées : 06/07/2023). Pages du PDF citées : 11-12
+    (tableau 3 et 4 : TRI à terminaison à fin 2019 selon les trois rapports —
+    TRI projet ART 7,9 % / IGF-CGEDD 8,3 % agrégés ; TRI actionnaire de la
+    privatisation Sénat 10,4 % / IGF-CGEDD 11,3 %), 15 (figure 8 : TRI
+    projet 2022 par société, 8,0 % moyenne), 16 (tableau 5 : TRI constaté),
+    17-18 (coût du capital : 5,4 à 7,0 % entre 2000 et 2010, l'essentiel
+    entre 6,0 et 6,5 % ; méthode 1960-2022 par le coût de la dette après
+    impôts 3,7 % → environ 7 %), 19 (un point de TRI ≈ 8 % de chiffre
+    d'affaires par an ≈ 740 M€ courants, 40 Md€ actualisés), 21-22
+    (imperfections du modèle concessif : inflation + 5,4 Md€, baisse de l'IS
+    + 7,9 Md€, double compensation).
+
+- id: S-04
+  publisher: Autorité de régulation des transports (ART)
+  title: Synthèse des comptes des sociétés concessionnaires d'autoroutes — Exercice 2024 (décembre 2025)
+  dataset_id: synthese_des_comptes_sca_2024
+  source_url: https://www.autorite-transports.fr/wp-content/uploads/2025/12/synthese_des_comptes_sca_2024.pdf
+  publication_date: 2025-12-01
+  retrieved_at: 2026-09-18
+  geographic_scope: France (ensemble des sociétés concessionnaires d'autoroutes)
+  temporal_scope: exercices 2023 et 2024 ; séries 2016-2024 pour les dividendes
+  license: information publique d'une autorité administrative indépendante — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/art-synthese-comptes-sca-2024.pdf
+  checksum: sha256:237940ed48d7fe9d1ffc821f5e6a92aa47ff04ae27754e82b1cc5001aa98ae05
+  notes: >
+    PDF de 10 pages (« 12/2025 » en pied de page ; date de publication au
+    mois près). Pages citées : 3 (trafic 100,7 Md véh.km), 4 (TMKP classe 1
+    9,27 c€/km, + 3,23 %), 5 (tableau 3 : agrégats 2023 / 2024 — chiffre
+    d'affaires 12,3 / 12,8 Md€, charges 3,2 / 3,7 dont impôts et taxes 1,0 /
+    1,5, EBITDA 9,1 / 9,1, amortissements 2,3 / 2,4, IS 1,5 / 1,6, résultat
+    net 4,4 / 4,3 ; recettes de péage des sociétés historiques 11,7 Md€ en
+    2024, récentes 0,7), 6 (flux de trésorerie 7,0 / 6,5 Md€ ; dividendes
+    67,7 % des flux en 2024 ; TEITLD non déductible), 7 (dividendes 4,1 / 4,4
+    Md€, répartition par groupe ; dette 30,5 Md€, endettement net 23,8), 8
+    (avantages financiers non consommés 204 M€), 9 (TRI projet 2024 :
+    historiques privées 7,9 %, récentes 5,9 %, publiques 2,0 %). Aucun
+    tableau par société dans cette édition (fiches numériques non figées).
+
+- id: S-05
+  publisher: Sénat — commission d'enquête sur le contrôle, la régulation et l'évolution des concessions autoroutières (rapporteur Vincent Delahaye)
+  title: "Rapport n° 709 (2019-2020), tome I : « Concessions autoroutières : des profits futurs à partager équitablement avec l'État et les usagers » (16 septembre 2020) — texte intégral"
+  dataset_id: r19-709-1
+  source_url: https://www.senat.fr/rap/r19-709-1/r19-709-1_mono.html
+  publication_date: 2020-09-16
+  retrieved_at: 2026-09-18
+  geographic_scope: France (concessions autoroutières historiques)
+  temporal_scope: privatisation 2002-2006 ; comptes 2006-2019 ; projections 2020-2036
+  license: document parlementaire — réutilisation libre avec mention de la source
+  local_file: data/raw/senat-r19-709-1-mono.html
+  checksum: sha256:bdaede5b73b11a6b5045e6864bb0c8236aa5d8146685db7c32a492d9f8d98846
+  notes: >
+    Téléchargement direct (HTML, 3,6 Mo). Résout la limite monopoles:L-12 :
+    l'« étude indépendante » citée par FIPECO (monopoles:S-13) est
+    l'expertise de Frédéric Fortin, « expert en fusion acquisition et en
+    finances d'entreprise », intégrée au tome I (partie « une étude
+    indépendante anticipe une surrentabilité »). Passages cités (O-09 à
+    O-12) : dividendes 2006-2019 (ASF-Escota 13,8 Md€ pour 10,4 Md€
+    décaissés ; APRR-Area 9 pour 6,7 ; Sanef-SAPN 4,8 pour 5,3 ; Cofiroute
+    5,8), TRI actionnaire prévisionnel / réalisé 2002-2019 / à terme (ASF
+    7,13 / 4,93 / 10,93 % ; APRR 9,2 / 4,28 / 11,25 % ; Sanef 8 / − 1,38 /
+    7,21 %), « au-delà de 2022, les dividendes versés atteindraient environ
+    40 milliards d'euros », privatisation 14,8 Md€ plus 16,8 Md€ de dette
+    transférée, rachat anticipé évalué par Bercy « entre 45 et 50 milliards
+    d'euros », taux négocié de 6,5 % à 5,9 % (PIA 2017), CMPC de marché
+    EDHECinfra 5,51 / 4,26 / 2,28 %, « une baisse de 1 % du CMPC […]
+    permettrait une réduction moyenne des péages de plus de 15 % ».
+
+- id: S-06
+  publisher: Inspection générale des finances (IGF) et Conseil général de l'environnement et du développement durable (CGEDD) — copie publiée par l'IGEDD
+  title: Le modèle économique des sociétés concessionnaires d'autoroutes (rapport IGF n° 2020-M-042-03 / CGEDD n° 013462-P, février 2021, rendu public en mars 2023)
+  dataset_id: 013462-p_rapport-publie
+  source_url: https://www.igedd.developpement-durable.gouv.fr/IMG/pdf/013462-p_rapport-publie_cle0fe95d.pdf
+  publication_date: 2023-03-23
+  retrieved_at: 2026-09-18
+  geographic_scope: France (SCA historiques et récentes)
+  temporal_scope: rapport de février 2021 ; modèle financier 2006-2036 ; scénarios de réalignement à compter de 2022 / 2026
+  license: rapport administratif publié — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/igf-cgedd-2021-modele-economique-sca.pdf
+  checksum: sha256:aae5ae8abb5575bbb8e5a6fbb4f99009595f2e0c33c97e281690c060f42c9324
+  notes: >
+    PDF de 114 pages, version « PUBLIÉ » (partie 2 confidentielle retirée).
+    L'adresse d'origine sur igf.finances.gouv.fr ne répond plus (migration
+    du site) ; la copie de l'IGEDD est retenue. Pages du PDF citées (O-23) :
+    4-6 (synthèse, onze propositions), 19 (tableau 4 : TRI projet /
+    actionnaire par scénario — ASF-Escota 7,80 / 11,77 % ; APRR-Area 8,69 /
+    12,49 % ; Sanef-SAPN 8,03 / 7,70 % en scénario de référence, contre
+    7,67 % attendu en 2006), 20 (réalignement : fin anticipée au 30 avril
+    2026 et 30 septembre 2026, ou baisse des péages de 58 % / 59 % dès
+    2022, ou prélèvement de 63 % / 64 % de l'EBE ; prix d'acquisition
+    « juste » 15,1 au lieu de 10,4 Md€ et 10,1 au lieu de 6,7 Md€), 20-21
+    (avis du Conseil d'État du 6 février 2020, jurisprudence « Olivet »).
+
+- id: S-07
+  publisher: Sénat — commission des finances (rapporteur spécial Hervé Maurey)
+  title: Rapport d'information n° 65 (2024-2025) sur la préparation de l'échéance des contrats de concessions autoroutières (23 octobre 2024)
+  dataset_id: r24-065
+  source_url: https://www.senat.fr/rap/r24-065/r24-0651.pdf
+  publication_date: 2024-10-23
+  retrieved_at: 2026-09-18
+  geographic_scope: France (concessions historiques ; modèle successeur)
+  temporal_scope: bilan 2006-2024 ; échéances 2031-2036 ; propositions pour l'après-concessions
+  license: document parlementaire — réutilisation libre avec mention de la source
+  local_file: data/raw/senat-r24-065-echeance-concessions.pdf
+  checksum: sha256:9bb92ea931e2dd63cc46b50672db72b70f761a0493b8e7e3060479ec1bcd63c4
+  notes: >
+    PDF de 198 pages. Pages du PDF citées (O-15, O-24) : 4-6 (sommaire :
+    « surrentabilité », résiliation 40 à 50 Md€, avis du Conseil d'État du 8
+    juin 2023, fiscalité 36 % du chiffre d'affaires, régie « inadaptée »,
+    gratuité « piège démagogique »), 69-72 (fiscalité : 1,2 Md€ de
+    fiscalité spécifique dont TAT 751 M€ prévus en 2024 ; 3,5 Md€ de
+    fiscalité générale dont IS ≈ 1 Md€ et TVA ≈ 2 Md€ ; TEITLD ≈ 450 M€ ;
+    contribution volontaire à l'AFIT France de 60 M€ par an refusée depuis
+    2021 ; citation d'Yves Crozet sur l'élasticité-prix), 143-144 (durée
+    des futurs contrats 15 à 20 ans ; mécanisme de « soulte » préconisé par
+    l'ART). Le texte intégral HTML (r24-065_mono.html) n'a pas été figé.
+
+- id: S-08
+  publisher: ASF (Autoroutes du Sud de la France), groupe VINCI Autoroutes
+  title: Groupe ASF — Rapport financier annuel 2023 (comptes consolidés IFRS au 31 décembre 2023, ASF et Escota)
+  dataset_id: asf2023-financier-annuel
+  source_url: https://www.vinci.com/publi/vinci_autoroutes/asf/asf2023-financier-annuel.pdf
+  publication_date: 2024-02-29
+  retrieved_at: 2026-09-18
+  geographic_scope: France (concessions ASF et Escota)
+  temporal_scope: exercice 2023 (comparatif 2022)
+  license: document d'information réglementée d'un émetteur obligataire — consultation libre, citation avec attribution ; redistribution de la copie figée non établie
+  local_file: data/raw/asf-rapport-financier-2023.pdf
+  checksum: sha256:dc7a732b873a95f37efa9a851d9c0856593d9ae66c09a8800af140d7d5cc280c
+  redistributable: false
+  notes: >
+    PDF de 68 pages. Date de publication : arrêté des comptes (le PDF ne
+    porte pas de date ; « février 2024 » retenu, à préciser). Pages du PDF
+    citées (O-18, T-01) : 14 (compte de résultat : chiffre d'affaires
+    4 585,0 M€ hors travaux, IS 591,0, résultat net 1 683,4), 16 (bilan :
+    immobilisations incorporelles du domaine concédé 9 388,4 M€ nettes,
+    corporelles 364,6), 27 (note 4 : achats 53,4, services extérieurs
+    317,2, sous-traitance 423,6 dont construction 394,0, impôts et taxes
+    545,7, personnel 288,9, amortissements 837,1, provisions 25,7), 32
+    (IFRIC 12, modèle de l'actif incorporel « net des éventuelles
+    subventions »), 33 (note 9.1 : coûts des infrastructures 23 801,9 M€
+    bruts au 31/12/2023, encours 627,6, subventions − 470,1, amortissements
+    cumulés − 14 819,5, dotation 769,2). Ne détaille pas les impôts et
+    taxes (L-05).
+
+- id: S-09
+  publisher: Cofiroute, groupe VINCI Autoroutes
+  title: Cofiroute — Rapport financier annuel 2023 (comptes individuels IFRS et comptes annuels au 31 décembre 2023)
+  dataset_id: cofiroute-rapport_financier-2023
+  source_url: https://www.vinci.com/publi/vinci_autoroutes/cofiroute/cofiroute-rapport_financier-2023.pdf
+  publication_date: 2024-02-29
+  retrieved_at: 2026-09-18
+  geographic_scope: France (réseau interurbain Cofiroute et Duplex A86)
+  temporal_scope: exercice 2023 (comparatif 2022)
+  license: document d'information réglementée d'un émetteur obligataire — consultation libre, citation avec attribution ; redistribution de la copie figée non établie
+  local_file: data/raw/cofiroute-rapport-financier-2023.pdf
+  checksum: sha256:4a77b6172386a7f8639a4351c52d967496276b73ed93c4a0a5e883b7681ac1c2
+  redistributable: false
+  notes: >
+    PDF de 88 pages (date de publication : arrêté des comptes, « février
+    2024 » retenu). Pages citées (O-13, O-19, T-01) : 30 (bilan IFRS :
+    domaine concédé 4 407,7 M€ nets, corporelles liées aux concessions
+    180,4), 40 (note 4 : chiffre d'affaires d'exploitation 1 602,2,
+    construction 162,2, achats 23,2, services extérieurs 89,6, impôts et
+    taxes 170,8, personnel 97,3, amortissements 276,4, reprise nette de
+    provisions 1,5), 41 (amortissements du domaine 242,2), 44 (note 9.1 :
+    coût des infrastructures en service 8 796,0 M€ bruts, encours 421,0,
+    amortissements cumulés 4 809,3 ; subventions « en diminution » de
+    l'actif), 45 (fin du contrat interurbain 30 juin 2034, « infrastructure
+    rendue au concédant à l'échéance sans indemnité, sauf rachat »), 72-73
+    (comptes annuels, règles : immobilisations non renouvelables « durée de
+    vie supérieure à la durée de la concession », amortissement de
+    caducité, subventions déduites).
+
+- id: S-10
+  publisher: APRR (Autoroutes Paris-Rhin-Rhône), groupe Eiffage
+  title: APRR — Comptes consolidés au 31 décembre 2024 (IFRS ; APRR, AREA, ALIAE ; colonne comparative 2023)
+  dataset_id: APRR Comptes consolidés au 31 12 2024
+  source_url: https://www.eiffage.com/files/live/sites/eiffagev2/files/Finance/R%C3%A9sultats/2025/APRR%20Comptes%20consolid%C3%A9s%20au%2031%2012%202024.pdf
+  publication_date: 2025-02-26
+  retrieved_at: 2026-09-18
+  geographic_scope: France (concessions APRR, AREA et ALIAE — A79)
+  temporal_scope: exercices 2024 et 2023
+  license: document d'information réglementée d'un émetteur obligataire — consultation libre, citation avec attribution ; redistribution de la copie figée non établie
+  local_file: data/raw/aprr-comptes-consolides-2024.pdf
+  checksum: sha256:9e2d7946ded6150337290d902523a496ffdb6886ee3b8ea1c0b336a863185e51
+  redistributable: false
+  notes: >
+    PDF de 40 pages (date de publication : arrêté des comptes, « février
+    2025 » retenu). Le périmètre inclut ALIAE (A79, concession récente,
+    chiffre d'affaires marginal) : l'étude l'assimile à APRR-Area (L-05).
+    Pages citées (O-14, O-20, T-01) : 4 (bilan : domaine concédé 6 760,0 M€
+    nets au 31/12/2023, corporelles 217,2), 5 (compte de résultat 2023 :
+    chiffre d'affaires d'exploitation 3 018,7, construction 230,5, achats
+    et charges externes 430,2, personnel 226,6, impôts et taxes 362,3,
+    amortissements 564,0, provisions 30,0, autres + 11,0, IS 384,3,
+    résultat net 1 115,8), 12 (subventions du concédant déduites du coût),
+    21 (note 5, 2023 : domaine concédé 16 509,1 M€ bruts, amortissements
+    cumulés 9 749,1, dotation 491,2), 33 (note 18 : TAT 190,7 / 196,7,
+    TEITLD 0 / 123,3, CET 43,7 / 41,3, redevance domaniale 100,0 / 106,0,
+    contribution AFITF 18,3 / 18,7 pour 2023 / 2024), 34 (assiettes des
+    taxes ; TEITLD 4,6 % au-delà de 120 M€).
+
+- id: S-11
+  publisher: VINCI SA
+  title: "VINCI — Rapport sur les comptes de l'exercice 2023 (rapport de gestion : résultats par pôle, capitaux engagés, ROCE)"
+  dataset_id: vinci-rapport-comptes-exercice-2023
+  source_url: https://www.vinci.com/publi/vinci/vinci-rapport-comptes-exercice-2023.pdf
+  publication_date: 2024-02-07
+  retrieved_at: 2026-09-18
+  geographic_scope: groupe VINCI (monde ; VINCI Autoroutes = ASF, Escota, Cofiroute, Arcour)
+  temporal_scope: exercice 2023 (comparatif 2022)
+  license: document d'information réglementée d'une société cotée — consultation libre, citation avec attribution ; redistribution de la copie figée non établie
+  local_file: data/raw/vinci-rapport-comptes-2023.pdf
+  checksum: sha256:f1055b2a6cb1df40afc938b006df43915f3715be9c6934959c399591821cb2d8
+  redistributable: false
+  notes: >
+    PDF de 18 pages (conseil d'administration du 7 février 2024, p. 14).
+    Source du TÉMOIN substituable (C-05, M-04) : pages 8-9 (résultat
+    opérationnel sur activité 2023 par pôle — VINCI Autoroutes 3 362 M€,
+    53,2 % du chiffre d'affaires ; VINCI Energies 1 356 M€, 7,0 % ; VINCI
+    Construction 1 260 M€, 4,0 %), 13 (capitaux engagés au 31/12/2023 :
+    VINCI Autoroutes 18,3 Md€, VINCI Energies 4,4 Md€, VINCI Construction
+    0,3 Md€), 14 (ROCE du groupe 11,3 %). Les capitaux engagés de VINCI
+    Autoroutes incluent le prix d'acquisition d'ASF (2006) : base au prix
+    d'acquisition, exclue par D-15, présentée en contre-exemple.
+
+- id: S-12
+  publisher: Ministère chargé des transports (DGITM) — publication du contrat consolidé
+  title: Contrat de concession et cahier des charges ASF — texte consolidé au 15 janvier 2024 (convention et cahier des charges après le 18e avenant)
+  dataset_id: contrat de concession ASF consolidé
+  source_url: https://www.ecologie.gouv.fr/sites/default/files/documents/2024.01.15%20-%20contrat%20de%20concession%20ASF%20consolid%C3%A9.pdf
+  publication_date: 2024-01-15
+  retrieved_at: 2026-09-18
+  geographic_scope: France (concession ASF, 2 721 km)
+  temporal_scope: texte consolidé au 15 janvier 2024 ; concession jusqu'au 30 avril 2036
+  license: contrat administratif publié par le ministère — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/asf-contrat-concession-consolide-2024-01-15.pdf
+  checksum: sha256:37d2f07d7a59ac63cd026db3edba06976479d3e50132396282a1b00ba846b561
+  notes: >
+    PDF de 120 pages. Pris comme contrat de référence (les six autres
+    contrats historiques, publiés au même endroit, n'ont pas été figés ;
+    l'ART indique que « la rédaction est identique à quelques nuances près »
+    hors Cofiroute, S-02 p. 67). Pages citées (D-04, D-07, D-08, O-22) :
+    15-16 (art. 2.2 : biens de retour « appartiennent à l'autorité
+    concédante dès leur achèvement », retour « en tout état de cause,
+    gratuit » ; art. 3.1 : 2 721 km), 76 (art. 32 : compensation des
+    impôts spécifiques nouveaux), 76-77 (art. 33 : garanties), 81-82 (art.
+    36.1 : fin le 30 avril 2036 ; art. 36.2 : fin anticipée sans indemnité
+    si le cumul actualisé à 8 % des recettes depuis 2006 atteint 40 606
+    330 689 €, au plus tôt le 31 décembre 2033), 82-83 (art. 37 : remise en
+    bon état, programme sept ans avant), 83-84 (art. 38 : rachat pour motif
+    d'intérêt général dès 2012, indemnité égale à la « juste valeur de la
+    concession reprise, estimée selon la méthode d'actualisation des flux de
+    trésorerie disponibles […] après impôts »).
+
+- id: S-13
+  publisher: Autorité de la concurrence
+  title: Avis n° 14-A-13 du 17 septembre 2014 sur le secteur des autoroutes après la privatisation des sociétés concessionnaires
+  dataset_id: 14a13
+  source_url: https://www.autoritedelaconcurrence.fr/sites/default/files/commitments/14a13.pdf
+  publication_date: 2014-09-17
+  retrieved_at: 2026-09-18
+  geographic_scope: France (SCA historiques)
+  temporal_scope: exercices 2004-2013
+  license: avis d'une autorité administrative indépendante — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/adlc-avis-14-a-13-2014.pdf
+  checksum: sha256:09df1b854826d68cc18eb42c3c11db35df2021cd90a752550b02a79a8991f3c9
+  notes: >
+    PDF de 154 pages. Pages citées (O-25) : 18-20 (§ 47-58 : analyse sur
+    comptes consolidés IFRS ; en 2013 EBE / CA entre 65 et 72 %, résultat
+    d'exploitation / CA entre 44 et 51 %, résultat net / CA entre 20 et
+    24 % ; groupes Vinci et Eiffage, concessions incluses : 14,3 / 14,7 %,
+    9,3 / 8,8 %, 5,1 / 2,3 % ; « une activité largement indifférente aux
+    cycles économiques, des marges élevées »). Point de comparaison
+    historique de la marge, dix ans avant la mesure.
+
+- id: S-14
+  publisher: Ministère de la Transition écologique — direction générale des infrastructures, des transports et des mobilités (DGITM)
+  title: Rapport d'activité 2020 — Exécution et contrôle des contrats de concession d'autoroutes et d'ouvrages d'art
+  dataset_id: rapport_activite_2020_gestion_reseau_autoroutier_concede
+  source_url: https://www.ecologie.gouv.fr/sites/default/files/documents/rapport_activite_2020_gestion_reseau_autoroutier_concede.pdf
+  publication_date: 2022-09-30
+  retrieved_at: 2026-09-18
+  geographic_scope: France (réseau autoroutier concédé)
+  temporal_scope: année 2020 ; annexe financière sur l'exercice 2019
+  license: rapport d'un service de l'État — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/dgitm-rapport-activite-2020-concessions.pdf
+  checksum: sha256:bfcc464d5876b755bbe59f415ea3a5359209f15adb97ac87aad746316e663df1
+  notes: >
+    PDF de 90 pages (métadonnées : 30/09/2022). Pages citées (D-04, O-27) :
+    18 (patrimoine autoroutier « estimé à près de 150 milliards d'euros »,
+    qui « reviendra à l'État » ; définition des biens de retour, de reprise
+    et propres à l'article L. 3132-4 du code de la commande publique, citée
+    verbatim), 20 (histoire : loi du 18 avril 1955, adossement), 79 (annexe
+    10 : chiffre d'affaires, EBITDA et résultat net 2019 par société,
+    d'après l'ART — total 10 365,0 / 7 501,9 / 3 665,0 M€).
+
+- id: S-15
+  publisher: Autorité de régulation des transports (ART)
+  title: Rapport sur l'économie des concessions autoroutières — 1re édition (novembre 2020)
+  dataset_id: rapport_economie_des_concessions_autoroutieres_nov2020
+  source_url: https://www.autorite-transports.fr/wp-content/uploads/2020/11/rapport_economie_des_concessions_autoroutieres_nov2020.pdf
+  publication_date: 2020-11-03
+  retrieved_at: 2026-09-18
+  geographic_scope: France (concessions historiques et récentes)
+  temporal_scope: 1955-2019 ; prévisions 2019-2036 des SCA
+  license: information publique d'une autorité administrative indépendante — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/art-economie-concessions-autoroutieres-2020.pdf
+  checksum: sha256:0a1e5a7fcc1877e9aafbbfbd633684ed54f529d345f26cac87082e02d5eb4916
+  notes: >
+    PDF de 185 pages, 12 Mo (métadonnées : 03/11/2020). Pages citées
+    (O-28) : 101-102 (méthode de l'actif moderne équivalent : « les coûts
+    d'acquisition et de construction des actifs historiques n'étaient pas
+    connus année par année, seule la valeur brute globale étant
+    conservée » ; ventilation de la valeur brute par année de mise en
+    service et indexation TP01 + 1 %), 138 (dette nette / EBITDA des
+    sociétés historiques privées de 4,9 en 2005 à 3,9 en 2018 ; EBITDA /
+    frais financiers de 3,0 à 10,0). C'est la source de la différence
+    entre la base de l'ART (coût de remplacement en 2002) et la base D-15
+    (coût historique), I-02.
+
+- id: S-16
+  publisher: Association des sociétés françaises d'autoroutes (ASFA)
+  title: Chiffres clés — édition 2025 (données 2024)
+  dataset_id: ASFA_Chiffres_cles_edition_2025
+  source_url: https://www.autoroutes.fr/FCKeditor/UserFiles/File/ASFA_Chiffres_cles_edition_2025.pdf
+  publication_date: 2025-06-01
+  retrieved_at: 2026-09-18
+  geographic_scope: France (réseau concédé, toutes sociétés membres)
+  temporal_scope: année 2024 ; séries 2020-2024
+  license: publication d'une association professionnelle — courte citation avec attribution ; redistribution de la copie figée non établie
+  local_file: data/raw/asfa-chiffres-cles-2025.pdf
+  checksum: sha256:0b94b59bc1e11ca81cba8a445031a83dc5f20833e1435da78a5b7d1d26ed92a3
+  redistributable: false
+  notes: >
+    PDF de 15 pages (date de publication au mois près). Source
+    professionnelle, utilisée pour une seule chose que les sources
+    publiques ne donnent pas société par société : le chiffre d'affaires
+    2024 par société (page 10 : ASF / ESCOTA 4 774,0 M€, APRR / AREA
+    3 064,6, COFIROUTE 1 657,0, SANEF / SAPN 2 001,5, total 12 819,2), d'où
+    la part de Sanef-SAPN (H-07). Page 11 : répartition de 10 € de péage
+    selon l'ASFA (3,90 € impôts et taxes, 1,20 € exploitation, 2,30 €
+    construction et modernisation, 2,60 € remboursement de la dette et
+    investisseurs) et échéances des concessions (O-16).
+
+- id: S-17
+  publisher: Ministère chargé des transports (DGITM)
+  title: Rapport 2024 — Exécution et contrôle des contrats de concession d'autoroutes et d'ouvrages d'art
+  dataset_id: MT rapport 2024 - exécution et le contrôle des contrats de concession d'autoroutes
+  source_url: https://www.ecologie.gouv.fr/sites/default/files/documents/MT%20rapport%202024%20-%20ex%C3%A9cution%20et%20le%20contr%C3%B4le%20des%20contrats%20de%20concession%20d%25u2019autoroutes.pdf
+  publication_date: 2025-09-01
+  retrieved_at: 2026-09-18
+  geographic_scope: France (réseau autoroutier concédé)
+  temporal_scope: année 2024
+  license: rapport d'un service de l'État — réutilisation libre avec mention de la source (CRPA)
+  local_file: data/raw/dgitm-rapport-2024-concessions.pdf
+  checksum: sha256:1e5d35f6a09568c9bdc7a9ae4162f119d47f2ab72012fb5b6d9f004cf8ee23ad
+  notes: >
+    PDF de 60 pages (date de publication au mois près, non portée par le
+    document). Page citée (O-27) : 10 (« usage des recettes de péage par les
+    sociétés concessionnaires en 2024 », 15,4 Md€ TTC dont 10,3 Md€ payés
+    par les véhicules légers et 5,1 Md€ par les poids lourds ;
+    investissement et entretien 3,5 Md€ ; la figure n'est que partiellement
+    rendue par l'extraction de texte : à lire sur le PDF avant toute
+    citation supplémentaire).

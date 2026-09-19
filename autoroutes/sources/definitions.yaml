@@ -1,0 +1,197 @@
+# Registre des définitions (D-xx) — méthode Métabolisme, INTRO §8.
+# Chaque définition est citée verbatim depuis une source figée (S-xx), datée,
+# avec ses limites (`caveats`). Les notions communes aux études sectorielles
+# sont REPRISES du cadrage monopoles/ (S-01) : leur champ `constructed_by`
+# renvoie au choix C-01 qui les importe, et leur terme porte l'identifiant
+# d'origine (monopoles:D-15, etc.). Étude « autoroutes », session 1.
+
+- id: D-01
+  term: rente mesurable — surprofit sur base d'actifs (reprise de monopoles:D-15)
+  source: S-01
+  constructed_by: C-01
+  url: https://github.com/lbdremy/metabolisme/blob/monopoles-cadrage-v1.0/monopoles/sources/definitions.yaml
+  last_updated: 2026-09-05
+  definition: >
+    La rente mesurable d'un secteur, pour une période donnée, est l'écart
+    entre ce que paient les usagers (prix, redevances, abonnements) et le
+    coût d'une fourniture efficace du service, celui-ci comprenant :
+    l'exploitation et l'entretien ; l'amortissement des actifs productifs
+    sur leur durée technique ; la rémunération du capital immobilisé au
+    taux de référence H-06, appliquée à une BASE D'ACTIFS égale au coût
+    historique des actifs productifs net des subventions et participations
+    reçues — jamais au prix d'acquisition d'un contrat ou d'un bien, qui
+    capitalise la rente future. Tout est compté avant impôts (l'impôt sur
+    les sociétés est une DESTINATION de la rente, part de l'État, pas un
+    coût). Les coûts externalisés (sous-investissement, dégradation de la
+    qualité, arbitrages d'usage non rendus) n'entrent pas dans la rente :
+    ils relèvent du coût collectif (gabarit, question 6). [...] Ce que
+    cette définition mesure est un SURPROFIT ; l'attribuer à une position
+    (D-03) plutôt qu'à une avance technique, une restriction réglementaire
+    ou une prime de risque est une interprétation séparée (I-03), qui
+    suppose le témoin.
+  caveats:
+    - "Citation abrégée ([...]) de monopoles:D-15, notion construite par le cadrage (monopoles:C-02) ; le texte intégral est dans la copie figée data/raw/monopoles-cadrage-v1.0-definitions.yaml. Les identifiants H-06, D-03, I-03 sont ceux du cadrage ; ici, le taux de référence est H-01 et l'attribution I-01."
+    - "Appliquée aux autoroutes (C-02, C-03, C-04) : usagers = recettes de péage et produits annexes ; exploitation = charges décaissables hors prélèvements spécifiques ; amortissement = comptable (caducité, D-05) ou technique (H-06) ; base = valeur nette comptable ou coût historique brut net des subventions (D-02) ; taux = H-01 aux deux bornes, H-02, H-03, H-04."
+
+- id: D-02
+  term: base d'actifs régulés et charges de capital normatives (reprise de monopoles:D-21, d'après la CRE)
+  source: S-01
+  constructed_by: C-01
+  url: https://github.com/lbdremy/metabolisme/blob/monopoles-cadrage-v1.0/monopoles/sources/definitions.yaml
+  last_updated: 2026-09-05
+  definition: >
+    La BAR est déterminée sur la base d'une valeur nette des actifs
+    immobilisés, déduction faite des subventions et participations reçues
+    de tiers. Les CCN correspondent à la somme de l'amortissement des actifs
+    constitutifs de la BAR et de la rémunération du capital immobilisé.
+  caveats:
+    - "Citation de la délibération CRE n° 2025-77 (TURPE 7 HTB, p. 18) reprise par monopoles:D-21 ; le régulateur l'applique à un réseau public régulé, l'étude la transpose à des concessions privées."
+    - "Sur les autoroutes, la « valeur nette des actifs immobilisés » est lue dans les comptes IFRS des groupes (immobilisations incorporelles du domaine concédé, IFRIC 12, nettes des subventions) : c'est la base « nette » de M-01. La base « brute » (coût historique avant tout amortissement, net des subventions) est présentée comme borne haute (C-04). Ni l'une ni l'autre n'est le coût de remplacement (actif moderne équivalent) que retient l'ART (S-15, I-02)."
+
+- id: D-03
+  term: TRI de la concession, TRI de la privatisation, TRI actionnaire, TRI projet
+  source: S-02
+  url: https://www.autorite-transports.fr/wp-content/uploads/2023/04/20241202_egc3_compresse-1.pdf
+  last_updated: 2024-12-02
+  definition: >
+    Dans le cas des concessions d'autoroutes, il est possible de calculer
+    plusieurs taux de rentabilité qui ne sont pas équivalents.
+    Schématiquement, il y a quatre TRI qui peuvent être calculés selon : la
+    période, et donc l'investissement considéré — on peut évaluer la
+    rentabilité de l'investissement initial sur toute la durée de vie de la
+    concession (« rentabilité de la concession ») ou bien la rentabilité de
+    l'acquisition d'une société concessionnaire par des investisseurs privés
+    entre 2002 et 2006 (« rentabilité de la privatisation pour les
+    acquéreurs ») ; les apporteurs de fonds considérés — on peut évaluer la
+    rentabilité pour les seuls actionnaires, dont l'investissement
+    correspond aux seuls fonds propres de la société concessionnaire, ou
+    bien la rentabilité à la fois pour les actionnaires et les prêteurs,
+    dont l'investissement global correspond à la somme des fonds propres et
+    de la dette. [...] Le TRI projet permet de mesurer la rentabilité
+    intrinsèque d'une activité car il ne dépend ni de ses modalités de
+    financement, ni de la politique de rémunération des actionnaires, ce
+    qui le distingue du TRI des actionnaires.
+  caveats:
+    - "ART, EGC3, page 87 du PDF. L'ART calcule un TRI projet de la concession « à terminaison », par troncature au 31 décembre 2002 avec un actif moderne équivalent (p. 90-91), à ± 1 point près. La mesure D-15 de cette étude n'est pas un TRI : c'est un surprofit annuel sur une base au coût historique (I-02)."
+
+- id: D-04
+  term: biens de retour, biens de reprise, biens propres (code de la commande publique, L. 3132-4)
+  source: S-14
+  url: https://www.ecologie.gouv.fr/sites/default/files/documents/rapport_activite_2020_gestion_reseau_autoroutier_concede.pdf
+  last_updated: 2022-09-30
+  definition: >
+    Lorsqu'une autorité concédante de droit public a conclu un contrat de
+    concession de travaux ou a concédé la gestion d'un service public :
+    1° Les biens, meubles ou immeubles, qui résultent d'investissements du
+    concessionnaire et sont nécessaires au fonctionnement du service public
+    sont les biens de retour. Dans le silence du contrat, ils sont et
+    demeurent la propriété de la personne publique dès leur réalisation ou
+    leur acquisition ; 2° Les biens, meubles ou immeubles, qui ne sont pas
+    remis au concessionnaire par l'autorité concédante de droit public et
+    qui ne sont pas indispensables au fonctionnement du service public sont
+    les biens de reprise. Ils sont la propriété du concessionnaire, sauf
+    stipulation contraire prévue par le contrat de concession ; 3° Les biens
+    qui ne sont ni des biens de retour, ni des biens de reprise, sont des
+    biens propres. Ils sont et demeurent la propriété du concessionnaire.
+  caveats:
+    - "Article L. 3132-4 du code de la commande publique tel que cité verbatim par le rapport d'activité 2020 du concédant (S-14, page 18 du PDF) ; la page Légifrance de l'article n'a pas été figée (capture navigateur nécessaire, monopoles:L-08)."
+    - "Le cahier des charges ASF (S-12, art. 2.2) le décline : les biens de retour « appartiennent à l'autorité concédante dès leur achèvement, acquisition ou mise à disposition » et leur retour en fin de concession est « en tout état de cause, gratuit » (O-22). C'est ce qui rend la question Q1 du cadrage (irrécupérabilité de l'investissement) tranchée par le droit : l'infrastructure est déjà propriété de l'État."
+
+- id: D-05
+  term: amortissement de caducité (immobilisations du domaine concédé)
+  source: S-09
+  url: https://www.vinci.com/publi/vinci_autoroutes/cofiroute/cofiroute-rapport_financier-2023.pdf
+  last_updated: 2024-02-29
+  definition: >
+    Les immobilisations du domaine concédé correspondent aux biens meubles
+    et immeubles directement nécessaires à la conception, la construction et
+    l'exploitation du réseau autoroutier. Elles sont financées par le
+    concessionnaire et seront remises gratuitement à l'État en fin de
+    concession. Elles sont inscrites à l'actif à leur coût de revient
+    historique [...]. Les immobilisations du domaine concédé se décomposent
+    en deux catégories : immobilisations non renouvelables : leur durée de
+    vie est supérieure à la durée de la concession [...] ; immobilisations
+    renouvelables : leur durée de vie étant inférieure à la durée de la
+    concession, elles doivent de ce fait être renouvelées [...]. Les biens
+    non renouvelables en service et les immobilisations d'exploitation font
+    l'objet d'un amortissement de caducité. Les amortissements de caducité
+    ont pour objet de ramener la valeur nette comptable de ces biens à une
+    valeur nulle à l'expiration de la concession (et non de constater une
+    dépréciation technique des biens). L'amortissement de caducité des biens
+    non renouvelables est calculé linéairement entre la date de leur mise en
+    service et la fin de la concession, sur la base du coût net des
+    subventions reçues.
+  caveats:
+    - "Cofiroute, comptes annuels 2023, règles et méthodes d'évaluation § 1.1.1 (S-09, page 72 du PDF). En IFRS (IFRIC 12), les groupes amortissent de même le droit à percevoir les péages « sur la durée du contrat » (S-08 p. 32) : la dotation comptable est un amortissement de caducité, pas un amortissement technique — d'où la variante « technique » de M-01 (H-06)."
+
+- id: D-06
+  term: taxe sur l'exploitation des infrastructures de transport de longue distance (TEITLD)
+  source: S-10
+  url: https://www.eiffage.com/files/live/sites/eiffagev2/files/Finance/R%C3%A9sultats/2025/APRR%20Comptes%20consolid%C3%A9s%20au%2031%2012%202024.pdf
+  last_updated: 2025-02-26
+  definition: >
+    La taxe sur l'exploitation des infrastructures de transport de longue
+    distance est calculée en appliquant un taux de 4,6 % à la fraction des
+    revenus d'exploitation des infrastructures qui excède 120 M€ sur une
+    base annuelle.
+  caveats:
+    - "APRR, comptes consolidés 2024, note 18 (S-10, page 34 du PDF). Créée par l'article 100 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, codifiée aux articles L. 425-1 et suivants du code des impositions sur les biens et services (S-02 p. 97, note 69) ; due dès 2024 par les sept SCA dont le résultat net rapporté au chiffre d'affaires dépasse 10 % en moyenne sur sept exercices (S-02 p. 98) ; non déductible de l'IS (S-04 p. 6). Les pages Légifrance n'ont pas été figées."
+
+- id: D-07
+  term: rachat de la concession (cahier des charges ASF, article 38)
+  source: S-12
+  url: https://www.ecologie.gouv.fr/sites/default/files/documents/2024.01.15%20-%20contrat%20de%20concession%20ASF%20consolid%C3%A9.pdf
+  last_updated: 2024-01-15
+  definition: >
+    A compter du 1er janvier 2012, l'Etat pourra, dans un motif d'intérêt
+    général, racheter la concession par arrêté conjoint du ministre chargé
+    de la voirie nationale, du ministre chargé de l'économie et du ministre
+    chargé du budget. Ce rachat ne pourra s'exécuter qu'au 1er janvier de
+    chaque année, moyennant un préavis d'un an dûment notifié au
+    concessionnaire. En cas de rachat, le concessionnaire aura droit à une
+    indemnité correspondant au préjudice subi par lui du fait de la
+    résiliation et dont le montant net d'impôt dû au titre de sa perception
+    et après prise en compte de toutes charges déductibles sera égal à la
+    juste valeur de la concession reprise, estimée selon la méthode
+    d'actualisation des flux de trésorerie disponibles, ces derniers étant
+    pris après impôts.
+  caveats:
+    - "Contrat ASF consolidé au 15 janvier 2024, art. 38.1 (S-12, page 83 du PDF). L'indemnité capitalise les flux futurs : racheter, c'est payer la rente d'avance — Bercy l'évaluait entre 45 et 50 Md€ pour l'ensemble (S-05), le Sénat entre 40 et 50 Md€ (S-07). Distinct de la fin anticipée sans indemnité de l'art. 36.2 (D-08) et de la résiliation pour rentabilité excessive (jurisprudence « Olivet », O-23)."
+
+- id: D-08
+  term: fin anticipée de la concession pour dépassement du cumul de recettes (cahier des charges ASF, article 36.2)
+  source: S-12
+  url: https://www.ecologie.gouv.fr/sites/default/files/documents/2024.01.15%20-%20contrat%20de%20concession%20ASF%20consolid%C3%A9.pdf
+  last_updated: 2024-01-15
+  definition: >
+    La concession prend fin le 30 avril 2036 pour l'ensemble du réseau
+    concédé. Toutefois, la concession prendra fin à la demande du concédant
+    dès lors que [...] le cumul depuis le 1er janvier 2006 des recettes
+    réelles de péage hors taxes ramenées en valeur 2006 par l'inflation
+    [...] et actualisées au 1er janvier 2006 au taux de 8 % sera égal ou
+    supérieur à 40 606 330 689 (quarante milliards six cent six millions
+    trois cent trente mille six cent quatre-vingt-neuf) euros. [...] La fin
+    anticipée de la concession prend effet le dernier jour du mois suivant
+    le mois où le seuil est franchi et au plus tôt au 31 décembre 2033
+    [...]. La concession prendra alors fin sans indemnité de part ni
+    d'autre.
+  caveats:
+    - "Contrat ASF, art. 36.1-36.2 (S-12, pages 81-82 du PDF). C'est la seule clause d'« encadrement de la rentabilité » des contrats historiques ; le Sénat (S-05) juge ces clauses « pas opérantes » en l'état. Le seuil est en recettes actualisées à 8 % (un taux supérieur à toutes les bornes de H-01 et à H-02), ce qui recule mécaniquement la date de déclenchement."
+
+- id: D-09
+  term: coût du capital (coût moyen pondéré du capital, CMPC) d'une concession
+  source: S-02
+  url: https://www.autorite-transports.fr/wp-content/uploads/2023/04/20241202_egc3_compresse-1.pdf
+  last_updated: 2024-12-02
+  definition: >
+    Il s'agit plus précisément du coût d'opportunité du capital,
+    c'est-à-dire du rendement moyen d'actifs similaires. En d'autres termes,
+    ce que l'on appelle ici « coût du capital » est la rémunération qu'un
+    apporteur de fonds peut en général attendre sur le marché d'un
+    investissement présentant le même profil de risque. Puisqu'un
+    investissement est, en général, financé par une combinaison de dette et
+    de fonds propres, le coût du capital peut s'écrire comme la moyenne
+    pondérée du coût des fonds propres et du coût de la dette : c'est le
+    coût moyen pondéré du capital (CMPC).
+  caveats:
+    - "ART, EGC3, note 67, page 95 du PDF. Le cadrage (monopoles:D-13) retient la même notion chez la CRE. Trois valeurs sont figées pour ce secteur : le taux que l'ART juge cohérent sur la durée des concessions (H-02, ≈ 7 %), le taux négocié par l'État en 2017 (H-03, 5,9 %) et le taux de marché mesuré par EDHECinfra (H-04, 2,28 à 5,51 %) — l'écart entre eux est lui-même un résultat (R-01)."

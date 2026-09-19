@@ -1,0 +1,127 @@
+---
+title: "La rente des concessions autoroutières — document de preuve"
+subtitle: >
+  Surprofit D-15 des concessions historiques privées en 2023, à six taux,
+  sur deux bases et deux amortissements, avec témoin ; en regard, la mesure
+  du régulateur (écart de TRI) — session 1, 2026-09-18
+date: 2026-09-18
+lang: fr
+format:
+  html:
+    toc: true
+    embed-resources: true
+    code-fold: true
+    code-summary: "voir le code"
+execute:
+  echo: true
+  warning: false
+---
+
+Ce document est le **document de preuve** de la première étude sectorielle
+du programme « Monopoles naturels, rentes de position et collectivisation
+des rentes » (Métabolisme). Il est **exécutable** : chaque chiffre affiché
+est recalculé par le code stabilisé du dépôt (`src/autoroutes/`) à partir
+des comptes transcrits (`data/transcribed/comptes-2023.csv`, T-01) et des
+paramètres du registre des hypothèses, puis confronté à l'artefact publié
+(`data/processed/rente-d15.json`). Les statuts épistémiques (S, D, H, O, T,
+M, R, I, V, C, P, L) sont ceux du graphe `evidence/claims.yaml`.
+
+```{python}
+#| code-summary: "initialisation : dépôt, registres, rebâti de la mesure"
+import json
+from pathlib import Path
+
+import pandas as pd
+
+from autoroutes.config import project_root
+from autoroutes.shell import build
+
+root = project_root()
+rebuilt = build.build_rent(root)
+committed = json.loads((root / build.RENT_OUTPUT).read_text(encoding="utf-8"))
+assert rebuilt == committed, "l'artefact publié ne correspond pas au rebâti"
+rates = rebuilt["rates_pct"]
+pd.set_option("display.float_format", lambda v: f"{v:,.0f}".replace(",", " "))
+print("Artefact publié = rebâti :", rebuilt == committed)
+print("Taux nommés (%) :", rates)
+print("Bilans rebouclés :", rebuilt["balance_sheet_checks"])
+```
+
+## 1. Les comptes transcrits (T-01)
+
+Une ligne par (entité, année, poste), avec la source et la page du PDF.
+
+```{python}
+#| code-summary: "T-01 : les postes des trois groupes mesurés"
+rows = pd.read_csv(root / build.TRANSCRIBED)
+groups = rows[rows["entity"].isin(build.MEASURED_GROUPS) & (rows["year"] == 2023)]
+groups.pivot(index="item", columns="entity", values="value_meur").loc[
+    ["revenue", "purchases", "external_services", "subcontracting_incl_construction",
+     "construction_revenue", "taxes", "personnel", "depreciation", "depreciation_domain",
+     "gross_domain", "accumulated_amortisation", "subsidies_gross", "net_domain", "tangible_net"]
+]
+```
+
+## 2. M-01 — le surprofit D-15 par groupe, deux bases × deux amortissements
+
+```{python}
+#| code-summary: "M-01 : surplus (M€) à chaque taux, quatre variantes"
+def table(variant: str) -> pd.DataFrame:
+    df = pd.DataFrame(rebuilt["m01_groups"][variant])
+    cols = ["company", "revenue", "operating_costs", "depreciation", "asset_base",
+            "operating_margin", "break_even_rate_pct"] + [f"surplus_{k}" for k in rates]
+    return df[cols].set_index("company")
+
+for variant in ("net_accounting", "gross_accounting", "net_technical", "gross_technical"):
+    print(f"\n=== variante {variant} ===")
+    display(table(variant))
+```
+
+```{python}
+#| code-summary: "M-01 : part des recettes (variante centrale) et extrapolation aux sept"
+central = pd.DataFrame(rebuilt["m01_groups"]["net_accounting"]).set_index("company")
+shares = central[[f"surplus_share_{k}" for k in rates]] * 100
+print("Surprofit en % des recettes (base nette, amortissement comptable) :")
+display(shares.round(1))
+seven = pd.DataFrame(rebuilt["m01_seven"]).T
+print("\nExtrapolation aux sept concessions (M€, H-07 / H-09) :")
+display(seven[["measured_surplus", "seven_surplus_low", "seven_surplus_central", "seven_surplus_high"]])
+print("\nSensibilités sur le total mesuré (base nette) :")
+display(pd.DataFrame(rebuilt["m01_sensitivity_total_net_base"]).T)
+```
+
+## 3. M-02 — les agrégats du secteur (ART)
+
+```{python}
+#| code-summary: "M-02 : marge avant capital, toutes SCA, 2023 et 2024"
+display(pd.DataFrame(rebuilt["m02_sector"]).T)
+```
+
+## 4. M-03 — la forme du régulateur (écart de TRI)
+
+```{python}
+#| code-summary: "M-03 : TRI 7,9 % contre chaque taux, converti en recettes (H-05)"
+tri = pd.DataFrame(rebuilt["m03_tri_gap"]["by_rate"]).T
+print("Recettes 2024 des sept sociétés (ASFA) :", round(rebuilt["m03_tri_gap"]["seven_revenue_2024"]), "M€")
+display(tri.round(1))
+```
+
+## 5. M-04 — le témoin substituable
+
+```{python}
+#| code-summary: "M-04 : VINCI Energies, Construction, Autoroutes — même forme"
+ctrl = pd.DataFrame(rebuilt["m04_control"]).T
+display((ctrl[[f"surplus_share_{k}" for k in rates]].astype(float) * 100).round(1))
+display(ctrl[["revenue_derived", "ropa", "capital_employed", "break_even_rate_pct"]].astype(float).round(1))
+```
+
+## 6. Lecture
+
+- Sur la base nette au coût historique, le surprofit des trois groupes est
+  compris entre 4,2 et 5,2 Md€ selon le taux (8,8 à 4,0 %) ; sur la base
+  brute, entre 1,8 et 4,1 Md€. Il est positif partout (R-01).
+- La forme du régulateur donne 2,6 Md€ à 5 %, 0,8 à 7 %, − 0,8 à 8,8 % :
+  la différence est la base (coût de remplacement en 2002 contre coût
+  historique), pas les flux (I-02).
+- Le témoin plafonne à 4-6 % des recettes ; les autoroutes dépassent 45 %
+  (I-01).

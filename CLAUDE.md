@@ -17,9 +17,12 @@ logement/     # first study: efficiency of the French housing stock
               # (see logement/INTRO.md + logement/CLAUDE.md)
 monopoles/    # second study: natural-monopoly rents — framing, grid, sector
               # template; registries + article, no Python (see monopoles/CLAUDE.md)
+autoroutes/   # sector study n° 1 of monopoles/: the rent of the motorway
+              # concessions, D-15 applied (uv project, see autoroutes/CLAUDE.md)
 site/         # the public website: posts + shareable notes, each with its
               # explorable evidence chain (see site/CLAUDE.md, site/README.md)
 .github/workflows/logement-ci.yml   # CI: gates + tests + validate + reproduce
+.github/workflows/autoroutes-ci.yml # CI: same loop for the autoroutes study
 .github/workflows/site-ci.yml       # CI: format + lint + types + tests + content + build
 .gitignore    # single root gitignore (git lives at the repo root only)
 ```

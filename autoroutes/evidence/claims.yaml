@@ -1,0 +1,893 @@
+# Graphe de preuves (méthode Métabolisme, INTRO §10) — les statuts hors
+# registres : O observations, T transformations, M mesures, R résultats,
+# I interprétations, V valeurs, C choix, P propositions, L limites.
+# Chaque nœud référence ses dépendances par identifiant ; contrôle par
+# `uv run autoroutes validate` (références résolues, empreintes) et au build
+# du site. Étude sectorielle « autoroutes », session 1 (2026-09-18), menée en
+# autonomie : les choix méthodologiques sont journalisés dans
+# evidence/decisions-2026-09-18.md (DEC-nn). Les identifiants du cadrage
+# sont cités « monopoles:X-nn » et ne se résolvent pas ici (S-01).
+
+# ---------------------------------------------------------- observations
+
+- id: O-01
+  type: observation
+  title: >
+    Le cadrage monopoles/ (tag monopoles-cadrage-v1.0) fixe le taux de
+    référence commun H-06 à 5,0 % nominal avant impôts, plage [4,0 ; 8,8]
+    (centre : CRE et ARCEP ; borne haute : haut de l'intervalle de confiance
+    du TRI projet des concessions autoroutières selon l'ART), la rente
+    mesurable D-15 (surprofit sur base d'actifs au coût historique net des
+    subventions, avant impôts, avec témoin), et pour les autoroutes
+    l'hypothèse de classement H-17 (infrastructure non duplicable,
+    concessions privées à échéance 2031-2036) et la configuration à
+    instruire en premier (C-05 : « à l'échéance : recette affectée,
+    exploitation au forfait ; statu quo = retour à l'État par défaut »).
+  depends_on: [S-01]
+
+- id: O-02
+  type: observation
+  title: >
+    ART, Économie des concessions autoroutières, 3e édition (novembre 2024),
+    figure 3.5 : TRI projet à terminaison des sept concessions historiques
+    privées, année 2023, scénario de référence — SAPN 5,7 %, APRR 7,7 %, ASF
+    7,7 %, Sanef 7,7 %, Escota 7,8 %, ensemble 7,9 %, Area 9,1 %, Cofiroute
+    9,2 % ; tableau 3.2 : TRI constaté à date fin 2023 de 4,8 % pour
+    l'ensemble (1,6 % SAPN à 6,7 % Cofiroute). La synthèse des comptes 2024
+    confirme 7,9 % pour les historiques privées, 5,9 % pour les récentes,
+    2,0 % pour les publiques.
+  depends_on: [S-02, S-04, D-03]
+
+- id: O-03
+  type: observation
+  title: >
+    ART, EGC3, p. 95-96 : « D'après les meilleures estimations de l'ART, la
+    rémunération des SCA est légèrement supérieure au coût du capital. Sur
+    la durée qui s'étend de l'origine des concessions autoroutières
+    historiques à nos jours, et pour un investissement dans un projet
+    comparable à une concession autoroutière, le coût du capital est en
+    effet de l'ordre de 7 %, soit 0,7 point de pourcentage de moins que le
+    TRI projet des concessions. » ; « compte tenu des incertitudes sur la
+    mesure du TRI, un écart de moins de 1 point de pourcentage n'est pas
+    significatif d'un point de vue statistique » ; flux actualisés « avec
+    un taux de 7,8 % » (tableaux 3.4, 3.5, 3.7).
+  depends_on: [S-02, D-09]
+
+- id: O-04
+  type: observation
+  title: >
+    ART, EGC3, p. 95 : « à titre d'illustration, 0,7 point de pourcentage
+    de TRI est à peu équivalent à un chiffre d'affaires supérieur de 5,5 %
+    par an sur la période 2003-2036 soit, en moyenne, 500 millions d'euros
+    courants de revenus supplémentaires par an. »
+  depends_on: [S-02, D-03]
+
+- id: O-05
+  type: observation
+  title: >
+    ART, Focus rentabilité (juillet 2023), p. 17-18 : « Pour estimer le coût
+    du capital sur la période 1960-2002, il faut tenir compte du contexte de
+    marché » ; méthode par le coût de la dette après impôts, 3,7 % en
+    moyenne entre 1960 et 2022, majoré de l'écart observé de trois à quatre
+    points : « le coût du capital peut ainsi être estimé à environ 7 % »,
+    estimation « limitée à de nombreux égards ». Conclusion : « Le TRI,
+    estimé à 8 %, se compare à un coût du capital de 7 %, ce qui permet de
+    conclure même en tenant compte de l'incertitude. »
+  depends_on: [S-03, D-09]
+
+- id: O-06
+  type: observation
+  title: >
+    ART, Focus rentabilité (2023), p. 17 : « sur la période 2000-2010, le
+    coût du capital des concessions historiques a oscillé entre 5,4 % et
+    7,0 %, l'essentiel des valeurs se situant entre 6,0 % et 6,5 %. Les
+    valeurs estimées par l'ART depuis sa prise de compétence en 2016,
+    sensiblement plus faibles, reflètent le contexte historiquement bas des
+    taux d'emprunt » (figure 10 : estimations hautes de l'ART entre 4 et
+    6 % de 2017 à 2022).
+  depends_on: [S-03, D-09]
+
+- id: O-07
+  type: observation
+  title: >
+    ART, Focus rentabilité (2023), p. 18 : « une hausse d'un point de
+    pourcentage du TRI est équivalente à un surcroît de chiffre d'affaires
+    de 8 % par an sur la période 2003-2036, soit, en moyenne, 740 millions
+    d'euros courants de revenus supplémentaires par an. Actualisés en 2022,
+    ces revenus supplémentaires représentent un montant de l'ordre de 40
+    milliards d'euros. »
+  depends_on: [S-03, D-03]
+
+- id: O-08
+  type: observation
+  title: >
+    ART, EGC3, figure 1.2 (p. 19) : échéances des contrats des sept
+    sociétés concessionnaires historiques privées — Sanef 31 décembre 2031,
+    Escota 29 février 2032, SAPN 31 août 2033, Cofiroute (réseau
+    interurbain) 30 juin 2034, APRR 30 novembre 2035, ASF 30 avril 2036,
+    Area 30 septembre 2036. Les contrats prévoient (art. 37) que le
+    concédant établit sept ans avant l'expiration le programme d'entretien
+    et de renouvellement des cinq dernières années, exécuté aux frais du
+    concessionnaire et garanti (art. 33).
+  depends_on: [S-02, S-12]
+
+- id: O-09
+  type: observation
+  title: >
+    Sénat, commission d'enquête (rapport n° 709, 2020), expertise de
+    Frédéric Fortin sur les comptes consolidés 2006-2019 : ASF-Escota —
+    chiffre d'affaires de 2,6 à 4 Md€, 8 Md€ d'investissements, 6,5 Md€
+    d'IS, 13,8 Md€ de dividendes pour 10,4 Md€ décaissés par Vinci
+    (2002-2006) ; APRR-Area — 9 Md€ de dividendes pour 6,7 Md€ décaissés
+    par Eiffarie ; Sanef-SAPN — 4,8 Md€ de dividendes pour 5,3 Md€
+    décaissés par Abertis ; Cofiroute — 5,8 Md€ de dividendes. TRI
+    actionnaire prévisionnel 2006 / réalisé 2002-2019 / à terme : ASF-Escota
+    7,13 % / 4,93 % / 10,93 % ; APRR-Area 9,2 % / 4,28 % / 11,25 % ;
+    Sanef-SAPN 8 % / − 1,38 % / 7,21 %. « Au-delà de 2022, les dividendes
+    versés atteindraient environ 40 milliards d'euros, dont 32 milliards
+    pour Vinci et Eiffage. »
+  depends_on: [S-05, D-03]
+  limitations: [L-10]
+
+- id: O-10
+  type: observation
+  title: >
+    Sénat, rapport n° 709 (2020) : la privatisation de 2006 « a rapporté
+    14,8 milliards d'euros à l'État qui s'est trouvé également déchargé des
+    16,8 milliards d'euros de dette des SCA » ; « le rachat aurait un coût
+    évalué par le ministère de l'économie et des finances entre 45 et 50
+    milliards d'euros. Il est donc raisonnable d'aller au terme des
+    concessions » ; « En l'état de leur rédaction, les clauses
+    d'encadrement de la rentabilité des concessions ne sont pas
+    opérantes. »
+  depends_on: [S-05, D-07, D-08]
+
+- id: O-11
+  type: observation
+  title: >
+    Sénat, rapport n° 709 (2020) : lors du plan d'investissement
+    autoroutier (2017), « un TRI finalement négocié à 6,5 % » puis, grâce
+    aux avis de l'ART, « diminution du taux de rémunération du capital
+    investi, qui est passé de 6,5 % à 5,9 % lors des nouvelles négociations
+    entre la DGITM et les SCA » (reprise de monopoles:O-06).
+  depends_on: [S-05, D-09]
+
+- id: O-12
+  type: observation
+  title: >
+    Sénat, rapport n° 709 (2020), citant l'étude EDHECinfra (Amenc et
+    Blanc-Brude) : CMPC des concessions autoroutières en France de 5,51 %
+    (2005-2010), 4,26 % (2010-2015) et 2,28 % (2015-2020) ; le CMPC de 5,9 %
+    retenu en 2017 « repose sur un coût implicite des capitaux propres de
+    l'ordre de 24 % » ; « À travaux, trafic et coûts d'exploitation
+    constants, une baisse de 1 % du CMPC appliquée à l'ensemble des revenus
+    permettrait une réduction moyenne des péages de plus de 15 %. »
+  depends_on: [S-05, D-09]
+  limitations: [L-10]
+
+- id: O-13
+  type: observation
+  title: >
+    Cofiroute, comptes annuels 2023 (règles et méthodes) : les
+    immobilisations non renouvelables — « l'infrastructure du réseau et
+    [les] ouvrages d'art » — ont une « durée de vie supérieure à la durée
+    de la concession » ; elles sont inscrites « à leur coût de revient
+    historique » et amorties par caducité « entre la date de leur mise en
+    service et la fin de la concession, sur la base du coût net des
+    subventions reçues » — « et non [pour] constater une dépréciation
+    technique des biens ».
+  depends_on: [S-09, D-05]
+
+- id: O-14
+  type: observation
+  title: >
+    APRR (comptes consolidés 2024, note 18), impôts et taxes 2023 / 2024 :
+    taxe d'aménagement du territoire 190,7 / 196,7 M€ ; taxe sur
+    l'exploitation des infrastructures de transport de longue distance 0 /
+    123,3 M€ ; CET 43,7 / 41,3 M€ ; redevance domaniale 100,0 / 106,0 M€ ;
+    contribution à l'AFITF 18,3 / 18,7 M€ ; total 362,3 / 495,6 M€, pour un
+    chiffre d'affaires d'exploitation de 3 018,7 / 3 152,5 M€. Les
+    prélèvements spécifiques (TAT + redevance + AFITF) représentent 85,3 %
+    des impôts et taxes en 2023 et 10,2 % du chiffre d'affaires.
+  depends_on: [S-10, D-06]
+
+- id: O-15
+  type: observation
+  title: >
+    Sénat, rapport d'information n° 65 (octobre 2024) : « À travers la
+    fiscalité, l'État prélève chaque année environ 36 % du chiffre
+    d'affaires réalisé par les autoroutes » — 1,2 Md€ de fiscalité
+    spécifique (TAT : 751 M€ prévus en 2024 ; redevance domaniale ;
+    contribution volontaire de 60 M€ par an à l'AFIT France, refusée par les
+    SCA depuis 2021), environ 3,5 Md€ de fiscalité générale (IS ≈ 1 Md€,
+    TVA collectée ≈ 2 Md€), TEITLD ≈ 450 M€ à compter de 2024 ; citant Yves
+    Crozet : « La privatisation a incité les acteurs, le concédant autant
+    que les concessionnaires à profiter de la faible élasticité-prix de la
+    demande pour accroître le chiffre d'affaires par kilomètre de réseau »
+    (+ 150 % de chiffre d'affaires par 100 km de réseau depuis 1991).
+  depends_on: [S-07, D-06]
+
+- id: O-16
+  type: observation
+  title: >
+    ASFA, Chiffres clés édition 2025 : chiffre d'affaires 2024 hors
+    construction par société — ASF / ESCOTA 4 774,0 M€, APRR / AREA
+    3 064,6 M€, COFIROUTE 1 657,0 M€, SANEF / SAPN 2 001,5 M€ (soit
+    11 497,1 M€ pour les sept historiques privées), total toutes sociétés
+    12 819,2 M€ ; répartition de 10 € de péage selon l'association : 3,90 €
+    d'impôts et taxes, 1,20 € d'exploitation et services, 2,30 € de
+    construction et modernisation, 2,60 € de remboursement de la dette et
+    des investisseurs.
+  depends_on: [S-16]
+
+- id: O-17
+  type: observation
+  title: >
+    ART, synthèse des comptes des SCA, exercice 2024 (tableau 3, toutes
+    sociétés) : chiffre d'affaires 12,3 Md€ en 2023 et 12,8 Md€ en 2024
+    (péage 11,9 / 12,4, dont 11,7 Md€ pour les sociétés historiques en
+    2024) ; charges 3,2 / 3,7 Md€ dont impôts et taxes 1,0 / 1,5 (+ 51,4 %,
+    TEITLD) ; EBITDA 9,1 / 9,1 ; amortissements et provisions 2,3 / 2,4 ;
+    résultat d'exploitation 6,8 / 6,7 ; IS 1,5 / 1,6 ; résultat net 4,4 /
+    4,3 (marge nette 36,2 % puis 33,6 %) ; dividendes 4,1 / 4,4 Md€ (« le
+    niveau […] le plus important observé depuis 2016 », 67,7 % des flux
+    opérationnels en 2024) ; investissements 1,4 / 1,3 Md€ ; dette
+    financière 30,5 Md€, endettement net 23,8 Md€ fin 2024 ; trafic 100,7
+    Md véh.km ; TMKP classe 1 9,27 c€/km (+ 3,23 %).
+  depends_on: [S-04]
+
+- id: O-18
+  type: observation
+  title: >
+    Groupe ASF (ASF + Escota), comptes consolidés IFRS 2023 : chiffre
+    d'affaires hors travaux 4 585,0 M€ ; charges opérationnelles 2 489,0
+    M€ dont amortissements 837,1, impôts et taxes 545,7, personnel 288,9,
+    services extérieurs 317,2, sous-traitance 423,6 (dont 394,0 de
+    construction IFRIC 12), achats 53,4, provisions 25,7 ; résultat
+    opérationnel sur activité 2 553,9 M€ (55,7 % du chiffre d'affaires) ;
+    IS 591,0 ; résultat net 1 683,4. Note 9.1 : « coûts des infrastructures
+    » 23 801,9 M€ en valeur brute au 31/12/2023, encours 627,6, subventions
+    d'investissement − 470,1, amortissements cumulés − 14 819,5 (dotation
+    de l'exercice 769,2) : valeur nette du domaine concédé 9 388,4 M€.
+  depends_on: [S-08, D-05]
+  limitations: [L-07]
+
+- id: O-19
+  type: observation
+  title: >
+    Cofiroute, comptes individuels IFRS 2023 : chiffre d'affaires
+    d'exploitation 1 602,2 M€ (construction 162,2) ; achats 23,2, services
+    extérieurs 89,6, impôts et taxes 170,8, personnel 97,3, amortissements
+    276,4 (dont domaine concédé 242,2), reprise nette de provisions 1,5 ;
+    résultat opérationnel sur activité 950,0 M€. Note 9.1 : coût des
+    infrastructures en service 8 796,0 M€ bruts au 31/12/2023 (subventions
+    déjà déduites), encours 421,0, amortissements cumulés 4 809,3 : valeur
+    nette 4 407,7 M€, plus 180,4 M€ d'immobilisations corporelles liées aux
+    concessions. Fin du contrat interurbain : 30 juin 2034.
+  depends_on: [S-09, D-05]
+  limitations: [L-07]
+
+- id: O-20
+  type: observation
+  title: >
+    APRR (APRR + AREA + ALIAE), comptes consolidés IFRS, colonne 2023 :
+    chiffre d'affaires d'exploitation 3 018,7 M€ (construction 230,5) ;
+    achats et charges externes 430,2 (dont 230,5 de construction),
+    personnel 226,6, impôts et taxes 362,3, amortissements 564,0 (dont
+    domaine concédé 491,2), provisions 30,0, autres + 11,0 ; résultat
+    opérationnel courant 1 647,1 M€ ; IS 384,3 ; résultat net 1 115,8.
+    Note 5 : immobilisations incorporelles du domaine concédé 16 509,1 M€
+    en valeur brute au 31/12/2023, amortissements cumulés 9 749,1 : valeur
+    nette 6 760,0 M€, plus 217,2 M€ d'immobilisations corporelles. Capitaux
+    propres consolidés négatifs (− 40,5 M€ fin 2023, − 228,0 fin 2024).
+  depends_on: [S-10, D-05]
+  limitations: [L-07]
+
+- id: O-21
+  type: observation
+  title: >
+    VINCI, rapport sur les comptes 2023 : résultat opérationnel sur
+    activité 2023 — VINCI Autoroutes 3 362 M€ (53,2 % du chiffre
+    d'affaires), VINCI Energies 1 356 M€ (7,0 %), VINCI Construction 1 260
+    M€ (4,0 %) ; capitaux engagés au 31/12/2023 — VINCI Autoroutes 18,3
+    Md€, VINCI Energies 4,4 Md€, VINCI Construction 0,3 Md€ (excédent de
+    fonds de roulement) ; ROCE du groupe 11,3 %.
+  depends_on: [S-11]
+
+- id: O-22
+  type: observation
+  title: >
+    Contrat de concession ASF consolidé au 15 janvier 2024 : art. 2.2, les
+    biens de retour « appartiennent à l'autorité concédante dès leur
+    achèvement, acquisition ou mise à disposition » et leur retour est « en
+    tout état de cause, gratuit » ; art. 32, en cas de création d'un impôt
+    « spécifique aux sociétés concessionnaires d'autoroutes », les parties
+    « arrêtent […] les mesures de compensation, notamment tarifaires » ;
+    art. 36.1, fin le 30 avril 2036 ; art. 36.2, fin anticipée sans
+    indemnité si le cumul des recettes actualisées à 8 % depuis 2006 atteint
+    40,6 Md€, au plus tôt le 31 décembre 2033 ; art. 37.1, à l'expiration
+    « l'Etat […] entrera immédiatement et […] gratuitement en possession
+    des Biens de Retour. A dater du même jour, tous les produits de la
+    concession lui reviendront » ; art. 38, rachat pour motif d'intérêt
+    général contre la juste valeur des flux actualisés après impôts.
+  depends_on: [S-12, D-04, D-07, D-08]
+
+- id: O-23
+  type: observation
+  title: >
+    Mission IGF-CGEDD (février 2021, publié en mars 2023), scénario de
+    référence à fin 2020 : TRI projet / TRI actionnaire — ASF-Escota 7,80 %
+    / 11,77 %, APRR-Area 8,69 % / 12,49 %, Sanef-SAPN 8,03 % / 7,70 %,
+    contre un coût des fonds propres de 7,67 % retenu à la privatisation ;
+    « la baisse de l'IS a quant à elle augmenté le TRI projet de plus de 20
+    pb ». Réalignement sur 7,67 % : fin anticipée d'ASF-Escota au 30 avril
+    2026 et d'APRR-Area au 30 septembre 2026, ou baisse des péages de 58 %
+    et 59 % dès 2022, ou prélèvement de 63 % et 64 % de l'EBE (32,9 et 22,5
+    Md€ constants) ; « seul le premier ajustement paraît légalement
+    envisageable au titre de la jurisprudence Olivet » (Conseil d'État,
+    avis n° 399132 du 6 février 2020), « avec néanmoins le risque que le
+    juge considère la rentabilité des concessions comme raisonnable ». Si
+    les dividendes avaient été anticipés, ASF-Escota aurait valu 15,1 au
+    lieu de 10,4 Md€ et APRR-Area 10,1 au lieu de 6,7 Md€.
+  depends_on: [S-06, D-03, D-07]
+
+- id: O-24
+  type: observation
+  title: >
+    Sénat, rapport d'information n° 65 (octobre 2024), rapporteur Hervé
+    Maurey : « des concessions historiques plus rentables qu'anticipé »,
+    surrentabilité qui « s'explique essentiellement par les gains de
+    refinancement de leur dette » ; « une possibilité de résiliation
+    anticipée contractuelle dont le coût pour l'État pourrait représenter de
+    40 à 50 milliards d'euros » ; « un avis du Conseil d'État du 8 juin
+    2023 souligne les risques juridiques encourus par l'État s'il résiliait
+    de façon anticipée » ; pour l'après : « la gratuité : un piège
+    démagogique à éviter », « la gestion publique en régie : une solution
+    inadaptée » qui « élimine le sujet de la potentielle captation d'une
+    rente par des sociétés privées mais fait peser parallèlement davantage
+    de risques financiers sur l'État », des contrats futurs de 15 à 20 ans
+    sans prolongation, et le mécanisme de « soulte » préconisé par l'ART
+    (« une indemnité monétaire définie dès la signature du contrat comme la
+    part des coûts contractualisés que les péages perçus durant le contrat
+    ne permettent a priori pas de couvrir »).
+  depends_on: [S-07, D-07]
+
+- id: O-25
+  type: observation
+  title: >
+    Autorité de la concurrence, avis n° 14-A-13 (2014), sur comptes
+    consolidés IFRS 2004-2013 : en 2013, EBE / chiffre d'affaires entre 65 %
+    et 72 %, résultat d'exploitation / CA entre 44 % et 51 %, résultat net /
+    CA entre 20 % et 24 % pour les SCA historiques ; pour les groupes Vinci
+    et Eiffage, concessions incluses, 14,3 % / 14,7 %, 9,3 % / 8,8 % et
+    5,1 % / 2,3 % ; les SCA offrent « une activité largement indifférente
+    aux cycles économiques, des marges élevées mais nécessitant des capitaux
+    considérables ».
+  depends_on: [S-13]
+
+- id: O-26
+  type: observation
+  title: >
+    ART, EGC3, chapitre 3 sections 3-4 : d'ici 2036, les sept SCA
+    « devraient générer des flux de trésorerie opérationnels […] de près
+    de 83 milliards d'euros courants soit, actualisés en 2024, 53 milliards
+    d'euros », face à 21 Md€ courants de remboursements de dette et 19 Md€
+    d'investissements dont 8,0 Md€ de fin de contrat ; la remise en bon état
+    pourrait coûter jusqu'à 1,2 Md€ supplémentaires (1,6 Md€ courants),
+    l'entretien en régime de croisière étant « de l'ordre de 1 milliard
+    d'euros par an » ; la TEITLD représente 500 M€ en 2024 et 6,3 Md€
+    cumulés (− 0,17 point de TRI) ; entre 2016 et 2024 le concédant « a
+    contractualisé des investissements à hauteur de 1,7 milliard d'euros de
+    recettes de péage » ; « il est logique d'observer que les SCA disposent
+    de marges de manœuvre, à l'approche de la fin des contrats », les
+    dividendes étant « plus importants en fin de contrat qu'en début ».
+  depends_on: [S-02, D-06]
+
+- id: O-27
+  type: observation
+  title: >
+    Concédant (DGITM) : le patrimoine autoroutier concédé est « estimé à
+    près de 150 milliards d'euros » et « reviendra à l'État » au terme des
+    contrats (rapport d'activité 2020, p. 18) ; en 2024, les usagers ont
+    payé 15,4 Md€ TTC de péages, 10,3 Md€ pour les véhicules légers et 5,1
+    Md€ pour les poids lourds, dont 3,5 Md€ d'investissement et d'entretien
+    (rapport 2024, p. 10) ; en 2019, les sociétés concessionnaires
+    réalisaient 10 365 M€ de chiffre d'affaires, 7 502 M€ d'EBITDA et 3 665
+    M€ de résultat net (annexe 10, d'après l'ART).
+  depends_on: [S-14, S-17]
+
+- id: O-28
+  type: observation
+  title: >
+    ART, EGC 1re édition (2020), p. 101-102 : pour le TRI, l'Autorité
+    valorise l'actif à la troncature (2002) par un actif moderne équivalent
+    ; « les sociétés concessionnaires historiques n'archivaient pas de
+    données financières depuis l'origine de la concession et […] les coûts
+    d'acquisition et de construction des actifs historiques n'étaient pas
+    connus année par année, seule la valeur brute globale étant conservée »
+    ; la valeur brute est ventilée par année de mise en service et indexée
+    sur le TP01 majoré de 1 % ; p. 138 : dette nette / EBITDA des sociétés
+    historiques privées de 4,9 en 2005 à 3,9 en 2018, EBITDA / frais
+    financiers de 3,0 à 10,0.
+  depends_on: [S-15, D-03]
+
+# ------------------------------------------------------ transformations
+
+- id: T-01
+  type: transformation
+  title: >
+    Transcription manuelle, ligne à ligne, des comptes 2023 des trois
+    groupes figés (ASF-Escota, Cofiroute, APRR-Area), des agrégats du
+    secteur (ART 2023-2024), des chiffres d'affaires 2024 par société
+    (ASFA) et des résultats par pôle de VINCI (2023), dans
+    data/transcribed/comptes-2023.csv : chaque valeur porte la source, la
+    page du PDF et un libellé ; les lignes sont parsées au bord (pydantic,
+    TranscribedRow) et le bilan de chaque groupe doit se reboucler (brut −
+    amortissements − subventions nettes + encours = valeur nette publiée, à
+    1 M€ près) avant toute mesure. Les sources étant des PDF, la
+    transcription est la seule étape non automatisée de la chaîne ; elle
+    est vérifiable page par page.
+  depends_on: [O-17, O-18, O-19, O-20, O-21, O-16]
+  produced_by: src/autoroutes/core/accounts.py
+  output: data/transcribed/comptes-2023.csv
+  limitations: [L-05, L-07]
+
+# --------------------------------------------------------------- mesures
+
+- id: M-01
+  type: measure
+  title: >
+    Surprofit D-15 des trois groupes mesurés en 2023 (ASF-Escota, Cofiroute,
+    APRR-Area ; 9 206 M€ de recettes) : marge avant capital de 6 071 M€
+    (recettes moins charges décaissables hors prélèvements spécifiques
+    1 457 M€, moins amortissements comptables 1 678 M€), soit 66 % des
+    recettes ; sur la base NETTE comptable (21 318 M€), surprofit de 5 218
+    M€ à 4,0 %, 5 005 M€ à 5,0 %, 4 813 M€ à 5,9 %, 4 579 M€ à 7,0 %, 4 195
+    M€ à 8,8 % ; sur la base BRUTE au coût historique (48 637 M€), 4 126 /
+    3 639 / 3 201 / 2 666 / 1 791 M€ aux mêmes taux ; avec un amortissement
+    technique sur 60 ans au lieu de la caducité, + 692 M€. Taux d'équilibre
+    (surprofit nul) : 28,5 % sur la base nette, 12,5 % sur la base brute.
+    Extrapolé aux sept concessions historiques (H-07, H-09) : 6 060 M€
+    [5 939 ; 6 198] à 5,0 %, 5 079 M€ [4 952 ; 5 213] à 8,8 %. Par groupe,
+    à 5,0 % : ASF-Escota 2 532 M€ (55 % des recettes), Cofiroute 866 M€
+    (54 %), APRR-Area 1 607 M€ (53 %).
+  depends_on: [T-01, D-01, D-02, D-05, H-01, H-02, H-03, H-04, H-06, H-07, H-08, H-09, C-02, C-03, C-04]
+  produced_by: src/autoroutes/core/rent.py
+  output: data/processed/rente-d15.json
+  limitations: [L-01, L-03, L-04, L-05, L-07, L-08]
+
+- id: M-02
+  type: measure
+  title: >
+    Le même calcul, du haut vers le bas, sur les agrégats de l'ART pour
+    l'ensemble des sociétés concessionnaires (récentes comprises) : en
+    2023, 12 300 M€ de chiffre d'affaires, 2 347 M€ de charges hors
+    prélèvements spécifiques (estimés à 853 M€ par H-08), 2 300 M€
+    d'amortissements et provisions : marge avant rémunération du capital de
+    7 653 M€, 62 % du chiffre d'affaires ; en 2024, 7 980 M€ (62 %). Le
+    secteur a versé cette année-là 1 500 M€ d'IS et 4 100 M€ de dividendes
+    (2024 : 1 600 et 4 400).
+  depends_on: [T-01, O-17, H-08, C-03]
+  produced_by: src/autoroutes/shell/build.py
+  output: data/processed/rente-d15.json
+  limitations: [L-05, L-08]
+
+- id: M-03
+  type: measure
+  title: >
+    La forme du régulateur : l'écart entre le TRI projet à terminaison des
+    sept concessions (7,9 %, O-02) et chaque taux, converti en part du
+    chiffre d'affaires par l'équivalence linéaire de l'ART (H-05) et
+    appliqué aux 11 497 M€ de recettes 2024 des sept sociétés (O-16) —
+    à 4,0 % : 30,6 % des recettes, 3 523 M€ par an ; à 5,0 % : 22,8 %,
+    2 620 M€ ; à 5,9 % : 15,7 %, 1 807 M€ ; à 7,0 % : 7,1 %, 813 M€ ; à
+    8,8 % : − 7,1 %, − 813 M€ ; au taux de marché EDHECinfra 2015-2020
+    (2,28 %) : 44,2 %, 5 077 M€. Le signe change entre les bornes de H-01,
+    comme le cadrage l'annonçait (monopoles:L-11).
+  depends_on: [O-02, O-04, O-07, O-16, H-01, H-02, H-03, H-04, H-05, D-03]
+  produced_by: src/autoroutes/core/rent.py
+  output: data/processed/rente-d15.json
+  limitations: [L-01, L-02]
+
+- id: M-04
+  type: measure
+  title: >
+    Témoin substituable, mesuré de la même façon (résultat opérationnel sur
+    activité moins taux × capitaux engagés, rapporté au chiffre d'affaires,
+    2023) : VINCI Energies 5,9 % du chiffre d'affaires à 5,0 % (5,0 % à
+    8,8 %), VINCI Construction 4,0 % (3,9 %) ; VINCI Autoroutes, sur ses
+    capitaux engagés de 18,3 Md€ qui incluent le prix d'acquisition d'ASF
+    en 2006 : 38,7 % à 5,0 %, 27,7 % à 8,8 % (taux d'équilibre 18,4 %).
+    Les pôles substituables du même groupe plafonnent entre 4 et 6 % ; les
+    autoroutes dépassent 25 % même sur la base au prix d'acquisition que
+    D-15 exclut.
+  depends_on: [T-01, O-21, H-01, C-05, D-01]
+  produced_by: src/autoroutes/shell/build.py
+  output: data/processed/rente-d15.json
+  limitations: [L-07, L-08]
+
+# ------------------------------------------------------------- résultats
+
+- id: R-01
+  type: result
+  title: >
+    De combien : en 2023, les usagers des sept concessions historiques
+    privées ont payé entre 5,1 et 6,1 milliards d'euros de plus que le coût
+    d'une fourniture efficace au sens de D-15 (base nette au coût
+    historique, taux de 8,8 % à 5,0 %), soit 46 à 54 % des recettes ; sur
+    la base la plus large que la définition admette (coût historique brut,
+    jamais amorti), encore 1,8 à 3,6 milliards (trois groupes) ; par la
+    méthode du régulateur, qui valorise l'actif à son coût de remplacement
+    en 2002, 0,8 milliard par an au taux que l'ART juge cohérent (7 %) et
+    2,6 milliards au taux de référence commun des études (5 %). Le
+    surprofit est positif à toutes les bornes, sur toutes les bases, sauf
+    par la méthode du TRI au-dessus de 8 %.
+  depends_on: [M-01, M-02, M-03, I-02]
+  limitations: [L-01, L-04, L-08]
+
+- id: R-02
+  type: result
+  title: >
+    À qui : sur les 12,3 Md€ de chiffre d'affaires 2023 du secteur, l'État
+    a reçu environ 1,2 Md€ de prélèvements spécifiques (TAT, redevance
+    domaniale) et 1,5 Md€ d'IS (2,7 Md€, 22 %), auxquels s'ajoutent en 2024
+    la TEITLD (0,5 Md€) et, hors périmètre des SCA, 2 Md€ de TVA sur les
+    péages ; les actionnaires ont reçu 4,1 Md€ de dividendes (4,4 en 2024,
+    dont 96 % pour les quatre groupes historiques) ; les créanciers 0,8
+    Md€ d'intérêts ; 1,4 Md€ ont été investis. Sur 2006-2019, les
+    dividendes des trois groupes privatisés (27,6 Md€) ont dépassé de 5,2
+    Md€ leur prix d'acquisition (22,4 Md€) ; 40 Md€ de dividendes sont
+    attendus après 2022. La rente se partage donc entre l'État (par
+    l'impôt) et les actionnaires, à raison d'environ 60 % pour les seconds et
+    40 % pour le premier ; l'usager n'en reçoit rien en prix.
+  depends_on: [M-02, O-09, O-14, O-15, O-17]
+  limitations: [L-05, L-08]
+
+- id: R-03
+  type: result
+  title: >
+    Coût pour la collectivité (estimation, jamais un constat) : la rente
+    privatisée (R-01) ; les hausses de péage contractualisées en
+    compensation d'investissements (1,7 Md€ de recettes 2016-2024, dont 500
+    M€ « discutables » selon l'ART) ; les effets d'aubaine du modèle
+    (baisse de l'IS + 7,9 Md€ et inflation + 5,4 Md€ cumulés selon l'ART) ;
+    le risque de restitution d'un réseau dégradé (effort de remise en bon
+    état estimé entre 1,2 et 1,6 Md€, jusqu'à 4,7 Md€ d'investissements de
+    seconde phase contestés) ; et le coût d'opportunité d'un rachat
+    anticipé (40 à 50 Md€), qui interdit en pratique toute reprise de la
+    rente avant l'échéance. Les coûts externalisés (qualité, entretien
+    différé) ne sont pas chiffrés ici (L-09).
+  depends_on: [R-01, O-26, O-10, O-24, O-03]
+  limitations: [L-09]
+
+- id: R-04
+  type: result
+  title: >
+    Quatre configurations comparées à l'échéance 2031-2036 (C-05 du
+    cadrage) : (1) statu quo prolongé — nouvelle concession longue à
+    recette privée : rente reconduite, l'État en capte 22 à 36 % par
+    l'impôt, transition nulle, risque de trafic transféré ; (2) privé
+    régulé — concessions courtes (15-20 ans) avec base d'actifs régulés au
+    coût historique et taux reconnu : le surprofit tombe à zéro au taux
+    reconnu par construction, la destination dépend du taux (5 % : prix au
+    coût ; 7 % : 0,8 Md€ laissés), transition = régulateur outillé,
+    soulte pour les gros investissements ; (3) collectivisation — retour
+    gratuit des biens (acquis), recette publique affectée (AFIT France) et
+    exploitation déléguée au forfait ou en régie : les 5 à 6 Md€ annuels
+    reviennent à la collectivité, l'État porte le risque de trafic (dette
+    publique : 30 Md€ de dette des SCA à refinancer ou laisser
+    s'éteindre), continuité par contrats d'exploitation ; (4) privé
+    intégral — cession de l'infrastructure : rente capitalisée dans le prix
+    de vente (précédent 2006 : 14,8 Md€ pour des dividendes de 40 Md€ après
+    2022), borne. Aucune configuration n'est retenue par le graphe ; le
+    choix dépend de V-01.
+  depends_on: [R-01, R-02, R-03, O-08, O-22, O-24, O-10, O-17, V-01]
+  limitations: [L-08, L-09]
+
+# ------------------------------------------------------- interprétations
+
+- id: I-01
+  type: interpretation
+  title: >
+    Attribution : le surprofit mesuré est une rente de position au sens du
+    cadrage (monopoles:D-03), pas une prime de risque ni une avance
+    technique. Les trois conditions de monopoles:I-03 sont remplies : (i)
+    positif aux deux bornes de H-01 sur les deux bases (M-01) ; (ii) le
+    témoin substituable du même groupe, mesuré de la même façon, n'en
+    montre pas (4 à 6 % contre plus de 45 %, M-04) ; (iii) les causes
+    concurrentes sont contrôlées — la prime de risque est déjà dans la borne
+    haute 8,8 % (TRI projet avec risque de trafic), la restriction
+    réglementaire est la concession elle-même (le prix est administré par la
+    loi tarifaire, pas par le marché), l'avance technique n'existe pas
+    (l'infrastructure est la même sous tout exploitant). Ce qui la
+    renverserait : un témoin substituable montrant plus de 25 % de
+    surprofit rapporté au chiffre d'affaires, ou une base d'actifs au coût
+    historique deux à trois fois supérieure à celle des comptes.
+  depends_on: [M-01, M-04, H-10, D-01]
+  limitations: [L-06, L-07]
+
+- id: I-02
+  type: interpretation
+  title: >
+    Pourquoi deux mesures : la forme comptable de D-15 (5 à 6 Md€ par an)
+    et la forme du régulateur (0,8 à 2,6 Md€) diffèrent par la BASE, pas
+    par les flux. D-15 rémunère le capital sur le coût historique net des
+    subventions et des amortissements déjà payés par les péages ; l'ART
+    tronque en 2002 et rémunère un actif moderne équivalent — le coût de
+    reconstruire le réseau en 2002, indexé sur le TP01 majoré de 1 % (O-28)
+    — c'est-à-dire qu'elle recapitalise en 2002 une infrastructure que
+    quarante ans de péages avaient déjà largement payée, exactement ce que
+    le cadrage refuse pour le prix d'acquisition. Les deux mesures sont
+    cohérentes entre elles : la base brute au coût historique (M-01,
+    variante gross) donne 1,8 à 3,6 Md€, entre les deux. Ce qui la
+    renverserait : une reconstitution des coûts historiques année par année
+    montrant que la valeur brute des comptes sous-estime le coût de
+    construction d'un facteur deux ou plus.
+  depends_on: [M-01, M-03, O-28, D-02]
+  limitations: [L-07, L-08]
+
+- id: I-03
+  type: interpretation
+  title: >
+    Le statu quo n'est pas un point fixe : entre décembre 2031 et septembre
+    2036, les sept contrats expirent, les biens de retour — déjà propriété
+    de l'État — reviennent gratuitement et « tous les produits de la
+    concession lui reviendront » (O-22). Sans décision, l'État encaisse
+    la recette ; la rente n'est reconduite que si une nouvelle concession
+    longue à recette privée est signée. Avant l'échéance, les deux voies de
+    reprise coûtent la rente d'avance (rachat, 40-50 Md€) ou sont
+    juridiquement incertaines (résiliation « Olivet », O-23) ; la seule
+    clause contractuelle d'encadrement (D-08) est calée sur un taux de 8 %.
+    Ce qui la renverserait : une prolongation des contrats par la loi, ou
+    une jurisprudence rendant la résiliation sans indemnité praticable.
+  depends_on: [O-08, O-22, O-10, O-23, O-24, D-04, D-07, D-08]
+
+- id: I-04
+  type: interpretation
+  title: >
+    Le prix de 2006 a capitalisé une partie seulement de la rente : 14,8
+    Md€ pour l'État, contre 27,6 Md€ de dividendes déjà versés aux trois
+    acquéreurs sur 2006-2019 et 40 Md€ attendus après 2022 (O-09) ; l'IGF
+    estime que le prix « juste » aurait été supérieur de 45 à 52 % pour
+    ASF-Escota et APRR-Area (O-23), et le Sénat de 2024 attribue
+    l'essentiel de l'écart aux gains de refinancement de la dette (O-24).
+    C'est l'illustration de monopoles:H-02 : une cession déplace la rente
+    sans la supprimer, et la partage au prix d'un jour. Ce qui la
+    renverserait : une valeur actualisée des dividendes 2006-2036 au coût
+    des fonds propres de 2006 (7,67 %) inférieure au prix payé.
+  depends_on: [O-09, O-10, O-23, O-24]
+  limitations: [L-10]
+
+# ------------------------------------------------------------- valeurs
+
+- id: V-01
+  type: value
+  title: >
+    Reprise des valeurs du cadrage (monopoles:V-01, V-04, V-05, V-06) : une
+    rente de position ne doit pas revenir à un propriétaire privé au seul
+    titre de la position qu'il détient ; elle revient à la collectivité
+    des usagers, par un prix au coût ou par une recette affectée, dite et
+    visible, sans rupture du service. Pour les autoroutes, le cadrage
+    propose d'instruire en premier la RECETTE AFFECTÉE à l'échéance avec
+    exploitation au forfait (monopoles:C-05) : la demande y étant peu
+    élastique et la congestion réelle, le prix au coût n'est pas la seule
+    destination admissible. Ceci est une position normative, pas une
+    conséquence des mesures.
+  depends_on: [O-01, R-01]
+
+# --------------------------------------------------------------- choix
+
+- id: C-01
+  type: choice
+  title: >
+    Le cadrage monopoles/ est traité comme une SOURCE figée (S-01, tag
+    monopoles-cadrage-v1.0) : les notions communes (D-15, D-21, H-06, H-17,
+    C-05, V-01, V-05) sont reprises comme définitions et hypothèses locales
+    qui citent cette source et portent l'identifiant d'origine, plutôt que
+    résolues par le site entre études ou recopiées sans lien (DEC-01). Ce
+    qui le renverserait : une deuxième étude sectorielle, qui justifierait
+    la résolution inter-études dans le contrat du site.
+  depends_on: [S-01, O-01]
+
+- id: C-02
+  type: choice
+  title: >
+    Périmètre et année de la mesure : les sept concessions historiques
+    privées (ASF, Escota, Cofiroute, APRR, Area, Sanef, SAPN), l'exercice
+    2023 (dernier exercice dont les comptes des trois groupes et la synthèse
+    de l'ART sont tous disponibles), les comptes IFRS consolidés par groupe
+    (ASF-Escota, APRR-Area-Aliae, Cofiroute) tels que publiés — pas les
+    comptes sociaux, ni les études financières transmises au concédant ;
+    Sanef-SAPN extrapolé faute de comptes figés (H-07, H-09). Les
+    concessions récentes (attribuées par appel d'offres, TRI 5,9 %) ne
+    sont pas mesurées : elles seraient le témoin « contractuel » de
+    monopoles:H-02, à instruire (DEC-04). Ce qui le renverserait : des
+    comptes sociaux montrant une base d'actifs au coût historique
+    sensiblement différente de la base IFRS.
+  depends_on: [O-02, O-17, O-18, O-19, O-20]
+  limitations: [L-04, L-07]
+
+- id: C-03
+  type: choice
+  title: >
+    Les prélèvements SPÉCIFIQUES au secteur (taxe d'aménagement du
+    territoire, redevance domaniale, contribution à l'AFITF, TEITLD) sont
+    comptés comme une DESTINATION du surprofit (part de l'État), pas comme
+    un coût de fourniture efficace ; les impôts généraux (CET) restent des
+    coûts ; l'IS est une destination (D-15). Justification : ces
+    prélèvements n'existent que parce que la position existe — ils
+    prélèvent la rente, ils ne produisent pas le service — et le contrat
+    lui-même les traite comme des éléments de l'équilibre à compenser par
+    le péage (art. 32, O-22). Ce qui le renverserait : la démonstration
+    que la TAT finance un coût du service (elle finance l'AFIT France, donc
+    d'autres infrastructures).
+  depends_on: [O-14, O-15, O-22, D-01, D-06]
+  limitations: [L-05]
+
+- id: C-04
+  type: choice
+  title: >
+    Deux bases et deux amortissements présentés côte à côte, sans en
+    retenir un : base NETTE comptable (valeur nette du domaine concédé +
+    corporelles, subventions déduites — le modèle de la CRE, D-02) et base
+    BRUTE au coût historique net des subventions (borne haute : comme si
+    rien n'avait été amorti) ; amortissement COMPTABLE (caducité sur la
+    durée du contrat, D-05) et amortissement TECHNIQUE (coût brut sur H-06).
+    La variante centrale est nette-comptable ; la variante brute-comptable
+    est la plus favorable aux concessionnaires que D-15 admette. Le coût de
+    remplacement (actif moderne équivalent) n'est pas une base admise par
+    D-15 ; il est présenté par M-03. Ce qui le renverserait : une source
+    donnant le coût historique de construction année par année (O-28 dit
+    qu'elle n'existe pas chez les SCA).
+  depends_on: [D-01, D-02, D-05, O-13, O-28]
+  limitations: [L-03, L-07]
+
+- id: C-05
+  type: choice
+  title: >
+    Témoin substituable : les pôles VINCI Energies et VINCI Construction —
+    même groupe que VINCI Autoroutes, même année, mêmes normes comptables,
+    activités où « quelqu'un peut faire aussi bien autrement » (marchés
+    concurrentiels de travaux et de services) —, mesurés par la même forme
+    (résultat opérationnel moins taux × capitaux engagés, rapporté au
+    chiffre d'affaires). VINCI Autoroutes sur ses capitaux engagés au prix
+    d'acquisition est ajouté comme contre-exemple de base. Le marché des
+    autocars librement organisés (régulé par la même autorité) était le
+    témoin envisagé ; ses rapports ne publient pas de résultats
+    d'exploitation par opérateur (DEC-05). Ce qui le renverserait : un
+    témoin de construction montrant un surprofit rapporté au chiffre
+    d'affaires supérieur à 25 %.
+  depends_on: [O-21, O-25, D-01]
+  limitations: [L-07]
+
+# ---------------------------------------------------------- propositions
+
+- id: P-01
+  type: proposal
+  title: >
+    Ce qui découle des mesures SI l'on tient V-01 : (a) ne pas reconduire à
+    l'échéance une concession longue à recette privée et ne pas prolonger
+    les contrats en cours — chaque année de prolongation reconduit 5 à 6
+    Md€ de surprofit ; (b) ne pas racheter avant terme (la rente serait
+    payée d'avance, 40 à 50 Md€) mais faire exécuter les obligations de
+    fin de contrat (remise en bon état, seconde phase) ; (c) à l'échéance,
+    conserver la recette (recette affectée, visible, V-01) et déléguer
+    l'exploitation et l'entretien par contrats courts au forfait ou en
+    régie — la concurrence POUR le réseau, pas SUR la recette (monopoles:Q4)
+    — ou, si une concession est retenue, la limiter à 15-20 ans sur une
+    base d'actifs régulés au coût historique et au taux reconnu, avec
+    soulte ; (d) chiffrer avant 2031 ce que la recette publique finance et
+    à quel prix (au coût, ou affecté), poste par poste. Ceci est une
+    proposition conditionnelle à la valeur V-01, pas une conséquence des
+    données.
+  depends_on: [R-01, R-04, I-03, V-01, O-24]
+  limitations: [L-08, L-09]
+
+# --------------------------------------------------------------- limites
+
+- id: L-01
+  type: limit
+  title: >
+    Tout taux de rémunération est un jugement : celui du cadrage (5,0 %,
+    régulateurs de l'énergie et des télécoms), celui de l'ART (≈ 7 %,
+    reconstruit sur 1960-2022), celui négocié par l'État (5,9 %), celui du
+    marché (2,28 à 5,51 %). La mesure est donnée à chacun ; elle ne dit
+    pas lequel est juste. Sur la base nette, le résultat en dépend peu
+    (4,2 à 5,2 Md€ entre 8,8 et 4,0 %) ; par la méthode du TRI il change
+    de signe.
+  depends_on: [H-01, H-02, H-03, H-04]
+
+- id: L-02
+  type: limit
+  title: >
+    L'équivalence « un point de TRI ≈ 8 % de chiffre d'affaires » de l'ART
+    est une linéarisation au voisinage de 7-8 % sur 2003-2036 ; l'appliquer
+    à 2,28 % ou à 4 % extrapole hors de son domaine. M-03 est un ordre de
+    grandeur, pas une mesure.
+  depends_on: [H-05, M-03]
+
+- id: L-03
+  type: limit
+  title: >
+    La durée de vie technique de l'infrastructure (H-06, 60 ans [40 ; 100])
+    n'a pas de source figée : c'est une convention d'ingénierie. Son effet
+    est borné (+ 0,3 à + 1,0 Md€ sur la variante technique, entre 40 et 100 ans) et la variante
+    comptable est présentée en premier.
+  depends_on: [H-06, M-01]
+
+- id: L-04
+  type: limit
+  title: >
+    Les comptes consolidés 2023 de Sanef-SAPN (groupe Abertis) n'ont pas pu
+    être figés : le site groupe.sanef.com rejette les téléchargements non
+    interactifs (403), y compris par navigateur piloté (trois méthodes
+    tentées le 2026-09-18). Sanef-SAPN (17,4 % des recettes des sept) est
+    extrapolé (H-07, H-09) ; l'ART et le Sénat le donnent moins rentable
+    que la moyenne, donc l'extrapolation est plutôt une borne haute. À
+    figer par un téléchargement manuel.
+  depends_on: [H-07, H-09, C-02]
+
+- id: L-05
+  type: limit
+  title: >
+    Les comptes d'ASF-Escota et de Cofiroute ne détaillent pas « impôts et
+    taxes » ; la part des prélèvements spécifiques y est celle d'APRR-Area
+    (H-08, 85 %), dont le périmètre inclut par ailleurs la petite concession
+    récente ALIAE. L'effet de H-08 sur le surprofit total est de ± 70 M€
+    entre ses bornes. Les prélèvements spécifiques du secteur sont connus
+    en agrégat (1,2 Md€, O-15), pas par société.
+  depends_on: [H-08, C-03, T-01]
+
+- id: L-06
+  type: limit
+  title: >
+    La non-duplicabilité de l'infrastructure (H-10) est établie par le
+    droit (biens de retour propriété de l'État, D-04) et par l'élasticité
+    faible de la demande (O-15), pas par un coût de duplication chiffré ;
+    l'alternative gratuite (réseau routier national) existe mais sa qualité
+    n'est pas comparée ici. Même limite que monopoles:L-09.
+  depends_on: [H-10, D-04]
+
+- id: L-07
+  type: limit
+  title: >
+    Les bases d'actifs sont lues dans des comptes IFRS (IFRIC 12) : le
+    « droit à percevoir les péages » y correspond « à la juste valeur de
+    l'ouvrage concédé », que les notes assimilent aux coûts de construction
+    (ASF : « coûts des infrastructures » ; Cofiroute : « coût de revient
+    historique » en comptes sociaux). Les comptes sociaux des sept sociétés
+    n'ont pas été figés ; l'Autorité de la concurrence notait en 2014 que
+    « la comparaison avec les comptes sociaux ne montre […] pas de
+    différences significatives » (O-25). VINCI Autoroutes (M-04) est un
+    périmètre plus large qu'ASF-Escota + Cofiroute (Arcour, services).
+  depends_on: [T-01, O-18, O-19, O-20, O-25, C-02]
+
+- id: L-08
+  type: limit
+  title: >
+    La mesure porte sur UN exercice (2023, année de trafic et de tarifs
+    élevés) et sur des concessions en fin de vie, quand la base est
+    presque amortie et les dividendes au plus haut (O-26) ; elle ne dit
+    pas ce qu'ont payé les usagers des années 1970-2000, ni ce que vaut la
+    rente sur toute la durée du contrat — c'est l'objet de M-03 et de I-02.
+    Une série 2006-2024 sur les mêmes comptes est la suite naturelle.
+  depends_on: [M-01, M-02, C-02]
+
+- id: L-09
+  type: limit
+  title: >
+    Les coûts externalisés (entretien différé, état de restitution, temps
+    perdu en congestion, report de trafic sur le réseau gratuit) ne sont
+    pas chiffrés : R-03 les nomme et cite les ordres de grandeur de l'ART
+    et du Sénat sans les additionner à la rente.
+  depends_on: [R-03]
+
+- id: L-10
+  type: limit
+  title: >
+    Observations de second rang : l'expertise de Frédéric Fortin et
+    l'étude EDHECinfra sont connues par le rapport du Sénat qui les cite
+    (S-05), non par leurs fichiers d'origine ; le modèle Fortin n'est pas
+    publié. Résout la limite monopoles:L-12 (FIPECO) sans la faire
+    disparaître entièrement.
+  depends_on: [O-09, O-12]

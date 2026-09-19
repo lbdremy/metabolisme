@@ -1,0 +1,238 @@
+# Registre des hypothèses (H-xx) — méthode Métabolisme, INTRO §9.
+# Paramètres chiffrés (valeur centrale, plage plausible, unité) ou hypothèses
+# qualitatives (`statement`), avec ce qui les justifie (S, O, I) et ce qui
+# les limite (L). Étude sectorielle « autoroutes » : les paramètres communs
+# aux études sectorielles sont REPRIS du cadrage monopoles/ (S-01, tag
+# monopoles-cadrage-v1.0) et portent l'identifiant d'origine dans leur
+# description ; les paramètres propres au secteur sont figés ici.
+#
+# Les mesures (M-01..M-04) sont présentées à chaque taux : les deux bornes
+# de H-01, le taux reconnu par le régulateur (H-02), le taux négocié par
+# l'État en 2017 (H-03) et le taux de marché du secteur (H-04).
+
+- id: H-01
+  name: reference_return_on_capital
+  description: >
+    Taux de RÉFÉRENCE de rémunération du capital (reprise de monopoles:H-06
+    au tag monopoles-cadrage-v1.0, S-01) : le surprofit D-15 est l'excédent
+    sur le rendement qu'un régulateur français accorderait à un réseau à
+    faible risque. Centre 5,0 % nominal avant impôts (CRE, ARCEP) ; borne
+    basse 4,0 % ; borne haute 8,8 %, haut de l'intervalle de confiance du
+    TRI projet des concessions autoroutières estimé par l'ART.
+  central_value: 5.0
+  plausible_range: [4.0, 8.8]
+  unit: "% nominal avant impôts"
+  confidence: medium
+  justification:
+    - O-01
+  limitations:
+    - L-01
+  affects:
+    - M-01
+    - M-02
+    - M-03
+    - M-04
+
+- id: H-02
+  name: art_cost_of_capital
+  description: >
+    Coût du capital reconnu par le régulateur du secteur : l'ART estime que,
+    « sur la durée qui s'étend de l'origine des concessions autoroutières
+    historiques à nos jours », le coût du capital « est de l'ordre de 7 % »
+    (O-05) ; entre 2000 et 2010 il « a oscillé entre 5,4 % et 7,0 %,
+    l'essentiel des valeurs se situant entre 6,0 % et 6,5 % » (O-06) ;
+    l'ART actualise ses flux à 7,8 % (O-03). Plage [6,0 ; 7,8].
+  central_value: 7.0
+  plausible_range: [6.0, 7.8]
+  unit: "% nominal, tous apporteurs de fonds"
+  confidence: medium
+  justification:
+    - O-05
+    - O-06
+    - O-03
+  limitations:
+    - L-01
+  affects:
+    - M-01
+    - M-03
+
+- id: H-03
+  name: state_negotiated_rate_2017
+  description: >
+    Taux de rémunération du capital NÉGOCIÉ par l'État avec les
+    concessionnaires : 6,5 % lors du plan de relance autoroutier (2015),
+    ramené à 5,9 % lors du plan d'investissement autoroutier (2017) après
+    les avis de l'ART (O-11). C'est le taux que l'État lui-même a reconnu
+    comme rémunération d'investissements nouveaux sur ces contrats.
+  central_value: 5.9
+  plausible_range: [5.9, 6.5]
+  unit: "% (CMPC)"
+  confidence: medium
+  justification:
+    - O-11
+  affects:
+    - M-01
+    - M-03
+
+- id: H-04
+  name: market_cost_of_capital_edhec
+  description: >
+    Coût moyen pondéré du capital des concessions autoroutières françaises
+    mesuré sur données de marché par Amenc et Blanc-Brude (EDHECinfra) pour
+    la commission d'enquête du Sénat : 5,51 % (2005-2010), 4,26 %
+    (2010-2015), 2,28 % (2015-2020) (O-12). Valeur centrale : la période la
+    plus récente ; plage : de la plus récente à la plus ancienne.
+  central_value: 2.28
+  plausible_range: [2.28, 5.51]
+  unit: "% (CMPC de marché)"
+  confidence: low
+  justification:
+    - O-12
+  limitations:
+    - L-01
+  affects:
+    - M-01
+    - M-03
+
+- id: H-05
+  name: tri_gap_revenue_share_per_point
+  description: >
+    Conversion LINÉAIRE d'un écart de TRI projet en part du chiffre
+    d'affaires : l'ART indique qu'un écart de 0,7 point de TRI « est à peu
+    près équivalent à un chiffre d'affaires supérieur de 5,5 % par an sur la
+    période 2003-2036 », soit 500 M€ courants par an (O-04), et, dans son
+    Focus de 2023, qu'un point de TRI équivaut à « un surcroît de chiffre
+    d'affaires de 8 % par an », 740 M€ courants (O-07). Centre 5,5/0,7 =
+    7,86 % de chiffre d'affaires par point ; plage [7,86 ; 8,0]. La
+    linéarité n'est valable qu'au voisinage du TRI de 7 à 8 % (L-02).
+  central_value: 7.857
+  plausible_range: [7.857, 8.0]
+  unit: "% du chiffre d'affaires annuel par point de TRI"
+  confidence: medium
+  justification:
+    - O-04
+    - O-07
+  limitations:
+    - L-02
+  affects:
+    - M-03
+
+- id: H-06
+  name: infrastructure_technical_life
+  description: >
+    Durée de vie TECHNIQUE de l'infrastructure autoroutière (terrassements,
+    ouvrages d'art, chaussées structurelles), servant à l'amortissement
+    « sur durée technique » de D-15 par opposition à l'amortissement de
+    caducité qui ramène la valeur à zéro à l'échéance du contrat (D-05).
+    Les concessionnaires eux-mêmes classent l'infrastructure et les ouvrages
+    d'art en « immobilisations non renouvelables : leur durée de vie est
+    supérieure à la durée de la concession » (O-13). Aucune source figée ne
+    donne une durée ; 60 ans [40 ; 100] est une convention d'ingénierie à
+    remplacer par une source (L-03).
+  central_value: 60
+  plausible_range: [40, 100]
+  unit: "années"
+  confidence: low
+  justification:
+    - O-13
+  limitations:
+    - L-03
+  affects:
+    - M-01
+
+- id: H-07
+  name: sanef_sapn_revenue_share
+  description: >
+    Part de Sanef-SAPN dans le chiffre d'affaires des sept concessions
+    historiques privées, lue dans les chiffres clés 2024 de l'ASFA (O-16) :
+    2 001,5 / (4 774,0 + 3 064,6 + 1 657,0 + 2 001,5) = 17,4 %. Sert à
+    extrapoler aux sept sociétés la mesure faite sur les trois groupes dont
+    les comptes 2023 ont pu être figés (H-09, L-04).
+  central_value: 17.4
+  plausible_range: [16.0, 19.0]
+  unit: "% du chiffre d'affaires des sept SCA historiques privées"
+  confidence: medium
+  justification:
+    - O-16
+  limitations:
+    - L-04
+  affects:
+    - M-01
+
+- id: H-08
+  name: specific_levies_share_of_taxes
+  description: >
+    Part des « impôts et taxes » d'un concessionnaire constituée de
+    prélèvements SPÉCIFIQUES au secteur (taxe d'aménagement du territoire,
+    redevance domaniale, contribution à l'AFITF ; TEITLD à partir de 2024),
+    que D-15 traite comme une destination du surprofit (part de l'État) et
+    non comme un coût de fourniture efficace (C-03). Lue dans la seule
+    note qui détaille ce poste, celle d'APRR-Area pour 2023 : (190,7 +
+    100,0 + 18,3) / 362,3 = 85,3 % (O-14) ; appliquée aux groupes qui ne
+    détaillent pas (ASF-Escota, Cofiroute).
+  central_value: 0.853
+  plausible_range: [0.75, 0.95]
+  unit: "ratio"
+  confidence: medium
+  justification:
+    - O-14
+  limitations:
+    - L-05
+  affects:
+    - M-01
+
+- id: H-09
+  name: sanef_sapn_surplus_like_measured_groups
+  description: >
+    Extrapolation à Sanef-SAPN : son surprofit rapporté au chiffre
+    d'affaires est supposé égal à la moyenne pondérée des trois groupes
+    mesurés, borné par le plus faible et le plus fort d'entre eux.
+  statement: >
+    Les comptes consolidés 2023 de Sanef-SAPN n'ont pas pu être figés
+    (site derrière un pare-feu, L-04). L'étude suppose que le surprofit
+    D-15 de Sanef-SAPN, rapporté à son chiffre d'affaires, est compris entre
+    le plus faible et le plus fort des ratios mesurés sur ASF-Escota,
+    Cofiroute et APRR-Area, avec pour valeur centrale leur moyenne pondérée
+    par le chiffre d'affaires. Indices : l'ART estime le TRI projet de Sanef
+    (7,7 %) et SAPN (5,7 %) sous la moyenne des sept (7,9 %) (O-02) ; le
+    Sénat trouve Sanef-SAPN « plus proche des attentes initiales » (O-09).
+    Le ratio central est donc plutôt une borne haute pour Sanef-SAPN.
+    Réfutée si, une fois ses comptes figés, le ratio de Sanef-SAPN sort de
+    la plage des trois groupes mesurés.
+  confidence: low
+  justification:
+    - O-02
+    - O-09
+  limitations:
+    - L-04
+  affects:
+    - M-01
+
+- id: H-10
+  name: motorway_infrastructure_not_duplicable
+  description: >
+    Hypothèse de classement (reprise de monopoles:H-17, S-01) : objet classé
+    l'infrastructure autoroutière ; Q1 non duplicable ; Q2a faiblement
+    rivale sauf congestion ; Q2b non différenciable ; Q3 captivité forte
+    (alternative lente et gratuite) ; non partageable ; domaine public
+    concédé.
+  statement: >
+    L'infrastructure autoroutière concédée est un réseau qu'il serait
+    inefficace de dupliquer : une seconde autoroute parallèle coûterait plus
+    que le partage de la première et l'investissement est irrécupérable (les
+    biens de retour appartiennent à l'État dès leur achèvement, D-04). La
+    demande y est peu élastique au prix : le Sénat rapporte que « la
+    privatisation a incité les acteurs [...] à profiter de la faible
+    élasticité-prix de la demande pour accroître le chiffre d'affaires par
+    kilomètre de réseau » (O-15). Réfutée comme classement si une
+    alternative routière gratuite de qualité comparable existe sur l'axe ;
+    réfutée comme source de surprofit si le témoin substituable (M-04)
+    montre le même surprofit rapporté au chiffre d'affaires.
+  confidence: medium
+  justification:
+    - O-15
+    - O-17
+  limitations:
+    - L-06
+  affects:
+    - I-01

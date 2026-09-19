@@ -13,6 +13,9 @@ on:
       - "monopoles/articles/**"
       - "monopoles/evidence/claims.yaml"
       - "monopoles/sources/**"
+      - "autoroutes/articles/**"
+      - "autoroutes/evidence/claims.yaml"
+      - "autoroutes/sources/**"
       - ".github/workflows/site-ci.yml"
 
 permissions:
