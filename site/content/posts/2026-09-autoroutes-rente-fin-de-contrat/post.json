@@ -1,0 +1,16 @@
+{
+  "slug": "2026-09-autoroutes-rente-fin-de-contrat",
+  "title": "Autoroutes : la rente en fin de contrat",
+  "subtitle": "Cinq à six milliards d'euros par an au-dessus du coût, à qui ils vont, et ce que l'échéance de 2031-2036 permet.",
+  "date": "2026-09-18",
+  "summary": "Première étude sectorielle du programme sur les rentes de position : la définition mesurable de la rente fixée par le cadrage, appliquée aux comptes 2023 des concessions autoroutières historiques. Sur une base d'actifs au coût historique, les usagers ont payé 5 à 6 milliards d'euros de plus que le coût d'une fourniture efficace, positif à tous les taux et sur toutes les bases ; le témoin substituable du même groupe n'en montre pas ; le régulateur trouve moins parce qu'il rémunère un actif au coût de remplacement. À qui va la rente, ce qu'elle coûte, ce qui se passe par défaut à l'échéance, et quatre configurations comparées.\n",
+  "study": {
+    "slug": "autoroutes",
+    "name": "La rente des concessions autoroutières",
+    "question": "Sur les autoroutes concédées, le péage rémunère-t-il une position plutôt qu'une production ; à qui ce surprofit revient-il aujourd'hui, de combien est-il, que coûte-t-il à la collectivité ; et sous quelles formes pourrait-il revenir à l'usager à l'échéance des contrats, entre 2031 et 2036 ?\n"
+  },
+  "version": {
+    "repo_url": "https://github.com/lbdremy/metabolisme",
+    "evidence_doc": "autoroutes/evidence/autoroutes-rente.qmd"
+  }
+}

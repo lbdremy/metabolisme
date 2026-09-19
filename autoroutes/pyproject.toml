@@ -28,6 +28,8 @@ dev = [
     "matplotlib>=3.8",     # evidence-document figures
     "jupytext>=1.16",      # py:percent pairing — the committed notebook representation
     "ipykernel>=6.29",     # jupyter engine for the Quarto evidence document
+    "nbclient>=0.11.0",
+    "nbformat>=5.11.1",
 ]
 
 [build-system]

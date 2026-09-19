@@ -26,7 +26,7 @@ après relecture de Rémy.**
    Et le PDF de l'ARCEP (S-09 est figé depuis le JORF ; la version ARCEP
    est derrière un pare-feu — à récupérer depuis un navigateur ordinaire
    si l'on veut les deux).
-2. **Première étude sectorielle : `autoroutes/`** (C-04). Projet autonome
+2. **Première étude sectorielle : `autoroutes/`** (C-04) — **FAIT le 2026-09-18** (session autonome, non relue : voir `../autoroutes/NEXT-STEPS.md` ; la commission d'enquête du Sénat y est figée en entier, ce qui résout la moitié de L-12 — l'« étude indépendante » est l'expertise Fortin intégrée au tome I). Reste : Projet autonome
    au niveau racine, gabarit INTRO §9 : objet classé et témoin ; régime et
    échéances (S-08, S-12 ; figure 1.2 de S-08 à lire pour les dates par
    société) ; flux et base d'actifs reconstituée au coût historique net des

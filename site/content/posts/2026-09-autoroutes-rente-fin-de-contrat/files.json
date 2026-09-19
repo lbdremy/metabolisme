@@ -1,0 +1,135 @@
+[
+  {
+    "path": "sources/monopoles-cadrage-v1.0-definitions.yaml",
+    "from": "autoroutes/data/raw/monopoles-cadrage-v1.0-definitions.yaml",
+    "size": 40122,
+    "mime": "text/yaml; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/monopoles-cadrage-v1.0-hypotheses.yaml",
+    "from": "autoroutes/data/raw/monopoles-cadrage-v1.0-hypotheses.yaml",
+    "size": 24262,
+    "mime": "text/yaml; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/monopoles-cadrage-v1.0-claims.yaml",
+    "from": "autoroutes/data/raw/monopoles-cadrage-v1.0-claims.yaml",
+    "size": 27221,
+    "mime": "text/yaml; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/art-economie-concessions-autoroutieres-2024.pdf",
+    "from": "autoroutes/data/raw/art-economie-concessions-autoroutieres-2024.pdf",
+    "size": 13809124,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/art-focus-rentabilite-2023.pdf",
+    "from": "autoroutes/data/raw/art-focus-rentabilite-2023.pdf",
+    "size": 7334533,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/art-synthese-comptes-sca-2024.pdf",
+    "from": "autoroutes/data/raw/art-synthese-comptes-sca-2024.pdf",
+    "size": 1897175,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/senat-r19-709-1-mono.html",
+    "from": "autoroutes/data/raw/senat-r19-709-1-mono.html",
+    "size": 3595619,
+    "mime": "text/html; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/igf-cgedd-2021-modele-economique-sca.pdf",
+    "from": "autoroutes/data/raw/igf-cgedd-2021-modele-economique-sca.pdf",
+    "size": 4263788,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/senat-r24-065-echeance-concessions.pdf",
+    "from": "autoroutes/data/raw/senat-r24-065-echeance-concessions.pdf",
+    "size": 2546331,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/asf-contrat-concession-consolide-2024-01-15.pdf",
+    "from": "autoroutes/data/raw/asf-contrat-concession-consolide-2024-01-15.pdf",
+    "size": 1238507,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/adlc-avis-14-a-13-2014.pdf",
+    "from": "autoroutes/data/raw/adlc-avis-14-a-13-2014.pdf",
+    "size": 1655123,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/dgitm-rapport-activite-2020-concessions.pdf",
+    "from": "autoroutes/data/raw/dgitm-rapport-activite-2020-concessions.pdf",
+    "size": 4693741,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/art-economie-concessions-autoroutieres-2020.pdf",
+    "from": "autoroutes/data/raw/art-economie-concessions-autoroutieres-2020.pdf",
+    "size": 11990933,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "sources/dgitm-rapport-2024-concessions.pdf",
+    "from": "autoroutes/data/raw/dgitm-rapport-2024-concessions.pdf",
+    "size": 5027391,
+    "mime": "application/pdf",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/autoroutes/core/accounts.py",
+    "from": "autoroutes/src/autoroutes/core/accounts.py",
+    "size": 5915,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/comptes-2023.csv",
+    "from": "autoroutes/data/transcribed/comptes-2023.csv",
+    "size": 10887,
+    "mime": "text/csv; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/autoroutes/core/rent.py",
+    "from": "autoroutes/src/autoroutes/core/rent.py",
+    "size": 5309,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "data/rente-d15.json",
+    "from": "autoroutes/data/processed/rente-d15.json",
+    "size": 22780,
+    "mime": "application/json; charset=utf-8",
+    "hosted": "asset"
+  },
+  {
+    "path": "code/src/autoroutes/shell/build.py",
+    "from": "autoroutes/src/autoroutes/shell/build.py",
+    "size": 10102,
+    "mime": "text/x-python; charset=utf-8",
+    "hosted": "asset"
+  }
+]
