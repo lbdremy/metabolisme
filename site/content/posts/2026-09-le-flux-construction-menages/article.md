@@ -207,7 +207,7 @@ cd logement
 uv sync                     # environnement figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe de preuves
 uv run logement reproduce   # rebâtit les 16 artefacts data/processed/
-./test.sh                   # 182 tests
+./test.sh                   # 180 tests
 ```
 
 Le document de preuve détaillé : `logement/evidence/efficacite-parc-immobilier.qmd`
