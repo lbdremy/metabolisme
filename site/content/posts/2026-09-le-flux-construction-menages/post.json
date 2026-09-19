@@ -1,0 +1,17 @@
+{
+  "slug": "2026-09-le-flux-construction-menages",
+  "title": "Le flux s'est arrêté avant le stock",
+  "subtitle": "Ce que la construction neuve couvrait de la formation des ménages, zone d'emploi par zone d'emploi — et ce qu'elle ne couvre plus depuis 2023.",
+  "date": "2026-09-19",
+  "summary": "Le deuxième article détendait un stock de 194 488 logements ; sa revue objectait que les ménages continuent de se former. Troisième article : zone d'emploi par zone d'emploi, ce qu'il a fallu construire pour la croissance du parc 2016-2022 (1,14 en France, 1,08 en zones tendues, où l'on a construit plus et plus cher), et l'effondrement d'un tiers depuis 2023 — 77 zones tendues sur 97 en déficit, un stock de détente consommé en trois ans. Une revue contradictoire a changé la source, la lecture et la conclusion avant publication ; le journal des décisions dit pourquoi.\n",
+  "study": {
+    "slug": "logement",
+    "name": "Efficacité du parc immobilier français",
+    "question": "Dans quelle mesure le parc immobilier français permet-il de loger correctement la population, dans les territoires où elle souhaite ou a besoin de vivre, à un coût soutenable et avec une mobilité suffisante ?\n"
+  },
+  "version": {
+    "repo_url": "https://github.com/lbdremy/metabolisme",
+    "tag": "efficacite-parc-v0.7",
+    "evidence_doc": "logement/evidence/efficacite-parc-immobilier.qmd"
+  }
+}

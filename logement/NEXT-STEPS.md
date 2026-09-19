@@ -3,55 +3,44 @@
 Ce qui est déjà fait est consigné dans [`PREV-STEPS.md`](PREV-STEPS.md).
 Mis à jour à chaque fin de session de travail significative.
 
-## État au sortir de la session 7 (2026-09-18)
+## État au sortir de la session 7 (2026-09-18/19) — deux articles écrits en autonomie
 
-**Le second article est ÉCRIT** (tag `article-proposition-institutionnelle-v1.0`,
-chaîne `efficacite-parc-v0.6`) :
-`articles/2026-09-proposition-institutionnelle.md`, sur les résultats
-R-15..R-17 et la proposition P-01 revus le jour même (61 objections,
-`evidence/revue-contradictoire-2026-09-18.md`). Toutes les décisions
-prises en autonomie sont dans `evidence/decisions-2026-09-18.md`
-(DEC-01..DEC-20) — **Rémy doit les relire** : chacune est réversible,
-en particulier DEC-01 (périmètre), DEC-04/DEC-16 (prix d'acquisition à
-la valeur vénale + remploi, sans décote), DEC-17 (seuil de 50 % du
-périmètre M-D), DEC-18 (l'acquisition sécurise, le bail est offert),
-DEC-20 (objections écartées). État : 53 sources, 23 définitions, 15
-hypothèses, 144 nœuds, 15 stages, 172 tests.
+**Articles 2 et 3 sont ÉCRITS** : la proposition institutionnelle (tag
+`article-proposition-institutionnelle-v1.0`, chaîne v0.6) et le flux
+(tag `article-flux-v1.0`, chaîne `efficacite-parc-v0.7`). Chacun a subi
+sa revue contradictoire le jour même (`evidence/revue-contradictoire-2026-09-18.md`
+et `-flux.md`). Toutes les décisions prises sans Rémy sont dans
+`evidence/decisions-2026-09-18.md` (DEC-01..DEC-28) — **Rémy doit les
+relire** ; les plus réversibles : DEC-04/16 (valeur vénale + remploi),
+DEC-17 (périmètre M-D), DEC-18 (acquisition sécurise, bail offert),
+DEC-20 et DEC-28 (objections écartées), DEC-21 (sujet de l'article 3),
+DEC-26 (H-21 uniforme), DEC-27 (affectation RS observée). État : 60
+sources, 24 définitions, 16 hypothèses, 151 nœuds, 16 stages, 180 tests.
 
 ## Prochaines étapes (dans l'ordre)
 
-1. **Lecture de Rémy** : article 2, journal des décisions, compte rendu
-   de revue ; puis tag/déploiement du site (post enregistré, contenu
-   reconstruit, non déployé).
-2. **Ce que P-01 laisse ouvert et qui est instruisable** :
-   - le **prix de repli** qui rendrait le bail préférable à la cession
-     (C-15(2)) — un paramètre de conception sans source : chercher les
-     précédents (OFS/BRS, portage EPF, préemption avec décote) ;
-   - l'**outil d'acquisition** (utilité publique d'une acquisition de
-     logements vacants, D-22) — instruction juridique, pas
-     statistique ;
-   - la **surface des vacants durables** (L-27 : les totaux de M-B
-     utilisent la surface des RP, majorant) — fichiers LOVAC détaillés
-     ou Fidéli, sous habilitation ;
-   - l'**assiette foncière** préalable à M-D (CPO S-51) ;
-   - le **flux** (L-32 : ~24 Md€/an au prix S-18) — Sit@del par ZE.
-3. **Observations qui trancheraient H-04** (reportées, DEC-13) :
-   - **DVF 2026** : la réforme DMTO 2025 (passage à 5,00 % département
-     par département, dates de vote S-31/S-35) est l'expérience
-     naturelle propre — doubles différences à la Bérard-Trannoy (S-43)
-     sur les volumes mensuels ; figer DVF 2026 dès parution ;
-   - **RPLS au 01/01/2026** (non paru au 2026-09-18, page SDES
-     vérifiée) puis 2027 : rebond → cyclique, persistance →
-     structurel ;
-   - **rotation par âge × ZE** (fichier détail RP, ANEM × AGEMEN8).
-4. **Restes ouverts des revues précédentes** (inchangés) : emploi ZE
-   récent (L-07) et re-exécution de R-03 ; réconciliation LOVAC
-   communal/départemental ; Paris 32 091 vs Apur ~18 600 (L-04) ;
-   référentiels de besoin en flux (L-21).
-5. **Frontières H-05 et frontières de données** : inchangées (voir
-   sessions précédentes) ; s'y ajoute : aucune source ouverte sur la
-   décote des vacants durables (SA-14), aucun bilan national du bail à
-   réhabilitation (SA-12), aucune évaluation de la TVLH 2027 (L-33).
+1. **Lecture de Rémy** : articles 2 et 3, journal des décisions, deux
+   comptes rendus de revue ; puis déploiement du site (trois posts
+   enregistrés, contenu reconstruit, non déployé).
+2. **Article 4 annoncé par l'article 3** : la production neuve — qui
+   porte le chantier quand le marché s'arrête ? Structure de la
+   production (promotion, bailleurs sociaux, particuliers — Sitadel
+   liste des permis, datafile 8b35affb, avec RES_PRINCIP_OU_SECOND et
+   catégorie de maître d'ouvrage), financement (Perspectives S-40,
+   agréments SDES), ce qui l'a arrêtée (taux S-36, coûts S-18/S-19).
+3. **Ce que R-18 laisse instruisable** : l'affectation réelle du neuf par
+   ZE (fichier détail RP2022, ACHL × CATL, 500 Mo — SA-4) ; le
+   sous-compte par département (série estimée départementale SDES) ; la
+   ventilation TLV / hors TLV des commencés (SE-5, faisable avec S-13) ;
+   le millésime 2025 des commencés (série communale, printemps 2027).
+4. **Ce que P-01 laisse ouvert** (inchangé) : prix de repli, outil
+   d'acquisition, surface des vacants, assiette foncière (CPO), flux —
+   désormais instruit par R-18 dans le sens défavorable.
+5. **Observations qui trancheraient H-04** (reportées, DEC-13) : DVF
+   2026 (réforme DMTO 2025), RPLS 01/01/2026, rotation par âge × ZE.
+6. **Restes ouverts des revues précédentes** et **frontières de données** :
+   inchangés (voir sessions 3-5 ; s'ajoutent : décote des vacants,
+   bilan du bail à réhabilitation, évaluation TVLH 2027).
 
 ## État de la chaîne R-01..R-14 (sessions 1-6)
 
@@ -93,15 +82,15 @@ changement) ; à traiter quand l'occasion s'y prête, pas avant :
 cd logement
 uv sync                     # env figé (uv.lock)
 uv run logement validate    # registres + sha256 + graphe : doit être vert
-uv run logement reproduce   # rebâtit les 15 artefacts data/processed/
-./check.sh && ./test.sh     # portes qualité (172 tests)
+uv run logement reproduce   # rebâtit les 16 artefacts data/processed/
+./check.sh && ./test.sh     # portes qualité (180 tests)
 ```
 
 Lire dans l'ordre : `CLAUDE.md` (doctrine + décisions arrêtées),
 `EVIDENCE.md` (index humain), `evidence/decisions-2026-09-18.md` (le
-journal des décisions de conception), les trois comptes rendus de revue
+journal des décisions de conception), les quatre comptes rendus de revue
 (`evidence/revue-contradictoire-2026-08-07.md`, `-2026-08-09.md`,
-`-2026-09-18.md`), puis `evidence/claims.yaml`.
+`-2026-09-18.md`, `-2026-09-18-flux.md`), puis `evidence/claims.yaml`.
 Le rendu du document de preuve : `QUARTO_PYTHON=.venv/bin/python quarto
 render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
 
@@ -209,3 +198,17 @@ render evidence/efficacite-parc-immobilier.qmd` (Quarto 1.10.18 installé).
 - **Cour des comptes S-22, p. 24** : les 6 700 sorties ZLV sont « 6,6 %
   des 102 000 logements dont les propriétaires ont été contactés », et
   « 3 % » en zone tendue = parmi les contactés — jamais « du stock ».
+- **Sitadel (S-56/S-57)** : la série COMMUNALE (même en date réelle)
+  ne compte que les déclarations remontées — ~15 % des chantiers ne
+  remontent jamais (S-58) : toujours publier la lecture estimée (× H-21)
+  et jamais comparer une série communale à la statistique publiée sans
+  ce facteur ; en date réelle, une année est CLOSE dès qu'elle est
+  passée (un événement 2023 déclaré en 2025 est compté en 2023) — ne
+  pas écarter les dernières années comme « incomplètes » ; le fichier
+  liste Paris en commune parente ET en arrondissements (ne pas sommer) ;
+  2025 n'a que les autorisations ; codes au COG de l'événement →
+  remapper par les mouvements de communes (S-59) avant toute jointure.
+- **Ménages ≡ résidences principales** dans le recensement : un « besoin
+  de flux » à structure constante est la croissance observée du parc ;
+  un ratio construction / besoin ne mesure jamais une formation de
+  ménages empêchée.

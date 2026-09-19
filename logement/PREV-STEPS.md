@@ -3,6 +3,44 @@
 Journal des sessions de travail, la plus récente en premier. Les prochaines
 étapes vivent dans [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
+## Session 7 (suite) — 2026-09-18/19 (article 3 : le flux, revue, requalification)
+
+Rémy : « continue le prochain article ». Sujet choisi en autonomie
+(DEC-21) : le FLUX — le trou laissé par la revue de P-01 (L-19/L-32).
+Tags **`efficacite-parc-v0.7`** et **`article-flux-v1.0`**.
+
+- **R-18** : formation de ménages 2016→2022 (S-11) vs logements
+  commencés (Sitadel), par ZE, avec le besoin de flux à structure
+  constante ; nouveau module `core/flux.py`, 16e stage, commande
+  `acquire-sitadel` (extrait S-54), 9 tests.
+- **Revue contradictoire « flux »** (3 relecteurs, DEC-24 ; 31
+  objections, ~70 recalculs exacts) — compte rendu
+  `evidence/revue-contradictoire-2026-09-18-flux.md`. Elle a changé la
+  SOURCE (série communale en date réelle du SDES, S-56, que DEC-22
+  croyait absente ; sous-compte de ~15 % des déclarations → H-21,
+  S-57/S-58 ; mouvements de communes S-59 : 25 822 chantiers rendus), la
+  LECTURE (2023-2024 sont des années closes, pas « incomplètes » — la
+  première version les écartait) et la CONCLUSION (« le flux n'est pas
+  le problème » → « depuis 2023 le flux est la contrainte dominante ») ;
+  plus : ménages ≡ RP donc le ratio ne mesure pas une couverture (HD-1),
+  affectation du neuf en RS = hypothèse à trois bornes (DEC-27),
+  absorption du stock par ZE (SE-2), plancher sur les corrélations
+  (ST-1 : + 0,20, pas « nulle »), sorties de parc mesurées (O-42, S-60).
+  DEC-25..28 ; sept objections écartées avec raison.
+- **Ce que R-18 établit (après revue)** : 2017-2022, 398 460 commencés
+  estimés/an en France pour 350 689 de besoin (1,14) ; ZE tendues 1,08
+  (+ 16 131/an), plus intenses (11,8 vs 5,9 pour 1 000 logements) et
+  ratio croissant avec le coût ; déficit littoral/alpin (affectation
+  RS). 2023-2024 : − 34 %, ZE tendues − 58 216/an, 77/97 en déficit
+  (Toulouse, Bordeaux, Nantes, Montpellier, Marseille) ; le stock de
+  détente (1,3 an de formation) est consommé en 2,9 ans (médiane par
+  ZE) par ce déficit ; P-01 en couvre un tiers → la détente par le stock
+  est subordonnée au retour du flux (I-18).
+- **Article 3** : `articles/2026-09-le-flux-construction-menages.md`
+  (« Le flux s'est arrêté avant le stock »), post du site enregistré.
+- État : 60 sources, 24 définitions, 16 hypothèses, 151 nœuds, 16
+  stages, 180 tests.
+
 ## Session 7 — 2026-09-18 (proposition institutionnelle : cinq mécanismes comparés, revue, second article)
 
 Étape 2 de NEXT-STEPS exécutée en autonomie (Rémy : « autonomie

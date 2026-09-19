@@ -17,7 +17,10 @@ reproductibles.
   — « Détendre le parc, au prix du marché », la proposition institutionnelle
   au tag `efficacite-parc-v0.6` (cinq mécanismes comparés, revue
   contradictoire, journal des décisions
-  [`evidence/decisions-2026-09-18.md`](evidence/decisions-2026-09-18.md)).
+  [`evidence/decisions-2026-09-18.md`](evidence/decisions-2026-09-18.md)) ;
+  [`articles/2026-09-le-flux-construction-menages.md`](articles/2026-09-le-flux-construction-menages.md)
+  — « Le flux s'est arrêté avant le stock », la construction neuve et la
+  formation des ménages par zone d'emploi, au tag `efficacite-parc-v0.7`.
 - **Conventions techniques** : [`CLAUDE.md`](CLAUDE.md).
 
 ## Reproduction
@@ -26,5 +29,5 @@ reproductibles.
 uv sync --locked            # environnement figé (uv.lock)
 ./test.sh                   # tests (pytest + hypothesis)
 uv run logement validate    # contrôle des registres (sources, définitions, hypothèses)
-uv run logement reproduce   # rejoue la chaîne stabilisée (15 stages)
+uv run logement reproduce   # rejoue la chaîne stabilisée (16 stages)
 ```
