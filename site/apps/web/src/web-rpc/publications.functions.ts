@@ -34,10 +34,29 @@ function notes(): IndexedNote[] {
   });
 }
 
+function byDateDescending(list: ReadonlyArray<Post>): Post[] {
+  return list.toSorted((a, b) => b.date.localeCompare(a.date));
+}
+
+// L'index ne porte que les posts relus. Un post « en relecture » reste
+// servi à son adresse (getPost ne filtre pas) : il est hors de la liste,
+// pas hors du site.
 export const listPosts = createServerFn({ method: "GET" }).handler(() =>
-  posts()
-    .map((entry) => entry.post)
-    .toSorted((a, b) => b.date.localeCompare(a.date)),
+  byDateDescending(
+    posts()
+      .map((entry) => entry.post)
+      .filter((post) => post.status === "published"),
+  ),
+);
+
+// La liste des posts en attente de relecture — demandée explicitement par
+// l'accueil quand le mode relecture est actif.
+export const listPostsInReview = createServerFn({ method: "GET" }).handler(() =>
+  byDateDescending(
+    posts()
+      .map((entry) => entry.post)
+      .filter((post) => post.status === "in_review"),
+  ),
 );
 
 const SlugInput = z.object({ slug: z.string().min(1) });

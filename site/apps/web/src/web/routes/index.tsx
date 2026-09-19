@@ -1,7 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
+import type { Post } from "~/contracts/evidence";
+import { SiteFooter } from "~/web/components/site-footer";
 import { Wordmark } from "~/web/components/ui/logo";
 import { PostList } from "~/web/modules/posts/components/post-list";
-import { listPosts } from "~/web-rpc/public";
+import { useReviewMode } from "~/web/modules/posts/use-review-mode";
+import { listPosts, listPostsInReview } from "~/web-rpc/public";
 
 export const Route = createFileRoute("/")({
   loader: () => listPosts(),
@@ -9,7 +13,30 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const posts = Route.useLoaderData();
+  const published = Route.useLoaderData();
+  const review = useReviewMode();
+  const [inReview, setInReview] = useState<ReadonlyArray<Post>>([]);
+
+  // Les posts en attente de relecture ne sont pas dans la réponse de la
+  // page : ils sont demandés à part, seulement quand le mode est actif.
+  useEffect(() => {
+    if (!review.enabled) {
+      setInReview([]);
+      return;
+    }
+    let current = true;
+    void listPostsInReview().then((list) => {
+      if (current) setInReview(list);
+    });
+    return () => {
+      current = false;
+    };
+  }, [review.enabled]);
+
+  const posts = useMemo(
+    () => [...published, ...inReview].toSorted((a, b) => b.date.localeCompare(a.date)),
+    [published, inReview],
+  );
 
   return (
     <div className="min-h-screen">
@@ -44,6 +71,7 @@ function HomePage() {
           )}
         </section>
       </main>
+      <SiteFooter review={review} />
     </div>
   );
 }

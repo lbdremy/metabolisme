@@ -83,6 +83,7 @@ function buildPost(slug: string): void {
     date: config.date,
     summary: config.summary,
     study: { slug: config.study.slug, name: config.study.name, question: config.study.question },
+    status: config.status,
     version: config.version,
   });
 

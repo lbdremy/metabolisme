@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { Post } from "~/contracts/evidence";
 import { formatDate } from "~/web/modules/evidence/model/format";
+import { InReviewBadge } from "./in-review-badge";
 
 export function PostList({ posts }: { posts: ReadonlyArray<Post> }) {
   return (
@@ -9,8 +10,11 @@ export function PostList({ posts }: { posts: ReadonlyArray<Post> }) {
       {posts.map((post) => (
         <li key={post.slug} className="py-7 first:pt-0">
           <Link to="/posts/$slug" params={{ slug: post.slug }} className="group block">
-            <p className="font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-ink-3">
-              {post.study.name} · {formatDate(post.date)}
+            <p className="flex flex-wrap items-center gap-2 font-sans text-[0.72rem] font-semibold uppercase tracking-wider text-ink-3">
+              <span>
+                {post.study.name} · {formatDate(post.date)}
+              </span>
+              {post.status === "in_review" && <InReviewBadge />}
             </p>
             <h2 className="mt-2 font-sans text-[1.5rem] font-bold leading-tight tracking-tight text-ink group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">
               {post.title}

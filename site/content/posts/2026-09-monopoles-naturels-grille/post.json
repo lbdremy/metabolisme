@@ -9,6 +9,7 @@
     "name": "Monopoles naturels, rentes de position et collectivisation des rentes",
     "question": "Dans quels secteurs le prix payé par l'usager rémunère-t-il une position plutôt qu'une production ; à qui cette rente revient-elle aujourd'hui, de combien est-elle, que coûte-t-elle à la collectivité ; et sous quelles formes institutionnelles pourrait-elle revenir à l'usager, pour quel gain et avec quelle part laissée au privé ?\n"
   },
+  "status": "published",
   "version": {
     "repo_url": "https://github.com/lbdremy/metabolisme",
     "tag": "monopoles-cadrage-v1.0",

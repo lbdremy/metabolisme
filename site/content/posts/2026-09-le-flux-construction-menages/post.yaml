@@ -20,6 +20,7 @@ study:
     besoin de vivre, à un coût soutenable et avec une mobilité suffisante ?
   dir: logement
 article: articles/2026-09-le-flux-construction-menages.md
+status: in_review
 version:
   repo_url: https://github.com/lbdremy/metabolisme
   tag: efficacite-parc-v0.7

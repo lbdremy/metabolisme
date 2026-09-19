@@ -1,14 +1,18 @@
 import { ExternalLink, Tag } from "lucide-react";
 import type { Post } from "~/contracts/evidence";
 import { formatDate } from "~/web/modules/evidence/model/format";
+import { InReviewBadge } from "./in-review-badge";
 
 // En-tête d'un post : titre, sous-titre, étude, date et version du
 // raisonnement (tag Git) — l'article est rattaché à une version précise.
 export function PostHeader({ post }: { post: Post }) {
   return (
     <header>
-      <p className="font-sans text-[0.75rem] font-semibold uppercase tracking-wider text-ink-3">
-        {post.study.name} · {formatDate(post.date)}
+      <p className="flex flex-wrap items-center gap-2 font-sans text-[0.75rem] font-semibold uppercase tracking-wider text-ink-3">
+        <span>
+          {post.study.name} · {formatDate(post.date)}
+        </span>
+        {post.status === "in_review" && <InReviewBadge />}
       </p>
       <h1 className="mt-3 font-sans text-[2rem] font-bold leading-[1.12] tracking-tight text-ink sm:text-[2.4rem]">
         {post.title}

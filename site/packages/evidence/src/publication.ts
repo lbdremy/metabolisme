@@ -12,6 +12,12 @@ import { EvidenceVersionSchema } from "./graph.ts";
 
 const Slug = z.string().regex(/^[a-z0-9][a-z0-9-]*$/);
 
+// Statut de publication d'un post. « in_review » : l'article est en ligne à
+// son adresse, mais ABSENT de l'index — il attend la relecture de l'auteur.
+// Ce n'est pas un secret (l'URL suffit), c'est un tri : la page d'accueil ne
+// présente que ce qui a été relu.
+export const PublicationStatusSchema = z.enum(["published", "in_review"]);
+
 export const StudySchema = z.object({
   slug: Slug,
   name: z.string().min(1),
@@ -25,6 +31,7 @@ export const PostSchema = z.object({
   date: z.string().date(),
   summary: z.string().optional(),
   study: StudySchema,
+  status: PublicationStatusSchema.default("published"),
   version: EvidenceVersionSchema.default({}),
 });
 
@@ -41,6 +48,7 @@ export const NoteSchema = z.object({
   version: EvidenceVersionSchema.default({}),
 });
 
+export type PublicationStatus = z.infer<typeof PublicationStatusSchema>;
 export type Study = z.infer<typeof StudySchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type Note = z.infer<typeof NoteSchema>;

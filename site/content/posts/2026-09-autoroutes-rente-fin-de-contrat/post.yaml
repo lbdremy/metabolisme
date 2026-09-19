@@ -24,6 +24,7 @@ study:
     2031 et 2036 ?
   dir: autoroutes
 article: articles/2026-09-autoroutes-la-rente-en-fin-de-contrat.md
+status: in_review
 version:
   repo_url: https://github.com/lbdremy/metabolisme
   evidence_doc: autoroutes/evidence/autoroutes-rente.qmd

@@ -9,6 +9,7 @@
     "name": "Efficacité du parc immobilier français",
     "question": "Dans quelle mesure le parc immobilier français permet-il de loger correctement la population, dans les territoires où elle souhaite ou a besoin de vivre, à un coût soutenable et avec une mobilité suffisante ?\n"
   },
+  "status": "in_review",
   "version": {
     "repo_url": "https://github.com/lbdremy/metabolisme",
     "tag": "efficacite-parc-v0.7",

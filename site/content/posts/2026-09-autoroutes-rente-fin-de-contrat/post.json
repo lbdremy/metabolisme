@@ -9,6 +9,7 @@
     "name": "La rente des concessions autoroutières",
     "question": "Sur les autoroutes concédées, le péage rémunère-t-il une position plutôt qu'une production ; à qui ce surprofit revient-il aujourd'hui, de combien est-il, que coûte-t-il à la collectivité ; et sous quelles formes pourrait-il revenir à l'usager à l'échéance des contrats, entre 2031 et 2036 ?\n"
   },
+  "status": "in_review",
   "version": {
     "repo_url": "https://github.com/lbdremy/metabolisme",
     "evidence_doc": "autoroutes/evidence/autoroutes-rente.qmd"

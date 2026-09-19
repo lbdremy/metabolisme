@@ -75,6 +75,14 @@ Ancres dans le texte : lien `[passage](ev:R-07)` ou identifiant nu `(R-07)`
   Pas de secret → jetons de développement, prévisibles (avertissement au
   build de production). `robots: noindex`, jamais listées. Le déploiement
   se fait depuis une machine qui a les deux dépôts.
+- **Statut de publication.** `post.yaml` porte `status` (`published` ou
+  `in_review` ; absent = publié). Un post « en relecture » est servi à son
+  adresse, avec une pastille « en attente de relecture », mais il est absent
+  de l'index : l'accueil ne présente que ce que l'auteur a relu. Trois clics
+  rapprochés sur le logo du pied de page (accueil et méthode) rallument le
+  mode relecture et les réaffichent dans la liste ; c'est une préférence du
+  navigateur (`metabolisme.review-mode`), pas une protection — l'adresse
+  d'un post en relecture suffit toujours à le lire.
 - **Charte dérivée du logo** (douze disques en spirale) : une couleur par
   statut, dans l'ordre de la chaîne ; papier et encre pour le reste ; serif
   pour le texte lu, sans pour le panneau. Jetons dans `src/styles.css`,

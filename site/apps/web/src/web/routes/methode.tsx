@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { SiteFooter } from "~/web/components/site-footer";
 import { Wordmark } from "~/web/components/ui/logo";
+import { useReviewMode } from "~/web/modules/posts/use-review-mode";
 import { getPage } from "~/web-rpc/public";
 
 // La méthode (INTRO.md du dépôt), rendue telle quelle.
@@ -13,6 +15,7 @@ export const Route = createFileRoute("/methode")({
 
 function MethodPage() {
   const { markdown } = Route.useLoaderData();
+  const review = useReviewMode();
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-30 flex h-12 items-center border-b border-rule bg-paper/95 px-6 backdrop-blur">
@@ -25,6 +28,7 @@ function MethodPage() {
           <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
         </div>
       </main>
+      <SiteFooter review={review} />
     </div>
   );
 }

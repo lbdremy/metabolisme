@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { EvidenceVersionSchema, StudySchema } from "@metabolisme/evidence";
+import { EvidenceVersionSchema, PublicationStatusSchema, StudySchema } from "@metabolisme/evidence";
 
 // post.yaml : la partie écrite à la main d'un post. Tout le reste du dossier
 // (post.json, article.md, graph.json, files.json) est généré par build-posts.
@@ -15,6 +15,8 @@ export const PostConfigSchema = z.object({
   }),
   // Article Markdown, relatif au dossier de l'étude.
   article: z.string().min(1),
+  // Absent = publié : un post n'est retenu de l'index que s'il le demande.
+  status: PublicationStatusSchema.default("published"),
   version: EvidenceVersionSchema.default({}),
 });
 
