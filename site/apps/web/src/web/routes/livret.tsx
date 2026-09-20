@@ -56,11 +56,12 @@ function LivretPage() {
             Livret 2027
           </h1>
           <p className="mt-5 max-w-[60ch] font-serif text-[1.15rem] leading-relaxed text-ink-2">
-            Dix notes écrites pour être lues ensemble : deux mécanismes de conception, trois droits,
-            la préemption des rentes de position, la forme urbaine, et la liste de ce qui reste à
-            instruire. Ce sont des <strong className="text-ink">textes de travail</strong> — la
-            plupart de ce qu'ils affirment est encore valeur, choix ou interprétation, et le panneau
-            de droite le dit nœud par nœud plutôt que de le déguiser en résultat.
+            Des notes écrites pour être lues ensemble : trois mécanismes de conception, trois
+            droits, la préemption des rentes de position, la forme urbaine, le seuil
+            d'employabilité, la stratégie, et la liste de ce qui reste à instruire. Ce sont des{" "}
+            <strong className="text-ink">textes de travail</strong> — la plupart de ce qu'ils
+            affirment est encore valeur, choix ou interprétation, et le panneau de droite le dit
+            nœud par nœud plutôt que de le déguiser en résultat.
           </p>
           <p className="mt-4 max-w-[60ch] font-sans text-[0.85rem] leading-relaxed text-ink-3">
             Cette page n'est référencée nulle part : elle existe pour être partagée telle quelle,
