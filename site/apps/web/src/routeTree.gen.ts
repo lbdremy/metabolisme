@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './web/routes/__root'
 import { Route as IndexRouteImport } from './web/routes/index'
+import { Route as LivretRouteImport } from './web/routes/livret'
 import { Route as MethodeRouteImport } from './web/routes/methode'
 import { Route as NotesTokenRouteImport } from './web/routes/notes.$token'
 import { Route as PostsSlugRouteImport } from './web/routes/posts.$slug'
@@ -17,6 +18,11 @@ import { Route as PostsSlugRouteImport } from './web/routes/posts.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LivretRoute = LivretRouteImport.update({
+  id: '/livret',
+  path: '/livret',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MethodeRoute = MethodeRouteImport.update({
@@ -37,12 +43,14 @@ const PostsSlugRoute = PostsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/livret': typeof LivretRoute
   '/methode': typeof MethodeRoute
   '/notes/$token': typeof NotesTokenRoute
   '/posts/$slug': typeof PostsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/livret': typeof LivretRoute
   '/methode': typeof MethodeRoute
   '/notes/$token': typeof NotesTokenRoute
   '/posts/$slug': typeof PostsSlugRoute
@@ -50,20 +58,23 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/livret': typeof LivretRoute
   '/methode': typeof MethodeRoute
   '/notes/$token': typeof NotesTokenRoute
   '/posts/$slug': typeof PostsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/methode' | '/notes/$token' | '/posts/$slug'
+  fullPaths: '/' | '/livret' | '/methode' | '/notes/$token' | '/posts/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/methode' | '/notes/$token' | '/posts/$slug'
-  id: '__root__' | '/' | '/methode' | '/notes/$token' | '/posts/$slug'
+  to: '/' | '/livret' | '/methode' | '/notes/$token' | '/posts/$slug'
+  id:
+    '__root__' | '/' | '/livret' | '/methode' | '/notes/$token' | '/posts/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LivretRoute: typeof LivretRoute
   MethodeRoute: typeof MethodeRoute
   NotesTokenRoute: typeof NotesTokenRoute
   PostsSlugRoute: typeof PostsSlugRoute
@@ -76,6 +87,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/livret': {
+      id: '/livret'
+      path: '/livret'
+      fullPath: '/livret'
+      preLoaderRoute: typeof LivretRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/methode': {
@@ -104,6 +122,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LivretRoute: LivretRoute,
   MethodeRoute: MethodeRoute,
   NotesTokenRoute: NotesTokenRoute,
   PostsSlugRoute: PostsSlugRoute,

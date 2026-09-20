@@ -15,6 +15,9 @@ explorable** (méthode : `../INTRO.md`, statuts §4, graphe §10) :
    graphe complet dérivé des registres de l'étude ;
 2. **Notes** — des messages courts et sourcés, partagés par une URL non
    devinable, avec une chaîne souvent minuscule (un chiffre → sa page).
+   Plusieurs notes écrites pour être lues ensemble forment un **recueil**
+   (`collection` dans `note.yaml`), servi comme sommaire à une adresse
+   unique — `/livret` pour le Livret 2027.
 
 La page de lecture : deux tiers de texte, un tiers de panneau ; chaque chiffre
 ancré ouvre son nœud, et le lecteur « dépile » jusqu'aux sources figées.
@@ -23,7 +26,7 @@ ancré ouvre son nœud, et le lecteur « dépile » jusqu'aux sources figées.
 
 ```txt
 apps/web/                  TanStack Start + Cloudflare Workers (cf. livret)
-  src/web/routes/          / · /posts/$slug · /notes/$token · /methode
+  src/web/routes/          / · /posts/$slug · /notes/$token · /livret · /methode
   src/web/modules/
     evidence/              le panneau : modèle externe (trail, fichier ouvert),
                            hook ViewModel, corps par statut, visionneuse
@@ -75,6 +78,15 @@ Ancres dans le texte : lien `[passage](ev:R-07)` ou identifiant nu `(R-07)`
   Pas de secret → jetons de développement, prévisibles (avertissement au
   build de production). `robots: noindex`, jamais listées. Le déploiement
   se fait depuis une machine qui a les deux dépôts.
+- **Recueils : la seule exception au « jamais listées ».** Une note peut
+  déclarer `collection: {slug, title, position}` dans `note.yaml` ; la route
+  `/livret` sert alors le sommaire des notes de ce recueil, dans l'ordre de
+  `position` (et non de date). Le régime des notes ne change pas — jeton,
+  noindex, absence de l'accueil ; c'est le SOMMAIRE qui se partage, à la
+  place de dix liens. La page de sommaire est elle-même `noindex, nofollow`
+  et n'est liée depuis nulle part : il faut en connaître l'adresse. La
+  sélection est une fonction pure (`packages/evidence/src/collection.ts`,
+  testée), l'ajout d'un recueil = une route de trois lignes.
 - **Statut de publication.** `post.yaml` porte `status` (`published` ou
   `in_review` ; absent = publié). Un post « en relecture » est servi à son
   adresse, avec une pastille « en attente de relecture », mais il est absent

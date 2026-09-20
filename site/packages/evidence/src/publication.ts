@@ -40,17 +40,30 @@ export const PostSchema = z.object({
 // révèle donc pas les adresses partagées. Le jeton n'est jamais listé.
 export const NoteTokenSchema = z.string().regex(/^[a-z0-9]{24}$/);
 
+// Un RECUEIL de notes : plusieurs notes écrites pour être lues ensemble
+// (un livret, un dossier). Il ne change rien au régime des notes — chacune
+// garde son URL à jeton, son noindex et son absence de l'accueil — mais il
+// donne au site de quoi servir un sommaire à une adresse unique, qui se
+// partage à la place de dix liens. Le sommaire lui-même n'est pas listé.
+export const NoteCollectionSchema = z.object({
+  slug: Slug,
+  title: z.string().min(1),
+  position: z.number().int().positive(),
+});
+
 export const NoteSchema = z.object({
   slug: Slug,
   title: z.string().min(1),
   date: z.string().date(),
   context: z.string().optional(),
+  collection: NoteCollectionSchema.optional(),
   version: EvidenceVersionSchema.default({}),
 });
 
 export type PublicationStatus = z.infer<typeof PublicationStatusSchema>;
 export type Study = z.infer<typeof StudySchema>;
 export type Post = z.infer<typeof PostSchema>;
+export type NoteCollection = z.infer<typeof NoteCollectionSchema>;
 export type Note = z.infer<typeof NoteSchema>;
 
 // Manifeste des fichiers d'une publication : chemin logique servi par le
