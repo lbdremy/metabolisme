@@ -1,39 +1,8 @@
 import { notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { contentIndex } from "virtual:content-index";
-import {
-  NoteSchema,
-  NoteTokenSchema,
-  PostSchema,
-  selectCollection,
-  type Note,
-  type Post,
-} from "~/contracts/evidence";
-
-// L'index est figé au build par vite-plugins/content-assets : le runtime de
-// déploiement n'a pas de système de fichiers. Il ne porte que les
-// métadonnées — article, graphe et fichiers sont des assets statiques.
-
-type IndexedPost = { readonly post: Post; readonly markdown: string };
-type IndexedNote = { readonly token: string; readonly note: Note; readonly markdown: string };
-
-function posts(): IndexedPost[] {
-  return contentIndex.posts.flatMap((entry) => {
-    const parsed = PostSchema.safeParse(entry.post);
-    // Un post.json invalide ne doit pas rendre toute la liste inaccessible.
-    return parsed.success ? [{ post: parsed.data, markdown: entry.markdown }] : [];
-  });
-}
-
-function notes(): IndexedNote[] {
-  return contentIndex.notes.flatMap((entry) => {
-    const parsed = NoteSchema.safeParse(entry.note);
-    return parsed.success
-      ? [{ token: entry.token, note: parsed.data, markdown: entry.markdown }]
-      : [];
-  });
-}
+import { NoteTokenSchema, selectCollection, type Post } from "~/contracts/evidence";
+import { indexedNotes as notes, indexedPage, indexedPosts as posts } from "~/content-index";
 
 function byDateDescending(list: ReadonlyArray<Post>): Post[] {
   return list.toSorted((a, b) => b.date.localeCompare(a.date));
@@ -109,7 +78,7 @@ const PageInput = z.object({ slug: z.string().regex(/^[a-z0-9-]+$/) });
 export const getPage = createServerFn({ method: "GET" })
   .validator(PageInput)
   .handler(({ data }) => {
-    const page = contentIndex.pages.find((candidate) => candidate.slug === data.slug);
+    const page = indexedPage(data.slug);
     if (page === undefined) {
       throw notFound();
     }

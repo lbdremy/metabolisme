@@ -1,0 +1,12 @@
+# Métabolisme — tout ce qui est publié se lit, humains et robots (IA compris).
+# Les notes et le livret ne sont pas bloqués ici : ils portent « noindex »,
+# et un robot empêché de les lire ne verrait pas cette consigne.
+User-agent: *
+Allow: /
+# Serveur MCP (accès par adresse secrète).
+Disallow: /mcp/
+# Sources brutes figées (jusqu'à plusieurs centaines de Mio) : elles se
+# consultent depuis le panneau de preuves, pas en exploration.
+Disallow: /content/
+
+Sitemap: https://metabolisme.dev/sitemap.xml

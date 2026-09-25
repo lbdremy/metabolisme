@@ -1,5 +1,7 @@
 import handler, { createServerEntry } from "@tanstack/react-start/server-entry";
 import { env } from "cloudflare:workers";
+import { indexedPosts } from "~/content-index";
+import { renderSitemap, sitemapEntries } from "~/contracts/evidence";
 
 // Point d'entrée serveur.
 //
@@ -12,6 +14,18 @@ import { env } from "cloudflare:workers";
 // quand l'asset n'existe pas, on tente le bucket avec le même chemin.
 
 const CONTENT_PREFIX = "/content/";
+
+// Le plan du site est calculé depuis l'index embarqué : il suit le contenu
+// du déploiement sans fichier à régénérer.
+function serveSitemap(origin: string): Response {
+  const xml = renderSitemap(origin, sitemapEntries(indexedPosts().map((entry) => entry.post)));
+  return new Response(xml, {
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, max-age=3600",
+    },
+  });
+}
 
 // Une seule adresse canonique : www renvoie sur l'apex.
 const CANONICAL_HOST = "metabolisme.dev";
@@ -54,6 +68,7 @@ export default createServerEntry({
       return Response.redirect(url.toString(), 301);
     }
     const { pathname } = url;
+    if (pathname === "/sitemap.xml") return serveSitemap(url.origin);
     if (pathname.startsWith(CONTENT_PREFIX)) {
       const fromAssets = await env.ASSETS.fetch(request);
       if (fromAssets.status !== 404) return fromAssets;

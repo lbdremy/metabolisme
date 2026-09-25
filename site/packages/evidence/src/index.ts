@@ -4,3 +4,4 @@ export * from "./anchors.ts";
 export * from "./publication.ts";
 export * from "./collection.ts";
 export * from "./note-token.ts";
+export * from "./sitemap.ts";

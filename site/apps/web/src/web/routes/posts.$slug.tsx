@@ -20,6 +20,10 @@ export const Route = createFileRoute("/posts/$slug")({
         ? []
         : [
             { title: `${loaderData.post.title} — Métabolisme` },
+            // Servi à son adresse, mais pas indexé avant la relecture.
+            ...(loaderData.post.status === "in_review"
+              ? [{ name: "robots", content: "noindex" }]
+              : []),
             ...(loaderData.post.summary === undefined
               ? []
               : [{ name: "description", content: loaderData.post.summary.trim() }]),
