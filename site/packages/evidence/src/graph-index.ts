@@ -63,26 +63,43 @@ export type ChainStep = {
   readonly depth: number;
 };
 
-// La chaîne amont d'un nœud : ses dépendances, puis les leurs, en largeur,
-// chaque nœud une seule fois (à sa profondeur minimale). C'est ce que le
-// panneau « dépile » jusqu'aux sources.
-export function upstreamChain(index: GraphIndex, rootId: string): ChainStep[] {
+export type WalkDirection = "upstream" | "downstream";
+
+// La chaîne d'un nœud, en largeur, chaque nœud une seule fois (à sa
+// profondeur minimale), bornée à `maxDepth` si besoin. En AMONT : ses
+// dépendances, puis les leurs — ce que le panneau « dépile » jusqu'aux
+// sources. En AVAL : ce qui s'appuie sur lui — ce qu'une source ou une
+// hypothèse fausse ferait tomber.
+export function walkChain(
+  index: GraphIndex,
+  rootId: string,
+  direction: WalkDirection,
+  maxDepth: number = Number.POSITIVE_INFINITY,
+): ChainStep[] {
+  const next = (id: string): ReadonlyArray<string> =>
+    direction === "upstream"
+      ? (index.byId.get(id)?.depends_on ?? [])
+      : (index.dependents.get(id) ?? []);
   const seen = new Set<string>([rootId]);
   const queue: ChainStep[] = [{ id: rootId, depth: 0 }];
   const out: ChainStep[] = [];
   while (queue.length > 0) {
     const step = queue.shift();
     if (step === undefined) break;
-    const node = index.byId.get(step.id);
-    if (node === undefined) continue;
+    if (!index.byId.has(step.id)) continue;
     if (step.depth > 0) out.push(step);
-    for (const dep of node.depends_on) {
-      if (seen.has(dep)) continue;
-      seen.add(dep);
-      queue.push({ id: dep, depth: step.depth + 1 });
+    if (step.depth >= maxDepth) continue;
+    for (const id of next(step.id)) {
+      if (seen.has(id)) continue;
+      seen.add(id);
+      queue.push({ id, depth: step.depth + 1 });
     }
   }
   return out;
+}
+
+export function upstreamChain(index: GraphIndex, rootId: string): ChainStep[] {
+  return walkChain(index, rootId, "upstream");
 }
 
 // Les sources (S-xx) qui, directement ou non, soutiennent un nœud.

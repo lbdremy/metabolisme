@@ -15,7 +15,8 @@
     "content": "pnpm content:posts && pnpm content:notes",
     "deploy:web": "pnpm typecheck && pnpm test && pnpm --filter @metabolisme/web release",
     "note:url": "pnpm --filter @metabolisme/tool-evidence note-url",
-    "note:new": "pnpm --filter @metabolisme/tool-evidence new-note"
+    "note:new": "pnpm --filter @metabolisme/tool-evidence new-note",
+    "mcp:url": "pnpm --filter @metabolisme/tool-evidence mcp-url"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",

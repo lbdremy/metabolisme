@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { danglingReferences, indexGraph, upstreamChain, upstreamSources } from "./graph-index.ts";
+import {
+  danglingReferences,
+  indexGraph,
+  upstreamChain,
+  upstreamSources,
+  walkChain,
+} from "./graph-index.ts";
 import { EvidenceGraphSchema } from "./graph.ts";
 
 const graph = EvidenceGraphSchema.parse({
@@ -40,6 +46,29 @@ describe("indexGraph", () => {
     ]);
     expect(upstreamSources(index, "I-01")).toEqual(["S-02", "S-01"]);
     expect(upstreamChain(index, "S-01")).toEqual([]);
+  });
+
+  it("walks downstream to what a node supports", () => {
+    expect(walkChain(index, "S-01", "downstream")).toEqual([
+      { id: "O-01", depth: 1 },
+      { id: "T-01", depth: 2 },
+      { id: "R-01", depth: 3 },
+      { id: "I-01", depth: 4 },
+    ]);
+    expect(walkChain(index, "I-01", "downstream")).toEqual([]);
+  });
+
+  it("stops at the requested depth", () => {
+    expect(walkChain(index, "I-01", "upstream", 2)).toEqual([
+      { id: "R-01", depth: 1 },
+      { id: "T-01", depth: 2 },
+      { id: "S-02", depth: 2 },
+    ]);
+    expect(walkChain(index, "S-01", "downstream", 0)).toEqual([]);
+  });
+
+  it("returns nothing for an unknown root", () => {
+    expect(walkChain(index, "R-99", "upstream")).toEqual([]);
   });
 });
 

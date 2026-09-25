@@ -5,3 +5,6 @@ export * from "./publication.ts";
 export * from "./collection.ts";
 export * from "./note-token.ts";
 export * from "./sitemap.ts";
+export * from "./mcp-token.ts";
+export * from "./reader-scope.ts";
+export * from "./text-search.ts";

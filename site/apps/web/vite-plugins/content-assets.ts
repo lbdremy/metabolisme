@@ -1,7 +1,7 @@
 import { createReadStream } from "node:fs";
 import { readdir, readFile, stat } from "node:fs/promises";
 import { extname, join, resolve } from "node:path";
-import { deriveNoteToken } from "@metabolisme/evidence";
+import { deriveMcpToken, deriveNoteToken } from "@metabolisme/evidence";
 import { loadEnv, type Plugin } from "vite";
 
 // Pont entre content/ (généré par tools/evidence) et l'application.
@@ -242,6 +242,9 @@ export function contentAssets(): Plugin {
         posts: posts.map((p) => ({ slug: p.id, post: p.meta, markdown: p.markdown })),
         notes: notes.map((n) => ({ token: n.id, note: n.meta, markdown: n.markdown })),
         pages,
+        // Jeton de l'adresse du serveur MCP (/mcp/<jeton>), dérivé du même
+        // secret que les notes.
+        mcpToken: await deriveMcpToken(noteSecret),
       };
       return `export const contentIndex = ${JSON.stringify(index)};\n`;
     },

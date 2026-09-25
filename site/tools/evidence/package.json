@@ -9,7 +9,8 @@
     "test": "vitest run",
     "upload-large": "node src/upload-large.ts",
     "new-note": "node src/build-notes.ts --new",
-    "note-url": "node src/build-notes.ts --url"
+    "note-url": "node src/build-notes.ts --url",
+    "mcp-url": "node src/build-notes.ts --mcp-url"
   },
   "dependencies": {
     "@metabolisme/evidence": "workspace:*",

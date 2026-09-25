@@ -2,9 +2,9 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
-import { deriveNoteToken, NoteSchema } from "@metabolisme/evidence";
+import { deriveMcpToken, deriveNoteToken, NoteSchema } from "@metabolisme/evidence";
 import { noteToGraph } from "./note-to-graph.ts";
-import { fail, NOTES_DIR } from "./paths.ts";
+import { fail, NOTES_DIR, SITE_ROOT } from "./paths.ts";
 
 // Compile les notes partageables, lues dans le dépôt privé des notes
 // (METABOLISME_NOTES_DIR, par défaut ../metabolisme-notes) :
@@ -75,14 +75,30 @@ if (command === "--new") {
   process.exit(0);
 }
 
-if (command === "--url") {
-  if (argument === undefined || !SLUG.test(argument)) fail("Usage : note-url <slug>");
+// Le secret et la base des adresses : l'environnement, sinon site/.env
+// (qui ne remplace pas une variable déjà définie).
+function addressSettings(): { secret: string; base: string } {
+  const envFile = join(SITE_ROOT, ".env");
+  if (existsSync(envFile)) process.loadEnvFile(envFile);
   const secret = process.env["NOTE_TOKEN_SECRET"];
   if (secret === undefined || secret === "") {
     fail("NOTE_TOKEN_SECRET absent : définissez-le (site/.env ou environnement).");
   }
   const base = (process.env["NOTE_SITE_URL"] ?? "https://metabolisme.dev").replace(/\/$/, "");
+  return { secret, base };
+}
+
+if (command === "--url") {
+  if (argument === undefined || !SLUG.test(argument)) fail("Usage : note-url <slug>");
+  const { secret, base } = addressSettings();
   console.log(`${base}/notes/${await deriveNoteToken(secret, argument)}`);
+  process.exit(0);
+}
+
+// L'adresse du serveur MCP (lecture seule), dérivée du même secret.
+if (command === "--mcp-url") {
+  const { secret, base } = addressSettings();
+  console.log(`${base}/mcp/${await deriveMcpToken(secret)}`);
   process.exit(0);
 }
 

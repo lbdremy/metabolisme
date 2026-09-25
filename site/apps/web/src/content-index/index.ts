@@ -39,3 +39,8 @@ export function indexedNotes(): IndexedNote[] {
 export function indexedPage(slug: string): IndexedPage | undefined {
   return contentIndex.pages.find((candidate) => candidate.slug === slug);
 }
+
+// Le jeton qui ouvre le serveur MCP (/mcp/<jeton>).
+export function mcpToken(): string {
+  return contentIndex.mcpToken;
+}

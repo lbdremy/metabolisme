@@ -34,10 +34,13 @@ apps/web/                  TanStack Start + Cloudflare Workers (cf. livret)
     posts/ notes/          en-têtes et liste
   src/contracts/           ré-exporte @metabolisme/evidence
   src/content-assets/      fetch du graphe/markdown/fichiers (navigateur)
-  src/web-rpc/             index figé au build (métadonnées + markdown)
+  src/web-rpc/             fonctions serveur des pages
+  src/content-index/       index figé au build (métadonnées + markdown), validé
+  src/mcp/                 serveur MCP en lecture seule (/mcp/<jeton>)
   vite-plugins/content-assets.ts   content/ → module virtuel + assets
 packages/web-core/         primitives steme (copie du livret)
-packages/evidence/         CONTRAT du graphe (zod), index pur, ancres, jeton
+packages/evidence/         CONTRAT du graphe (zod), index et parcours purs,
+                           ancres, jetons, sitemap, périmètre et recherche MCP
 tools/evidence/            build-posts · build-notes · upload-large
 content/
   posts/<slug>/            post.yaml (main) → post.json, article.md, graph.json, files.json
@@ -95,6 +98,25 @@ Ancres dans le texte : lien `[passage](ev:R-07)` ou identifiant nu `(R-07)`
   mode relecture et les réaffichent dans la liste ; c'est une préférence du
   navigateur (`metabolisme.review-mode`), pas une protection — l'adresse
   d'un post en relecture suffit toujours à le lire.
+- **Plan du site et robots.** `/sitemap.xml` est calculé par le Worker
+  depuis l'index (`sitemap.ts`, pur, testé) : accueil, méthode, posts
+  relus — ce que présente l'accueil, rien de plus. Un post en relecture est
+  `noindex`. Notes et livret restent hors du plan : les y mettre, ce serait
+  les publier. `public/robots.txt` ouvre tout aux robots (IA compris) sauf
+  `/content/` (sources brutes, parfois des centaines de Mio) et `/mcp/` ; il
+  ne bloque PAS `/notes/` ni `/livret`, sans quoi un robot ne verrait pas
+  leur `noindex`.
+- **Serveur MCP en lecture seule** pour un assistant (Claude) :
+  `/mcp/<jeton>`, jeton = `HMAC(NOTE_TOKEN_SECRET, "mcp:v1")` calculé au
+  build — le régime des notes, sans secret de plus ; un jeton faux est un 404. Pour révoquer l'adresse sans toucher aux notes : incrémenter
+  `MCP_TOKEN_LABEL`. Périmètre (`reader-scope.ts`, pur, testé) : TOUS les
+  posts (relus ou en relecture) et les notes des recueils ouverts (le
+  livret) ; une note isolée n'y est jamais. Outils : `list_publications`,
+  `read_publication`, `get_graph` (le JSON du graphe, filtrable par statut
+  ou identifiant), `walk_graph` (amont jusqu'aux sources, aval vers ce
+  qu'un nœud soutient), `search` (sans accents ni casse), `read_method`.
+  Sans état (`createMcpHandler` de `@modelcontextprotocol/server`, une
+  instance par requête) ; les graphes sont lus dans les assets.
 - **Charte dérivée du logo** (douze disques en spirale) : une couleur par
   statut, dans l'ordre de la chaîne ; papier et encre pour le reste ; serif
   pour le texte lu, sans pour le panneau. Jetons dans `src/styles.css`,
@@ -111,6 +133,7 @@ pnpm dev · build · preview · test · typecheck · lint · format
 pnpm content            posts (depuis les études) + notes
 pnpm note:new <slug>    dossier de note
 pnpm note:url <slug>    adresse partageable (NOTE_TOKEN_SECRET requis)
+pnpm mcp:url            adresse du serveur MCP (même secret)
 pnpm --filter @metabolisme/tool-evidence upload-large [--dry-run]
 pnpm deploy:web
 ```

@@ -12,5 +12,6 @@ declare module "virtual:content-index" {
       readonly markdown: string;
     }[];
     readonly pages: readonly { readonly slug: string; readonly markdown: string }[];
+    readonly mcpToken: string;
   };
 }

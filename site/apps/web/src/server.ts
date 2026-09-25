@@ -2,12 +2,14 @@ import handler, { createServerEntry } from "@tanstack/react-start/server-entry";
 import { env } from "cloudflare:workers";
 import { indexedPosts } from "~/content-index";
 import { renderSitemap, sitemapEntries } from "~/contracts/evidence";
+import { MCP_PREFIX, serveMcp } from "~/mcp/endpoint";
 
 // Point d'entrée serveur.
 //
 // Le site est public : pas d'authentification. Les notes partageables ne
 // sont protégées que par leur URL non devinable — et signalées « noindex »
-// pour ne pas être référencées.
+// pour ne pas être référencées. Le serveur MCP (lecture seule) suit le même
+// régime : /mcp/<jeton>.
 //
 // Les fichiers de preuve (/content/…) sont des assets statiques servis par
 // le CDN, sauf les plus lourds (> 25 Mio) qui vivent dans un stockage objet :
@@ -69,6 +71,7 @@ export default createServerEntry({
     }
     const { pathname } = url;
     if (pathname === "/sitemap.xml") return serveSitemap(url.origin);
+    if (pathname.startsWith(MCP_PREFIX)) return serveMcp(request, env.ASSETS);
     if (pathname.startsWith(CONTENT_PREFIX)) {
       const fromAssets = await env.ASSETS.fetch(request);
       if (fromAssets.status !== 404) return fromAssets;
