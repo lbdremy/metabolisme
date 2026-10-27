@@ -21,6 +21,26 @@ La méthode vise ainsi à produire un **système de publication à chaîne de pr
 
 > Une proposition politique, institutionnelle ou économique ne doit pas seulement être lisible. Elle doit être inspectable.
 
+## Deux disciplines, une chaîne de preuves
+
+La méthode sert deux démarches distinctes, qui produisent deux types d’artefacts distincts.
+
+| | Établir l’existant | Concevoir un système métabolique |
+| --- | --- | --- |
+| Question | Qu’est-ce qui est, et comment le sait-on ? | Qu’est-ce qui pourrait être, et est-ce que cela tiendrait ? |
+| Artefact | L’**article de recherche**, adossé à une étude | L’**article de conception** |
+| Nœuds qui le portent | Observations, transformations, mesures, résultats | Valeurs, choix, propositions |
+| Ce qui le juge | Vrai ou faux, reproductible ou non | Cohérent ou non, robuste ou fragile, défendable ou non |
+| Son épreuve | La revue contradictoire, la reproduction depuis zéro | Le test d’alternance, les contraintes matérielles |
+
+Les deux disciplines partagent la même infrastructure : le registre des sources, les statuts épistémiques, le graphe de preuves, le versionnage. C’est ce qui les relie. Un article de conception ne refait pas la recherche : il s’appuie sur des nœuds établis, les siens ou ceux d’une étude, et son graphe peut reprendre des éléments du graphe d’un article de recherche.
+
+Elles se nourrissent dans les deux sens. La recherche fournit à la conception ses faits et ses ordres de grandeur. La conception renvoie à la recherche ce qu’elle ne sait pas encore : chacune de ses limites est une question à instruire, formulée assez précisément pour devenir une étude.
+
+Les distinguer protège l’une et l’autre. La recherche reste recevable par qui ne partage pas les valeurs de la conception. La conception s’assume comme un choix politique au lieu d’emprunter l’autorité des chiffres.
+
+Dans la suite, ce qui vaut pour les deux est écrit sans précision ; ce qui est propre à l’une est signalé. Le workflow (§14) les sépare en phases, les critères de qualité (§16) aussi ; la conception de systèmes métaboliques est définie au §17.
+
 ---
 
 ## 1. Pourquoi cette méthode existe
@@ -143,6 +163,8 @@ La méthode assume donc ses emprunts, nomme leur origine et dit ce qu’ils serv
 
 #### Les techniques empruntées
 
+Pour **établir**, les emprunts viennent surtout du génie logiciel : ils servent à ce qu’un fait publié reste vérifiable.
+
 | Technique | Origine | Usage dans la méthode | Ce qu’elle garantit |
 | --- | --- | --- | --- |
 | Gestion de versions (Git) | Génie logiciel | Versionner sources, hypothèses, calculs et articles | Qu’aucune modification du raisonnement ne soit silencieuse |
@@ -150,8 +172,13 @@ La méthode assume donc ses emprunts, nomme leur origine et dit ce qu’ils serv
 | Tests de propriétés (invariants) | Génie logiciel, méthodes formelles | Vérifier qu’un taux reste entre 0 et 1, qu’une somme égale son total | Que le modèle ne viole pas des contraintes physiques ou comptables |
 | Intégration continue | Génie logiciel | Rejouer toute la chaîne dans un environnement neuf | Que la reproduction ne dépende de personne en particulier |
 | Gestion des exigences et traçabilité | Ingénierie système | Graphe de preuves reliant chaque proposition à ses dépendances | Qu’on sache pourquoi chaque choix a été fait, et ce qu’une correction affecte |
-| Optimisation sous contraintes | Recherche opérationnelle | Concevoir un système à partir des ressources, besoins et pertes mesurés | Que la proposition respecte les contraintes matérielles |
 | Analyse de sensibilité | Ingénierie, modélisation | Scénarios bas, central, haut ; seuils de bascule | Que l’incertitude décisive soit visible |
+
+Pour **concevoir**, ils viennent de la recherche opérationnelle, de la sûreté de fonctionnement et de l’automatique : ils servent à ce qu’un système proposé respecte ses contraintes et tienne dans le temps.
+
+| Technique | Origine | Usage dans la méthode | Ce qu’elle garantit |
+| --- | --- | --- | --- |
+| Optimisation sous contraintes | Recherche opérationnelle | Concevoir un système à partir des ressources, besoins et pertes mesurés | Que la proposition respecte les contraintes matérielles |
 | Analyse des modes de défaillance (AMDEC) | Sûreté de fonctionnement | Test d’alternance (§14, étape 12 bis) | Qu’on cherche activement comment le système peut être cassé |
 | Boucles de rétroaction et régulation | Automatique, cybernétique | Indexation automatique, mécanismes autocorrecteurs (§17.2) | Que le système se maintienne sans décision politique répétée |
 
@@ -1106,6 +1133,12 @@ Le principe général est le suivant :
 
 ## 14. Workflow complet
 
+Le workflow suit les deux disciplines. Les étapes 1 à 12 établissent l’existant et produisent l’article de recherche. Les étapes 12 bis et 13 conçoivent le système et produisent l’article de conception. Les étapes 14 à 16 publient l’un ou l’autre.
+
+Un article de conception peut partir d’études déjà faites : il reprend leurs nœuds au lieu de refaire les étapes 1 à 11, et inscrit comme limite ce qui reste à établir.
+
+## Phase 1 — Établir
+
 ## Étape 1 — Formuler la question
 
 Définir :
@@ -1266,6 +1299,8 @@ Conduire une revue contradictoire :
 
 Les objections sérieuses doivent être intégrées au document.
 
+## Phase 2 — Concevoir
+
 ## Étape 12 bis — Le test d’alternance
 
 La revue contradictoire demande si la proposition est juste. Le test d’alternance demande si elle survivrait à un gouvernement qui ne la veut pas. Il transpose l’analyse des modes de défaillance (AMDEC) de la sûreté de fonctionnement.
@@ -1294,6 +1329,8 @@ Sortie : un tableau de défaillances annexé au document de preuve, et des nœud
 * proposer une architecture.
 
 Le système proposé doit rester relié aux éléments qui justifient sa forme.
+
+## Phase 3 — Publier
 
 ## Étape 14 — Rédiger l’article
 
@@ -1370,7 +1407,9 @@ Toute donnée sensible à une hypothèse importante doit être accompagnée d’
 
 ## 16. Critères de qualité
 
-Une étude est considérée comme publiable lorsque les questions suivantes reçoivent une réponse satisfaisante.
+Une publication est considérée comme publiable lorsque les questions suivantes reçoivent une réponse satisfaisante.
+
+Les rubriques Sources, Calculs et Hypothèses s’appliquent d’abord aux articles de recherche. Ancrage et Durabilité s’appliquent aux articles de conception. Raisonnement et Publication s’appliquent aux deux.
 
 ### Sources
 
@@ -1402,7 +1441,13 @@ Une étude est considérée comme publiable lorsque les questions suivantes reç
 * Les étapes implicites ont-elles été rendues visibles ?
 * Les objections sérieuses ont-elles été examinées ?
 
-### Durabilité
+### Ancrage (conception)
+
+* Chaque fait invoqué par une proposition est-il un nœud établi, dans l’article ou dans une étude ?
+* Ce qui n’est pas établi est-il marqué comme hypothèse ou comme limite ?
+* Chaque limite dit-elle précisément ce qu’il faudrait mesurer pour la lever ?
+
+### Durabilité (conception)
 
 * Le test d’alternance a-t-il été conduit ?
 * Les modes d’attaque les plus probables (désindexation, ciblage, transfert budgétaire) sont-ils couverts ou documentés comme limites ?
