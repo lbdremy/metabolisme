@@ -7,12 +7,14 @@ Guidance for Claude when working in this repository.
 **Métabolisme** is a research program: designing institutions and economic
 systems from real material conditions, published as **executable evidence
 chains**. The method is defined in `INTRO.md` — read it before any research
-work; its §21 lists twenty binding rules for agents (record every source, never
-silently change a hypothesis, distinguish facts / hypotheses / interpretations /
-values / choices, …).
+work; its §21 lists twenty-one binding rules for agents (record every source,
+never silently change a hypothesis, distinguish facts / hypotheses /
+interpretations / values / choices, test every proposal against alternation, …).
 
 ```
 INTRO.md      # the method: executable evidence chain (authoritative)
+ATTAQUES-ET-PARADES.md  # design catalogue used by the method's alternation test
+              # (INTRO §14 step 12 bis, §17.2)
 logement/     # first study: efficiency of the French housing stock
               # (see logement/INTRO.md + logement/CLAUDE.md)
 monopoles/    # second study: natural-monopoly rents — framing, grid, sector
