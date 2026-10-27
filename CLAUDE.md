@@ -11,6 +11,20 @@ work; its §21 lists twenty-one binding rules for agents (record every source,
 never silently change a hypothesis, distinguish facts / hypotheses /
 interpretations / values / choices, test every proposal against alternation, …).
 
+The method serves two distinct disciplines that share one evidence
+infrastructure (sources, statuses, graph, versioning) — see INTRO's opening
+section « Deux disciplines, une chaîne de preuves »:
+
+- **establishing what exists** → the *research article* (a study under
+  `logement/`, `monopoles/`, `autoroutes/`, published as a post);
+- **designing a metabolic system** → the *design article* (« article de
+  conception », today the `conception` collection of notes in the private
+  `metabolisme-notes` repo).
+
+Keep them visibly apart in every artefact: a design article leans on
+established nodes and turns what it cannot establish into limits (L) that
+are research questions.
+
 ```
 INTRO.md      # the method: executable evidence chain (authoritative)
 ATTAQUES-ET-PARADES.md  # design catalogue used by the method's alternation test
