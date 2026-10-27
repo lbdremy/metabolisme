@@ -133,6 +133,40 @@ La méthode ne cherche donc pas à faire passer un choix politique pour une cons
 * les valeurs qui orientent la conception ;
 * les arbitrages qui restent politiques.
 
+### 1.4 Ce que la méthode emprunte à l’ingénierie
+
+#### Pourquoi le dire
+
+La méthode emprunte depuis l’origine des pratiques à l’ingénierie, sans jamais les nommer. Ce silence pose deux problèmes. D’abord, il prive le lecteur d’une clé de lecture : on ne comprend pas pourquoi une proposition politique est accompagnée de tests, de versions et d’empreintes de fichiers si l’on ignore d’où viennent ces pratiques. Ensuite, il empêche de juger si l’emprunt est pertinent : une technique d’ingénierie a été conçue pour un certain type de problème, et elle peut être mal transposée à un autre.
+
+La méthode assume donc ses emprunts, nomme leur origine et dit ce qu’ils servent à garantir.
+
+#### Les techniques empruntées
+
+| Technique | Origine | Usage dans la méthode | Ce qu’elle garantit |
+| --- | --- | --- | --- |
+| Gestion de versions (Git) | Génie logiciel | Versionner sources, hypothèses, calculs et articles | Qu’aucune modification du raisonnement ne soit silencieuse |
+| Tests unitaires, d’intégration, de régression | Génie logiciel | Vérifier chaque transformation et signaler tout résultat publié qui change | Qu’un chiffre publié reste reproductible et que ses changements soient expliqués |
+| Tests de propriétés (invariants) | Génie logiciel, méthodes formelles | Vérifier qu’un taux reste entre 0 et 1, qu’une somme égale son total | Que le modèle ne viole pas des contraintes physiques ou comptables |
+| Intégration continue | Génie logiciel | Rejouer toute la chaîne dans un environnement neuf | Que la reproduction ne dépende de personne en particulier |
+| Gestion des exigences et traçabilité | Ingénierie système | Graphe de preuves reliant chaque proposition à ses dépendances | Qu’on sache pourquoi chaque choix a été fait, et ce qu’une correction affecte |
+| Optimisation sous contraintes | Recherche opérationnelle | Concevoir un système à partir des ressources, besoins et pertes mesurés | Que la proposition respecte les contraintes matérielles |
+| Analyse de sensibilité | Ingénierie, modélisation | Scénarios bas, central, haut ; seuils de bascule | Que l’incertitude décisive soit visible |
+| Analyse des modes de défaillance (AMDEC) | Sûreté de fonctionnement | Test d’alternance (§14, étape 12 bis) | Qu’on cherche activement comment le système peut être cassé |
+| Boucles de rétroaction et régulation | Automatique, cybernétique | Indexation automatique, mécanismes autocorrecteurs (§17.2) | Que le système se maintienne sans décision politique répétée |
+
+#### Les limites de l’emprunt
+
+Un système social n’est pas une machine. Trois différences doivent rester présentes à l’esprit.
+
+Premièrement, les composants d’un système social sont des acteurs qui s’adaptent à la règle et peuvent la contourner. Un pont ne cherche pas à échapper au calcul de charge. Toute analyse de défaillance doit donc inclure des défaillances stratégiques, pas seulement accidentelles.
+
+Deuxièmement, les objectifs ne sont pas donnés : ils relèvent de valeurs. L’ingénierie ne dit pas ce qu’il faut vouloir ; elle aide à construire ce qu’on a décidé de vouloir. C’est pourquoi la méthode maintient la séparation entre valeurs (V), choix (C) et résultats (R).
+
+Troisièmement, un système trop verrouillé devient incapable de s’adapter, et un verrouillage contre l’alternance pose une question démocratique. Le §17.2 traite cette tension explicitement.
+
+> L’ingénierie est mobilisée pour rendre les propositions inspectables et robustes, jamais pour faire passer un choix politique pour une nécessité technique.
+
 ---
 
 ## 2. Le principe central : explorer librement, stabiliser explicitement
@@ -1232,6 +1266,22 @@ Conduire une revue contradictoire :
 
 Les objections sérieuses doivent être intégrées au document.
 
+## Étape 12 bis — Le test d’alternance
+
+La revue contradictoire demande si la proposition est juste. Le test d’alternance demande si elle survivrait à un gouvernement qui ne la veut pas. Il transpose l’analyse des modes de défaillance (AMDEC) de la sûreté de fonctionnement.
+
+Le test s’appuie sur le [catalogue des attaques et des parades](https://github.com/lbdremy/metabolisme/blob/main/ATTAQUES-ET-PARADES.md). Le catalogue recense les modes d’attaque génériques (ponction, gel, reciblage, dérive, vente, superposition, reprise en main) et, pour chacun, un menu de parades notées selon leur rigidité, leur coût démocratique et leur coût d’installation. Le test fait émerger les failles ; le catalogue aide à choisir les remèdes. Toute attaque ou parade nouvelle rencontrée dans une étude y est ajoutée.
+
+Déroulé :
+
+1. **Lister les mécanismes** de la proposition : ressources, droits, paramètres, organes de gestion.
+2. **Pour chaque mécanisme, lister les modes d’attaque** : suppression frontale, désindexation, gel, ouverture de dérogations, transfert de la ressource vers le budget général, privatisation de la gestion, mise en concurrence, ciblage progressif, superposition d’un dispositif concurrent.
+3. **Évaluer chaque mode** sur trois critères : coût politique de l’attaque (qui proteste ?), visibilité (l’attaque passe-t-elle inaperçue ?), et effet sur le système.
+4. **Identifier les protections existantes** et les modes non couverts.
+5. **Modifier la conception** pour couvrir les modes critiques, ou documenter le risque comme limite (L).
+
+Sortie : un tableau de défaillances annexé au document de preuve, et des nœuds dans le graphe. Les modes d’attaque non couverts deviennent des limites (L), les protections ajoutées deviennent des choix (C) reliés aux principes de conception du §17.2.
+
 ## Étape 13 — Concevoir le système
 
 À partir des résultats :
@@ -1352,6 +1402,13 @@ Une étude est considérée comme publiable lorsque les questions suivantes reç
 * Les étapes implicites ont-elles été rendues visibles ?
 * Les objections sérieuses ont-elles été examinées ?
 
+### Durabilité
+
+* Le test d’alternance a-t-il été conduit ?
+* Les modes d’attaque les plus probables (désindexation, ciblage, transfert budgétaire) sont-ils couverts ou documentés comme limites ?
+* Les mécanismes de verrouillage sont-ils nommés comme tels ?
+* La procédure de modification légitime est-elle indiquée ?
+
 ### Publication
 
 * L’article pointe-t-il vers le document de preuve ?
@@ -1402,6 +1459,68 @@ La chaîne de preuves doit rendre visibles à la fois :
 * la contrainte du réel ;
 * le travail de modélisation ;
 * le choix politique.
+
+### 17.1 La conception de systèmes métaboliques
+
+Métabolisme pratique la conception de systèmes métaboliques. Le terme vient de la biologie : un organisme puise des ressources dans son milieu, les transforme pour s’entretenir et croître, et se régule lui-même, en renouvelant ses parties sans perdre sa forme.
+
+Un système social métabolique fait de même. Il capte des ressources (préemption), les transforme en patrimoine durable plutôt qu’en dépense consommée, se maintient par des boucles de régulation automatiques et croît de lui-même. La branche logement en donne l’exemple : chaque logement amorti finance le suivant. Il s’oppose à la dépense budgétaire classique, consommée puis revotée chaque année.
+
+Le terme « métabolisme social » existe déjà en écologie industrielle (Marina Fischer-Kowalski), où il désigne l’analyse des flux de matière et d’énergie d’une société. L’usage de Métabolisme en est parent, puisqu’il part lui aussi des ressources et des flux, mais il est différent : il ne s’agit pas de mesurer ces flux, mais de concevoir des institutions qui les captent, les accumulent et se perpétuent.
+
+### 17.2 Concevoir pour durer
+
+#### 17.2.1 L’objectif
+
+Métabolisme se donne un objectif explicite : proposer des systèmes sociaux qui tiennent dans la durée. Concrètement, cela veut dire trois choses : résister à l’alternance entre gouvernements de sensibilités différentes, résister à l’érosion progressive de leur valeur, et rester capables de s’adapter sans être démantelés.
+
+Une proposition qui serait juste mais défaite à la première alternance n’aurait produit qu’une parenthèse. La durabilité n’est donc pas une qualité secondaire : elle fait partie de la conception.
+
+#### 17.2.2 Ce que la recherche établit
+
+Cet objectif s’appuie sur un champ de recherche établi, principalement en science politique comparée (institutionnalisme historique).
+
+* **Les effets de retour (policy feedbacks).** Paul Pierson (*Dismantling the Welfare State?*, 1994) montre que les politiques sociales créent leurs propres défenseurs : leurs bénéficiaires et ceux qui les gèrent se mobilisent contre leur démantèlement. Une politique durable est une politique qui fabrique sa coalition.
+* **La dépendance au sentier.** Pierson (2000) décrit les rendements croissants : plus une institution dure, plus il devient coûteux d’en sortir.
+* **Les conditions de survie d’une réforme.** Eric Patashnik (*Reforms at Risk*, 2008) montre que les réformes survivent lorsqu’elles recomposent durablement les intérêts autour d’elles, et périssent lorsqu’elles les laissent intacts.
+* **La dérive (policy drift).** Jacob Hacker (2004), puis Wolfgang Streeck et Kathleen Thelen (*Beyond Continuity*, 2005), montrent qu’un système peut être vidé de sa substance sans être aboli : il suffit de ne pas l’adapter (non-indexation, non-extension aux nouveaux risques). Ils décrivent aussi la superposition (layering) et la conversion.
+* **Le paradoxe de la redistribution.** Walter Korpi et Joakim Palme (1998) montrent que les systèmes universels, qui incluent les classes moyennes, redistribuent davantage et résistent mieux que les dispositifs ciblés sur les plus pauvres.
+* **Le cas français.** Bruno Palier (*Gouverner la sécurité sociale*, 2002) analyse la résistance du modèle bismarckien français, financé par cotisations et cogéré, puis sa transformation par réformes incrémentales. Pierre Lascoumes et Patrick Le Galès (*Gouverner par les instruments*, 2004) montrent que le choix de l’instrument (cotisation, impôt, niche fiscale) structure durablement la politique qui en découle.
+
+Ces travaux expliquent le plus souvent après coup pourquoi un système a tenu. Métabolisme cherche à en faire des critères de conception, en amont.
+
+#### 17.2.3 Les principes de conception
+
+Chaque proposition (P) doit expliciter comment elle se situe par rapport aux principes suivants.
+
+1. **Fabriquer ses défenseurs.** Qui bénéficie du système, de façon visible et individualisée ? Ces bénéficiaires sont-ils assez nombreux et assez divers pour constituer une coalition au-delà d’un seul camp politique ?
+2. **Préférer l’universel au ciblé.** Le système inclut-il les classes moyennes ? Un dispositif réservé aux plus pauvres est plus facile à stigmatiser et à réduire.
+3. **Créer des droits individualisés.** Un droit attaché à une personne, adossé à une contribution (cotisation, propriété d’usage), est plus difficile à retirer qu’une dépense budgétaire votée chaque année.
+4. **Automatiser contre la dérive.** Chaque paramètre exposé à l’érosion (montant, plafond, barème) doit avoir une règle d’ajustement automatique. Le maintien ne doit pas exiger de vote ; c’est la modification qui doit en exiger un.
+5. **Choisir l’instrument pour sa robustesse.** Une ressource affectée et gérée hors du budget général résiste mieux qu’une ligne budgétaire ou une niche fiscale.
+6. **Rendre la réversion coûteuse.** Le système crée-t-il des actifs, des engagements ou des structures dont le démontage aurait un coût visible ? C’est la condition d’irréversibilité de la préemption des rentes.
+7. **Documenter la doctrine.** Chaque choix de conception doit rester relié à sa justification dans le graphe de preuves, pour qu’on ne le rogne pas par ignorance. Une réforme sans doctrine se fait détricoter à l’alternance suivante.
+8. **Garder une porte d’adaptation.** Un système robuste n’est pas un système figé. La proposition doit prévoir par quelle procédure, et à quelles conditions, elle peut être modifiée sans être démantelée.
+
+#### 17.2.4 Une durabilité démocratique
+
+Le but n’est pas de concevoir des institutions hors sol qui dédémocratisent la société, mais des institutions qui lui permettent de se défendre face aux acteurs qui voudraient les éroder. La durabilité recherchée ne repose pas sur la force : elle repose sur des conditions qui permettent au système de perdurer.
+
+La plupart des mécanismes de durabilité ne posent aucun problème démocratique. Quand un système tient parce que des millions de personnes le défendent, c’est la démocratie qui fonctionne. Une majorité future peut toujours le défaire : elle doit seulement convaincre.
+
+Les verrous et les automatismes ne s’opposent pas non plus à la volonté populaire. Ils la protègent. La dérive est une décision prise sans débat : on désindexe, on gèle, on cesse d’exercer un droit, et la population ne voit pas que le système s’érode contre son gré. L’automatisme ne supprime pas le choix ; il oblige à le faire au grand jour, par un vote explicite, en sachant ce que l’on fait.
+
+D’où le critère de légitimité retenu par la méthode :
+
+> Un mécanisme de durabilité est légitime s’il rend l’érosion visible et l’oblige à passer par une décision explicite. Il devient problématique s’il empêche une majorité claire et informée de changer d’avis.
+
+Trois règles en découlent.
+
+* Les mécanismes sont publics, nommés comme tels dans la proposition et marqués comme choix (C) adossés à une valeur (V).
+* On privilégie les parades qui imposent la visibilité et le vote explicite (automatismes, transparence, droits nominatifs) à celles qui retirent la décision aux majorités (verrou constitutionnel quasi intouchable). Une parade de ce second type doit être justifiée spécifiquement.
+* Toute proposition indique comment une majorité future et informée peut la modifier, et à quel coût. Un système impossible à réformer est un défaut de conception, pas une réussite.
+
+La hiérarchie des normes ne suffit pas à résoudre cette tension. Une loi organique reste à la portée d’une majorité parlementaire ; une disposition constitutionnelle est plus solide mais fige davantage. La méthode privilégie donc un verrou d’une autre nature, la **réciprocité référendaire** : ce qui a été adopté par référendum ne peut être défait que par un nouveau référendum. Ce verrou est démocratique au sens le plus fort. Il n’empêche pas le changement ; il garantit que ce n’est pas une simple alternance qui défait une décision du peuple, mais le peuple lui-même. Voir le [catalogue des attaques et des parades](https://github.com/lbdremy/metabolisme/blob/main/ATTAQUES-ET-PARADES.md), parades transversales.
 
 ---
 
@@ -1553,6 +1672,7 @@ Tout agent travaillant dans ce dépôt doit respecter les règles suivantes.
 18. Préférer une limite explicite à une précision artificielle.
 19. Préférer un raisonnement incomplet mais inspectable à un résultat complet impossible à vérifier.
 20. Considérer la critique comme une fonction normale du système, non comme une attaque extérieure.
+21. Soumettre toute proposition à un test d’alternance avant publication, et signaler tout paramètre exposé à la dérive sans règle d’ajustement automatique.
 
 ---
 
