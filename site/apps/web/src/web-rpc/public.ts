@@ -3,7 +3,8 @@ export {
   getNote,
   getPage,
   getPost,
-  listCollection,
+  listConception,
+  listConceptionInReview,
   listPosts,
   listPostsInReview,
 } from "./publications.functions";

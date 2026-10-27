@@ -25,13 +25,13 @@ const readables: Readable[] = [
   },
   {
     kind: "note",
-    slug: "livret-un",
-    title: "Livret, un",
+    slug: "conception-un",
+    title: "Conception, un",
     date: "2026-09-20",
     path: "/notes/tok",
     contentId: "tok",
     markdown: "Doctrine.",
-    collection: { slug: "livret", title: "Livret 2027", position: 1 },
+    collection: { slug: "conception", title: "Conception", position: 1 },
   },
 ];
 
@@ -92,7 +92,7 @@ describe("serveur MCP", () => {
   it("liste les publications avec leur adresse, filtrées par type", async () => {
     const { text } = await call("list_publications", { kind: "note" });
     expect(JSON.parse(text[0] ?? "[]")).toEqual([
-      expect.objectContaining({ slug: "livret-un", url: "https://metabolisme.dev/notes/tok" }),
+      expect.objectContaining({ slug: "conception-un", url: "https://metabolisme.dev/notes/tok" }),
     ]);
   });
 

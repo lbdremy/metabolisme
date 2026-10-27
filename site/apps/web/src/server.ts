@@ -1,6 +1,6 @@
 import handler, { createServerEntry } from "@tanstack/react-start/server-entry";
 import { env } from "cloudflare:workers";
-import { indexedPosts } from "~/content-index";
+import { indexedNotes, indexedPosts } from "~/content-index";
 import { renderSitemap, sitemapEntries } from "~/contracts/evidence";
 import { MCP_PREFIX, serveMcp } from "~/mcp/endpoint";
 
@@ -20,7 +20,13 @@ const CONTENT_PREFIX = "/content/";
 // Le plan du site est calculé depuis l'index embarqué : il suit le contenu
 // du déploiement sans fichier à régénérer.
 function serveSitemap(origin: string): Response {
-  const xml = renderSitemap(origin, sitemapEntries(indexedPosts().map((entry) => entry.post)));
+  const xml = renderSitemap(
+    origin,
+    sitemapEntries(
+      indexedPosts().map((entry) => entry.post),
+      indexedNotes(),
+    ),
+  );
   return new Response(xml, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",

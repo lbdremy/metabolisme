@@ -1,13 +1,15 @@
+import { CONCEPTION_COLLECTION, conceptionStatus, isConception } from "./collection.ts";
 import type { Note, NoteCollection, Post, PublicationStatus, Study } from "./publication.ts";
 
 // Ce que le serveur MCP donne à lire — sélection pure.
 //
-// Tous les posts, relus ou en relecture (ils sont déjà servis à leur
-// adresse). Parmi les notes, SEULEMENT celles des recueils ouverts (le livret) :
-// une note isolée reste un message privé, lisible par son seul jeton. Le
-// markdown et les graphes sont ceux du site, jamais une copie.
+// Tous les articles de recherche (posts), relus ou en relecture (ils sont
+// déjà servis à leur adresse). Parmi les notes, SEULEMENT celles des recueils
+// ouverts — les articles de conception, publiés ou en relecture : une note
+// isolée reste un message privé, lisible par son seul jeton. Le markdown et
+// les graphes sont ceux du site, jamais une copie.
 
-export const READER_COLLECTIONS: readonly string[] = ["livret"];
+export const READER_COLLECTIONS: readonly string[] = [CONCEPTION_COLLECTION];
 
 export type ReadableKind = "post" | "note";
 
@@ -59,6 +61,7 @@ function fromNote({ token, note, markdown }: NoteEntry): Readable {
     markdown,
     ...(note.context === undefined ? {} : { context: note.context.trim() }),
     ...(note.collection === undefined ? {} : { collection: note.collection }),
+    ...(isConception(note) ? { status: conceptionStatus(note) } : {}),
   };
 }
 

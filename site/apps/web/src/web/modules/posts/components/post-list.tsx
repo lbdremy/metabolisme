@@ -2,8 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { Post } from "~/contracts/evidence";
 import { formatDate } from "~/web/modules/evidence/model/format";
+import { frenchSpacing } from "~/web/lib/french-spacing";
 import { InReviewBadge } from "./in-review-badge";
 
+// La liste des articles de recherche, du plus récent au plus ancien. La
+// section qui la porte dit déjà leur type.
 export function PostList({ posts }: { posts: ReadonlyArray<Post> }) {
   return (
     <ul className="divide-y divide-rule">
@@ -17,14 +20,16 @@ export function PostList({ posts }: { posts: ReadonlyArray<Post> }) {
               {post.status === "in_review" && <InReviewBadge />}
             </p>
             <h2 className="mt-2 font-sans text-[1.5rem] font-bold leading-tight tracking-tight text-ink group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">
-              {post.title}
+              {frenchSpacing(post.title)}
             </h2>
             {post.subtitle !== undefined && (
-              <p className="mt-1.5 font-serif text-[1.05rem] text-ink-2">{post.subtitle}</p>
+              <p className="mt-1.5 font-serif text-[1.05rem] text-ink-2">
+                {frenchSpacing(post.subtitle)}
+              </p>
             )}
             {post.summary !== undefined && (
               <p className="mt-3 font-serif text-[0.95rem] leading-relaxed text-ink-2">
-                {post.summary.trim()}
+                {frenchSpacing(post.summary.trim())}
               </p>
             )}
             <span className="mt-3 inline-flex items-center gap-1 font-sans text-[0.8rem] font-medium text-ink">

@@ -13,7 +13,7 @@ import {
 // Le serveur MCP de Métabolisme : LECTURE SEULE.
 //
 // Il donne à un assistant (Claude) ce que le site donne à un lecteur : les
-// posts (relus ou en relecture), les notes du livret, la méthode, et pour
+// articles de recherche (posts) et de conception, relus ou en relecture, la méthode, et pour
 // chaque publication son graphe de preuves. Rien ne s'écrit, rien ne sort du
 // périmètre choisi par `selectReadable` — une note isolée n'y est jamais.
 //
@@ -29,9 +29,10 @@ export type McpContent = {
 
 const INSTRUCTIONS = `Métabolisme est un programme de recherche : concevoir des institutions et des systèmes économiques à partir des conditions matérielles réelles, publiés comme des CHAÎNES DE PREUVES exécutables (read_method pour la méthode complète).
 
-Deux objets :
-- les POSTS, articles d'étude (logement, monopoles, autoroutes…), statut « published » (relu) ou « in_review » (en attente de relecture de l'auteur — le dire quand on le cite) ;
-- les NOTES du recueil « Livret 2027 », doctrine d'un groupe de travail, à lire dans l'ordre de leur position. Elles portent surtout des valeurs, choix et propositions : ne pas les présenter comme des résultats d'étude.
+Deux types d'articles, qui relèvent de deux disciplines distinctes de la méthode :
+- les ARTICLES DE RECHERCHE (kind « post »), qui établissent l'existant à partir d'une étude (logement, monopoles, autoroutes…) ;
+- les ARTICLES DE CONCEPTION (kind « note », recueil « conception »), qui conçoivent des systèmes métaboliques, à lire dans l'ordre de leur position. Ils portent surtout des valeurs, choix et propositions : ne jamais les présenter comme des résultats d'étude. Leurs limites (L) sont des questions de recherche.
+Chacun a un statut « published » (relu) ou « in_review » (en attente de relecture de l'auteur — le dire quand on le cite).
 
 Chaque publication a un graphe de preuves. Les nœuds ont un statut épistémique (préfixe de l'identifiant) : S source, D définition, O observation, T transformation, M mesure, H hypothèse, R résultat, I interprétation, V valeur, C choix, P proposition, L limite. Le texte ancre ses chiffres sur des nœuds : [passage](ev:R-07) ou (R-07). Pour vérifier une affirmation, remonter la chaîne (walk_graph, direction upstream) jusqu'aux sources et leurs localisateurs (page, citation) ; pour mesurer ce qu'une hypothèse ou une source porte, descendre (downstream).
 
@@ -90,7 +91,7 @@ export function createMetabolismeMcpServer(content: McpContent): McpServer {
     {
       title: "Lister les publications",
       description:
-        "Liste les posts (articles d'étude) et les notes du Livret 2027 : slug, titre, date, statut (posts), position dans le recueil (notes), résumé, adresse. Point de départ pour choisir quoi lire.",
+        "Liste les articles de recherche (posts) et de conception (notes du recueil conception) : slug, titre, date, statut, position dans le recueil (conception), résumé, adresse. Point de départ pour choisir quoi lire.",
       inputSchema: z.object({
         kind: KindSchema.optional().describe("post ou note ; absent = les deux"),
         status: z
@@ -213,7 +214,7 @@ export function createMetabolismeMcpServer(content: McpContent): McpServer {
     {
       title: "Rechercher",
       description:
-        "Recherche plein texte dans les posts et les notes du livret, insensible à la casse et aux accents. Tous les mots doivent figurer. Renvoie les publications les plus denses d'abord, avec des extraits.",
+        "Recherche plein texte dans les articles de recherche et de conception, insensible à la casse et aux accents. Tous les mots doivent figurer. Renvoie les publications les plus denses d'abord, avec des extraits.",
       inputSchema: z.object({
         query: z.string().min(1),
         kind: KindSchema.optional(),
