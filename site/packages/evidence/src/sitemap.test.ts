@@ -73,9 +73,10 @@ describe("sitemapEntries — articles de conception", () => {
     },
   ];
 
-  it("ajoute les seuls articles de conception publiés, à leur adresse à jeton", () => {
+  it("ajoute les seuls articles de conception publiés, à leur adresse lisible", () => {
     const paths = sitemapEntries([], notes).map((entry) => entry.path);
-    expect(paths).toContain("/notes/pub");
+    expect(paths).toContain("/conception/publiee");
+    expect(paths).not.toContain("/notes/pub");
     expect(paths).not.toContain("/notes/rel");
     expect(paths).not.toContain("/notes/iso");
   });

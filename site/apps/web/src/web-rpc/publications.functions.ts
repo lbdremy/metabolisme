@@ -1,7 +1,7 @@
 import { notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { NoteTokenSchema, selectConception, type Post } from "~/contracts/evidence";
+import { conceptionSlug, NoteTokenSchema, selectConception, type Post } from "~/contracts/evidence";
 import { indexedNotes as notes, indexedPage, indexedPosts as posts } from "~/content-index";
 
 function byDateDescending(list: ReadonlyArray<Post>): Post[] {
@@ -70,6 +70,20 @@ export const getNote = createServerFn({ method: "GET" })
     const entry = NoteTokenSchema.safeParse(data.token).success
       ? notes().find((candidate) => candidate.token === data.token)
       : undefined;
+    if (entry === undefined) {
+      throw notFound();
+    }
+    return entry;
+  });
+
+// Un article de conception PUBLIÉ, par son adresse lisible. En relecture,
+// il n'a pas d'adresse lisible : la page n'existe pas (seul le jeton y mène).
+export const getConceptionArticle = createServerFn({ method: "GET" })
+  .validator(SlugInput)
+  .handler(({ data }) => {
+    const entry = selectConception(notes(), "published").find(
+      (candidate) => conceptionSlug(candidate.note) === data.slug,
+    );
     if (entry === undefined) {
       throw notFound();
     }

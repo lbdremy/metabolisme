@@ -1,4 +1,4 @@
-import { CONCEPTION_COLLECTION, conceptionStatus, isConception } from "./collection.ts";
+import { CONCEPTION_COLLECTION, conceptionStatus, isConception, notePath } from "./collection.ts";
 import type { Note, NoteCollection, Post, PublicationStatus, Study } from "./publication.ts";
 
 // Ce que le serveur MCP donne à lire — sélection pure.
@@ -56,7 +56,7 @@ function fromNote({ token, note, markdown }: NoteEntry): Readable {
     slug: note.slug,
     title: note.title,
     date: note.date,
-    path: `/notes/${token}`,
+    path: notePath({ token, note }),
     contentId: token,
     markdown,
     ...(note.context === undefined ? {} : { context: note.context.trim() }),

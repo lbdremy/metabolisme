@@ -75,6 +75,23 @@ describe("selectReadable", () => {
     });
   });
 
+  it("adresse un article de conception publié par son adresse lisible", () => {
+    const published = {
+      token: "tok-9",
+      note: {
+        ...note("livret-publie", { slug: "conception", position: 9 }),
+        status: "published" as const,
+        public_slug: "publie",
+      },
+      markdown: "p",
+    };
+    expect(selectReadable([], [published])[0]).toMatchObject({
+      path: "/conception/publie",
+      contentId: "tok-9",
+      status: "published",
+    });
+  });
+
   it("dit le statut d'un article de conception — en relecture faute de mieux", () => {
     expect(readable.find((entry) => entry.slug === "conception-un")?.status).toBe("in_review");
   });

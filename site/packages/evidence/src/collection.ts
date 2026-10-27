@@ -44,3 +44,33 @@ export function selectConception<T extends { readonly token: string; readonly no
     (entry) => conceptionStatus(entry.note) === status,
   );
 }
+
+// Le slug lisible d'un article de conception : `public_slug` s'il est
+// donné, le slug du dossier sinon.
+export function conceptionSlug(note: Note): string {
+  return note.public_slug ?? note.slug;
+}
+
+// L'adresse canonique d'une note. Un article de conception PUBLIÉ est
+// durable : il a une adresse lisible, et son jeton y redirige. Tout le reste
+// — conception en relecture, note isolée — n'a que son jeton.
+export function notePath(entry: { readonly token: string; readonly note: Note }): string {
+  return isPublishedConception(entry.note)
+    ? `/conception/${conceptionSlug(entry.note)}`
+    : `/notes/${entry.token}`;
+}
+
+// Deux articles de conception ne peuvent pas revendiquer la même adresse
+// lisible : le build refuse, plutôt que de servir l'un à la place de l'autre.
+export function duplicateConceptionSlugs(notes: ReadonlyArray<Note>): string[] {
+  const seen = new Map<string, number>();
+  for (const note of notes) {
+    if (!isConception(note)) continue;
+    const slug = conceptionSlug(note);
+    seen.set(slug, (seen.get(slug) ?? 0) + 1);
+  }
+  return [...seen]
+    .filter(([, count]) => count > 1)
+    .map(([slug]) => slug)
+    .toSorted();
+}

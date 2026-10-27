@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
+  conceptionSlug,
   conceptionStatus,
+  duplicateConceptionSlugs,
   isPublishedConception,
+  notePath,
   selectCollection,
   selectConception,
 } from "./collection.ts";
@@ -80,5 +83,29 @@ describe("articles de conception", () => {
   it("se sélectionnent par statut, dans l'ordre du recueil", () => {
     expect(selectConception(designs, "in_review").map((entry) => entry.token)).toEqual(["s", "e"]);
     expect(selectConception(designs, "published").map((entry) => entry.token)).toEqual(["r"]);
+  });
+});
+
+describe("adresse d'un article de conception", () => {
+  it("publié : adresse lisible, `public_slug` d'abord, slug du dossier sinon", () => {
+    expect(notePath({ token: "r", note: conception("relue", 2, "published") })).toBe(
+      "/conception/relue",
+    );
+    const renamed = { ...conception("livret-relue", 2, "published"), public_slug: "relue" };
+    expect(conceptionSlug(renamed)).toBe("relue");
+    expect(notePath({ token: "r", note: renamed })).toBe("/conception/relue");
+  });
+
+  it("en relecture ou hors recueil : seulement le jeton", () => {
+    expect(notePath({ token: "s", note: conception("sans-statut", 1) })).toBe("/notes/s");
+    expect(notePath(designs[3]!)).toBe("/notes/z");
+  });
+
+  it("signale deux articles qui revendiquent la même adresse lisible", () => {
+    const clash = { ...conception("autre", 4), public_slug: "relue" };
+    expect(duplicateConceptionSlugs([conception("relue", 2), clash, note("relue")])).toEqual([
+      "relue",
+    ]);
+    expect(duplicateConceptionSlugs(designs.map((entry) => entry.note))).toEqual([]);
   });
 });

@@ -2,7 +2,12 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
-import { deriveMcpToken, deriveNoteToken, NoteSchema } from "@metabolisme/evidence";
+import {
+  deriveMcpToken,
+  deriveNoteToken,
+  duplicateConceptionSlugs,
+  NoteSchema,
+} from "@metabolisme/evidence";
 import { noteToGraph } from "./note-to-graph.ts";
 import { fail, NOTES_DIR, SITE_ROOT } from "./paths.ts";
 
@@ -113,4 +118,18 @@ const slugs = readdirSync(notesDir, { withFileTypes: true })
 if (slugs.length === 0) console.log(`Aucune note (${notesDir}/<slug>/note.yaml).`);
 let ok = true;
 for (const slug of slugs) ok = buildNote(slug) && ok;
+// Deux articles de conception ne peuvent pas partager une adresse lisible.
+const clashes = duplicateConceptionSlugs(
+  slugs.flatMap((slug) => {
+    const parsed = NoteSchema.safeParse({
+      slug,
+      ...(readYaml(join(notesDir, slug, "note.yaml")) as object),
+    });
+    return parsed.success ? [parsed.data] : [];
+  }),
+);
+for (const clash of clashes) {
+  console.error(`✗ adresse /conception/${clash} revendiquée par plusieurs articles de conception`);
+  ok = false;
+}
 if (!ok) process.exit(1);
