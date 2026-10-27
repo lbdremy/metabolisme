@@ -9,12 +9,17 @@ dépendance en dépendance jusqu'aux fichiers sources figés.
 > Architecture, doctrine et décisions techniques : [`CLAUDE.md`](./CLAUDE.md).
 > La méthode de recherche elle-même : [`../INTRO.md`](../INTRO.md).
 
-## Deux objets publiés
+## Deux types d'articles, et des notes
 
-| Objet    | URL              | Contenu                                                                    | Chaîne de preuves                                                           |
-| -------- | ---------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| **Post** | `/posts/<slug>`  | Un article d'étude (`logement/articles/…`), long, sur une question ouverte | Dérivée des registres de l'étude (sources, définitions, hypothèses, claims) |
-| **Note** | `/notes/<jeton>` | Un message court et sourcé, partagé par lien, jamais listé ni indexé       | Écrite à la main (`evidence.yaml`), souvent courte : un chiffre, sa page    |
+La méthode distingue deux disciplines : établir l'existant, concevoir un
+système métabolique. Le site en publie les deux artefacts, visiblement
+distincts, qui partagent la même chaîne de preuves.
+
+| Objet                     | URL                                      | Contenu                                                                            | Chaîne de preuves                                                           |
+| ------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Article de recherche**  | `/posts/<slug>`                          | Un article d'étude (`logement/articles/…`) qui établit l'existant                  | Dérivée des registres de l'étude (sources, définitions, hypothèses, claims) |
+| **Article de conception** | `/notes/<jeton>`, sommaire `/conception` | Une note du recueil `conception`, qui conçoit un système ; listée une fois publiée | Écrite à la main (`evidence.yaml`) : surtout valeurs, choix, propositions   |
+| **Note**                  | `/notes/<jeton>`                         | Un message court et sourcé, partagé par lien, jamais listé ni indexé               | Écrite à la main (`evidence.yaml`), souvent courte : un chiffre, sa page    |
 
 Dans les deux cas, la page est coupée en deux tiers de texte et un tiers de
 panneau : cliquer un chiffre souligné ouvre son nœud, ses dépendances, ses

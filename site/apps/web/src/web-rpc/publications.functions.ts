@@ -1,7 +1,7 @@
 import { notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { NoteTokenSchema, selectCollection, type Post } from "~/contracts/evidence";
+import { NoteTokenSchema, selectConception, type Post } from "~/contracts/evidence";
 import { indexedNotes as notes, indexedPage, indexedPosts as posts } from "~/content-index";
 
 function byDateDescending(list: ReadonlyArray<Post>): Post[] {
@@ -29,21 +29,24 @@ export const listPostsInReview = createServerFn({ method: "GET" }).handler(() =>
   ),
 );
 
-// Un RECUEIL de notes : le seul endroit du site où des notes sont listées,
-// et il faut en connaître l'adresse. Le régime des notes ne change pas —
-// chacune garde son jeton, son noindex et son absence de l'accueil ; c'est le
-// SOMMAIRE qui se partage, à la place de dix liens. Les notes hors recueil ne
-// sont toujours accessibles que par leur jeton.
-const CollectionInput = z.object({ collection: z.string().min(1) });
+// Les ARTICLES DE CONCEPTION publiés, dans l'ordre de lecture du recueil —
+// l'accueil et le sommaire de la conception les présentent comme les posts.
+// Les notes hors recueil ne sont jamais listées : seul leur jeton y mène.
+export const listConception = createServerFn({ method: "GET" }).handler(() =>
+  selectConception(notes(), "published").map((entry) => ({
+    token: entry.token,
+    note: entry.note,
+  })),
+);
 
-export const listCollection = createServerFn({ method: "GET" })
-  .validator(CollectionInput)
-  .handler(({ data }) =>
-    selectCollection(notes(), data.collection).map((entry) => ({
-      token: entry.token,
-      note: entry.note,
-    })),
-  );
+// Les articles de conception en relecture — demandés explicitement quand le
+// mode relecture est actif, comme les posts en relecture.
+export const listConceptionInReview = createServerFn({ method: "GET" }).handler(() =>
+  selectConception(notes(), "in_review").map((entry) => ({
+    token: entry.token,
+    note: entry.note,
+  })),
+);
 
 const SlugInput = z.object({ slug: z.string().min(1) });
 

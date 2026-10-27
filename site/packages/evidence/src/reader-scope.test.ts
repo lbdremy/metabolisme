@@ -31,9 +31,17 @@ const posts = [
 ];
 
 const notes = [
-  { token: "tok-2", note: note("livret-deux", { slug: "livret", position: 2 }), markdown: "n2" },
+  {
+    token: "tok-2",
+    note: note("conception-deux", { slug: "conception", position: 2 }),
+    markdown: "n2",
+  },
   { token: "tok-p", note: note("note-privee"), markdown: "secret" },
-  { token: "tok-1", note: note("livret-un", { slug: "livret", position: 1 }), markdown: "n1" },
+  {
+    token: "tok-1",
+    note: note("conception-un", { slug: "conception", position: 1 }),
+    markdown: "n1",
+  },
   { token: "tok-d", note: note("dossier", { slug: "autre", position: 1 }), markdown: "d" },
 ];
 
@@ -46,8 +54,8 @@ describe("selectReadable", () => {
     expect(readable[0]?.status).toBe("in_review");
   });
 
-  it("donne les notes du livret dans l'ordre du recueil", () => {
-    expect(slugs.slice(2)).toEqual(["livret-un", "livret-deux"]);
+  it("donne les articles de conception dans l'ordre du recueil", () => {
+    expect(slugs.slice(2)).toEqual(["conception-un", "conception-deux"]);
   });
 
   it("ne donne jamais une note hors recueil ni celle d'un recueil fermé", () => {
@@ -61,10 +69,14 @@ describe("selectReadable", () => {
       path: "/posts/ancien",
       contentId: "ancien",
     });
-    expect(readable.find((entry) => entry.slug === "livret-un")).toMatchObject({
+    expect(readable.find((entry) => entry.slug === "conception-un")).toMatchObject({
       path: "/notes/tok-1",
       contentId: "tok-1",
     });
+  });
+
+  it("dit le statut d'un article de conception — en relecture faute de mieux", () => {
+    expect(readable.find((entry) => entry.slug === "conception-un")?.status).toBe("in_review");
   });
 
   it("n'ouvre que les recueils demandés", () => {

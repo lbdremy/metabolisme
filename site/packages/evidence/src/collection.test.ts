@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { selectCollection } from "./collection.ts";
+import {
+  conceptionStatus,
+  isPublishedConception,
+  selectCollection,
+  selectConception,
+} from "./collection.ts";
 import type { Note } from "./publication.ts";
 
 function note(slug: string, collection?: { slug: string; position: number }): Note {
@@ -44,5 +49,36 @@ describe("selectCollection", () => {
 
   it("rend une liste vide pour un recueil inconnu", () => {
     expect(selectCollection(entries, "inexistant")).toEqual([]);
+  });
+});
+
+function conception(slug: string, position: number, status?: Note["status"]): Note {
+  return {
+    ...note(slug, { slug: "conception", position }),
+    ...(status === undefined ? {} : { status }),
+  };
+}
+
+const designs = [
+  { token: "r", note: conception("relue", 2, "published") },
+  { token: "s", note: conception("sans-statut", 1) },
+  { token: "e", note: conception("en-relecture", 3, "in_review") },
+  { token: "z", note: { ...note("note-isolee"), status: "published" as const } },
+];
+
+describe("articles de conception", () => {
+  it("sont en relecture tant que note.yaml ne dit pas « published »", () => {
+    expect(conceptionStatus(conception("sans-statut", 1))).toBe("in_review");
+  });
+
+  it("ne sont publics que s'ils sont du recueil conception ET publiés", () => {
+    expect(
+      designs.filter((entry) => isPublishedConception(entry.note)).map((e) => e.token),
+    ).toEqual(["r"]);
+  });
+
+  it("se sélectionnent par statut, dans l'ordre du recueil", () => {
+    expect(selectConception(designs, "in_review").map((entry) => entry.token)).toEqual(["s", "e"]);
+    expect(selectConception(designs, "published").map((entry) => entry.token)).toEqual(["r"]);
   });
 });

@@ -18,7 +18,7 @@ export function ReadingLayout({
   selectedId,
   onNavigate,
   footer,
-  robotsNoIndex = false,
+  kindLabel,
 }: {
   publication: PublicationRef;
   header: ReactNode;
@@ -26,7 +26,9 @@ export function ReadingLayout({
   selectedId: string | null;
   onNavigate: (id: string | null) => void;
   footer?: ReactNode;
-  robotsNoIndex?: boolean;
+  // Le type de la page, rappelé dans la barre : « article de recherche »,
+  // « article de conception », « note partagée par lien ».
+  kindLabel?: string;
 }) {
   const vm = useEvidenceExplorerViewModel({ publication, selectedId, onNavigate });
   // Ouverture du panneau sur petit écran : état d'interface local, pas métier.
@@ -41,9 +43,9 @@ export function ReadingLayout({
           <Wordmark />
         </Link>
         <nav className="ml-auto flex items-center gap-2 font-sans text-[0.8rem]">
-          {robotsNoIndex && (
+          {kindLabel !== undefined && (
             <span className="hidden rounded-full border border-rule px-2 py-0.5 text-ink-3 sm:inline">
-              note partagée par lien
+              {kindLabel}
             </span>
           )}
           <button

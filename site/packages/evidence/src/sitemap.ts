@@ -1,10 +1,12 @@
-import type { Post } from "./publication.ts";
+import { isPublishedConception } from "./collection.ts";
+import type { Note, Post } from "./publication.ts";
 
 // Plan du site pour les moteurs (sitemap.xml) — fonction pure.
 //
-// Il ne liste que ce que l'accueil présente : l'accueil, la méthode et les
-// posts relus. Un post « en relecture » est servi à son adresse mais signalé
-// noindex ; les notes et les recueils (le livret) restent hors index — leur
+// Il ne liste que ce que l'accueil présente : l'accueil, la méthode, les
+// articles de recherche relus (posts), le sommaire de la conception et les
+// articles de conception publiés. Ce qui est en relecture est servi à son
+// adresse mais signalé noindex ; les autres notes restent hors index — leur
 // adresse se transmet, elle ne se découvre pas.
 
 export type SitemapEntry = {
@@ -12,15 +14,26 @@ export type SitemapEntry = {
   readonly lastmod?: string;
 };
 
-export function sitemapEntries(posts: ReadonlyArray<Post>): SitemapEntry[] {
+export function sitemapEntries(
+  posts: ReadonlyArray<Post>,
+  notes: ReadonlyArray<{ readonly token: string; readonly note: Note }> = [],
+): SitemapEntry[] {
   const published = posts
     .filter((post) => post.status === "published")
     .toSorted((a, b) => b.date.localeCompare(a.date));
-  const latest = published[0]?.date;
+  const designs = notes
+    .filter((entry) => isPublishedConception(entry.note))
+    .toSorted((a, b) => b.note.date.localeCompare(a.note.date));
+  const latest = [published[0]?.date, designs[0]?.note.date]
+    .filter((date): date is string => date !== undefined)
+    .toSorted()
+    .at(-1);
   return [
     latest === undefined ? { path: "/" } : { path: "/", lastmod: latest },
     { path: "/methode" },
     ...published.map((post) => ({ path: `/posts/${post.slug}`, lastmod: post.date })),
+    { path: "/conception" },
+    ...designs.map((entry) => ({ path: `/notes/${entry.token}`, lastmod: entry.note.date })),
   ];
 }
 

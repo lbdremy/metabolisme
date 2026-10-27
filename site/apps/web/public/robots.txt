@@ -1,5 +1,5 @@
 # Métabolisme — tout ce qui est publié se lit, humains et robots (IA compris).
-# Les notes et le livret ne sont pas bloqués ici : ils portent « noindex »,
+# Les notes et ce qui est en relecture ne sont pas bloqués ici : ils portent « noindex »,
 # et un robot empêché de les lire ne verrait pas cette consigne.
 User-agent: *
 Allow: /

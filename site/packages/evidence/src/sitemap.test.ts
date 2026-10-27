@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Post } from "./publication.ts";
+import type { Note, Post } from "./publication.ts";
 import { renderSitemap, sitemapEntries } from "./sitemap.ts";
 
 function post(slug: string, date: string, status: Post["status"] = "published"): Post {
@@ -21,6 +21,7 @@ describe("sitemapEntries", () => {
       "/methode",
       "/posts/recent",
       "/posts/ancien",
+      "/conception",
     ]);
   });
 
@@ -42,6 +43,48 @@ describe("sitemapEntries", () => {
 
   it("sans post relu, l'accueil n'a pas de date", () => {
     expect(sitemapEntries([])[0]).toEqual({ path: "/" });
+  });
+});
+
+function design(slug: string, date: string, status?: Note["status"]): Note {
+  return {
+    slug,
+    title: slug,
+    date,
+    collection: { slug: "conception", title: "Conception", position: 1 },
+    ...(status === undefined ? {} : { status }),
+    version: {},
+  };
+}
+
+describe("sitemapEntries — articles de conception", () => {
+  const notes = [
+    { token: "pub", note: design("publiee", "2026-10-20", "published") },
+    { token: "rel", note: design("en-relecture", "2026-10-25") },
+    {
+      token: "iso",
+      note: {
+        slug: "isolee",
+        title: "isolee",
+        date: "2026-10-26",
+        status: "published",
+        version: {},
+      } as Note,
+    },
+  ];
+
+  it("ajoute les seuls articles de conception publiés, à leur adresse à jeton", () => {
+    const paths = sitemapEntries([], notes).map((entry) => entry.path);
+    expect(paths).toContain("/notes/pub");
+    expect(paths).not.toContain("/notes/rel");
+    expect(paths).not.toContain("/notes/iso");
+  });
+
+  it("date l'accueil de la publication la plus récente, recherche ou conception", () => {
+    expect(sitemapEntries([post("relu", "2026-08-01")], notes)[0]).toEqual({
+      path: "/",
+      lastmod: "2026-10-20",
+    });
   });
 });
 

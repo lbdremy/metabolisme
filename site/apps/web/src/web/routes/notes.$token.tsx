@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { NODE_ID_PATTERN } from "~/contracts/evidence";
+import { isConception, isPublishedConception, NODE_ID_PATTERN } from "~/contracts/evidence";
 import { NoteHeader } from "~/web/modules/notes/components/note-header";
 import { ReadingLayout } from "~/web/modules/reading/components/reading-layout";
 import { getNote } from "~/web-rpc/public";
@@ -9,17 +9,25 @@ const SearchSchema = z.object({
   n: z.string().regex(NODE_ID_PATTERN).optional().catch(undefined),
 });
 
-// Une note n'est accessible que par son jeton ; elle n'est ni listée ni
-// indexée. La page reste publique pour qui a le lien.
+// Une note n'est accessible que par son jeton. Une note isolée n'est ni
+// listée ni indexée ; un article de conception l'est quand il est publié
+// (note.yaml, `status: published`), et reste hors index en relecture. La page
+// reste publique pour qui a le lien.
 export const Route = createFileRoute("/notes/$token")({
   validateSearch: SearchSchema,
   loader: ({ params }) => getNote({ data: { token: params.token } }),
   head: ({ loaderData }) => ({
     meta: [
-      { name: "robots", content: "noindex, nofollow" },
+      ...(loaderData !== undefined && isPublishedConception(loaderData.note)
+        ? []
+        : [{ name: "robots", content: "noindex, nofollow" }]),
       ...(loaderData === undefined
         ? []
-        : [{ title: `${loaderData.note.title} — note Métabolisme` }]),
+        : [
+            {
+              title: `${loaderData.note.title} — ${isConception(loaderData.note) ? "conception" : "note"} Métabolisme`,
+            },
+          ]),
     ],
   }),
   component: NotePage,
@@ -44,7 +52,7 @@ function NotePage() {
           resetScroll: false,
         });
       }}
-      robotsNoIndex
+      kindLabel={isConception(note) ? "article de conception" : "note partagée par lien"}
     />
   );
 }

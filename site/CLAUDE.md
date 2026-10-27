@@ -11,13 +11,24 @@ frontières. Ce fichier ne décrit que ce qui est propre au site.
 Publier les productions du programme avec leur **chaîne de preuves
 explorable** (méthode : `../INTRO.md`, statuts §4, graphe §10) :
 
-1. **Posts** — les articles d'étude (`../<étude>/articles/*.md`, ex. `logement`, `monopoles`), avec le
-   graphe complet dérivé des registres de l'étude ;
-2. **Notes** — des messages courts et sourcés, partagés par une URL non
-   devinable, avec une chaîne souvent minuscule (un chiffre → sa page).
-   Plusieurs notes écrites pour être lues ensemble forment un **recueil**
-   (`collection` dans `note.yaml`), servi comme sommaire à une adresse
-   unique — `/livret` pour le Livret 2027.
+Deux TYPES D'ARTICLES, qui relèvent des deux disciplines de la méthode
+(`../INTRO.md`, « Deux disciplines, une chaîne de preuves ») et que le site
+garde visiblement distincts (pastille, couleur, section de l'accueil —
+`web/modules/artefacts/`) :
+
+1. **Articles de recherche** — les posts : les articles d'étude
+   (`../<étude>/articles/*.md`, ex. `logement`, `monopoles`), avec le graphe
+   complet dérivé des registres de l'étude. Ils établissent l'existant.
+   Couleur du résultat (R).
+2. **Articles de conception** — les notes du recueil `conception`
+   (`collection.slug: conception` dans `note.yaml`), servies à leur jeton,
+   sommaire à `/conception` (l'ancien `/livret` y redirige, relecture
+   comprise). Ils conçoivent des systèmes métaboliques. Couleur de la
+   proposition (P).
+
+Les autres **notes** sont des messages courts et sourcés, partagés par une
+URL non devinable, avec une chaîne souvent minuscule (un chiffre → sa page) :
+ni listées ni indexées.
 
 La page de lecture : deux tiers de texte, un tiers de panneau ; chaque chiffre
 ancré ouvre son nœud, et le lecteur « dépile » jusqu'aux sources figées.
@@ -26,7 +37,7 @@ ancré ouvre son nœud, et le lecteur « dépile » jusqu'aux sources figées.
 
 ```txt
 apps/web/                  TanStack Start + Cloudflare Workers (cf. livret)
-  src/web/routes/          / · /posts/$slug · /notes/$token · /livret · /methode
+  src/web/routes/          / · /posts/$slug · /notes/$token · /conception · /livret (→) · /methode
   src/web/modules/
     evidence/              le panneau : modèle externe (trail, fichier ouvert),
                            hook ViewModel, corps par statut, visionneuse
@@ -81,15 +92,16 @@ Ancres dans le texte : lien `[passage](ev:R-07)` ou identifiant nu `(R-07)`
   Pas de secret → jetons de développement, prévisibles (avertissement au
   build de production). `robots: noindex`, jamais listées. Le déploiement
   se fait depuis une machine qui a les deux dépôts.
-- **Recueils : la seule exception au « jamais listées ».** Une note peut
-  déclarer `collection: {slug, title, position}` dans `note.yaml` ; la route
-  `/livret` sert alors le sommaire des notes de ce recueil, dans l'ordre de
-  `position` (et non de date). Le régime des notes ne change pas — jeton,
-  noindex, absence de l'accueil ; c'est le SOMMAIRE qui se partage, à la
-  place de dix liens. La page de sommaire est elle-même `noindex, nofollow`
-  et n'est liée depuis nulle part : il faut en connaître l'adresse. La
-  sélection est une fonction pure (`packages/evidence/src/collection.ts`,
-  testée), l'ajout d'un recueil = une route de trois lignes.
+- **Articles de conception : la seule exception au « jamais listées ».**
+  Une note du recueil `conception` (`collection: {slug: conception, title,
+position}`) porte un `status` dans `note.yaml` : absent ou `in_review`,
+  elle est EN RELECTURE — servie à son jeton, `noindex`, montrée seulement
+  en mode relecture (ou sur `/conception?relecture=1`, l'adresse à donner
+  aux relecteurs) ; `published`, elle entre à l'accueil, sur `/conception`,
+  dans le plan du site, et perd son `noindex`. Publier = une ligne dans
+  `note.yaml`, décidée par l'auteur. L'ordre est celui de `position`. La
+  sélection est pure (`packages/evidence/src/collection.ts`, testée). Un
+  autre recueil ne change rien au régime de ses notes.
 - **Statut de publication.** `post.yaml` porte `status` (`published` ou
   `in_review` ; absent = publié). Un post « en relecture » est servi à son
   adresse, avec une pastille « en attente de relecture », mais il est absent
@@ -100,18 +112,19 @@ Ancres dans le texte : lien `[passage](ev:R-07)` ou identifiant nu `(R-07)`
   d'un post en relecture suffit toujours à le lire.
 - **Plan du site et robots.** `/sitemap.xml` est calculé par le Worker
   depuis l'index (`sitemap.ts`, pur, testé) : accueil, méthode, posts
-  relus — ce que présente l'accueil, rien de plus. Un post en relecture est
-  `noindex`. Notes et livret restent hors du plan : les y mettre, ce serait
-  les publier. `public/robots.txt` ouvre tout aux robots (IA compris) sauf
+  relus, `/conception` et les articles de conception publiés — ce que
+  présente l'accueil, rien de plus. Ce qui est en relecture est `noindex` ;
+  les autres notes restent hors du plan : les y mettre, ce serait les
+  publier. `public/robots.txt` ouvre tout aux robots (IA compris) sauf
   `/content/` (sources brutes, parfois des centaines de Mio) et `/mcp/` ; il
-  ne bloque PAS `/notes/` ni `/livret`, sans quoi un robot ne verrait pas
+  ne bloque PAS `/notes/`, sans quoi un robot ne verrait pas
   leur `noindex`.
 - **Serveur MCP en lecture seule** pour un assistant (Claude) :
   `/mcp/<jeton>`, jeton = `HMAC(NOTE_TOKEN_SECRET, "mcp:v1")` calculé au
   build — le régime des notes, sans secret de plus ; un jeton faux est un 404. Pour révoquer l'adresse sans toucher aux notes : incrémenter
   `MCP_TOKEN_LABEL`. Périmètre (`reader-scope.ts`, pur, testé) : TOUS les
-  posts (relus ou en relecture) et les notes des recueils ouverts (le
-  livret) ; une note isolée n'y est jamais. Outils : `list_publications`,
+  posts (relus ou en relecture) et les articles de conception (publiés ou
+  en relecture, avec leur statut) ; une note isolée n'y est jamais. Outils : `list_publications`,
   `read_publication`, `get_graph` (le JSON du graphe, filtrable par statut
   ou identifiant), `walk_graph` (amont jusqu'aux sources, aval vers ce
   qu'un nœud soutient), `search` (sans accents ni casse), `read_method`.

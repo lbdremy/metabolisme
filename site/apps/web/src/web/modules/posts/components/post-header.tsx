@@ -1,24 +1,29 @@
 import { ExternalLink, Tag } from "lucide-react";
 import type { Post } from "~/contracts/evidence";
+import { ArtefactKindBadge } from "~/web/modules/artefacts/components/artefact-kind-badge";
+import { frenchSpacing } from "~/web/lib/french-spacing";
 import { formatDate } from "~/web/modules/evidence/model/format";
 import { InReviewBadge } from "./in-review-badge";
 
-// En-tête d'un post : titre, sous-titre, étude, date et version du
+// En-tête d'un article de recherche (post) : type, titre, sous-titre, étude, date et version du
 // raisonnement (tag Git) — l'article est rattaché à une version précise.
 export function PostHeader({ post }: { post: Post }) {
   return (
     <header>
       <p className="flex flex-wrap items-center gap-2 font-sans text-[0.75rem] font-semibold uppercase tracking-wider text-ink-3">
+        <ArtefactKindBadge kind="research" />
         <span>
           {post.study.name} · {formatDate(post.date)}
         </span>
         {post.status === "in_review" && <InReviewBadge />}
       </p>
       <h1 className="mt-3 font-sans text-[2rem] font-bold leading-[1.12] tracking-tight text-ink sm:text-[2.4rem]">
-        {post.title}
+        {frenchSpacing(post.title)}
       </h1>
       {post.subtitle !== undefined && (
-        <p className="mt-3 font-serif text-[1.2rem] leading-snug text-ink-2">{post.subtitle}</p>
+        <p className="mt-3 font-serif text-[1.2rem] leading-snug text-ink-2">
+          {frenchSpacing(post.subtitle)}
+        </p>
       )}
       {post.study.question !== undefined && (
         <blockquote className="mt-5 border-l-2 border-rule-2 pl-4 font-serif text-[0.95rem] italic leading-relaxed text-ink-2">

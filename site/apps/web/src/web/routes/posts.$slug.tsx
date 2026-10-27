@@ -51,6 +51,7 @@ function PostPage() {
           resetScroll: false,
         });
       }}
+      kindLabel="article de recherche"
     />
   );
 }
