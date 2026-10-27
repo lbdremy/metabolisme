@@ -65,6 +65,11 @@ export const NoteSchema = z.object({
   // servi à son jeton, montré au seul mode relecture. Une conception ne
   // devient publique que par une décision écrite dans note.yaml.
   status: PublicationStatusSchema.optional(),
+  // L'adresse LISIBLE d'un article de conception publié : /conception/<slug>.
+  // Absente, c'est le slug du dossier. Elle ne sert qu'une fois l'article
+  // publié — en relecture, seul le jeton y mène ; le dossier, lui, ne se
+  // renomme pas (le jeton en dérive, et des liens sont déjà partagés).
+  public_slug: Slug.optional(),
   version: EvidenceVersionSchema.default({}),
 });
 

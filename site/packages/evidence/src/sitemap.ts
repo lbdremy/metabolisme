@@ -1,4 +1,4 @@
-import { isPublishedConception } from "./collection.ts";
+import { isPublishedConception, notePath } from "./collection.ts";
 import type { Note, Post } from "./publication.ts";
 
 // Plan du site pour les moteurs (sitemap.xml) — fonction pure.
@@ -33,7 +33,7 @@ export function sitemapEntries(
     { path: "/methode" },
     ...published.map((post) => ({ path: `/posts/${post.slug}`, lastmod: post.date })),
     { path: "/conception" },
-    ...designs.map((entry) => ({ path: `/notes/${entry.token}`, lastmod: entry.note.date })),
+    ...designs.map((entry) => ({ path: notePath(entry), lastmod: entry.note.date })),
   ];
 }
 
