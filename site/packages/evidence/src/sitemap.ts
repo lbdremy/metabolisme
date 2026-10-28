@@ -3,9 +3,9 @@ import type { Note, Post } from "./publication.ts";
 
 // Plan du site pour les moteurs (sitemap.xml) — fonction pure.
 //
-// Il ne liste que ce que l'accueil présente : l'accueil, la méthode, les
-// articles de recherche relus (posts), le sommaire de la conception et les
-// articles de conception publiés. Ce qui est en relecture est servi à son
+// Il ne liste que ce que le site présente : l'accueil, la méthode, le sommaire
+// de la recherche et ses articles relus (posts), le sommaire de la conception
+// et ses articles publiés. Ce qui est en relecture est servi à son
 // adresse mais signalé noindex ; les autres notes restent hors index — leur
 // adresse se transmet, elle ne se découvre pas.
 
@@ -31,6 +31,7 @@ export function sitemapEntries(
   return [
     latest === undefined ? { path: "/" } : { path: "/", lastmod: latest },
     { path: "/methode" },
+    { path: "/recherche" },
     ...published.map((post) => ({ path: `/posts/${post.slug}`, lastmod: post.date })),
     { path: "/conception" },
     ...designs.map((entry) => ({ path: notePath(entry), lastmod: entry.note.date })),

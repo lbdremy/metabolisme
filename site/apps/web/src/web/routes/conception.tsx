@@ -74,26 +74,11 @@ function ConceptionPage() {
             Concevoir des systèmes métaboliques
           </h1>
           <p className="mt-5 max-w-[60ch] font-serif text-[1.15rem] leading-relaxed text-ink-2">
-            Un article de conception part d'un constat établi, une rente qui rapporte sans rien
-            produire ou un besoin que la dépense publique couvre année après année, et dessine
-            l'institution qui pourrait y répondre durablement. Métabolique au sens de l'organisme :
-            le système capte une ressource, la transforme en patrimoine plutôt qu'en dépense
-            consommée, et s'entretient de lui-même. Dans la Sécurité sociale du logement, chaque
-            logement amorti finance le suivant.
-          </p>
-          <p className="mt-4 max-w-[60ch] font-serif text-[1rem] leading-relaxed text-ink-2">
-            Les articles se lisent dans l'ordre. Les premiers posent le projet et ses mécanismes :
-            préempter les rentes de position, fixer des normes, diriger par contrat. Les suivants
-            les appliquent à un besoin : le logement, l'alimentation, l'information, la transmission
-            du patrimoine, la ville, l'emploi. Les derniers traitent de la stratégie et recensent
-            les questions encore ouvertes.
-          </p>
-          <p className="mt-4 max-w-[60ch] font-serif text-[1rem] leading-relaxed text-ink-2">
-            Ce ne sont pas des résultats de recherche. Ils assument des{" "}
-            <strong className="text-ink">valeurs, des choix et des propositions</strong>, et le
-            panneau de preuves le signale nœud par nœud. Les faits sur lesquels ils s'appuient sont
-            sourcés ; ce qu'ils ne peuvent pas encore établir est marqué comme limite, autant de
-            questions renvoyées à la recherche.
+            La conception métabolique dessine des institutions qui vivent comme un organisme : elles
+            captent une ressource dans leur milieu, la transforment en patrimoine durable plutôt
+            qu'en dépense consommée, et s'entretiennent d'elles-mêmes. Chaque article en propose
+            une, avec sa <strong className="text-ink">chaîne de preuves</strong> : les faits sont
+            sourcés, les valeurs et les choix nommés comme tels.
           </p>
         </section>
         <section className="pt-10">

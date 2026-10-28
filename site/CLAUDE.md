@@ -13,8 +13,9 @@ explorable** (méthode : `../INTRO.md`, statuts §4, graphe §10) :
 
 Deux TYPES D'ARTICLES, qui relèvent des deux disciplines de la méthode
 (`../INTRO.md`, « Deux disciplines, une chaîne de preuves ») et que le site
-garde visiblement distincts (pastille, couleur, section de l'accueil —
-`web/modules/artefacts/`) :
+garde visiblement distincts (pastille, couleur, sommaire propre :
+`/recherche` et `/conception` ; l'accueil présente le programme et mène
+aux deux — `web/modules/artefacts/`) :
 
 1. **Articles de recherche** — les posts : les articles d'étude
    (`../<étude>/articles/*.md`, ex. `logement`, `monopoles`), avec le graphe
@@ -97,7 +98,7 @@ Ancres dans le texte : lien `[passage](ev:R-07)` ou identifiant nu `(R-07)`
 position}`) porte un `status` dans `note.yaml` : absent ou `in_review`,
   elle est EN RELECTURE — servie à son jeton, `noindex`, montrée seulement
   en mode relecture (ou sur `/conception?relecture=1`, l'adresse à donner
-  aux relecteurs) ; `published`, elle entre à l'accueil, sur `/conception`,
+  aux relecteurs) ; `published`, elle entre sur `/conception`,
   dans le plan du site, et perd son `noindex`. Publier = une ligne dans
   `note.yaml`, décidée par l'auteur. L'ordre est celui de `position`. La
   sélection est pure (`packages/evidence/src/collection.ts`, testée). Un
@@ -105,15 +106,15 @@ position}`) porte un `status` dans `note.yaml` : absent ou `in_review`,
 - **Statut de publication.** `post.yaml` porte `status` (`published` ou
   `in_review` ; absent = publié). Un post « en relecture » est servi à son
   adresse, avec une pastille « en attente de relecture », mais il est absent
-  de l'index : l'accueil ne présente que ce que l'auteur a relu. Trois clics
+  de l'index : `/recherche` ne présente que ce que l'auteur a relu. Trois clics
   rapprochés sur le logo du pied de page (accueil et méthode) rallument le
   mode relecture et les réaffichent dans la liste ; c'est une préférence du
   navigateur (`metabolisme.review-mode`), pas une protection — l'adresse
   d'un post en relecture suffit toujours à le lire.
 - **Plan du site et robots.** `/sitemap.xml` est calculé par le Worker
-  depuis l'index (`sitemap.ts`, pur, testé) : accueil, méthode, posts
-  relus, `/conception` et les articles de conception publiés — ce que
-  présente l'accueil, rien de plus. Ce qui est en relecture est `noindex` ;
+  depuis l'index (`sitemap.ts`, pur, testé) : accueil, méthode, `/recherche`
+  et ses posts relus, `/conception` et ses articles publiés — ce que
+  présente le site, rien de plus. Ce qui est en relecture est `noindex` ;
   les autres notes restent hors du plan : les y mettre, ce serait les
   publier. `public/robots.txt` ouvre tout aux robots (IA compris) sauf
   `/content/` (sources brutes, parfois des centaines de Mio) et `/mcp/` ; il

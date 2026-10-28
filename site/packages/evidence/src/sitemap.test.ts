@@ -14,11 +14,12 @@ function post(slug: string, date: string, status: Post["status"] = "published"):
 }
 
 describe("sitemapEntries", () => {
-  it("liste l'accueil, la méthode puis les posts relus, du plus récent au plus ancien", () => {
+  it("liste l'accueil, la méthode, la recherche puis ses posts relus, du plus récent au plus ancien", () => {
     const entries = sitemapEntries([post("ancien", "2026-08-01"), post("recent", "2026-09-10")]);
     expect(entries.map((entry) => entry.path)).toEqual([
       "/",
       "/methode",
+      "/recherche",
       "/posts/recent",
       "/posts/ancien",
       "/conception",
