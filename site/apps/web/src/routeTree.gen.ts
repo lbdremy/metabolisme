@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './web/routes/index'
 import { Route as ConceptionRouteImport } from './web/routes/conception'
 import { Route as LivretRouteImport } from './web/routes/livret'
 import { Route as MethodeRouteImport } from './web/routes/methode'
+import { Route as RechercheRouteImport } from './web/routes/recherche'
 import { Route as ConceptionSlugRouteImport } from './web/routes/conception_.$slug'
 import { Route as NotesTokenRouteImport } from './web/routes/notes.$token'
 import { Route as PostsSlugRouteImport } from './web/routes/posts.$slug'
@@ -37,6 +38,11 @@ const MethodeRoute = MethodeRouteImport.update({
   path: '/methode',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RechercheRoute = RechercheRouteImport.update({
+  id: '/recherche',
+  path: '/recherche',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConceptionSlugRoute = ConceptionSlugRouteImport.update({
   id: '/conception_/$slug',
   path: '/conception/$slug',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/conception': typeof ConceptionRoute
   '/livret': typeof LivretRoute
   '/methode': typeof MethodeRoute
+  '/recherche': typeof RechercheRoute
   '/conception/$slug': typeof ConceptionSlugRoute
   '/notes/$token': typeof NotesTokenRoute
   '/posts/$slug': typeof PostsSlugRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/conception': typeof ConceptionRoute
   '/livret': typeof LivretRoute
   '/methode': typeof MethodeRoute
+  '/recherche': typeof RechercheRoute
   '/conception/$slug': typeof ConceptionSlugRoute
   '/notes/$token': typeof NotesTokenRoute
   '/posts/$slug': typeof PostsSlugRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/conception': typeof ConceptionRoute
   '/livret': typeof LivretRoute
   '/methode': typeof MethodeRoute
+  '/recherche': typeof RechercheRoute
   '/conception_/$slug': typeof ConceptionSlugRoute
   '/notes/$token': typeof NotesTokenRoute
   '/posts/$slug': typeof PostsSlugRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/conception'
     | '/livret'
     | '/methode'
+    | '/recherche'
     | '/conception/$slug'
     | '/notes/$token'
     | '/posts/$slug'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/conception'
     | '/livret'
     | '/methode'
+    | '/recherche'
     | '/conception/$slug'
     | '/notes/$token'
     | '/posts/$slug'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/conception'
     | '/livret'
     | '/methode'
+    | '/recherche'
     | '/conception_/$slug'
     | '/notes/$token'
     | '/posts/$slug'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   ConceptionRoute: typeof ConceptionRoute
   LivretRoute: typeof LivretRoute
   MethodeRoute: typeof MethodeRoute
+  RechercheRoute: typeof RechercheRoute
   ConceptionSlugRoute: typeof ConceptionSlugRoute
   NotesTokenRoute: typeof NotesTokenRoute
   PostsSlugRoute: typeof PostsSlugRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MethodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/recherche': {
+      id: '/recherche'
+      path: '/recherche'
+      fullPath: '/recherche'
+      preLoaderRoute: typeof RechercheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/conception_/$slug': {
       id: '/conception_/$slug'
       path: '/conception/$slug'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConceptionRoute: ConceptionRoute,
   LivretRoute: LivretRoute,
   MethodeRoute: MethodeRoute,
+  RechercheRoute: RechercheRoute,
   ConceptionSlugRoute: ConceptionSlugRoute,
   NotesTokenRoute: NotesTokenRoute,
   PostsSlugRoute: PostsSlugRoute,

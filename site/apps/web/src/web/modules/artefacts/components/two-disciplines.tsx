@@ -2,13 +2,14 @@ import { Link } from "@tanstack/react-router";
 import { ARTEFACT_KINDS, type ArtefactKind } from "../model/artefact-kind";
 import { ArtefactKindBadge } from "./artefact-kind-badge";
 
-const ORDER: ReadonlyArray<{ kind: ArtefactKind; anchor: string }> = [
-  { kind: "research", anchor: "#recherche" },
-  { kind: "design", anchor: "#conception" },
+const ORDER: ReadonlyArray<{ kind: ArtefactKind; to: "/recherche" | "/conception" }> = [
+  { kind: "research", to: "/recherche" },
+  { kind: "design", to: "/conception" },
 ];
 
 // Les deux types d'articles côte à côte, sur l'accueil : ce qu'ils
-// demandent, ce qui les porte, et ce qui les relie.
+// demandent, ce qui les porte, et ce qui les relie. Chaque carte mène au
+// sommaire de son type.
 export function TwoDisciplines() {
   return (
     <section aria-labelledby="deux-types" className="border-b border-rule py-10">
@@ -19,12 +20,12 @@ export function TwoDisciplines() {
         Deux types d'articles
       </h2>
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        {ORDER.map(({ kind, anchor }) => {
+        {ORDER.map(({ kind, to }) => {
           const info = ARTEFACT_KINDS[kind];
           return (
-            <a
+            <Link
               key={kind}
-              href={anchor}
+              to={to}
               className="group block rounded-lg border border-rule bg-white/60 p-5 hover:border-rule-2"
               style={{ borderTopColor: info.color, borderTopWidth: 3 }}
             >
@@ -38,7 +39,7 @@ export function TwoDisciplines() {
               <p className="mt-2 font-serif text-[0.95rem] leading-relaxed text-ink-2">
                 {info.carries}
               </p>
-            </a>
+            </Link>
           );
         })}
       </div>

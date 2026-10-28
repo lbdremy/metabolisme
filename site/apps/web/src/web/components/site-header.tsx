@@ -10,7 +10,7 @@ export function SiteHeader() {
         <Wordmark />
       </Link>
       <nav className="flex items-center gap-5 font-sans text-[0.85rem] text-ink-2">
-        <Link to="/" hash="recherche" className="hover:underline">
+        <Link to="/recherche" className="hover:underline">
           Recherches
         </Link>
         <Link to="/conception" className="hover:underline">
